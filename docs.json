@@ -1,7 +1,7 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "LaTeX Documentation",
+  "name": "LaTeX Cloud Studio Documentation",
   "colors": {
     "primary": "#FF6037",
     "light": "#FF8A6B",
@@ -9,9 +9,19 @@
   },
   "favicon": "/favicon.ico",
   "metadata": {
-    "og:site_name": "LaTeX Documentation",
+    "og:site_name": "LaTeX Cloud Studio",
     "og:type": "website",
-    "twitter:card": "summary_large_image"
+    "og:url": "https://resources.latex-cloud-studio.com",
+    "og:image": "https://resources.latex-cloud-studio.com/images/og-image.png",
+    "twitter:card": "summary_large_image",
+    "twitter:site": "@latexcloudstudio",
+    "twitter:creator": "@latexcloudstudio",
+    "description": "Master LaTeX with our comprehensive documentation, tutorials, and guides. Learn professional document creation with LaTeX Cloud Studio.",
+    "keywords": "LaTeX, documentation, tutorials, cloud editor, document creation, academic writing, scientific publishing",
+    "author": "LaTeX Cloud Studio Team",
+    "robots": "index, follow",
+    "language": "en-US",
+    "revisit-after": "7 days"
   },
   "seo": {
     "indexHiddenPages": false

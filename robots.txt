@@ -1,0 +1,22 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://resources.latex-cloud-studio.com/sitemap.xml
+
+# Crawl-delay (optional - helps with server load)
+Crawl-delay: 1
+
+# Block access to template files and scripts
+Disallow: /templates/
+Disallow: /scripts/
+Disallow: /*.mdx$
+Disallow: /snippets/
+
+# Allow important pages
+Allow: /blog/
+Allow: /learn/
+Allow: /platform/
+
+# Block auto-generated content
+Disallow: /blog/auto-index
