@@ -1,0 +1,752 @@
+---
+title: Page Numbering in LaTeX
+description: Complete guide to page numbering in LaTeX. Learn to customize page numbers, create different numbering schemes, and handle complex document structures.
+---
+
+
+Page numbering is crucial for document navigation and professional presentation. This guide covers everything from basic page numbers to complex multi-part documents with different numbering schemes.
+
+<Info>
+**Key concept**: LaTeX provides flexible page numbering that can adapt to different document structures. Understanding how to control numbering styles and resets allows you to create professional documents that follow academic and publishing conventions.
+
+**Related topics**: [Headers and footers](/learn/latex/formatting/headers-footers) | [Document structure](/learn/latex/document-structure) | [Cross-referencing](/learn/latex/cross-referencing)
+</Info>
+
+## Basic Page Numbering
+
+### Default Numbering
+
+LaTeX automatically numbers pages starting from 1. The page number appears in different locations depending on the document class and page style.
+
+<CodeGroup>
+```latex basic-numbering.tex
+\documentclass{article}
+\begin{document}
+
+% Page numbers appear automatically
+\section{Introduction}
+This is page 1.
+
+\newpage
+\section{Methods}
+This is page 2.
+
+\newpage
+\section{Results}
+This is page 3.
+
+\end{document}
+```
+</CodeGroup>
+
+### Changing Page Number Style
+
+<CodeGroup>
+```latex number-styles.tex
+\documentclass{article}
+\begin{document}
+
+% Arabic numerals (default)
+\pagenumbering{arabic}
+Page numbering: 1, 2, 3, 4...
+
+\newpage
+% Roman numerals (lowercase)
+\pagenumbering{roman}
+Page numbering: i, ii, iii, iv...
+
+\newpage
+% Roman numerals (uppercase)  
+\pagenumbering{Roman}
+Page numbering: I, II, III, IV...
+
+\newpage
+% Alphabetic (lowercase)
+\pagenumbering{alph}
+Page numbering: a, b, c, d...
+
+\newpage
+% Alphabetic (uppercase)
+\pagenumbering{Alph}
+Page numbering: A, B, C, D...
+
+\end{document}
+```
+</CodeGroup>
+
+### Setting Page Number
+
+<CodeGroup>
+```latex set-page-number.tex
+\documentclass{article}
+\begin{document}
+
+% Start numbering from a specific number
+\setcounter{page}{5}
+This page is numbered 5.
+
+\newpage
+This page is numbered 6.
+
+% Reset counter
+\setcounter{page}{1}
+\newpage
+Back to page 1.
+
+\end{document}
+```
+</CodeGroup>
+
+## Page Number Positioning
+
+### Using Page Styles
+
+<CodeGroup>
+```latex page-styles.tex
+\documentclass{article}
+\begin{document}
+
+% Plain style: number at bottom center
+\pagestyle{plain}
+\section{Section with Plain Style}
+Page number appears at bottom center.
+
+\newpage
+% Empty style: no page numbers
+\pagestyle{empty}  
+\section{Section with No Numbers}
+This page has no page number.
+
+\newpage
+% Headings style: number in header
+\pagestyle{headings}
+\section{Section with Header Numbers}
+Page number appears in header with section name.
+
+\end{document}
+```
+</CodeGroup>
+
+### Custom Positioning with fancyhdr
+
+<CodeGroup>
+```latex custom-positioning.tex
+\documentclass{article}
+\usepackage{fancyhdr}
+
+% Set up custom page numbering
+\pagestyle{fancy}
+\fancyhf{} % Clear all headers and footers
+
+% Page number in different positions
+\fancyfoot[L]{Page \thepage}     % Bottom left
+% \fancyfoot[C]{\thepage}        % Bottom center  
+% \fancyfoot[R]{\thepage}        % Bottom right
+% \fancyhead[L]{\thepage}        % Top left
+% \fancyhead[C]{\thepage}        % Top center
+% \fancyhead[R]{\thepage}        % Top right
+
+\begin{document}
+
+\section{Custom Page Positioning}
+Page numbers can appear anywhere you specify.
+
+\newpage
+\section{Continued Content}
+Consistent positioning across pages.
+
+\end{document}
+```
+</CodeGroup>
+
+## Advanced Page Numbering
+
+### Different Styles for Different Sections
+
+<CodeGroup>
+```latex different-styles.tex
+\documentclass{report}
+\usepackage{fancyhdr}
+
+\begin{document}
+
+% Front matter with roman numerals
+\pagenumbering{roman}
+\pagestyle{plain}
+
+\tableofcontents
+\newpage
+
+\listoffigures
+\newpage
+
+% Main content with arabic numerals
+\pagenumbering{arabic}
+\setcounter{page}{1}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\thepage}
+\fancyfoot[C]{Main Document}
+
+\chapter{Introduction}
+Main content starts with page 1.
+
+\chapter{Methods}
+Continues with normal numbering.
+
+% Appendix with different style
+\appendix
+\pagenumbering{Alph}
+\setcounter{page}{1}
+
+\chapter{Additional Data}
+Appendix uses alphabetic numbering: A, B, C...
+
+\end{document}
+```
+</CodeGroup>
+
+### Page Ranges and Prefixes
+
+<CodeGroup>
+```latex page-ranges.tex
+\documentclass{book}
+\usepackage{fancyhdr}
+
+\begin{document}
+
+% Preface with prefix
+\pagenumbering{roman}
+\renewcommand{\thepage}{Preface-\roman{page}}
+
+\chapter*{Preface}
+Pages numbered as: Preface-i, Preface-ii, etc.
+
+\tableofcontents
+
+% Main content
+\mainmatter
+\pagenumbering{arabic}
+\renewcommand{\thepage}{\arabic{page}}
+
+\chapter{Introduction}
+Regular numbering: 1, 2, 3...
+
+% Appendix with prefix
+\appendix
+\renewcommand{\thepage}{App-\Alph{chapter}-\arabic{page}}
+\setcounter{page}{1}
+
+\chapter{Data Tables}
+Numbered as: App-A-1, App-A-2, etc.
+
+\chapter{Code Listings}  
+Numbered as: App-B-1, App-B-2, etc.
+
+\end{document}
+```
+</CodeGroup>
+
+## Two-Sided Documents
+
+### Different Numbering for Odd/Even Pages
+
+<CodeGroup>
+```latex two-sided-numbering.tex
+\documentclass[twoside]{article}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+
+% Different positions for odd and even pages
+\fancyfoot[LE]{\thepage}  % Left on even pages
+\fancyfoot[RO]{\thepage}  % Right on odd pages
+
+% Alternative: outside corners
+% \fancyhead[LE,RO]{\thepage}
+
+% Content in headers
+\fancyhead[LE]{\leftmark}  % Section name on left of even pages
+\fancyhead[RO]{\rightmark} % Subsection name on right of odd pages
+
+\begin{document}
+
+\section{First Section}
+Content that demonstrates two-sided numbering.
+
+\newpage
+\subsection{Subsection}
+More content to show header differences.
+
+\newpage
+\section{Second Section}
+Even more content.
+
+\end{document}
+```
+</CodeGroup>
+
+### Blank Pages in Two-Sided Documents
+
+<CodeGroup>
+```latex blank-pages.tex
+\documentclass[twoside,openright]{book}
+\usepackage{fancyhdr}
+
+% Define style for blank pages
+\fancypagestyle{blank}{%
+  \fancyhf{}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+}
+
+% Command to insert blank page
+\newcommand{\blankpage}{%
+  \newpage
+  \thispagestyle{blank}
+  \mbox{}
+  \newpage
+}
+
+\begin{document}
+
+\chapter{First Chapter}
+Content here...
+
+% Insert blank page before new chapter
+\blankpage
+
+\chapter{Second Chapter}
+New chapter content...
+
+\end{document}
+```
+</CodeGroup>
+
+## Special Page Numbering Schemes
+
+### Chapter-Based Numbering
+
+<CodeGroup>
+```latex chapter-numbering.tex
+\documentclass{book}
+
+% Redefine page numbering to include chapter
+\renewcommand{\thepage}{\thechapter-\arabic{page}}
+
+% Reset page counter at each chapter
+\usepackage{chngcntr}
+\counterwithin{page}{chapter}
+
+\begin{document}
+
+\chapter{Introduction}
+Pages numbered: 1-1, 1-2, 1-3...
+
+\chapter{Methods}
+Pages numbered: 2-1, 2-2, 2-3...
+
+\chapter{Results}
+Pages numbered: 3-1, 3-2, 3-3...
+
+\end{document}
+```
+</CodeGroup>
+
+### Section-Based Numbering
+
+<CodeGroup>
+```latex section-numbering.tex
+\documentclass{article}
+
+% Include section number in page numbering
+\renewcommand{\thepage}{\thesection.\arabic{page}}
+
+% Reset page counter for each section
+\usepackage{chngcntr}
+\counterwithin{page}{section}
+
+\begin{document}
+
+\section{Introduction}
+Pages: 1.1, 1.2, 1.3...
+
+\section{Literature Review}
+Pages: 2.1, 2.2, 2.3...
+
+\section{Methodology}
+Pages: 3.1, 3.2, 3.3...
+
+\end{document}
+```
+</CodeGroup>
+
+### Total Page Count
+
+<CodeGroup>
+```latex total-pages.tex
+\documentclass{article}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+
+\pagestyle{fancy}
+\fancyhf{}
+
+% Show current page of total pages
+\fancyfoot[C]{Page \thepage\ of \pageref{LastPage}}
+
+% Alternative with different formatting
+% \fancyfoot[C]{\thepage\ / \pageref{LastPage}}
+% \fancyfoot[C]{[\thepage\ | \pageref{LastPage}]}
+
+\begin{document}
+
+\section{Introduction}
+This shows page X of Y format.
+
+\newpage
+\section{Content}
+More content to demonstrate numbering.
+
+\newpage
+\section{Conclusion}
+Final page shows total count.
+
+\end{document}
+```
+</CodeGroup>
+
+## Conditional Page Numbering
+
+### Hide Numbers on Specific Pages
+
+<CodeGroup>
+```latex conditional-numbering.tex
+\documentclass{article}
+\usepackage{fancyhdr}
+\usepackage{ifthen}
+
+\pagestyle{fancy}
+\fancyhf{}
+
+% Conditional page numbering
+\fancyfoot[C]{%
+  \ifthenelse{\value{page}=1}
+    {} % No number on first page
+    {\thepage} % Number on other pages
+}
+
+% Alternative: hide on chapter pages
+\fancyfoot[C]{%
+  \ifthenelse{\boolean{@mainmatter}}
+    {\thepage}
+    {} % No numbers in front matter
+}
+
+\begin{document}
+
+\title{Document Title}
+\maketitle
+
+\newpage
+\section{Introduction}
+This page has a number.
+
+\newpage
+\section{Methods}
+This page also has a number.
+
+\end{document}
+```
+</CodeGroup>
+
+### Different Formats by Page Range
+
+<CodeGroup>
+```latex format-by-range.tex
+\documentclass{article}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+
+% Different formatting based on page number
+\fancyfoot[C]{%
+  \ifnum\value{page}<10
+    Page 0\thepage  % Zero-padded for pages 1-9
+  \else
+    Page \thepage   % Normal for pages 10+
+  \fi
+}
+
+% Alternative: different styles by range
+\fancyhead[C]{%
+  \ifnum\value{page}<5
+    \textit{Introduction Section}
+  \else
+    \ifnum\value{page}<10
+      \textit{Main Content}
+    \else
+      \textit{Appendices}
+    \fi
+  \fi
+}
+
+\begin{document}
+
+\section{Introduction}
+Pages 1-4 show "Introduction Section"
+
+\newpage \newpage \newpage \newpage
+
+\section{Main Content}
+Pages 5-9 show "Main Content"
+
+\newpage \newpage \newpage \newpage \newpage
+
+\section{Appendices}
+Pages 10+ show "Appendices"
+
+\end{document}
+```
+</CodeGroup>
+
+## Multi-Volume Documents
+
+### Volume and Page Numbering
+
+<CodeGroup>
+```latex multi-volume.tex
+\documentclass{book}
+
+% Define volume number
+\newcounter{volume}
+\setcounter{volume}{1}
+
+% Include volume in page numbering
+\renewcommand{\thepage}{Vol.\Roman{volume}-\arabic{page}}
+
+% Alternative format
+% \renewcommand{\thepage}{\Roman{volume}:\arabic{page}}
+
+\begin{document}
+
+\frontmatter
+% Front matter pages: Vol.I-i, Vol.I-ii, etc.
+
+\mainmatter
+% Main content: Vol.I-1, Vol.I-2, etc.
+
+\chapter{First Chapter}
+Content for volume 1...
+
+% Start new volume (in practice, this would be a new document)
+\setcounter{volume}{2}
+\setcounter{page}{1}
+
+\chapter{Volume Two Content}
+Pages now numbered: Vol.II-1, Vol.II-2, etc.
+
+\end{document}
+```
+</CodeGroup>
+
+## Customizing Number Appearance
+
+### Styling Page Numbers
+
+<CodeGroup>
+```latex styling-numbers.tex
+\documentclass{article}
+\usepackage{fancyhdr}
+\usepackage{xcolor}
+
+\pagestyle{fancy}
+\fancyhf{}
+
+% Styled page numbers
+\fancyfoot[C]{%
+  \textcolor{blue}{\textbf{-- \thepage\ --}}
+}
+
+% Alternative styles
+% \fancyfoot[C]{\fbox{\thepage}}  % Boxed
+% \fancyfoot[C]{\textsc{Page \thepage}}  % Small caps
+% \fancyfoot[C]{\Large\thepage}  % Large font
+
+% Decorative numbering
+\fancyhead[C]{%
+  $\cdot$ \thepage\ $\cdot$
+}
+
+\begin{document}
+
+\section{Styled Numbers}
+Demonstrates various page number styling options.
+
+\newpage
+\section{More Content}
+Consistent styling across pages.
+
+\end{document}
+```
+</CodeGroup>
+
+### Custom Number Commands
+
+<CodeGroup>
+```latex custom-commands.tex
+\documentclass{article}
+\usepackage{fancyhdr}
+
+% Custom page number formatting
+\newcommand{\fancypagenumber}{%
+  \textbf{[Page \thepage]}
+}
+
+\newcommand{\circledpagenumber}{%
+  \textcircled{\small\thepage}
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+
+% Use custom commands
+\fancyfoot[C]{\fancypagenumber}
+% Alternative: \fancyfoot[C]{\circledpagenumber}
+
+\begin{document}
+
+\section{Custom Formatting}
+Page numbers use custom styling commands.
+
+\end{document}
+```
+</CodeGroup>
+
+## Troubleshooting Page Numbering
+
+### Common Issues and Solutions
+
+<CodeGroup>
+```latex troubleshooting.tex
+\documentclass{article}
+\usepackage{fancyhdr}
+
+\begin{document}
+
+% Issue: Page numbers not showing
+% Solution: Make sure page style is set
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+
+% Issue: Numbers in wrong position
+% Solution: Clear and reset headers/footers
+\fancyhf{}  % Clear everything first
+\fancyfoot[C]{\thepage}  % Then set what you want
+
+% Issue: Numbers not updating
+% Solution: Use \thepage, not literal numbers
+\fancyfoot[C]{\thepage}  % Correct
+% \fancyfoot[C]{1}       % Wrong - always shows 1
+
+% Issue: Numbering resets unexpectedly
+% Solution: Check for \pagenumbering commands
+% Remove unwanted \setcounter{page}{1} commands
+
+Content to demonstrate solutions...
+
+\end{document}
+```
+</CodeGroup>
+
+## Best Practices
+
+<Tip>
+**Page numbering guidelines:**
+
+1. **Be consistent** - Use the same style throughout similar sections
+2. **Consider your audience** - Academic papers often use different schemes than business documents
+3. **Plan ahead** - Design your numbering scheme before starting
+4. **Test thoroughly** - Check numbering across all document sections
+5. **Use automation** - Let LaTeX handle numbering rather than manual placement
+6. **Follow conventions** - Front matter typically uses roman numerals, main content uses arabic
+</Tip>
+
+### Professional Examples
+
+<CodeGroup>
+```latex professional-example.tex
+\documentclass[twoside]{book}
+\usepackage{fancyhdr}
+
+% Front matter style
+\fancypagestyle{frontmatter}{%
+  \fancyhf{}
+  \fancyfoot[C]{\roman{page}}
+  \renewcommand{\headrulewidth}{0pt}
+}
+
+% Main content style
+\fancypagestyle{mainmatter}{%
+  \fancyhf{}
+  \fancyhead[LE,RO]{\thepage}
+  \fancyhead[LO]{\leftmark}
+  \fancyhead[RE]{\rightmark}
+  \renewcommand{\headrulewidth}{0.4pt}
+}
+
+\begin{document}
+
+% Front matter
+\frontmatter
+\pagestyle{frontmatter}
+\tableofcontents
+
+% Main content
+\mainmatter
+\pagestyle{mainmatter}
+
+\chapter{Introduction}
+Professional numbering scheme...
+
+\end{document}
+```
+</CodeGroup>
+
+## Quick Reference
+
+### Page Numbering Commands
+
+| Command | Purpose | Example |
+|---------|---------|---------|
+| `\pagenumbering{style}` | Set numbering style | `\pagenumbering{roman}` |
+| `\setcounter{page}{n}` | Set page number | `\setcounter{page}{1}` |
+| `\thepage` | Current page number | Use in headers/footers |
+| `\pageref{label}` | Reference page number | `\pageref{LastPage}` |
+
+### Numbering Styles
+
+| Style | Output | Typical Use |
+|-------|---------|-------------|
+| `arabic` | 1, 2, 3, 4... | Main content |
+| `roman` | i, ii, iii, iv... | Front matter |
+| `Roman` | I, II, III, IV... | Volume numbers |
+| `alph` | a, b, c, d... | Appendix sections |
+| `Alph` | A, B, C, D... | Appendix chapters |
+
+### Position Codes (with fancyhdr)
+
+| Code | Position | Code | Position |
+|------|----------|------|----------|
+| `L` | Left | `E` | Even pages |
+| `C` | Center | `O` | Odd pages |
+| `R` | Right | `LE` | Left on even |
+
+---
+
+<Info>
+**Next**: Learn about [Single-sided vs double-sided documents](/learn/latex/formatting/document-sides) for layout considerations, or explore [Headers and footers](/learn/latex/formatting/headers-footers) for complementary page design.
+</Info>

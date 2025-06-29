@@ -1,0 +1,664 @@
+---
+title: Headers and Footers in LaTeX
+description: Complete guide to customizing headers and footers in LaTeX. Learn to use fancyhdr, create custom page styles, and design professional document headers.
+---
+
+
+Headers and footers provide essential navigation and document information. This comprehensive guide covers everything from basic page numbering to complex multi-section headers with automatic content generation.
+
+<Info>
+**Key concept**: LaTeX separates content (what appears) from style (how it looks). Understanding page styles lets you create consistent, professional headers and footers across your document.
+
+**Related topics**: [Page numbering](/learn/latex/formatting/page-numbering) | [Document design](/learn/latex/formatting/document-design) | [Cross-referencing](/learn/latex/cross-referencing)
+</Info>
+
+## Understanding Page Styles
+
+### Default Page Styles
+
+LaTeX provides four built-in page styles:
+
+| Style | Description | Header | Footer |
+|-------|-------------|--------|--------|
+| `plain` | Default for chapters | Empty | Page number |
+| `empty` | Completely blank | Empty | Empty |
+| `headings` | Automatic headers | Section/chapter names | Page number |
+| `myheadings` | Manual headers | User-defined content | Page number |
+
+<CodeGroup>
+```latex basic-styles.tex
+\documentclass{article}
+\begin{document}
+
+% Set page style for entire document
+\pagestyle{headings}
+
+% Or change style for current page only
+\thispagestyle{empty}
+
+\section{Introduction}
+This page will have the style set above.
+
+\newpage
+\section{Methods}
+This page continues with the document page style.
+
+\end{document}
+```
+</CodeGroup>
+
+## The fancyhdr Package
+
+The `fancyhdr` package provides complete control over headers and footers.
+
+### Basic Setup
+
+<CodeGroup>
+```latex fancyhdr-basic.tex
+\documentclass{article}
+\usepackage{fancyhdr}
+
+% Activate fancy page style
+\pagestyle{fancy}
+
+% Clear default headers and footers
+\fancyhf{}
+
+% Set headers and footers
+\fancyhead[L]{Left Header}
+\fancyhead[C]{Center Header}  
+\fancyhead[R]{Right Header}
+\fancyfoot[L]{Left Footer}
+\fancyfoot[C]{Page \thepage}
+\fancyfoot[R]{Right Footer}
+
+% Customize the line under header
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\begin{document}
+
+\section{Sample Content}
+This page demonstrates basic header and footer customization.
+
+\newpage
+\section{More Content}
+Headers and footers appear consistently across pages.
+
+\end{document}
+```
+</CodeGroup>
+
+### Position Specifiers
+
+<CodeGroup>
+```latex position-specifiers.tex
+\documentclass[twoside]{article}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+
+% For two-sided documents
+\fancyhead[LE,RO]{\thepage}  % Left on Even pages, Right on Odd pages
+\fancyhead[LO,RE]{\leftmark} % Left on Odd pages, Right on Even pages
+
+% Alternative: use combinations
+\fancyhead[L]{\ifnum\value{page}=1 Title Page \else \leftmark \fi}
+\fancyfoot[C]{Footer text}
+
+% For one-sided documents, use simple positions:
+% L (Left), C (Center), R (Right)
+
+\begin{document}
+
+\section{Introduction}
+Content for testing headers...
+
+\newpage
+\section{Methods}
+More content to show header changes...
+
+\end{document}
+```
+</CodeGroup>
+
+## Advanced Header Customization
+
+### Dynamic Content
+
+<CodeGroup>
+```latex dynamic-headers.tex
+\documentclass{article}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+
+\pagestyle{fancy}
+\fancyhf{}
+
+% Dynamic page information
+\fancyhead[L]{\leftmark}
+\fancyhead[R]{\today}
+\fancyfoot[L]{Document Title}
+\fancyfoot[C]{Page \thepage\ of \pageref{LastPage}}
+\fancyfoot[R]{Author Name}
+
+% Custom header rule
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{blue}\leaders\hrule height \headrulewidth\hfill}}
+
+% Different style for first page
+\fancypagestyle{firststyle}{%
+  \fancyhf{}
+  \fancyfoot[C]{\thepage}
+  \renewcommand{\headrulewidth}{0pt}
+}
+
+\begin{document}
+
+\thispagestyle{firststyle}
+\title{Document Title}
+\author{Author Name}
+\maketitle
+
+\section{Introduction}
+Regular pages use the main fancy style.
+
+\newpage
+\section{Methods}
+Headers automatically update with section names.
+
+\end{document}
+```
+</CodeGroup>
+
+### Conditional Headers
+
+<CodeGroup>
+```latex conditional-headers.tex
+\documentclass{book}
+\usepackage{fancyhdr}
+\usepackage{ifthen}
+
+\pagestyle{fancy}
+\fancyhf{}
+
+% Different headers for different page types
+\fancyhead[LE,RO]{\thepage}
+\fancyhead[LO]{\ifthenelse{\isodd{\value{page}}}{\rightmark}{\leftmark}}
+\fancyhead[RE]{\ifthenelse{\isodd{\value{page}}}{\leftmark}{\rightmark}}
+
+% Chapter-specific footers
+\fancyfoot[C]{%
+  \ifthenelse{\value{chapter}>3}
+    {Advanced Topics}
+    {Foundation Material}
+}
+
+% Special handling for chapter pages
+\fancypagestyle{plain}{%
+  \fancyhf{}
+  \fancyfoot[C]{\thepage}
+  \renewcommand{\headrulewidth}{0pt}
+}
+
+\begin{document}
+
+\chapter{Introduction}
+Chapter content here...
+
+\chapter{Background} 
+More content...
+
+\chapter{Methods}
+Even more content...
+
+\chapter{Advanced Topics}
+Notice the footer changes here...
+
+\end{document}
+```
+</CodeGroup>
+
+## Multi-line Headers
+
+<CodeGroup>
+```latex multiline-headers.tex
+\documentclass{article}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+
+% Multi-line header
+\fancyhead[L]{%
+  \begin{tabular}{l}
+  \textbf{Document Title} \\
+  \textit{Subtitle}
+  \end{tabular}
+}
+
+\fancyhead[R]{%
+  \begin{tabular}{r}
+  Author Name \\
+  \today
+  \end{tabular}
+}
+
+% Adjust header height for multi-line content
+\setlength{\headheight}{28pt}
+
+\fancyfoot[C]{\thepage}
+
+\renewcommand{\headrulewidth}{0.4pt}
+
+\begin{document}
+
+\section{Sample Section}
+This demonstrates multi-line headers with proper spacing.
+
+\end{document}
+```
+</CodeGroup>
+
+## Graphics in Headers
+
+<CodeGroup>
+```latex graphics-headers.tex
+\documentclass{article}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+
+\pagestyle{fancy}
+\fancyhf{}
+
+% Logo in header
+\fancyhead[L]{\includegraphics[height=20pt]{company-logo}}
+\fancyhead[C]{\textbf{CONFIDENTIAL}}
+\fancyhead[R]{\thepage}
+
+% Watermark-style footer
+\fancyfoot[C]{%
+  \begin{picture}(0,0)
+    \put(-50,-10){\includegraphics[width=2cm,opacity=0.3]{watermark}}
+  \end{picture}
+}
+
+% Adjust header height for graphics
+\setlength{\headheight}{25pt}
+
+\begin{document}
+
+\section{Document with Graphics}
+Headers can include logos and other graphics elements.
+
+\end{document}
+```
+</CodeGroup>
+
+## Chapter and Section Information
+
+### Automatic Section Headers
+
+<CodeGroup>
+```latex section-headers.tex
+\documentclass{report}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+
+% Use LaTeX's automatic sectioning marks
+\fancyhead[LE,RO]{\thepage}
+\fancyhead[LO]{\nouppercase{\rightmark}} % Section name
+\fancyhead[RE]{\nouppercase{\leftmark}}  % Chapter name
+
+% Customize how marks are created
+\renewcommand{\chaptermark}[1]{%
+  \markboth{\thechapter.\ #1}{}
+}
+\renewcommand{\sectionmark}[1]{%
+  \markright{\thesection.\ #1}
+}
+
+% Remove uppercase from marks
+\renewcommand{\MakeUppercase}[1]{#1}
+
+\begin{document}
+
+\chapter{Introduction}
+\section{Overview}
+Content here shows chapter and section in headers.
+
+\section{Scope}
+More content to demonstrate header updates.
+
+\chapter{Methods}
+\section{Data Collection}
+New chapter shows different header content.
+
+\end{document}
+```
+</CodeGroup>
+
+### Custom Section Marking
+
+<CodeGroup>
+```latex custom-marking.tex
+\documentclass{article}
+\usepackage{fancyhdr}
+
+% Custom command to set header content
+\newcommand{\sectionheader}[1]{%
+  \markright{#1}
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+
+\fancyhead[L]{\rightmark}
+\fancyhead[R]{\thepage}
+\fancyfoot[C]{Custom Document Footer}
+
+\begin{document}
+
+\section{Introduction}
+\sectionheader{Introduction to LaTeX Headers}
+
+This section has a custom header description.
+
+\section{Methods}  
+\sectionheader{Research Methodology and Approach}
+
+Different custom header for this section.
+
+\end{document}
+```
+</CodeGroup>
+
+## Special Page Styles
+
+### Title Page Style
+
+<CodeGroup>
+```latex title-page-style.tex
+\documentclass{article}
+\usepackage{fancyhdr}
+
+% Define special style for title page
+\fancypagestyle{titlepage}{%
+  \fancyhf{}
+  \fancyfoot[C]{\textit{Draft Version - \today}}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0.4pt}
+}
+
+% Define style for table of contents
+\fancypagestyle{toc}{%
+  \fancyhf{}
+  \fancyhead[C]{\textsc{Contents}}
+  \fancyfoot[C]{\thepage}
+  \renewcommand{\headrulewidth}{0.4pt}
+}
+
+% Main document style
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\leftmark}
+\fancyhead[R]{\thepage}
+\fancyfoot[C]{Main Document}
+
+\begin{document}
+
+% Use title page style
+\thispagestyle{titlepage}
+\title{Document Title}
+\author{Author Name}
+\maketitle
+
+\newpage
+
+% Use TOC style
+\pagestyle{toc}
+\tableofcontents
+
+\newpage
+
+% Switch to main style
+\pagestyle{fancy}
+\section{Introduction}
+Main content with standard headers...
+
+\end{document}
+```
+</CodeGroup>
+
+### Bibliography Style
+
+<CodeGroup>
+```latex bibliography-style.tex
+\documentclass{article}
+\usepackage{fancyhdr}
+
+% Style for bibliography pages
+\fancypagestyle{bibliography}{%
+  \fancyhf{}
+  \fancyhead[L]{\textsc{References}}
+  \fancyhead[R]{\thepage}
+  \fancyfoot[C]{\textit{Bibliography}}
+  \renewcommand{\headrulewidth}{0.4pt}
+  \renewcommand{\footrulewidth}{0pt}
+}
+
+% Main document style
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\leftmark}
+\fancyhead[R]{\thepage}
+
+\begin{document}
+
+\section{Introduction}
+Main content here...
+
+% Switch to bibliography style
+\newpage
+\pagestyle{bibliography}
+
+\begin{thebibliography}{9}
+\bibitem{ref1}
+Author, A. (2023). Paper title. \textit{Journal Name}, 10(2), 123-145.
+\end{thebibliography}
+
+\end{document}
+```
+</CodeGroup>
+
+## Headers with Boxes and Borders
+
+<CodeGroup>
+```latex boxed-headers.tex
+\documentclass{article}
+\usepackage{fancyhdr}
+\usepackage{xcolor}
+\usepackage{tikz}
+
+\pagestyle{fancy}
+\fancyhf{}
+
+% Boxed header with color
+\fancyhead[L]{%
+  \colorbox{lightgray}{%
+    \parbox{3cm}{\centering\textbf{Section}\\\leftmark}
+  }
+}
+
+\fancyhead[R]{%
+  \fcolorbox{black}{yellow}{%
+    \parbox{2cm}{\centering Page \thepage}
+  }
+}
+
+% Fancy footer with TikZ
+\fancyfoot[C]{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \draw[thick,blue] (0,0) -- (2,0);
+    \node at (1,0.2) {\textbf{Document Footer}};
+  \end{tikzpicture}
+}
+
+\setlength{\headheight}{25pt}
+
+\begin{document}
+
+\section{Sample Section}
+This page demonstrates boxed headers and graphic footers.
+
+\end{document}
+```
+</CodeGroup>
+
+## Troubleshooting Common Issues
+
+### Header Height Problems
+
+<CodeGroup>
+```latex header-height.tex
+\documentclass{article}
+\usepackage{fancyhdr}
+
+% Set appropriate header height BEFORE using fancy
+\setlength{\headheight}{30pt}  % Adjust as needed
+
+\pagestyle{fancy}
+\fancyhf{}
+
+% Multi-line header that needs more space
+\fancyhead[L]{%
+  Line 1\\Line 2\\Line 3
+}
+
+% If you get warnings about headheight, increase it:
+% \addtolength{\headheight}{5pt}
+
+\begin{document}
+Content here...
+\end{document}
+```
+</CodeGroup>
+
+### Page Break Issues
+
+<CodeGroup>
+```latex page-break-issues.tex
+\documentclass{article}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+
+% Prevent headers from affecting page breaks
+\fancyhead[L]{\leftmark}
+\fancyhead[R]{\thepage}
+
+% Use phantom content to prevent widow/orphan issues
+\fancyfoot[C]{%
+  \phantom{Invisible content for spacing}
+  Page \thepage
+}
+
+% Adjust penalties if needed
+\clubpenalty=10000
+\widowpenalty=10000
+
+\begin{document}
+
+Content that flows across pages...
+
+\end{document}
+```
+</CodeGroup>
+
+## Best Practices
+
+<Tip>
+**Header and footer guidelines:**
+
+1. **Keep it simple** - Too much information clutters the page
+2. **Be consistent** - Use the same style throughout similar documents
+3. **Consider your audience** - Academic vs. business documents have different conventions
+4. **Test thoroughly** - Check headers on all page types (first, last, odd, even)
+5. **Mind the margins** - Ensure headers don't overlap with main content
+6. **Use semantic marking** - Let LaTeX generate section names automatically when possible
+</Tip>
+
+### Professional Formatting
+
+<CodeGroup>
+```latex professional-example.tex
+\documentclass[11pt,letterpaper]{article}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+
+% Professional document setup
+\pagestyle{fancy}
+\fancyhf{}
+
+% Header: document info on left, page on right
+\fancyhead[L]{\textbf{Project Report} | \leftmark}
+\fancyhead[R]{Page \thepage\ of \pageref{LastPage}}
+
+% Footer: company info and date
+\fancyfoot[L]{Company Name}
+\fancyfoot[C]{\textit{Confidential}}
+\fancyfoot[R]{\today}
+
+% Clean lines
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0.3pt}
+
+% Adjust spacing
+\setlength{\headheight}{14pt}
+
+\begin{document}
+
+\section{Executive Summary}
+Professional document content...
+
+\end{document}
+```
+</CodeGroup>
+
+## Quick Reference
+
+### Essential fancyhdr Commands
+
+| Command | Purpose | Example |
+|---------|---------|---------|
+| `\pagestyle{fancy}` | Activate fancy headers | Required for customization |
+| `\fancyhf{}` | Clear all headers/footers | Start with clean slate |
+| `\fancyhead[L]{text}` | Set left header | `\fancyhead[L]{\leftmark}` |
+| `\fancyfoot[C]{text}` | Set center footer | `\fancyfoot[C]{\thepage}` |
+| `\thispagestyle{style}` | Set style for current page | Override default style |
+
+### Position Codes
+
+| Code | Meaning | Code | Meaning |
+|------|---------|------|---------|
+| `L` | Left | `E` | Even pages |
+| `C` | Center | `O` | Odd pages |
+| `R` | Right | `LE` | Left on even pages |
+
+### Common Variables
+
+| Variable | Content |
+|----------|---------|
+| `\thepage` | Current page number |
+| `\leftmark` | Chapter name (book) or section name (article) |
+| `\rightmark` | Section name (book) or subsection name (article) |
+| `\today` | Current date |
+
+---
+
+<Info>
+**Next**: Learn about [Page numbering](/learn/latex/formatting/page-numbering) for advanced numbering schemes, or explore [Document design](/learn/latex/formatting/document-design) for overall layout principles.
+</Info>

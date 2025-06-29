@@ -1,0 +1,1112 @@
+---
+title: Circuit Diagrams and Schematics
+description: Complete guide to drawing electrical circuits and schematics in LaTeX. Learn CircuiTikZ, electrical symbols, and professional circuit documentation.
+---
+
+
+Electrical circuit diagrams require precise symbols and layouts. This guide covers CircuiTikZ and other packages for creating professional electrical schematics, from simple circuits to complex systems.
+
+<Info>
+**Key concept**: CircuiTikZ extends TikZ with electrical components and symbols. It provides standardized symbols following international conventions and allows for both simple and complex circuit drawings with automatic wire routing.
+
+**Related topics**: [Graphics and diagrams](/learn/latex/graphics) | [TikZ drawings](/learn/latex/tikz) | [Technical documentation](/learn/latex/technical)
+</Info>
+
+## The CircuiTikZ Package
+
+### Basic Circuit Elements
+
+<CodeGroup>
+```latex basic-circuit-elements.tex
+\documentclass{article}
+\usepackage{circuitikz}
+
+\begin{document}
+
+\section{Basic Circuit Elements}
+
+% Simple resistor
+\begin{circuitikz}
+\draw (0,0) to[R, l=$R_1$] (2,0);
+\end{circuitikz}
+
+% Capacitor
+\begin{circuitikz}
+\draw (0,0) to[C, l=$C_1$] (2,0);
+\end{circuitikz}
+
+% Inductor
+\begin{circuitikz}
+\draw (0,0) to[L, l=$L_1$] (2,0);
+\end{circuitikz}
+
+% Voltage source
+\begin{circuitikz}
+\draw (0,0) to[V, l=$V_s$] (2,0);
+\end{circuitikz}
+
+% Current source
+\begin{circuitikz}
+\draw (0,0) to[I, l=$I_s$] (2,0);
+\end{circuitikz}
+
+% Battery
+\begin{circuitikz}
+\draw (0,0) to[battery, l=$V_{bat}$] (2,0);
+\end{circuitikz}
+
+% Switch
+\begin{circuitikz}
+\draw (0,0) to[switch, l=$S_1$] (2,0);
+\end{circuitikz}
+
+% Diode
+\begin{circuitikz}
+\draw (0,0) to[D, l=$D_1$] (2,0);
+\end{circuitikz}
+
+% Ground symbol
+\begin{circuitikz}
+\draw (0,0) node[ground]{};
+\end{circuitikz}
+
+\section{Component Variations}
+
+% Variable resistor
+\begin{circuitikz}
+\draw (0,0) to[vR, l=$R_{var}$] (2,0);
+\end{circuitikz}
+
+% Polarized capacitor
+\begin{circuitikz}
+\draw (0,0) to[pC, l=$C_{pol}$] (2,0);
+\end{circuitikz}
+
+% Zener diode
+\begin{circuitikz}
+\draw (0,0) to[zD, l=$D_Z$] (2,0);
+\end{circuitikz}
+
+% LED
+\begin{circuitikz}
+\draw (0,0) to[LED, l=$LED_1$] (2,0);
+\end{circuitikz}
+
+\end{document}
+```
+</CodeGroup>
+
+### Simple Circuits
+
+<CodeGroup>
+```latex simple-circuits.tex
+\documentclass{article}
+\usepackage{circuitikz}
+
+\begin{document}
+
+\section{Series Circuit}
+
+\begin{center}
+\begin{circuitikz}[scale=1.2]
+\draw (0,0) to[V, l=$12V$] (0,3)
+      to[R, l=$R_1=100\Omega$] (3,3)
+      to[R, l=$R_2=200\Omega$] (6,3)
+      to[short] (6,0)
+      to[short] (0,0);
+\draw (0,0) node[ground]{};
+\end{circuitikz}
+\end{center}
+
+\section{Parallel Circuit}
+
+\begin{center}
+\begin{circuitikz}[scale=1.2]
+% Main loop
+\draw (0,0) to[V, l=$9V$] (0,3)
+      to[short] (2,3);
+\draw (2,3) to[R, l=$R_1=1k\Omega$] (2,1.5)
+      to[short] (2,0);
+\draw (2,3) to[short] (4,3)
+      to[R, l=$R_2=2k\Omega$] (4,1.5)
+      to[short] (4,0);
+\draw (4,0) to[short] (0,0);
+\draw (0,0) node[ground]{};
+\end{circuitikz}
+\end{center}
+
+\section{RC Circuit}
+
+\begin{center}
+\begin{circuitikz}[scale=1.2]
+\draw (0,0) to[V, l=$V_s$] (0,3)
+      to[R, l=$R$] (3,3)
+      to[C, l=$C$] (3,0)
+      to[short] (0,0);
+\draw (0,0) node[ground]{};
+% Voltage measurement across capacitor
+\draw (3,3) to[open, v=$v_C(t)$] (3,0);
+\end{circuitikz}
+\end{center}
+
+\section{RLC Circuit}
+
+\begin{center}
+\begin{circuitikz}[scale=1.2]
+\draw (0,0) to[V, l=$v_s(t)$] (0,3)
+      to[R, l=$R$] (2,3)
+      to[L, l=$L$] (4,3)
+      to[C, l=$C$] (4,0)
+      to[short] (0,0);
+\draw (0,0) node[ground]{};
+\end{circuitikz}
+\end{center}
+
+\end{document}
+```
+</CodeGroup>
+
+### Complex Circuit Analysis
+
+<CodeGroup>
+```latex complex-circuits.tex
+\documentclass{article}
+\usepackage{circuitikz}
+\usepackage{amsmath}
+
+\begin{document}
+
+\section{Operational Amplifier Circuits}
+
+% Non-inverting amplifier
+\begin{center}
+\textbf{Non-inverting Amplifier}
+\begin{circuitikz}[scale=1.2]
+% Op-amp
+\draw (2,1) node[op amp] (opamp) {};
+% Input
+\draw (0,1.5) to[short, -o] (1,1.5);
+\draw (1,1.5) to[short] (opamp.+);
+\node[left] at (0,1.5) {$v_{in}$};
+% Feedback network
+\draw (opamp.-) to[short] (1.2,0.5)
+      to[short] (1.2,0)
+      to[R, l=$R_1$] (3.5,0)
+      to[short] (3.5,1)
+      to[short] (opamp.out);
+\draw (1.2,0) to[short] (1.2,-0.5) node[ground]{};
+\draw (1.2,0.5) to[R, l=$R_2$, *-] (1.2,2.5)
+      to[short] (3.5,2.5)
+      to[short] (3.5,1);
+% Output
+\draw (opamp.out) to[short, -o] (4,1);
+\node[right] at (4,1) {$v_{out}$};
+% Gain equation
+\node at (2,-1.5) {$A_v = 1 + \frac{R_2}{R_1}$};
+\end{circuitikz}
+\end{center}
+
+% Inverting amplifier
+\begin{center}
+\textbf{Inverting Amplifier}
+\begin{circuitikz}[scale=1.2]
+% Op-amp
+\draw (3,1) node[op amp] (opamp) {};
+% Input
+\draw (0,1.5) to[R, l=$R_1$] (2,1.5)
+      to[short] (2,0.5)
+      to[short] (opamp.-);
+\node[left] at (0,1.5) {$v_{in}$};
+% Non-inverting input to ground
+\draw (opamp.+) to[short] (2.2,1.5)
+      to[short] (2.2,0) node[ground]{};
+% Feedback
+\draw (opamp.-) to[short] (2,0.5)
+      to[short] (2,2.5)
+      to[R, l=$R_f$] (4.5,2.5)
+      to[short] (4.5,1)
+      to[short] (opamp.out);
+% Output
+\draw (opamp.out) to[short, -o] (5,1);
+\node[right] at (5,1) {$v_{out}$};
+% Gain equation
+\node at (3,-1.5) {$A_v = -\frac{R_f}{R_1}$};
+\end{circuitikz}
+\end{center}
+
+\section{Filter Circuits}
+
+% Low-pass filter
+\begin{center}
+\textbf{RC Low-Pass Filter}
+\begin{circuitikz}[scale=1.2]
+\draw (0,0) to[sV, l=$v_{in}$] (0,2)
+      to[R, l=$R$] (3,2)
+      to[short] (4,2)
+      to[C, l=$C$, v=$v_{out}$] (4,0)
+      to[short] (0,0);
+\draw (0,0) node[ground]{};
+\draw (4,2) to[short, -o] (5,2);
+\draw (4,0) to[short, -o] (5,0);
+\node[right] at (5,1) {$v_{out}$};
+% Transfer function
+\node at (2,-1) {$H(j\omega) = \frac{1}{1 + j\omega RC}$};
+\end{circuitikz}
+\end{center}
+
+% High-pass filter
+\begin{center}
+\textbf{RC High-Pass Filter}
+\begin{circuitikz}[scale=1.2]
+\draw (0,0) to[sV, l=$v_{in}$] (0,2)
+      to[C, l=$C$] (3,2)
+      to[short] (4,2)
+      to[R, l=$R$, v=$v_{out}$] (4,0)
+      to[short] (0,0);
+\draw (0,0) node[ground]{};
+\draw (4,2) to[short, -o] (5,2);
+\draw (4,0) to[short, -o] (5,0);
+\node[right] at (5,1) {$v_{out}$};
+% Transfer function
+\node at (2,-1) {$H(j\omega) = \frac{j\omega RC}{1 + j\omega RC}$};
+\end{circuitikz}
+\end{center}
+
+\end{document}
+```
+</CodeGroup>
+
+## Digital Circuit Components
+
+### Logic Gates and Digital Circuits
+
+<CodeGroup>
+```latex digital-circuits.tex
+\documentclass{article}
+\usepackage{circuitikz}
+
+\begin{document}
+
+\section{Basic Logic Gates}
+
+% AND gate
+\begin{center}
+\textbf{AND Gate}
+\begin{circuitikz}
+\draw (0,1) node[and port] (and1) {};
+\draw (and1.in 1) node[left] {A};
+\draw (and1.in 2) node[left] {B};
+\draw (and1.out) node[right] {Y = A $\cdot$ B};
+\end{circuitikz}
+\end{center}
+
+% OR gate
+\begin{center}
+\textbf{OR Gate}
+\begin{circuitikz}
+\draw (0,1) node[or port] (or1) {};
+\draw (or1.in 1) node[left] {A};
+\draw (or1.in 2) node[left] {B};
+\draw (or1.out) node[right] {Y = A + B};
+\end{circuitikz}
+\end{center}
+
+% NOT gate
+\begin{center}
+\textbf{NOT Gate}
+\begin{circuitikz}
+\draw (0,1) node[not port] (not1) {};
+\draw (not1.in) node[left] {A};
+\draw (not1.out) node[right] {Y = $\overline{A}$};
+\end{circuitikz}
+\end{center}
+
+% NAND gate
+\begin{center}
+\textbf{NAND Gate}
+\begin{circuitikz}
+\draw (0,1) node[nand port] (nand1) {};
+\draw (nand1.in 1) node[left] {A};
+\draw (nand1.in 2) node[left] {B};
+\draw (nand1.out) node[right] {Y = $\overline{A \cdot B}$};
+\end{circuitikz}
+\end{center}
+
+% NOR gate
+\begin{center}
+\textbf{NOR Gate}
+\begin{circuitikz}
+\draw (0,1) node[nor port] (nor1) {};
+\draw (nor1.in 1) node[left] {A};
+\draw (nor1.in 2) node[left] {B};
+\draw (nor1.out) node[right] {Y = $\overline{A + B}$};
+\end{circuitikz}
+\end{center}
+
+% XOR gate
+\begin{center}
+\textbf{XOR Gate}
+\begin{circuitikz}
+\draw (0,1) node[xor port] (xor1) {};
+\draw (xor1.in 1) node[left] {A};
+\draw (xor1.in 2) node[left] {B};
+\draw (xor1.out) node[right] {Y = A $\oplus$ B};
+\end{circuitikz}
+\end{center}
+
+\section{Combinational Circuits}
+
+% Half adder
+\begin{center}
+\textbf{Half Adder}
+\begin{circuitikz}[scale=1.2]
+% Inputs
+\draw (0,2) node[left] {A} to[short, -o] (0.5,2);
+\draw (0,0) node[left] {B} to[short, -o] (0.5,0);
+% XOR for sum
+\draw (2,1) node[xor port] (xor1) {};
+\draw (0.5,2) to[short] (1,2) to[short] (1,1.3) to[short] (xor1.in 1);
+\draw (0.5,0) to[short] (1,0) to[short] (1,0.7) to[short] (xor1.in 2);
+% AND for carry
+\draw (2,3) node[and port] (and1) {};
+\draw (1,2) to[short] (1.3,2) to[short] (1.3,3.3) to[short] (and1.in 1);
+\draw (1,0) to[short] (1.3,0) to[short] (1.3,2.7) to[short] (and1.in 2);
+% Outputs
+\draw (xor1.out) to[short, -o] (3.5,1);
+\draw (and1.out) to[short, -o] (3.5,3);
+\node[right] at (3.5,1) {Sum};
+\node[right] at (3.5,3) {Carry};
+\end{circuitikz}
+\end{center}
+
+% Full adder using half adders
+\begin{center}
+\textbf{Full Adder}
+\begin{circuitikz}[scale=0.8]
+% First half adder
+\draw (0,2) node[left] {A};
+\draw (0,1) node[left] {B};
+\draw (0,0) node[left] {$C_{in}$};
+\draw (2,1.5) rectangle (3.5,2.5) node[pos=.5] {HA};
+\draw (0,2) to[short] (2,2);
+1draw (0,1) to[short] (2,1.5);
+% Second half adder
+\draw (5,1) rectangle (6.5,2) node[pos=.5] {HA};
+\draw (3.5,2) to[short] (5,1.5);
+\draw (0,0) to[short] (4.5,0) to[short] (4.5,1.3) to[short] (5,1.3);
+% OR gate for carry out
+\draw (7,2.5) node[or port] (or1) {};
+\draw (3.5,2.5) to[short] (6.3,2.5) to[short] (6.3,2.8) to[short] (or1.in 1);
+\draw (6.5,1.7) to[short] (6.3,1.7) to[short] (6.3,2.2) to[short] (or1.in 2);
+% Outputs
+\draw (6.5,1.3) to[short, -o] (8,1.3);
+\draw (or1.out) to[short, -o] (8,2.5);
+\node[right] at (8,1.3) {Sum};
+\node[right] at (8,2.5) {$C_{out}$};
+\end{circuitikz}
+\end{center}
+
+\end{document}
+```
+</CodeGroup>
+
+### Sequential Circuits and Memory
+
+<CodeGroup>
+```latex sequential-circuits.tex
+\documentclass{article}
+\usepackage{circuitikz}
+
+\begin{document}
+
+\section{Flip-Flops}
+
+% SR Latch
+\begin{center}
+\textbf{SR Latch}
+\begin{circuitikz}[scale=1.2]
+% NOR gates
+\draw (2,2) node[nor port] (nor1) {};
+\draw (2,0) node[nor port] (nor2) {};
+% Cross coupling
+\draw (nor1.out) to[short] (3.5,2) to[short] (3.5,-0.5) to[short] (1.3,-0.5) to[short] (nor2.in 2);
+\draw (nor2.out) to[short] (3.5,0) to[short] (3.5,2.5) to[short] (1.3,2.5) to[short] (nor1.in 2);
+% Inputs
+\draw (nor1.in 1) to[short] (0.5,2.3) to[short] (0.5,3) node[above] {R};
+\draw (nor2.in 1) to[short] (0.5,0.3) to[short] (0.5,-0.5) node[below] {S};
+% Outputs
+\draw (3.5,2) to[short, -o] (4,2);
+\draw (3.5,0) to[short, -o] (4,0);
+\node[right] at (4,2) {Q};
+\node[right] at (4,0) {$\overline{Q}$};
+\end{circuitikz}
+\end{center}
+
+% D Flip-Flop
+\begin{center}
+\textbf{D Flip-Flop}
+\begin{circuitikz}[scale=1.2]
+\draw (2,1) rectangle (4,3);
+\node at (3,2) {D FF};
+% Inputs
+\draw (0,2.5) node[left] {D} to[short] (2,2.5);
+\draw (0,1.5) node[left] {CLK} to[short] (2,1.5);
+% Outputs
+\draw (4,2.5) to[short] (5,2.5) node[right] {Q};
+\draw (4,1.5) to[short] (5,1.5) node[right] {$\overline{Q}$};
+% Clock symbol
+\draw (1.8,1.5) -- (2,1.7) -- (2.2,1.5);
+\end{circuitikz}
+\end{center}
+
+% JK Flip-Flop
+\begin{center}
+\textbf{JK Flip-Flop}
+\begin{circuitikz}[scale=1.2]
+\draw (2,0.5) rectangle (4,3.5);
+\node at (3,2) {JK FF};
+% Inputs
+\draw (0,3) node[left] {J} to[short] (2,3);
+\draw (0,2) node[left] {CLK} to[short] (2,2);
+\draw (0,1) node[left] {K} to[short] (2,1);
+% Outputs
+\draw (4,2.5) to[short] (5,2.5) node[right] {Q};
+\draw (4,1.5) to[short] (5,1.5) node[right] {$\overline{Q}$};
+% Clock symbol
+\draw (1.8,2) -- (2,2.2) -- (2.2,2);
+\end{circuitikz}
+\end{center}
+
+\section{Counters}
+
+% 4-bit binary counter
+\begin{center}
+\textbf{4-bit Binary Counter}
+\begin{circuitikz}[scale=0.8]
+% Flip-flops
+\draw (0,0) rectangle (1.5,2) node[pos=.5] {FF0};
+\draw (2.5,0) rectangle (4,2) node[pos=.5] {FF1};
+\draw (5,0) rectangle (6.5,2) node[pos=.5] {FF2};
+\draw (7.5,0) rectangle (9,2) node[pos=.5] {FF3};
+% Clock connections
+\draw (0,0.5) node[left] {CLK} to[short] (0.75,0.5);
+\draw (1.5,1.5) to[short] (2.5,1.5) to[short] (2.5,0.5) to[short] (3.25,0.5);
+\draw (4,1.5) to[short] (5,1.5) to[short] (5,0.5) to[short] (5.75,0.5);
+\draw (6.5,1.5) to[short] (7.5,1.5) to[short] (7.5,0.5) to[short] (8.25,0.5);
+% Outputs
+\draw (1.5,1.5) to[short] (1.5,2.5) node[above] {$Q_0$};
+\draw (4,1.5) to[short] (4,2.5) node[above] {$Q_1$};
+\draw (6.5,1.5) to[short] (6.5,2.5) node[above] {$Q_2$};
+\draw (9,1.5) to[short] (9,2.5) node[above] {$Q_3$};
+\end{circuitikz}
+\end{center}
+
+\section{Memory Circuits}
+
+% SRAM Cell
+\begin{center}
+\textbf{SRAM Cell}
+\begin{circuitikz}[scale=1.2]
+% Cross-coupled inverters
+\draw (1,1) node[not port] (inv1) {};
+\draw (3,1) node[not port] (inv2) {};
+\draw (inv1.out) to[short] (inv2.in);
+\draw (inv2.out) to[short] (2,2) to[short] (1,2) to[short] (inv1.in);
+% Access transistors
+\draw (0.5,1) to[Tnmos, rotate=90] (0.5,2);
+\draw (3.5,1) to[Tnmos, rotate=90] (3.5,2);
+% Word line
+\draw (0,1.5) node[left] {WL} to[short] (0.3,1.5);
+\draw (3.8,1.5) to[short] (4,1.5);
+\draw (0.3,1.5) to[short] (0.3,0.7) to[short] (3.8,0.7) to[short] (3.8,1.5);
+% Bit lines
+\draw (0.5,2.5) node[above] {BL} to[short] (0.5,2.2);
+\draw (3.5,2.5) node[above] {$\overline{BL}$} to[short] (3.5,2.2);
+\end{circuitikz}
+\end{center}
+
+\end{document}
+```
+</CodeGroup>
+
+## Power and Control Circuits
+
+### Power Electronics
+
+<CodeGroup>
+```latex power-circuits.tex
+\documentclass{article}
+\usepackage{circuitikz}
+
+\begin{document}
+
+\section{Rectifier Circuits}
+
+% Half-wave rectifier
+\begin{center}
+\textbf{Half-Wave Rectifier}
+\begin{circuitikz}[scale=1.2]
+% Transformer
+\draw (0,0) to[L, l=$N_1$] (0,2)
+      to[short] (1,2)
+      to[L, l=$N_2$] (1,0)
+      to[short] (0,0);
+% Diode
+\draw (1,2) to[D, l=$D_1$] (3,2)
+      to[R, l=$R_L$] (3,0)
+      to[short] (1,0);
+% AC source
+\draw (-1.5,1) to[sV, l=$v_s$] (-1.5,1) 
+      to[short] (0,1);
+% Output
+\draw (3,2) to[short, -o] (4,2);
+\draw (3,0) to[short, -o] (4,0);
+\node[right] at (4,1) {$v_o$};
+\end{circuitikz}
+\end{center}
+
+% Full-wave bridge rectifier
+\begin{center}
+\textbf{Full-Wave Bridge Rectifier}
+\begin{circuitikz}[scale=1.2]
+% Bridge diodes
+\draw (2,2) to[D, l=$D_1$] (4,2);
+\draw (2,0) to[D, l=$D_3$] (4,0);
+\draw (2,2) to[D, l=$D_4$] (2,0);
+\draw (4,2) to[D, l=$D_2$] (4,0);
+% AC source
+\draw (0,1) to[sV, l=$v_s$] (0,1);
+\draw (0,2) to[short] (2,2);
+\draw (0,0) to[short] (2,0);
+% Load
+\draw (4,2) to[short] (5,2)
+      to[R, l=$R_L$] (5,0)
+      to[short] (4,0);
+% Output
+\draw (5,2) to[short, -o] (6,2);
+\draw (5,0) to[short, -o] (6,0);
+\node[right] at (6,1) {$v_o$};
+\end{circuitikz}
+\end{center}
+
+% Voltage regulator
+\begin{center}
+\textbf{Linear Voltage Regulator}
+\begin{circuitikz}[scale=1.2]
+\draw (0,0) to[V, l=$V_{in}$] (0,2)
+      to[short] (1,2)
+      to[Tnpn, l=$Q_1$] (3,2);
+\draw (2,1.3) to[short] (2,1)
+      to[zD, l=$D_Z$] (2,0)
+      to[short] (0,0);
+\draw (3,2) to[R, l=$R_L$] (3,0)
+      to[short] (2,0);
+\draw (2,1) to[R, l=$R_1$] (1,1)
+      to[short] (1,2);
+% Output
+\draw (3,2) to[short, -o] (4,2);
+\draw (3,0) to[short, -o] (4,0);
+\node[right] at (4,1) {$V_{out}$};
+\end{circuitikz}
+\end{center}
+
+\section{Motor Control}
+
+% DC motor speed control
+\begin{center}
+\textbf{PWM Motor Speed Control}
+\begin{circuitikz}[scale=1.2]
+% PWM source
+\draw (0,2) node[left] {PWM} to[short] (1,2)
+      to[Tnmos, l=$Q_1$] (1,0);
+\draw (1,2) to[short] (2,2)
+      to[D, l=$D_1$] (2,0);
+\draw (2,2) to[L, l=Motor] (4,2)
+      to[short] (4,0)
+      to[short] (1,0);
+\draw (1,0) node[ground]{};
+% Supply
+\draw (2,3) to[V, l=$V_{DC}$] (2,2);
+\end{circuitikz}
+\end{center}
+
+% Three-phase motor control
+\begin{center}
+\textbf{Three-Phase Inverter}
+\begin{circuitikz}[scale=0.8]
+% DC bus
+\draw (0,4) to[short] (6,4);
+\draw (0,0) to[short] (6,0);
+\draw (0,2) to[V, l=$V_{DC}$] (0,4);
+\draw (0,0) to[short] (0,2);
+% Phase A
+\draw (1,4) to[Tnmos, l=$S_1$] (1,2);
+\draw (1,2) to[Tnmos, l=$S_4$] (1,0);
+\draw (1,2) to[short, -o] (1,1.5);
+\node[below] at (1,1.5) {A};
+% Phase B
+\draw (3,4) to[Tnmos, l=$S_3$] (3,2);
+\draw (3,2) to[Tnmos, l=$S_6$] (3,0);
+\draw (3,2) to[short, -o] (3,1.5);
+\node[below] at (3,1.5) {B};
+% Phase C
+\draw (5,4) to[Tnmos, l=$S_5$] (5,2);
+\draw (5,2) to[Tnmos, l=$S_2$] (5,0);
+\draw (5,2) to[short, -o] (5,1.5);
+\node[below] at (5,1.5) {C};
+% Motor connection
+\draw (6.5,2) node[circle, draw, minimum size=1cm] {M};
+\draw (1,1.5) to[short] (6,1.5);
+\draw (3,1.5) to[short] (6,1.8);
+\draw (5,1.5) to[short] (6,2.2);
+\end{circuitikz}
+\end{center}
+
+\end{document}
+```
+</CodeGroup>
+
+### Control Systems
+
+<CodeGroup>
+```latex control-systems.tex
+\documentclass{article}
+\usepackage{circuitikz}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+
+\begin{document}
+
+\section{Control System Block Diagrams}
+
+% Feedback control system
+\begin{center}
+\textbf{Closed-Loop Control System}
+\begin{tikzpicture}[scale=1.2, >=stealth]
+% Blocks
+\draw (0,0) rectangle (1.5,1) node[pos=.5] {Controller};
+\draw (3,0) rectangle (4.5,1) node[pos=.5] {Plant};
+\draw (1.5,-2) rectangle (3,-1) node[pos=.5] {Sensor};
+
+% Summing junction
+\draw (-2,0.5) circle (0.3);
+\draw (-2.3,0.5) -- (-1.7,0.5);
+\draw (-2,0.2) -- (-2,0.8);
+\node at (-2.15,0.65) {+};
+\node at (-2.15,0.15) {-};
+
+% Arrows and signals
+\draw[->] (-3,0.5) -- (-2.3,0.5);
+\node[above] at (-3.5,0.5) {Reference};
+\draw[->] (-1.7,0.5) -- (0,0.5);
+\node[above] at (-0.8,0.5) {Error};
+\draw[->] (1.5,0.5) -- (3,0.5);
+\node[above] at (2.2,0.5) {Control};
+\draw[->] (4.5,0.5) -- (5.5,0.5);
+\node[above] at (5.8,0.5) {Output};
+
+% Feedback path
+\draw[->] (5,0.5) -- (5,-1.5) -- (3,-1.5);
+\draw[->] (1.5,-1.5) -- (-2,-1.5) -- (-2,0.2);
+\node[below] at (0,-1.5) {Feedback};
+\end{tikzpicture}
+\end{center}
+
+% PID Controller
+\begin{center}
+\textbf{PID Controller Structure}
+\begin{tikzpicture}[scale=1.2, >=stealth]
+% Input
+\draw[->] (0,2) -- (1,2);
+\node[above] at (0.5,2) {$e(t)$};
+
+% Proportional path
+\draw (1,2.5) rectangle (2.5,3.5) node[pos=.5] {$K_p$};
+\draw[->] (1,2) -- (1,3) -- (1.5,3);
+
+% Integral path
+\draw (1,1) rectangle (2.5,2) node[pos=.5] {$K_i \int$};
+\draw[->] (1,2) -- (1,1.5);
+
+% Derivative path
+\draw (1,0) rectangle (2.5,0.5) node[pos=.5] {$K_d \frac{d}{dt}$};
+\draw[->] (1,2) -- (1,0.25);
+
+% Summing junction
+\draw (4,2) circle (0.3);
+\draw (3.7,2) -- (4.3,2);
+\draw (4,1.7) -- (4,2.3);
+\node at (3.85,2.15) {+};
+\node at (3.85,1.85) {+};
+\node at (3.85,2.35) {+};
+
+% Connections to summer
+\draw[->] (2.5,3) -- (3.5,3) -- (3.5,2.3) -- (3.7,2.3);
+\draw[->] (2.5,1.5) -- (3.7,1.5) -- (3.7,2);
+\draw[->] (2.5,0.25) -- (3.5,0.25) -- (3.5,1.7) -- (3.7,1.7);
+
+% Output
+\draw[->] (4.3,2) -- (5.5,2);
+\node[above] at (5.8,2) {$u(t)$};
+\end{tikzpicture}
+\end{center}
+
+\section{Signal Flow Graphs}
+
+% Simple feedback system
+\begin{center}
+\textbf{Signal Flow Graph}
+\begin{tikzpicture}[scale=1.2, >=stealth]
+% Nodes
+\draw (0,0) circle (0.1) node[below] {$R(s)$};
+\draw (2,0) circle (0.1) node[below] {$E(s)$};
+\draw (4,0) circle (0.1) node[below] {$C(s)$};
+\draw (2,-2) circle (0.1) node[below] {$B(s)$};
+
+% Forward paths
+\draw[->] (0.1,0) -- (1.9,0);
+\node[above] at (1,0) {1};
+\draw[->] (2.1,0) -- (3.9,0);
+\node[above] at (3,0) {$G(s)$};
+
+% Feedback path
+\draw[->] (4,0) -- (4,-2) -- (2,-2);
+\draw[->] (2,-1.9) -- (2,-0.1);
+\node[left] at (3,-2) {$H(s)$};
+\node[right] at (2,-1) {-1};
+\end{tikzpicture}
+\end{center}
+
+\end{document}
+```
+</CodeGroup>
+
+## RF and Microwave Circuits
+
+### High-Frequency Circuits
+
+<CodeGroup>
+```latex rf-circuits.tex
+\documentclass{article}
+\usepackage{circuitikz}
+
+\begin{document}
+
+\section{RF Circuit Elements}
+
+% Transmission line
+\begin{center}
+\textbf{Transmission Line}
+\begin{circuitikz}[scale=1.2]
+\draw (0,1) to[tline, l=$Z_0$, l_=$\beta l$] (3,1);
+\draw (0,1) to[short, -o] (-0.5,1);
+\draw (0,0) to[short, -o] (-0.5,0);
+\draw (3,1) to[short, -o] (3.5,1);
+\draw (3,0) to[short, -o] (3.5,0);
+\node[left] at (-0.5,0.5) {Input};
+\node[right] at (3.5,0.5) {Output};
+\end{circuitikz}
+\end{center}
+
+% Smith chart matching
+\begin{center}
+\textbf{Impedance Matching Network}
+\begin{circuitikz}[scale=1.2]
+% Source
+\draw (0,0) to[sV, l=$V_s$] (0,2)
+      to[R, l=$R_s$] (2,2);
+% Matching network
+\draw (2,2) to[L, l=$L_1$] (4,2)
+      to[C, l=$C_1$] (4,0)
+      to[short] (2,0);
+\draw (4,2) to[short] (5,2)
+      to[R, l=$R_L$] (5,0)
+      to[short] (0,0);
+% Annotations
+\node at (3,3) {Matching Network};
+\draw (2,2.5) rectangle (4.5,3.5);
+\end{circuitikz}
+\end{center}
+
+\section{Amplifier Circuits}
+
+% Common emitter amplifier
+\begin{center}
+\textbf{RF Amplifier}
+\begin{circuitikz}[scale=1.2]
+% Transistor
+\draw (3,1) node[npn] (Q1) {};
+% Input matching
+\draw (0,1.3) to[L, l=$L_1$] (1.5,1.3)
+      to[C, l=$C_1$] (Q1.base);
+\draw (1.5,1.3) to[C, l=$C_2$] (1.5,0);
+% Output matching
+\draw (Q1.collector) to[C, l=$C_3$] (4.5,2)
+      to[L, l=$L_2$] (6,2);
+\draw (4.5,2) to[C, l=$C_4$] (4.5,0);
+% Bias and supply
+\draw (Q1.collector) to[R, l=$R_C$] (3,3)
+      to[short] (3,3.5) node[above] {$V_{CC}$};
+\draw (Q1.emitter) to[short] (3,0);
+% Ground
+\draw (0,0) to[short] (6,0);
+\draw (3,0) node[ground]{};
+% Ports
+\draw (0,1.3) to[short, -o] (-0.5,1.3);
+\draw (0,0) to[short, -o] (-0.5,0);
+\draw (6,2) to[short, -o] (6.5,2);
+\draw (6,0) to[short, -o] (6.5,0);
+\node[left] at (-0.5,0.65) {RF In};
+\node[right] at (6.5,1) {RF Out};
+\end{circuitikz}
+\end{center}
+
+% Mixer circuit
+\begin{center}
+\textbf{RF Mixer}
+\begin{circuitikz}[scale=1.2]
+% Mixer symbol
+\draw (2,2) circle (1);
+\draw (1.3,2.7) -- (2.7,1.3);
+\draw (1.3,1.3) -- (2.7,2.7);
+% Inputs
+\draw (0,2.5) node[left] {RF} to[short] (1,2.5);
+\draw (0,1.5) node[left] {LO} to[short] (1,1.5);
+% Output
+\draw (3,2) to[short] (4,2) node[right] {IF};
+% Baluns or transformers for isolation
+\draw (1,2.5) to[cute inductor] (1.4,2.4);
+\draw (1,1.5) to[cute inductor] (1.4,1.6);
+\end{circuitikz}
+\end{center}
+
+\section{Antenna Circuits}
+
+% Dipole antenna
+\begin{center}
+\textbf{Dipole Antenna}
+\begin{circuitikz}[scale=1.2]
+% Feed point
+\draw (2,0) to[short, -o] (1.5,0);
+\draw (2,0.5) to[short, -o] (1.5,0.5);
+\node[left] at (1.5,0.25) {Feed};
+% Antenna elements
+\draw (2,0.5) to[short] (2,2);
+\draw (2,0) to[short] (2,-1.5);
+% Length annotations
+\draw[<->] (2.2,0.5) -- (2.2,2);
+\node[right] at (2.2,1.25) {$\lambda/4$};
+\draw[<->] (2.2,0) -- (2.2,-1.5);
+\node[right] at (2.2,-0.75) {$\lambda/4$};
+% Radiation pattern indication
+\draw[dashed] (2,0.25) ellipse (3 and 1.5);
+\end{circuitikz}
+\end{center}
+
+% Antenna matching
+\begin{center}
+\textbf{Antenna Matching Network}
+\begin{circuitikz}[scale=1.2]
+% Transmitter
+\draw (0,0) to[sV, l=TX] (0,1.5)
+      to[R, l=$R_s=50\Omega$] (1.5,1.5);
+% Matching network
+\draw (1.5,1.5) to[L, l=$L$] (3,1.5)
+      to[C, l=$C$] (3,0)
+      to[short] (0,0);
+% Antenna
+\draw (3,1.5) to[short] (4,1.5)
+      to[R, l=$R_A$] (4,0.75)
+      to[L, l=$jX_A$] (4,0)
+      to[short] (3,0);
+\draw (0,0) node[ground]{};
+% SWR indication
+\node at (2.25,2.5) {Matching for SWR = 1:1};
+\end{circuitikz}
+\end{center}
+
+\end{document}
+```
+</CodeGroup>
+
+## Best Practices
+
+<Tip>
+**Circuit drawing guidelines:**
+
+1. **Use standard symbols** - Follow IEEE or IEC standards for component symbols
+2. **Clear layout** - Organize components logically with adequate spacing
+3. **Consistent style** - Use uniform line weights and component sizes
+4. **Proper labeling** - Include component values and reference designators
+5. **Signal flow** - Arrange circuits to show clear signal flow from left to right
+6. **Annotations** - Add equations, transfer functions, and design notes where helpful
+</Tip>
+
+### Professional Circuit Documentation
+
+<CodeGroup>
+```latex professional-circuit.tex
+\documentclass{article}
+\usepackage{circuitikz}
+\usepackage{amsmath}
+\usepackage{siunitx}
+\usepackage{booktabs}
+
+\begin{document}
+
+\title{Audio Amplifier Design}
+\author{Electronics Engineering}
+\maketitle
+
+\section{Design Specifications}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{@{}ll@{}}
+\toprule
+Parameter & Specification \\
+\midrule
+Supply Voltage & $\pm$\SI{15}{\volt} \\
+Output Power & \SI{10}{\watt} into \SI{8}{\ohm} \\
+Frequency Response & \SI{20}{\hertz} to \SI{20}{\kilo\hertz} \\
+THD & $< 0.1\%$ at \SI{1}{\kilo\hertz} \\
+Input Impedance & \SI{10}{\kilo\ohm} \\
+\bottomrule
+\end{tabular}
+\caption{Audio amplifier specifications}
+\end{table}
+
+\section{Circuit Design}
+
+\begin{center}
+\textbf{Complete Audio Amplifier}
+\begin{circuitikz}[scale=0.8]
+% Input stage - differential amplifier
+\draw (0,2) node[left] {$V_{in}$} to[C, l=\SI{1}{\micro\farad}] (1.5,2)
+      to[R, l=\SI{10}{\kilo\ohm}] (3,2);
+\draw (3,2.5) node[npn] (Q1) {};
+\draw (3,1.5) node[npn] (Q2) {};
+\draw (Q1.base) to[short] (3,2);
+\draw (Q2.base) to[R, l=\SI{10}{\kilo\ohm}] (1.5,1.5)
+      to[short] (1.5,0) node[ground]{};
+
+% Current source
+\draw (Q1.emitter) to[short] (2.8,2.2);
+\draw (Q2.emitter) to[short] (2.8,1.8);
+\draw (2.8,2) to[I, l=\SI{2}{\milli\ampere}] (2.8,0);
+
+% Load resistors
+\draw (Q1.collector) to[R, l=\SI{2.2}{\kilo\ohm}] (3.2,4)
+      to[short] (3.2,4.5) node[above] {$+15V$};
+\draw (Q2.collector) to[R, l=\SI{2.2}{\kilo\ohm}] (2.8,4)
+      to[short] (2.8,4.5) node[above] {$+15V$};
+
+% Output stage
+\draw (Q2.collector) to[short] (4.5,1.3)
+      to[C, l=\SI{10}{\micro\farad}] (6,1.3);
+\draw (6,2) node[npn] (Q3) {};
+\draw (6,0.6) node[pnp] (Q4) {};
+\draw (Q3.base) to[short] (6,1.3);
+\draw (Q4.base) to[short] (6,1.3);
+
+% Output coupling
+\draw (Q3.emitter) to[short] (6.2,1.6);
+\draw (Q4.emitter) to[short] (6.2,1);
+\draw (6.2,1.3) to[C, l=\SI{1000}{\micro\farad}] (8,1.3)
+      to[R, l=\SI{8}{\ohm}] (8,0);
+
+% Supply connections
+\draw (Q3.collector) to[short] (6,3) node[above] {$+15V$};
+\draw (Q4.collector) to[short] (6,-0.5) node[below] {$-15V$};
+
+% Ground
+\draw (0,0) to[short] (8,0);
+\draw (2.8,0) node[ground]{};
+
+% Output
+\draw (8,1.3) to[short, -o] (9,1.3);
+\draw (8,0) to[short, -o] (9,0);
+\node[right] at (9,0.65) {$V_{out}$};
+\end{circuitikz}
+\end{center}
+
+\section{Analysis}
+
+\subsection{Differential Input Stage}
+The differential amplifier provides:
+\begin{align}
+A_{diff} &= g_m \cdot R_C \\
+&= \frac{I_C}{V_T} \cdot R_C \\
+&= \frac{\SI{1}{\milli\ampere}}{\SI{26}{\milli\volt}} \cdot \SI{2.2}{\kilo\ohm} \\
+&= 84.6
+\end{align}
+
+\subsection{Output Stage}
+The complementary emitter follower provides:
+\begin{itemize}
+\item High current gain for driving low-impedance loads
+\item Low output impedance: $r_{out} \approx \frac{r_e}{\beta} \approx \SI{0.26}{\ohm}$
+\item Unity voltage gain with high input impedance
+\end{itemize}
+
+\subsection{Overall Performance}
+\begin{align}
+A_v &= A_{diff} \cdot A_{output} \approx 84.6 \cdot 1 = 84.6 \\
+P_{out} &= \frac{V_{out}^2}{R_L} = \frac{(\SI{8.94}{\volt})^2}{\SI{8}{\ohm}} = \SI{10}{\watt}
+\end{align}
+
+\section{Component Selection}
+
+\textbf{Critical Design Considerations:}
+\begin{itemize}
+\item $Q_1, Q_2$: Matched pair for minimal offset (BC550C)
+\item $Q_3, Q_4$: High current capability (2N3055/MJ2955)
+\item Coupling capacitors: Low ESR for audio applications
+\item Thermal management: Heat sinks for output transistors
+\end{itemize}
+
+\end{document}
+```
+</CodeGroup>
+
+## Quick Reference
+
+### Essential CircuiTikZ Components
+
+| Component | Code | Symbol |
+|-----------|------|---------|
+| Resistor | `to[R, l=$R_1$]` | Rectangle |
+| Capacitor | `to[C, l=$C_1$]` | Parallel plates |
+| Inductor | `to[L, l=$L_1$]` | Coil |
+| Voltage source | `to[V, l=$V_s$]` | Circle with + - |
+| Current source | `to[I, l=$I_s$]` | Circle with arrow |
+| Diode | `to[D, l=$D_1$]` | Triangle + line |
+| Transistor (NPN) | `node[npn]` | Standard symbol |
+| Op-amp | `node[op amp]` | Triangle |
+
+### Logic Gates
+
+| Gate | Code | Function |
+|------|------|----------|
+| AND | `node[and port]` | Y = A·B |
+| OR | `node[or port]` | Y = A+B |
+| NOT | `node[not port]` | Y = Ā |
+| NAND | `node[nand port]` | Y = A·B̄ |
+| NOR | `node[nor port]` | Y = A+B̄ |
+| XOR | `node[xor port]` | Y = A⊕B |
+
+### Common Options
+
+| Option | Purpose | Example |
+|--------|---------|---------|
+| `l=text` | Component label | `l=$R_1$` |
+| `v=text` | Voltage annotation | `v=$V_C$` |
+| `i=text` | Current annotation | `i=$I_L$` |
+| `scale=n` | Size scaling | `scale=1.2` |
+| `rotate=angle` | Rotation | `rotate=90` |
+
+---
+
+<Info>
+**Next**: Learn about [Linguistic trees and diagrams](/learn/latex/specialized/linguistics) for language analysis, or explore [Algorithm pseudocode](/learn/latex/specialized/algorithms) for computer science notation.
+</Info>

@@ -1,0 +1,1086 @@
+---
+title: Music Notation and Scores
+description: Complete guide to typesetting musical notation in LaTeX. Learn MusiXTeX, LilyPond integration, and advanced music scoring techniques.
+---
+
+
+Musical notation in LaTeX requires specialized packages to handle staves, notes, rhythms, and complex musical elements. This guide covers the essential tools for creating professional music scores and musical examples.
+
+<Info>
+**Key concept**: LaTeX offers several approaches to music notation, from simple musical symbols to complete score typesetting. MusiXTeX provides comprehensive notation capabilities, while LilyPond can be integrated for professional-quality scores.
+
+**Related topics**: [Mathematical notation](/learn/latex/mathematics) | [Graphics and diagrams](/learn/latex/graphics) | [Symbols and special characters](/learn/latex/symbols)
+</Info>
+
+## Basic Musical Symbols
+
+### Simple Musical Notation
+
+<CodeGroup>
+```latex basic-music-symbols.tex
+\documentclass{article}
+\usepackage{wasysym}
+\usepackage{harmony}
+
+\begin{document}
+
+\section{Basic Musical Symbols}
+
+% Note values from wasysym
+Whole note: \wholenote
+
+Half note: \halfnote
+
+Quarter note: \quarternote
+
+Eighth note: \eighthnote
+
+Sixteenth note: \sixteenthnote
+
+% Rest symbols
+Whole rest: \wholerest
+
+Half rest: \halfrest
+
+Quarter rest: \quarterrest
+
+Eighth rest: \eighthrest
+
+% Accidentals
+Sharp: \sharp
+
+Flat: \flat
+
+Natural: \natural
+
+Double sharp: \doublesharp
+
+Double flat: \doubleflat
+
+% Other symbols
+Treble clef: \trebleclef
+
+Bass clef: \bassclef
+
+% Time signatures (using text)
+Common time: C (4/4)
+
+Cut time: \textit{alla breve} (2/2)
+
+\section{Musical Examples}
+
+A simple melody might be notated as:
+\quarternote \quarternote \halfnote \quarternote \quarternote \wholerest
+
+With accidentals:
+C\sharp{} D\flat{} E\natural{} F\sharp{} G
+
+\end{document}
+```
+</CodeGroup>
+
+## The musixtex Package
+
+### Basic Staff Notation
+
+<CodeGroup>
+```latex musixtex-basic.tex
+\documentclass{article}
+\usepackage{musixtex}
+
+\begin{document}
+
+\section{Basic Staff Notation}
+
+% Simple scale
+\begin{music}
+\parindent10mm
+\instrumentnumber{1}
+\setname1{Treble}
+\setstaffs1{1}
+\setclef1\treble
+\startextract
+\Notes\qu{cdefgab}\en
+\bar
+\Notes\qu{c'}\en
+\endextract
+\end{music}
+
+% With different note values
+\begin{music}
+\parindent10mm
+\instrumentnumber{1}
+\setstaffs1{1}
+\setclef1\treble
+\startextract
+\Notes\wh{c}\en
+\bar
+\Notes\hu{de}\en
+\bar
+\Notes\qu{fgab}\en
+\bar
+\Notes\cu{c'd'e'f'}\en
+\endextract
+\end{music}
+
+\section{Bass Clef}
+
+\begin{music}
+\parindent10mm
+\instrumentnumber{1}
+\setstaffs1{1}
+\setclef1\bass
+\startextract
+\Notes\qu{CDEFGAB}\en
+\bar
+\Notes\qu{c}\en
+\endextract
+\end{music}
+
+\end{document}
+```
+</CodeGroup>
+
+### Complex Musical Structures
+
+<CodeGroup>
+```latex musixtex-complex.tex
+\documentclass{article}
+\usepackage{musixtex}
+
+\begin{document}
+
+\section{Piano Score}
+
+% Two-staff piano notation
+\begin{music}
+\parindent10mm
+\instrumentnumber{1}
+\setname1{Piano}
+\setstaffs1{2}
+\setclef1{\treble\bass}
+\startextract
+% Right hand (treble)
+\Notes\qu{ceg}\en
+\nextstaff
+% Left hand (bass)
+\Notes\qu{C}\en
+\bar
+% Continue with more complex patterns
+\Notes\qu{dfh}\en
+\nextstaff
+\Notes\qu{D}\en
+\endextract
+\end{music}
+
+\section{Chord Notation}
+
+\begin{music}
+\parindent10mm
+\instrumentnumber{1}
+\setstaffs1{1}
+\setclef1\treble
+\startextract
+% Major chords
+\Notes\zq{c}\zq{e}\qu{g}\en
+\Notes\zq{d}\zq{f}\qu{a}\en
+\Notes\zq{e}\zq{g}\qu{b}\en
+\bar
+% Minor chords
+\Notes\zq{c}\zq{e^}\qu{g}\en
+\Notes\zq{d}\zq{f}\qu{a^}\en
+\Notes\zq{e}\zq{g}\qu{b^}\en
+\endextract
+\end{music}
+
+\section{Rhythmic Patterns}
+
+\begin{music}
+\parindent10mm
+\instrumentnumber{1}
+\setstaffs1{1}
+\setclef1\treble
+\startextract
+% Different rhythms
+\Notes\qu{c}\cu{dd}\qu{e}\en
+\bar
+\Notes\hu{f}\qu{g}\en
+\bar
+\Notes\wh{a}\en
+\bar
+% Tied notes
+\Notes\qu{c}\tqu{d}\en
+\bar
+\Notes\qu{e}\qu{f}\en
+\endextract
+\end{music}
+
+\end{document}
+```
+</CodeGroup>
+
+### Advanced Musical Elements
+
+<CodeGroup>
+```latex musixtex-advanced.tex
+\documentclass{article}
+\usepackage{musixtex}
+
+\begin{document}
+
+\section{Advanced Notation}
+
+% Key signatures and accidentals
+\begin{music}
+\parindent10mm
+\instrumentnumber{1}
+\setstaffs1{1}
+\setclef1\treble
+\generalsignature{2}  % D major (2 sharps)
+\startextract
+\Notes\qu{defg}\en
+\bar
+% Accidentals
+\Notes\qu{d^\q{e_}\q{f=}\qu{g}}\en
+\endextract
+\end{music}
+
+\section{Time Signatures}
+
+% 3/4 time
+\begin{music}
+\parindent10mm
+\instrumentnumber{1}
+\setstaffs1{1}
+\setclef1\treble
+\setmeter1{\meterC{3}{4}}
+\startextract
+\Notes\qu{cde}\en
+\bar
+\Notes\hu{f}\qu{g}\en
+\bar
+\Notes\wh{a}\qu{r}\en
+\endextract
+\end{music}
+
+% 6/8 time
+\begin{music}
+\parindent10mm
+\instrumentnumber{1}
+\setstaffs1{1}
+\setclef1\treble
+\setmeter1{\meterC{6}{8}}
+\startextract
+\Notes\cu{cde}\cu{fga}\en
+\bar
+\Notes\qu{b}\cu{c'}\qu{d'}\cu{e'}\en
+\endextract
+\end{music}
+
+\section{Beaming and Grouping}
+
+\begin{music}
+\parindent10mm
+\instrumentnumber{1}
+\setstaffs1{1}
+\setclef1\treble
+\startextract
+% Beamed eighth notes
+\Notes\ibu0f0\qb0{cde}\tbu0\qb0f\en
+\bar
+% Beamed sixteenth notes
+\Notes\ibbu0f0\qb0{cdef}\tbu0\qb0g\en
+\endextract
+\end{music}
+
+\section{Slurs and Ties}
+
+\begin{music}
+\parindent10mm
+\instrumentnumber{1}
+\setstaffs1{1}
+\setclef1\treble
+\startextract
+% Slurs
+\Notes\isluru0c\qu{c}\tslur0d\qu{d}\qu{e}\qu{f}\en
+\bar
+% Ties
+\Notes\itie0\qu{g}\ttie0\qu{g}\qu{a}\qu{b}\en
+\endextract
+\end{music}
+
+\end{document}
+```
+</CodeGroup>
+
+## The lilyglyphs Package
+
+### LilyPond Symbol Integration
+
+<CodeGroup>
+```latex lilyglyphs-symbols.tex
+\documentclass{article}
+\usepackage{lilyglyphs}
+
+\begin{document}
+
+\section{LilyPond Musical Symbols}
+
+% Note heads
+Whole note: \wholeNote
+
+Half note: \halfNote
+
+Quarter note: \crotchet
+
+Eighth note: \quaver
+
+Sixteenth note: \semiquaver
+
+% Rests
+Whole rest: \wholeNoteRest
+
+Half rest: \halfNoteRest
+
+Quarter rest: \crotchetRest
+
+Eighth rest: \quaverRest
+
+% Clefs
+Treble clef: \clefTreble
+
+Bass clef: \clefBass
+
+Alto clef: \clefAlto
+
+Tenor clef: \clefTenor
+
+% Accidentals
+Sharp: \accidentalSharp
+
+Flat: \accidentalFlat
+
+Natural: \accidentalNatural
+
+Double sharp: \accidentalDoubleSharp
+
+Double flat: \accidentalDoubleFlat
+
+% Time signatures
+Four-four time: \timeFourFour
+
+Three-four time: \timeThreeFour
+
+Two-four time: \timeTwoFour
+
+Cut time: \timeCutTime
+
+\section{Dynamic Markings}
+
+Piano: \dynamicPiano
+
+Forte: \dynamicForte
+
+Mezzo piano: \dynamicMezzoPiano
+
+Mezzo forte: \dynamicMezzoForte
+
+Pianissimo: \dynamicPianissimo
+
+Fortissimo: \dynamicFortissimo
+
+% Crescendo and diminuendo
+Crescendo: \textit{cresc.} or use hairpins
+
+Diminuendo: \textit{dim.} or use hairpins
+
+\section{Articulations}
+
+Staccato: \textperiodcentered
+
+Accent: \textgreater
+
+Tenuto: \textminus
+
+Fermata: over notes or rests
+
+\end{document}
+```
+</CodeGroup>
+
+## Lead Sheets and Chord Charts
+
+### Jazz and Popular Music Notation
+
+<CodeGroup>
+```latex lead-sheets.tex
+\documentclass{article}
+\usepackage{musixtex}
+\usepackage{harmony}
+
+\begin{document}
+
+\section{Lead Sheet Example}
+
+\begin{center}
+\Large\textbf{My Funny Valentine}\\
+\normalsize Richard Rodgers
+\end{center}
+
+% Chord progression with lyrics
+\begin{tabular}{|l|l|l|l|}
+\hline
+Cm & Cm(\MA7) & Cm7 & Cm6 \\
+My & fun-ny & Val-en & tine \\
+\hline
+Dm7b5 & G7 & Cm & Cm \\
+Sweet & com-ic & Val-en & tine \\
+\hline
+\end{tabular}
+
+\section{Chord Symbols}
+
+% Major chords
+C major: C or C\textbigcircle
+
+C major 7: C\MA7 or Cmaj7
+
+C dominant 7: C7
+
+% Minor chords
+C minor: Cm or C-
+
+C minor 7: Cm7
+
+C half-diminished: Cm7b5 or C\oslash
+
+C diminished: C\textdegree{} or Cdim
+
+% Extended chords
+C add 9: Cadd9
+
+C major 9: C\MA9
+
+C 13: C13
+
+% Slash chords
+C over E: C/E
+
+F over G: F/G
+
+\section{Nashville Number System}
+
+In key of C:
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+I & ii & iii & IV & V & vi & vii\textdegree \\
+\hline
+C & Dm & Em & F & G & Am & Bdim \\
+\hline
+\end{tabular}
+
+Common progressions:
+\begin{itemize}
+\item I-V-vi-IV (C-G-Am-F)
+\item ii-V-I (Dm-G-C)
+\item vi-IV-I-V (Am-F-C-G)
+\end{itemize}
+
+\section{Roman Numeral Analysis}
+
+\begin{music}
+\parindent10mm
+\instrumentnumber{1}
+\setstaffs1{1}
+\setclef1\treble
+\startextract
+% I chord
+\Notes\zq{c}\zq{e}\qu{g}\en
+% V chord
+\Notes\zq{d}\zq{f}\qu{a}\en
+% vi chord
+\Notes\zq{e}\zq{g}\qu{b}\en
+% IV chord
+\Notes\zq{f}\zq{a}\qu{c'}\en
+\endextract
+\end{music}
+
+Analysis: I - V - vi - IV
+
+\end{document}
+```
+</CodeGroup>
+
+## Music Analysis and Theory
+
+### Harmonic Analysis
+
+<CodeGroup>
+```latex music-analysis.tex
+\documentclass{article}
+\usepackage{musixtex}
+\usepackage{harmony}
+\usepackage{amsmath}
+
+\begin{document}
+
+\section{Harmonic Analysis}
+
+% Bach Chorale excerpt analysis
+\begin{music}
+\parindent10mm
+\instrumentnumber{1}
+\setstaffs1{2}
+\setclef1{\treble\bass}
+\generalsignature{0}  % C major
+\startextract
+% Soprano
+\Notes\qu{g}\en
+\nextstaff
+% Bass
+\Notes\qu{C}\en
+\bar
+% Continue analysis...
+\Notes\qu{a}\en
+\nextstaff
+\Notes\qu{F}\en
+\endextract
+\end{music}
+
+Roman numeral analysis:
+\begin{center}
+\begin{tabular}{c|c|c|c}
+Measure & 1 & 2 & 3 \\
+\hline
+Analysis & I & IV & V \\
+Function & Tonic & Subdominant & Dominant
+\end{tabular}
+\end{center}
+
+\section{Voice Leading Analysis}
+
+% Four-part voice leading
+\begin{music}
+\parindent10mm
+\instrumentnumber{1}
+\setstaffs1{2}
+\setclef1{\treble\treble}
+\startextract
+% Upper voices
+\Notes\zq{e}\qu{g}\zq{f}\qu{a}\en
+\nextstaff
+% Lower voices
+\Notes\zq{c}\qu{e}\zq{d}\qu{f}\en
+\endextract
+\end{music}
+
+Voice leading principles:
+\begin{itemize}
+\item Stepwise motion preferred
+\item Avoid parallel fifths and octaves
+\item Resolve tendency tones
+\item Maintain smooth voice leading
+\end{itemize}
+
+\section{Schenkerian Analysis}
+
+Background structure:
+\[
+\hat{3} - \hat{2} - \hat{1}
+\]
+
+Linear progressions:
+\begin{itemize}
+\item Ascending: $\hat{1} - \hat{2} - \hat{3}$
+\item Descending: $\hat{3} - \hat{2} - \hat{1}$
+\item Chromatic: with chromatic passing tones
+\end{itemize}
+
+\section{Set Theory Analysis}
+
+Pitch class sets:
+\begin{itemize}
+\item Major triad: (0,4,7)
+\item Minor triad: (0,3,7)
+\item Diminished triad: (0,3,6)
+\item Augmented triad: (0,4,8)
+\end{itemize}
+
+Twelve-tone operations:
+\begin{itemize}
+\item Prime (P): Original row
+\item Inversion (I): Interval inversion
+\item Retrograde (R): Backward order
+\item Retrograde Inversion (RI): Both operations
+\end{itemize}
+
+\end{document}
+```
+</CodeGroup>
+
+## Specialized Musical Notation
+
+### Early Music and Neumes
+
+<CodeGroup>
+```latex early-music.tex
+\documentclass{article}
+\usepackage{gregoriotex}
+
+\begin{document}
+
+\section{Gregorian Chant Notation}
+
+% Simple neume notation
+\begin{center}
+\Large
+Ky-ri-e e-le-i-son
+\end{center}
+
+Neume types:
+\begin{itemize}
+\item Punctum: Single note
+\item Virga: Single note with tail
+\item Podatus: Two ascending notes
+\item Clivis: Two descending notes
+\item Scandicus: Three ascending notes
+\item Climacus: Three descending notes
+\end{itemize}
+
+\section{Renaissance Mensural Notation}
+
+Note values in mensural notation:
+\begin{itemize}
+\item Maxima: Longest note value
+\item Longa: Long note
+\item Brevis: Breve (whole note equivalent)
+\item Semibrevis: Semibreve (half note equivalent)
+\item Minima: Minim (quarter note equivalent)
+\item Semiminima: Semiminim (eighth note equivalent)
+\end{itemize}
+
+Mensuration signs:
+\begin{itemize}
+\item C: Tempus imperfectum, prolatio minor (2:2)
+\item O: Tempus perfectum, prolatio minor (3:2)
+\item \textperiodcentered C: Tempus imperfectum, prolatio maior (2:3)
+\item \textperiodcentered O: Tempus perfectum, prolatio maior (3:3)
+\end{itemize}
+
+\section{Tablature Notation}
+
+% Lute tablature representation
+\textbf{Lute Tablature:}
+\begin{verbatim}
+e|---0---2---4---
+B|---1---3---5---
+G|---0---2---4---
+D|---2---4---6---
+A|---3---5---7---
+E|---0---2---4---
+\end{verbatim}
+
+\textbf{Guitar Tab:}
+\begin{verbatim}
+E|---3---5---7---
+B|---3---5---7---
+G|---4---6---8---
+D|---5---7---9---
+A|---5---7---9---
+E|---3---5---7---
+\end{verbatim}
+
+\end{document}
+```
+</CodeGroup>
+
+### Contemporary and Extended Techniques
+
+<CodeGroup>
+```latex contemporary-notation.tex
+\documentclass{article}
+\usepackage{musixtex}
+\usepackage{tikz}
+
+\begin{document}
+
+\section{Extended Techniques}
+
+% String techniques
+\textbf{String Instruments:}
+\begin{itemize}
+\item sul ponticello: near the bridge
+\item sul tasto: over the fingerboard
+\item col legno: with the wood of the bow
+\item pizzicato: plucked
+\item harmonics: \textcircled{o} natural, \textcircled{$\diamond$} artificial
+\item tremolo: rapid bow movement
+\end{itemize}
+
+% Wind techniques
+\textbf{Wind Instruments:}
+\begin{itemize}
+\item flutter tonguing: rolled r
+\item multiphonics: multiple simultaneous pitches
+\item overblowing: forcing higher partials
+\item key clicks: percussive key sounds
+\item embouchure changes: altered tone quality
+\end{itemize}
+
+% Percussion techniques
+\textbf{Percussion:}
+\begin{itemize}
+\item rim shot: stick on rim and head
+\item cross stick: stick shaft on head
+\item brushes: wire brushes
+\item mallets: soft, medium, hard
+\item timpani glissando: pedal slide
+\end{itemize}
+
+\section{Graphic Notation}
+
+% Using TikZ for graphic notation
+\begin{center}
+\begin{tikzpicture}
+% Time line
+\draw[thick] (0,0) -- (8,0);
+\foreach \x in {0,2,4,6,8}
+  \draw (\x,0) -- (\x,-0.2) node[below] {\x''};
+
+% Graphic elements
+\draw[thick] (1,1) -- (3,2) -- (5,0.5) -- (7,3);
+\fill[gray!50] (2,1.5) circle (0.3);
+\draw[dashed] (4,0) -- (4,4);
+
+% Dynamic envelope
+\draw[red, thick] (0,0.5) -- (2,3) -- (4,1) -- (6,2.5) -- (8,0.2);
+
+\node at (4,4.5) {\textbf{Graphic Score Example}};
+\node at (0.5,3.5) {ff};
+\node at (4.5,3.5) {mp};
+\node at (7.5,3.5) {pp};
+\end{tikzpicture}
+\end{center}
+
+\section{Proportional Notation}
+
+Space = Time relationship:
+\begin{itemize}
+\item 1 cm = 1 second
+\item Note placement indicates precise timing
+\item No traditional bar lines
+\item Conductor or click track needed
+\end{itemize}
+
+\section{Microtonal Notation}
+
+Quarter-tone symbols:
+\begin{itemize}
+\item Quarter sharp: $\sharp$ + arrow up
+\item Quarter flat: $\flat$ + arrow down
+\item Three-quarter sharp: $\sharp$ + $\sharp$ + arrow up
+\item Three-quarter flat: $\flat$ + $\flat$ + arrow down
+\end{itemize}
+
+Cent notation:
+\begin{itemize}
+\item +50¢: 50 cents sharp
+\item -25¢: 25 cents flat
+\item Just intonation ratios: 5:4, 3:2, etc.
+\end{itemize}
+
+\end{document}
+```
+</CodeGroup>
+
+## Digital Music and MIDI
+
+### Computer Music Notation
+
+<CodeGroup>
+```latex digital-music.tex
+\documentclass{article}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\begin{document}
+
+\section{MIDI Data Representation}
+
+% MIDI note numbers
+\textbf{MIDI Note Numbers:}
+\begin{tabular}{|c|c|c|}
+\hline
+Note & Octave 4 & MIDI Number \\
+\hline
+C & C4 & 60 \\
+C\# & C\#4 & 61 \\
+D & D4 & 62 \\
+D\# & D\#4 & 63 \\
+E & E4 & 64 \\
+F & F4 & 65 \\
+F\# & F\#4 & 66 \\
+G & G4 & 67 \\
+G\# & G\#4 & 68 \\
+A & A4 & 69 \\
+A\# & A\#4 & 70 \\
+B & B4 & 71 \\
+\hline
+\end{tabular}
+
+\section{Music Programming Languages}
+
+% SuperCollider example
+\textbf{SuperCollider:}
+\begin{lstlisting}[language=C++]
+(
+SynthDef(\sine, {
+    arg freq = 440, amp = 0.1, gate = 1;
+    var env, osc;
+    env = EnvGen.kr(Env.adsr, gate, doneAction: 2);
+    osc = SinOsc.ar(freq, 0, amp) * env;
+    Out.ar(0, osc.dup);
+}).add;
+)
+
+// Play a note
+x = Synth(\sine, [\freq, 440, \amp, 0.2]);
+x.release;
+\end{lstlisting}
+
+% Chuck example
+\textbf{ChucK:}
+\begin{lstlisting}
+// Simple oscillator
+SinOsc osc => dac;
+
+// Set frequency and play
+440 => osc.freq;
+0.5 => osc.gain;
+1::second => now;
+\end{lstlisting}
+
+\section{Music Information Retrieval}
+
+% Python music analysis
+\textbf{Python with music21:}
+\begin{lstlisting}[language=Python]
+from music21 import stream, note, meter, key
+
+# Create a simple melody
+melody = stream.Stream()
+melody.append(meter.TimeSignature('4/4'))
+melody.append(key.KeySignature(0))  # C major
+
+# Add notes
+notes = ['C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4', 'C5']
+for pitch in notes:
+    melody.append(note.Note(pitch, quarterLength=1))
+
+# Analyze the melody
+melody.analyze('key')
+melody.show('text')
+\end{lstlisting}
+
+\section{Music Markup Languages}
+
+% MusicXML structure
+\textbf{MusicXML:}
+\begin{lstlisting}[language=XML]
+<score-partwise>
+  <part-list>
+    <score-part id="P1">
+      <part-name>Piano</part-name>
+    </score-part>
+  </part-list>
+  
+  <part id="P1">
+    <measure number="1">
+      <attributes>
+        <divisions>4</divisions>
+        <key>
+          <fifths>0</fifths>
+          <mode>major</mode>
+        </key>
+        <time>
+          <beats>4</beats>
+          <beat-type>4</beat-type>
+        </time>
+      </attributes>
+      <note>
+        <pitch>
+          <step>C</step>
+          <octave>4</octave>
+        </pitch>
+        <duration>4</duration>
+        <type>quarter</type>
+      </note>
+    </measure>
+  </part>
+</score-partwise>
+\end{lstlisting}
+
+\end{document}
+```
+</CodeGroup>
+
+## Best Practices
+
+<Tip>
+**Music notation guidelines:**
+
+1. **Choose appropriate package** - MusiXTeX for traditional notation, specialized packages for extended techniques
+2. **Consistent formatting** - Use standard musical conventions and spacing
+3. **Clear layout** - Ensure readability for performers
+4. **Proper symbols** - Use correct musical symbols and terminology
+5. **Score preparation** - Include all necessary performance information
+6. **Version control** - Track changes in complex scores
+</Tip>
+
+### Professional Music Document
+
+<CodeGroup>
+```latex professional-music.tex
+\documentclass{article}
+\usepackage{musixtex}
+\usepackage{lilyglyphs}
+\usepackage{fancyhdr}
+
+% Custom headers for music
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textbf{Sonata in C Major}}
+\fancyhead[R]{\textbf{W.A. Mozart}}
+\fancyfoot[C]{\thepage}
+
+\begin{document}
+
+\begin{center}
+{\Large\textbf{Sonata in C Major, K. 545}}\\[5mm]
+{\large\textbf{Allegro}}\\[3mm]
+Wolfgang Amadeus Mozart (1756-1791)\\[10mm]
+\end{center}
+
+% Performance notes
+\textbf{Performance Notes:}
+\begin{itemize}
+\item Tempo: \quarternote = 120-132
+\item Style: Classical, elegant and clear
+\item Articulation: Observe all slurs and staccatos
+\item Dynamics: Follow markings precisely
+\end{itemize}
+
+% Main score
+\begin{music}
+\parindent10mm
+\instrumentnumber{1}
+\setname1{Piano}
+\setstaffs1{2}
+\setclef1{\treble\bass}
+\generalsignature{0}  % C major
+\setmeter1{\meterC{4}{4}}
+\startextract
+
+% Measure 1 - Right hand melody
+\Notes\qu{ceg}\qu{c'}\en
+\nextstaff
+% Left hand accompaniment
+\Notes\qu{C}\qu{r}\qu{E}\qu{r}\en
+\bar
+
+% Measure 2
+\Notes\qu{ded}\qu{d'}\en
+\nextstaff
+\Notes\qu{G,}\qu{r}\qu{G,}\qu{r}\en
+\bar
+
+% Measure 3
+\Notes\qu{efe}\qu{e'}\en
+\nextstaff
+\Notes\qu{C}\qu{r}\qu{E}\qu{r}\en
+\bar
+
+% Measure 4
+\Notes\hu{df}\hu{d'}\en
+\nextstaff
+\Notes\qu{G,}\qu{r}\qu{G,}\qu{r}\en
+
+\endextract
+\end{music}
+
+\section{Analysis}
+
+This opening phrase demonstrates Mozart's characteristic clarity and elegance:
+
+\begin{itemize}
+\item \textbf{Form}: Sentence structure (2+2+4)
+\item \textbf{Harmony}: I-V-I-V progression
+\item \textbf{Texture}: Melody with Alberti bass accompaniment
+\item \textbf{Motivic development}: Simple scalar patterns
+\end{itemize}
+
+\section{Technical Considerations}
+
+\textbf{Right Hand:}
+\begin{itemize}
+\item Finger legato in scalar passages
+\item Clear articulation of melody line
+\item Balanced phrase shaping
+\end{itemize}
+
+\textbf{Left Hand:}
+\begin{itemize}
+\item Light, even Alberti bass
+\item Avoid heavy accents
+\item Maintain steady pulse
+\end{itemize}
+
+\textbf{Pedaling:}
+\begin{itemize}
+\item Minimal use on period instrument
+\item Clear harmonic changes
+\item Support melodic line without blurring
+\end{itemize}
+
+\end{document}
+```
+</CodeGroup>
+
+## Quick Reference
+
+### Essential Music Symbols
+
+| Symbol | Command | Package | Purpose |
+|--------|---------|---------|---------|
+| ♩ | `\quarternote` | wasysym | Quarter note |
+| ♪ | `\eighthnote` | wasysym | Eighth note |
+| 𝄽 | `\quarterrest` | wasysym | Quarter rest |
+| ♯ | `\sharp` | wasysym | Sharp |
+| ♭ | `\flat` | wasysym | Flat |
+| 𝄞 | `\trebleclef` | wasysym | Treble clef |
+
+### MusiXTeX Basic Commands
+
+| Command | Purpose | Example |
+|---------|---------|---------|
+| `\qu{notes}` | Quarter notes | `\qu{cde}` |
+| `\hu{notes}` | Half notes | `\hu{fg}` |
+| `\wh{note}` | Whole note | `\wh{c}` |
+| `\cu{notes}` | Eighth notes | `\cu{abcd}` |
+| `\bar` | Bar line | Between measures |
+| `\en` | End notes | After note group |
+
+### Common Time Signatures
+
+| Symbol | LaTeX | Meaning |
+|--------|-------|---------|
+| C | `\meterC{4}{4}` | 4/4 time |
+| 𝄵 | `\meterC{2}{2}` | Cut time |
+| 3/4 | `\meterC{3}{4}` | 3/4 time |
+| 6/8 | `\meterC{6}{8}` | 6/8 time |
+
+---
+
+<Info>
+**Next**: Learn about [Circuit diagrams and schematics](/learn/latex/specialized/circuits) for electrical engineering notation, or explore [Linguistic trees](/learn/latex/specialized/linguistics) for language analysis diagrams.
+</Info>

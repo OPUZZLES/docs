@@ -1,0 +1,696 @@
+---
+title: Chemistry Formulas and Reactions
+description: Complete guide to typesetting chemical formulas, equations, and reaction mechanisms in LaTeX. Learn mhchem, chemfig, and advanced chemistry notation.
+---
+
+
+Chemical notation requires specialized formatting for formulas, reactions, and molecular structures. This guide covers the essential packages and techniques for professional chemistry typesetting in LaTeX.
+
+<Info>
+**Key concept**: LaTeX provides powerful packages like `mhchem` for chemical equations and `chemfig` for molecular structures. These packages handle subscripts, superscripts, arrows, and complex chemical notation automatically.
+
+**Related topics**: [Mathematical notation](/learn/latex/mathematics) | [Scientific notation](/learn/latex/mathematics/science) | [Symbols and special characters](/learn/latex/symbols)
+</Info>
+
+## The mhchem Package
+
+### Basic Chemical Formulas
+
+<CodeGroup>
+```latex basic-formulas.tex
+\documentclass{article}
+\usepackage[version=4]{mhchem}
+
+\begin{document}
+
+\section{Chemical Formulas}
+
+% Simple formulas
+Water: \ce{H2O}
+
+Sulfuric acid: \ce{H2SO4}
+
+Methane: \ce{CH4}
+
+% Complex formulas with charges
+Hydronium ion: \ce{H3O+}
+
+Sulfate ion: \ce{SO4^2-}
+
+Ammonium: \ce{NH4+}
+
+% Isotopes
+Carbon-14: \ce{^14C}
+
+Uranium-235: \ce{^235U}
+
+Deuterium oxide: \ce{^2H2O}
+
+% States of matter
+Solid sodium chloride: \ce{NaCl_{(s)}}
+
+Aqueous hydrochloric acid: \ce{HCl_{(aq)}}
+
+Gaseous carbon dioxide: \ce{CO2_{(g)}}
+
+Liquid water: \ce{H2O_{(l)}}
+
+\end{document}
+```
+</CodeGroup>
+
+### Chemical Equations and Reactions
+
+<CodeGroup>
+```latex chemical-reactions.tex
+\documentclass{article}
+\usepackage[version=4]{mhchem}
+
+\begin{document}
+
+\section{Chemical Reactions}
+
+% Simple reaction
+\ce{2H2 + O2 -> 2H2O}
+
+% Reversible reaction
+\ce{N2 + 3H2 <=> 2NH3}
+
+% Equilibrium with conditions
+\ce{CaCO3_{(s)} <=>[\Delta] CaO_{(s)} + CO2_{(g)}}
+
+% Multiple steps
+\begin{align}
+\ce{CH4 + 2O2 &-> CO2 + 2H2O} \\
+\ce{2H2 + O2 &-> 2H2O} \\
+\ce{C + O2 &-> CO2}
+\end{align}
+
+\section{Complex Reactions}
+
+% Precipitation reaction
+\ce{AgNO3_{(aq)} + NaCl_{(aq)} -> AgCl_{(s)} v + NaNO3_{(aq)}}
+
+% Acid-base reaction
+\ce{HCl_{(aq)} + NaOH_{(aq)} -> NaCl_{(aq)} + H2O_{(l)}}
+
+% Oxidation-reduction
+\ce{Zn_{(s)} + Cu^2+_{(aq)} -> Zn^2+_{(aq)} + Cu_{(s)}}
+
+% Organic reaction with mechanism
+\ce{CH3CH2OH ->[H2SO4][\Delta] CH2=CH2 + H2O}
+
+% Enzyme-catalyzed reaction
+\ce{glucose + O2 ->[enzyme] CO2 + H2O + ATP}
+
+\section{Reaction Mechanisms}
+
+% Nucleophilic substitution
+\ce{R-X + Nu^- -> R-Nu + X^-}
+
+% Addition reaction
+\ce{CH2=CH2 + HBr -> CH3CH2Br}
+
+% Elimination reaction
+\ce{CH3CH2Br + OH^- -> CH2=CH2 + Br^- + H2O}
+
+\end{document}
+```
+</CodeGroup>
+
+### Advanced Chemical Notation
+
+<CodeGroup>
+```latex advanced-chemistry.tex
+\documentclass{article}
+\usepackage[version=4]{mhchem}
+\usepackage{amsmath}
+
+\begin{document}
+
+\section{Advanced Chemical Notation}
+
+% Coordination compounds
+Hexaamminecobalt(III) chloride: \ce{[Co(NH3)6]Cl3}
+
+Potassium hexacyanoferrate(II): \ce{K4[Fe(CN)6]}
+
+% Transition states
+\ce{A + B ->[TS] P}
+
+% Catalysts above arrows
+\ce{benzene ->[AlCl3] methylbenzene}
+
+\ce{ethene + H2 ->[Ni][\Delta] ethane}
+
+% Multiple arrows
+\ce{A ->[k1] B ->[k2] C}
+
+\ce{reactants <=>[\ce{k_{forward}}][\ce{k_{reverse}}] products}
+
+% Electron configurations
+Ground state oxygen: \ce{[He] 2s^2 2p^4}
+
+Excited state carbon: \ce{[He] 2s^1 2p^3}
+
+\section{Thermodynamic Notation}
+
+% Enthalpy changes
+\ce{CH4_{(g)} + 2O2_{(g)} -> CO2_{(g)} + 2H2O_{(l)}} \quad $\Delta H = -890$ kJ/mol
+
+% Equilibrium expressions
+\ce{N2_{(g)} + 3H2_{(g)} <=> 2NH3_{(g)}} \quad $K_c = \frac{[\ce{NH3}]^2}{[\ce{N2}][\ce{H2}]^3}$
+
+% Rate expressions
+Rate = $k[\ce{A}]^m[\ce{B}]^n$
+
+\section{Biochemical Notation}
+
+% Amino acids
+Glycine: \ce{NH2CH2COOH}
+
+Alanine: \ce{NH2CH(CH3)COOH}
+
+% Phosphorylation
+\ce{ATP + H2O -> ADP + Pi + energy}
+
+% DNA bases
+Adenine: \ce{C5H5N5}
+
+Guanine: \ce{C5H5N5O}
+
+\end{document}
+```
+</CodeGroup>
+
+## Molecular Structures with chemfig
+
+### Basic Molecular Drawing
+
+<CodeGroup>
+```latex chemfig-basic.tex
+\documentclass{article}
+\usepackage{chemfig}
+
+\begin{document}
+
+\section{Basic Molecular Structures}
+
+% Simple molecules
+Methane: \chemfig{C(-[1]H)(-[3]H)(-[5]H)(-[7]H)}
+
+Water: \chemfig{H-O-H}
+
+Ammonia: \chemfig{N(-[1]H)(-[5]H)(-[7]H)}
+
+% Linear molecules
+Ethane: \chemfig{H_3C-CH_3}
+
+Propane: \chemfig{H_3C-CH_2-CH_3}
+
+% Branched molecules
+Isobutane: \chemfig{H_3C-CH(-[2]CH_3)-CH_3}
+
+% Double bonds
+Ethene: \chemfig{H_2C=CH_2}
+
+Carbon dioxide: \chemfig{O=C=O}
+
+% Triple bonds
+Ethyne: \chemfig{HC~CH}
+
+Hydrogen cyanide: \chemfig{H-C~N}
+
+\section{Cyclic Structures}
+
+% Cyclohexane
+\chemfig{*6(------)}
+
+% Benzene
+\chemfig{*6(=-==-=)}
+
+% Cyclopentane
+\chemfig{*5(-----)}
+
+% Substituted benzene
+Toluene: \chemfig{*6(=-=(-CH_3)-=)}
+
+Phenol: \chemfig{*6(=-=(-OH)-=)}
+
+\end{document}
+```
+</CodeGroup>
+
+### Complex Organic Structures
+
+<CodeGroup>
+```latex complex-structures.tex
+\documentclass{article}
+\usepackage{chemfig}
+
+\begin{document}
+
+\section{Complex Organic Molecules}
+
+% Glucose
+Glucose: \chemfig{HO-[1,0.5,2]?<[7,0.7]OH>[1,0.7]?<[2,0.5]OH>[3,0.7]?<[4]OH>[4,0.7]?<[3,0.5]OH>[7,0.7]?(-[1,0.3]O-[7,0.3]?)}
+
+% Caffeine
+Caffeine: \chemfig{*6((-N*5(-(-CH_3)-N=-N(-CH_3)-))=N-=(-N(-CH_3))=*6(-(-=O)-N(-CH_3)-(-=O)-N=-=))}
+
+% Cholesterol (simplified)
+Cholesterol: \chemfig{*6((-*6(-----(-OH)))---(-*5(---(-*6(------))--))-(-(=)-(-[1])-([7]))---)}
+
+\section{Functional Groups}
+
+% Alcohol
+Primary alcohol: \chemfig{R-CH_2-OH}
+
+Secondary alcohol: \chemfig{R-CH(-[2]OH)-R'}
+
+Tertiary alcohol: \chemfig{R-C(-[2]OH)(-[6]R')(-[7]R'')}
+
+% Carbonyl compounds
+Aldehyde: \chemfig{R-C(=[2]O)-H}
+
+Ketone: \chemfig{R-C(=[2]O)-R'}
+
+% Carboxylic acid derivatives
+Carboxylic acid: \chemfig{R-C(=[2]O)-OH}
+
+Ester: \chemfig{R-C(=[2]O)-O-R'}
+
+Amide: \chemfig{R-C(=[2]O)-N(-[6]H)-H}
+
+% Aromatic functional groups
+Aniline: \chemfig{*6(=-=(-NH_2)-=)}
+
+Benzoic acid: \chemfig{*6(=-=(-C(=[2]O)-OH)-=)}
+
+\section{Stereochemistry}
+
+% Wedge and dash bonds
+Tetrahedral carbon: \chemfig{C(-[1,,,1]H)(-[3,,,2]Cl)(-[5]Br)(-[7]F)}
+
+% Chair conformation
+Cyclohexane chair: \chemfig{*6((-[2]H)(-[6]H)-(-[2]H)(-[6]H)-(-[2]H)(-[6]H)---)}
+
+% Newman projection
+Newman projection: \chemfig{*6((-H)(-H)(-H)-*6((-H)(-H)(-H)---)---)}
+
+\end{document}
+```
+</CodeGroup>
+
+### Reaction Schemes
+
+<CodeGroup>
+```latex reaction-schemes.tex
+\documentclass{article}
+\usepackage{chemfig}
+\usepackage[version=4]{mhchem}
+
+\begin{document}
+
+\section{Organic Reaction Schemes}
+
+% SN2 reaction
+\schemestart
+\chemfig{H_3C-CH_2-Br}
+\+
+\chemfig{OH^{-}}
+\arrow{->[SN2]}
+\chemfig{H_3C-CH_2-OH}
+\+
+\chemfig{Br^{-}}
+\schemestop
+
+% Addition reaction
+\schemestart
+\chemfig{H_2C=CH_2}
+\+
+\chemfig{HBr}
+\arrow{->}
+\chemfig{H_3C-CH_2Br}
+\schemestop
+
+% Multistep synthesis
+\schemestart
+\chemfig{*6(=-=(-CH_3)-=)}
+\arrow{->[KMnO_4][H^+, heat]}
+\chemfig{*6(=-=(-C(=[2]O)-OH)-=)}
+\arrow{->[SOCl_2]}
+\chemfig{*6(=-=(-C(=[2]O)-Cl)-=)}
+\arrow{->[NH_3]}
+\chemfig{*6(=-=(-C(=[2]O)-NH_2)-=)}
+\schemestop
+
+\section{Biochemical Pathways}
+
+% Glycolysis step
+\schemestart
+\chemfig{glucose}
+\arrow{->[hexokinase][ATP, Mg^{2+}]}
+\chemfig{glucose-6-phosphate}
+\arrow{->[phosphoglucose isomerase]}
+\chemfig{fructose-6-phosphate}
+\schemestop
+
+% Peptide bond formation
+\schemestart
+\chemfig{H_2N-CH(-[6]R_1)-C(=[2]O)-OH}
+\+
+\chemfig{H_2N-CH(-[6]R_2)-C(=[2]O)-OH}
+\arrow{->[condensation][-H_2O]}
+\chemfig{H_2N-CH(-[6]R_1)-C(=[2]O)-NH-CH(-[6]R_2)-C(=[2]O)-OH}
+\schemestop
+
+\section{Coordination Chemistry}
+
+% Octahedral complex
+Octahedral \ce{[Co(NH3)6]^3+}:
+\chemfig{Co(-[0]NH_3)(-[60]NH_3)(-[120]NH_3)(-[180]NH_3)(-[240]NH_3)(-[300]NH_3)}
+
+% Square planar complex
+Square planar \ce{[PtCl4]^2-}:
+\chemfig{Pt(-[0]Cl)(-[90]Cl)(-[180]Cl)(-[270]Cl)}
+
+% Chelating ligand
+EDTA complex:
+\chemfig{(-[1]OOC-CH_2)_2N-CH_2-CH_2-N(-[7]CH_2-COO)_2}
+
+\end{document}
+```
+</CodeGroup>
+
+## Spectroscopy and Analytical Chemistry
+
+### NMR and IR Notation
+
+<CodeGroup>
+```latex spectroscopy.tex
+\documentclass{article}
+\usepackage[version=4]{mhchem}
+\usepackage{siunitx}
+
+\begin{document}
+
+\section{NMR Spectroscopy}
+
+% Chemical shifts
+\ce{^1H} NMR (400 MHz, CDCl$_3$): $\delta$ 7.26 (s, 5H, Ph), 3.85 (s, 3H, OCH$_3$), 2.45 (t, 2H, CH$_2$)
+
+\ce{^13C} NMR (100 MHz, CDCl$_3$): $\delta$ 170.2 (C=O), 128.5 (Ar-C), 55.2 (OCH$_3$), 34.1 (CH$_2$)
+
+% Coupling constants
+\ce{^1H} NMR: $\delta$ 6.95 (d, $J$ = 8.0 Hz, 2H), 4.12 (q, $J$ = 7.2 Hz, 2H)
+
+% Two-dimensional NMR
+COSY, HSQC, and HMBC correlations confirm the structure.
+
+\section{IR Spectroscopy}
+
+IR (KBr): $\tilde{\nu}$ = \SI{3300}{\per\centi\meter} (O-H stretch), \SI{1720}{\per\centi\meter} (C=O stretch), \SI{1600}{\per\centi\meter} (C=C stretch)
+
+FT-IR (neat): \SI{2950}{\per\centi\meter} (C-H stretch), \SI{1735}{\per\centi\meter} (ester C=O), \SI{1250}{\per\centi\meter} (C-O stretch)
+
+\section{Mass Spectrometry}
+
+MS (EI, 70 eV): $m/z$ (\%) = 180 (M$^+$, 45), 152 (M$^+$ - CO, 100), 124 (M$^+$ - 2CO, 75)
+
+HRMS (ESI): $m/z$ calculated for \ce{C10H12NO2} [M+H]$^+$ 178.0868, found 178.0865
+
+\section{Elemental Analysis}
+
+Anal. Calculated for \ce{C15H14N2O3}: C, 66.66; H, 5.22; N, 10.36. Found: C, 66.58; H, 5.18; N, 10.41.
+
+\section{Crystallography}
+
+Crystal data: \ce{C12H10N2O}, $M$ = 198.22, monoclinic, space group $P2_1/c$, $a$ = \SI{7.123}{\angstrom}, $b$ = \SI{15.456}{\angstrom}, $c$ = \SI{9.876}{\angstrom}, $\beta$ = 105.23°, $V$ = \SI{1045.2}{\angstrom\cubed}, $Z$ = 4.
+
+\end{document}
+```
+</CodeGroup>
+
+## Physical Chemistry Notation
+
+### Thermodynamics and Kinetics
+
+<CodeGroup>
+```latex physical-chemistry.tex
+\documentclass{article}
+\usepackage[version=4]{mhchem}
+\usepackage{amsmath}
+\usepackage{siunitx}
+
+\begin{document}
+
+\section{Thermodynamics}
+
+% Standard formation enthalpies
+$\Delta_f H^\circ$ (\ce{H2O}, l) = \SI{-285.8}{\kilo\joule\per\mole}
+
+$\Delta_f H^\circ$ (\ce{CO2}, g) = \SI{-393.5}{\kilo\joule\per\mole}
+
+% Gibbs free energy
+$\Delta G = \Delta H - T\Delta S$
+
+For the reaction \ce{N2 + 3H2 <=> 2NH3}:
+$\Delta G^\circ = -2 \times \SI{16.5}{\kilo\joule\per\mole} = \SI{-33.0}{\kilo\joule\per\mole}$
+
+% Equilibrium constant
+$K_p = \frac{P_{\ce{NH3}}^2}{P_{\ce{N2}} \cdot P_{\ce{H2}}^3}$
+
+$\ln K = -\frac{\Delta G^\circ}{RT}$
+
+\section{Chemical Kinetics}
+
+% Rate laws
+For \ce{A + B -> C}, the rate law is:
+\[
+\text{Rate} = k[\ce{A}]^m[\ce{B}]^n
+\]
+
+% Integrated rate laws
+First order: $\ln[\ce{A}] = \ln[\ce{A}]_0 - kt$
+
+Second order: $\frac{1}{[\ce{A}]} = \frac{1}{[\ce{A}]_0} + kt$
+
+% Arrhenius equation
+$k = A e^{-E_a/RT}$
+
+$\ln k = \ln A - \frac{E_a}{RT}$
+
+\section{Electrochemistry}
+
+% Nernst equation
+$E = E^\circ - \frac{RT}{nF} \ln Q$
+
+At 298 K: $E = E^\circ - \frac{0.0592}{n} \log Q$
+
+% Standard reduction potentials
+\ce{Cu^2+ + 2e^- -> Cu} \quad $E^\circ = +\SI{0.34}{\volt}$
+
+\ce{Zn^2+ + 2e^- -> Zn} \quad $E^\circ = -\SI{0.76}{\volt}$
+
+% Cell notation
+\ce{Zn | Zn^2+ (1 M) || Cu^2+ (1 M) | Cu}
+
+$E_{\text{cell}}^\circ = E_{\text{cathode}}^\circ - E_{\text{anode}}^\circ = 0.34 - (-0.76) = \SI{1.10}{\volt}$
+
+\section{Quantum Chemistry}
+
+% Schrödinger equation
+$\hat{H}\Psi = E\Psi$
+
+% Hydrogen atom wavefunctions
+$\Psi_{1s} = \frac{1}{\sqrt{\pi a_0^3}} e^{-r/a_0}$
+
+% Molecular orbitals
+For \ce{H2^+}: $\Psi_{\pm} = \frac{1}{\sqrt{2 \pm 2S}}(\phi_A \pm \phi_B)$
+
+% Electronic configurations
+\ce{C}: $1s^2 2s^2 2p^2$
+
+\ce{Fe^3+}: $[\ce{Ar}] 3d^5$
+
+\end{document}
+```
+</CodeGroup>
+
+## Chemical Drawing Packages Comparison
+
+### Package Selection Guide
+
+<CodeGroup>
+```latex package-comparison.tex
+\documentclass{article}
+\usepackage[version=4]{mhchem}
+\usepackage{chemfig}
+\usepackage{modiagram}
+
+\begin{document}
+
+\section{Package Comparison}
+
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{Package} & \textbf{Best For} & \textbf{Examples} \\
+\hline
+mhchem & Chemical equations & \ce{H2SO4}, \ce{A + B -> C} \\
+& Formulas with charges & \ce{NH4+}, \ce{SO4^2-} \\
+& Reaction arrows & \ce{A <=> B} \\
+\hline
+chemfig & Molecular structures & Benzene rings, stereochemistry \\
+& Organic molecules & Complex natural products \\
+& Reaction schemes & Multi-step syntheses \\
+\hline
+modiagram & Molecular orbitals & MO diagrams \\
+& Electronic structure & Energy level diagrams \\
+\hline
+\end{tabular}
+
+\section{Molecular Orbital Diagrams}
+
+% Simple MO diagram for H2
+\begin{modiagram}[labels]
+\atom[N]{left}{1s}
+\atom[N]{right}{1s}
+\molecule[N]{
+1sigma = {0; pair}
+}
+\end{modiagram}
+
+% More complex example for O2
+\begin{modiagram}[labels]
+\atom[O]{left}{2s, 2p = {;pair,up,up}}
+\atom[O]{right}{2s, 2p = {;pair,up,up}}
+\molecule[O2]{
+2sigma = {0; pair},
+2sigma* = {1.5; },
+2piy = {-1; pair},
+2piz = {-1; pair},
+2pix = {0.5; up, up},
+2pix* = {2; }
+}
+\end{modiagram}
+
+\end{document}
+```
+</CodeGroup>
+
+## Best Practices
+
+<Tip>
+**Chemistry typesetting guidelines:**
+
+1. **Use mhchem for equations** - Handles subscripts, superscripts, and arrows automatically
+2. **Consistent notation** - Follow IUPAC naming conventions
+3. **Proper spacing** - Let packages handle chemical spacing
+4. **Clear structures** - Use chemfig for complex molecules
+5. **State symbols** - Always indicate physical states when relevant
+6. **Units and precision** - Use siunitx for measurements and uncertainties
+</Tip>
+
+### Professional Chemistry Document
+
+<CodeGroup>
+```latex professional-chemistry.tex
+\documentclass{article}
+\usepackage[version=4]{mhchem}
+\usepackage{chemfig}
+\usepackage{siunitx}
+\usepackage{amsmath}
+\usepackage{booktabs}
+
+% Custom commands for common notation
+\newcommand{\conc}[1]{[\ce{#1}]}
+\newcommand{\std}{\circ}
+
+\begin{document}
+
+\title{Synthesis and Characterization of Novel Organic Compounds}
+\author{Chemistry Department}
+\maketitle
+
+\section{Experimental}
+
+\subsection{Synthesis of Compound 1}
+
+To a solution of \ce{benzaldehyde} (\SI{1.06}{\gram}, \SI{10.0}{\milli\mole}) in dry \ce{CH2Cl2} (\SI{20}{\milli\liter}) was added \ce{NaBH4} (\SI{0.38}{\gram}, \SI{10.0}{\milli\mole}) at \SI{0}{\celsius}. The reaction mixture was stirred for \SI{2}{\hour} at room temperature.
+
+\schemestart
+\chemfig{*6(=-=(-CHO)-=)}
+\arrow{->[NaBH_4][CH_2Cl_2, rt]}
+\chemfig{*6(=-=(-CH_2OH)-=)}
+\schemestop
+
+\subsection{Characterization}
+
+\textbf{Compound 1}: Colorless oil. Yield: \SI{92}{\percent}.
+
+\textbf{\ce{^1H} NMR} (400 MHz, CDCl$_3$): $\delta$ 7.38-7.28 (m, 5H, Ar-H), 4.68 (s, 2H, CH$_2$), 2.15 (br s, 1H, OH).
+
+\textbf{\ce{^13C} NMR} (100 MHz, CDCl$_3$): $\delta$ 140.8, 128.4, 127.6, 126.9, 65.1.
+
+\textbf{IR} (neat): $\tilde{\nu}$ = \SI{3330}{\per\centi\meter} (O-H), \SI{3030}{\per\centi\meter} (Ar-H), \SI{2924}{\per\centi\meter} (C-H), \SI{1496}{\per\centi\meter}, \SI{1454}{\per\centi\meter} (Ar).
+
+\textbf{MS} (EI): $m/z$ (\%) = 108 (M$^+$, 25), 79 (100), 77 (85).
+
+\section{Results and Discussion}
+
+The reaction proceeded via a nucleophilic addition mechanism:
+
+\begin{align}
+\ce{C6H5CHO + BH4^- &-> C6H5CH2O^-BH3} \\
+\ce{C6H5CH2O^-BH3 + H2O &-> C6H5CH2OH + B(OH)3 + H2}
+\end{align}
+
+The equilibrium constant for the hydride transfer is:
+\[
+K_{eq} = \frac{\conc{C6H5CH2O^-BH3}}{\conc{C6H5CHO}\conc{BH4^-}}
+\]
+
+Thermodynamic analysis shows $\Delta G\std = \SI{-15.2}{\kilo\joule\per\mole}$ for this transformation at \SI{298}{\kelvin}.
+
+\end{document}
+```
+</CodeGroup>
+
+## Quick Reference
+
+### Essential mhchem Commands
+
+| Command | Purpose | Example |
+|---------|---------|---------|
+| `\ce{formula}` | Chemical formula | `\ce{H2SO4}` |
+| `\ce{A + B -> C}` | Chemical equation | `\ce{2H2 + O2 -> 2H2O}` |
+| `\ce{A <=> B}` | Equilibrium | `\ce{N2 + 3H2 <=> 2NH3}` |
+| `\ce{^14C}` | Isotope | `\ce{^14C}` |
+| `\ce{SO4^2-}` | Ion with charge | `\ce{SO4^2-}` |
+
+### Common Chemical Notation
+
+| Notation | LaTeX Code | Result |
+|----------|------------|---------|
+| Subscript | `\ce{H2O}` | H₂O |
+| Superscript | `\ce{Ca^2+}` | Ca²⁺ |
+| State | `\ce{NaCl_{(s)}}` | NaCl₍ₛ₎ |
+| Arrow | `\ce{->}` | → |
+| Equilibrium | `\ce{<=>}` | ⇌ |
+
+### chemfig Basics
+
+| Element | Code | Description |
+|---------|------|-------------|
+| Single bond | `-` | Single bond |
+| Double bond | `=` | Double bond |
+| Triple bond | `~` | Triple bond |
+| Angle | `[angle]` | Bond angle |
+| Ring | `*n(bonds)` | n-membered ring |
+
+---
+
+<Info>
+**Next**: Learn about [Music notation and scores](/learn/latex/specialized/music) for musical typesetting, or explore [Circuit diagrams](/learn/latex/specialized/circuits) for electrical schematics.
+</Info>

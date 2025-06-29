@@ -1,0 +1,1199 @@
+---
+title: Linguistic Trees and Diagrams
+description: Complete guide to creating linguistic syntax trees, phonological charts, and language analysis diagrams in LaTeX using Forest, TikZ-qtree, and specialized packages.
+---
+
+
+Linguistic analysis requires specialized tree structures and diagrams to represent syntax, phonology, and morphological relationships. This guide covers the essential packages and techniques for professional linguistic typesetting in LaTeX.
+
+<Info>
+**Key concept**: LaTeX provides powerful packages like `forest`, `tikz-qtree`, and `phonrule` for linguistic notation. These packages handle complex tree structures, phonological rules, and feature matrices following linguistic conventions.
+
+**Related topics**: [TikZ graphics](/learn/latex/graphics) | [Mathematical notation](/learn/latex/mathematics) | [Trees and diagrams](/learn/latex/diagrams)
+</Info>
+
+## Syntax Trees with Forest
+
+### Basic Phrase Structure Trees
+
+<CodeGroup>
+```latex basic-syntax-trees.tex
+\documentclass{article}
+\usepackage[linguistics]{forest}
+
+\begin{document}
+
+\section{Basic Syntax Trees}
+
+% Simple sentence structure
+\begin{forest}
+[S
+  [NP [Det [the]] [N [cat]]]
+  [VP [V [sat]] [PP [P [on]] [NP [Det [the]] [N [mat]]]]]
+]
+\end{forest}
+
+% More complex sentence
+\begin{forest}
+[S
+  [NP [Det [The]] [Adj [quick]] [N [fox]]]
+  [VP 
+    [V [jumped]]
+    [PP [P [over]] [NP [Det [the]] [Adj [lazy]] [N [dog]]]]
+  ]
+]
+\end{forest}
+
+% Embedded clause
+\begin{forest}
+[S
+  [NP [N [John]]]
+  [VP
+    [V [thinks]]
+    [CP
+      [C [that]]
+      [S
+        [NP [N [Mary]]]
+        [VP [V [left]]]
+      ]
+    ]
+  ]
+]
+\end{forest}
+
+\section{Movement and Traces}
+
+% Wh-movement
+\begin{forest}
+[CP
+  [Spec,CP [What$_i$]]
+  [C'
+    [C [did]]
+    [S
+      [NP [John]]
+      [VP [V [see]] [NP [t$_i$]]]
+    ]
+  ]
+]
+\end{forest}
+
+% Passive construction
+\begin{forest}
+[S
+  [NP [The book]$_i$]
+  [VP
+    [V [was]]
+    [VP
+      [V [read]]
+      [NP [t$_i$]]
+      [PP [P [by]] [NP [Mary]]]
+    ]
+  ]
+]
+\end{forest}
+
+\end{document}
+```
+</CodeGroup>
+
+### Advanced Syntactic Structures
+
+<CodeGroup>
+```latex advanced-syntax.tex
+\documentclass{article}
+\usepackage[linguistics]{forest}
+\usepackage{amsmath}
+
+\begin{document}
+
+\section{X-bar Theory}
+
+% X-bar structure
+\begin{forest}
+[XP
+  [Spec]
+  [X'
+    [X$^0$]
+    [YP [Complement]]
+  ]
+]
+\end{forest}
+
+% Detailed VP structure
+\begin{forest}
+[VP
+  [Spec,VP [John]]
+  [V'
+    [V$^0$ [give]]
+    [VP
+      [V'
+        [V$^0$ [t$_{give}$]]
+        [DP [the book]]
+        [PP [to Mary]]
+      ]
+    ]
+  ]
+]
+\end{forest}
+
+\section{Minimalist Syntax}
+
+% Phase structure
+\begin{forest}
+[CP, draw, thick
+  [DP$_1$ [who]]
+  [C'
+    [C$^0$ [$+$wh, $+$Q]]
+    [TP, draw, thick
+      [T'
+        [T$^0$ [did]]
+        [vP
+          [DP [John]]
+          [v'
+            [v$^0$ [t$_{see}$]]
+            [VP
+              [V$^0$ [see]]
+              [DP [t$_1$]]
+            ]
+          ]
+        ]
+      ]
+    ]
+  ]
+]
+\end{forest}
+
+% Feature checking
+\begin{forest}
+[T$^0$, name=T
+  [T [+finite]]
+  [AGR [$\phi$-features] [uCase:\_\_\_]]
+]
+\draw[->] (T) to[out=south east,in=north] node[right] {Agree} ++(2,-1);
+\end{forest}
+
+\section{Morphological Structure}
+
+% Word structure
+\begin{forest}
+[Word
+  [Stem
+    [Root [play]]
+    [Deriv [-er]]
+  ]
+  [Infl [-s]]
+]
+\end{forest}
+
+% Complex morphology
+\begin{forest}
+[Word
+  [Prefix [un-]]
+  [Stem
+    [Root [break]]
+    [Suffix [-able]]
+  ]
+]
+\end{forest}
+
+\section{Semantic Composition}
+
+% Lambda calculus notation
+\begin{forest}
+[VP: $\lambda x.\text{love}(x)(\text{mary})$
+  [V: $\lambda y \lambda x.\text{love}(x)(y)$ [loves]]
+  [NP: $\text{mary}$ [Mary]]
+]
+\end{forest}
+
+% Type-driven semantics
+\begin{forest}
+[S: $t$
+  [NP: $e$ [John]]
+  [VP: $\langle e,t \rangle$
+    [V: $\langle e, \langle e,t \rangle \rangle$ [likes]]
+    [NP: $e$ [pizza]]
+  ]
+]
+\end{forest}
+
+\end{document}
+```
+</CodeGroup>
+
+### Comparative Syntax
+
+<CodeGroup>
+```latex comparative-syntax.tex
+\documentclass{article}
+\usepackage[linguistics]{forest}
+\usepackage{multicol}
+
+\begin{document}
+
+\section{Cross-linguistic Comparison}
+
+\textbf{English SVO:}
+\begin{forest}
+[S
+  [NP [John]]
+  [VP [V [sees]] [NP [Mary]]]
+]
+\end{forest}
+
+\textbf{Japanese SOV:}
+\begin{forest}
+[S
+  [NP [Taro-ga]]
+  [VP [NP [Hanako-o]] [V [miru]]]
+]
+\end{forest}
+
+\textbf{Welsh VSO:}
+\begin{forest}
+[S
+  [V [Gwelodd]]
+  [NP [Siôn]]
+  [NP [Mair]]
+]
+\end{forest}
+
+\section{Head Movement}
+
+\textbf{French V-to-I movement:}
+\begin{forest}
+[IP
+  [NP [Jean]]
+  [I'
+    [I$^0$ [mange$_i$] [+AGR]]
+    [VP
+      [V$^0$ [t$_i$]]
+      [NP [la pomme]]
+    ]
+  ]
+]
+\end{forest}
+
+\section{Binding Theory}
+
+% Reflexives and anaphors
+\begin{forest}
+[S
+  [NP$_i$ [John]]
+  [VP
+    [V [saw]]
+    [NP [himself$_i$]]
+  ]
+]
+\end{forest}
+
+% Binding domains
+\begin{forest}
+[S$_1$
+  [NP$_i$ [John]]
+  [VP
+    [V [thinks]]
+    [S$_2$
+      [NP$_j$ [Mary]]
+      [VP [V [likes]] [NP [him$_{i/*j}$]]]
+    ]
+  ]
+]
+\end{forest}
+
+\section{Government and Binding}
+
+% Case assignment
+\begin{forest}
+[S
+  [NP$_{\text{NOM}}$ [John]]
+  [VP
+    [V [sees]]
+    [NP$_{\text{ACC}}$ [Mary]]
+  ]
+]
+\end{forest}
+
+% Exceptional Case Marking
+\begin{forest}
+[S
+  [NP$_{\text{NOM}}$ [I]]
+  [VP
+    [V [believe]]
+    [S
+      [NP$_{\text{ACC}}$ [him]]
+      [VP [V [to]] [VP [V [be]] [AP [intelligent]]]]
+    ]
+  ]
+]
+\end{forest}
+
+\end{document}
+```
+</CodeGroup>
+
+## Phonological Representations
+
+### Feature Matrices
+
+<CodeGroup>
+```latex phonological-features.tex
+\documentclass{article}
+\usepackage{phonrule}
+\usepackage{array}
+\usepackage{amsmath}
+
+\begin{document}
+
+\section{Distinctive Features}
+
+% Feature matrix
+\begin{center}
+\begin{tabular}{c|c|c|c}
+& /p/ & /b/ & /m/ \\
+\hline
+consonantal & + & + & + \\
+sonorant & $-$ & $-$ & + \\
+voice & $-$ & + & + \\
+nasal & $-$ & $-$ & + \\
+labial & + & + & + \\
+\end{tabular}
+\end{center}
+
+% Natural classes
+\textbf{Natural Classes:}
+\begin{itemize}
+\item Stops: [$-$sonorant, $-$continuant]
+\item Fricatives: [$-$sonorant, +continuant]
+\item Nasals: [+sonorant, +nasal]
+\item Liquids: [+sonorant, $-$nasal, $-$syllabic]
+\end{itemize}
+
+\section{Phonological Rules}
+
+% Rule notation
+\textbf{Devoicing rule:}
+\phonb
+\phonfeat{+obstruent \\ -sonorant}
+\phonc
+\phonrightarrow
+\phonfeat{-voice}
+\phonc
+/ \phonc \_\_\_ \phonfeat{-voice}
+\phonc
+\phone
+
+\textbf{Vowel harmony:}
+\phonb
+\phonfeat{+syllabic \\ -consonantal}
+\phonc
+\phonrightarrow
+\phonfeat{$\alpha$back \\ $\alpha$round}
+\phonc
+/ \phonfeat{$\alpha$back \\ $\alpha$round} C$_0$ \_\_\_
+\phone
+
+\section{Autosegmental Phonology}
+
+% Tone representation
+\textbf{Tone spreading:}
+\begin{center}
+\begin{tikzpicture}
+% Skeletal tier
+\node at (0,0) {C};
+\node at (1,0) {V};
+\node at (2,0) {C};
+\node at (3,0) {V};
+
+% Tonal tier
+\node at (1,1) {H};
+\node at (3,1) {L};
+
+% Association lines
+\draw (1,0.2) -- (1,0.8);
+\draw (3,0.2) -- (3,0.8);
+\draw[dashed] (1,0.8) -- (3,0.8);
+\end{tikzpicture}
+\end{center}
+
+% Metrical structure
+\textbf{Metrical grid:}
+\begin{center}
+\begin{tikzpicture}
+% Word level
+\node at (2,3) {*};
+% Foot level
+\node at (1,2) {*};
+\node at (3,2) {*};
+% Syllable level
+\node at (0.5,1) {*};
+\node at (1.5,1) {*};
+\node at (2.5,1) {*};
+\node at (3.5,1) {*};
+% Segments
+\node at (0.5,0) {te};
+\node at (1.5,0) {le};
+\node at (2.5,0) {vi};
+\node at (3.5,0) {sion};
+
+% Grid lines
+\draw (2,2.8) -- (2,3.2);
+\draw (1,1.8) -- (1,2.2);
+\draw (3,1.8) -- (3,2.2);
+\foreach \x in {0.5,1.5,2.5,3.5}
+  \draw (\x,0.8) -- (\x,1.2);
+\end{tikzpicture}
+\end{center}
+
+\section{Optimality Theory}
+
+% Constraint tableau
+\begin{center}
+\begin{tabular}{|l||c|c|c|}
+\hline
+/input/ & CONSTRAINT1 & CONSTRAINT2 & CONSTRAINT3 \\
+\hline
+\hline
+$\rightarrow$ candidate1 & & * & \\
+\hline
+candidate2 & *! & & \\
+\hline
+candidate3 & & ** & * \\
+\hline
+\end{tabular}
+\end{center}
+
+\end{document}
+```
+</CodeGroup>
+
+### Prosodic Structure
+
+<CodeGroup>
+```latex prosodic-structure.tex
+\documentclass{article}
+\usepackage{forest}
+\usepackage{tikz}
+
+\begin{document}
+
+\section{Prosodic Hierarchy}
+
+% Prosodic tree
+\begin{forest}
+[Utterance
+  [Intonational Phrase
+    [Phonological Phrase
+      [Prosodic Word
+        [Foot [$\sigma$ [$\sigma$]]]
+        [Foot [$\sigma$ [$\sigma$]]]
+      ]
+      [Prosodic Word
+        [Foot [$\sigma$]]
+      ]
+    ]
+  ]
+]
+\end{forest}
+
+\section{Syllable Structure}
+
+% Syllable internal structure
+\begin{forest}
+[$\sigma$
+  [Onset [C]]
+  [Rhyme
+    [Nucleus [V]]
+    [Coda [C]]
+  ]
+]
+\end{forest}
+
+% Complex onset
+\begin{forest}
+[$\sigma$
+  [Onset [C [s]] [C [t]]]
+  [Rhyme
+    [Nucleus [V [a]]]
+    [Coda [C [p]]]
+  ]
+]
+\end{forest}
+
+\section{Metrical Structure}
+
+% Binary branching feet
+\begin{forest}
+[Foot
+  [$\sigma$ [strong]]
+  [$\sigma$ [weak]]
+]
+\end{forest}
+
+% Ternary branching
+\begin{forest}
+[Foot
+  [$\sigma$ [strong]]
+  [$\sigma$ [weak]]
+  [$\sigma$ [weak]]
+]
+\end{forest}
+
+\section{Morpho-Phonological Interface}
+
+% Lexical Phonology levels
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+% Level 1
+\draw (0,3) rectangle (4,4);
+\node at (2,3.5) {Level 1: Class I affixes + Rules};
+
+% Level 2  
+\draw (0,2) rectangle (4,3);
+\node at (2,2.5) {Level 2: Class II affixes + Rules};
+
+% Post-lexical
+\draw (0,1) rectangle (4,2);
+\node at (2,1.5) {Post-lexical: Phrasal rules};
+
+% Arrows
+\draw[->] (2,2.8) -- (2,2.2);
+\draw[->] (2,1.8) -- (2,1.2);
+
+% Word boundaries
+\draw[thick] (-0.5,3) -- (-0.5,1);
+\draw[thick] (4.5,3) -- (4.5,1);
+\end{tikzpicture}
+\end{center}
+
+\section{Intonational Phonology}
+
+% ToBI notation
+\textbf{ToBI Transcription:}
+\begin{center}
+\begin{tikzpicture}
+% Text tier
+\node at (0,0) {What};
+\node at (1,0) {did};
+\node at (2,0) {John};
+\node at (3,0) {eat};
+\node at (4,0) {?};
+
+% Tonal tier
+\node at (2,1) {H*};
+\node at (4,1) {L*};
+\node at (4,1.5) {H\%};
+
+% Association lines
+\draw (2,0.2) -- (2,0.8);
+\draw (4,0.2) -- (4,0.8);
+\draw (4,1.2) -- (4,1.3);
+
+% F0 contour
+\draw[thick] (0,2) .. controls (1,2.5) and (1.5,2.8) .. (2,3) 
+            .. controls (2.5,2.8) and (3,2.2) .. (4,2.5);
+\end{tikzpicture}
+\end{center}
+
+\end{document}
+```
+</CodeGroup>
+
+## Historical and Comparative Linguistics
+
+### Language Family Trees
+
+<CodeGroup>
+```latex language-families.tex
+\documentclass{article}
+\usepackage{forest}
+\usepackage{tikz}
+
+\begin{document}
+
+\section{Indo-European Family Tree}
+
+\begin{forest}
+[Proto-Indo-European
+  [Germanic
+    [West Germanic
+      [English]
+      [German]
+      [Dutch]
+    ]
+    [North Germanic
+      [Swedish]
+      [Norwegian]
+      [Danish]
+    ]
+    [East Germanic
+      [Gothic$^\dagger$]
+    ]
+  ]
+  [Celtic
+    [Insular Celtic
+      [Gaelic [Irish] [Scottish]]
+      [Brythonic [Welsh] [Breton]]
+    ]
+  ]
+  [Italic
+    [Latin$^\dagger$]
+    [Romance
+      [Spanish]
+      [French]
+      [Italian]
+    ]
+  ]
+  [Slavic
+    [West Slavic [Polish] [Czech]]
+    [East Slavic [Russian] [Ukrainian]]
+    [South Slavic [Serbian] [Bulgarian]]
+  ]
+]
+\end{forest}
+
+\section{Sound Changes}
+
+% Grimm's Law
+\textbf{Grimm's Law (Proto-Germanic):}
+\begin{align}
+\text{PIE } *p, *t, *k &\rightarrow \text{PGmc } *f, *\theta, *x \\
+\text{PIE } *b, *d, *g &\rightarrow \text{PGmc } *p, *t, *k \\
+\text{PIE } *b^h, *d^h, *g^h &\rightarrow \text{PGmc } *b, *d, *g
+\end{align}
+
+% Comparative method
+\textbf{Comparative Reconstruction:}
+\begin{center}
+\begin{tabular}{l|l|l|l|l}
+& Latin & Greek & Sanskrit & Gothic & Reconstruction \\
+\hline
+'father' & pater & patēr & pitár- & fadar & *ph₂tér- \\
+'three' & trēs & treîs & tráyas & þreis & *tréyes \\
+'new' & novus & néos & návas & niujis & *néwos \\
+\end{tabular}
+\end{center}
+
+\section{Phonological Correspondences}
+
+% Sound correspondence table
+\begin{center}
+\begin{tabular}{c|c|c|c|c}
+Proto-Lang & Lang A & Lang B & Lang C & Example \\
+\hline
+*p & p & f & p & *pater > pater/faðir/padre \\
+*t & t & θ & t & *treyes > tres/þreis/tres \\
+*k & k & x & k & *ḱm̥tóm > centum/hund/cent \\
+\end{tabular}
+\end{center}
+
+\section{Lexical Diffusion}
+
+% Wave model
+\begin{center}
+\begin{tikzpicture}
+% Circles representing linguistic areas
+\draw (0,0) circle (1.5);
+\draw (2,0) circle (1.5);
+\draw (1,1.5) circle (1.5);
+
+% Labels
+\node at (-0.5,-0.5) {Dialect A};
+\node at (2.5,-0.5) {Dialect B};
+\node at (1,2) {Dialect C};
+
+% Innovation waves
+\draw[dashed] (1,0) circle (0.8);
+\draw[dashed] (1,0) circle (1.2);
+\node at (1,-1.8) {Innovation spreading};
+\end{tikzpicture}
+\end{center}
+
+\end{document}
+```
+</CodeGroup>
+
+## Discourse and Pragmatics
+
+### Information Structure
+
+<CodeGroup>
+```latex information-structure.tex
+\documentclass{article}
+\usepackage{forest}
+\usepackage{tikz}
+\usepackage{amsmath}
+
+\begin{document}
+
+\section{Information Structure}
+
+% Topic-Focus articulation
+\textbf{Topic-Focus Structure:}
+\begin{forest}
+[S
+  [Topic [The book$_i$]]
+  [Focus [John read t$_i$]]
+]
+\end{forest}
+
+% Given-New structure
+\textbf{Given-New Information:}
+\begin{center}
+\begin{tikzpicture}
+\draw (0,0) rectangle (3,1);
+\draw (3,0) rectangle (6,1);
+\node at (1.5,0.5) {GIVEN};
+\node at (4.5,0.5) {NEW};
+
+\node at (1.5,-0.5) {John};
+\node at (4.5,-0.5) {bought a car};
+\end{tikzpicture}
+\end{center}
+
+\section{Discourse Representation}
+
+% DRS (Discourse Representation Structure)
+\textbf{DRT Box:}
+\begin{center}
+\begin{tikzpicture}
+\draw (0,0) rectangle (4,3);
+\draw (0,1.5) -- (4,1.5);
+
+% Universe
+\node at (2,2.25) {$x, y$};
+
+% Conditions
+\node at (1,1) {man($x$)};
+\node at (1,0.5) {car($y$)};
+\node at (3,0.75) {buy($x,y$)};
+\end{tikzpicture}
+\end{center}
+
+% Accessibility relations
+\textbf{DRS Accessibility:}
+\begin{center}
+\begin{tikzpicture}
+% Main DRS
+\draw (0,0) rectangle (3,2);
+\draw (0,1.2) -- (3,1.2);
+\node at (1.5,1.6) {$x$};
+\node at (1.5,0.6) {man($x$)};
+
+% Embedded DRS
+\draw (4,0.2) rectangle (6.5,1.8);
+\draw (4,1.2) -- (6.5,1.2);
+\node at (5.25,1.5) {$y$};
+\node at (5.25,0.6) {car($y$)};
+
+% Arrow
+\draw[->] (3,1) -- (4,1);
+\end{tikzpicture}
+\end{center}
+
+\section{Speech Act Theory}
+
+% Searle's taxonomy
+\textbf{Speech Act Classification:}
+\begin{forest}
+[Speech Acts
+  [Representatives [assert] [conclude] [believe]]
+  [Directives [request] [command] [invite]]
+  [Commissives [promise] [threaten] [offer]]
+  [Expressives [thank] [apologize] [congratulate]]
+  [Declarations [pronounce] [christen] [fire]]
+]
+\end{forest}
+
+\section{Conversational Analysis}
+
+% Turn-taking system
+\textbf{Turn-Taking Rules:}
+\begin{enumerate}
+\item Current speaker selects next
+\item Self-selection by others
+\item Current speaker continues
+\end{enumerate}
+
+% Adjacency pairs
+\textbf{Adjacency Pairs:}
+\begin{center}
+\begin{tabular}{l|l}
+First Pair Part & Second Pair Part \\
+\hline
+Question & Answer \\
+Invitation & Acceptance/Decline \\
+Greeting & Greeting \\
+Compliment & Acceptance/Deflection \\
+\end{tabular}
+\end{center}
+
+\end{document}
+```
+</CodeGroup>
+
+## Corpus Linguistics and Computational Methods
+
+### Statistical Analysis
+
+<CodeGroup>
+```latex corpus-linguistics.tex
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{forest}
+
+\begin{document}
+
+\section{Frequency Distributions}
+
+% Zipf's law visualization
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+  xlabel={Rank},
+  ylabel={Frequency},
+  title={Zipf's Law},
+  xmode=log,
+  ymode=log
+]
+\addplot coordinates {
+  (1,1000) (2,500) (3,333) (4,250) (5,200)
+  (10,100) (20,50) (50,20) (100,10) (1000,1)
+};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\section{Syntactic Parsing}
+
+% Parse tree with probabilities
+\begin{forest}
+[S [0.8]
+  [NP [0.6] [Det [0.9] [the]] [N [0.7] [cat]]]
+  [VP [0.7] [V [0.8] [sat]] [PP [0.5] [P [0.9] [on]] [NP [0.6] [Det [0.9] [the]] [N [0.6] [mat]]]]]
+]
+\end{forest}
+
+\section{N-gram Models}
+
+% Markov chain for bigrams
+\textbf{Bigram Transition Probabilities:}
+\begin{center}
+\begin{tikzpicture}[scale=1.5]
+% States
+\node[circle,draw] (the) at (0,0) {the};
+\node[circle,draw] (cat) at (2,0) {cat};
+\node[circle,draw] (dog) at (0,-2) {dog};
+\node[circle,draw] (runs) at (2,-2) {runs};
+
+% Transitions
+\draw[->] (the) to[bend left] node[above] {0.4} (cat);
+\draw[->] (the) to[bend right] node[left] {0.6} (dog);
+\draw[->] (cat) to[bend left] node[right] {0.8} (runs);
+\draw[->] (dog) to[bend left] node[below] {0.9} (runs);
+\draw[->] (runs) to[bend left] node[below] {0.3} (the);
+\end{tikzpicture}
+\end{center}
+
+\section{Semantic Vectors}
+
+% Word embedding visualization
+\textbf{Word Vector Space:}
+\begin{center}
+\begin{tikzpicture}
+% Axes
+\draw[->] (0,0) -- (4,0) node[right] {Dimension 1};
+\draw[->] (0,0) -- (0,4) node[above] {Dimension 2};
+
+% Word vectors
+\node at (1,3) {king};
+\node at (3,3.2) {queen};
+\node at (0.8,1) {man};
+\node at (2.8,1.2) {woman};
+
+% Vector arrows
+\draw[->] (0,0) -- (1,3);
+\draw[->] (0,0) -- (3,3.2);
+\draw[->] (0,0) -- (0.8,1);
+\draw[->] (0,0) -- (2.8,1.2);
+
+% Analogy relationship
+\draw[dashed] (1,3) -- (0.8,1);
+\draw[dashed] (3,3.2) -- (2.8,1.2);
+\end{tikzpicture}
+\end{center}
+
+\section{Corpus Annotation}
+
+% Part-of-speech tagging
+\textbf{POS-tagged text:}
+\begin{center}
+\begin{tabular}{c|c|c|c|c}
+The & cat & sat & on & the \\
+\hline
+DET & N & V & P & DET \\
+\end{tabular}
+\end{center}
+
+% Dependency parsing
+\textbf{Dependency Relations:}
+\begin{center}
+\begin{tikzpicture}
+% Words
+\node (the1) at (0,0) {The};
+\node (cat) at (1,0) {cat};
+\node (sat) at (2,0) {sat};
+\node (on) at (3,0) {on};
+\node (the2) at (4,0) {the};
+\node (mat) at (5,0) {mat};
+
+% Dependencies
+\draw[->] (cat) to[bend left=45] node[above] {det} (the1);
+\draw[->] (sat) to[bend left=45] node[above] {nsubj} (cat);
+\draw[->] (sat) to[bend left=45] node[above] {prep} (on);
+\draw[->] (on) to[bend left=45] node[above] {pobj} (mat);
+\draw[->] (mat) to[bend right=45] node[below] {det} (the2);
+\end{tikzpicture}
+\end{center}
+
+\end{document}
+```
+</CodeGroup>
+
+## Specialized Linguistic Notation
+
+### IPA and Phonetic Transcription
+
+<CodeGroup>
+```latex ipa-notation.tex
+\documentclass{article}
+\usepackage{tipa}
+\usepackage{vowel}
+\usepackage{tikz}
+
+\begin{document}
+
+\section{IPA Transcription}
+
+% Phonetic vs phonemic
+\textbf{Phonetic:} [\textipa{"ExsEnt}] \\
+\textbf{Phonemic:} /\textipa{"aks@nt}/
+
+% Stress and length
+\textbf{Primary stress:} \textipa{"f@Un@tIks} \\
+\textbf{Secondary stress:} \textipa{,f@Un@"tIks} \\
+\textbf{Long vowel:} \textipa{fi:d} \\
+\textbf{Half-long:} \textipa{fi\textlengthmark d}
+
+\section{Vowel Systems}
+
+% Vowel chart
+\begin{vowel}
+\putcvowel[l]{i}{1}
+\putcvowel[r]{u}{8}
+\putcvowel[l]{e}{2}
+\putcvowel[r]{o}{7}
+\putcvowel[l]{\ae}{3}
+\putcvowel{\textschwa}{4}
+\putcvowel[r]{\textturnscripta}{6}
+\putcvowel[l]{a}{5}
+\end{vowel}
+
+\section{Consonant Charts}
+
+% Place and manner features
+\begin{center}
+\begin{tabular}{l|c|c|c|c}
+& Bilabial & Alveolar & Velar & Glottal \\
+\hline
+Stops & p b & t d & k g & \textipa{P} \\
+Fricatives & f v & s z & x \textipa{G} & h \\
+Nasals & m & n & \textipa{N} & \\
+Liquids & & l r & & \\
+\end{tabular}
+\end{center}
+
+\section{Suprasegmentals}
+
+% Tone notation
+\textbf{Level tones:} \\
+High: \tone{55}ma \\
+Mid: \tone{33}ma \\
+Low: \tone{11}ma \\
+
+\textbf{Contour tones:} \\
+Rising: \tone{35}ma \\
+Falling: \tone{51}ma \\
+Dipping: \tone{213}ma \\
+
+% Intonation
+\textbf{Intonation patterns:}
+\begin{center}
+\begin{tikzpicture}
+% Statement
+\draw (0,1) node[left] {Statement:} -- (0.5,1) -- (1.5,1.2) -- (2.5,0.8);
+\node at (1.25,0.5) {He's coming.};
+
+% Question  
+\draw (0,0) node[left] {Question:} -- (0.5,0) -- (1.5,0.2) -- (2.5,0.8);
+\node at (1.25,-0.5) {He's coming?};
+\end{tikzpicture}
+\end{center}
+
+\end{document}
+```
+</CodeGroup>
+
+## Best Practices
+
+<Tip>
+**Linguistic typesetting guidelines:**
+
+1. **Use appropriate packages** - Forest for trees, TIPA for IPA, specialized packages for specific notations
+2. **Consistent notation** - Follow linguistic conventions and be consistent throughout
+3. **Clear structure** - Use proper hierarchy and spacing in trees
+4. **Standard abbreviations** - Use accepted linguistic abbreviations (NP, VP, etc.)
+5. **Feature specification** - Use proper notation for phonological and syntactic features
+6. **Cross-references** - Link related structures and maintain coherent analysis
+</Tip>
+
+### Professional Linguistic Paper
+
+<CodeGroup>
+```latex professional-linguistics.tex
+\documentclass{article}
+\usepackage[linguistics]{forest}
+\usepackage{phonrule}
+\usepackage{tipa}
+\usepackage{booktabs}
+\usepackage{amsmath}
+
+\begin{document}
+
+\title{Syntactic Analysis of Wh-Movement in English}
+\author{Department of Linguistics}
+\maketitle
+
+\section{Introduction}
+
+This paper examines the syntactic properties of wh-movement in English, focusing on the derivation of questions and relative clauses within the Minimalist framework.
+
+\section{Theoretical Background}
+
+Wh-movement is analyzed as an instance of A-bar movement driven by the need to check uninterpretable features on C$^0$.
+
+\subsection{Basic Wh-Question}
+
+\begin{forest}
+[CP
+  [Spec,CP [What$_i$ [\textsc{+wh}]]]
+  [C'
+    [C$^0$ [did [\textsc{+Q, +wh}]]]
+    [TP
+      [T'
+        [T$^0$ [t$_{did}$]]
+        [vP
+          [DP [John]]
+          [v'
+            [v$^0$ [buy]]
+            [VP
+              [V$^0$ [t$_{buy}$]]
+              [DP [t$_i$]]
+            ]
+          ]
+        ]
+      ]
+    ]
+  ]
+]
+\end{forest}
+
+\section{Feature Checking}
+
+The wh-phrase moves to Spec,CP to check the \textsc{+wh} feature on C$^0$:
+
+\begin{align}
+\text{C}^0[\textsc{+Q, +wh}] &\rightarrow \text{Probe} \\
+\text{what}[\textsc{+wh}] &\rightarrow \text{Goal} \\
+\text{Agree}(\text{C}^0, \text{what}) &\rightarrow \text{Feature checking}
+\end{align}
+
+\section{Cross-linguistic Evidence}
+
+\subsection{Wh-in-situ Languages}
+
+In languages like Mandarin Chinese, wh-phrases remain in their base position:
+
+\begin{forest}
+[TP
+  [DP [Zhangsan]]
+  [VP
+    [V [mai]]
+    [DP [shenme [\textsc{+wh}]]]
+  ]
+]
+\end{forest}
+
+'What did Zhangsan buy?'
+
+\section{Phonological Considerations}
+
+Wh-movement affects prosodic phrasing:
+
+\textbf{In-situ:} (\textipa{dZAn}) (\textipa{bOt}) (\textipa{wVt}) \\
+\textbf{Moved:} (\textipa{wVt}) (\textipa{dId}) (\textipa{dZAn}) (\textipa{baI})
+
+\section{Acquisition Data}
+
+Children initially show optional wh-movement:
+
+\begin{enumerate}
+\item What did you buy? (adult-like)
+\item You bought what? (child grammar)
+\item *What you bought? (intermediate stage)
+\end{enumerate}
+
+\section{Conclusion}
+
+Wh-movement in English is best analyzed as feature-driven movement to Spec,CP, with cross-linguistic variation in whether movement is overt or covert.
+
+\end{document}
+```
+</CodeGroup>
+
+## Quick Reference
+
+### Essential Forest Commands
+
+| Command | Purpose | Example |
+|---------|---------|---------|
+| `[Node [Child1] [Child2]]` | Basic tree structure | `[S [NP] [VP]]` |
+| `for tree={align=center}` | Tree formatting | Global alignment |
+| `name=label` | Node labeling | For drawing connections |
+| `draw` | Draw box around node | Highlight phases |
+| `triangle` | Triangle abbreviation | For large subtrees |
+
+### Linguistic Abbreviations
+
+| Abbreviation | Meaning | Usage |
+|--------------|---------|-------|
+| S | Sentence | Clause structure |
+| NP/DP | Noun/Determiner Phrase | Nominal constituents |
+| VP | Verb Phrase | Verbal constituents |
+| CP | Complementizer Phrase | Embedded clauses |
+| TP | Tense Phrase | Inflectional layer |
+
+### IPA Packages
+
+| Package | Purpose | Key Features |
+|---------|---------|--------------|
+| `tipa` | IPA symbols | Phonetic transcription |
+| `vowel` | Vowel charts | IPA vowel quadrilateral |
+| `phonrule` | Phonological rules | Feature matrices |
+
+---
+
+<Info>
+**Next**: Learn about [Algorithm pseudocode and computer science notation](/learn/latex/specialized/algorithms) for computational linguistics and algorithms, or explore [Document design](/learn/latex/formatting/document-design) for comprehensive layout principles.
+</Info>

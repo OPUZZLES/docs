@@ -3,7 +3,6 @@ title: LaTeX Symbol Reference
 description: Complete reference guide for LaTeX symbols. Find mathematical symbols, Greek letters, operators, arrows, and special characters with easy copy-paste commands.
 ---
 
-import { Card, CardGroup, Info, Tip, Warning } from '/snippets/components.mdx'
 
 Quick access to all LaTeX symbols organized by category. Click any symbol to copy its LaTeX command.
 
@@ -66,17 +65,19 @@ Greek letters not listed (like Alpha, Beta) use regular Latin letters (A, B).
 
 ### Comparison and Relations
 
-| Symbol | Command | Symbol | Command | Symbol | Command |
-|--------|---------|--------|---------|--------|---------|
-| = | `=` | ≠ | `\neq` or `\ne` | ≈ | `\approx` |
-| < | `<` | > | `>` | ≤ | `\leq` or `\le` |
-| ≥ | `\geq` or `\ge` | ≪ | `\ll` | ≫ | `\gg` |
-| ≡ | `\equiv` | ∼ | `\sim` | ≃ | `\simeq` |
-| ∝ | `\propto` | ⊥ | `\perp` | ∥ | `\parallel` |
-| ≅ | `\cong` | ≍ | `\asymp` | ⊣ | `\dashv` |
-| ≺ | `\prec` | ≻ | `\succ` | ⪯ | `\preceq` |
-| ⪰ | `\succeq` | ⊂ | `\subset` | ⊃ | `\supset` |
-| ⊆ | `\subseteq` | ⊇ | `\supseteq` | ⊊ | `\subsetneq` |
+| Symbol | Command | Symbol | Command |
+|--------|---------|--------|---------|
+| = | `=` | ≠ | `\neq` |
+| &lt; | `<` | &gt; | `>` |
+| ≤ | `\leq` | ≥ | `\geq` |
+| ≪ | `\ll` | ≫ | `\gg` |
+| ≈ | `\approx` | ≡ | `\equiv` |
+| ∼ | `\sim` | ≃ | `\simeq` |
+| ∝ | `\propto` | ⊥ | `\perp` |
+| ∥ | `\parallel` | ≅ | `\cong` |
+| ≺ | `\prec` | ≻ | `\succ` |
+| ⊂ | `\subset` | ⊃ | `\supset` |
+| ⊆ | `\subseteq` | ⊇ | `\supseteq` |
 
 ### Logical Operators
 
@@ -184,7 +185,7 @@ Greek letters not listed (like Alpha, Beta) use regular Latin letters (A, B).
 | ⟨ | `\langle` | ⟩ | `\rangle` |
 | ⌊ | `\lfloor` | ⌋ | `\rfloor` |
 | ⌈ | `\lceil` | ⌉ | `\rceil` |
-| ‖ | `\|` or `\Vert` | \| | `\vert` |
+| ‖ | `\Vert` | &#124; | `\vert` |
 
 <Tip>
 Use `\left` and `\right` for auto-sizing delimiters:
@@ -238,7 +239,7 @@ Use `\left` and `\right` for auto-sizing delimiters:
 | ¶ | `\P` | Paragraph |
 | © | `\copyright` | Copyright |
 | £ | `\pounds` | Pound sterling |
-| € | `\euro` | Euro (requires eurosym package) |
+| € | `\euro` | Euro |
 
 ### Geometric Symbols
 
@@ -256,31 +257,39 @@ Use `\left` and `\right` for auto-sizing delimiters:
 
 ### Matrix Types
 
-```latex
+<CodeGroup>
+```latex parentheses-matrix.tex
 % Parentheses matrix
 \begin{pmatrix}
 a & b \\
 c & d
 \end{pmatrix}
+```
 
+```latex bracket-matrix.tex
 % Bracket matrix
 \begin{bmatrix}
 a & b \\
 c & d
 \end{bmatrix}
+```
 
+```latex determinant.tex
 % Determinant
 \begin{vmatrix}
 a & b \\
 c & d
 \end{vmatrix}
+```
 
+```latex norm.tex
 % Norm
 \begin{Vmatrix}
 a & b \\
 c & d
 \end{Vmatrix}
 ```
+</CodeGroup>
 
 ## Special Packages for More Symbols
 
@@ -302,7 +311,7 @@ Some symbols require special packages:
 ### Most Used Symbols
 
 <CardGroup cols={3}>
-  <Card title="Greek" icon="α">
+  <Card title="Greek" icon="language">
     `\alpha` `\beta` `\gamma` `\delta` `\epsilon` `\theta` `\lambda` `\mu` `\pi` `\sigma` `\phi` `\omega`
   </Card>
   <Card title="Operators" icon="plus">

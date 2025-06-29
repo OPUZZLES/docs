@@ -1,0 +1,925 @@
+---
+title: LaTeX Counters and Numbering
+description: Complete guide to LaTeX counters and custom numbering systems. Learn to create, modify, and customize automatic numbering for any document element.
+---
+
+
+LaTeX counters control all automatic numbering in your document. This guide covers how to create custom counters, modify existing ones, and implement sophisticated numbering schemes for any document element.
+
+<Info>
+**Key concept**: LaTeX uses counters to track numbers for sections, figures, tables, equations, and more. Understanding counters lets you create custom numbering schemes and control how elements are numbered throughout your document.
+
+**Related topics**: [Page numbering](/learn/latex/formatting/page-numbering) | [Cross-referencing](/learn/latex/cross-referencing) | [Document structure](/learn/latex/document-structure)
+</Info>
+
+## Understanding LaTeX Counters
+
+### Built-in Counters
+
+LaTeX provides many predefined counters:
+
+| Counter | Purpose | Example |
+|---------|---------|---------|
+| `page` | Page numbers | 1, 2, 3... |
+| `chapter` | Chapter numbers | 1, 2, 3... |
+| `section` | Section numbers | 1.1, 1.2, 2.1... |
+| `subsection` | Subsection numbers | 1.1.1, 1.1.2... |
+| `figure` | Figure numbers | Figure 1, Figure 2... |
+| `table` | Table numbers | Table 1, Table 2... |
+| `equation` | Equation numbers | (1), (2), (3)... |
+| `footnote` | Footnote numbers | ¹, ², ³... |
+
+<CodeGroup>
+```latex viewing-counters.tex
+\documentclass{article}
+\begin{document}
+
+% Display current counter values
+Current page: \thepage
+
+Current section: \thesection
+
+Current figure: \thefigure
+
+Current table: \thetable
+
+% Show counter values in different formats
+Page (arabic): \arabic{page}
+
+Section (roman): \roman{section}
+
+Chapter (Roman): \Roman{chapter}
+
+\end{document}
+```
+</CodeGroup>
+
+### Counter Operations
+
+<CodeGroup>
+```latex counter-operations.tex
+\documentclass{article}
+\begin{document}
+
+% View current value
+Current page counter: \thepage
+
+% Set counter to specific value
+\setcounter{page}{5}
+New page value: \thepage
+
+% Add to counter
+\addtocounter{page}{3}
+After adding 3: \thepage
+
+% Step counter (increment by 1)
+\stepcounter{page}
+After stepping: \thepage
+
+% Reset counter to zero
+\setcounter{page}{0}
+After reset: \thepage
+
+\end{document}
+```
+</CodeGroup>
+
+## Creating Custom Counters
+
+### Basic Counter Creation
+
+<CodeGroup>
+```latex custom-counters.tex
+\documentclass{article}
+
+% Create new counters
+\newcounter{example}
+\newcounter{problem}
+\newcounter{solution}
+
+% Create counter that resets with another
+\newcounter{subproblem}[problem]
+
+\begin{document}
+
+% Use custom counters
+\stepcounter{example}
+Example \theexample: This is the first example.
+
+\stepcounter{example}
+Example \theexample: This is the second example.
+
+\stepcounter{problem}
+Problem \theproblem: Solve this equation.
+
+\stepcounter{subproblem}
+Subproblem \theproblem.\thesubproblem: First part.
+
+\stepcounter{subproblem}
+Subproblem \theproblem.\thesubproblem: Second part.
+
+\stepcounter{problem}
+Problem \theproblem: New problem resets subproblem.
+
+\stepcounter{subproblem}
+Subproblem \theproblem.\thesubproblem: Starts at 1 again.
+
+\end{document}
+```
+</CodeGroup>
+
+### Counter Display Formats
+
+<CodeGroup>
+```latex counter-formats.tex
+\documentclass{article}
+
+\newcounter{demo}
+
+% Redefine how counter is displayed
+\renewcommand{\thedemo}{\Roman{demo}}
+
+\begin{document}
+
+% Default arabic format
+\stepcounter{demo}
+Demo \thedemo
+
+% Change to alphabetic
+\renewcommand{\thedemo}{\Alph{demo}}
+\stepcounter{demo}
+Demo \thedemo
+
+% Change to roman numerals
+\renewcommand{\thedemo}{\roman{demo}}
+\stepcounter{demo}
+Demo \thedemo
+
+% Custom format with prefix/suffix
+\renewcommand{\thedemo}{Example-\arabic{demo}}
+\stepcounter{demo}
+Demo \thedemo
+
+% Complex format combining counters
+\newcounter{chapter}
+\newcounter{section}[chapter]
+\renewcommand{\thesection}{\thechapter.\arabic{section}}
+
+\setcounter{chapter}{3}
+\stepcounter{section}
+Section \thesection
+
+\end{document}
+```
+</CodeGroup>
+
+## Advanced Counter Techniques
+
+### Conditional Counter Reset
+
+<CodeGroup>
+```latex conditional-reset.tex
+\documentclass{article}
+\usepackage{ifthen}
+
+\newcounter{task}
+\newcounter{step}
+
+% Custom reset behavior
+\newcommand{\newtask}{%
+  \stepcounter{task}%
+  \setcounter{step}{0}%
+  \textbf{Task \thetask:}%
+}
+
+\newcommand{\newstep}{%
+  \stepcounter{step}%
+  \ifthenelse{\value{step}=1}%
+    {Step \thestep:}%
+    {Step \thestep:}%
+}
+
+\begin{document}
+
+\newtask
+\newstep First step of first task.
+\newstep Second step of first task.
+
+\newtask
+\newstep First step of second task.
+\newstep Second step of second task.
+\newstep Third step of second task.
+
+\end{document}
+```
+</CodeGroup>
+
+### Counter Dependencies
+
+<CodeGroup>
+```latex counter-dependencies.tex
+\documentclass{book}
+
+% Create hierarchical counters
+\newcounter{exercise}[chapter]
+\newcounter{question}[exercise]
+\newcounter{part}[question]
+
+% Define display formats
+\renewcommand{\theexercise}{\thechapter.\arabic{exercise}}
+\renewcommand{\thequestion}{\theexercise.\arabic{question}}
+\renewcommand{\thepart}{\thequestion(\alph{part})}
+
+% Commands for easy use
+\newcommand{\exercise}{%
+  \stepcounter{exercise}%
+  \setcounter{question}{0}%
+  \textbf{Exercise \theexercise}%
+}
+
+\newcommand{\question}{%
+  \stepcounter{question}%
+  \setcounter{part}{0}%
+  \par\textbf{Question \thequestion:}%
+}
+
+\newcommand{\part}{%
+  \stepcounter{part}%
+  \par(\thepart)%
+}
+
+\begin{document}
+
+\chapter{Linear Algebra}
+
+\exercise
+\question What is a vector?
+\part Define vector space.
+\part Give three examples.
+
+\question How do you add vectors?
+\part Component-wise addition.
+\part Geometric interpretation.
+
+\exercise
+\question What is a matrix?
+
+\chapter{Calculus}
+
+\exercise
+\question What is a derivative?
+
+\end{document}
+```
+</CodeGroup>
+
+## Custom Numbering Environments
+
+### Creating Numbered Environments
+
+<CodeGroup>
+```latex numbered-environments.tex
+\documentclass{article}
+
+% Create counter for custom environment
+\newcounter{theorem}[section]
+\newcounter{lemma}[section]
+\newcounter{corollary}[section]
+
+% Define display format
+\renewcommand{\thetheorem}{\thesection.\arabic{theorem}}
+\renewcommand{\thelemma}{\thesection.\arabic{lemma}}
+\renewcommand{\thecorollary}{\thesection.\arabic{corollary}}
+
+% Create environments
+\newenvironment{theorem}[1][]
+{%
+  \stepcounter{theorem}%
+  \textbf{Theorem \thetheorem}%
+  \ifthenelse{\equal{#1}{}}{}{ (#1)}%
+  \textbf{.} \itshape%
+}
+{%
+  \par\medskip%
+}
+
+\newenvironment{lemma}[1][]
+{%
+  \stepcounter{lemma}%
+  \textbf{Lemma \thelemma}%
+  \ifthenelse{\equal{#1}{}}{}{ (#1)}%
+  \textbf{.} \itshape%
+}
+{%
+  \par\medskip%
+}
+
+\begin{document}
+
+\section{Basic Theory}
+
+\begin{theorem}[Fundamental Theorem]
+This is an important theorem in the first section.
+\end{theorem}
+
+\begin{lemma}
+A supporting lemma for the theorem.
+\end{lemma}
+
+\begin{theorem}
+Another theorem in the same section.
+\end{theorem}
+
+\section{Advanced Topics}
+
+\begin{theorem}
+New section resets the counter.
+\end{theorem}
+
+\end{document}
+```
+</CodeGroup>
+
+### Shared Counter Systems
+
+<CodeGroup>
+```latex shared-counters.tex
+\documentclass{article}
+
+% Create shared counter for all theorem-like environments
+\newcounter{theorem}[section]
+
+% All environments share the same counter
+\newenvironment{theorem}[1][]
+{%
+  \stepcounter{theorem}%
+  \textbf{Theorem \thesection.\arabic{theorem}}%
+  \ifthenelse{\equal{#1}{}}{}{ (#1)}%
+  \textbf{.} \itshape%
+}{\par\medskip}
+
+\newenvironment{lemma}[1][]
+{%
+  \stepcounter{theorem}%
+  \textbf{Lemma \thesection.\arabic{theorem}}%
+  \ifthenelse{\equal{#1}{}}{}{ (#1)}%
+  \textbf{.} \itshape%
+}{\par\medskip}
+
+\newenvironment{corollary}[1][]
+{%
+  \stepcounter{theorem}%
+  \textbf{Corollary \thesection.\arabic{theorem}}%
+  \ifthenelse{\equal{#1}{}}{}{ (#1)}%
+  \textbf{.} \itshape%
+}{\par\medskip}
+
+\begin{document}
+
+\section{Mathematical Results}
+
+\begin{theorem}
+First result.
+\end{theorem}
+
+\begin{lemma}
+Supporting lemma numbered consecutively.
+\end{lemma}
+
+\begin{corollary}
+Follows from the theorem.
+\end{corollary}
+
+\begin{theorem}
+Fourth result in the sequence.
+\end{theorem}
+
+\end{document}
+```
+</CodeGroup>
+
+## List Numbering Customization
+
+### Custom List Counters
+
+<CodeGroup>
+```latex custom-list-numbering.tex
+\documentclass{article}
+\usepackage{enumitem}
+
+% Create custom counter for special lists
+\newcounter{priority}
+\renewcommand{\thepriority}{P-\arabic{priority}}
+
+% Define custom list
+\newlist{prioritylist}{enumerate}{1}
+\setlist[prioritylist]{%
+  label=\stepcounter{priority}\thepriority:,
+  ref=\thepriority
+}
+
+\begin{document}
+
+\section{Project Tasks}
+
+\begin{prioritylist}
+\item High importance task
+\item Medium importance task  
+\item Low importance task
+\end{prioritylist}
+
+\section{Requirements}
+
+\begin{prioritylist}[resume]
+\item Continue numbering from previous list
+\item Another requirement
+\end{prioritylist}
+
+% Reset counter for new project
+\setcounter{priority}{0}
+
+\section{New Project}
+
+\begin{prioritylist}
+\item First task of new project
+\item Second task of new project
+\end{prioritylist}
+
+\end{document}
+```
+</CodeGroup>
+
+### Multi-Level Custom Numbering
+
+<CodeGroup>
+```latex multilevel-numbering.tex
+\documentclass{article}
+\usepackage{enumitem}
+
+% Create counters for hierarchical numbering
+\newcounter{requirement}
+\newcounter{subrequirement}[requirement]
+\newcounter{detail}[subrequirement]
+
+% Define display formats
+\renewcommand{\therequirement}{R\arabic{requirement}}
+\renewcommand{\thesubrequirement}{\therequirement.\arabic{subrequirement}}
+\renewcommand{\thedetail}{\thesubrequirement.\alph{detail}}
+
+% Custom environments
+\newenvironment{requirements}
+{\begin{enumerate}[label=\stepcounter{requirement}\therequirement:]}
+{\end{enumerate}}
+
+\newenvironment{subrequirements}
+{\begin{enumerate}[label=\stepcounter{subrequirement}\thesubrequirement:]}
+{\end{enumerate}}
+
+\newenvironment{details}
+{\begin{enumerate}[label=\stepcounter{detail}\thedetail)]}
+{\end{enumerate}}
+
+\begin{document}
+
+\section{System Requirements}
+
+\begin{requirements}
+\item User Authentication
+  \begin{subrequirements}
+  \item Login functionality
+    \begin{details}
+    \item Username validation
+    \item Password encryption
+    \item Session management
+    \end{details}
+  \item Registration process
+    \begin{details}
+    \item Email verification
+    \item Data validation
+    \end{details}
+  \end{subrequirements}
+
+\item Data Management
+  \begin{subrequirements}
+  \item Database design
+  \item Backup procedures
+  \end{subrequirements}
+\end{requirements}
+
+\end{document}
+```
+</CodeGroup>
+
+## Cross-Counter References
+
+### Referencing Custom Counters
+
+<CodeGroup>
+```latex counter-references.tex
+\documentclass{article}
+
+\newcounter{definition}[section]
+\renewcommand{\thedefinition}{\thesection.\arabic{definition}}
+
+\newenvironment{definition}[1][]
+{%
+  \stepcounter{definition}%
+  \textbf{Definition \thedefinition}%
+  \ifthenelse{\equal{#1}{}}{}{ (#1)}%
+  \textbf{.} \itshape%
+}
+{\par\medskip}
+
+\begin{document}
+
+\section{Basic Concepts}
+
+\begin{definition}[Vector Space]\label{def:vector-space}
+A vector space is a collection of objects called vectors.
+\end{definition}
+
+\begin{definition}[Linear Independence]\label{def:linear-independence}
+Vectors are linearly independent if no vector can be written as a linear combination of the others.
+\end{definition}
+
+\section{Applications}
+
+In Definition~\ref{def:vector-space}, we established the concept of vector spaces. Building on Definition~\ref{def:linear-independence}, we can now discuss bases.
+
+The relationship between Definition~\ref{def:vector-space} and Definition~\ref{def:linear-independence} is fundamental to linear algebra.
+
+\end{document}
+```
+</CodeGroup>
+
+### Counter-Based Indexing
+
+<CodeGroup>
+```latex counter-indexing.tex
+\documentclass{article}
+
+% Create index counter system
+\newcounter{item}
+\newcounter{subitem}[item]
+
+\renewcommand{\theitem}{\arabic{item}}
+\renewcommand{\thesubitem}{\theitem.\arabic{subitem}}
+
+% Commands for index entries
+\newcommand{\indexitem}[2]{%
+  \stepcounter{item}%
+  \setcounter{subitem}{0}%
+  \textbf{\theitem. #1} \dotfill #2\par%
+}
+
+\newcommand{\indexsubitem}[2]{%
+  \stepcounter{subitem}%
+  \quad\textbf{\thesubitem} #1 \dotfill #2\par%
+}
+
+\begin{document}
+
+\section{Index}
+
+\indexitem{Introduction}{Page 1}
+\indexsubitem{Overview}{Page 1}
+\indexsubitem{Scope}{Page 2}
+\indexsubitem{Methodology}{Page 3}
+
+\indexitem{Theory}{Page 5}
+\indexsubitem{Basic Concepts}{Page 5}
+\indexsubitem{Advanced Topics}{Page 8}
+
+\indexitem{Applications}{Page 12}
+\indexsubitem{Example 1}{Page 12}
+\indexsubitem{Example 2}{Page 15}
+\indexsubitem{Case Studies}{Page 18}
+
+\end{document}
+```
+</CodeGroup>
+
+## Specialized Numbering Systems
+
+### Legal Document Numbering
+
+<CodeGroup>
+```latex legal-numbering.tex
+\documentclass{article}
+
+% Legal document counter system
+\newcounter{article}
+\newcounter{section}[article]
+\newcounter{subsection}[section]
+\newcounter{paragraph}[subsection]
+
+% Custom display formats
+\renewcommand{\thearticle}{\Roman{article}}
+\renewcommand{\thesection}{\arabic{section}}
+\renewcommand{\thesubsection}{\alph{subsection}}
+\renewcommand{\theparagraph}{\roman{paragraph}}
+
+% Commands for legal structure
+\newcommand{\legalArticle}[1]{%
+  \stepcounter{article}%
+  \setcounter{section}{0}%
+  \textbf{ARTICLE \thearticle}\par%
+  \textbf{#1}\par\medskip%
+}
+
+\newcommand{\legalSection}[1]{%
+  \stepcounter{section}%
+  \setcounter{subsection}{0}%
+  \textbf{Section \thearticle.\thesection.} #1\par%
+}
+
+\newcommand{\legalSubsection}[1]{%
+  \stepcounter{subsection}%
+  \setcounter{paragraph}{0}%
+  \textbf{(\thesubsection)} #1\par%
+}
+
+\newcommand{\legalParagraph}[1]{%
+  \stepcounter{paragraph}%
+  \textbf{(\theparagraph)} #1\par%
+}
+
+\begin{document}
+
+\legalArticle{GENERAL PROVISIONS}
+
+\legalSection{Definitions}
+\legalSubsection{In this document, unless the context otherwise requires:}
+\legalParagraph{"Company" means the organization defined herein;}
+\legalParagraph{"Agreement" refers to this contract;}
+\legalParagraph{"Party" means any signatory to this agreement.}
+
+\legalSection{Scope of Application}
+\legalSubsection{This agreement applies to all parties involved.}
+
+\legalArticle{TERMS AND CONDITIONS}
+
+\legalSection{Obligations}
+\legalSubsection{Each party shall:}
+\legalParagraph{Fulfill their contractual obligations;}
+\legalParagraph{Maintain confidentiality;}
+\legalParagraph{Report any violations.}
+
+\end{document}
+```
+</CodeGroup>
+
+### Scientific Paper Numbering
+
+<CodeGroup>
+```latex scientific-numbering.tex
+\documentclass{article}
+
+% Scientific numbering system
+\newcounter{hypothesis}
+\newcounter{experiment}
+\newcounter{observation}[experiment]
+\newcounter{conclusion}
+
+\renewcommand{\thehypothesis}{H\arabic{hypothesis}}
+\renewcommand{\theexperiment}{E\arabic{experiment}}
+\renewcommand{\theobservation}{\theexperiment.\arabic{observation}}
+\renewcommand{\theconclusion}{C\arabic{conclusion}}
+
+% Scientific environments
+\newenvironment{hypothesis}[1][]
+{%
+  \stepcounter{hypothesis}%
+  \textbf{Hypothesis \thehypothesis}%
+  \ifthenelse{\equal{#1}{}}{}{ (#1)}%
+  \textbf{:} \itshape%
+}{\par\medskip}
+
+\newenvironment{experiment}[1][]
+{%
+  \stepcounter{experiment}%
+  \setcounter{observation}{0}%
+  \textbf{Experiment \theexperiment}%
+  \ifthenelse{\equal{#1}{}}{}{ (#1)}%
+  \textbf{:}%
+}{\par\medskip}
+
+\newenvironment{observation}[1][]
+{%
+  \stepcounter{observation}%
+  \textbf{Observation \theobservation}%
+  \ifthenelse{\equal{#1}{}}{}{ (#1)}%
+  \textbf{:} \itshape%
+}{\par\medskip}
+
+\begin{document}
+
+\section{Research Methodology}
+
+\begin{hypothesis}[Primary]
+Increased temperature will accelerate the reaction rate.
+\end{hypothesis}
+
+\begin{hypothesis}[Secondary] 
+Pressure changes will have minimal effect on the reaction.
+\end{hypothesis}
+
+\begin{experiment}[Temperature Study]
+Conduct reaction at various temperatures.
+
+\begin{observation}[25°C]
+Reaction completed in 60 minutes.
+\end{observation}
+
+\begin{observation}[50°C]
+Reaction completed in 30 minutes.
+\end{observation}
+
+\begin{observation}[75°C]
+Reaction completed in 15 minutes.
+\end{observation}
+\end{experiment}
+
+\begin{experiment}[Pressure Study]
+Conduct reaction at various pressures.
+
+\begin{observation}[1 atm]
+Reaction rate unchanged from baseline.
+\end{observation}
+
+\begin{observation}[2 atm]
+Minimal change in reaction rate.
+\end{observation}
+\end{experiment}
+
+\end{document}
+```
+</CodeGroup>
+
+## Best Practices
+
+<Tip>
+**Counter management guidelines:**
+
+1. **Plan your numbering scheme** - Design consistent hierarchy before implementation
+2. **Use descriptive counter names** - `problem` is better than `prob` or `p`
+3. **Reset appropriately** - Child counters should reset when parent increments
+4. **Document your system** - Comment complex counter relationships
+5. **Test thoroughly** - Check numbering across document sections
+6. **Consider references** - Ensure counter formats work well with `\ref{}`
+</Tip>
+
+### Professional Counter Setup
+
+<CodeGroup>
+```latex professional-counters.tex
+\documentclass{report}
+
+% Professional counter hierarchy
+\newcounter{requirement}[chapter]
+\newcounter{subrequirement}[requirement]
+\newcounter{specification}[chapter]
+\newcounter{testcase}[specification]
+
+% Clear numbering formats
+\renewcommand{\therequirement}{\thechapter.\arabic{requirement}}
+\renewcommand{\thesubrequirement}{\therequirement.\arabic{subrequirement}}
+\renewcommand{\thespecification}{\thechapter.\arabic{specification}}
+\renewcommand{\thetestcase}{\thespecification.\arabic{testcase}}
+
+% Consistent formatting commands
+\newcommand{\Requirement}[1]{%
+  \stepcounter{requirement}%
+  \setcounter{subrequirement}{0}%
+  \paragraph{Requirement \therequirement:} #1%
+}
+
+\newcommand{\SubRequirement}[1]{%
+  \stepcounter{subrequirement}%
+  \subparagraph{Requirement \thesubrequirement:} #1%
+}
+
+\newcommand{\Specification}[1]{%
+  \stepcounter{specification}%
+  \setcounter{testcase}{0}%
+  \paragraph{Specification \thespecification:} #1%
+}
+
+\newcommand{\TestCase}[1]{%
+  \stepcounter{testcase}%
+  \subparagraph{Test Case \thetestcase:} #1%
+}
+
+\begin{document}
+
+\chapter{User Interface Requirements}
+
+\Requirement{The system shall provide a user-friendly interface.}
+\SubRequirement{All buttons shall be clearly labeled.}
+\SubRequirement{Navigation shall be intuitive.}
+
+\Requirement{The interface shall be responsive.}
+\SubRequirement{Layout shall adapt to screen size.}
+
+\Specification{Login form implementation}
+\TestCase{Valid credentials acceptance}
+\TestCase{Invalid credentials rejection}
+
+\Specification{Menu navigation implementation}
+\TestCase{Menu accessibility}
+\TestCase{Submenu functionality}
+
+\chapter{Performance Requirements}
+
+\Requirement{Response times shall be minimal.}
+\SubRequirement{Page loads under 2 seconds.}
+\SubRequirement{Database queries under 1 second.}
+
+\end{document}
+```
+</CodeGroup>
+
+## Troubleshooting Counters
+
+### Common Counter Issues
+
+<CodeGroup>
+```latex counter-troubleshooting.tex
+\documentclass{article}
+
+% Problem: Counter not resetting properly
+% Solution: Ensure proper counter dependency
+
+\newcounter{main}
+\newcounter{sub}[main]  % Correctly reset sub when main increments
+
+% Problem: Wrong display format
+% Solution: Check \renewcommand{\thecounter}
+
+\renewcommand{\themain}{\arabic{main}}  % Correct format
+\renewcommand{\thesub}{\themain.\arabic{sub}}
+
+% Problem: Counter value not updating
+% Solution: Use \stepcounter or \addtocounter
+
+\newcommand{\newmain}{%
+  \stepcounter{main}%  % Correct: increments counter
+  % \setcounter{main}{\value{main}+1}  % Wrong: doesn't work
+}
+
+% Problem: References showing wrong number
+% Solution: Ensure counter is stepped before labeling
+
+\newcommand{\labeleditem}[1]{%
+  \stepcounter{main}%  % Step BEFORE label
+  \label{#1}%
+  Item \themain%
+}
+
+\begin{document}
+
+\newmain
+Main item \themain
+
+\stepcounter{sub}
+Sub item \thesub
+
+\newmain
+Next main item (sub resets): \themain, \thesub
+
+\labeleditem{item:first}
+This can be referenced as \ref{item:first}.
+
+\end{document}
+```
+</CodeGroup>
+
+## Quick Reference
+
+### Essential Counter Commands
+
+| Command | Purpose | Example |
+|---------|---------|---------|
+| `\newcounter{name}` | Create new counter | `\newcounter{example}` |
+| `\newcounter{name}[parent]` | Create with reset dependency | `\newcounter{sub}[main]` |
+| `\setcounter{name}{value}` | Set counter to value | `\setcounter{page}{1}` |
+| `\addtocounter{name}{value}` | Add to counter | `\addtocounter{page}{5}` |
+| `\stepcounter{name}` | Increment by 1 | `\stepcounter{section}` |
+| `\value{name}` | Get counter value | `\value{page}` |
+| `\thename` | Display counter | `\thepage` |
+
+### Counter Display Formats
+
+| Format | Command | Output Example |
+|--------|---------|----------------|
+| Arabic | `\arabic{counter}` | 1, 2, 3, 4... |
+| Roman (lower) | `\roman{counter}` | i, ii, iii, iv... |
+| Roman (upper) | `\Roman{counter}` | I, II, III, IV... |
+| Alphabetic (lower) | `\alph{counter}` | a, b, c, d... |
+| Alphabetic (upper) | `\Alph{counter}` | A, B, C, D... |
+
+---
+
+<Info>
+**Next**: Learn about [Advanced code listings and minted](/learn/latex/formatting/code-listings-minted) for displaying source code, or explore [Footnotes and margin notes](/learn/latex/formatting/footnotes-margins) for additional content placement.
+</Info>

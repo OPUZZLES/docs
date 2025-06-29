@@ -1,0 +1,1092 @@
+---
+title: Algorithm Pseudocode and Computer Science Notation
+description: Complete guide to typesetting algorithms, pseudocode, and computer science notation in LaTeX. Learn algorithm2e, algorithmic, and mathematical notation for CS.
+---
+
+
+Computer science requires specialized notation for algorithms, data structures, and mathematical concepts. This guide covers the essential packages and techniques for professional algorithm documentation and CS notation in LaTeX.
+
+<Info>
+**Key concept**: LaTeX provides powerful packages like `algorithm2e`, `algorithmic`, and standard math notation for computer science. These packages handle pseudocode formatting, complexity notation, and formal specifications following CS conventions.
+
+**Related topics**: [Mathematical notation](/learn/latex/mathematics) | [Code listings](/learn/latex/formatting/code-listings-minted) | [Formal logic notation](/learn/latex/logic)
+</Info>
+
+## The algorithm2e Package
+
+### Basic Algorithm Structure
+
+<CodeGroup>
+```latex basic-algorithms.tex
+\documentclass{article}
+\usepackage[ruled,vlined]{algorithm2e}
+
+\begin{document}
+
+\section{Basic Algorithms}
+
+\begin{algorithm}[H]
+\SetAlgoLined
+\KwData{Array $A$ of $n$ integers}
+\KwResult{Sum of all elements in $A$}
+\SetKwInOut{Input}{Input}
+\SetKwInOut{Output}{Output}
+
+\Input{Array $A[1..n]$}
+\Output{Sum $S$}
+
+$S \leftarrow 0$\;
+\For{$i \leftarrow 1$ \KwTo $n$}{
+  $S \leftarrow S + A[i]$\;
+}
+\Return{$S$}\;
+\caption{Array Sum Algorithm}
+\label{alg:array-sum}
+\end{algorithm}
+
+\begin{algorithm}[H]
+\SetAlgoLined
+\KwData{Positive integer $n$}
+\KwResult{$n!$ (factorial of $n$)}
+
+\eIf{$n = 0$ \textbf{or} $n = 1$}{
+  \Return{1}\;
+}{
+  \Return{$n \times \text{Factorial}(n-1)$}\;
+}
+\caption{Recursive Factorial}
+\label{alg:factorial}
+\end{algorithm}
+
+\begin{algorithm}[H]
+\SetAlgoLined
+\KwData{Array $A$ of $n$ comparable elements}
+\KwResult{Sorted array $A$}
+
+\For{$i \leftarrow 1$ \KwTo $n-1$}{
+  \For{$j \leftarrow 1$ \KwTo $n-i$}{
+    \If{$A[j] > A[j+1]$}{
+      Swap $A[j]$ and $A[j+1]$\;
+    }
+  }
+}
+\caption{Bubble Sort}
+\label{alg:bubble-sort}
+\end{algorithm}
+
+\section{Control Structures}
+
+\begin{algorithm}[H]
+\SetAlgoLined
+\KwData{Array $A$, element $x$}
+\KwResult{Index of $x$ in $A$, or $-1$ if not found}
+
+\For{$i \leftarrow 1$ \KwTo $\text{length}(A)$}{
+  \If{$A[i] = x$}{
+    \Return{$i$}\;
+  }
+}
+\Return{$-1$}\;
+\caption{Linear Search}
+\end{algorithm}
+
+\end{document}
+```
+</CodeGroup>
+
+### Advanced Algorithm Features
+
+<CodeGroup>
+```latex advanced-algorithms.tex
+\documentclass{article}
+\usepackage[ruled,vlined]{algorithm2e}
+\usepackage{amsmath}
+
+\begin{document}
+
+\section{Sorting Algorithms}
+
+\begin{algorithm}[H]
+\SetAlgoLined
+\SetKwFunction{Merge}{Merge}
+\SetKwFunction{MergeSort}{MergeSort}
+\SetKwProg{Fn}{Function}{:}{}
+
+\Fn{\MergeSort{$A, p, r$}}{
+  \If{$p < r$}{
+    $q \leftarrow \lfloor (p + r)/2 \rfloor$\;
+    \MergeSort{$A, p, q$}\;
+    \MergeSort{$A, q+1, r$}\;
+    \Merge{$A, p, q, r$}\;
+  }
+}
+
+\BlankLine
+\Fn{\Merge{$A, p, q, r$}}{
+  $n_1 \leftarrow q - p + 1$\;
+  $n_2 \leftarrow r - q$\;
+  Create arrays $L[1..n_1+1]$ and $R[1..n_2+1]$\;
+  
+  \For{$i \leftarrow 1$ \KwTo $n_1$}{
+    $L[i] \leftarrow A[p + i - 1]$\;
+  }
+  \For{$j \leftarrow 1$ \KwTo $n_2$}{
+    $R[j] \leftarrow A[q + j]$\;
+  }
+  
+  $L[n_1 + 1] \leftarrow \infty$\;
+  $R[n_2 + 1] \leftarrow \infty$\;
+  $i \leftarrow 1$\;
+  $j \leftarrow 1$\;
+  
+  \For{$k \leftarrow p$ \KwTo $r$}{
+    \eIf{$L[i] \leq R[j]$}{
+      $A[k] \leftarrow L[i]$\;
+      $i \leftarrow i + 1$\;
+    }{
+      $A[k] \leftarrow R[j]$\;
+      $j \leftarrow j + 1$\;
+    }
+  }
+}
+\caption{Merge Sort Algorithm}
+\end{algorithm}
+
+\section{Graph Algorithms}
+
+\begin{algorithm}[H]
+\SetAlgoLined
+\SetKwFunction{BFS}{BFS}
+\SetKwData{Queue}{Queue}
+\SetKwData{Visited}{Visited}
+
+\Fn{\BFS{$G, s$}}{
+  Initialize \Visited array to \textbf{false} for all vertices\;
+  \Visited$[s] \leftarrow$ \textbf{true}\;
+  \Queue $\leftarrow$ empty queue\;
+  Enqueue($s$, \Queue)\;
+  
+  \While{\Queue is not empty}{
+    $u \leftarrow$ Dequeue(\Queue)\;
+    Process vertex $u$\;
+    
+    \ForEach{vertex $v$ adjacent to $u$}{
+      \If{not \Visited$[v]$}{
+        \Visited$[v] \leftarrow$ \textbf{true}\;
+        Enqueue($v$, \Queue)\;
+      }
+    }
+  }
+}
+\caption{Breadth-First Search}
+\end{algorithm}
+
+\begin{algorithm}[H]
+\SetAlgoLined
+\SetKwFunction{DFS}{DFS}
+\SetKwFunction{DFSVisit}{DFS-Visit}
+\SetKwData{Color}{Color}
+\SetKwData{Time}{Time}
+
+\Fn{\DFS{$G$}}{
+  \ForEach{vertex $u \in V[G]$}{
+    \Color$[u] \leftarrow$ WHITE\;
+    $\pi[u] \leftarrow$ NIL\;
+  }
+  \Time $\leftarrow 0$\;
+  
+  \ForEach{vertex $u \in V[G]$}{
+    \If{\Color$[u] =$ WHITE}{
+      \DFSVisit{$u$}\;
+    }
+  }
+}
+
+\BlankLine
+\Fn{\DFSVisit{$u$}}{
+  \Color$[u] \leftarrow$ GRAY\;
+  \Time $\leftarrow$ \Time $+ 1$\;
+  $d[u] \leftarrow$ \Time\;
+  
+  \ForEach{vertex $v \in \text{Adj}[u]$}{
+    \If{\Color$[v] =$ WHITE}{
+      $\pi[v] \leftarrow u$\;
+      \DFSVisit{$v$}\;
+    }
+  }
+  
+  \Color$[u] \leftarrow$ BLACK\;
+  \Time $\leftarrow$ \Time $+ 1$\;
+  $f[u] \leftarrow$ \Time\;
+}
+\caption{Depth-First Search}
+\end{algorithm}
+
+\end{document}
+```
+</CodeGroup>
+
+### Dynamic Programming
+
+<CodeGroup>
+```latex dynamic-programming.tex
+\documentclass{article}
+\usepackage[ruled,vlined]{algorithm2e}
+\usepackage{amsmath}
+
+\begin{document}
+
+\section{Dynamic Programming Algorithms}
+
+\begin{algorithm}[H]
+\SetAlgoLined
+\SetKwFunction{LCS}{LCS-Length}
+
+\Fn{\LCS{$X, Y$}}{
+  $m \leftarrow$ length$(X)$\;
+  $n \leftarrow$ length$(Y)$\;
+  Create table $c[0..m, 0..n]$\;
+  
+  \For{$i \leftarrow 0$ \KwTo $m$}{
+    $c[i, 0] \leftarrow 0$\;
+  }
+  \For{$j \leftarrow 0$ \KwTo $n$}{
+    $c[0, j] \leftarrow 0$\;
+  }
+  
+  \For{$i \leftarrow 1$ \KwTo $m$}{
+    \For{$j \leftarrow 1$ \KwTo $n$}{
+      \eIf{$X[i] = Y[j]$}{
+        $c[i, j] \leftarrow c[i-1, j-1] + 1$\;
+      }{
+        $c[i, j] \leftarrow \max(c[i-1, j], c[i, j-1])$\;
+      }
+    }
+  }
+  \Return{$c[m, n]$}\;
+}
+\caption{Longest Common Subsequence}
+\end{algorithm}
+
+\begin{algorithm}[H]
+\SetAlgoLined
+\SetKwFunction{Knapsack}{Knapsack}
+
+\Fn{\Knapsack{$W, w[], v[], n$}}{
+  Create table $K[0..n, 0..W]$\;
+  
+  \For{$i \leftarrow 0$ \KwTo $n$}{
+    \For{$w \leftarrow 0$ \KwTo $W$}{
+      \eIf{$i = 0$ \textbf{or} $w = 0$}{
+        $K[i, w] \leftarrow 0$\;
+      }{
+        \eIf{$w[i-1] \leq w$}{
+          $K[i, w] \leftarrow \max(v[i-1] + K[i-1, w-w[i-1]], K[i-1, w])$\;
+        }{
+          $K[i, w] \leftarrow K[i-1, w]$\;
+        }
+      }
+    }
+  }
+  \Return{$K[n, W]$}\;
+}
+\caption{0-1 Knapsack Problem}
+\end{algorithm}
+
+\section{String Algorithms}
+
+\begin{algorithm}[H]
+\SetAlgoLined
+\SetKwFunction{EditDistance}{Edit-Distance}
+
+\Fn{\EditDistance{$s_1, s_2$}}{
+  $m \leftarrow$ length$(s_1)$\;
+  $n \leftarrow$ length$(s_2)$\;
+  Create matrix $dp[0..m, 0..n]$\;
+  
+  \For{$i \leftarrow 0$ \KwTo $m$}{
+    $dp[i, 0] \leftarrow i$\;
+  }
+  \For{$j \leftarrow 0$ \KwTo $n$}{
+    $dp[0, j] \leftarrow j$\;
+  }
+  
+  \For{$i \leftarrow 1$ \KwTo $m$}{
+    \For{$j \leftarrow 1$ \KwTo $n$}{
+      \eIf{$s_1[i-1] = s_2[j-1]$}{
+        $dp[i, j] \leftarrow dp[i-1, j-1]$\;
+      }{
+        $dp[i, j] \leftarrow 1 + \min(dp[i-1, j], dp[i, j-1], dp[i-1, j-1])$\;
+      }
+    }
+  }
+  \Return{$dp[m, n]$}\;
+}
+\caption{Edit Distance (Levenshtein Distance)}
+\end{algorithm}
+
+\end{document}
+```
+</CodeGroup>
+
+## Complexity Analysis
+
+### Big O Notation
+
+<CodeGroup>
+```latex complexity-analysis.tex
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage{pgfplots}
+
+\begin{document}
+
+\section{Asymptotic Notation}
+
+\subsection{Big O Notation}
+
+\textbf{Definition:} $f(n) = O(g(n))$ if and only if there exist positive constants $c$ and $n_0$ such that:
+\[
+0 \leq f(n) \leq c \cdot g(n) \text{ for all } n \geq n_0
+\]
+
+\textbf{Common complexity classes:}
+\begin{align}
+O(1) &\quad \text{Constant time} \\
+O(\log n) &\quad \text{Logarithmic time} \\
+O(n) &\quad \text{Linear time} \\
+O(n \log n) &\quad \text{Linearithmic time} \\
+O(n^2) &\quad \text{Quadratic time} \\
+O(n^3) &\quad \text{Cubic time} \\
+O(2^n) &\quad \text{Exponential time} \\
+O(n!) &\quad \text{Factorial time}
+\end{align}
+
+\subsection{Complexity Hierarchy}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+  xlabel={Input size $n$},
+  ylabel={Operations},
+  title={Growth Rates of Common Functions},
+  xmin=1, xmax=10,
+  ymin=0, ymax=100,
+  legend pos=north west
+]
+\addplot[domain=1:10, samples=50] {1};
+\addlegendentry{$O(1)$}
+
+\addplot[domain=1:10, samples=50] {ln(x)/ln(2)};
+\addlegendentry{$O(\log n)$}
+
+\addplot[domain=1:10, samples=50] {x};
+\addlegendentry{$O(n)$}
+
+\addplot[domain=1:10, samples=50] {x*ln(x)/ln(2)};
+\addlegendentry{$O(n \log n)$}
+
+\addplot[domain=1:10, samples=50] {x^2};
+\addlegendentry{$O(n^2)$}
+
+\addplot[domain=1:5, samples=50] {2^x};
+\addlegendentry{$O(2^n)$}
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\section{Analysis Examples}
+
+\subsection{Algorithm Complexity}
+
+\textbf{Linear Search:}
+\begin{itemize}
+\item Best case: $O(1)$ - element found at first position
+\item Average case: $O(n)$ - element found at middle
+\item Worst case: $O(n)$ - element not found or at last position
+\end{itemize}
+
+\textbf{Binary Search:}
+\begin{itemize}
+\item Best case: $O(1)$ - element found at middle
+\item Average case: $O(\log n)$ - logarithmic search
+\item Worst case: $O(\log n)$ - logarithmic search
+\end{itemize}
+
+\textbf{Merge Sort:}
+\begin{align}
+T(n) &= 2T(n/2) + O(n) \\
+&= O(n \log n) \text{ by Master Theorem}
+\end{align}
+
+\textbf{Quick Sort:}
+\begin{itemize}
+\item Best case: $O(n \log n)$ - balanced partitions
+\item Average case: $O(n \log n)$ - random pivots
+\item Worst case: $O(n^2)$ - already sorted array
+\end{itemize}
+
+\section{Space Complexity}
+
+\textbf{Space complexity notation:}
+\begin{itemize}
+\item $S(n) = O(1)$ - Constant space (in-place algorithms)
+\item $S(n) = O(\log n)$ - Logarithmic space (recursive algorithms)
+\item $S(n) = O(n)$ - Linear space (storing input-sized data)
+\item $S(n) = O(n^2)$ - Quadratic space (2D arrays)
+\end{itemize}
+
+\subsection{Recurrence Relations}
+
+\textbf{Master Theorem:} For recurrences of the form $T(n) = aT(n/b) + f(n)$:
+
+\begin{enumerate}
+\item If $f(n) = O(n^{\log_b a - \epsilon})$ for some $\epsilon > 0$, then $T(n) = \Theta(n^{\log_b a})$
+\item If $f(n) = \Theta(n^{\log_b a})$, then $T(n) = \Theta(n^{\log_b a} \log n)$
+\item If $f(n) = \Omega(n^{\log_b a + \epsilon})$ for some $\epsilon > 0$, and if $af(n/b) \leq cf(n)$ for some $c < 1$, then $T(n) = \Theta(f(n))$
+\end{enumerate}
+
+\textbf{Examples:}
+\begin{align}
+T(n) &= 2T(n/2) + n && \Rightarrow T(n) = O(n \log n) \\
+T(n) &= 4T(n/2) + n && \Rightarrow T(n) = O(n^2) \\
+T(n) &= T(n-1) + 1 && \Rightarrow T(n) = O(n)
+\end{align}
+
+\end{document}
+```
+</CodeGroup>
+
+## Data Structures
+
+### Basic Data Structures
+
+<CodeGroup>
+```latex data-structures.tex
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage[ruled,vlined]{algorithm2e}
+
+\begin{document}
+
+\section{Arrays and Lists}
+
+\subsection{Array Representation}
+\begin{center}
+\begin{tikzpicture}
+\foreach \i in {0,1,2,3,4} {
+  \draw (\i,0) rectangle (\i+1,0.8);
+  \node at (\i+0.5,0.4) {\i};
+  \node at (\i+0.5,-0.3) {$A[\i]$};
+}
+\node at (2.5,-1) {Array indices: 0, 1, 2, 3, 4};
+\end{tikzpicture}
+\end{center}
+
+\subsection{Linked List}
+\begin{center}
+\begin{tikzpicture}
+% Nodes
+\foreach \i/\val in {0/12,2/25,4/37,6/NIL} {
+  \draw (\i,0) rectangle (\i+1.5,0.8);
+  \draw (\i+1,0) -- (\i+1,0.8);
+  \node at (\i+0.5,0.4) {\val};
+  \ifnum\i<6
+    \draw[->] (\i+1.25,0.4) -- (\i+1.75,0.4);
+  \fi
+}
+\node at (0.5,-0.5) {data};
+\node at (1.25,-0.5) {next};
+\end{tikzpicture}
+\end{center}
+
+\section{Trees}
+
+\subsection{Binary Search Tree}
+\begin{center}
+\begin{tikzpicture}[level distance=1.5cm,
+  level 1/.style={sibling distance=3cm},
+  level 2/.style={sibling distance=1.5cm}]
+\node[circle,draw] {15}
+  child {node[circle,draw] {6}
+    child {node[circle,draw] {3}}
+    child {node[circle,draw] {7}
+      child[missing]
+      child {node[circle,draw] {13}}
+    }
+  }
+  child {node[circle,draw] {18}
+    child {node[circle,draw] {17}}
+    child {node[circle,draw] {20}}
+  };
+\end{tikzpicture}
+\end{center}
+
+\textbf{BST Property:} For any node $x$:
+\begin{itemize}
+\item All nodes in left subtree have values $\leq x.\text{key}$
+\item All nodes in right subtree have values $\geq x.\text{key}$
+\end{itemize}
+
+\subsection{Heap Structure}
+\begin{center}
+\begin{tikzpicture}[level distance=1.5cm,
+  level 1/.style={sibling distance=3cm},
+  level 2/.style={sibling distance=1.5cm}]
+\node[circle,draw] {16}
+  child {node[circle,draw] {14}
+    child {node[circle,draw] {10}}
+    child {node[circle,draw] {8}}
+  }
+  child {node[circle,draw] {9}
+    child {node[circle,draw] {3}}
+    child {node[circle,draw] {2}}
+  };
+\end{tikzpicture}
+\end{center}
+
+\textbf{Max-Heap Property:} $A[\text{parent}(i)] \geq A[i]$
+
+\section{Hash Tables}
+
+\subsection{Hash Function}
+\[
+h(k) = k \bmod m
+\]
+
+\subsection{Collision Resolution}
+
+\textbf{Chaining:}
+\begin{center}
+\begin{tikzpicture}
+\foreach \i in {0,1,2,3} {
+  \draw (0,\i) rectangle (1,\i+1);
+  \node at (0.5,\i+0.5) {\i};
+}
+% Chains
+\draw[->] (1,0.5) -- (1.5,0.5);
+\draw (1.5,0.2) rectangle (2.5,0.8);
+\node at (2,0.5) {13};
+
+\draw[->] (1,2.5) -- (1.5,2.5);
+\draw (1.5,2.2) rectangle (2.5,2.8);
+\node at (2,2.5) {6};
+\draw[->] (2.5,2.5) -- (3,2.5);
+\draw (3,2.2) rectangle (4,2.8);
+\node at (3.5,2.5) {10};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Open Addressing:}
+\begin{itemize}
+\item Linear probing: $h(k,i) = (h'(k) + i) \bmod m$
+\item Quadratic probing: $h(k,i) = (h'(k) + c_1i + c_2i^2) \bmod m$
+\item Double hashing: $h(k,i) = (h_1(k) + i \cdot h_2(k)) \bmod m$
+\end{itemize}
+
+\section{Graphs}
+
+\subsection{Graph Representations}
+
+\textbf{Adjacency Matrix:}
+\[
+A[i,j] = \begin{cases}
+1 & \text{if } (i,j) \in E \\
+0 & \text{otherwise}
+\end{cases}
+\]
+
+\textbf{Adjacency List:}
+\begin{center}
+\begin{tikzpicture}
+\node at (0,2) {1:};
+\draw[->] (0.5,2) -- (1,2);
+\draw (1,1.8) rectangle (1.8,2.2);
+\node at (1.4,2) {2};
+\draw[->] (1.8,2) -- (2.3,2);
+\draw (2.3,1.8) rectangle (3.1,2.2);
+\node at (2.7,2) {3};
+
+\node at (0,1) {2:};
+\draw[->] (0.5,1) -- (1,1);
+\draw (1,0.8) rectangle (1.8,1.2);
+\node at (1.4,1) {3};
+
+\node at (0,0) {3:};
+\draw[->] (0.5,0) -- (1,0);
+\draw (1,-0.2) rectangle (1.8,0.2);
+\node at (1.4,0) {1};
+\end{tikzpicture}
+\end{center}
+
+\end{document}
+```
+</CodeGroup>
+
+## Formal Methods and Specifications
+
+### Program Verification
+
+<CodeGroup>
+```latex formal-methods.tex
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+
+\begin{document}
+
+\section{Hoare Logic}
+
+\subsection{Hoare Triples}
+\[
+\{P\} \; S \; \{Q\}
+\]
+where:
+\begin{itemize}
+\item $P$ is the precondition
+\item $S$ is the program statement
+\item $Q$ is the postcondition
+\end{itemize}
+
+\subsection{Inference Rules}
+
+\textbf{Assignment Rule:}
+\[
+\frac{}{\{Q[x \leftarrow E]\} \; x := E \; \{Q\}}
+\]
+
+\textbf{Sequence Rule:}
+\[
+\frac{\{P\} S_1 \{R\} \quad \{R\} S_2 \{Q\}}{\{P\} S_1; S_2 \{Q\}}
+\]
+
+\textbf{Conditional Rule:}
+\[
+\frac{\{P \land B\} S_1 \{Q\} \quad \{P \land \neg B\} S_2 \{Q\}}{\{P\} \text{if } B \text{ then } S_1 \text{ else } S_2 \{Q\}}
+\]
+
+\textbf{While Rule:}
+\[
+\frac{\{I \land B\} S \{I\}}{\{I\} \text{while } B \text{ do } S \{I \land \neg B\}}
+\]
+
+\subsection{Example Verification}
+
+\textbf{Program:} Find maximum of two numbers
+\begin{align}
+&\{x = a \land y = b\} \\
+&\text{if } x \geq y \text{ then } \max := x \text{ else } \max := y \\
+&\{\max = \max(a,b)\}
+\end{align}
+
+\textbf{Proof:}
+\begin{align}
+&\{x = a \land y = b \land x \geq y\} \; \max := x \; \{\max = \max(a,b)\} \\
+&\{x = a \land y = b \land x < y\} \; \max := y \; \{\max = \max(a,b)\}
+\end{align}
+
+\section{Predicate Logic}
+
+\subsection{First-Order Logic}
+\textbf{Syntax:}
+\begin{align}
+\text{Term} \quad t &::= x \mid f(t_1, \ldots, t_n) \\
+\text{Formula} \quad \phi &::= P(t_1, \ldots, t_n) \mid \neg \phi \mid \phi_1 \land \phi_2 \\
+&\mid \phi_1 \lor \phi_2 \mid \phi_1 \rightarrow \phi_2 \\
+&\mid \forall x. \phi \mid \exists x. \phi
+\end{align}
+
+\textbf{Semantics:}
+\begin{itemize}
+\item $\models \forall x. P(x)$ iff $P(a)$ holds for all $a$ in the domain
+\item $\models \exists x. P(x)$ iff $P(a)$ holds for some $a$ in the domain
+\end{itemize}
+
+\section{Type Theory}
+
+\subsection{Simply Typed Lambda Calculus}
+
+\textbf{Types:}
+\[
+\tau ::= \iota \mid \tau_1 \rightarrow \tau_2
+\]
+
+\textbf{Terms:}
+\[
+e ::= x \mid \lambda x:\tau. e \mid e_1 \; e_2
+\]
+
+\textbf{Typing Rules:}
+
+\textbf{Variable:}
+\[
+\frac{x:\tau \in \Gamma}{\Gamma \vdash x : \tau}
+\]
+
+\textbf{Abstraction:}
+\[
+\frac{\Gamma, x:\tau_1 \vdash e : \tau_2}{\Gamma \vdash \lambda x:\tau_1. e : \tau_1 \rightarrow \tau_2}
+\]
+
+\textbf{Application:}
+\[
+\frac{\Gamma \vdash e_1 : \tau_1 \rightarrow \tau_2 \quad \Gamma \vdash e_2 : \tau_1}{\Gamma \vdash e_1 \; e_2 : \tau_2}
+\]
+
+\section{Automata Theory}
+
+\subsection{Finite State Machines}
+
+\textbf{DFA Definition:} $M = (Q, \Sigma, \delta, q_0, F)$ where:
+\begin{itemize}
+\item $Q$ is a finite set of states
+\item $\Sigma$ is a finite alphabet
+\item $\delta: Q \times \Sigma \rightarrow Q$ is the transition function
+\item $q_0 \in Q$ is the initial state
+\item $F \subseteq Q$ is the set of accepting states
+\end{itemize}
+
+\textbf{Regular Expressions:}
+\[
+r ::= \emptyset \mid \epsilon \mid a \mid r_1 + r_2 \mid r_1 \cdot r_2 \mid r^*
+\]
+
+\textbf{Equivalence:} DFA $\equiv$ NFA $\equiv$ Regular Expressions
+
+\end{document}
+```
+</CodeGroup>
+
+## Machine Learning and AI
+
+### ML Algorithm Notation
+
+<CodeGroup>
+```latex machine-learning.tex
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[ruled,vlined]{algorithm2e}
+
+\begin{document}
+
+\section{Machine Learning Algorithms}
+
+\subsection{Gradient Descent}
+
+\begin{algorithm}[H]
+\SetAlgoLined
+\SetKwFunction{GradientDescent}{Gradient-Descent}
+\SetKwData{LearningRate}{$\alpha$}
+\SetKwData{Tolerance}{$\epsilon$}
+
+\Fn{\GradientDescent{$f, \nabla f, \theta_0, \alpha, \epsilon$}}{
+  $\theta \leftarrow \theta_0$\;
+  \Repeat{$\|\nabla f(\theta)\| < \epsilon$}{
+    $\theta \leftarrow \theta - \alpha \nabla f(\theta)$\;
+  }
+  \Return{$\theta$}\;
+}
+\caption{Gradient Descent Optimization}
+\end{algorithm}
+
+\textbf{Update Rule:}
+\[
+\theta_{t+1} = \theta_t - \alpha \nabla_\theta J(\theta_t)
+\]
+
+\subsection{Backpropagation}
+
+\begin{algorithm}[H]
+\SetAlgoLined
+\SetKwFunction{Backprop}{Backpropagation}
+
+\Fn{\Backprop{Network $N$, Input $x$, Target $y$}}{
+  \tcp{Forward pass}
+  $a^{(0)} \leftarrow x$\;
+  \For{$l = 1$ \KwTo $L$}{
+    $z^{(l)} \leftarrow W^{(l)} a^{(l-1)} + b^{(l)}$\;
+    $a^{(l)} \leftarrow \sigma(z^{(l)})$\;
+  }
+  
+  \tcp{Backward pass}
+  $\delta^{(L)} \leftarrow \nabla_a C \odot \sigma'(z^{(L)})$\;
+  \For{$l = L-1$ \KwTo $1$}{
+    $\delta^{(l)} \leftarrow ((W^{(l+1)})^T \delta^{(l+1)}) \odot \sigma'(z^{(l)})$\;
+  }
+  
+  \tcp{Update weights}
+  \For{$l = 1$ \KwTo $L$}{
+    $W^{(l)} \leftarrow W^{(l)} - \alpha \delta^{(l)} (a^{(l-1)})^T$\;
+    $b^{(l)} \leftarrow b^{(l)} - \alpha \delta^{(l)}$\;
+  }
+}
+\caption{Backpropagation Algorithm}
+\end{algorithm}
+
+\section{Statistical Learning}
+
+\subsection{PAC Learning}
+
+\textbf{Definition:} A concept class $\mathcal{C}$ is PAC-learnable if there exists an algorithm $A$ and polynomial $p$ such that for any:
+\begin{itemize}
+\item Distribution $\mathcal{D}$ over $\mathcal{X}$
+\item Target concept $c \in \mathcal{C}$
+\item $0 < \epsilon, \delta < 1$
+\end{itemize}
+
+Given $m \geq p(1/\epsilon, 1/\delta, \text{size}(c), \text{size}(x))$ examples, $A$ outputs $h$ such that:
+\[
+\Pr[\text{error}(h) \leq \epsilon] \geq 1 - \delta
+\]
+
+\subsection{VC Dimension}
+
+\textbf{Definition:} The VC dimension of a hypothesis class $\mathcal{H}$ is the size of the largest set that can be shattered by $\mathcal{H}$.
+
+\textbf{Fundamental Theorem:} If $\text{VCdim}(\mathcal{H}) = d < \infty$, then $\mathcal{H}$ is PAC-learnable with sample complexity:
+\[
+m = O\left(\frac{d + \log(1/\delta)}{\epsilon}\right)
+\]
+
+\section{Information Theory}
+
+\subsection{Entropy and Information}
+
+\textbf{Shannon Entropy:}
+\[
+H(X) = -\sum_{x} p(x) \log_2 p(x)
+\]
+
+\textbf{Conditional Entropy:}
+\[
+H(Y|X) = \sum_{x} p(x) H(Y|X=x)
+\]
+
+\textbf{Mutual Information:}
+\[
+I(X;Y) = H(X) - H(X|Y) = H(Y) - H(Y|X)
+\]
+
+\textbf{KL Divergence:}
+\[
+D_{KL}(P \| Q) = \sum_{x} P(x) \log \frac{P(x)}{Q(x)}
+\]
+
+\section{Computational Complexity Classes}
+
+\subsection{Complexity Classes}
+
+\textbf{Time Complexity Classes:}
+\begin{align}
+\mathbf{P} &= \bigcup_{k \geq 1} \text{TIME}(n^k) \\
+\mathbf{NP} &= \bigcup_{k \geq 1} \text{NTIME}(n^k) \\
+\mathbf{EXPTIME} &= \bigcup_{k \geq 1} \text{TIME}(2^{n^k})
+\end{align}
+
+\textbf{Space Complexity Classes:}
+\begin{align}
+\mathbf{L} &= \text{SPACE}(\log n) \\
+\mathbf{PSPACE} &= \bigcup_{k \geq 1} \text{SPACE}(n^k)
+\end{align}
+
+\textbf{Relationships:}
+\[
+\mathbf{L} \subseteq \mathbf{P} \subseteq \mathbf{NP} \subseteq \mathbf{PSPACE} \subseteq \mathbf{EXPTIME}
+\]
+
+\end{document}
+```
+</CodeGroup>
+
+## Best Practices
+
+<Tip>
+**Algorithm documentation guidelines:**
+
+1. **Clear pseudocode** - Use standard notation and consistent style
+2. **Complexity analysis** - Always include time and space complexity
+3. **Preconditions** - Specify input requirements and assumptions
+4. **Invariants** - Document loop invariants for verification
+5. **Examples** - Provide concrete examples of algorithm execution
+6. **Correctness** - Argue or prove algorithm correctness
+</Tip>
+
+### Professional Algorithm Paper
+
+<CodeGroup>
+```latex professional-algorithms.tex
+\documentclass{article}
+\usepackage[ruled,vlined]{algorithm2e}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{booktabs}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+
+\begin{document}
+
+\title{Efficient Algorithms for Graph Shortest Paths}
+\author{Computer Science Department}
+\maketitle
+
+\section{Introduction}
+
+This paper presents improved algorithms for computing shortest paths in weighted graphs, with applications to network routing and optimization problems.
+
+\section{Preliminary Definitions}
+
+\begin{theorem}[Optimal Substructure]
+Let $G = (V, E, w)$ be a weighted graph and $p = \langle v_1, v_2, \ldots, v_k \rangle$ be a shortest path from $v_1$ to $v_k$. Then any subpath $p_{ij} = \langle v_i, v_{i+1}, \ldots, v_j \rangle$ is a shortest path from $v_i$ to $v_j$.
+\end{theorem}
+
+\section{Dijkstra's Algorithm}
+
+\begin{algorithm}[H]
+\SetAlgoLined
+\SetKwFunction{Dijkstra}{Dijkstra}
+\SetKwFunction{ExtractMin}{Extract-Min}
+\SetKwFunction{Relax}{Relax}
+
+\Fn{\Dijkstra{$G, w, s$}}{
+  \tcp{Initialize single source}
+  \ForEach{vertex $v \in V[G]$}{
+    $d[v] \leftarrow \infty$\;
+    $\pi[v] \leftarrow$ NIL\;
+  }
+  $d[s] \leftarrow 0$\;
+  
+  $S \leftarrow \emptyset$\;
+  $Q \leftarrow V[G]$ \tcp*{Priority queue}
+  
+  \While{$Q \neq \emptyset$}{
+    $u \leftarrow$ \ExtractMin{$Q$}\;
+    $S \leftarrow S \cup \{u\}$\;
+    
+    \ForEach{vertex $v \in \text{Adj}[u]$}{
+      \Relax{$u, v, w$}\;
+    }
+  }
+}
+
+\BlankLine
+\Fn{\Relax{$u, v, w$}}{
+  \If{$d[v] > d[u] + w(u,v)$}{
+    $d[v] \leftarrow d[u] + w(u,v)$\;
+    $\pi[v] \leftarrow u$\;
+  }
+}
+\caption{Dijkstra's Shortest Path Algorithm}
+\label{alg:dijkstra}
+\end{algorithm}
+
+\begin{theorem}[Correctness of Dijkstra's Algorithm]
+Algorithm~\ref{alg:dijkstra} correctly computes shortest path distances from source $s$ to all vertices in $G$, assuming all edge weights are non-negative.
+\end{theorem}
+
+\begin{theorem}[Time Complexity]
+The time complexity of Algorithm~\ref{alg:dijkstra} is $O((V + E) \log V)$ when implemented with a binary heap.
+\end{theorem}
+
+\section{Bellman-Ford Algorithm}
+
+\begin{algorithm}[H]
+\SetAlgoLined
+\SetKwFunction{BellmanFord}{Bellman-Ford}
+
+\Fn{\BellmanFord{$G, w, s$}}{
+  \tcp{Initialize single source}
+  \ForEach{vertex $v \in V[G]$}{
+    $d[v] \leftarrow \infty$\;
+    $\pi[v] \leftarrow$ NIL\;
+  }
+  $d[s] \leftarrow 0$\;
+  
+  \tcp{Relax edges repeatedly}
+  \For{$i \leftarrow 1$ \KwTo $|V[G]| - 1$}{
+    \ForEach{edge $(u,v) \in E[G]$}{
+      \Relax{$u, v, w$}\;
+    }
+  }
+  
+  \tcp{Check for negative cycles}
+  \ForEach{edge $(u,v) \in E[G]$}{
+    \If{$d[v] > d[u] + w(u,v)$}{
+      \Return{\textbf{false}} \tcp*{Negative cycle detected}
+    }
+  }
+  \Return{\textbf{true}}\;
+}
+\caption{Bellman-Ford Algorithm}
+\end{algorithm}
+
+\section{Performance Comparison}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{@{}lccc@{}}
+\toprule
+Algorithm & Time Complexity & Space Complexity & Negative Edges \\
+\midrule
+Dijkstra & $O((V + E) \log V)$ & $O(V)$ & No \\
+Bellman-Ford & $O(VE)$ & $O(V)$ & Yes \\
+Floyd-Warshall & $O(V^3)$ & $O(V^2)$ & Yes \\
+Johnson & $O(V^2 \log V + VE)$ & $O(V^2)$ & Yes \\
+\bottomrule
+\end{tabular}
+\caption{Shortest path algorithm comparison}
+\end{table}
+
+\section{Conclusion}
+
+We have presented classical shortest path algorithms with their complexity analysis. The choice of algorithm depends on graph properties and application requirements.
+
+\end{document}
+```
+</CodeGroup>
+
+## Quick Reference
+
+### Algorithm2e Commands
+
+| Command | Purpose | Example |
+|---------|---------|---------|
+| `\KwData{}` | Input specification | `\KwData{Array A[1..n]}` |
+| `\KwResult{}` | Output specification | `\KwResult{Sorted array}` |
+| `\For{}{}` | For loop | `\For{i=1 to n}{}` |
+| `\While{}{}` | While loop | `\While{condition}{}` |
+| `\If{}{}` | Conditional | `\If{condition}{}` |
+| `\Return{}` | Return statement | `\Return{value}` |
+
+### Complexity Notation
+
+| Notation | Meaning | Typical Use |
+|----------|---------|-------------|
+| $O(f(n))$ | Upper bound | Worst-case analysis |
+| $\Omega(f(n))$ | Lower bound | Best-case analysis |
+| $\Theta(f(n))$ | Tight bound | Average-case analysis |
+| $o(f(n))$ | Strict upper bound | Asymptotic comparison |
+| $\omega(f(n))$ | Strict lower bound | Asymptotic comparison |
+
+### Common Algorithms
+
+| Algorithm | Time Complexity | Space Complexity |
+|-----------|----------------|------------------|
+| Linear Search | $O(n)$ | $O(1)$ |
+| Binary Search | $O(\log n)$ | $O(1)$ |
+| Merge Sort | $O(n \log n)$ | $O(n)$ |
+| Quick Sort | $O(n \log n)$ avg | $O(\log n)$ |
+| Heap Sort | $O(n \log n)$ | $O(1)$ |
+| Dijkstra | $O((V+E) \log V)$ | $O(V)$ |
+
+---
+
+<Info>
+**Next**: Explore [Document design and layout](/learn/latex/formatting/document-design) for comprehensive formatting principles, or learn about [Custom commands and environments](/learn/latex/advanced/custom-commands) for advanced LaTeX programming.
+</Info>

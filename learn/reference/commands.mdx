@@ -3,7 +3,6 @@ title: LaTeX Commands Reference
 description: Comprehensive reference guide for LaTeX commands. Find syntax, usage examples, and options for all essential LaTeX commands.
 ---
 
-import { CodeGroup, Info, Tip, Warning, Card, CardGroup } from '/snippets/components.mdx'
 
 This reference provides a comprehensive guide to LaTeX commands organized by category. Each command includes syntax, options, and practical examples.
 
@@ -198,10 +197,10 @@ Right-aligned paragraph
 \cleardoublepage % For two-sided documents
 
 % Line breaks
-\\ % New line
-\\[1cm] % New line with extra space
-\linebreak % Suggests line break
-\newline % Forces new line
+\\\\ % New line
+\\\\[1cm] % New line with extra space
+\\linebreak % Suggests line break
+\\newline % Forces new line
 ```
 </CodeGroup>
 
@@ -336,15 +335,15 @@ $$E = mc^2$$
 
 | Command | Output | Usage |
 |---------|--------|-------|
-| `\frac{a}{b}` | $\frac{a}{b}$ | Fractions |
-| `\sqrt{x}` | $\sqrt{x}$ | Square root |
-| `\sqrt[n]{x}` | $\sqrt[n]{x}$ | nth root |
-| `x^{2}` | $x^{2}$ | Superscript |
-| `x_{i}` | $x_{i}$ | Subscript |
-| `\sum_{i=1}^{n}` | $\sum_{i=1}^{n}$ | Summation |
-| `\int_{a}^{b}` | $\int_{a}^{b}$ | Integral |
-| `\lim_{x \to 0}` | $\lim_{x \to 0}$ | Limit |
-| `\prod_{i=1}^{n}` | $\prod_{i=1}^{n}$ | Product |
+| `\frac{a}{b}` | a/b | Fractions |
+| `\sqrt{x}` | √x | Square root |
+| `\sqrt[n]{x}` | ⁿ√x | nth root |
+| `x^{2}` | x² | Superscript |
+| `x_{i}` | xᵢ | Subscript |
+| `\sum_{i=1}^{n}` | ∑ᵢ₌₁ⁿ | Summation |
+| `\int_{a}^{b}` | ∫ₐᵇ | Integral |
+| `\lim_{x \to 0}` | lim x→0 | Limit |
+| `\prod_{i=1}^{n}` | ∏ᵢ₌₁ⁿ | Product |
 
 ### Greek Letters
 
@@ -501,8 +500,8 @@ Left & Center & Right \\
 | `%` | `\%` | % |
 | `&` | `\&` | & |
 | `_` | `\_` | _ |
-| `{` | `\{` | { |
-| `}` | `\}` | } |
+| `{` | `\{` | \{ |
+| `}` | `\}` | \} |
 | `~` | `\textasciitilde` | ~ |
 | `^` | `\textasciicircum` | ^ |
 | `\` | `\textbackslash` | \ |

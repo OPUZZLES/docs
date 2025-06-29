@@ -1,0 +1,622 @@
+---
+title: LaTeX Lengths and Units
+description: Complete guide to LaTeX measurement units, lengths, and spacing. Learn how to use points, ems, centimeters, and other units for precise document formatting.
+---
+
+
+Understanding LaTeX lengths and units is essential for precise document formatting. This guide covers all measurement units, how to use them effectively, and practical examples for common formatting tasks.
+
+<Info>
+**Key concept**: LaTeX uses different units for different purposes. Understanding when to use each unit type will help you create professional, consistent documents.
+
+**Related topics**: [Page layout](/learn/latex/formatting/page-layout) | [Spacing](/learn/latex/paragraphs-spacing) | [Document design](/learn/latex/formatting/document-design)
+</Info>
+
+## LaTeX Units Overview
+
+### Absolute Units
+
+Fixed measurements that don't change based on font or context.
+
+| Unit | Name | Equivalent | Best Used For |
+|------|------|------------|---------------|
+| `pt` | Point | 1 pt = 1/72.27 inch | Font sizes, line widths |
+| `pc` | Pica | 1 pc = 12 pt | Typography measurements |
+| `in` | Inch | 1 in = 72.27 pt | Page dimensions |
+| `cm` | Centimeter | 1 cm = 28.45 pt | Metric page layout |
+| `mm` | Millimeter | 1 mm = 2.845 pt | Precise measurements |
+| `bp` | Big point | 1 bp = 1/72 inch | PostScript compatibility |
+| `dd` | Didot point | 1 dd = 1.07 pt | European typography |
+| `cc` | Cicero | 1 cc = 12 dd | European typography |
+| `sp` | Scaled point | 1 sp = 1/65536 pt | Internal calculations |
+
+### Relative Units
+
+Units that scale with font size or document context.
+
+| Unit | Name | Relative To | Best Used For |
+|------|------|-------------|---------------|
+| `em` | Em | Current font size | Font-dependent spacing |
+| `ex` | Ex | Height of letter 'x' | Vertical spacing |
+| `en` | En | Half the width of 'M' | Horizontal spacing |
+| `mu` | Math unit | 1/18 em in math mode | Math spacing |
+
+## Basic Length Usage
+
+### Setting Lengths
+
+<CodeGroup>
+```latex basic-lengths.tex
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+
+\begin{document}
+
+% Setting margins
+\newgeometry{left=2cm, right=2cm, top=3cm, bottom=3cm}
+
+% Horizontal spacing
+This text\hspace{2cm}has 2cm space.
+
+% Vertical spacing
+This is the first line.
+\vspace{1in}
+This line is 1 inch below.
+
+% Paragraph indentation
+\setlength{\parindent}{0.5in}
+This paragraph is indented by half an inch.
+
+% Line spacing
+\setlength{\baselineskip}{14pt}
+This text has 14pt baseline skip.
+
+\end{document}
+```
+</CodeGroup>
+
+### Measuring Existing Elements
+
+<CodeGroup>
+```latex measuring.tex
+\documentclass{article}
+\begin{document}
+
+% Get current values
+The current font size is \the\fontdimen6\font pt.
+
+% Text width measurements
+Text width: \the\textwidth
+
+Line height: \the\baselineskip
+
+Paragraph indent: \the\parindent
+
+% Using lengths in calculations
+\newlength{\mywidth}
+\setlength{\mywidth}{0.5\textwidth}
+This box is half text width: \fbox{\parbox{\mywidth}{Content here}}
+
+\end{document}
+```
+</CodeGroup>
+
+## Practical Applications
+
+### Page Layout Dimensions
+
+<CodeGroup>
+```latex page-dimensions.tex
+\documentclass{article}
+\usepackage{geometry}
+
+% Absolute measurements
+\geometry{
+    paperwidth=210mm,      % A4 width
+    paperheight=297mm,     % A4 height
+    left=25mm,             % Left margin
+    right=25mm,            % Right margin
+    top=30mm,              % Top margin
+    bottom=30mm            % Bottom margin
+}
+
+% Relative to paper size
+\geometry{
+    width=0.8\paperwidth,  % 80% of paper width
+    height=0.9\paperheight % 90% of paper height
+}
+
+\begin{document}
+
+Current page dimensions:
+\begin{itemize}
+\item Paper width: \the\paperwidth
+\item Paper height: \the\paperheight
+\item Text width: \the\textwidth
+\item Text height: \the\textheight
+\end{itemize}
+
+\end{document}
+```
+</CodeGroup>
+
+### Font-Relative Spacing
+
+<CodeGroup>
+```latex font-relative.tex
+\documentclass{article}
+\begin{document}
+
+% Em-based spacing (scales with font size)
+{\normalsize Normal text with \hspace{2em} 2em space.}
+
+{\large Large text with \hspace{2em} 2em space.}
+
+{\huge Huge text with \hspace{2em} 2em space.}
+
+% Ex-based spacing (scales with x-height)
+Baseline text\vspace{2ex}
+Text with 2ex vertical space above.
+
+% Comparison of units
+\begin{tabular}{ll}
+2cm space: & Text\hspace{2cm}continues \\
+2em space: & Text\hspace{2em}continues \\
+2ex space: & Text\hspace{2ex}continues \\
+\end{tabular}
+
+\end{document}
+```
+</CodeGroup>
+
+## Advanced Length Operations
+
+### Length Arithmetic
+
+<CodeGroup>
+```latex length-arithmetic.tex
+\documentclass{article}
+\usepackage{calc}
+
+\begin{document}
+
+% Define custom lengths
+\newlength{\sidebarwidth}
+\newlength{\mainwidth}
+
+% Calculate widths
+\setlength{\sidebarwidth}{0.25\textwidth}
+\setlength{\mainwidth}{\textwidth - \sidebarwidth - 1cm}
+
+% Use in layout
+\noindent
+\begin{minipage}{\sidebarwidth}
+\textbf{Sidebar}\\
+Content here
+\end{minipage}%
+\hspace{1cm}%
+\begin{minipage}{\mainwidth}
+\textbf{Main Content}\\
+This is the main content area calculated to fit properly.
+\end{minipage}
+
+% Complex calculations
+\newlength{\complexwidth}
+\setlength{\complexwidth}{(\textwidth - 3\columnsep) / 2}
+
+Width calculation: \the\complexwidth
+
+\end{document}
+```
+</CodeGroup>
+
+### Conditional Lengths
+
+<CodeGroup>
+```latex conditional-lengths.tex
+\documentclass{article}
+\usepackage{ifthen}
+
+\begin{document}
+
+% Set length based on conditions
+\newlength{\dynamicspace}
+
+\ifthenelse{\lengthtest{\textwidth > 400pt}}
+  {\setlength{\dynamicspace}{2cm}}
+  {\setlength{\dynamicspace}{1cm}}
+
+Dynamic spacing: \the\dynamicspace
+
+% Responsive margins
+\newcommand{\responsivemargin}{%
+  \ifthenelse{\lengthtest{\textwidth > 500pt}}
+    {2cm}
+    {1cm}
+}
+
+\newgeometry{margin=\responsivemargin}
+
+\end{document}
+```
+</CodeGroup>
+
+## Spacing Commands
+
+### Horizontal Spacing
+
+<CodeGroup>
+```latex horizontal-spacing.tex
+\documentclass{article}
+\begin{document}
+
+% Fixed horizontal spaces
+Word\hspace{1cm}space
+
+% Flexible spaces
+Left\hfill Right
+
+% Negative space
+Over\hspace{-2mm}lap
+
+% Stretchable space
+\hspace{1cm plus 1cm minus 0.5cm}
+
+% Fill remaining space
+Text\hfill\hfill More text
+
+% Specific spacing commands
+Thin\,space (3/18 em)
+Medium\:space (4/18 em)
+Thick\;space (5/18 em)
+Quad\quad space (1 em)
+Double\qquad space (2 em)
+
+\end{document}
+```
+</CodeGroup>
+
+### Vertical Spacing
+
+<CodeGroup>
+```latex vertical-spacing.tex
+\documentclass{article}
+\begin{document}
+
+First paragraph.
+
+\vspace{2cm}
+Paragraph with 2cm space above.
+
+\vspace*{1in}
+Paragraph with 1 inch space that won't disappear at page breaks.
+
+% Stretchable vertical space
+\vspace{1cm plus 2cm minus 0.5cm}
+Flexible space above this paragraph.
+
+% Fill remaining page
+Content at top.
+\vfill
+Content at bottom.
+
+% Negative vertical space
+Line one.
+\vspace{-\baselineskip}
+Line that overlaps above.
+
+\end{document}
+```
+</CodeGroup>
+
+## Length Variables and Customization
+
+### Document-Wide Settings
+
+<CodeGroup>
+```latex document-settings.tex
+\documentclass{article}
+
+% Customize default lengths
+\setlength{\parindent}{2em}        % Paragraph indentation
+\setlength{\parskip}{1ex plus 0.5ex} % Space between paragraphs
+\setlength{\baselineskip}{14pt}    % Line spacing
+\setlength{\columnsep}{2em}        % Column separation
+
+% Custom length variables
+\newlength{\sectionspace}
+\setlength{\sectionspace}{2ex plus 1ex minus 0.5ex}
+
+\newlength{\figuremargin}
+\setlength{\figuremargin}{1cm}
+
+\begin{document}
+
+% Use custom lengths
+\section{Introduction}
+\vspace{\sectionspace}
+
+Normal paragraph with custom settings.
+
+% Dynamic adjustments
+\addtolength{\leftskip}{2em}
+This paragraph is indented by 2em on the left.
+\addtolength{\leftskip}{-2em}
+
+Back to normal margins.
+
+\end{document}
+```
+</CodeGroup>
+
+### Creating Length Commands
+
+<CodeGroup>
+```latex length-commands.tex
+\documentclass{article}
+
+% Custom spacing commands
+\newcommand{\smallgap}{\vspace{0.5\baselineskip}}
+\newcommand{\mediumgap}{\vspace{\baselineskip}}
+\newcommand{\largegap}{\vspace{2\baselineskip}}
+
+% Responsive spacing
+\newcommand{\smartspace}[1]{%
+  \ifthenelse{\lengthtest{#1 > 2cm}}
+    {\vspace{#1}}
+    {\vspace{2cm}}%
+}
+
+% Context-aware spacing
+\newcommand{\sectiongap}{%
+  \ifthenelse{\equal{\@currsize}{\large}}
+    {\vspace{1.5ex}}
+    {\vspace{1ex}}%
+}
+
+\begin{document}
+
+First section.
+\smallgap
+
+Second section.
+\mediumgap
+
+Third section.
+\largegap
+
+Fourth section with large gap.
+
+\end{document}
+```
+</CodeGroup>
+
+## Math Mode Spacing
+
+### Math Units
+
+<CodeGroup>
+```latex math-spacing.tex
+\documentclass{article}
+\usepackage{amsmath}
+
+\begin{document}
+
+% Math mode spacing units
+\begin{align}
+f(x) &= x^2 \quad \text{(1 em space)} \\
+g(x) &= x^3 \qquad \text{(2 em space)} \\
+h(x) &= x^4 \, \text{(thin space)} \\
+i(x) &= x^5 \: \text{(medium space)} \\
+j(x) &= x^6 \; \text{(thick space)} \\
+k(x) &= x^7 \! \text{(negative thin space)}
+\end{align}
+
+% Custom math spacing
+\begin{equation}
+\int_0^\infty \! f(x) \, dx = \sum_{n=0}^\infty \, a_n
+\end{equation}
+
+% Math spacing commands
+\[
+\text{Thin: } a\,b \quad
+\text{Medium: } a\:b \quad  
+\text{Thick: } a\;b \quad
+\text{Quad: } a\quad b
+\]
+
+\end{document}
+```
+</CodeGroup>
+
+## Units in Different Contexts
+
+### Tables and Figures
+
+<CodeGroup>
+```latex table-figure-units.tex
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{booktabs}
+
+\begin{document}
+
+% Table with unit-based sizing
+\begin{table}[h]
+\centering
+\begin{tabular}{p{3cm}p{4cm}p{2cm}}
+\toprule
+Fixed 3cm & Fixed 4cm & Fixed 2cm \\
+\midrule
+Content adapts & to specified & column width \\
+\bottomrule
+\end{tabular}
+\caption{Table with fixed column widths}
+\end{table}
+
+% Figure scaling with units
+\begin{figure}[h]
+\centering
+% Scale by absolute size
+\includegraphics[width=8cm]{example-image}
+\caption{Figure scaled to 8cm width}
+\end{figure}
+
+% Relative scaling
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{example-image}
+\caption{Figure scaled to 80\% of text width}
+\end{figure}
+
+\end{document}
+```
+</CodeGroup>
+
+### Custom Environments
+
+<CodeGroup>
+```latex custom-environments.tex
+\documentclass{article}
+\usepackage{framed}
+
+% Define environment with custom spacing
+\newenvironment{myquote}[1][2em]
+{%
+  \vspace{1ex}%
+  \begin{quote}%
+  \leftskip=#1%
+  \rightskip=#1%
+  \itshape%
+}
+{%
+  \end{quote}%
+  \vspace{1ex}%
+}
+
+\begin{document}
+
+Regular paragraph text.
+
+\begin{myquote}
+This is a quote with default 2em indentation.
+\end{myquote}
+
+\begin{myquote}[4em]
+This quote has 4em indentation on both sides.
+\end{myquote}
+
+Regular text continues.
+
+\end{document}
+```
+</CodeGroup>
+
+## Best Practices
+
+<Tip>
+**Unit selection guidelines:**
+
+1. **Use `em` for font-dependent spacing** - Scales automatically with font changes
+2. **Use `ex` for vertical spacing** - Based on lowercase letter height
+3. **Use `pt` for precise control** - When exact measurements are needed
+4. **Use `cm/mm` for page layout** - Intuitive for physical dimensions
+5. **Use relative units when possible** - Better for responsive designs
+6. **Avoid mixing unit systems** - Stick to metric OR imperial consistently
+</Tip>
+
+### Common Patterns
+
+<CodeGroup>
+```latex best-practices.tex
+\documentclass{article}
+
+% Good: Font-relative spacing
+\setlength{\parskip}{0.5\baselineskip plus 0.2\baselineskip}
+
+% Good: Consistent unit system
+\geometry{margin=2.5cm, marginparwidth=2cm}
+
+% Good: Flexible spacing
+\newcommand{\flexspace}{\vspace{1ex plus 0.5ex minus 0.2ex}}
+
+% Avoid: Mixing systems inconsistently
+% \geometry{margin=1in, marginparwidth=3cm}  % Don't mix
+
+% Good: Relative to context
+\newlength{\myindent}
+\setlength{\myindent}{2em}  % Scales with font
+
+\begin{document}
+
+Properly spaced content with consistent units.
+
+\end{document}
+```
+</CodeGroup>
+
+## Debugging Length Issues
+
+### Measuring and Displaying
+
+<CodeGroup>
+```latex debugging-lengths.tex
+\documentclass{article}
+\usepackage{layouts}
+
+\begin{document}
+
+% Display current settings
+\begin{itemize}
+\item Text width: \the\textwidth
+\item Text height: \the\textheight
+\item Line height: \the\baselineskip
+\item Paragraph indent: \the\parindent
+\item Paragraph skip: \the\parskip
+\end{itemize}
+
+% Show page layout
+\currentpage
+\pagediagram
+
+% Measure specific elements
+\newlength{\testlength}
+\settowidth{\testlength}{Sample text to measure}
+Width of "Sample text to measure": \the\testlength
+
+\settoheight{\testlength}{Sample text}
+Height of "Sample text": \the\testlength
+
+\end{document}
+```
+</CodeGroup>
+
+## Quick Reference
+
+### Essential Length Commands
+
+| Command | Purpose | Example |
+|---------|---------|---------|
+| `\hspace{length}` | Horizontal space | `\hspace{2cm}` |
+| `\vspace{length}` | Vertical space | `\vspace{1ex}` |
+| `\setlength{\variable}{length}` | Set length variable | `\setlength{\parindent}{2em}` |
+| `\addtolength{\variable}{length}` | Modify length | `\addtolength{\textwidth}{-2cm}` |
+| `\newlength{\variable}` | Create length variable | `\newlength{\mywidth}` |
+
+### Common Length Variables
+
+| Variable | Description |
+|----------|-------------|
+| `\textwidth` | Width of text area |
+| `\textheight` | Height of text area |
+| `\paperwidth` | Paper width |
+| `\paperheight` | Paper height |
+| `\baselineskip` | Line spacing |
+| `\parindent` | Paragraph indentation |
+| `\parskip` | Space between paragraphs |
+
+---
+
+<Info>
+**Next**: Learn about [Headers and footers](/learn/latex/formatting/headers-footers) to customize page headers and footers, or explore [Page numbering](/learn/latex/formatting/page-numbering) for advanced numbering schemes.
+</Info>

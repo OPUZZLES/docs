@@ -50,7 +50,7 @@
               "learn/latex/text-formatting",
               "learn/latex/paragraphs-spacing",
               "learn/latex/fonts",
-              "learn/latex/lists"
+              "learn/latex/basics/lists"
             ]
           },
           {
@@ -79,18 +79,18 @@
           {
             "group": "Document Types",
             "pages": [
-              "learn/how-to/articles",
-              "learn/how-to/presentations",
-              "learn/how-to/cv-resume",
-              "learn/how-to/thesis"
+              "learn/latex/how-to/articles",
+              "learn/latex/how-to/presentations",
+              "learn/latex/how-to/cv-resume",
+              "learn/latex/how-to/thesis"
             ]
           },
           {
             "group": "Advanced Topics",
             "pages": [
-              "learn/latex/bibliography",
-              "learn/latex/custom-commands",
-              "learn/latex/packages"
+              "learn/latex/bibliography-citations",
+              "learn/latex/cross-referencing",
+              "learn/latex/package-management"
             ]
           }
         ]
@@ -116,7 +116,6 @@
             "group": "Academic",
             "pages": [
               "templates/article",
-              "templates/report",
               "templates/thesis"
             ]
           },
@@ -124,7 +123,6 @@
             "group": "Professional",
             "pages": [
               "templates/cv",
-              "templates/letter",
               "templates/presentation"
             ]
           }

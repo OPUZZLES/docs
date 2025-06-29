@@ -1,0 +1,1203 @@
+---
+title: Advanced Code Listings and Minted
+description: Complete guide to displaying source code in LaTeX using listings and minted packages. Learn syntax highlighting, custom styles, and advanced formatting options.
+---
+
+
+Displaying source code professionally in LaTeX requires specialized packages. This guide covers both the `listings` package and the more advanced `minted` package for syntax highlighting and code formatting.
+
+<Info>
+**Key concept**: The `listings` package provides basic code formatting, while `minted` offers advanced syntax highlighting using Pygments. Choose based on your needs: `listings` for simple formatting, `minted` for publication-quality highlighting.
+
+**Related topics**: [Text formatting](/learn/latex/text-formatting) | [Colors](/learn/latex/colors) | [Document design](/learn/latex/formatting/document-design)
+</Info>
+
+## The listings Package
+
+### Basic Code Formatting
+
+<CodeGroup>
+```latex listings-basic.tex
+\documentclass{article}
+\usepackage{listings}
+\usepackage{xcolor}
+
+% Basic configuration
+\lstset{
+  basicstyle=\ttfamily\footnotesize,
+  breaklines=true,
+  frame=single,
+  numbers=left,
+  numberstyle=\tiny,
+  stepnumber=1,
+  showstringspaces=false
+}
+
+\begin{document}
+
+\section{Code Examples}
+
+\begin{lstlisting}[language=Python]
+def fibonacci(n):
+    """Calculate the nth Fibonacci number."""
+    if n <= 1:
+        return n
+    return fibonacci(n-1) + fibonacci(n-2)
+
+# Example usage
+for i in range(10):
+    print(f"F({i}) = {fibonacci(i)}")
+\end{lstlisting}
+
+% Inline code
+The function \lstinline|fibonacci(n)| calculates Fibonacci numbers.
+
+\end{document}
+```
+</CodeGroup>
+
+### Language-Specific Styling
+
+<CodeGroup>
+```latex listings-languages.tex
+\documentclass{article}
+\usepackage{listings}
+\usepackage{xcolor}
+
+% Python style
+\lstdefinestyle{pythonstyle}{
+  language=Python,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{blue}\bfseries,
+  stringstyle=\color{red},
+  commentstyle=\color{gray}\itshape,
+  numberstyle=\tiny\color{gray},
+  breaklines=true,
+  showstringspaces=false,
+  frame=leftline,
+  framerule=2pt,
+  rulecolor=\color{blue!30},
+  backgroundcolor=\color{blue!5}
+}
+
+% Java style
+\lstdefinestyle{javastyle}{
+  language=Java,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{purple}\bfseries,
+  stringstyle=\color{orange},
+  commentstyle=\color{green!60!black}\itshape,
+  numberstyle=\tiny\color{gray},
+  breaklines=true,
+  showstringspaces=false,
+  frame=tb,
+  framerule=1pt
+}
+
+% C++ style
+\lstdefinestyle{cppstyle}{
+  language=C++,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{blue}\bfseries,
+  stringstyle=\color{red!80!black},
+  commentstyle=\color{green!60!black}\itshape,
+  numberstyle=\tiny\color{gray},
+  breaklines=true,
+  showstringspaces=false,
+  frame=single,
+  frameround=tttt
+}
+
+\begin{document}
+
+\section{Python Example}
+\begin{lstlisting}[style=pythonstyle]
+class DataProcessor:
+    def __init__(self, data):
+        self.data = data
+        
+    def process(self):
+        """Process the data using advanced algorithms."""
+        result = []
+        for item in self.data:
+            if self.validate(item):
+                result.append(self.transform(item))
+        return result
+\end{lstlisting}
+
+\section{Java Example}
+\begin{lstlisting}[style=javastyle]
+public class Calculator {
+    private double result;
+    
+    public Calculator() {
+        this.result = 0.0;
+    }
+    
+    public double add(double value) {
+        result += value;
+        return result;
+    }
+    
+    public void reset() {
+        result = 0.0;
+    }
+}
+\end{lstlisting}
+
+\section{C++ Example}
+\begin{lstlisting}[style=cppstyle]
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+template<typename T>
+class Container {
+private:
+    std::vector<T> data;
+    
+public:
+    void add(const T& item) {
+        data.push_back(item);
+    }
+    
+    void sort() {
+        std::sort(data.begin(), data.end());
+    }
+};
+\end{lstlisting}
+
+\end{document}
+```
+</CodeGroup>
+
+### Custom Language Definitions
+
+<CodeGroup>
+```latex listings-custom-language.tex
+\documentclass{article}
+\usepackage{listings}
+\usepackage{xcolor}
+
+% Define custom language (LaTeX commands)
+\lstdefinelanguage{LaTeX}{
+  morekeywords={
+    documentclass, usepackage, begin, end, section, subsection,
+    title, author, maketitle, textbf, textit, emph, label, ref,
+    cite, bibliography, includegraphics, caption
+  },
+  morecomment=[l]{\%},
+  morestring=[b]",
+  morestring=[b]',
+  sensitive=true
+}
+
+% Style for LaTeX
+\lstdefinestyle{latexstyle}{
+  language=LaTeX,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{blue}\bfseries,
+  stringstyle=\color{red},
+  commentstyle=\color{green!60!black}\itshape,
+  breaklines=true,
+  showstringspaces=false,
+  frame=single,
+  backgroundcolor=\color{yellow!10},
+  escapeinside={(*@}{@*)}  % Allow LaTeX commands inside
+}
+
+% Define SQL language
+\lstdefinelanguage{SQL}{
+  morekeywords={
+    SELECT, FROM, WHERE, INSERT, UPDATE, DELETE, CREATE, TABLE,
+    INDEX, PRIMARY, KEY, FOREIGN, REFERENCES, JOIN, INNER, LEFT,
+    RIGHT, OUTER, GROUP, BY, ORDER, HAVING, DISTINCT, COUNT, SUM,
+    AVG, MAX, MIN, AND, OR, NOT, NULL, TRUE, FALSE
+  },
+  morecomment=[l]{--},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]",
+  morestring=[b]',
+  sensitive=false
+}
+
+\begin{document}
+
+\section{LaTeX Code Example}
+\begin{lstlisting}[style=latexstyle]
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{amsmath}
+
+\title{My Document}
+\author{John Doe}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+This is an example of (*@\textbf{LaTeX}@*) code formatting.
+
+\begin{equation}
+E = mc^2
+\end{equation}
+
+\end{document}
+\end{lstlisting}
+
+\section{SQL Example}
+\begin{lstlisting}[language=SQL, style=javastyle]
+-- Create a table for user information
+CREATE TABLE users (
+    id INTEGER PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    email VARCHAR(100) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Insert sample data
+INSERT INTO users (username, email) VALUES
+    ('john_doe', 'john@example.com'),
+    ('jane_smith', 'jane@example.com');
+
+-- Query with joins
+SELECT u.username, p.title, p.created_at
+FROM users u
+INNER JOIN posts p ON u.id = p.user_id
+WHERE p.published = TRUE
+ORDER BY p.created_at DESC;
+\end{lstlisting}
+
+\end{document}
+```
+</CodeGroup>
+
+## The minted Package
+
+### Basic minted Setup
+
+<Warning>
+The `minted` package requires Python and Pygments to be installed, and LaTeX must be compiled with the `--shell-escape` flag. In LaTeX Cloud Studio, this is handled automatically.
+</Warning>
+
+<CodeGroup>
+```latex minted-basic.tex
+\documentclass{article}
+\usepackage{minted}
+
+% Global minted settings
+\setminted{
+  fontsize=\footnotesize,
+  linenos,
+  breaklines,
+  frame=lines,
+  framesep=2mm
+}
+
+\begin{document}
+
+\section{Python with minted}
+
+\begin{minted}{python}
+import numpy as np
+import matplotlib.pyplot as plt
+
+def mandelbrot(c, max_iter):
+    """Calculate the Mandelbrot set value for complex number c."""
+    z = 0
+    for n in range(max_iter):
+        if abs(z) > 2:
+            return n
+        z = z*z + c
+    return max_iter
+
+# Generate Mandelbrot set
+width, height = 800, 600
+xmin, xmax = -2.0, 1.0
+ymin, ymax = -1.5, 1.5
+
+mandelbrot_set = np.zeros((height, width))
+for i in range(height):
+    for j in range(width):
+        c = complex(xmin + (xmax - xmin) * j / width,
+                   ymin + (ymax - ymin) * i / height)
+        mandelbrot_set[i, j] = mandelbrot(c, 100)
+
+plt.imshow(mandelbrot_set, extent=[xmin, xmax, ymin, ymax], 
+           cmap='hot', origin='lower')
+plt.colorbar()
+plt.title('Mandelbrot Set')
+plt.show()
+\end{minted}
+
+\end{document}
+```
+</CodeGroup>
+
+### Advanced minted Styling
+
+<CodeGroup>
+```latex minted-advanced.tex
+\documentclass{article}
+\usepackage{minted}
+\usepackage{mdframed}
+\usepackage{xcolor}
+
+% Define custom style
+\definecolor{codegray}{rgb}{0.95,0.95,0.95}
+\definecolor{codeframe}{rgb}{0.7,0.7,0.7}
+
+% Custom environment for highlighted code
+\newenvironment{mintedbox}[1]{%
+  \begin{mdframed}[
+    linecolor=codeframe,
+    backgroundcolor=codegray,
+    roundcorner=5pt,
+    linewidth=1pt,
+    innertopmargin=10pt,
+    innerbottommargin=10pt,
+    innerleftmargin=10pt,
+    innerrightmargin=10pt
+  ]
+  \begin{minted}[
+    fontsize=\small,
+    linenos,
+    breaklines,
+    numbersep=5pt,
+    gobble=2
+  ]{#1}
+}{%
+  \end{minted}
+  \end{mdframed}
+}
+
+\begin{document}
+
+\section{Styled Code Blocks}
+
+\begin{mintedbox}{javascript}
+  // Advanced JavaScript example with ES6+ features
+  class APIClient {
+    constructor(baseURL) {
+      this.baseURL = baseURL;
+      this.headers = {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      };
+    }
+    
+    async request(endpoint, options = {}) {
+      const url = `${this.baseURL}${endpoint}`;
+      const config = {
+        ...options,
+        headers: {
+          ...this.headers,
+          ...options.headers
+        }
+      };
+      
+      try {
+        const response = await fetch(url, config);
+        
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+        
+        return await response.json();
+      } catch (error) {
+        console.error('API request failed:', error);
+        throw error;
+      }
+    }
+    
+    // Convenience methods
+    get(endpoint) {
+      return this.request(endpoint, { method: 'GET' });
+    }
+    
+    post(endpoint, data) {
+      return this.request(endpoint, {
+        method: 'POST',
+        body: JSON.stringify(data)
+      });
+    }
+  }
+  
+  // Usage example
+  const client = new APIClient('https://api.example.com');
+  
+  client.get('/users')
+    .then(users => console.log('Users:', users))
+    .catch(error => console.error('Failed to fetch users:', error));
+\end{mintedbox}
+
+\section{Rust Example}
+
+\begin{minted}[
+  bgcolor=codegray,
+  fontsize=\footnotesize,
+  linenos,
+  breaklines,
+  frame=single,
+  framerule=0.5pt,
+  framesep=3mm
+]{rust}
+use std::collections::HashMap;
+use std::fs::File;
+use std::io::{BufRead, BufReader, Result};
+
+#[derive(Debug, Clone)]
+pub struct WordCounter {
+    counts: HashMap<String, usize>,
+    total_words: usize,
+}
+
+impl WordCounter {
+    pub fn new() -> Self {
+        Self {
+            counts: HashMap::new(),
+            total_words: 0,
+        }
+    }
+    
+    pub fn add_word(&mut self, word: &str) {
+        let normalized = word.to_lowercase();
+        *self.counts.entry(normalized).or_insert(0) += 1;
+        self.total_words += 1;
+    }
+    
+    pub fn count_from_file(&mut self, filename: &str) -> Result<()> {
+        let file = File::open(filename)?;
+        let reader = BufReader::new(file);
+        
+        for line in reader.lines() {
+            let line = line?;
+            for word in line.split_whitespace() {
+                // Remove punctuation
+                let clean_word: String = word
+                    .chars()
+                    .filter(|c| c.is_alphabetic())
+                    .collect();
+                
+                if !clean_word.is_empty() {
+                    self.add_word(&clean_word);
+                }
+            }
+        }
+        
+        Ok(())
+    }
+    
+    pub fn most_frequent(&self, n: usize) -> Vec<(&String, &usize)> {
+        let mut pairs: Vec<_> = self.counts.iter().collect();
+        pairs.sort_by(|a, b| b.1.cmp(a.1));
+        pairs.into_iter().take(n).collect()
+    }
+}
+\end{minted}
+
+\end{document}
+```
+</CodeGroup>
+
+### Highlighting Specific Lines
+
+<CodeGroup>
+```latex minted-highlighting.tex
+\documentclass{article}
+\usepackage{minted}
+\usepackage{xcolor}
+
+% Define highlight colors
+\definecolor{highlightgray}{rgb}{0.9,0.9,0.9}
+\definecolor{highlightyellow}{rgb}{1.0,1.0,0.8}
+
+\begin{document}
+
+\section{Line Highlighting Examples}
+
+\subsection{Highlighting Specific Lines}
+\begin{minted}[
+  linenos,
+  highlightlines={3,7-9},
+  highlightcolor=highlightyellow
+]{python}
+def binary_search(arr, target):
+    left, right = 0, len(arr) - 1
+    
+    while left <= right:  # Main loop condition
+        mid = (left + right) // 2
+        
+        if arr[mid] == target:    # Found target
+            return mid            # Return index
+        elif arr[mid] < target:   # Target in right half
+            left = mid + 1
+        else:                     # Target in left half
+            right = mid - 1
+    
+    return -1  # Target not found
+\end{minted}
+
+\subsection{Multiple Highlight Ranges}
+\begin{minted}[
+  linenos,
+  highlightlines={1-2,8-10},
+  highlightcolor=highlightgray
+]{cpp}
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main() {
+    std::vector<int> numbers = {64, 34, 25, 12, 22, 11, 90};
+    
+    std::cout << "Original array: ";
+    for (int num : numbers) {
+        std::cout << num << " ";
+    }
+    std::cout << std::endl;
+    
+    std::sort(numbers.begin(), numbers.end());
+    
+    std::cout << "Sorted array: ";
+    for (int num : numbers) {
+        std::cout << num << " ";
+    }
+    std::cout << std::endl;
+    
+    return 0;
+}
+\end{minted}
+
+\end{document}
+```
+</CodeGroup>
+
+## Code Listings in Floats
+
+### Floating Code Listings
+
+<CodeGroup>
+```latex code-floats.tex
+\documentclass{article}
+\usepackage{minted}
+\usepackage{caption}
+\usepackage{float}
+
+% Define new float type for code
+\newfloat{listing}{tbp}{lol}
+\floatname{listing}{Listing}
+
+% Caption setup for listings
+\captionsetup[listing]{position=below}
+
+\begin{document}
+
+\section{Algorithm Examples}
+
+Listing~\ref{lst:quicksort} shows an implementation of the quicksort algorithm.
+
+\begin{listing}[H]
+\begin{minted}[
+  fontsize=\footnotesize,
+  linenos,
+  frame=single,
+  framesep=2mm
+]{python}
+def quicksort(arr):
+    """
+    Sorts an array using the quicksort algorithm.
+    
+    Args:
+        arr: List of comparable elements
+        
+    Returns:
+        Sorted list
+    """
+    if len(arr) <= 1:
+        return arr
+    
+    pivot = arr[len(arr) // 2]
+    left = [x for x in arr if x < pivot]
+    middle = [x for x in arr if x == pivot]
+    right = [x for x in arr if x > pivot]
+    
+    return quicksort(left) + middle + quicksort(right)
+
+# Example usage
+if __name__ == "__main__":
+    test_array = [3, 6, 8, 10, 1, 2, 1]
+    print(f"Original: {test_array}")
+    print(f"Sorted: {quicksort(test_array)}")
+\end{minted}
+\caption{Quicksort algorithm implementation in Python}
+\label{lst:quicksort}
+\end{listing}
+
+The algorithm shown in Listing~\ref{lst:quicksort} has an average time complexity of O(n log n).
+
+\begin{listing}[t]
+\begin{minted}[
+  fontsize=\small,
+  linenos,
+  frame=leftline,
+  framerule=2pt,
+  rulecolor=blue
+]{java}
+public class BinaryTree<T extends Comparable<T>> {
+    private Node<T> root;
+    
+    private static class Node<T> {
+        T data;
+        Node<T> left, right;
+        
+        Node(T data) {
+            this.data = data;
+            this.left = this.right = null;
+        }
+    }
+    
+    public void insert(T data) {
+        root = insertRec(root, data);
+    }
+    
+    private Node<T> insertRec(Node<T> root, T data) {
+        if (root == null) {
+            root = new Node<>(data);
+            return root;
+        }
+        
+        if (data.compareTo(root.data) < 0) {
+            root.left = insertRec(root.left, data);
+        } else if (data.compareTo(root.data) > 0) {
+            root.right = insertRec(root.right, data);
+        }
+        
+        return root;
+    }
+    
+    public boolean search(T data) {
+        return searchRec(root, data);
+    }
+    
+    private boolean searchRec(Node<T> root, T data) {
+        if (root == null) {
+            return false;
+        }
+        
+        if (data.compareTo(root.data) == 0) {
+            return true;
+        }
+        
+        return data.compareTo(root.data) < 0 
+            ? searchRec(root.left, data)
+            : searchRec(root.right, data);
+    }
+}
+\end{minted}
+\caption{Generic binary search tree implementation in Java}
+\label{lst:bst}
+\end{listing}
+
+\end{document}
+```
+</CodeGroup>
+
+### Code Listings with Subfigures
+
+<CodeGroup>
+```latex code-subfigures.tex
+\documentclass{article}
+\usepackage{minted}
+\usepackage{subcaption}
+\usepackage{caption}
+
+\begin{document}
+
+\section{Algorithm Comparison}
+
+Figure~\ref{fig:sorting-algorithms} compares different sorting algorithm implementations.
+
+\begin{figure}[htbp]
+\centering
+
+\begin{subfigure}[t]{0.45\textwidth}
+\begin{minted}[
+  fontsize=\tiny,
+  linenos,
+  frame=single,
+  framesep=1mm
+]{python}
+def bubble_sort(arr):
+    """Bubble sort - O(n²)"""
+    n = len(arr)
+    for i in range(n):
+        for j in range(0, n - i - 1):
+            if arr[j] > arr[j + 1]:
+                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+    return arr
+
+# Example
+numbers = [64, 34, 25, 12, 22, 11, 90]
+print("Bubble sort:", bubble_sort(numbers.copy()))
+\end{minted}
+\caption{Bubble sort algorithm}
+\label{fig:bubble-sort}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.45\textwidth}
+\begin{minted}[
+  fontsize=\tiny,
+  linenos,
+  frame=single,
+  framesep=1mm
+]{python}
+def merge_sort(arr):
+    """Merge sort - O(n log n)"""
+    if len(arr) <= 1:
+        return arr
+    
+    mid = len(arr) // 2
+    left = merge_sort(arr[:mid])
+    right = merge_sort(arr[mid:])
+    
+    return merge(left, right)
+
+def merge(left, right):
+    result = []
+    i = j = 0
+    
+    while i < len(left) and j < len(right):
+        if left[i] <= right[j]:
+            result.append(left[i])
+            i += 1
+        else:
+            result.append(right[j])
+            j += 1
+    
+    result.extend(left[i:])
+    result.extend(right[j:])
+    return result
+
+# Example
+numbers = [64, 34, 25, 12, 22, 11, 90]
+print("Merge sort:", merge_sort(numbers.copy()))
+\end{minted}
+\caption{Merge sort algorithm}
+\label{fig:merge-sort}
+\end{subfigure}
+
+\caption{Comparison of sorting algorithms with different time complexities}
+\label{fig:sorting-algorithms}
+\end{figure}
+
+\end{document}
+```
+</CodeGroup>
+
+## Inline Code and Escaping
+
+### Inline Code with Special Characters
+
+<CodeGroup>
+```latex inline-code.tex
+\documentclass{article}
+\usepackage{minted}
+\usepackage{listings}
+
+% Configure listings for inline code
+\lstset{
+  basicstyle=\ttfamily,
+  breaklines=true
+}
+
+\begin{document}
+
+\section{Inline Code Examples}
+
+% Simple inline code
+The \lstinline|print()| function outputs text to the console.
+
+% Inline code with special characters
+Use \lstinline|arr[i] = arr[j]| to swap array elements.
+
+% Different delimiters for special characters
+The regular expression \lstinline/[a-zA-Z0-9]+/ matches alphanumeric strings.
+
+% Minted inline code
+The \mintinline{python}|lambda x: x**2| function squares its input.
+
+% Inline code with highlighting
+The key function is \mintinline[bgcolor=yellow!30]{python}|process_data()|.
+
+\section{Code with LaTeX Escapes}
+
+\begin{lstlisting}[language=Python, escapeinside={(*@}{@*)}]
+def calculate_(*@\textbf{mean}@*)(values):
+    """Calculate the arithmetic (*@\emph{mean}@*) of a list."""
+    if not values:
+        return 0
+    return sum(values) / len(values)  # (*@$\frac{\sum x_i}{n}$@*)
+
+# Example: (*@\textcolor{red}{Important note}@*)
+result = calculate_mean([1, 2, 3, 4, 5])
+print(f"Mean: {result}")  # Output: (*@\texttt{Mean: 3.0}@*)
+\end{lstlisting}
+
+\end{document}
+```
+</CodeGroup>
+
+## Performance and Customization
+
+### Custom Color Schemes
+
+<CodeGroup>
+```latex custom-colors.tex
+\documentclass{article}
+\usepackage{minted}
+\usepackage{xcolor}
+
+% Define custom color scheme
+\definecolor{darkblue}{rgb}{0.0,0.2,0.4}
+\definecolor{darkgreen}{rgb}{0.0,0.4,0.2}
+\definecolor{darkred}{rgb}{0.4,0.0,0.2}
+\definecolor{darkorange}{rgb}{0.8,0.4,0.0}
+\definecolor{codebg}{rgb}{0.98,0.98,0.98}
+
+% Custom minted style
+\newminted{python}{
+  bgcolor=codebg,
+  fontsize=\footnotesize,
+  linenos,
+  numbersep=8pt,
+  frame=leftline,
+  framerule=2pt,
+  rulecolor=darkblue,
+  breaklines,
+  breaksymbolleft=\raisebox{0.8ex}{\small\reflectbox{\carriagereturn}},
+  breaksymbolindentleft=0pt,
+  breaksymbolsepleft=0pt,
+  breaksymbolright=\small\carriagereturn,
+  breaksymbolindentright=0pt,
+  breaksymbolsepright=0pt
+}
+
+% Custom environment
+\newenvironment{darkcode}
+{%
+  \begin{tcolorbox}[
+    colback=black!95,
+    coltext=white,
+    colframe=gray!50,
+    arc=2mm,
+    boxrule=0.5pt
+  ]
+  \begin{minted}[
+    bgcolor={},
+    fontsize=\small,
+    style=monokai
+  ]{python}
+}{%
+  \end{minted}
+  \end{tcolorbox}
+}
+
+\begin{document}
+
+\section{Custom Styled Code}
+
+\begin{pythoncode}
+import asyncio
+import aiohttp
+from typing import List, Dict, Optional
+
+class AsyncWebScraper:
+    def __init__(self, max_concurrent: int = 10):
+        self.max_concurrent = max_concurrent
+        self.session: Optional[aiohttp.ClientSession] = None
+        
+    async def __aenter__(self):
+        connector = aiohttp.TCPConnector(limit=self.max_concurrent)
+        self.session = aiohttp.ClientSession(connector=connector)
+        return self
+        
+    async def __aexit__(self, exc_type, exc_val, exc_tb):
+        if self.session:
+            await self.session.close()
+            
+    async def fetch_url(self, url: str) -> Dict[str, str]:
+        """Fetch content from a single URL."""
+        try:
+            async with self.session.get(url) as response:
+                content = await response.text()
+                return {
+                    'url': url,
+                    'status': response.status,
+                    'content': content[:1000],  # First 1000 chars
+                    'headers': dict(response.headers)
+                }
+        except Exception as e:
+            return {
+                'url': url,
+                'error': str(e),
+                'status': None,
+                'content': None
+            }
+    
+    async def scrape_urls(self, urls: List[str]) -> List[Dict[str, str]]:
+        """Scrape multiple URLs concurrently."""
+        tasks = [self.fetch_url(url) for url in urls]
+        results = await asyncio.gather(*tasks, return_exceptions=True)
+        return [r for r in results if not isinstance(r, Exception)]
+
+# Usage example
+async def main():
+    urls = [
+        'https://httpbin.org/json',
+        'https://httpbin.org/xml',
+        'https://httpbin.org/html'
+    ]
+    
+    async with AsyncWebScraper(max_concurrent=5) as scraper:
+        results = await scraper.scrape_urls(urls)
+        
+    for result in results:
+        print(f"URL: {result['url']}")
+        print(f"Status: {result.get('status', 'Error')}")
+        print("-" * 50)
+
+if __name__ == "__main__":
+    asyncio.run(main())
+\end{pythoncode}
+
+\end{document}
+```
+</CodeGroup>
+
+### Code Import from Files
+
+<CodeGroup>
+```latex code-import.tex
+\documentclass{article}
+\usepackage{minted}
+
+\begin{document}
+
+\section{Importing Code from Files}
+
+% Import entire file
+\inputminted{python}{example_script.py}
+
+% Import specific lines from file
+\inputminted[firstline=10,lastline=25]{python}{large_script.py}
+
+% Import with custom styling
+\inputminted[
+  fontsize=\footnotesize,
+  linenos,
+  numbersep=5pt,
+  frame=lines,
+  framesep=2mm,
+  bgcolor=gray!10
+]{python}{algorithm.py}
+
+\section{Code Snippets}
+
+% You can also use external command to include processed code
+\immediate\write18{pygmentize -l python -f latex example.py > example_highlighted.tex}
+\input{example_highlighted.tex}
+
+\end{document}
+```
+</CodeGroup>
+
+## Best Practices
+
+<Tip>
+**Code formatting guidelines:**
+
+1. **Choose appropriate package** - Use `listings` for simple formatting, `minted` for syntax highlighting
+2. **Consistent styling** - Define styles once and reuse throughout document
+3. **Font size** - Use `\footnotesize` or `\small` for better readability
+4. **Line numbers** - Include for longer code blocks, omit for short snippets
+5. **Break long lines** - Enable `breaklines` for better page layout
+6. **Escape special characters** - Use proper delimiters for inline code
+</Tip>
+
+### Production-Ready Setup
+
+<CodeGroup>
+```latex production-code.tex
+\documentclass{article}
+\usepackage{minted}
+\usepackage{tcolorbox}
+\usepackage{caption}
+
+% Global minted configuration
+\setminted{
+  fontsize=\footnotesize,
+  linenos=true,
+  numbersep=8pt,
+  frame=leftline,
+  framerule=1pt,
+  breaklines=true,
+  breaksymbolleft=\raisebox{0.8ex}{\small\reflectbox{\carriagereturn}},
+  autogobble=true
+}
+
+% Professional code environment
+\newtcolorbox{codebox}[2][]{
+  colback=blue!5!white,
+  colframe=blue!50!black,
+  title=#2,
+  fonttitle=\bfseries,
+  #1
+}
+
+% Language-specific environments
+\newenvironment{pythoncode}[1][]
+{%
+  \begin{codebox}[#1]{Python Code}
+  \begin{minted}{python}
+}{%
+  \end{minted}
+  \end{codebox}
+}
+
+\newenvironment{javacode}[1][]
+{%
+  \begin{codebox}[colback=orange!5!white,colframe=orange!50!black,#1]{Java Code}
+  \begin{minted}{java}
+}{%
+  \end{minted}
+  \end{codebox}
+}
+
+\begin{document}
+
+\section{Professional Code Presentation}
+
+\begin{pythoncode}[title=Data Analysis Pipeline]
+import pandas as pd
+import numpy as np
+from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import classification_report, confusion_matrix
+
+class DataAnalysisPipeline:
+    """A complete data analysis pipeline for machine learning."""
+    
+    def __init__(self, random_state=42):
+        self.random_state = random_state
+        self.scaler = StandardScaler()
+        self.model = RandomForestClassifier(
+            n_estimators=100,
+            random_state=self.random_state
+        )
+        self.is_fitted = False
+        
+    def preprocess_data(self, X, y=None, fit_transform=True):
+        """Preprocess the input data."""
+        if fit_transform:
+            X_scaled = self.scaler.fit_transform(X)
+        else:
+            X_scaled = self.scaler.transform(X)
+            
+        return X_scaled
+        
+    def train(self, X, y, test_size=0.2):
+        """Train the model with the provided data."""
+        # Split the data
+        X_train, X_test, y_train, y_test = train_test_split(
+            X, y, test_size=test_size, random_state=self.random_state
+        )
+        
+        # Preprocess
+        X_train_scaled = self.preprocess_data(X_train, fit_transform=True)
+        X_test_scaled = self.preprocess_data(X_test, fit_transform=False)
+        
+        # Train model
+        self.model.fit(X_train_scaled, y_train)
+        self.is_fitted = True
+        
+        # Evaluate
+        train_score = self.model.score(X_train_scaled, y_train)
+        test_score = self.model.score(X_test_scaled, y_test)
+        
+        return {
+            'train_score': train_score,
+            'test_score': test_score,
+            'X_test': X_test_scaled,
+            'y_test': y_test
+        }
+        
+    def predict(self, X):
+        """Make predictions on new data."""
+        if not self.is_fitted:
+            raise ValueError("Model must be trained before making predictions")
+            
+        X_scaled = self.preprocess_data(X, fit_transform=False)
+        return self.model.predict(X_scaled)
+        
+    def feature_importance(self):
+        """Get feature importance scores."""
+        if not self.is_fitted:
+            raise ValueError("Model must be trained first")
+            
+        return self.model.feature_importances_
+
+# Example usage
+if __name__ == "__main__":
+    # Load your dataset here
+    # X, y = load_your_data()
+    
+    pipeline = DataAnalysisPipeline()
+    results = pipeline.train(X, y)
+    
+    print(f"Training accuracy: {results['train_score']:.3f}")
+    print(f"Testing accuracy: {results['test_score']:.3f}")
+\end{pythoncode}
+
+\end{document}
+```
+</CodeGroup>
+
+## Quick Reference
+
+### Essential Commands
+
+| Package | Command | Purpose | Example |
+|---------|---------|---------|---------|
+| listings | `\lstset{}` | Global configuration | `\lstset{language=Python}` |
+| listings | `\begin{lstlisting}` | Code block | `\begin{lstlisting}[language=Java]` |
+| listings | `\lstinline` | Inline code | `\lstinline|code|` |
+| minted | `\setminted{}` | Global configuration | `\setminted{fontsize=\small}` |
+| minted | `\begin{minted}` | Code block | `\begin{minted}{python}` |
+| minted | `\mintinline` | Inline code | `\mintinline{python}|code|` |
+
+### Common Options
+
+| Option | Effect | Example |
+|--------|--------|---------|
+| `language` | Set programming language | `language=Python` |
+| `linenos` | Show line numbers | `linenos=true` |
+| `fontsize` | Set font size | `fontsize=\footnotesize` |
+| `breaklines` | Allow line breaking | `breaklines=true` |
+| `frame` | Add frame around code | `frame=single` |
+| `bgcolor` | Background color | `bgcolor=gray!10` |
+
+### Supported Languages
+
+Both packages support many languages including:
+- Python, Java, C++, C, JavaScript, TypeScript
+- HTML, CSS, SQL, LaTeX, Bash, PowerShell
+- Go, Rust, Swift, Kotlin, Scala, Haskell
+- MATLAB, R, Julia, Perl, Ruby, PHP
+
+---
+
+<Info>
+**Next**: Learn about [Footnotes and margin notes](/learn/latex/formatting/footnotes-margins) for additional content placement, or explore [Document design](/learn/latex/formatting/document-design) for comprehensive layout principles.
+</Info>
