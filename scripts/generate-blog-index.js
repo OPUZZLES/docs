@@ -6,7 +6,7 @@ const matter = require('gray-matter');
 
 // Configuration
 const BLOG_DIR = path.join(__dirname, '../blog');
-const OUTPUT_FILE = path.join(BLOG_DIR, 'index.mdx');
+const OUTPUT_FILE = path.join(BLOG_DIR, 'auto-index.mdx');
 
 // Ensure blog directory exists
 if (!fs.existsSync(BLOG_DIR)) {
