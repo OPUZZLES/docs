@@ -240,14 +240,11 @@
   },
   "analytics": {
     "gtm": {
-      "tagId": "GTM-XXXXXXX"
-    },
-    "ga4": {
-      "measurementId": "G-XXXXXXXXXX"
+      "tagId": "GTM-5JZMJ5RB"
     },
     "posthog": {
-      "apiKey": "phc_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-      "apiHost": "https://app.posthog.com"
+      "apiKey": "phc_TSFbhAvn2aTODD9RjuB1ULGV4idHgfcqoo6xEhKTcQ",
+      "apiHost": "https://eu.i.posthog.com"
     }
   }
 }
