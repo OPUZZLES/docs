@@ -1,0 +1,474 @@
+---
+title: Scientific Notation in LaTeX
+description: Master scientific and technical notation in LaTeX. Learn physics formulas, chemistry equations, units, and specialized scientific formatting.
+---
+
+import { CodeGroup, Info, Tip, Warning, Card, CardGroup } from '/snippets/components.mdx'
+
+Learn to typeset scientific and technical documents with LaTeX. This guide covers physics, chemistry, units, and specialized notation used in scientific fields.
+
+<Info>
+**Prerequisites**: Familiarity with [basic mathematics](/learn/latex/mathematics/basics) in LaTeX. Knowledge of mathematical symbols is helpful.
+</Info>
+
+## Physics Notation
+
+### Fundamental Constants and Variables
+
+<CodeGroup>
+```latex physics-constants.tex
+\documentclass{article}
+\usepackage{amsmath,amssymb}
+\usepackage{siunitx} % For units
+\begin{document}
+
+% Common physics constants
+$c = \SI{3.0e8}{\meter\per\second}$ % Speed of light
+$h = \SI{6.626e-34}{\joule\second}$ % Planck constant
+$\hbar = \frac{h}{2\pi}$ % Reduced Planck constant
+$k_B = \SI{1.381e-23}{\joule\per\kelvin}$ % Boltzmann constant
+$e = \SI{1.602e-19}{\coulomb}$ % Elementary charge
+
+% Common variables
+$\vec{F}$ % Force vector
+$\vec{v}$ % Velocity vector
+$\vec{E}$ % Electric field
+$\vec{B}$ % Magnetic field
+$\mathbf{r}$ % Position vector
+
+\end{document}
+```
+</CodeGroup>
+
+### Quantum Mechanics
+
+<CodeGroup>
+```latex quantum-mechanics.tex
+% Dirac notation
+$\langle \psi | \phi \rangle$ % Inner product
+$| \psi \rangle$ % Ket
+$\langle \phi |$ % Bra
+$\langle \psi | \hat{H} | \phi \rangle$ % Expectation value
+
+% Schrödinger equation
+$i\hbar \frac{\partial}{\partial t} |\psi\rangle = \hat{H}|\psi\rangle$
+
+% Wave function
+$\Psi(x,t) = A e^{i(kx - \omega t)}$
+
+% Commutation relations
+$[\hat{x}, \hat{p}] = i\hbar$
+$[\hat{L}_i, \hat{L}_j] = i\hbar\epsilon_{ijk}\hat{L}_k$
+
+% Uncertainty principle
+$\Delta x \Delta p \geq \frac{\hbar}{2}$
+```
+</CodeGroup>
+
+### Electromagnetism
+
+<CodeGroup>
+```latex electromagnetism.tex
+% Maxwell's equations
+\begin{align}
+\nabla \cdot \vec{E} &= \frac{\rho}{\epsilon_0} \\
+\nabla \cdot \vec{B} &= 0 \\
+\nabla \times \vec{E} &= -\frac{\partial \vec{B}}{\partial t} \\
+\nabla \times \vec{B} &= \mu_0 \vec{J} + \mu_0\epsilon_0\frac{\partial \vec{E}}{\partial t}
+\end{align}
+
+% Lorentz force
+$\vec{F} = q(\vec{E} + \vec{v} \times \vec{B})$
+
+% Electromagnetic wave
+$\vec{E}(\vec{r},t) = \vec{E}_0 \cos(\vec{k} \cdot \vec{r} - \omega t + \phi)$
+
+% Poynting vector
+$\vec{S} = \frac{1}{\mu_0} \vec{E} \times \vec{B}$
+```
+</CodeGroup>
+
+### Thermodynamics and Statistical Mechanics
+
+<CodeGroup>
+```latex thermodynamics.tex
+% First law of thermodynamics
+$dU = \delta Q - \delta W$
+
+% Entropy
+$S = k_B \ln \Omega$
+
+% Maxwell-Boltzmann distribution
+$f(v) = 4\pi n \left(\frac{m}{2\pi k_B T}\right)^{3/2} v^2 e^{-\frac{mv^2}{2k_B T}}$
+
+% Partition function
+$Z = \sum_i e^{-\beta E_i}$
+
+% Boltzmann factor
+$P_i \propto e^{-\beta E_i}$ where $\beta = \frac{1}{k_B T}$
+
+% Heat capacity
+$C_V = \left(\frac{\partial U}{\partial T}\right)_V$
+```
+</CodeGroup>
+
+## Chemistry Notation
+
+### Chemical Formulas and Equations
+
+<CodeGroup>
+```latex chemistry.tex
+\documentclass{article}
+\usepackage{chemfig} % For chemical structures
+\usepackage{mhchem}  % For chemical equations
+\begin{document}
+
+% Simple molecules
+\ce{H2O} % Water
+\ce{CO2} % Carbon dioxide
+\ce{NH3} % Ammonia
+\ce{C6H12O6} % Glucose
+
+% Chemical reactions
+\ce{2H2 + O2 -> 2H2O}
+\ce{CaCO3 <=> CaO + CO2}
+\ce{A + B <<>> C + D}
+
+% Ions and charges
+\ce{Na+} \ce{Cl-} \ce{SO4^2-} \ce{NH4+}
+
+% Isotopes
+\ce{^{14}C} \ce{^{235}U} \ce{^{1}H}
+
+% Reaction conditions
+\ce{A + B ->[\Delta][catalyst] C + D}
+
+\end{document}
+```
+</CodeGroup>
+
+### Chemical Structures
+
+<CodeGroup>
+```latex chemical-structures.tex
+\usepackage{chemfig}
+
+% Simple structures
+\chemfig{H-C(-[2]H)(-[6]H)-H} % Methane
+\chemfig{*6(=-=-=-)} % Benzene
+\chemfig{H-N(-H)-H} % Ammonia
+
+% More complex molecules
+\chemfig{[:30]*6((-=O)-N(-CH_3)-*5(-N=-N(-CH_3)-=)-=-=-=-)}
+
+% Reaction schemes
+\schemestart
+\chemfig{A}
+\arrow{->}
+\chemfig{B}
+\arrow{<=>}
+\chemfig{C}
+\schemestop
+```
+</CodeGroup>
+
+### Spectroscopy
+
+<CodeGroup>
+```latex spectroscopy.tex
+% NMR notation
+$^1$H NMR: $\delta$ \SI{7.26}{\ppm}
+$^{13}$C NMR: $\delta$ \SI{77.16}{\ppm}
+
+% IR frequencies
+$\tilde{\nu} = \SI{3000}{\per\centi\meter}$ % Wavenumber
+
+% UV-Vis
+$\lambda_{\max} = \SI{280}{\nano\meter}$
+$\epsilon = \SI{1500}{\liter\per\mole\per\centi\meter}$ % Molar absorptivity
+
+% Mass spectrometry
+$m/z = 91$ % Mass-to-charge ratio
+$[\text{M}]^+ = 120$ % Molecular ion
+```
+</CodeGroup>
+
+## Units and Measurements
+
+### SI Units with siunitx
+
+<CodeGroup>
+```latex si-units.tex
+\usepackage{siunitx}
+
+% Basic units
+\SI{10}{\meter}
+\SI{5.2}{\kilogram}
+\SI{3.7}{\second}
+\SI{298}{\kelvin}
+\SI{2.5}{\ampere}
+
+% Derived units
+\SI{9.8}{\meter\per\second\squared} % Acceleration
+\SI{101325}{\pascal} % Pressure
+\SI{4.18}{\joule\per\gram\per\kelvin} % Specific heat
+\SI{1.5}{\tesla} % Magnetic field
+
+% Powers of 10
+\SI{6.022e23}{\per\mole} % Avogadro's number
+\SI{1.38e-23}{\joule\per\kelvin} % Boltzmann constant
+
+% Ranges
+\SIrange{10}{20}{\celsius}
+\SIrange{1e-3}{1e-6}{\meter}
+
+% Complex units
+\SI{2.5e-4}{\meter\squared\per\second}
+\SI{1.6e-19}{\joule\per\particle}
+```
+</CodeGroup>
+
+### Unit Formatting Best Practices
+
+<CodeGroup>
+```latex unit-best-practices.tex
+% Correct formatting
+The reaction proceeded at \SI{298}{\kelvin}.
+Pressure was maintained at \SI{1.5}{\bar}.
+The sample had a mass of \SI{2.5 \pm 0.1}{\gram}.
+
+% Avoid these common mistakes
+% Wrong: 298 K, 1.5 bar, 2.5±0.1 g
+% Right: Use siunitx as shown above
+
+% Scientific notation
+\num{6.022e23} particles per mole
+\SI{1.602e-19}{\coulomb} per electron
+
+% Percentages and ratios
+\SI{15}{\percent} yield
+\num{1:2:1} stoichiometric ratio
+```
+</CodeGroup>
+
+## Specialized Scientific Packages
+
+### Physics Package
+
+<CodeGroup>
+```latex physics-package.tex
+\usepackage{physics}
+
+% Derivatives
+\dv{f}{x} % df/dx
+\dv[2]{f}{x} % d²f/dx²
+\pdv{f}{x} % ∂f/∂x
+\pdv{f}{x}{y} % ∂²f/∂x∂y
+
+% Integrals
+\int \dd{x} % Better spacing
+\int f(x) \dd{x}
+\int \dd[3]{r} % 3D integral
+
+% Operators
+\grad % Gradient
+\div % Divergence
+\curl % Curl
+\laplacian % Laplacian
+
+% Brackets
+\abs{x} % |x|
+\norm{v} % ||v||
+\eval{f(x)}_a^b % Evaluated at limits
+
+% Commutators and anticommutators
+\comm{A}{B} % [A,B]
+\anticomm{A}{B} % {A,B}
+
+% Matrix elements
+\matrixel{n}{A}{m} % ⟨n|A|m⟩
+\ev{A}{\psi} % ⟨ψ|A|ψ⟩
+```
+</CodeGroup>
+
+### Chemistry Packages
+
+<CodeGroup>
+```latex chemistry-packages.tex
+% mhchem for chemical equations
+\usepackage[version=4]{mhchem}
+\ce{H2SO4} % Sulfuric acid
+\ce{^{235}U} % Uranium-235
+\ce{A + B -> C + D} % Reaction
+
+% chemfig for structures
+\usepackage{chemfig}
+\chemfig{H-C(-[2]H)(-[6]H)-H}
+
+% chemmacros for chemical symbols
+\usepackage{chemmacros}
+\pH % pH symbol
+\pOH % pOH symbol
+\Enthalpy{298} % Enthalpy at 298K
+\Entropy{298} % Entropy at 298K
+
+% chemformula alternative
+\usepackage{chemformula}
+\ch{H2O} % Water
+\ch{"\ox{+1,Na}" + "\ox{-1,Cl}" -> NaCl} % Oxidation states
+```
+</CodeGroup>
+
+## Mathematical Physics
+
+### Vector Calculus
+
+<CodeGroup>
+```latex vector-calculus.tex
+% Vector operators
+\vec{\nabla} \cdot \vec{F} % Divergence
+\vec{\nabla} \times \vec{F} % Curl
+\nabla^2 \phi % Laplacian
+
+% Green's theorem
+\oint_C \vec{F} \cdot d\vec{r} = \iint_D (\nabla \times \vec{F}) \cdot \hat{n} \, dA
+
+% Gauss's theorem
+\iiint_V (\nabla \cdot \vec{F}) \, dV = \oiint_S \vec{F} \cdot \hat{n} \, dA
+
+% Stokes' theorem
+\oint_C \vec{F} \cdot d\vec{r} = \iint_S (\nabla \times \vec{F}) \cdot \hat{n} \, dA
+```
+</CodeGroup>
+
+### Tensor Notation
+
+<CodeGroup>
+```latex tensor-notation.tex
+% Einstein notation
+$g_{\mu\nu} x^\mu x^\nu$ % Metric tensor
+$T^{\mu\nu}$ % Stress-energy tensor
+$R_{\mu\nu} - \frac{1}{2}Rg_{\mu\nu} = 8\pi G T_{\mu\nu}$ % Einstein field equation
+
+% Christoffel symbols
+$\Gamma^\lambda_{\mu\nu} = \frac{1}{2}g^{\lambda\rho}(\partial_\mu g_{\rho\nu} + \partial_\nu g_{\rho\mu} - \partial_\rho g_{\mu\nu})$
+
+% Covariant derivative
+$\nabla_\mu V^\nu = \partial_\mu V^\nu + \Gamma^\nu_{\mu\lambda} V^\lambda$
+```
+</CodeGroup>
+
+## Laboratory and Experimental
+
+### Error Analysis
+
+<CodeGroup>
+```latex error-analysis.tex
+% Measurements with uncertainty
+$m = \SI{2.45 \pm 0.05}{\gram}$
+$T = \SI{298.2 \pm 0.3}{\kelvin}$
+
+% Relative error
+$\frac{\Delta x}{x} = \SI{2.3}{\percent}$
+
+% Error propagation
+$\Delta f = \sqrt{\left(\frac{\partial f}{\partial x}\Delta x\right)^2 + \left(\frac{\partial f}{\partial y}\Delta y\right)^2}$
+
+% Statistical measures
+$\bar{x} = \frac{1}{n}\sum_{i=1}^n x_i$ % Mean
+$s = \sqrt{\frac{\sum_{i=1}^n (x_i - \bar{x})^2}{n-1}}$ % Standard deviation
+$\sigma_{\bar{x}} = \frac{s}{\sqrt{n}}$ % Standard error of mean
+```
+</CodeGroup>
+
+### Data Presentation
+
+<CodeGroup>
+```latex data-presentation.tex
+% Significant figures
+\num{1.23e-4} % Scientific notation
+\num{1.234567} % Regular number
+
+% Tables with uncertainties
+\begin{tabular}{cS[table-format=3.2(2)]}
+\toprule
+Trial & {Mass (\si{\gram})} \\
+\midrule
+1 & 2.45(5) \\
+2 & 2.52(3) \\
+3 & 2.48(4) \\
+\bottomrule
+\end{tabular}
+
+% Concentration notation
+$[\text{HCl}] = \SI{0.1}{\Molar}$
+$c(\text{NaOH}) = \SI{0.05}{\mol\per\liter}$
+```
+</CodeGroup>
+
+## Best Practices for Scientific Writing
+
+<Tip>
+**Scientific LaTeX guidelines:**
+
+1. **Consistency**: Use the same notation throughout your document
+2. **Units**: Always use the `siunitx` package for proper unit formatting
+3. **Variables**: Use consistent fonts for variables (italic for scalars, bold for vectors)
+4. **Spacing**: Proper spacing around operators and in equations
+5. **Packages**: Load appropriate packages for your field (physics, mhchem, etc.)
+6. **Standards**: Follow field-specific conventions and style guides
+</Tip>
+
+## Common Scientific Symbols
+
+<CodeGroup>
+```latex scientific-symbols.tex
+% Physics
+$\hbar$ % Reduced Planck constant
+$\alpha$ % Fine structure constant
+$\mu_0$ % Permeability of free space
+$\epsilon_0$ % Permittivity of free space
+$\sigma$ % Stefan-Boltzmann constant
+
+% Chemistry
+$\Delta H$ % Enthalpy change
+$\Delta S$ % Entropy change
+$\Delta G$ % Gibbs free energy change
+$K_{\text{eq}}$ % Equilibrium constant
+$K_{\text{sp}}$ % Solubility product
+
+% Mathematics/Statistics
+$\sigma$ % Standard deviation
+$\mu$ % Population mean
+$\chi^2$ % Chi-squared
+$R^2$ % Coefficient of determination
+$p$ % p-value
+```
+</CodeGroup>
+
+## Quick Reference
+
+### Essential Packages
+```latex
+\usepackage{amsmath,amssymb} % Mathematics
+\usepackage{siunitx}         % Units and numbers
+\usepackage{physics}         % Physics notation
+\usepackage{mhchem}          % Chemistry
+\usepackage{chemfig}         % Chemical structures
+\usepackage{booktabs}        % Professional tables
+```
+
+### Common Templates
+
+| Field | Template Start |
+|-------|----------------|
+| **Physics Paper** | `\documentclass{article}` + `amsmath` + `siunitx` + `physics` |
+| **Chemistry Paper** | `\documentclass{article}` + `amsmath` + `mhchem` + `chemfig` |
+| **Laboratory Report** | `\documentclass{report}` + `siunitx` + `booktabs` + `graphicx` |
+| **Thesis** | `\documentclass{book}` + all packages + `biblatex` |
+
+---
+
+<Info>
+**Next**: Learn about [Bibliography and citations](/learn/latex/bibliography-citations) for managing references in scientific documents.
+</Info>

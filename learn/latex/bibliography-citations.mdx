@@ -1,0 +1,555 @@
+---
+title: Bibliography and Citations in LaTeX
+description: Master bibliography management and citations in LaTeX. Learn BibTeX, BibLaTeX, citation styles, and reference management for academic writing.
+---
+
+import { CodeGroup, Info, Tip, Warning, Card, CardGroup } from '/snippets/components.mdx'
+
+Learn to manage references and citations professionally in LaTeX. This comprehensive guide covers both traditional BibTeX and modern BibLaTeX approaches.
+
+<Info>
+**Quick start**: LaTeX Cloud Studio supports both BibTeX and BibLaTeX. Choose BibLaTeX for new projects as it offers more features and flexibility.
+</Info>
+
+## Bibliography Systems Overview
+
+### BibTeX vs BibLaTeX Comparison
+
+| Feature | BibTeX | BibLaTeX |
+|---------|--------|----------|
+| **Age** | Older (1985) | Modern (2006+) |
+| **Backend** | bibtex | biber (recommended) |
+| **Languages** | Limited | Full Unicode support |
+| **Styles** | Fixed styles | Highly customizable |
+| **Sorting** | Basic | Advanced options |
+| **Multiple bibliographies** | Difficult | Easy |
+| **Customization** | Limited | Extensive |
+| **Recommendation** | Legacy projects | New projects |
+
+<Tip>
+**For new documents**: Use BibLaTeX with Biber backend for the best experience and most features.
+</Tip>
+
+## BibLaTeX: Modern Bibliography Management
+
+### Basic Setup
+
+<CodeGroup>
+```latex biblatex-setup.tex
+\documentclass{article}
+\usepackage[
+  backend=biber,        % Use biber (recommended)
+  style=authoryear,     % Citation style
+  sorting=nyt,          % Sort by name, year, title
+  maxbibnames=10,       % Max names in bibliography
+  maxcitenames=2,       % Max names in citations
+  hyperref=true,        % Clickable links
+  backref=true         % Back references
+]{biblatex}
+
+% Add bibliography file
+\addbibresource{references.bib}
+
+\begin{document}
+
+\section{Introduction}
+This research builds on \textcite{smith2020} and \textcite{jones2021}.
+Multiple studies \parencite{brown2019,wilson2022,taylor2023} confirm...
+
+\printbibliography
+
+\end{document}
+```
+</CodeGroup>
+
+### Citation Commands
+
+<CodeGroup>
+```latex biblatex-citations.tex
+% In-text citations
+\textcite{smith2020}           % Smith (2020) argues...
+\parencite{smith2020}          % Recent studies (Smith 2020) show...
+\cite{smith2020}               % Basic citation
+
+% Multiple citations
+\parencite{smith2020,jones2021,brown2019}
+\textcite{smith2020,jones2021} % Smith (2020) and Jones (2021)
+
+% Author and year separately
+\citeauthor{smith2020} (\citeyear{smith2020})  % Smith (2020)
+\citeauthor{smith2020}                         % Smith
+\citeyear{smith2020}                           % 2020
+
+% Page numbers and prenotes
+\parencite[15]{smith2020}                      % (Smith 2020, 15)
+\parencite[see][15-20]{smith2020}              % (see Smith 2020, 15-20)
+\parencite[cf.][]{smith2020}                   % (cf. Smith 2020)
+
+% Footnote citations
+\footcite{smith2020}           % Footnote with full citation
+\footcitetext{smith2020}       % Only footnote text
+
+% Full citations in text
+\fullcite{smith2020}           % Complete reference inline
+```
+</CodeGroup>
+
+### Bibliography File (.bib)
+
+<CodeGroup>
+```bibtex references.bib
+% Journal article
+@article{smith2020,
+  author = {Smith, John A. and Doe, Jane B.},
+  title = {Advanced Machine Learning Techniques},
+  journal = {Journal of Artificial Intelligence},
+  year = {2020},
+  volume = {45},
+  number = {3},
+  pages = {123--145},
+  doi = {10.1234/jai.2020.45.123},
+  url = {https://example.com/article},
+  abstract = {This paper presents novel approaches to...}
+}
+
+% Book
+@book{jones2021,
+  author = {Jones, Alice M.},
+  title = {Introduction to Data Science},
+  publisher = {Academic Press},
+  year = {2021},
+  edition = {3rd},
+  address = {New York},
+  isbn = {978-0123456789},
+  pages = {450}
+}
+
+% Book chapter
+@incollection{brown2019,
+  author = {Brown, Robert C.},
+  title = {Statistical Methods in Research},
+  booktitle = {Handbook of Research Methods},
+  editor = {Wilson, Sarah D.},
+  publisher = {Scientific Publishers},
+  year = {2019},
+  pages = {45--67},
+  address = {London}
+}
+
+% Conference paper
+@inproceedings{wilson2022,
+  author = {Wilson, Mark E. and Taylor, Lisa F.},
+  title = {Neural Networks for Image Classification},
+  booktitle = {Proceedings of the International Conference on Machine Learning},
+  year = {2022},
+  pages = {234--245},
+  address = {Vienna, Austria},
+  publisher = {PMLR},
+  month = {July}
+}
+
+% PhD thesis
+@phdthesis{taylor2023,
+  author = {Taylor, Emma R.},
+  title = {Deep Learning Applications in Computer Vision},
+  school = {Massachusetts Institute of Technology},
+  year = {2023},
+  type = {PhD thesis},
+  address = {Cambridge, MA}
+}
+
+% Online source
+@online{website2024,
+  author = {Organization Name},
+  title = {Important Guidelines},
+  url = {https://example.com/guidelines},
+  urldate = {2024-01-15},
+  year = {2024}
+}
+
+% Technical report
+@techreport{report2023,
+  author = {Research Team},
+  title = {Annual Technical Report},
+  institution = {National Laboratory},
+  year = {2023},
+  number = {TR-2023-001},
+  address = {Washington, DC}
+}
+```
+</CodeGroup>
+
+### Citation Styles
+
+<CodeGroup>
+```latex citation-styles.tex
+% Author-year styles
+\usepackage[style=authoryear]{biblatex}     % (Smith 2020)
+\usepackage[style=authoryear-comp]{biblatex} % (Smith 2020; Jones 2021)
+\usepackage[style=apa]{biblatex}            % APA style
+
+% Numeric styles
+\usepackage[style=numeric]{biblatex}        % [1]
+\usepackage[style=numeric-comp]{biblatex}   % [1-3,5]
+\usepackage[style=ieee]{biblatex}           % IEEE style
+
+% Alphabetic styles
+\usepackage[style=alphabetic]{biblatex}     % [Smi20]
+\usepackage[style=alphabetic-verb]{biblatex} % [Smith2020]
+
+% Verbose styles (footnotes)
+\usepackage[style=verbose]{biblatex}        % Full footnotes
+\usepackage[style=verbose-ibid]{biblatex}   % With ibid.
+
+% Field-specific styles
+\usepackage[style=nature]{biblatex}         % Nature journal
+\usepackage[style=science]{biblatex}        % Science journal
+\usepackage[style=chicago-authordate]{biblatex} % Chicago style
+```
+</CodeGroup>
+
+### Advanced BibLaTeX Features
+
+<CodeGroup>
+```latex advanced-biblatex.tex
+% Multiple bibliographies
+\begin{refsection}
+\section{Chapter 1}
+Citations for chapter 1 \cite{ref1,ref2}.
+\printbibliography[heading=subbibliography,title={Chapter 1 References}]
+\end{refsection}
+
+\begin{refsection}
+\section{Chapter 2}
+Citations for chapter 2 \cite{ref3,ref4}.
+\printbibliography[heading=subbibliography,title={Chapter 2 References}]
+\end{refsection}
+
+% Filtered bibliographies
+\printbibliography[type=article,title={Journal Articles}]
+\printbibliography[type=book,title={Books}]
+\printbibliography[keyword=primary,title={Primary Sources}]
+\printbibliography[nottype=online,title={Print Sources}]
+
+% Custom categories
+\DeclareBibliographyCategory{primary}
+\addtocategory{primary}{smith2020,jones2021}
+\printbibliography[category=primary,title={Primary Sources}]
+
+% Split by language
+\printbibliography[langid=english,title={English Sources}]
+\printbibliography[langid=german,title={German Sources}]
+```
+</CodeGroup>
+
+## Traditional BibTeX
+
+### Basic BibTeX Setup
+
+<CodeGroup>
+```latex bibtex-setup.tex
+\documentclass{article}
+\usepackage{natbib} % Enhanced citation commands
+
+\begin{document}
+
+\section{Introduction}
+\citet{smith2020} argues that machine learning...
+Multiple studies \citep{jones2021,brown2019} confirm...
+
+% Bibliography
+\bibliographystyle{plainnat} % or apalike, unsrt, etc.
+\bibliography{references}    % references.bib file
+
+\end{document}
+```
+</CodeGroup>
+
+### BibTeX Citation Commands (with natbib)
+
+<CodeGroup>
+```latex bibtex-citations.tex
+% Basic citations
+\cite{smith2020}              % Smith et al. (2020) or [1]
+\citep{smith2020}             % (Smith et al., 2020)
+\citet{smith2020}             % Smith et al. (2020)
+
+% Multiple citations
+\citep{smith2020,jones2021}   % (Smith et al., 2020; Jones, 2021)
+
+% Author/year separation
+\citeauthor{smith2020}        % Smith et al.
+\citeyear{smith2020}          % 2020
+
+% Alternative forms
+\citealp{smith2020}           % Smith et al., 2020
+\citealt{smith2020}           % Smith et al. 2020
+
+% Page numbers
+\citep[p.~15]{smith2020}      % (Smith et al., 2020, p. 15)
+\citep[see][pp.~10-15]{smith2020} % (see Smith et al., 2020, pp. 10-15)
+
+% Starred versions (full author list)
+\citet*{multiauthor2020}      % All authors listed
+\citep*{multiauthor2020}      % All authors in parentheses
+```
+</CodeGroup>
+
+### BibTeX Styles
+
+<CodeGroup>
+```latex bibtex-styles.tex
+% Standard styles (without natbib)
+\bibliographystyle{plain}     % Numbered, sorted alphabetically
+\bibliographystyle{unsrt}     % Numbered, order of citation
+\bibliographystyle{alpha}     % Alphabetic labels [Smi20]
+\bibliographystyle{abbrv}     % Abbreviated names/journals
+
+% With natbib package
+\bibliographystyle{plainnat}  % Author-year, full names
+\bibliographystyle{abbrvnat}  % Author-year, abbreviated
+\bibliographystyle{unsrtnat}  % Author-year, citation order
+\bibliographystyle{apalike}   % APA-like style
+
+% Field-specific styles
+\bibliographystyle{ieeetr}    % IEEE Transactions
+\bibliographystyle{acm}       % ACM style
+\bibliographystyle{amsplain}  % AMS style
+\bibliographystyle{chicago}   % Chicago style
+```
+</CodeGroup>
+
+## Reference Management Integration
+
+### Popular Reference Managers
+
+<CodeGroup>
+```latex reference-managers.tex
+% Most reference managers can export BibTeX:
+
+% Zotero
+% 1. Select references
+% 2. File → Export Library
+% 3. Choose BibTeX format
+% 4. Include file in LaTeX project
+
+% Mendeley
+% 1. Select references
+% 2. File → Export
+% 3. Choose BibTeX format
+
+% EndNote
+% 1. Select references
+% 2. File → Export
+% 3. Choose BibTeX format
+
+% JabRef (dedicated BibTeX manager)
+% Native BibTeX editor with LaTeX integration
+
+% Example workflow with Zotero:
+\addbibresource{zotero-export.bib} % In preamble
+\cite{key-from-zotero}              % In document
+```
+</CodeGroup>
+
+### Automated Bibliography Management
+
+<CodeGroup>
+```latex automated-bib.tex
+% Better BibTeX for Zotero
+% - Automatic citation key generation
+% - Real-time sync with LaTeX projects
+% - Custom key patterns
+
+% Example citation keys:
+% [auth:lower][year] → smith2020
+% [authorsAlpha][year] → SJB20
+% [title:clean:select,1,1][year] → Advanced2020
+
+% In your .bib file generated by Better BibTeX:
+@article{smith2020advanced,
+  author = {Smith, John A.},
+  title = {Advanced Machine Learning},
+  journal = {AI Journal},
+  year = {2020}
+}
+```
+</CodeGroup>
+
+## Journal-Specific Styles
+
+### Academic Journal Templates
+
+<CodeGroup>
+```latex journal-styles.tex
+% Nature journals
+\documentclass{nature}
+\bibliographystyle{naturemag}
+
+% Science
+\documentclass{sciencepaper}
+\bibliographystyle{Science}
+
+% IEEE journals
+\documentclass{IEEEtran}
+\bibliographystyle{IEEEtran}
+
+% ACM journals
+\documentclass{acmart}
+\bibliographystyle{ACM-Reference-Format}
+
+% Elsevier journals
+\documentclass{elsarticle}
+\bibliographystyle{elsarticle-num}
+
+% Springer journals
+\documentclass{svjour3}
+\bibliographystyle{spbasic}
+
+% APA style (psychology)
+\usepackage[style=apa]{biblatex}
+\DeclareLanguageMapping{american}{american-apa}
+
+% Chicago style (history, literature)
+\usepackage[style=chicago-authordate]{biblatex}
+```
+</CodeGroup>
+
+## Advanced Citation Techniques
+
+### Custom Citation Commands
+
+<CodeGroup>
+```latex custom-citations.tex
+% Define custom citation commands
+\newcommand{\citepos}[1]{\citeauthor{#1}'s (\citeyear{#1})}
+% Usage: \citepos{smith2020} → Smith's (2020)
+
+\newcommand{\citeposs}[1]{\citeauthor{#1}' (\citeyear{#1})}
+% For plural possessive: \citeposs{authors2020} → Authors' (2020)
+
+% Parenthetical citations with page ranges
+\newcommand{\citepp}[2]{\citep[pp.~#2]{#1}}
+% Usage: \citepp{smith2020}{15-20} → (Smith 2020, pp. 15-20)
+
+% Compare citations
+\newcommand{\citecf}[1]{\citep[cf.][]{#1}}
+% Usage: \citecf{smith2020} → (cf. Smith 2020)
+
+% See also citations
+\newcommand{\citesee}[1]{\citep[see][]{#1}}
+% Usage: \citesee{smith2020} → (see Smith 2020)
+```
+</CodeGroup>
+
+### Handling Special Cases
+
+<CodeGroup>
+```latex special-citations.tex
+% Anonymous authors
+@article{anonymous2020,
+  author = {{Anonymous}},
+  title = {Confidential Research Results},
+  journal = {Secret Journal},
+  year = {2020}
+}
+
+% Corporate authors
+@report{who2021,
+  author = {{World Health Organization}},
+  title = {Global Health Report 2021},
+  institution = {WHO},
+  year = {2021}
+}
+
+% Multiple works by same author, same year
+@article{smith2020a,
+  author = {Smith, John A.},
+  title = {First Paper in 2020},
+  journal = {Journal A},
+  year = {2020}
+}
+
+@article{smith2020b,
+  author = {Smith, John A.},
+  title = {Second Paper in 2020},
+  journal = {Journal B},
+  year = {2020}
+}
+
+% Forthcoming publications
+@article{jones2024,
+  author = {Jones, Mary},
+  title = {Future Research},
+  journal = {Future Journal},
+  year = {2024},
+  note = {forthcoming}
+}
+```
+</CodeGroup>
+
+## Best Practices
+
+<Tip>
+**Bibliography best practices:**
+
+1. **Consistent formatting**: Use a reference manager for consistency
+2. **Complete information**: Include all required fields (DOI, pages, etc.)
+3. **Verification**: Double-check all citations against original sources
+4. **Style compliance**: Follow your target journal's requirements exactly
+5. **Backup**: Keep backup copies of your .bib files
+6. **Organization**: Use meaningful citation keys
+7. **Updates**: Keep reference information current
+8. **Permissions**: Ensure you have rights to cite all sources
+</Tip>
+
+## Troubleshooting
+
+<Warning>
+**Common issues and solutions:**
+
+1. **Missing references**: Check citation keys match .bib entries exactly
+2. **Style errors**: Ensure you're using the correct bibliography style
+3. **Compilation order**: Run LaTeX → Biber/BibTeX → LaTeX → LaTeX
+4. **Unicode issues**: Use BibLaTeX with UTF-8 encoding
+5. **Multiple authors**: Use `and` to separate authors in .bib files
+6. **Special characters**: Use LaTeX escape sequences or UTF-8
+7. **Page ranges**: Use `--` for page ranges (123--145)
+8. **URLs**: Use `\url{}` command or proper URL fields
+</Warning>
+
+## Quick Reference
+
+### Compilation Process
+
+```bash
+# For BibLaTeX (recommended)
+pdflatex document.tex
+biber document
+pdflatex document.tex
+pdflatex document.tex
+
+# For BibTeX
+pdflatex document.tex
+bibtex document
+pdflatex document.tex
+pdflatex document.tex
+```
+
+### Essential Entry Types
+
+| Type | Purpose | Required Fields |
+|------|---------|-----------------|
+| `@article` | Journal articles | author, title, journal, year |
+| `@book` | Books | author/editor, title, publisher, year |
+| `@incollection` | Book chapters | author, title, booktitle, publisher, year |
+| `@inproceedings` | Conference papers | author, title, booktitle, year |
+| `@phdthesis` | Dissertations | author, title, school, year |
+| `@techreport` | Technical reports | author, title, institution, year |
+| `@online` | Web sources | author, title, url, urldate |
+
+---
+
+<Info>
+**Next**: Learn about [Cross-referencing systems](/learn/latex/cross-referencing) to create professional internal references in your documents.
+</Info>

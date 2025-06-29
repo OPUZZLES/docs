@@ -1,0 +1,370 @@
+---
+title: Getting Started with LaTeX Cloud Studio
+description: Quick start guide for LaTeX Cloud Studio. Learn how to create your first document, use templates, and navigate the interface in minutes.
+---
+
+import { CodeGroup, Info, Tip, Warning, Card, CardGroup } from '/snippets/components.mdx'
+
+Welcome to LaTeX Cloud Studio! This guide will help you get started with our powerful cloud-based LaTeX editor and create your first professional document in minutes.
+
+<Info>
+**Already know LaTeX?** Jump to [Creating Your First Document](#creating-your-first-document). New to LaTeX? Start with our [LaTeX in 30 minutes](/learn/latex-in-30-minutes) tutorial after this quick start guide.
+</Info>
+
+## What is LaTeX Cloud Studio?
+
+LaTeX Cloud Studio is a powerful, cloud-based LaTeX editor that provides:
+
+<CardGroup cols={2}>
+<Card title="No Installation Required" icon="cloud">
+Access LaTeX anywhere with just a browser - no software to install or maintain
+</Card>
+<Card title="Real-time Collaboration" icon="users">
+Work together with teammates in real-time, like Google Docs but for LaTeX
+</Card>
+<Card title="Professional Templates" icon="file-text">
+Start with ready-made templates for articles, presentations, CVs, and academic papers
+</Card>
+<Card title="Instant Compilation" icon="bolt">
+See your PDF output instantly as you type with our fast cloud compiler
+</Card>
+</CardGroup>
+
+## Creating Your First Document
+
+### Step 1: Access LaTeX Cloud Studio
+
+1. Navigate to [LaTeX Cloud Studio](https://www.latex-cloud-studio.com/)
+2. Sign up for a free account or log in if you already have one
+3. Click **"New Project"** to get started
+
+### Step 2: Choose a Template
+
+<CodeGroup>
+```latex article-template.tex
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{graphicx}
+\usepackage[margin=1in]{geometry}
+
+\title{Your Document Title}
+\author{Your Name}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+Welcome to your first LaTeX document! You can start writing your content here.
+
+\section{Getting Started}
+
+LaTeX Cloud Studio makes it easy to create professional documents. Simply:
+
+\begin{enumerate}
+\item Write your content using LaTeX markup
+\item The PDF updates automatically
+\item Download or share when ready
+\end{enumerate}
+
+\section{Math Example}
+
+LaTeX excels at mathematical expressions:
+
+\begin{equation}
+E = mc^2
+\end{equation}
+
+\section{Conclusion}
+
+You're now ready to create amazing documents with LaTeX Cloud Studio!
+
+\end{document}
+```
+</CodeGroup>
+
+### Step 3: Start Writing
+
+1. **Replace the title and author** with your information
+2. **Edit the content** - replace the example text with your own
+3. **Watch the PDF update** in real-time as you type
+4. **Use the toolbar** for common formatting options
+
+<Tip>
+**Pro tip**: Use `Ctrl+S` (or `Cmd+S` on Mac) to manually save your work, though LaTeX Cloud Studio auto-saves every few seconds.
+</Tip>
+
+## Interface Overview
+
+### Main Editor Components
+
+| Component | Description | Location |
+|-----------|-------------|----------|
+| **File Explorer** | Browse your project files | Left sidebar |
+| **Code Editor** | Write your LaTeX source | Center panel |
+| **PDF Preview** | Live preview of output | Right panel |
+| **Compiler Output** | Error messages and logs | Bottom panel |
+
+### Key Features
+
+#### Real-time Preview
+Your PDF updates automatically as you type. No need to manually compile!
+
+#### Syntax Highlighting
+LaTeX commands are color-coded to help you write error-free code.
+
+#### Error Detection
+Errors are highlighted in red with helpful descriptions in the output panel.
+
+#### Auto-completion
+Start typing LaTeX commands and get intelligent suggestions.
+
+## Quick Start Templates
+
+Choose from our professional templates to get started immediately:
+
+<CardGroup cols={2}>
+<Card title="Academic Article" icon="graduation-cap">
+Perfect for research papers and journal submissions
+- IEEE, ACM, and custom formats
+- Bibliography support
+- Mathematical equations
+</Card>
+<Card title="Business Report" icon="chart-line">
+Professional reports and documentation
+- Executive summary layouts
+- Charts and graphs
+- Company branding options
+</Card>
+<Card title="Presentation" icon="presentation-screen">
+Create stunning slides with Beamer
+- Multiple themes available
+- Animations and transitions
+- Speaker notes support
+</Card>
+<Card title="CV/Resume" icon="id-card">
+Professional CVs and resumes
+- Academic and industry formats
+- Multiple column layouts
+- Contact information templates
+</Card>
+</CardGroup>
+
+## Essential LaTeX Basics
+
+### Document Structure
+
+Every LaTeX document follows this basic structure:
+
+<CodeGroup>
+```latex basic-structure.tex
+\documentclass{article}          % Document type
+\usepackage{package-name}        % Additional features
+
+% Preamble - document settings go here
+
+\begin{document}
+% Your content goes here
+\end{document}
+```
+</CodeGroup>
+
+### Common Formatting
+
+<CodeGroup>
+```latex formatting-examples.tex
+% Text formatting
+\textbf{Bold text}
+\textit{Italic text}
+\underline{Underlined text}
+
+% Sections
+\section{Main Section}
+\subsection{Subsection}
+\subsubsection{Sub-subsection}
+
+% Lists
+\begin{itemize}
+\item First item
+\item Second item
+\end{itemize}
+
+\begin{enumerate}
+\item Numbered item
+\item Another numbered item
+\end{enumerate}
+
+% Math
+Inline math: $E = mc^2$
+
+Display math:
+\begin{equation}
+\sum_{i=1}^{n} x_i = x_1 + x_2 + \cdots + x_n
+\end{equation}
+```
+</CodeGroup>
+
+## Collaboration Features
+
+### Sharing Your Project
+
+1. Click the **"Share"** button in the top toolbar
+2. Choose your sharing preferences:
+   - **View only**: Others can see but not edit
+   - **Edit access**: Others can make changes
+   - **Comment only**: Others can add comments but not edit
+3. Copy the sharing link or invite by email
+
+### Real-time Editing
+
+- **See live cursors** of other editors
+- **Changes sync instantly** across all users
+- **Version history** tracks all changes
+- **Comment system** for feedback and discussion
+
+### Version Control
+
+LaTeX Cloud Studio automatically saves versions of your work:
+
+- **Auto-save**: Every few seconds
+- **Manual snapshots**: Create named versions
+- **Restore previous versions**: Roll back changes easily
+- **Compare versions**: See what changed between versions
+
+## Cloud Features
+
+### File Management
+
+- **Organize projects** in folders
+- **Search across all files** in your account
+- **Import existing LaTeX projects** by uploading ZIP files
+- **Export projects** as ZIP files for backup
+
+### Packages and Compilation
+
+<Info>
+**All packages included**: LaTeX Cloud Studio comes with the complete TeX Live distribution - over 4,000 packages ready to use without installation.
+</Info>
+
+Common packages you can use immediately:
+
+```latex
+\usepackage{amsmath}      % Enhanced math
+\usepackage{graphicx}     % Images
+\usepackage{booktabs}     % Professional tables
+\usepackage{tikz}         % Graphics and diagrams
+\usepackage{biblatex}     % Bibliography management
+\usepackage{hyperref}     % Links and cross-references
+```
+
+### Compilation Options
+
+LaTeX Cloud Studio supports multiple compilers:
+
+- **pdfLaTeX**: Default, fastest compilation
+- **XeLaTeX**: Unicode and system fonts
+- **LuaLaTeX**: Advanced features and scripting
+- **LaTeX → DVI**: Traditional workflow
+
+## Getting Help
+
+### Learning Resources
+
+<CardGroup cols={1}>
+<Card title="LaTeX in 30 Minutes" icon="clock" href="/learn/latex-in-30-minutes">
+Complete beginner tutorial covering all essential LaTeX concepts
+</Card>
+<Card title="LaTeX Basics" icon="book" href="/learn/latex/basics/creating-first-document">
+Step-by-step guides for document creation, formatting, and structure
+</Card>
+<Card title="Math & Science" icon="square-root-variable" href="/learn/latex/mathematics/basics">
+Comprehensive guides for mathematical typesetting and scientific documents
+</Card>
+<Card title="Templates Gallery" icon="template" href="/templates/article">
+Ready-to-use templates for articles, reports, presentations, and more
+</Card>
+</CardGroup>
+
+### Support Options
+
+- **Live chat**: Available 24/7 for technical support
+- **Email support**: Detailed help for complex issues
+- **Community forums**: Connect with other LaTeX users
+- **Video tutorials**: Visual guides for common tasks
+
+### Common Issues
+
+<Warning>
+**Compilation errors**: Check the output panel for error messages and line numbers. Most errors are due to:
+- Missing `\end{...}` commands
+- Typos in command names
+- Missing packages (though rare in Cloud Studio)
+- Unmatched braces `{` or `}`
+</Warning>
+
+## Next Steps
+
+Now that you've created your first document, explore these features:
+
+1. **Try different templates** - See what's possible with LaTeX
+2. **Learn basic LaTeX** - Follow our [30-minute tutorial](/learn/latex-in-30-minutes)
+3. **Invite collaborators** - Share your project with teammates
+4. **Explore packages** - Add powerful features to your documents
+5. **Create complex documents** - Build presentations, books, or scientific papers
+
+<Tip>
+**Pro tip**: Start with templates similar to what you want to create, then customize them. This is faster than starting from scratch and helps you learn LaTeX patterns.
+</Tip>
+
+## Quick Reference
+
+### Essential Shortcuts
+
+| Shortcut | Action |
+|----------|--------|
+| `Ctrl+S` / `Cmd+S` | Save document |
+| `Ctrl+/` / `Cmd+/` | Comment/uncomment line |
+| `Ctrl+D` / `Cmd+D` | Duplicate line |
+| `Ctrl+F` / `Cmd+F` | Find and replace |
+| `Ctrl+Z` / `Cmd+Z` | Undo |
+| `Ctrl+Y` / `Cmd+Y` | Redo |
+
+### Common LaTeX Commands
+
+```latex
+% Document structure
+\section{Title}
+\subsection{Subtitle}
+\paragraph{Paragraph title}
+
+% Text formatting
+\textbf{bold}
+\textit{italic}
+\texttt{monospace}
+
+% Math
+$inline math$
+\begin{equation}
+display math
+\end{equation}
+
+% Lists
+\begin{itemize}
+\item bullet point
+\end{itemize}
+
+% References
+\label{key}
+\ref{key}
+\cite{citation-key}
+```
+
+---
+
+<Info>
+**Ready to dive deeper?** Continue with our comprehensive [LaTeX in 30 minutes](/learn/latex-in-30-minutes) tutorial to master the fundamentals, or browse our [template gallery](/templates/article) for inspiration.
+</Info>

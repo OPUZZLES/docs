@@ -28,6 +28,7 @@
             "group": "Getting Started",
             "pages": [
               "index",
+              "getting-started/cloud-studio",
               "learn/latex-in-30-minutes"
             ]
           },

@@ -1,0 +1,646 @@
+---
+title: Cross-referencing in LaTeX
+description: Master LaTeX cross-referencing system. Learn to reference figures, tables, equations, sections with labels, and use advanced packages like cleveref.
+---
+
+import { CodeGroup, Info, Tip, Warning, Card, CardGroup } from '/snippets/components.mdx'
+
+Learn to create professional cross-references in LaTeX documents. This guide covers the complete referencing system from basic labels to advanced automated references.
+
+<Info>
+**Why cross-references matter**: They maintain consistency automatically, update numbering when you reorganize content, and provide clickable navigation in PDF documents.
+</Info>
+
+## Basic Cross-referencing System
+
+### Labels and References
+
+<CodeGroup>
+```latex basic-references.tex
+\documentclass{article}
+\begin{document}
+
+\section{Introduction}
+\label{sec:intro}
+This is the introduction section.
+
+\section{Methods}
+\label{sec:methods}
+As mentioned in Section~\ref{sec:intro}, we will now discuss methods.
+
+\subsection{Data Collection}
+\label{subsec:data}
+Data collection procedures are described here.
+
+\section{Results}
+According to the methods in Section~\ref{sec:methods} and specifically 
+the data collection in Section~\ref{subsec:data}, our results show...
+
+\end{document}
+```
+</CodeGroup>
+
+### The Label-Reference Workflow
+
+1. **Create labels** with `\label{prefix:name}`
+2. **Reference labels** with `\ref{prefix:name}`
+3. **Compile twice** to resolve all references
+
+<CodeGroup>
+```latex label-reference-workflow.tex
+% Step 1: Add labels to elements you want to reference
+\section{Literature Review}
+\label{sec:literature}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.8\textwidth]{diagram.png}
+  \caption{System architecture}
+  \label{fig:architecture}
+\end{figure}
+
+\begin{equation}
+E = mc^2
+\label{eq:einstein}
+\end{equation}
+
+% Step 2: Reference them in text
+As shown in Figure~\ref{fig:architecture}, the system...
+Einstein's equation (Equation~\ref{eq:einstein}) demonstrates...
+The literature review in Section~\ref{sec:literature} covers...
+```
+</CodeGroup>
+
+## Recommended Label Prefixes
+
+### Standard Naming Convention
+
+<CodeGroup>
+```latex label-conventions.tex
+% Sections and chapters
+\chapter{Introduction}
+\label{chap:intro}
+
+\section{Background}
+\label{sec:background}
+
+\subsection{Previous Work}
+\label{subsec:previous}
+
+% Figures and tables
+\begin{figure}
+  \caption{Results overview}
+  \label{fig:results}
+\end{figure}
+
+\begin{table}
+  \caption{Performance comparison}
+  \label{tab:performance}
+\end{table}
+
+% Equations
+\begin{equation}
+  y = mx + b
+  \label{eq:linear}
+\end{equation}
+
+% Algorithms and listings
+\begin{algorithm}
+  \caption{Sorting algorithm}
+  \label{alg:sort}
+\end{algorithm}
+
+% Appendices
+\appendix
+\section{Additional Data}
+\label{app:data}
+
+% Examples and theorems
+\begin{theorem}
+  \label{thm:main}
+  Statement of theorem...
+\end{theorem}
+
+\begin{example}
+  \label{ex:basic}
+  Example content...
+\end{example}
+```
+</CodeGroup>
+
+### Label Naming Best Practices
+
+| Element Type | Prefix | Example | Reference |
+|--------------|--------|---------|-----------|
+| Chapter | `chap:` | `\label{chap:intro}` | `Chapter~\ref{chap:intro}` |
+| Section | `sec:` | `\label{sec:methods}` | `Section~\ref{sec:methods}` |
+| Subsection | `subsec:` | `\label{subsec:data}` | `Section~\ref{subsec:data}` |
+| Figure | `fig:` | `\label{fig:results}` | `Figure~\ref{fig:results}` |
+| Table | `tab:` | `\label{tab:stats}` | `Table~\ref{tab:stats}` |
+| Equation | `eq:` | `\label{eq:main}` | `Equation~\ref{eq:main}` |
+| Algorithm | `alg:` | `\label{alg:sort}` | `Algorithm~\ref{alg:sort}` |
+| Theorem | `thm:` | `\label{thm:main}` | `Theorem~\ref{thm:main}` |
+| Lemma | `lem:` | `\label{lem:helper}` | `Lemma~\ref{lem:helper}` |
+| Appendix | `app:` | `\label{app:code}` | `Appendix~\ref{app:code}` |
+
+<Tip>
+**Label naming tips:**
+- Use descriptive names: `fig:sales-growth` not `fig:1`
+- Keep it concise but meaningful
+- Use hyphens for multi-word labels
+- Be consistent throughout your document
+</Tip>
+
+## Advanced Reference Commands
+
+### Page References
+
+<CodeGroup>
+```latex page-references.tex
+% Basic page reference
+See the discussion on page~\pageref{sec:methods}.
+
+% Combined references
+Figure~\ref{fig:results} on page~\pageref{fig:results} shows...
+
+% Reference with both number and page
+Equation~\ref{eq:main} (page~\pageref{eq:main}) demonstrates...
+
+% Checking if reference is on current page
+\ifthenelse{\equal{\pageref{fig:test}}{\thepage}}{%
+  Figure~\ref{fig:test} above shows...
+}{%
+  Figure~\ref{fig:test} on page~\pageref{fig:test} shows...
+}
+```
+</CodeGroup>
+
+### Equation References
+
+<CodeGroup>
+```latex equation-references.tex
+\usepackage{amsmath}
+
+% Numbered equation with reference
+\begin{equation}
+  \label{eq:quadratic}
+  x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
+\end{equation}
+
+% Reference equation in text
+The quadratic formula (Equation~\ref{eq:quadratic}) provides...
+
+% Using \eqref for automatic parentheses
+The solution is given by~\eqref{eq:quadratic}.
+
+% Multiple equations with sub-references
+\begin{subequations}
+\label{eq:system}
+\begin{align}
+  x + y &= 5 \label{eq:system-a} \\
+  2x - y &= 1 \label{eq:system-b}
+\end{align}
+\end{subequations}
+
+% Referencing the system and individual equations
+The system~\eqref{eq:system} consists of equations~\eqref{eq:system-a} 
+and~\eqref{eq:system-b}.
+```
+</CodeGroup>
+
+### Subfigure References
+
+<CodeGroup>
+```latex subfigure-references.tex
+\usepackage{subcaption}
+
+\begin{figure}[htbp]
+  \centering
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{image1.png}
+    \caption{First result}
+    \label{fig:results-a}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{image2.png}
+    \caption{Second result}
+    \label{fig:results-b}
+  \end{subfigure}
+  \caption{Experimental results}
+  \label{fig:results}
+\end{figure}
+
+% Referencing main figure and subfigures
+Figure~\ref{fig:results} shows our experimental results. 
+Specifically, Figure~\ref{fig:results-a} demonstrates the first outcome,
+while Figure~\ref{fig:results-b} shows the second.
+```
+</CodeGroup>
+
+## The cleveref Package
+
+### Smart Automatic References
+
+<CodeGroup>
+```latex cleveref-setup.tex
+\usepackage{cleveref}
+
+% cleveref automatically determines reference type
+\cref{sec:intro}        % → section 1
+\cref{fig:results}      % → figure 2
+\cref{tab:data}         % → table 3
+\cref{eq:main}          % → equation (4)
+
+% Capitalized versions
+\Cref{sec:intro}        % → Section 1
+\Cref{fig:results}      % → Figure 2
+
+% Multiple references
+\cref{fig:a,fig:b,fig:c}     % → figures 1, 2 and 3
+\cref{eq:1,eq:2,eq:3}        % → equations (1) to (3)
+\cref{sec:intro,sec:methods} % → sections 1 and 2
+
+% Range references
+\crefrange{fig:first}{fig:last}  % → figures 1 to 5
+\Crefrange{eq:start}{eq:end}     % → Equations (1) to (3)
+```
+</CodeGroup>
+
+### Customizing cleveref
+
+<CodeGroup>
+```latex cleveref-customization.tex
+\usepackage{cleveref}
+
+% Customize reference formats
+\crefname{figure}{fig.}{figs.}           % figure → fig.
+\Crefname{figure}{Fig.}{Figs.}          % Figure → Fig.
+
+\crefname{table}{tab.}{tabs.}           % table → tab.
+\Crefname{table}{Tab.}{Tabs.}           % Table → Tab.
+
+\crefname{equation}{eq.}{eqs.}          % equation → eq.
+\Crefname{equation}{Eq.}{Eqs.}          % Equation → Eq.
+
+\crefname{section}{sect.}{sects.}       % section → sect.
+\Crefname{section}{Sect.}{Sects.}       % Section → Sect.
+
+% Custom theorem-like environments
+\newtheorem{theorem}{Theorem}
+\crefname{theorem}{theorem}{theorems}
+\Crefname{theorem}{Theorem}{Theorems}
+
+% Usage examples
+\cref{fig:test}     % → fig. 1
+\Cref{fig:test}     % → Fig. 1
+\cref{thm:main}     % → theorem 1
+\Cref{thm:main}     % → Theorem 1
+```
+</CodeGroup>
+
+### Advanced cleveref Features
+
+<CodeGroup>
+```latex cleveref-advanced.tex
+% Conjunctions and lists
+\cref{fig:a,fig:b}              % → figures 1 and 2
+\cref{fig:a,fig:b,fig:c}        % → figures 1, 2 and 3
+\cref{fig:a,fig:b,fig:c,fig:d}  % → figures 1 to 4
+
+% Custom conjunctions
+\crefname{figure}{figure}{figures}
+\newcommand{\crefrangeconjunction}{--}  % Change "to" to "--"
+\crefrange{fig:first}{fig:last}         % → figures 1--5
+
+% Sorting and compression
+\cref{fig:c,fig:a,fig:b}        % → figures 1, 2 and 3 (auto-sorted)
+\cref{eq:1,eq:2,eq:3,eq:4,eq:5} % → equations (1) to (5) (compressed)
+
+% Cross-reference without number
+\namecref{fig:test}             % → figure (without number)
+\nameCref{fig:test}             % → Figure (without number)
+
+% Reference format for specific instances
+\labelcref{fig:test}            % → 1 (just the number)
+\labelcpageref{fig:test}        % → 5 (just the page number)
+```
+</CodeGroup>
+
+## Hyperref Integration
+
+### Clickable References
+
+<CodeGroup>
+```latex hyperref-setup.tex
+\usepackage{hyperref}
+\usepackage{cleveref} % Load AFTER hyperref
+
+% Configure hyperref
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,        % Internal links
+  citecolor=green,       % Citations
+  filecolor=magenta,     % File links
+  urlcolor=cyan,         % URL links
+  bookmarks=true,        % PDF bookmarks
+  pdfborder={0 0 0}     % Remove boxes around links
+}
+
+% All references are now clickable
+\section{Introduction}
+\label{sec:intro}
+
+\section{Methods}
+As discussed in \cref{sec:intro}...  % Clickable blue link
+
+% Customize link appearance
+\hypersetup{
+  linkcolor=black,       % Black links
+  colorlinks=false,      % Boxes instead of colors
+  pdfborder={0 0 1}     % Thin border
+}
+```
+</CodeGroup>
+
+### PDF Bookmarks and Metadata
+
+<CodeGroup>
+```latex pdf-bookmarks.tex
+\usepackage{hyperref}
+
+\hypersetup{
+  pdftitle={Document Title},
+  pdfauthor={Author Name},
+  pdfsubject={Subject},
+  pdfkeywords={keyword1, keyword2, keyword3},
+  bookmarks=true,
+  bookmarksopen=true,
+  bookmarksdepth=3,      % Depth of bookmark tree
+  pdfstartview=FitH      % Initial view
+}
+
+% Bookmarks are automatically generated from sections
+\section{Introduction}        % Appears in PDF bookmarks
+\subsection{Background}       % Nested bookmark
+\subsubsection{Related Work}  % Deeper nesting
+
+% Custom bookmark entries
+\pdfbookmark[0]{Custom Entry}{custom}  % Level 0 bookmark
+\pdfbookmark[1]{Sub Entry}{sub}        % Level 1 bookmark
+```
+</CodeGroup>
+
+## Special Reference Types
+
+### Theorem Environments
+
+<CodeGroup>
+```latex theorem-references.tex
+\usepackage{amsthm}
+\usepackage{cleveref}
+
+% Define theorem environments
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+% Configure cleveref names
+\crefname{theorem}{theorem}{theorems}
+\Crefname{theorem}{Theorem}{Theorems}
+\crefname{lemma}{lemma}{lemmas}
+\Crefname{lemma}{Lemma}{Lemmas}
+\crefname{definition}{definition}{definitions}
+\Crefname{definition}{Definition}{Definitions}
+
+% Usage
+\begin{theorem}
+\label{thm:main}
+This is the main theorem.
+\end{theorem}
+
+\begin{proof}
+The proof follows from \cref{thm:main}...
+\end{proof}
+
+\begin{lemma}
+\label{lem:helper}
+This lemma supports the main theorem.
+\end{lemma}
+
+% References in text
+\Cref{thm:main} establishes... % → Theorem 1 establishes...
+\cref{lem:helper} provides...  % → lemma 2 provides...
+```
+</CodeGroup>
+
+### Algorithm References
+
+<CodeGroup>
+```latex algorithm-references.tex
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{cleveref}
+
+% Configure algorithm references
+\crefname{algorithm}{algorithm}{algorithms}
+\Crefname{algorithm}{Algorithm}{Algorithms}
+
+\begin{algorithm}
+\caption{Quicksort algorithm}
+\label{alg:quicksort}
+\begin{algorithmic}[1]
+\Procedure{QuickSort}{$A, p, r$}
+\If{$p < r$}
+    \State $q \gets \Call{Partition}{A, p, r}$
+    \State \Call{QuickSort}{$A, p, q-1$}
+    \State \Call{QuickSort}{$A, q+1, r$}
+\EndIf
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+% Reference in text
+\Cref{alg:quicksort} shows the implementation...
+The complexity of \cref{alg:quicksort} is...
+```
+</CodeGroup>
+
+## Cross-document References
+
+### External References with xr Package
+
+<CodeGroup>
+```latex external-references.tex
+% In main document
+\usepackage{xr}
+\externaldocument{chapter1}  % References chapter1.tex
+\externaldocument{chapter2}  % References chapter2.tex
+
+% Can now reference labels from external documents
+As shown in \cref{fig:external-result} (from Chapter 1)...
+\Cref{tab:comparison} in Chapter 2 demonstrates...
+
+% Avoiding label conflicts
+\externaldocument[ch1-]{chapter1}  % Prefix all labels with "ch1-"
+\externaldocument[ch2-]{chapter2}  % Prefix all labels with "ch2-"
+
+% References now need prefixes
+\cref{ch1-fig:result}
+\cref{ch2-tab:data}
+```
+</CodeGroup>
+
+### Managing Large Documents
+
+<CodeGroup>
+```latex large-document-refs.tex
+% Main document structure
+% main.tex
+\documentclass{book}
+\usepackage{hyperref}
+\usepackage{cleveref}
+
+% Include chapters
+\include{chapters/introduction}    % \input doesn't work with xr
+\include{chapters/literature}
+\include{chapters/methodology}
+\include{chapters/results}
+\include{chapters/conclusion}
+
+% Each chapter file can reference others
+% chapters/results.tex
+\chapter{Results}
+\label{chap:results}
+
+As discussed in \cref{chap:introduction}, our methodology 
+(\cref{chap:methodology}) leads to the following results...
+
+\section{Experimental Setup}
+\label{sec:setup}
+The setup described here builds on \cref{sec:literature-review}...
+```
+</CodeGroup>
+
+## Best Practices
+
+<Tip>
+**Cross-referencing best practices:**
+
+1. **Consistent labeling**: Use standard prefixes and descriptive names
+2. **Non-breaking spaces**: Always use `~` before `\ref{}` commands
+3. **Meaningful labels**: Choose names that describe content, not position
+4. **Compile multiple times**: Run LaTeX twice to resolve all references
+5. **Use cleveref**: Automate reference types and formatting
+6. **Check broken refs**: Look for "??" in output indicating unresolved references
+7. **Hyperref last**: Load hyperref before cleveref but after most other packages
+8. **Backup strategy**: Keep label conventions documented for large projects
+</Tip>
+
+## Troubleshooting
+
+<Warning>
+**Common cross-referencing issues:**
+
+1. **"??" in output**: Reference not found - check label spelling and compile twice
+2. **Wrong reference numbers**: Labels may have moved - recompile completely
+3. **Missing hyperlinks**: Ensure hyperref is loaded before cleveref
+4. **Broken subfigure refs**: Check subcaption package and label placement
+5. **cleveref not working**: Load after hyperref and other reference packages
+6. **External refs failing**: Ensure external documents compiled first
+7. **Theorem refs wrong**: Check theorem numbering and cleveref configuration
+8. **PDF bookmarks broken**: Check special characters in section titles
+</Warning>
+
+## Advanced Tips
+
+### Conditional References
+
+<CodeGroup>
+```latex conditional-references.tex
+\usepackage{ifthen}
+
+% Check if reference exists
+\newcommand{\safecref}[1]{%
+  \ifthenelse{\equal{\ref{#1}}{??}}{%
+    [Reference not found]%
+  }{%
+    \cref{#1}%
+  }%
+}
+
+% Check if on same page
+\newcommand{\smartref}[1]{%
+  \ifthenelse{\equal{\pageref{#1}}{\thepage}}{%
+    \cref{#1} above%
+  }{%
+    \cref{#1} on page~\pageref{#1}%
+  }%
+}
+
+% Usage
+\smartref{fig:test}  % → "figure 1 above" or "figure 1 on page 5"
+```
+</CodeGroup>
+
+### Custom Reference Macros
+
+<CodeGroup>
+```latex custom-ref-macros.tex
+% Define convenient macros
+\newcommand{\figref}[1]{Figure~\ref{#1}}
+\newcommand{\tabref}[1]{Table~\ref{#1}}
+\newcommand{\eqnref}[1]{Equation~\eqref{#1}}
+\newcommand{\secref}[1]{Section~\ref{#1}}
+\newcommand{\chapref}[1]{Chapter~\ref{#1}}
+
+% Enhanced macros with page references
+\newcommand{\figpref}[1]{Figure~\ref{#1} on page~\pageref{#1}}
+\newcommand{\tabpref}[1]{Table~\ref{#1} on page~\pageref{#1}}
+
+% Usage
+\figref{fig:results} shows...      % → Figure 1 shows...
+\tabpref{tab:data} contains...     % → Table 1 on page 3 contains...
+```
+</CodeGroup>
+
+## Quick Reference
+
+### Essential Commands
+
+| Command | Purpose | Example Output |
+|---------|---------|----------------|
+| `\label{name}` | Create label | (invisible) |
+| `\ref{name}` | Reference number | 1, 2, 3... |
+| `\pageref{name}` | Reference page | 5, 10, 15... |
+| `\eqref{name}` | Equation reference | (1), (2), (3)... |
+| `\cref{name}` | Smart reference | figure 1, table 2... |
+| `\Cref{name}` | Capitalized reference | Figure 1, Table 2... |
+
+### Compilation Order
+
+```bash
+# Standard compilation for references
+pdflatex document.tex
+pdflatex document.tex
+
+# With bibliography
+pdflatex document.tex
+biber document      # or bibtex document
+pdflatex document.tex
+pdflatex document.tex
+```
+
+---
+
+<Info>
+**Next**: Learn about [Package management](/learn/latex/package-management) to understand how to find, install, and use LaTeX packages effectively.
+</Info>

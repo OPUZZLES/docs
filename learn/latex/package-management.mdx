@@ -1,0 +1,741 @@
+---
+title: LaTeX Package Management
+description: Learn to find, install, and manage LaTeX packages. Understand CTAN, package documentation, troubleshooting conflicts, and best practices.
+---
+
+import { CodeGroup, Info, Tip, Warning, Card, CardGroup } from '/snippets/components.mdx'
+
+Master LaTeX package management to extend your documents with powerful features. This guide covers package discovery, installation, usage, and troubleshooting.
+
+<Info>
+**Good news**: LaTeX Cloud Studio includes all major packages pre-installed. You can focus on using packages rather than installing them!
+</Info>
+
+## Understanding LaTeX Packages
+
+### What Are Packages?
+
+Packages extend LaTeX's core functionality by providing:
+- Additional commands and environments
+- New document classes
+- Enhanced formatting options
+- Specialized symbols and fonts
+- Integration with external tools
+
+<CodeGroup>
+```latex package-basics.tex
+% Loading packages in the preamble
+\documentclass{article}
+
+% Essential packages
+\usepackage[utf8]{inputenc}    % Input encoding
+\usepackage[T1]{fontenc}       % Font encoding
+\usepackage[english]{babel}    % Language support
+\usepackage{graphicx}          % Graphics inclusion
+\usepackage{amsmath}           % Enhanced mathematics
+
+% Packages with options
+\usepackage[margin=1in]{geometry}     % Page layout
+\usepackage[style=authoryear]{biblatex}  % Bibliography
+\usepackage[table,xcdraw]{xcolor}     % Colors
+
+\begin{document}
+% Package commands now available
+\includegraphics{image.png}    % From graphicx
+\textcolor{blue}{Blue text}    % From xcolor
+\begin{align}                  % From amsmath
+  E &= mc^2
+\end{align}
+\end{document}
+```
+</CodeGroup>
+
+### Package Categories
+
+<CardGroup cols={2}>
+  <Card title="Core Extensions" icon="gear">
+    **amsmath, amssymb, graphicx, geometry**
+    Essential packages that most documents need
+  </Card>
+  <Card title="Specialized Tools" icon="wrench">
+    **tikz, minted, algorithm2e, chemfig**
+    Domain-specific packages for specialized content
+  </Card>
+  <Card title="Formatting & Style" icon="paintbrush">
+    **fancyhdr, titlesec, enumitem, booktabs**
+    Packages that enhance document appearance
+  </Card>
+  <Card title="Language & Fonts" icon="font">
+    **babel, fontspec, polyglossia, microtype**
+    Internationalization and typography
+  </Card>
+</CardGroup>
+
+## Finding Packages
+
+### CTAN: The Comprehensive TeX Archive Network
+
+<CodeGroup>
+```latex finding-packages.tex
+% CTAN is the central repository for LaTeX packages
+% Visit: https://ctan.org
+
+% Common search strategies:
+% 1. Browse by topic: https://ctan.org/topics
+% 2. Search by name: https://ctan.org/search
+% 3. Browse alphabetically: https://ctan.org/pkg
+
+% Popular package categories:
+% - Graphics: tikz, pgfplots, graphicx
+% - Mathematics: amsmath, mathtools, physics
+% - Tables: booktabs, array, longtable
+% - Bibliography: biblatex, natbib
+% - Code: listings, minted, algorithm2e
+% - Fonts: fontspec, lmodern, libertine
+```
+</CodeGroup>
+
+### Package Documentation
+
+Every package should include documentation. Here's how to access it:
+
+<CodeGroup>
+```bash package-documentation.bash
+# Command line (if you have LaTeX installed locally)
+texdoc packagename          # Opens package documentation
+texdoc graphicx            # Example: graphicx documentation
+texdoc amsmath             # Example: amsmath documentation
+
+# Alternative methods:
+# 1. CTAN package page: https://ctan.org/pkg/packagename
+# 2. Google: "latex packagename documentation"
+# 3. LaTeX package galleries and guides
+```
+</CodeGroup>
+
+### Popular Package Collections
+
+<CodeGroup>
+```latex popular-packages.tex
+% Essential mathematics
+\usepackage{amsmath}      % Enhanced math environments
+\usepackage{amssymb}      % Additional math symbols
+\usepackage{mathtools}    % Extensions to amsmath
+
+% Graphics and figures
+\usepackage{graphicx}     % Include graphics
+\usepackage{tikz}         % Create graphics programmatically
+\usepackage{pgfplots}     % Create plots and charts
+
+% Tables and arrays
+\usepackage{booktabs}     % Professional table formatting
+\usepackage{array}        % Enhanced column types
+\usepackage{longtable}    % Multi-page tables
+
+% Text formatting
+\usepackage{microtype}    % Improved typography
+\usepackage{enumitem}     % Customizable lists
+\usepackage{fancyhdr}     % Custom headers/footers
+
+% Colors and styling
+\usepackage{xcolor}       % Color support
+\usepackage{listings}     % Code listings
+\usepackage{hyperref}     % Hyperlinks and PDF features
+
+% Bibliography and citations
+\usepackage{biblatex}     % Modern bibliography (recommended)
+\usepackage{natbib}       % Traditional bibliography
+```
+</CodeGroup>
+
+## Package Installation
+
+### LaTeX Cloud Studio (Pre-installed)
+
+<Info>
+**LaTeX Cloud Studio advantage**: All major packages are pre-installed and ready to use. Simply add `\usepackage{packagename}` to your document.
+</Info>
+
+<CodeGroup>
+```latex cloud-studio-packages.tex
+% These packages work immediately in LaTeX Cloud Studio:
+\usepackage{amsmath}      ✓ Mathematics
+\usepackage{graphicx}     ✓ Graphics
+\usepackage{tikz}         ✓ Drawings
+\usepackage{booktabs}     ✓ Tables
+\usepackage{listings}     ✓ Code
+\usepackage{biblatex}     ✓ Bibliography
+\usepackage{hyperref}     ✓ Links
+\usepackage{xcolor}       ✓ Colors
+\usepackage{geometry}     ✓ Page layout
+\usepackage{fancyhdr}     ✓ Headers/footers
+% And hundreds more...
+```
+</CodeGroup>
+
+### Local Installation (For Reference)
+
+<CodeGroup>
+```bash local-installation.bash
+# TeX Live (Linux/macOS/Windows)
+sudo apt-get install texlive-full    # Ubuntu/Debian
+brew install --cask mactex           # macOS
+# Windows: Download from https://tug.org/texlive/
+
+# MiKTeX (Windows/macOS/Linux)
+# Download from https://miktex.org/
+# Automatically installs packages on first use
+
+# Manual package installation (if needed)
+# 1. Download package from CTAN
+# 2. Extract to appropriate directory
+# 3. Run texhash to update database
+# 4. Update package database if required
+```
+</CodeGroup>
+
+## Package Usage Patterns
+
+### Loading Order Matters
+
+<CodeGroup>
+```latex package-order.tex
+\documentclass{article}
+
+% 1. Input/Output encoding (first)
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+% 2. Language and fonts
+\usepackage[english]{babel}
+\usepackage{lmodern}
+
+% 3. Page layout
+\usepackage[margin=1in]{geometry}
+
+% 4. Mathematics (early for widespread use)
+\usepackage{amsmath,amssymb}
+
+% 5. Graphics and colors
+\usepackage{graphicx}
+\usepackage{xcolor}
+
+% 6. Tables and lists
+\usepackage{booktabs}
+\usepackage{enumitem}
+
+% 7. Bibliography (before hyperref)
+\usepackage[backend=biber]{biblatex}
+
+% 8. Hyperref (near the end)
+\usepackage{hyperref}
+
+% 9. Packages that must load after hyperref
+\usepackage{cleveref}
+
+\begin{document}
+% Content here
+\end{document}
+```
+</CodeGroup>
+
+### Package Options
+
+<CodeGroup>
+```latex package-options.tex
+% Packages often accept options to modify behavior
+
+% Geometry with specific margins
+\usepackage[
+  top=1in,
+  bottom=1in,
+  left=1.5in,
+  right=1in,
+  headheight=15pt
+]{geometry}
+
+% Babel with multiple languages
+\usepackage[english,spanish,french]{babel}
+
+% Biblatex with style and backend
+\usepackage[
+  backend=biber,
+  style=authoryear,
+  sorting=nyt,
+  maxcitenames=2
+]{biblatex}
+
+% Hyperref with link colors
+\usepackage[
+  colorlinks=true,
+  linkcolor=blue,
+  citecolor=green,
+  urlcolor=red
+]{hyperref}
+
+% Listings with default language
+\usepackage[language=Python]{listings}
+
+% Multiple options for xcolor
+\usepackage[table,xcdraw,dvipsnames]{xcolor}
+```
+</CodeGroup>
+
+### Conditional Package Loading
+
+<CodeGroup>
+```latex conditional-loading.tex
+% Check if package is available
+\IfPackageExists{microtype}{
+  \usepackage{microtype}
+  \newcommand{\hasmicrotype}{true}
+}{
+  \newcommand{\hasmicrotype}{false}
+}
+
+% Load different packages based on compiler
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[utf8]{inputenc}
+  \usepackage[T1]{fontenc}
+\else
+  \usepackage{fontspec}
+\fi
+
+% Version-specific loading
+\@ifpackagelater{tikz}{2020/12/27}{
+  % TikZ version 3.1.8 or later
+  \usetikzlibrary{new-features}
+}{
+  % Older TikZ version
+  \usetikzlibrary{legacy-features}
+}
+
+% Global options vs package options
+\documentclass[12pt]{article}  % Global option affects all packages
+\usepackage{geometry}          % Inherits 12pt if relevant
+
+% Override global options
+\usepackage[10pt]{package}     % This package uses 10pt regardless
+```
+</CodeGroup>
+
+## Package Conflicts and Compatibility
+
+### Common Conflicts
+
+<Warning>
+**Known package conflicts:**
+
+1. **hyperref conflicts**: Load hyperref late, but before cleveref
+2. **Font conflicts**: Don't mix incompatible font packages
+3. **Math conflicts**: amsmath and mathtools can conflict with some packages
+4. **Table conflicts**: Some table packages don't work together
+5. **Encoding conflicts**: inputenc and fontspec are mutually exclusive
+</Warning>
+
+<CodeGroup>
+```latex handling-conflicts.tex
+% Conflict: subfigure vs subcaption
+% DON'T DO THIS:
+% \usepackage{subfigure}    % Obsolete
+% \usepackage{subcaption}   % Modern
+% DO THIS:
+\usepackage{subcaption}     % Use only the modern package
+
+% Conflict: times vs newtx
+% DON'T DO THIS:
+% \usepackage{times}        % Obsolete
+% \usepackage{newtxtext}    % Modern replacement
+% DO THIS:
+\usepackage{newtxtext,newtxmath}  % Complete modern replacement
+
+% Conflict: hyperref positioning
+% WRONG ORDER:
+% \usepackage{cleveref}
+% \usepackage{hyperref}
+% CORRECT ORDER:
+\usepackage{hyperref}
+\usepackage{cleveref}
+
+% Resolving font encoding conflicts
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[utf8]{inputenc}  % For pdflatex
+  \usepackage[T1]{fontenc}
+\else
+  \usepackage{fontspec}        % For xelatex/lualatex
+\fi
+```
+</CodeGroup>
+
+### Debugging Package Issues
+
+<CodeGroup>
+```latex debugging-packages.tex
+% Method 1: Minimal example
+\documentclass{article}
+\usepackage{problematic-package}
+\begin{document}
+Test content
+\end{document}
+
+% Method 2: Load packages incrementally
+\documentclass{article}
+% \usepackage{package1}     % Comment out packages one by one
+% \usepackage{package2}     % to identify conflicts
+% \usepackage{package3}
+\usepackage{package4}       % Until you find the problematic combination
+
+% Method 3: Check package versions
+\listfiles                  % Add this before \begin{document}
+% This will list all loaded packages and versions in the log
+
+% Method 4: Verbose error reporting
+\errorcontextlines=999      % Show more context in error messages
+\tracingmacros=1           % Trace macro expansions (very verbose!)
+```
+</CodeGroup>
+
+## Essential Package Categories
+
+### Mathematics and Science
+
+<CodeGroup>
+```latex math-science-packages.tex
+% Core mathematics
+\usepackage{amsmath}        % Essential math environments
+\usepackage{amssymb}        % Additional symbols
+\usepackage{mathtools}      % Enhanced amsmath
+
+% Advanced mathematics
+\usepackage{physics}        % Physics notation
+\usepackage{siunitx}        % SI units
+\usepackage{tensor}         % Tensor notation
+\usepackage{cancel}         % Cancel terms in equations
+
+% Chemistry
+\usepackage{mhchem}         % Chemical formulas
+\usepackage{chemfig}        % Chemical structures
+\usepackage{chemmacros}     % Chemical macros
+
+% Algorithm typesetting
+\usepackage{algorithm}      % Algorithm floats
+\usepackage{algpseudocode}  % Pseudocode
+\usepackage{algorithm2e}    % Alternative algorithm package
+```
+</CodeGroup>
+
+### Graphics and Visualization
+
+<CodeGroup>
+```latex graphics-packages.tex
+% Basic graphics
+\usepackage{graphicx}       % Include images
+\usepackage{rotating}       % Rotate content
+\usepackage{wrapfig}        % Wrap text around figures
+
+% Advanced graphics
+\usepackage{tikz}           % Programmatic graphics
+\usepackage{pgfplots}       % Data plotting
+\usepackage{circuitikz}     % Circuit diagrams
+
+% Subfigures
+\usepackage{subcaption}     % Modern subfigures
+\usepackage{subfig}         % Alternative (less recommended)
+
+% Figure positioning
+\usepackage{float}          % Enhanced float control
+\usepackage{placeins}       % Float barriers
+```
+</CodeGroup>
+
+### Text and Document Formatting
+
+<CodeGroup>
+```latex formatting-packages.tex
+% Typography
+\usepackage{microtype}      % Improved typography
+\usepackage{setspace}       % Line spacing control
+\usepackage{parskip}        % Paragraph spacing
+
+% Page layout
+\usepackage{geometry}       % Page dimensions
+\usepackage{fancyhdr}       % Headers and footers
+\usepackage{titlesec}       % Section title formatting
+
+% Lists and itemization
+\usepackage{enumitem}       % Customizable lists
+\usepackage{mdwlist}        % Compact lists
+
+% Tables
+\usepackage{booktabs}       % Professional tables
+\usepackage{array}          % Enhanced column types
+\usepackage{tabularx}       % Auto-width tables
+\usepackage{longtable}      % Multi-page tables
+\usepackage{ltxtable}       % Combination of longtable and tabularx
+```
+</CodeGroup>
+
+### Code and Verbatim
+
+<CodeGroup>
+```latex code-packages.tex
+% Code listings
+\usepackage{listings}       % Basic code listings
+\usepackage{minted}         % Advanced syntax highlighting (requires pygments)
+\usepackage{fancyvrb}       % Enhanced verbatim
+
+% Listings configuration
+\lstset{
+  language=Python,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{blue},
+  commentstyle=\color{green},
+  stringstyle=\color{red},
+  numbers=left,
+  numberstyle=\tiny,
+  breaklines=true
+}
+
+% Minted configuration
+\setminted{
+  fontsize=\small,
+  linenos=true,
+  breaklines=true,
+  frame=lines
+}
+```
+</CodeGroup>
+
+## Advanced Package Management
+
+### Creating Your Own Packages
+
+<CodeGroup>
+```latex custom-package.sty
+% mypackage.sty - Custom package file
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{mypackage}[2024/01/01 My Custom Package]
+
+% Package options
+\newif\if@myoption
+\@myoptionfalse
+\DeclareOption{myoption}{\@myoptiontrue}
+\ProcessOptions\relax
+
+% Required packages
+\RequirePackage{amsmath}
+\RequirePackage{xcolor}
+
+% Custom commands
+\newcommand{\highlight}[1]{\textcolor{yellow}{#1}}
+\newcommand{\important}[1]{\textbf{\textcolor{red}{#1}}}
+
+% Custom environments
+\newenvironment{myenv}{%
+  \begin{center}\color{blue}\bfseries
+}{%
+  \end{center}
+}
+
+% Conditional code based on options
+\if@myoption
+  \newcommand{\optionalcommand}{This appears with myoption}
+\else
+  \newcommand{\optionalcommand}{This appears without myoption}
+\fi
+```
+
+```latex using-custom-package.tex
+% Using the custom package
+\documentclass{article}
+\usepackage[myoption]{mypackage}  % Load with option
+
+\begin{document}
+\highlight{Highlighted text}
+\important{Important text}
+
+\begin{myenv}
+Content in custom environment
+\end{myenv}
+
+\optionalcommand
+\end{document}
+```
+</CodeGroup>
+
+### Package Version Control
+
+<CodeGroup>
+```latex version-control.tex
+% Require specific package version
+\usepackage{l3packages}
+\ExplSyntaxOn
+\msg_new:nnn { mypackage } { version-too-old }
+  { Package~'#1'~is~too~old.~Required:~#2,~Found:~#3 }
+
+% Check if package version is sufficient
+\@ifpackagelater{tikz}{2020/12/27}{
+  % Version is 3.1.8 or later
+}{
+  \msg_error:nnn { mypackage } { version-too-old } { tikz } { 3.1.8 } { \@ifpackageloaded{tikz}{\csname ver@tikz.sty\endcsname}{not loaded} }
+}
+\ExplSyntaxOff
+
+% Alternative simple version check
+\@ifpackagelater{amsmath}{2017/09/02}{}{
+  \PackageError{mydocument}{amsmath package too old}{}
+}
+```
+</CodeGroup>
+
+## Best Practices
+
+<Tip>
+**Package management best practices:**
+
+1. **Document requirements**: List all required packages in comments
+2. **Use stable packages**: Prefer well-established packages over experimental ones
+3. **Read documentation**: Always check package documentation before use
+4. **Test compatibility**: Test package combinations in minimal examples
+5. **Version control**: Document package versions for reproducible builds
+6. **Minimal loading**: Only load packages you actually use
+7. **Load order**: Follow standard loading order to avoid conflicts
+8. **Keep updated**: Use recent package versions when possible
+</Tip>
+
+### Package Documentation Template
+
+<CodeGroup>
+```latex package-documentation.tex
+% Document header with package requirements
+%
+% Required packages:
+% - amsmath (core LaTeX distribution)
+% - graphicx (core LaTeX distribution)
+% - tikz (CTAN: tikz)
+% - booktabs (CTAN: booktabs)
+% - biblatex with biber backend
+%
+% Optional packages:
+% - microtype (improved typography)
+% - hyperref (PDF links and bookmarks)
+%
+% Compilation: pdflatex -> biber -> pdflatex -> pdflatex
+%
+
+\documentclass{article}
+
+% Package loading with version comments
+\usepackage{amsmath}        % v2.17 or later
+\usepackage{graphicx}       % v1.1 or later
+\usepackage{tikz}           % v3.1.8 or later for advanced features
+\usepackage{booktabs}       % v1.6 or later
+\usepackage[backend=biber]{biblatex}  % v3.16 or later
+
+% Document content
+\begin{document}
+Content requiring the above packages...
+\end{document}
+```
+</CodeGroup>
+
+## Troubleshooting Guide
+
+### Common Error Messages
+
+<Warning>
+**Fixing common package errors:**
+
+1. **"Package not found"**: Check spelling and availability
+2. **"Option clash"**: Package loaded twice with different options
+3. **"Command already defined"**: Two packages define the same command
+4. **"Missing number"**: Syntax error in package options
+5. **"Unknown option"**: Option not supported by package version
+6. **"File not found"**: Missing package files or dependencies
+</Warning>
+
+<CodeGroup>
+```latex troubleshooting.tex
+% Error: Package not found
+% Solution: Check package name spelling
+\usepackage{graphicx}  % Correct
+% \usepackage{graphics}  % Common misspelling
+
+% Error: Option clash
+% Problem:
+% \usepackage[utf8]{inputenc}
+% \usepackage[latin1]{inputenc}  % Conflict!
+% Solution: Use global options or load once
+\PassOptionsToPackage{utf8}{inputenc}
+\usepackage{inputenc}
+
+% Error: Command redefinition
+% Problem: Two packages define \example
+% Solution: Rename one command
+\usepackage{package1}
+\let\exampleoriginal\example
+\usepackage{package2}  % Redefines \example
+\let\examplenew\example
+\let\example\exampleoriginal  % Restore original
+
+% Error: Unknown option
+% Check package documentation for valid options
+\usepackage[colorlinks=true]{hyperref}  % Valid option
+% \usepackage[invalidoption]{hyperref}   % Would cause error
+```
+</CodeGroup>
+
+## Quick Reference
+
+### Essential Package Loading Order
+
+```latex
+% 1. Input/Output
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+% 2. Language
+\usepackage[english]{babel}
+
+% 3. Layout
+\usepackage{geometry}
+
+% 4. Math
+\usepackage{amsmath,amssymb}
+
+% 5. Graphics
+\usepackage{graphicx}
+
+% 6. Colors
+\usepackage{xcolor}
+
+% 7. Bibliography
+\usepackage{biblatex}
+
+% 8. Hyperref (late)
+\usepackage{hyperref}
+
+% 9. After hyperref
+\usepackage{cleveref}
+```
+
+### Package Categories Quick List
+
+| Category | Essential Packages |
+|----------|-------------------|
+| **Math** | `amsmath`, `amssymb`, `mathtools` |
+| **Graphics** | `graphicx`, `tikz`, `subcaption` |
+| **Tables** | `booktabs`, `array`, `longtable` |
+| **Bibliography** | `biblatex`, `natbib` |
+| **Typography** | `microtype`, `setspace`, `enumitem` |
+| **Layout** | `geometry`, `fancyhdr`, `titlesec` |
+| **Code** | `listings`, `minted`, `fancyvrb` |
+| **PDF** | `hyperref`, `cleveref`, `bookmark` |
+
+---
+
+<Info>
+**Next**: Learn about [Enhanced cross-linking](/learn/latex/cross-referencing) to improve navigation between related topics in your documentation.
+</Info>

@@ -1,0 +1,829 @@
+---
+title: Presentation Templates
+description: Professional LaTeX Beamer templates for academic presentations, conference talks, and lectures. Ready-to-use presentation templates.
+---
+
+import { CodeGroup, Info, Tip, Warning, Card, CardGroup } from '/snippets/components.mdx'
+
+Create stunning presentations with LaTeX Beamer. These templates provide professional slides for academic talks, conference presentations, and lectures.
+
+<Info>
+**Quick start**: Copy any template below, paste it into [LaTeX Cloud Studio](/getting-started/cloud-studio), and create your presentation immediately.
+</Info>
+
+## Basic Academic Presentation
+
+Perfect for conference talks, seminars, and academic presentations.
+
+<CodeGroup>
+```latex academic-presentation.tex
+\documentclass[aspectratio=169]{beamer}
+
+% Theme selection
+\usetheme{Madrid}
+\usecolortheme{default}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+
+% Title page information
+\title{Your Presentation Title}
+\subtitle{A Comprehensive Overview}
+\author{Your Name}
+\institute{Your Institution\\Department of Your Field}
+\date{\today}
+
+% Footer information
+\setbeamertemplate{footline}[frame number]
+
+\begin{document}
+
+% Title slide
+\frame{\titlepage}
+
+% Outline slide
+\begin{frame}{Outline}
+\tableofcontents
+\end{frame}
+
+\section{Introduction}
+
+\begin{frame}{Introduction}
+\begin{itemize}
+\item Welcome to our presentation on [topic]
+\item Today we will explore [key points]
+\item This work addresses [problem/question]
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Motivation}
+\begin{columns}
+\begin{column}{0.6\textwidth}
+\begin{itemize}
+\item Why is this topic important?
+\item What problem are we solving?
+\item How does this relate to current research?
+\end{itemize}
+\end{column}
+\begin{column}{0.4\textwidth}
+\includegraphics[width=\textwidth]{motivation-figure}
+\end{column}
+\end{columns}
+\end{frame}
+
+\section{Background}
+
+\begin{frame}{Literature Review}
+\begin{block}{Previous Work}
+\begin{itemize}
+\item Smith et al. (2022): Initial findings
+\item Johnson (2023): Extended analysis
+\item Brown et al. (2023): Recent developments
+\end{itemize}
+\end{block}
+
+\begin{alertblock}{Research Gap}
+Despite progress, challenges remain in:
+\begin{itemize}
+\item Area 1: Specific limitation
+\item Area 2: Methodological issues
+\end{itemize}
+\end{alertblock}
+\end{frame}
+
+\begin{frame}{Theoretical Framework}
+\begin{definition}
+Let $X$ be a [mathematical object]. We define [concept] as:
+\begin{equation}
+f(x) = \sum_{i=1}^{n} w_i \cdot x_i
+\end{equation}
+\end{definition}
+
+\begin{theorem}
+Under conditions A and B, the proposed method converges.
+\end{theorem}
+\end{frame}
+
+\section{Methodology}
+
+\begin{frame}{Research Approach}
+\begin{enumerate}
+\item<1-> Problem formulation
+\item<2-> Data collection and preprocessing
+\item<3-> Algorithm development
+\item<4-> Experimental validation
+\item<5-> Analysis and interpretation
+\end{enumerate}
+
+\onslide<6->{
+\begin{center}
+\textbf{Systematic approach ensures reproducible results}
+\end{center}
+}
+\end{frame}
+
+\begin{frame}{System Architecture}
+\begin{center}
+\includegraphics[width=0.8\textwidth]{system-diagram}
+\end{center}
+
+\begin{itemize}
+\item Input processing module
+\item Core algorithm implementation
+\item Output generation and validation
+\end{itemize}
+\end{frame}
+
+\section{Results}
+
+\begin{frame}{Experimental Setup}
+\begin{table}
+\centering
+\caption{Experimental parameters}
+\begin{tabular}{@{}lr@{}}
+\toprule
+Parameter & Value \\
+\midrule
+Dataset size & 10,000 samples \\
+Training split & 80\% \\
+Validation split & 20\% \\
+Epochs & 100 \\
+Learning rate & 0.001 \\
+\bottomrule
+\end{tabular}
+\end{table}
+\end{frame}
+
+\begin{frame}{Performance Results}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{performance-chart}
+\caption{Accuracy over time}
+\end{figure}
+\end{column}
+\begin{column}{0.5\textwidth}
+\begin{itemize}
+\item Achieved 95\% accuracy
+\item 20\% improvement over baseline
+\item Convergence in 50 epochs
+\end{itemize}
+
+\begin{exampleblock}{Key Finding}
+Our method outperforms existing approaches while maintaining computational efficiency.
+\end{exampleblock}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Comparison with State-of-the-Art}
+\begin{table}
+\centering
+\begin{tabular}{@{}lccc@{}}
+\toprule
+Method & Accuracy & Speed & Memory \\
+\midrule
+Baseline & 85.2\% & 1.0x & 100 MB \\
+Method A & 89.7\% & 0.8x & 120 MB \\
+Method B & 91.3\% & 0.6x & 150 MB \\
+\textbf{Our Method} & \textbf{95.1\%} & \textbf{0.9x} & \textbf{95 MB} \\
+\bottomrule
+\end{tabular}
+\end{table}
+\end{frame}
+
+\section{Discussion}
+
+\begin{frame}{Key Insights}
+\begin{itemize}
+\item<1-> \textbf{Performance}: Significant improvement in accuracy
+\item<2-> \textbf{Efficiency}: Lower memory requirements
+\item<3-> \textbf{Scalability}: Works well with larger datasets
+\item<4-> \textbf{Generalization}: Consistent results across domains
+\end{itemize}
+
+\onslide<5->{
+\begin{center}
+\colorbox{yellow}{\textbf{Main contribution: Novel approach with practical benefits}}
+\end{center}
+}
+\end{frame}
+
+\begin{frame}{Limitations and Future Work}
+\begin{block}{Current Limitations}
+\begin{itemize}
+\item Limited to specific data types
+\item Computational complexity for very large datasets
+\item Parameter sensitivity in edge cases
+\end{itemize}
+\end{block}
+
+\begin{block}{Future Directions}
+\begin{itemize}
+\item Extension to multimodal data
+\item Real-time processing capabilities
+\item Integration with existing frameworks
+\end{itemize}
+\end{block}
+\end{frame}
+
+\section{Conclusion}
+
+\begin{frame}{Summary}
+\begin{itemize}
+\item Presented a novel approach to [problem]
+\item Demonstrated superior performance
+\item Provided insights into [specific area]
+\end{itemize}
+
+\vspace{1em}
+
+\begin{center}
+\large \textbf{Thank you for your attention!}
+\end{center}
+
+\vspace{1em}
+
+\begin{center}
+\textit{Questions?}
+\end{center}
+\end{frame}
+
+% References slide
+\begin{frame}{References}
+\begin{thebibliography}{9}
+\bibitem{smith2022}
+Smith, J. et al. (2022). Initial findings in [field]. \textit{Journal Name}, 15(3), 123-145.
+
+\bibitem{johnson2023}
+Johnson, A. (2023). Extended analysis of [topic]. \textit{Conference Proceedings}, pp. 456-789.
+
+\bibitem{brown2023}
+Brown, M. et al. (2023). Recent developments in [area]. \textit{Research Review}, 8(2), 234-567.
+\end{thebibliography}
+\end{frame}
+
+% Backup slides
+\appendix
+
+\begin{frame}{Additional Results}
+\begin{center}
+\textbf{Backup Slide: Detailed Analysis}
+\end{center}
+
+Include additional figures, tables, or detailed explanations that you might need during Q&A.
+\end{frame}
+
+\end{document}
+```
+</CodeGroup>
+
+## Conference Presentation Template
+
+Optimized for conference talks with time constraints.
+
+<CodeGroup>
+```latex conference-presentation.tex
+\documentclass[aspectratio=169,10pt]{beamer}
+
+% Modern theme
+\usetheme{metropolis}
+\usecolortheme{spruce}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{booktabs}
+
+% Custom colors
+\definecolor{primarycolor}{RGB}{0,114,189}
+\definecolor{secondarycolor}{RGB}{217,83,25}
+
+\setbeamercolor{progress bar}{fg=primarycolor}
+\setbeamercolor{title separator}{fg=primarycolor}
+\setbeamercolor{frametitle}{bg=primarycolor}
+
+% Title information
+\title{Conference Talk Title}
+\subtitle{Key Findings and Implications}
+\author{Your Name}
+\institute{University/Company}
+\date{Conference Name 2024}
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}{Research Question}
+\begin{center}
+{\Large \textbf{How can we improve [specific problem]?}}
+\end{center}
+
+\vspace{1em}
+
+\begin{itemize}
+\item Challenge: Current methods have limitations
+\item Goal: Develop a better approach
+\item Impact: Practical applications in [field]
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Our Contribution}
+\begin{columns}[T]
+\begin{column}{0.5\textwidth}
+\textbf{Key Innovation:}
+\begin{itemize}
+\item Novel algorithm design
+\item Theoretical guarantees
+\item Empirical validation
+\end{itemize}
+\end{column}
+\begin{column}{0.5\textwidth}
+\textbf{Main Results:}
+\begin{itemize}
+\item 25\% performance improvement
+\item 50\% reduction in complexity
+\item Generalizes to new domains
+\end{itemize}
+\end{column}
+\end{columns}
+
+\vspace{1em}
+
+\begin{center}
+\colorbox{primarycolor!20}{\textbf{First to achieve X in Y setting}}
+\end{center}
+\end{frame}
+
+\begin{frame}{Method Overview}
+\begin{center}
+\begin{tikzpicture}[
+  box/.style={rectangle, draw, fill=blue!20, minimum width=2cm, minimum height=1cm},
+  arrow/.style={->, thick}
+]
+\node[box] (input) {Input Data};
+\node[box, right=2cm of input] (process) {Our Algorithm};
+\node[box, right=2cm of process] (output) {Improved Results};
+
+\draw[arrow] (input) -- (process);
+\draw[arrow] (process) -- (output);
+
+\node[below=0.5cm of process] {Core Innovation};
+\end{tikzpicture}
+\end{center}
+
+\begin{itemize}
+\item Step 1: Preprocessing with novel technique
+\item Step 2: Optimization using [method]
+\item Step 3: Post-processing for robustness
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Experimental Results}
+\begin{table}
+\centering
+\begin{tabular}{@{}lcc@{}}
+\toprule
+\textbf{Method} & \textbf{Performance} & \textbf{Time (sec)} \\
+\midrule
+Baseline & 75.2\% & 10.5 \\
+State-of-art & 82.1\% & 8.7 \\
+\textbf{Ours} & \textbf{91.3\%} & \textbf{6.2} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\vspace{1em}
+
+\begin{center}
+\textcolor{primarycolor}{\textbf{Significant improvement across all metrics}}
+\end{center}
+\end{frame}
+
+\begin{frame}{Impact and Future Work}
+\begin{block}{Immediate Impact}
+\begin{itemize}
+\item Applicable to real-world problems
+\item Already implemented in [system]
+\item Interest from industry partners
+\end{itemize}
+\end{block}
+
+\begin{block}{Next Steps}
+\begin{itemize}
+\item Scale to larger datasets
+\item Explore related applications
+\item Open-source implementation
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}[standout]
+\Huge Thank You!
+
+\vspace{1em}
+
+\large Questions?
+
+\vspace{1em}
+
+\normalsize
+Contact: your.email@institution.edu\\
+Code: github.com/username/project
+\end{frame}
+
+\end{document}
+```
+</CodeGroup>
+
+## Lecture Slides Template
+
+Designed for educational presentations and lectures.
+
+<CodeGroup>
+```latex lecture-slides.tex
+\documentclass[aspectratio=43,12pt]{beamer}
+
+% Educational theme
+\usetheme{Warsaw}
+\usecolortheme{beaver}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{graphicx}
+\usepackage{enumerate}
+\usepackage{listings}
+
+% Code listing setup
+\lstset{
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue},
+    commentstyle=\color{green!60!black},
+    numbers=left,
+    numberstyle=\tiny,
+    frame=single
+}
+
+% Course information
+\title{Lecture Topic: Advanced Concepts}
+\subtitle{Course Name - Week X}
+\author{Professor Name}
+\institute{University Name\\Department}
+\date{Academic Year}
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}{Today's Agenda}
+\tableofcontents
+\end{frame}
+
+\section{Learning Objectives}
+
+\begin{frame}{What You'll Learn Today}
+By the end of this lecture, you will be able to:
+
+\begin{enumerate}
+\item Understand the core concepts of [topic]
+\item Apply [method] to solve problems
+\item Analyze [specific cases]
+\item Evaluate the effectiveness of different approaches
+\end{enumerate}
+
+\vspace{1em}
+
+\begin{center}
+\textbf{Active participation encouraged!}
+\end{center}
+\end{frame}
+
+\section{Review}
+
+\begin{frame}{Quick Review: Previous Lecture}
+\begin{itemize}
+\item<1-> Key concept 1: [Brief reminder]
+\item<2-> Key concept 2: [Brief reminder]
+\item<3-> Important formula: $E = mc^2$
+\item<4-> Practical application: [Example]
+\end{itemize}
+
+\onslide<5->{
+\begin{block}{Question}
+Can anyone recall why this matters for today's topic?
+\end{block}
+}
+\end{frame}
+
+\section{New Material}
+
+\begin{frame}{Core Concept: [Topic Name]}
+\begin{definition}
+A [concept] is defined as [formal definition].
+\end{definition}
+
+\begin{example}
+Consider the case where [specific example]:
+\begin{equation}
+f(x) = ax^2 + bx + c
+\end{equation}
+Here we can see that [explanation].
+\end{example}
+\end{frame}
+
+\begin{frame}{Step-by-Step Process}
+\begin{enumerate}
+\item<1-> \textbf{Step 1}: Identify the problem type
+  \begin{itemize}
+  \item<2-> Look for key indicators
+  \item<2-> Check boundary conditions
+  \end{itemize}
+\item<3-> \textbf{Step 2}: Apply the appropriate method
+  \begin{itemize}
+  \item<4-> Use formula X for case A
+  \item<4-> Use formula Y for case B
+  \end{itemize}
+\item<5-> \textbf{Step 3}: Verify the solution
+  \begin{itemize}
+  \item<6-> Check units and reasonableness
+  \item<6-> Compare with known results
+  \end{itemize}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{Code Example}
+\begin{lstlisting}[language=Python]
+def solve_problem(data):
+    """
+    Solve the problem using our method
+    """
+    # Step 1: Preprocess data
+    processed = preprocess(data)
+    
+    # Step 2: Apply algorithm
+    result = algorithm(processed)
+    
+    # Step 3: Post-process
+    final_result = postprocess(result)
+    
+    return final_result
+\end{lstlisting}
+
+\begin{itemize}
+\item Clean, modular code structure
+\item Each step clearly separated
+\item Easy to debug and modify
+\end{itemize}
+\end{frame}
+
+\section{Examples}
+
+\begin{frame}{Worked Example 1}
+\textbf{Problem}: Given [specific problem statement]
+
+\pause
+
+\textbf{Solution}:
+\begin{align}
+\text{Step 1: } & \quad [mathematical step] \\
+\text{Step 2: } & \quad [mathematical step] \\
+\text{Step 3: } & \quad [final result]
+\end{align}
+
+\pause
+
+\begin{alertblock}{Key Insight}
+Notice how we used [specific technique] to simplify the problem.
+\end{alertblock}
+\end{frame}
+
+\begin{frame}{Your Turn: Practice Problem}
+\begin{block}{Problem}
+Try to solve: [problem statement]
+\end{block}
+
+\vspace{1em}
+
+Take 3 minutes to work on this individually, then we'll discuss solutions.
+
+\pause
+
+\vspace{1em}
+
+\begin{center}
+\textit{[Time for student work]}
+\end{center}
+
+\pause
+
+Who would like to share their approach?
+\end{frame}
+
+\section{Applications}
+
+\begin{frame}{Real-World Applications}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\textbf{Industry Applications:}
+\begin{itemize}
+\item Manufacturing optimization
+\item Financial modeling
+\item Medical diagnostics
+\item Environmental monitoring
+\end{itemize}
+\end{column}
+\begin{column}{0.5\textwidth}
+\textbf{Research Applications:}
+\begin{itemize}
+\item Scientific computing
+\item Data analysis
+\item Machine learning
+\item Simulation studies
+\end{itemize}
+\end{column}
+\end{columns}
+
+\vspace{1em}
+
+\begin{exampleblock}{Case Study}
+Company X used this approach to improve efficiency by 30\%.
+\end{exampleblock}
+\end{frame}
+
+\section{Summary}
+
+\begin{frame}{Key Takeaways}
+\begin{enumerate}
+\item \textbf{Concept}: [Main concept learned]
+\item \textbf{Method}: [Primary method or technique]
+\item \textbf{Application}: [How to apply it]
+\item \textbf{Benefits}: [Why it's useful]
+\end{enumerate}
+
+\vspace{1em}
+
+\begin{center}
+\textbf{Remember}: Practice makes perfect!
+\end{center}
+\end{frame}
+
+\begin{frame}{Next Week}
+\begin{itemize}
+\item Reading assignment: Chapter X, sections Y-Z
+\item Problem set due: Friday by 5 PM
+\item Next topic: [Preview of next lecture]
+\end{itemize}
+
+\vspace{1em}
+
+\begin{block}{Office Hours}
+Available for questions:
+\begin{itemize}
+\item Tuesday 2-4 PM
+\item Thursday 10-12 PM
+\item By appointment
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}[standout]
+Questions?
+
+\vspace{2em}
+
+Thank you for your attention!
+\end{frame}
+
+\end{document}
+```
+</CodeGroup>
+
+## Template Features
+
+<Tip>
+**Presentation tips:**
+
+1. **Keep slides simple** - Maximum 6-7 bullet points per slide
+2. **Use visual hierarchy** - Important points should stand out
+3. **Include animations sparingly** - Use `\pause` and `\onslide` for emphasis
+4. **Prepare backup slides** - Use `\appendix` for additional material
+5. **Practice timing** - Academic talks: 1-2 minutes per slide
+</Tip>
+
+## Customization Options
+
+### Themes and Colors
+
+<CodeGroup>
+```latex themes.tex
+% Popular themes
+\usetheme{Madrid}      % Professional
+\usetheme{Berlin}      % Academic
+\usetheme{metropolis}  % Modern (requires package)
+\usetheme{Frankfurt}   % Compact
+
+% Color themes
+\usecolortheme{default}
+\usecolortheme{beaver}     % Red
+\usecolortheme{dolphin}    % Blue
+\usecolortheme{orchid}     % Purple
+
+% Custom colors
+\definecolor{mycolor}{RGB}{25,25,112}
+\setbeamercolor{structure}{fg=mycolor}
+```
+</CodeGroup>
+
+### Aspect Ratios
+
+<CodeGroup>
+```latex aspect-ratios.tex
+% 16:9 widescreen (modern projectors)
+\documentclass[aspectratio=169]{beamer}
+
+% 4:3 traditional (older projectors)
+\documentclass[aspectratio=43]{beamer}
+
+% 16:10 (some laptops)
+\documentclass[aspectratio=1610]{beamer}
+```
+</CodeGroup>
+
+### Advanced Features
+
+<CodeGroup>
+```latex advanced.tex
+% Progress bar
+\usepackage{tikz}
+\setbeamertemplate{headline}{
+  \begin{beamercolorbox}[wd=\paperwidth,ht=4pt,dp=0pt]{structure}
+    \pgfmathsetmacro{\progress}{\insertframenumber/\inserttotalframenumber}
+    \begin{tikzpicture}[overlay,remember picture]
+      \fill[structure.fg] (0,0) rectangle (\progress\paperwidth,4pt);
+    \end{tikzpicture}
+  \end{beamercolorbox}
+}
+
+% Custom footline
+\setbeamertemplate{footline}{
+  \hfill\insertframenumber/\inserttotalframenumber\hspace{1em}\vspace{1em}
+}
+```
+</CodeGroup>
+
+## Quick Reference
+
+### Essential Commands
+
+| Command | Purpose | Example |
+|---------|---------|---------|
+| `\frame{}` | Create slide | `\frame{\titlepage}` |
+| `\begin{frame}{Title}` | Frame with title | `\begin{frame}{Introduction}` |
+| `\pause` | Pause between items | `Item 1 \pause Item 2` |
+| `\onslide<2->{}` | Show from slide 2 | `\onslide<2->{Text}` |
+| `\only<1>{}` | Show only on slide 1 | `\only<1>{Special text}` |
+
+### Blocks and Environments
+
+<CodeGroup>
+```latex blocks.tex
+% Information blocks
+\begin{block}{Title}
+Content goes here
+\end{block}
+
+\begin{alertblock}{Warning}
+Important information
+\end{alertblock}
+
+\begin{exampleblock}{Example}
+Example content
+\end{exampleblock}
+
+% Columns
+\begin{columns}
+\begin{column}{0.5\textwidth}
+Left column
+\end{column}
+\begin{column}{0.5\textwidth}
+Right column
+\end{column}
+\end{columns}
+```
+</CodeGroup>
+
+---
+
+<Info>
+**Next**: Create professional [CV templates](/templates/cv) for resumes and academic CVs, or explore [Report templates](/templates/report) for longer documents.
+</Info>
