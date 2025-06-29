@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>LaTeX Cloud Studio Blog</title>
+    <description>Insights, tutorials, and updates from the LaTeX Cloud Studio team</description>
+    <link>https://docs.latex-cloud-studio.com/blog</link>
+    <atom:link href="https://docs.latex-cloud-studio.com/blog/rss.xml" rel="self" type="application/rss+xml" />
+    <language>en-us</language>
+    <lastBuildDate>Sun, 29 Jun 2025 15:20:37 GMT</lastBuildDate>
+    
+    <item>
+      <title>From Word to LaTeX - A Beginner's Journey to Better Documents</title>
+      <description>Follow Emma's transformation from frustrated Word user to LaTeX convert. Discover how switching to LaTeX Cloud Studio revolutionized her academic writing and document quality.</description>
+      <link>https://docs.latex-cloud-studio.com/blog/from-word-to-latex-beginners-journey</link>
+      <guid>https://docs.latex-cloud-studio.com/blog/from-word-to-latex-beginners-journey</guid>
+      <pubDate>Fri, 22 Mar 2024 00:00:00 GMT</pubDate>
+      <author>Emma Rodriguez, Graduate Student</author>
+      <category>beginner</category>
+      <category>story</category>
+      <category>word-to-latex</category>
+      <category>academic</category>
+      <category>transformation</category>
+    </item>
+    <item>
+      <title>Why We Built LaTeX Cloud Studio - Making LaTeX Accessible to Everyone</title>
+      <description>The story behind LaTeX Cloud Studio and why we believe everyone deserves access to beautiful, professional document creation without the complexity.</description>
+      <link>https://docs.latex-cloud-studio.com/blog/why-we-built-latex-cloud-studio</link>
+      <guid>https://docs.latex-cloud-studio.com/blog/why-we-built-latex-cloud-studio</guid>
+      <pubDate>Fri, 15 Mar 2024 00:00:00 GMT</pubDate>
+      <author>LaTeX Cloud Studio Team</author>
+      <category>story</category>
+      <category>platform</category>
+      <category>accessibility</category>
+      <category>mission</category>
+    </item>
+    <item>
+      <title>Mastering TikZ Diagrams - Tips and Tricks</title>
+      <description>Learn advanced techniques for creating stunning diagrams with TikZ in LaTeX</description>
+      <link>https://docs.latex-cloud-studio.com/blog/mastering-tikz-diagrams</link>
+      <guid>https://docs.latex-cloud-studio.com/blog/mastering-tikz-diagrams</guid>
+      <pubDate>Sat, 10 Feb 2024 00:00:00 GMT</pubDate>
+      <author>Dr. Sarah Chen</author>
+      <category>tutorial</category>
+      <category>tikz</category>
+      <category>graphics</category>
+    </item>
+    <item>
+      <title>Welcome to LaTeX Cloud Studio</title>
+      <description>Introducing our new cloud-based LaTeX editor with real-time collaboration and powerful features</description>
+      <link>https://docs.latex-cloud-studio.com/blog/welcome-to-latex-cloud-studio</link>
+      <guid>https://docs.latex-cloud-studio.com/blog/welcome-to-latex-cloud-studio</guid>
+      <pubDate>Mon, 15 Jan 2024 00:00:00 GMT</pubDate>
+      <author>LaTeX Cloud Studio Team</author>
+      <category>announcement</category>
+      <category>platform</category>
+    </item>
+  </channel>
+</rss>

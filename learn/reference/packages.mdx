@@ -200,15 +200,17 @@ Enhanced version of amsmath.
 \DeclarePairedDelimiter\abs{\lvert}{\rvert}
 \DeclarePairedDelimiter\norm{\lVert}{\rVert}
 
-$\abs{x}$, $\abs*{\frac{a}{b}}$
-$\norm{v}$, $\norm*{\sum_{i=1}^n x_i}$
+% Usage
+\abs{x}      % Absolute value
+\abs*{x}     % Auto-sizing
+\norm{v}     % Vector norm
 ```
 </CodeGroup>
 
-## Graphics Packages
+## Graphics and Figures
 
 ### graphicx
-Including and manipulating images.
+Standard package for including graphics.
 
 <CodeGroup>
 ```latex graphicx-package.tex
@@ -216,56 +218,29 @@ Including and manipulating images.
 
 % Include images
 \includegraphics{image.png}
-\includegraphics[width=5cm]{image.png}
-\includegraphics[height=3cm]{image.png}
-\includegraphics[scale=0.5]{image.png}
-\includegraphics[angle=90]{image.png}
+\includegraphics[width=5cm]{image.pdf}
+\includegraphics[height=3cm]{image.jpg}
+\includegraphics[scale=0.5]{image.eps}
+\includegraphics[width=0.8\textwidth]{image.svg}
 
-% Set graphics path
-\graphicspath{{images/}{figures/}{../pics/}}
+% Rotation and scaling
+\includegraphics[angle=90]{image.png}
+\rotatebox{45}{Rotated text}
+\scalebox{2}{Scaled text}
+\resizebox{5cm}{3cm}{Resized content}
 
 % Figure environment
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.8\textwidth]{diagram}
-  \caption{Figure caption}
-  \label{fig:diagram}
+  \includegraphics[width=\textwidth]{plot.pdf}
+  \caption{Important results}
+  \label{fig:results}
 \end{figure}
 ```
 </CodeGroup>
 
-### tikz
-Creating graphics programmatically.
-
-<CodeGroup>
-```latex tikz-package.tex
-\usepackage{tikz}
-\usetikzlibrary{arrows,shapes,positioning}
-
-% Simple drawing
-\begin{tikzpicture}
-  \draw (0,0) -- (2,0) -- (1,1.732) -- cycle;
-  \draw[red,thick] (1,0.577) circle (0.577);
-  \node at (1,0.577) {Center};
-\end{tikzpicture}
-
-% Flowchart
-\begin{tikzpicture}[
-  box/.style={rectangle, draw, minimum width=2cm, minimum height=1cm},
-  arrow/.style={->, thick}
-]
-  \node[box] (A) {Start};
-  \node[box, below=of A] (B) {Process};
-  \node[box, below=of B] (C) {End};
-  
-  \draw[arrow] (A) -- (B);
-  \draw[arrow] (B) -- (C);
-\end{tikzpicture}
-```
-</CodeGroup>
-
 ### subcaption
-Subfigures and subtables.
+Create subfigures and subtables.
 
 <CodeGroup>
 ```latex subcaption-package.tex
@@ -273,243 +248,185 @@ Subfigures and subtables.
 
 \begin{figure}
   \centering
-  \begin{subfigure}[b]{0.45\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{fig1}
-    \caption{First subfigure}
+  \begin{subfigure}{0.45\textwidth}
+    \includegraphics[width=\textwidth]{image1.png}
+    \caption{First subplot}
     \label{fig:sub1}
   \end{subfigure}
   \hfill
-  \begin{subfigure}[b]{0.45\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{fig2}
-    \caption{Second subfigure}
+  \begin{subfigure}{0.45\textwidth}
+    \includegraphics[width=\textwidth]{image2.png}
+    \caption{Second subplot}
     \label{fig:sub2}
   \end{subfigure}
-  \caption{Main figure caption}
-  \label{fig:main}
+  \caption{Combined figure}
+  \label{fig:combined}
 \end{figure}
+
+% Reference subfigures
+See Figure~\ref{fig:sub1} and~\ref{fig:sub2}.
 ```
 </CodeGroup>
 
-## Table Packages
+### tikz
+Powerful graphics creation.
+
+<CodeGroup>
+```latex tikz-package.tex
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning, shapes}
+
+% Simple drawing
+\begin{tikzpicture}
+  \draw (0,0) -- (2,1) -- (1,2) -- cycle;
+  \node at (1,1) {Center};
+\end{tikzpicture}
+
+% Complex diagram
+\begin{tikzpicture}[
+  node distance=2cm,
+  every node/.style={draw, circle}
+]
+  \node (A) {A};
+  \node (B) [right=of A] {B};
+  \node (C) [below=of A] {C};
+  
+  \draw[->] (A) -- (B);
+  \draw[->] (A) -- (C);
+  \draw[->] (B) -- (C);
+\end{tikzpicture}
+```
+</CodeGroup>
+
+## Tables
 
 ### booktabs
-Professional-looking tables.
+Professional table formatting.
 
 <CodeGroup>
 ```latex booktabs-package.tex
 \usepackage{booktabs}
 
-\begin{table}
-\centering
-\begin{tabular}{lcc}
-\toprule
-Method & Accuracy & Speed \\
-\midrule
-Algorithm A & 95\% & Fast \\
-Algorithm B & 92\% & Medium \\
-Algorithm C & 98\% & Slow \\
-\bottomrule
-\end{tabular}
-\caption{Comparison of methods}
+\begin{table}[htbp]
+  \centering
+  \caption{Professional table}
+  \begin{tabular}{lcc}
+    \toprule
+    Item & Quantity & Price \\
+    \midrule
+    Apples & 5 & \$2.50 \\
+    Oranges & 3 & \$1.80 \\
+    Bananas & 6 & \$3.00 \\
+    \midrule
+    Total & 14 & \$7.30 \\
+    \bottomrule
+  \end{tabular}
 \end{table}
-
-% Additional rules
-\cmidrule{2-3}  % Partial rule
-\cmidrule(lr){2-3}  % With trimming
-\addlinespace  % Extra vertical space
 ```
 </CodeGroup>
 
 ### array
-Enhanced column specifications.
+Enhanced array and tabular environments.
 
 <CodeGroup>
 ```latex array-package.tex
 \usepackage{array}
 
 % New column types
-\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
-\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
-\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}}
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+\newcolumntype{R}{>{\raggedleft\arraybackslash}X}
 
-\begin{tabular}{L{3cm}C{3cm}R{3cm}}
-Left aligned & Centered & Right aligned \\
-with fixed & column & widths \\
+% Advanced tables
+\begin{tabular}{>{\bfseries}l c r}
+  \hline
+  Bold Header & Center & Right \\
+  \hline
+  Row 1 & Data & Values \\
+  Row 2 & More & Data \\
+  \hline
 \end{tabular}
-
-% Pre/post column material
-\begin{tabular}{>{\bfseries}l<{:}cr}
-Name & Value & Unit \\
-\end{tabular}
-```
-</CodeGroup>
-
-### tabularx
-Tables with calculated column widths.
-
-<CodeGroup>
-```latex tabularx-package.tex
-\usepackage{tabularx}
-
-% X columns expand to fill width
-\begin{tabularx}{\textwidth}{lXr}
-\toprule
-Fixed & Expanding column fills available space & Fixed \\
-A & This column automatically adjusts its width & 123 \\
-\bottomrule
-\end{tabularx}
-
-% Multiple X columns share space
-\begin{tabularx}{\textwidth}{|X|X|X|}
-\hline
-Equal & Width & Columns \\
-\hline
-\end{tabularx}
 ```
 </CodeGroup>
 
 ### longtable
-Multi-page tables.
+Tables spanning multiple pages.
 
 <CodeGroup>
 ```latex longtable-package.tex
 \usepackage{longtable}
 
 \begin{longtable}{lcc}
-\caption{Long table example} \label{tab:long} \\
-\toprule
-Name & Value & Unit \\
-\midrule
-\endfirsthead
-
-\multicolumn{3}{c}{\tablename\ \thetable\ -- \textit{Continued}} \\
-\toprule
-Name & Value & Unit \\
-\midrule
-\endhead
-
-\midrule
-\multicolumn{3}{r}{\textit{Continued on next page}} \\
-\endfoot
-
-\bottomrule
-\endlastfoot
-
-% Table data
-Item 1 & 10 & kg \\
-Item 2 & 20 & kg \\
-% ... many rows ...
+  \caption{Long table spanning pages} \\
+  \toprule
+  Column 1 & Column 2 & Column 3 \\
+  \midrule
+  \endfirsthead
+  
+  \multicolumn{3}{c}{{\tablename\ \thetable{} -- continued}} \\
+  \toprule
+  Column 1 & Column 2 & Column 3 \\
+  \midrule
+  \endhead
+  
+  \midrule
+  \multicolumn{3}{r}{{Continued on next page}} \\
+  \endfoot
+  
+  \bottomrule
+  \endlastfoot
+  
+  % Table content
+  Data & More & Values \\
+  % ... many rows
 \end{longtable}
 ```
 </CodeGroup>
 
-## Font Packages
-
-### Font Families
-
-<CodeGroup>
-```latex font-packages.tex
-% Times
-\usepackage{times}
-\usepackage{newtxtext,newtxmath}
-
-% Palatino
-\usepackage{palatino}
-\usepackage{newpxtext,newpxmath}
-
-% Computer Modern (enhanced)
-\usepackage{lmodern}
-
-% Helvetica
-\usepackage{helvet}
-\renewcommand{\familydefault}{\sfdefault}
-
-% Courier
-\usepackage{courier}
-
-% Custom combinations
-\usepackage{mathpazo}  % Palatino with matching math
-\usepackage{mathptmx}  % Times with matching math
-```
-</CodeGroup>
-
-### fontspec (XeLaTeX/LuaLaTeX)
-
-<CodeGroup>
-```latex fontspec-package.tex
-\usepackage{fontspec}
-
-% System fonts
-\setmainfont{Times New Roman}
-\setsansfont{Arial}
-\setmonofont{Consolas}
-
-% With options
-\setmainfont{Georgia}[
-  Numbers=OldStyle,
-  Ligatures=TeX
-]
-
-% Custom fonts
-\newfontfamily\headingfont{Helvetica Neue}[
-  Scale=1.1,
-  LetterSpace=2
-]
-
-{\headingfont\Large This is a heading}
-```
-</CodeGroup>
-
-## Citation Packages
+## Bibliography and Citations
 
 ### biblatex
 Modern bibliography management.
 
 <CodeGroup>
 ```latex biblatex-package.tex
-\usepackage[
-  backend=biber,
-  style=authoryear,  % or numeric, alphabetic, etc.
-  sorting=nyt,
-  maxbibnames=10,
-  maxcitenames=2
-]{biblatex}
-
+\usepackage[style=authoryear,backend=biber]{biblatex}
 \addbibresource{references.bib}
 
-% In document
-\textcite{smith2020}  % Smith (2020)
-\parencite{smith2020} % (Smith 2020)
-\footcite{smith2020}  % Footnote citation
+% Citation commands
+\cite{key}              % (Author, Year)
+\parencite{key}         % (Author, Year)
+\textcite{key}          % Author (Year)
+\citeauthor{key}        % Author
+\citeyear{key}          % Year
+\footcite{key}          % Footnote citation
+\fullcite{key}          % Full citation
 
 % Multiple citations
-\parencite{ref1,ref2,ref3}
+\parencite{key1,key2,key3}
 
-% Print bibliography
+% Bibliography
 \printbibliography
-\printbibliography[type=book,title={Books}]
 ```
 </CodeGroup>
 
 ### natbib
-Traditional bibliography management.
+Traditional bibliography package.
 
 <CodeGroup>
 ```latex natbib-package.tex
-\usepackage[round]{natbib}
+\usepackage[authoryear,round]{natbib}
 
-% Citation commands
-\cite{key}          % Jones et al. (1990)
-\citep{key}         % (Jones et al., 1990)
-\citet{key}         % Jones et al. (1990)
-\citealp{key}       % Jones et al., 1990
-\citeauthor{key}    % Jones et al.
-\citeyear{key}      % 1990
+% Citation styles
+\citet{key}     % Author (Year)
+\citep{key}     % (Author, Year)
+\citealt{key}   % Author Year
+\citealp{key}   % Author, Year
+\citeauthor{key}% Author
+\citeyear{key}  % Year
 
-% Multiple citations
-\citep{key1,key2}   % (Jones et al., 1990; Smith, 1991)
+% With page numbers
+\citep[p.~25]{key}
+\citep[see][p.~25]{key}
 
 % Bibliography
 \bibliographystyle{plainnat}
@@ -517,7 +434,7 @@ Traditional bibliography management.
 ```
 </CodeGroup>
 
-## List Packages
+## Lists
 
 ### enumitem
 Customizable lists.
@@ -526,132 +443,166 @@ Customizable lists.
 ```latex enumitem-package.tex
 \usepackage{enumitem}
 
-% Customize spacing
-\begin{itemize}[noitemsep,topsep=0pt]
-  \item Compact list
-  \item No extra spacing
+% Customized itemize
+\begin{itemize}[label=\textbullet, itemsep=0pt]
+  \item First item
+  \item Second item
 \end{itemize}
 
-% Custom labels
-\begin{enumerate}[label=(\alph*)]
-  \item First item (a)
-  \item Second item (b)
-\end{enumerate}
-
-% Resume numbering
-\begin{enumerate}[start=5]
-  \item Fifth item
-\end{enumerate}
-\begin{enumerate}[resume]
-  \item Sixth item
+% Customized enumerate
+\begin{enumerate}[label=(\alph*), start=3]
+  \item Third item (c)
+  \item Fourth item (d)
 \end{enumerate}
 
 % Inline lists
 \begin{enumerate*}[label=(\roman*)]
-  \item one \item two \item three
+  \item One \item Two \item Three
 \end{enumerate*}
+
+% Description lists
+\begin{description}[style=nextline]
+  \item[Long term] Description on next line
+  \item[Short] Inline description
+\end{description}
 ```
 </CodeGroup>
 
-## Color Packages
-
-### xcolor
-Extended color support.
-
-<CodeGroup>
-```latex xcolor-package.tex
-\usepackage[dvipsnames,svgnames,table]{xcolor}
-
-% Basic colors
-\textcolor{red}{Red text}
-\textcolor{blue!50}{50\% blue}
-\textcolor{red!30!blue}{Mixed color}
-
-% Define colors
-\definecolor{myblue}{RGB}{0,114,189}
-\definecolor{mygreen}{HTML}{00FF00}
-\definecolor{mygray}{gray}{0.8}
-
-% Background colors
-\colorbox{yellow}{Highlighted}
-\fcolorbox{red}{yellow}{Framed and filled}
-
-% Table colors
-\rowcolor{gray!20}
-\cellcolor{blue!10}
-\columncolor{green!5}
-```
-</CodeGroup>
-
-## Code Listing Packages
+## Code and Verbatim
 
 ### listings
-Source code formatting.
+Code listings with syntax highlighting.
 
 <CodeGroup>
 ```latex listings-package.tex
 \usepackage{listings}
 \usepackage{xcolor}
 
+% Configure style
 \lstset{
   language=Python,
   basicstyle=\ttfamily\small,
-  keywordstyle=\color{blue}\bfseries,
+  keywordstyle=\color{blue},
+  commentstyle=\color{green},
   stringstyle=\color{red},
-  commentstyle=\color{gray}\itshape,
   numbers=left,
-  numberstyle=\tiny\color{gray},
-  stepnumber=1,
-  numbersep=5pt,
-  backgroundcolor=\color{gray!10},
-  frame=single,
+  numberstyle=\tiny,
   breaklines=true,
-  captionpos=b
+  frame=single
 }
 
+% Inline code
+\lstinline{print("Hello")}
+
+% Code block
 \begin{lstlisting}[caption=Python example]
-def factorial(n):
-    """Calculate factorial of n"""
+def fibonacci(n):
     if n <= 1:
-        return 1
-    return n * factorial(n - 1)
+        return n
+    return fibonacci(n-1) + fibonacci(n-2)
 \end{lstlisting}
 
-% Inline code
-\lstinline|print("Hello")|
+% External file
+\lstinputlisting[language=C]{code.c}
 ```
 </CodeGroup>
 
-### minted (requires --shell-escape)
-Syntax highlighting with Pygments.
+### minted
+Advanced syntax highlighting.
 
 <CodeGroup>
 ```latex minted-package.tex
 \usepackage{minted}
 
-\begin{minted}[
-  frame=lines,
-  framesep=2mm,
-  baselinestretch=1.2,
-  bgcolor=gray!10,
-  fontsize=\footnotesize,
-  linenos
-]{python}
+% Inline code
+\mintinline{python}{print("Hello")}
+
+% Code block
+\begin{minted}[linenos,bgcolor=gray!10]{python}
 def quicksort(arr):
     if len(arr) <= 1:
         return arr
-    pivot = arr[0]
-    left = [x for x in arr[1:] if x < pivot]
-    right = [x for x in arr[1:] if x >= pivot]
-    return quicksort(left) + [pivot] + quicksort(right)
+    pivot = arr[len(arr) // 2]
+    left = [x for x in arr if x < pivot]
+    middle = [x for x in arr if x == pivot]
+    right = [x for x in arr if x > pivot]
+    return quicksort(left) + middle + quicksort(right)
 \end{minted}
 
-% Inline
-\mintinline{python}{lambda x: x**2}
+% External file
+\inputminted{javascript}{script.js}
 ```
 </CodeGroup>
 
-## Hyperlink Packages
+### verbatim
+Enhanced verbatim environments.
+
+<CodeGroup>
+```latex verbatim-package.tex
+\usepackage{verbatim}
+
+% Basic verbatim
+\begin{verbatim}
+Raw text with $special% characters&
+\end{verbatim}
+
+% Comment out sections
+\begin{comment}
+This entire section is commented out
+and will not appear in the output.
+\end{comment}
+
+% Verbatim input from file
+\verbatiminput{file.txt}
+```
+</CodeGroup>
+
+## Fonts and Typography
+
+### fontspec
+Modern font selection (XeLaTeX/LuaLaTeX).
+
+<CodeGroup>
+```latex fontspec-package.tex
+\usepackage{fontspec}
+
+% Set main fonts
+\setmainfont{Times New Roman}
+\setsansfont{Arial}
+\setmonofont{Courier New}
+
+% Font features
+\setmainfont[
+  Ligatures=TeX,
+  Numbers=OldStyle
+]{Minion Pro}
+
+% Custom font families
+\newfontfamily\myfont{Comic Sans MS}
+{\myfont This text uses Comic Sans}
+```
+</CodeGroup>
+
+### microtype
+Typography refinements.
+
+<CodeGroup>
+```latex microtype-package.tex
+\usepackage{microtype}
+
+% Automatic improvements:
+% - Character protrusion
+% - Font expansion
+% - Kerning adjustments
+% - Tracking adjustments
+
+% Manual adjustments
+\textls[200]{Letter spaced text}
+\microtypesetup{expansion=false}
+```
+</CodeGroup>
+
+## Cross-references
 
 ### hyperref
 Hyperlinks and PDF features.
@@ -667,174 +618,295 @@ Hyperlinks and PDF features.
   filecolor=magenta,
   urlcolor=cyan,
   citecolor=green,
-  pdftitle={Document Title},
   pdfauthor={Author Name},
+  pdftitle={Document Title},
   pdfsubject={Subject},
-  pdfkeywords={keyword1, keyword2},
-  bookmarks=true,
-  bookmarksopen=true
+  pdfkeywords={keyword1, keyword2}
 }
 
-% Links
+% Usage
 \href{https://example.com}{Link text}
 \url{https://example.com}
-\href{mailto:email@example.com}{Email}
+\nolinkurl{https://example.com}
 
 % Internal links
-\hyperref[sec:intro]{Go to introduction}
-\autoref{fig:diagram}  % "Figure 1"
+\hyperref[label]{text}
+\autoref{label}  % Automatic reference type
 ```
 </CodeGroup>
 
 ### cleveref
-Smart cross-references.
+Intelligent cross-referencing.
 
 <CodeGroup>
 ```latex cleveref-package.tex
 \usepackage{cleveref}
 
-% Automatic reference types
-\cref{eq:einstein}     % eq. (1)
-\Cref{sec:intro}       % Section 1
-\cref{fig:a,fig:b}     % figs. 1 and 2
-\crefrange{eq:1}{eq:5} % eqs. (1) to (5)
+% Better references
+\cref{eq:equation}     % Equation (1)
+\Cref{fig:figure}      % Figure 1
+\cref{sec:section}     % Section 2.1
 
-% Customization
-\crefname{equation}{equation}{equations}
-\Crefname{equation}{Equation}{Equations}
+% Multiple references
+\cref{eq:1,eq:2,eq:3}  % Equations (1) to (3)
+\cref{fig:a,fig:b}     % Figures 1 and 2
+
+% Custom names
+\crefname{algorithm}{algorithm}{algorithms}
+\Crefname{algorithm}{Algorithm}{Algorithms}
 ```
 </CodeGroup>
 
-## Special Purpose Packages
+## Specialized Packages
 
 ### siunitx
-Typesetting units and numbers.
+Scientific units and numbers.
 
 <CodeGroup>
 ```latex siunitx-package.tex
 \usepackage{siunitx}
 
 % Numbers
-\num{12345.67890}      % 12,345.678 90
-\num{1.23e-4}          % 1.23 × 10^{-4}
-\num[round-mode=places,round-precision=2]{1.2345}  % 1.23
+\num{123456.789}        % 123,456.789
+\num{1.23e-4}          % 1.23 × 10⁻⁴
 
 % Units
-\si{kg.m/s^2}          % kg⋅m/s²
-\si{\kilo\gram\meter\per\second\squared}
-\SI{9.81}{m/s^2}       % 9.81 m/s²
-\SI{20}{\celsius}      % 20 °C
+\si{\meter\per\second}  % m/s
+\si{\kilo\gram}        % kg
+\si{\degree\celsius}    % °C
+
+% Numbers with units
+\SI{9.81}{\meter\per\second\squared}  % 9.81 m/s²
+\SI{25}{\degree\celsius}              % 25 °C
 
 % Ranges
-\SIrange{10}{20}{\meter}     % 10 m to 20 m
-\numrange{1e3}{1e5}          % 1 × 10³ to 1 × 10⁵
+\SIrange{10}{20}{\celsius}            % 10 °C to 20 °C
+\numrange{1.2}{3.4}                   % 1.2 to 3.4
 
 % Tables
 \begin{tabular}{S[table-format=3.2]}
-  {Number} \\
-  12.34 \\
-  123.4 \\
-  1.234 \\
+  \toprule
+  {Values} \\
+  \midrule
+  1.23 \\
+  45.67 \\
+  890.12 \\
+  \bottomrule
 \end{tabular}
 ```
 </CodeGroup>
 
 ### algorithm2e
-Algorithm typesetting.
+Algorithm pseudocode.
 
 <CodeGroup>
 ```latex algorithm2e-package.tex
-\usepackage{algorithm2e}
+\usepackage[ruled,vlined]{algorithm2e}
 
 \begin{algorithm}[H]
-\SetAlgoLined
-\KwData{Array $A$ of $n$ elements}
-\KwResult{Sorted array $A$}
-\For{$i \leftarrow 1$ \KwTo $n-1$}{
-  $key \leftarrow A[i]$\;
-  $j \leftarrow i - 1$\;
-  \While{$j \geq 0$ \textbf{and} $A[j] > key$}{
-    $A[j+1] \leftarrow A[j]$\;
-    $j \leftarrow j - 1$\;
+  \SetAlgoLined
+  \KwData{Array $A$ of $n$ elements}
+  \KwResult{Sorted array $A$}
+  
+  \For{$i \leftarrow 1$ \KwTo $n-1$}{
+    $key \leftarrow A[i]$\;
+    $j \leftarrow i-1$\;
+    
+    \While{$j \geq 0$ \KwAnd $A[j] > key$}{
+      $A[j+1] \leftarrow A[j]$\;
+      $j \leftarrow j-1$\;
+    }
+    $A[j+1] \leftarrow key$\;
   }
-  $A[j+1] \leftarrow key$\;
-}
-\caption{Insertion Sort}
+  
+  \caption{Insertion Sort}
+  \label{alg:insertion-sort}
 \end{algorithm}
 ```
 </CodeGroup>
 
-## Best Practices
+### mhchem
+Chemical formulas and equations.
 
-<Tip>
-**Package usage tips:**
+<CodeGroup>
+```latex mhchem-package.tex
+\usepackage{mhchem}
 
-1. **Load order matters**: Some packages must be loaded in specific order
-2. **Avoid conflicts**: Some packages are incompatible with others
-3. **Options**: Many packages accept options to customize behavior
-4. **Documentation**: Use `texdoc packagename` to read documentation
-5. **Minimal loading**: Only load packages you actually use
-6. **Updates**: Keep packages updated for bug fixes and features
-</Tip>
+% Chemical formulas
+\ce{H2O}              % Water
+\ce{CaCl2}            % Calcium chloride
+\ce{H2SO4}            % Sulfuric acid
 
-## Common Package Conflicts
+% Chemical equations
+\ce{2H2 + O2 -> 2H2O}
+\ce{CaCO3 + 2HCl -> CaCl2 + H2O + CO2}
+
+% Reaction arrows
+\ce{A <=>> B}         % Equilibrium
+\ce{A ->[catalyst] B} % Catalyst
+\ce{A ->[\Delta] B}   % Heat
+
+% States of matter
+\ce{H2O(l)}           % Liquid
+\ce{NaCl(s)}          % Solid
+\ce{CO2(g)}           % Gas
+\ce{Na+(aq)}          % Aqueous
+```
+</CodeGroup>
+
+## Layout and Formatting
+
+### multicol
+Multiple column layouts.
+
+<CodeGroup>
+```latex multicol-package.tex
+\usepackage{multicol}
+
+% Two-column text
+\begin{multicols}{2}
+  This text will be formatted in two columns.
+  LaTeX automatically balances the columns.
+\end{multicols}
+
+% Three columns with separator
+\begin{multicols}{3}[\section{Three Column Section}]
+  Content in three columns with a section header.
+\end{multicols}
+
+% Column break
+\begin{multicols}{2}
+  First column content.
+  \columnbreak
+  Second column content.
+\end{multicols}
+```
+</CodeGroup>
+
+### setspace
+Line spacing control.
+
+<CodeGroup>
+```latex setspace-package.tex
+\usepackage{setspace}
+
+% Document-wide spacing
+\singlespacing
+\onehalfspacing
+\doublespacing
+\setstretch{1.5}
+
+% Local spacing
+\begin{spacing}{1.8}
+  This paragraph has 1.8 line spacing.
+\end{spacing}
+
+\begin{singlespace}
+  This paragraph is single-spaced.
+\end{singlespace}
+
+\begin{doublespace}
+  This paragraph is double-spaced.
+\end{doublespace}
+```
+</CodeGroup>
+
+### parskip
+Paragraph spacing without indentation.
+
+<CodeGroup>
+```latex parskip-package.tex
+\usepackage{parskip}
+
+% Automatically sets:
+% - \parindent to 0pt
+% - \parskip to appropriate spacing
+% - Adjusts list environments
+
+% Manual control
+\setlength{\parskip}{1em}
+\setlength{\parindent}{0pt}
+```
+</CodeGroup>
+
+## Package Management Tips
+
+### Loading Order
 
 <Warning>
-**Known conflicts and solutions:**
+**Important package loading order:**
 
-- `hyperref`: Load last (with few exceptions like `cleveref`)
-- `float` + `floatrow`: Use one or the other
-- `subfigure` vs `subcaption`: Use `subcaption` (newer)
-- `times` + `mathptmx`: Use `newtxtext` + `newtxmath` instead
-- `enumerate` + `enumitem`: Use `enumitem` only
+1. **Font encoding**: `inputenc`, `fontenc`
+2. **Language**: `babel`, `polyglossia`
+3. **Fonts**: `lmodern`, `fontspec`
+4. **Math**: `amsmath`, `amssymb`, `mathtools`
+5. **Graphics**: `graphicx`, `tikz`
+6. **Tables**: `booktabs`, `longtable`
+7. **Bibliography**: `biblatex`, `natbib`
+8. **Cross-references**: `cleveref`, `hyperref` (load last)
 </Warning>
 
-## Package Loading Order
+### Common Conflicts
 
-Recommended loading order for common packages:
+<CodeGroup>
+```latex Package Conflicts
+% Avoid these combinations:
+% \usepackage{subfigure}  % Old package
+% \usepackage{subcaption} % Use this instead
 
-```latex
-\documentclass{article}
+% \usepackage{cite}       % Basic citations
+% \usepackage{natbib}     % Use this for advanced citations
 
-% 1. Font encoding
-\usepackage[T1]{fontenc}
+% \usepackage{hyperref}
+% \usepackage{cleveref}   % Load cleveref AFTER hyperref
+```
+
+```latex Safe Loading
+% Recommended safe order:
 \usepackage[utf8]{inputenc}
-
-% 2. Language
+\usepackage[T1]{fontenc}
 \usepackage[english]{babel}
-
-% 3. Fonts
 \usepackage{lmodern}
+\usepackage{microtype}
 
-% 4. Page layout
-\usepackage{geometry}
-
-% 5. Math packages
-\usepackage{amsmath,amssymb,amsthm}
-
-% 6. Graphics
+\usepackage{amsmath}
+\usepackage{amssymb}
 \usepackage{graphicx}
-\usepackage{xcolor}
-
-% 7. Tables
 \usepackage{booktabs}
-\usepackage{array}
 
-% 8. Lists
-\usepackage{enumitem}
-
-% 9. Bibliography
-\usepackage{biblatex}
-
-% 10. Hyperref (near last)
+\usepackage[style=authoryear]{biblatex}
 \usepackage{hyperref}
-
-% 11. Cleveref (after hyperref)
 \usepackage{cleveref}
 ```
+</CodeGroup>
+
+## Quick Reference
+
+### Most Used Packages
+
+<CardGroup cols={3}>
+<Card title="Essential" icon="star">
+`amsmath` `graphicx` `hyperref` `geometry` `babel`
+</Card>
+<Card title="Typography" icon="font">
+`microtype` `setspace` `parskip` `fontspec` `lmodern`
+</Card>
+<Card title="Tables" icon="table">
+`booktabs` `array` `longtable` `multirow` `tabularx`
+</Card>
+<Card title="Bibliography" icon="book">
+`biblatex` `natbib` `cite` `apacite` `chicago`
+</Card>
+<Card title="Math" icon="square-root-variable">
+`amssymb` `amsthm` `mathtools` `siunitx` `physics`
+</Card>
+<Card title="Code" icon="code">
+`listings` `minted` `verbatim` `algorithm2e` `pseudocode`
+</Card>
+</CardGroup>
 
 ---
 
 <Info>
-**Next**: Learn about different [Document classes](/learn/reference/document-classes) and when to use each one, or explore [Package management](/learn/latex/package-management) for advanced package handling techniques.
+**Need help choosing packages?** Check our [Package Selection Guide](/learn/latex/how-to/choosing-packages) for recommendations based on document type and field.
 </Info>

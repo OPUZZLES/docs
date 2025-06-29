@@ -1,0 +1,298 @@
+---
+title: Basic LaTeX Commands
+description: Essential LaTeX commands for text formatting, structure, and document elements
+---
+
+# Basic LaTeX Commands
+
+This reference covers the fundamental LaTeX commands you'll use in almost every document. Commands in LaTeX start with a backslash `\` and can take optional and required arguments.
+
+## Command Syntax
+
+LaTeX commands follow this general pattern:
+
+```latex
+\commandname[optional arguments]{required arguments}
+```
+
+<Info>
+**Note**: Commands are case-sensitive. `\Section` is different from `\section`.
+</Info>
+
+## Text Formatting Commands
+
+### Font Styles
+
+<CodeGroup>
+```latex Basic Styles
+\textbf{Bold text}
+\textit{Italic text}
+\texttt{Monospace text}
+\textrm{Roman text}
+\textsf{Sans serif text}
+\textsc{Small Capitals}
+\emph{Emphasized text}
+\underline{Underlined text}
+```
+
+```latex Nested Styles
+\textbf{\textit{Bold italic text}}
+\emph{Emphasized \emph{nested} emphasis}
+\texttt{\textbf{Bold monospace}}
+```
+</CodeGroup>
+
+### Font Sizes
+
+Commands for changing text size (from smallest to largest):
+
+```latex
+{\tiny Tiny text}
+{\scriptsize Script size text}
+{\footnotesize Footnote size text}
+{\small Small text}
+{\normalsize Normal size text}
+{\large Large text}
+{\Large Larger text}
+{\LARGE Even larger text}
+{\huge Huge text}
+{\Huge Largest text}
+```
+
+<Warning>
+Font size commands affect all text until the end of the current group. Always use braces `{}` to limit their scope.
+</Warning>
+
+### Text Alignment
+
+```latex
+\centering  % Center alignment
+\raggedright  % Left alignment
+\raggedleft   % Right alignment
+
+% Example usage
+{\centering
+This text is centered.
+}
+```
+
+## Spacing Commands
+
+### Horizontal Spacing
+
+```latex
+\quad           % 1em space
+\qquad          % 2em space
+\,              % Thin space (3/18 em)
+\:              % Medium space (4/18 em)
+\;              % Thick space (5/18 em)
+\!              % Negative thin space
+\hspace{1cm}    % Custom horizontal space
+\hfill          % Fill remaining horizontal space
+```
+
+### Vertical Spacing
+
+```latex
+\vspace{1cm}    % Add vertical space
+\vspace*{1cm}   % Force vertical space (even at page start)
+\smallskip      % Small vertical skip
+\medskip        % Medium vertical skip
+\bigskip        % Large vertical skip
+\vfill          % Fill remaining vertical space
+```
+
+### Line Breaks and Page Breaks
+
+```latex
+\\              % Line break
+\\[1cm]         % Line break with extra space
+\newline        % Alternative line break
+\linebreak      % Line break (justified)
+
+\newpage        % Start new page
+\clearpage      % Flush floats and start new page
+\pagebreak      % Page break (can be ignored)
+\nopagebreak    % Prevent page break
+```
+
+## Special Characters
+
+Some characters have special meaning in LaTeX and need to be escaped:
+
+```latex
+\%              % Percent sign
+\$              % Dollar sign
+\&              % Ampersand
+\#              % Hash/pound sign
+\_              % Underscore
+\{              % Left brace
+\}              % Right brace
+\textbackslash  % Backslash
+\~{}            % Tilde
+\^{}            % Caret
+```
+
+## Accents and Special Letters
+
+```latex
+\'e    % é - acute accent
+\`e    % è - grave accent
+\^e    % ê - circumflex
+\"e    % ë - umlaut/dieresis
+\~n    % ñ - tilde
+\c{c}  % ç - cedilla
+\={o}  % ō - macron
+\.{e}  % ė - dot accent
+\u{o}  % ŏ - breve
+\v{c}  % č - caron
+```
+
+## Document Structure Commands
+
+### Sectioning
+
+```latex
+\part{Part Title}
+\chapter{Chapter Title}        % Only in book/report class
+\section{Section Title}
+\subsection{Subsection Title}
+\subsubsection{Subsubsection Title}
+\paragraph{Paragraph Title}
+\subparagraph{Subparagraph Title}
+
+% Unnumbered versions
+\section*{Unnumbered Section}
+\subsection*{Unnumbered Subsection}
+```
+
+### Title Commands
+
+```latex
+\title{Document Title}
+\author{Author Name \and Second Author}
+\date{\today}  % or \date{January 2024}
+\maketitle     % Generate title
+```
+
+## Reference Commands
+
+### Labels and References
+
+```latex
+\label{key}           % Create label
+\ref{key}            % Reference number
+\pageref{key}        % Page number reference
+\eqref{key}          % Equation reference (with parentheses)
+
+% Example
+\section{Introduction}\label{sec:intro}
+As discussed in Section~\ref{sec:intro} on page~\pageref{sec:intro}...
+```
+
+### Footnotes
+
+```latex
+\footnote{Footnote text}
+\footnote[3]{Custom numbered footnote}
+\footnotemark           % Just the mark
+\footnotetext{Text}     % Just the text
+```
+
+## List Commands
+
+### Item Commands
+
+```latex
+\item              % Basic item
+\item[--]         % Custom bullet
+\item[(a)]        % Custom label
+```
+
+## Box Commands
+
+### Text Boxes
+
+```latex
+\mbox{Text that won't break}
+\fbox{Framed text}
+\framebox[5cm][c]{Centered in 5cm box}
+\makebox[5cm][r]{Right-aligned in 5cm}
+\parbox{5cm}{Paragraph in 5cm box}
+```
+
+### Margin Notes
+
+```latex
+\marginpar{Note in margin}
+\marginpar[Left text]{Right text}
+```
+
+## Utility Commands
+
+### Counters and Numbering
+
+```latex
+\stepcounter{page}      % Increment counter
+\setcounter{page}{5}    % Set counter value
+\arabic{page}           % Arabic numerals
+\roman{page}            % Roman numerals (i, ii, iii)
+\Roman{page}            % Roman numerals (I, II, III)
+\alph{section}          % Letters (a, b, c)
+\Alph{section}          % Letters (A, B, C)
+```
+
+### Conditional Text
+
+```latex
+\today              % Current date
+\LaTeX              % LaTeX logo
+\TeX                % TeX logo
+```
+
+## Common Command Combinations
+
+### Emphasized Quotations
+
+```latex
+\emph{``This is an emphasized quote''}
+```
+
+### Centered Title
+
+```latex
+{\centering\Large\textbf{Document Title}\\[1cm]}
+```
+
+### Custom Spacing
+
+```latex
+Text\hspace{1cm}with\hspace{1cm}gaps
+```
+
+## Best Practices
+
+<Tip>
+**Command usage tips:**
+1. **Use semantic commands** - `\emph{}` for emphasis, not `\textit{}`
+2. **Group formatting** - `{\large Some text}` to limit scope
+3. **Non-breaking spaces** - Use `~` between references: `Figure~\ref{fig:1}`
+4. **Consistent style** - Define custom commands for repeated formatting
+5. **Check package requirements** - Some commands need specific packages
+</Tip>
+
+## Quick Reference Table
+
+| Command | Purpose | Example |
+|---------|---------|---------|
+| `\textbf{}` | Bold text | `\textbf{Important}` |
+| `\section{}` | Create section | `\section{Methods}` |
+| `\label{}` | Set reference | `\label{sec:intro}` |
+| `\ref{}` | Reference label | `\ref{sec:intro}` |
+| `\footnote{}` | Add footnote | `\footnote{Note}` |
+| `\\` | Line break | `First line\\Second line` |
+| `\today` | Current date | `Date: \today` |
+
+---
+
+Next: Learn about [Document Structure](/components/document-structure) components or explore [Text Formatting](/components/text-formatting) in detail.

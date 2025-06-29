@@ -1,0 +1,424 @@
+---
+title: Real-time Collaboration
+description: Work together seamlessly on LaTeX documents. Real-time editing, live cursors, instant sync, and version control for teams.
+---
+
+# Real-time Collaboration
+
+LaTeX Cloud Studio transforms collaborative LaTeX writing with Google Docs-style real-time editing, while maintaining the power and precision of LaTeX. Work together seamlessly, whether you're across the hall or across the globe.
+
+<Info>
+**Instant Sync**: Changes appear in real-time for all collaborators. No more emailing files or managing version conflicts.
+</Info>
+
+## Real-time Editing Features
+
+### Live Collaborative Editing
+
+Experience true real-time collaboration:
+
+<CardGroup cols={2}>
+<Card title="Live Cursors" icon="cursor">
+See exactly where your collaborators are working with named, colored cursors
+</Card>
+<Card title="Instant Updates" icon="bolt">
+Changes sync instantly - see edits as they happen, character by character
+</Card>
+<Card title="Conflict Resolution" icon="shield-check">
+Automatic handling of simultaneous edits with intelligent conflict resolution
+</Card>
+<Card title="Network Resilience" icon="wifi">
+Robust handling of network interruptions with automatic reconnection
+</Card>
+</CardGroup>
+
+### Visual Collaboration Indicators
+
+Track team activity at a glance:
+
+```latex
+% Sarah is editing here █
+\section{Introduction}
+LaTeX Cloud Studio enables seamless collaboration...
+
+% Mike's cursor is here █
+\section{Methods}
+Our methodology involves...
+
+% Recent change by Alex (highlighted)
+\section{Results} % ✓ Added by Alex 2 min ago
+The experimental results show...
+```
+
+### Collaborative Awareness
+
+Always know who's working on what:
+
+- **Active users panel** shows who's currently online
+- **Recent activity feed** displays latest changes and authors
+- **Edit indicators** highlight recent modifications with author attribution
+- **Focus indicators** show which sections teammates are viewing
+
+## Permission Management
+
+### Access Control Levels
+
+Fine-grained permissions for different collaboration needs:
+
+<Tabs>
+<Tab title="Owner">
+**Full Control**
+- Edit document content
+- Manage collaborator permissions
+- Delete or archive project
+- Export and publish
+- Billing and subscription management
+</Tab>
+
+<Tab title="Editor">
+**Content Control**
+- Edit document content
+- Add/remove files
+- Invite viewers (not editors)
+- Create and manage versions
+- Access full revision history
+</Tab>
+
+<Tab title="Commenter">
+**Review Access**
+- View document content
+- Add comments and suggestions
+- Resolve comment threads
+- View revision history
+- Export read-only copies
+</Tab>
+
+<Tab title="Viewer">
+**Read-only Access**
+- View document content
+- View comments (cannot add)
+- Export read-only copies
+- View public versions
+- Download PDF outputs
+</Tab>
+</Tabs>
+
+### Team Management
+
+Organize large collaborative projects:
+
+```latex
+% Project: "Research Paper 2024"
+% Team Structure:
+% 
+% Owners: Dr. Smith (Principal Investigator)
+% Editors: Sarah (PhD Student), Mike (Postdoc)
+% Commenters: Dr. Johnson (Collaborator), Alex (Research Assistant)
+% Viewers: Department Reviewers, External Advisors
+```
+
+### Invitation System
+
+Multiple ways to add collaborators:
+
+- **Email invitations** with custom messages
+- **Shareable links** with embedded permissions
+- **Organization integration** for automatic team access
+- **Guest access** for external reviewers without accounts
+
+## Comment and Review System
+
+### Threaded Comments
+
+Rich commenting system for feedback and discussion:
+
+<CodeGroup>
+```latex Document with Comments
+\section{Introduction}
+LaTeX is a document preparation system. % 💬 Sarah: "Should we be more specific about the advantages here?"
+% 💬 Mike (replying to Sarah): "Good point, I'll add a sentence about typography quality"
+% 💬 Sarah: "Perfect, thanks!"
+
+The system provides excellent typography
+and precise control over document formatting.
+```
+</CodeGroup>
+
+### Comment Features
+
+<CardGroup cols={2}>
+<Card title="Rich Comments" icon="message">
+Add formatted text, links, and LaTeX code in comments
+</Card>
+<Card title="Line-specific" icon="map-pin">
+Comments attach to specific lines or selections
+</Card>
+<Card title="Thread Management" icon="comments">
+Organize discussions with threaded replies and resolutions
+</Card>
+<Card title="Notifications" icon="bell">
+Get notified of new comments and replies via email or in-app
+</Card>
+</CardGroup>
+
+### Suggestion Mode
+
+Non-destructive editing for reviewers:
+
+```latex
+% Original text:
+The experiment was conducted carefully.
+
+% Suggestion from reviewer:
+% Sarah suggests: "The experiment was conducted with rigorous controls."
+% Status: Pending Review
+```
+
+### Review Workflows
+
+Structured review processes:
+
+1. **Draft Phase** - Authors create initial content
+2. **Internal Review** - Team members add comments and suggestions
+3. **External Review** - Outside experts provide feedback
+4. **Revision Phase** - Incorporate feedback and track changes
+5. **Final Review** - Last check before submission
+
+## Version Control and History
+
+### Automatic Version Tracking
+
+Every change is automatically saved and tracked:
+
+- **Continuous snapshots** created every few minutes
+- **Major versions** created at significant milestones
+- **Author attribution** for every change
+- **Timestamp tracking** with timezone support
+
+### Version Comparison
+
+Visual diff tools for understanding changes:
+
+<CodeGroup>
+```latex Version 1.0 (Yesterday)
+\section{Introduction}
+LaTeX is a typesetting system.
+```
+
+```latex Version 1.1 (Current)
+\section{Introduction}
+LaTeX is a powerful document preparation system
+that provides excellent typography and precise
+control over document formatting.
+```
+
+```diff Version Diff
+\section{Introduction}
+-LaTeX is a typesetting system.
++LaTeX is a powerful document preparation system
++that provides excellent typography and precise
++control over document formatting.
+```
+</CodeGroup>
+
+### Named Versions
+
+Create meaningful checkpoints:
+
+```latex
+% Version History:
+% v1.0 "Initial Draft" - 2024-03-01
+% v1.1 "Added Literature Review" - 2024-03-05  
+% v1.2 "Methodology Complete" - 2024-03-10
+% v1.3 "Results Added" - 2024-03-15
+% v2.0 "First Complete Draft" - 2024-03-20 ⭐
+% v2.1 "Addressed Review Comments" - 2024-03-25
+```
+
+### Restore and Branch
+
+Flexible version management:
+
+- **Point-in-time restore** to any previous version
+- **Selective restore** of specific sections or files
+- **Branch creation** for experimental changes
+- **Merge capabilities** for bringing branches together
+
+## File Management
+
+### Project Organization
+
+Keep collaborative projects organized:
+
+```
+📁 Research Paper 2024/
+├── 📄 main.tex (Primary document)
+├── 📁 chapters/
+│   ├── 📄 introduction.tex
+│   ├── 📄 methodology.tex
+│   ├── 📄 results.tex
+│   └── 📄 discussion.tex
+├── 📁 figures/
+│   ├── 🖼️ experiment_setup.png
+│   ├── 🖼️ results_graph.pdf
+│   └── 🖼️ comparison_chart.svg
+├── 📁 references/
+│   └── 📄 bibliography.bib
+└── 📁 templates/
+    └── 📄 journal_template.tex
+```
+
+### Shared Assets
+
+Centralized resource management:
+
+- **Shared figure library** accessible to all team members
+- **Common bibliography** maintained collaboratively
+- **Template repository** for consistent formatting
+- **Style guide** documentation for team standards
+
+### File Synchronization
+
+Automatic sync across all devices:
+
+- **Real-time file updates** when collaborators add/modify files
+- **Conflict resolution** for simultaneous file operations
+- **Lock indicators** when files are being actively edited
+- **Upload notifications** when new files are added
+
+## Communication Tools
+
+### Integrated Chat
+
+Built-in communication without leaving the editor:
+
+<CodeGroup>
+```markdown Team Chat
+Sarah: Just finished the methodology section
+Mike: Great! I'll start reviewing it now
+Dr. Smith: Can we schedule a meeting to discuss the results?
+Alex: I've uploaded the new figures to the shared folder
+```
+</CodeGroup>
+
+### Activity Feed
+
+Track all project activity:
+
+- **Recent edits** with author and timestamp
+- **File uploads** and modifications
+- **Comment additions** and resolutions
+- **Version creations** and naming
+- **Permission changes** and team updates
+
+### Notifications
+
+Stay informed without being overwhelmed:
+
+<CardGroup cols={2}>
+<Card title="Real-time Alerts" icon="bell-ring">
+Instant notifications for comments directed at you
+</Card>
+<Card title="Daily Digest" icon="envelope">
+Summary emails of project activity
+</Card>
+<Card title="Milestone Alerts" icon="flag">
+Notifications for version releases and deadlines
+</Card>
+<Card title="Custom Filters" icon="filter">
+Choose which activities trigger notifications
+</Card>
+</CardGroup>
+
+## Advanced Collaboration Features
+
+### 100% LaTeX Compatibility
+
+Seamless integration with existing workflows:
+
+- **Import from any LaTeX editor** without formatting loss
+- **Export to standard LaTeX** for external processing
+- **Full package support** - no limitations on LaTeX features
+- **BibTeX/BibLaTeX compatibility** with existing bibliographies
+
+### Cross-platform Editing
+
+Work from any device:
+
+- **Web browser access** - no software installation required
+- **Mobile-friendly interface** for reviewing and commenting
+- **Tablet support** for reading and annotation
+- **Offline editing** with automatic sync when reconnected
+
+### Integration Capabilities
+
+Connect with your existing tools:
+
+<CodeGroup>
+```latex Git Integration
+% Automatic Git commits for major versions
+% Branch management through the interface
+% Pull request workflows for large changes
+```
+
+```latex Reference Managers
+% Direct import from Zotero, Mendeley, EndNote
+% Automatic bibliography updates
+% Citation style management
+```
+
+```latex External Tools
+% Export to submission systems
+% Integration with journal templates
+% Manuscript tracking compatibility
+```
+</CodeGroup>
+
+## Best Practices for Team Collaboration
+
+<Tip>
+**Collaboration Guidelines**:
+
+1. **Establish roles early** - Define who has editing vs. commenting access
+2. **Use meaningful file names** - Keep the project organized for everyone
+3. **Comment frequently** - Clear communication prevents misunderstandings
+4. **Create regular versions** - Mark important milestones for easy reference
+5. **Respect work in progress** - Check who's editing before making major changes
+6. **Use consistent style** - Agree on formatting conventions upfront
+</Tip>
+
+### Team Workflow Patterns
+
+**For Academic Papers:**
+1. Principal investigator creates project and adds team
+2. Each author works on assigned sections
+3. Regular review cycles with comment-based feedback
+4. Version control for submission iterations
+
+**For Technical Documentation:**
+1. Project manager sets up structure and permissions
+2. Subject matter experts contribute content
+3. Technical writers review and edit for consistency
+4. Stakeholders provide feedback through comments
+
+**For Student Projects:**
+1. Team leader creates shared project
+2. Each member responsible for specific sections
+3. Peer review through comment system
+4. Instructor access for guidance and grading
+
+## Getting Started with Collaboration
+
+1. **Create your project** or open an existing document
+2. **Click "Share"** in the top toolbar
+3. **Add collaborators** by email or shareable link
+4. **Set permissions** appropriate for each team member
+5. **Start collaborating** - changes sync immediately
+6. **Use comments** for feedback and discussion
+7. **Create versions** at important milestones
+
+---
+
+<Info>
+**Need help?** Check our [Collaboration Tutorial](/learn/latex/how-to/collaboration-workflow) for step-by-step guidance and advanced tips.
+</Info>

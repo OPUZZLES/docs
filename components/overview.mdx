@@ -1,0 +1,150 @@
+---
+title: LaTeX Components Overview
+description: Learn about LaTeX components, commands, and environments for document creation
+---
+
+# LaTeX Components Overview
+
+LaTeX provides a rich set of components (commands and environments) that form the building blocks of your documents. This reference guide covers the essential components you'll use in LaTeX Cloud Studio.
+
+## What are LaTeX Components?
+
+In LaTeX, components fall into three main categories:
+
+<CardGroup cols={3}>
+<Card title="Commands" icon="terminal">
+Start with a backslash and perform specific actions
+`\textbf{bold text}`
+</Card>
+<Card title="Environments" icon="box">
+Surround content with begin/end pairs
+`\begin{center}...\end{center}`
+</Card>
+<Card title="Packages" icon="package">
+Extend LaTeX with additional functionality
+`\usepackage{graphicx}`
+</Card>
+</CardGroup>
+
+## Component Categories
+
+### Document Structure
+- Document classes (`article`, `report`, `book`)
+- Sectioning commands (`\chapter`, `\section`)
+- Title components (`\title`, `\author`, `\date`)
+
+### Text Formatting
+- Font styles (`\textbf`, `\textit`, `\texttt`)
+- Size commands (`\tiny` to `\Huge`)
+- Spacing and breaks (`\\`, `\vspace`, `\hspace`)
+
+### Mathematical Components
+- Math environments (`equation`, `align`, `gather`)
+- Math symbols and operators
+- Matrices and arrays
+
+### Lists and Enumerations
+- Bullet lists (`itemize`)
+- Numbered lists (`enumerate`)
+- Description lists (`description`)
+
+### Floating Elements
+- Figures (`figure`)
+- Tables (`table`)
+- Captions and labels
+
+### References and Citations
+- Cross-references (`\ref`, `\label`)
+- Bibliography commands
+- Citation styles
+
+## How to Use This Reference
+
+Each component page includes:
+
+<Info>
+**Component documentation includes:**
+- **Syntax** - How to write the command or environment
+- **Parameters** - Required and optional arguments
+- **Examples** - Working code you can copy
+- **Common Use Cases** - When and why to use it
+- **Related Components** - Similar or complementary features
+</Info>
+
+## Quick Example
+
+Here's how a typical LaTeX document uses various components:
+
+```latex
+\documentclass{article}  % Document class component
+
+\usepackage{graphicx}    % Package component
+
+\begin{document}         % Environment component
+
+\title{My Document}      % Command component
+\maketitle
+
+\section{Introduction}   % Sectioning component
+This is \textbf{bold} and \textit{italic} text.
+
+\begin{itemize}         % List environment
+  \item First item
+  \item Second item
+\end{itemize}
+
+\end{document}
+```
+
+## Getting Started
+
+<CardGroup cols={2}>
+<Card title="Basic Commands" icon="code" href="/components/basic-commands">
+Essential LaTeX commands for everyday use
+</Card>
+<Card title="Document Structure" icon="file-lines" href="/components/document-structure">
+Building blocks of LaTeX documents
+</Card>
+<Card title="Text Formatting" icon="font" href="/components/text-formatting">
+Commands for styling and formatting text
+</Card>
+<Card title="Math Mode" icon="square-root-variable" href="/components/math-mode">
+Mathematical typesetting components
+</Card>
+</CardGroup>
+
+## Component Syntax Patterns
+
+Most LaTeX components follow predictable patterns:
+
+### Commands
+```latex
+\commandname[optional]{required}
+```
+
+### Environments
+```latex
+\begin{environment}[options]
+  content
+\end{environment}
+```
+
+### Packages
+```latex
+\usepackage[options]{packagename}
+```
+
+## Best Practices
+
+<Tip>
+**Component usage tips:**
+1. **Load packages in the preamble** - Before `\begin{document}`
+2. **Use semantic commands** - `\emph{}` instead of `\textit{}`
+3. **Close all environments** - Every `\begin{}` needs an `\end{}`
+4. **Check package compatibility** - Some packages conflict
+5. **Read error messages** - They often point to the exact issue
+</Tip>
+
+---
+
+Ready to explore specific components? Start with [Basic Commands](/components/basic-commands) or jump to any category that interests you.

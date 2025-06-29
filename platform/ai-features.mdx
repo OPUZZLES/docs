@@ -1,0 +1,297 @@
+---
+title: AI-Powered LaTeX Features
+description: Intelligent assistance for LaTeX writing. AI error correction, citation suggestions, paragraph rewriting, and smart document restructuring.
+---
+
+# AI-Powered LaTeX Features
+
+LaTeX Cloud Studio integrates advanced AI capabilities to make LaTeX writing more intuitive and efficient. Our AI features help you write better documents faster while maintaining full control over your content.
+
+<Info>
+**Privacy First**: Our AI features are fully auditable and reversible. We never use your documents for AI training, and all suggestions can be reviewed before application.
+</Info>
+
+## AI Error Correction
+
+### Intelligent Error Detection
+
+Our AI automatically identifies and suggests fixes for common LaTeX errors before they cause compilation issues.
+
+<CardGroup cols={2}>
+<Card title="Syntax Errors" icon="code">
+Catches missing braces, unclosed environments, and malformed commands
+</Card>
+<Card title="Reference Issues" icon="link">
+Identifies broken cross-references and citation problems
+</Card>
+<Card title="Math Mode Errors" icon="square-root-variable">
+Detects incorrect math syntax and suggests proper formatting
+</Card>
+<Card title="Package Conflicts" icon="triangle-exclamation">
+Warns about incompatible packages and suggests alternatives
+</Card>
+</CardGroup>
+
+### Auditable Corrections
+
+Every AI suggestion is fully transparent:
+
+```latex
+% Original (with error)
+\begin{itemize
+\item First item
+\item Second item
+\end{itemize}
+
+% AI Suggestion (with explanation)
+\begin{itemize}  % Added missing closing brace
+\item First item
+\item Second item
+\end{itemize}
+```
+
+<Tip>
+**Review Mode**: All AI corrections are highlighted in the editor. Click any suggestion to see the explanation and accept or reject the change.
+</Tip>
+
+### Reversible Changes
+
+- **One-click undo** for any AI correction
+- **Change history** shows all AI modifications
+- **Selective reversal** - undo specific changes without affecting others
+- **Batch operations** - accept or reject multiple suggestions at once
+
+## AI Citation Assistance
+
+### Smart Citation Suggestions
+
+The AI analyzes your content and suggests relevant citations from:
+
+- **Your existing bibliography**
+- **Common academic databases**
+- **Similar documents in your project**
+- **Recently cited works in your field**
+
+### Citation Context Analysis
+
+```latex
+% You write:
+Einstein's theory of relativity revolutionized physics
+
+% AI suggests:
+Einstein's theory of relativity \cite{einstein1905} revolutionized physics
+% With tooltip: "Einstein, A. (1905). On the electrodynamics of moving bodies"
+```
+
+### Bibliography Management
+
+The AI helps maintain consistent citations by:
+
+- **Detecting duplicate entries** in your bibliography
+- **Suggesting missing citation details**
+- **Standardizing citation formats**
+- **Identifying incomplete references**
+
+<Warning>
+Always verify AI-suggested citations for accuracy and appropriateness to your work.
+</Warning>
+
+## AI Paragraph Rewriting
+
+### Style and Clarity Enhancement
+
+The AI can help improve your writing while preserving technical accuracy:
+
+<CodeGroup>
+```latex Before
+The experiment was conducted by us using the method described in the previous section and the results obtained were analyzed.
+```
+
+```latex After (AI Enhanced)
+We conducted the experiment using the methodology outlined in Section~\ref{sec:methods} and analyzed the resulting data.
+```
+</CodeGroup>
+
+### Tone Adjustment
+
+Adjust writing style for different audiences:
+
+- **Academic tone** - Formal, precise language for papers
+- **Technical documentation** - Clear, instructional style
+- **General audience** - Accessible language while maintaining accuracy
+
+### Length Optimization
+
+- **Expand explanations** for clarity
+- **Condense verbose sections** while preserving meaning
+- **Balance technical detail** with readability
+
+## Smart Document Restructuring
+
+### Automatic Organization
+
+The AI analyzes your document structure and suggests improvements:
+
+<Tabs>
+<Tab title="Section Organization">
+```latex
+% AI suggests reordering sections for better flow:
+\section{Introduction}
+\section{Literature Review}    % AI: Move before Methods
+\section{Methodology}
+\section{Results}
+\section{Discussion}
+\section{Conclusion}
+```
+</Tab>
+
+<Tab title="Content Grouping">
+```latex
+% AI identifies related content for grouping:
+\subsection{Data Collection}
+\subsection{Data Processing}   % AI: Combine into "Data Management"
+\subsection{Data Analysis}
+```
+</Tab>
+
+<Tab title="Reference Placement">
+```latex
+% AI suggests optimal citation placement:
+This phenomenon has been observed \cite{smith2020,jones2021}.
+% AI: Move citation to sentence end for better flow
+```
+</Tab>
+</Tabs>
+
+### Document Flow Analysis
+
+The AI evaluates:
+
+- **Logical progression** of ideas
+- **Transition quality** between sections
+- **Balanced section lengths**
+- **Appropriate detail levels**
+
+## Inline AI Editing
+
+### Real-time Suggestions
+
+As you type, the AI provides contextual assistance:
+
+<CodeGroup>
+```latex Command Completion
+\begin{fig
+% AI suggests: \begin{figure}[htbp]
+```
+
+```latex Environment Matching
+\begin{equation}
+E = mc^2
+% AI suggests: \end{equation}
+```
+
+```latex Reference Suggestions
+See Figure~\ref{
+% AI suggests available figure labels
+```
+</CodeGroup>
+
+### Smart Auto-completion
+
+The AI learns from your writing patterns:
+
+- **Personal style** preferences
+- **Field-specific** terminology
+- **Document context** awareness
+- **Project-wide** consistency
+
+### Contextual Help
+
+Hover over any LaTeX command for AI-powered explanations:
+
+```latex
+\usepackage{amsmath}  % AI tooltip: "Provides enhanced math environments"
+\begin{align}         % AI tooltip: "Multi-line equations with alignment"
+```
+
+## AI Configuration
+
+### Customization Options
+
+Tailor AI assistance to your preferences:
+
+<CardGroup cols={2}>
+<Card title="Suggestion Level" icon="sliders">
+Choose from minimal, moderate, or comprehensive AI assistance
+</Card>
+<Card title="Field Specialization" icon="graduation-cap">
+Optimize suggestions for your academic field or document type
+</Card>
+<Card title="Language Style" icon="language">
+Configure for academic, technical, or general writing styles
+</Card>
+<Card title="Auto-application" icon="wand-magic-sparkles">
+Set which suggestions apply automatically vs. require confirmation
+</Card>
+</CardGroup>
+
+### Privacy Settings
+
+<Info>
+**Data Protection**:
+- All processing happens on secure servers
+- Documents are encrypted in transit and at rest
+- No document content used for AI training
+- GDPR compliant with EU data storage
+- Complete audit trail of all AI interactions
+</Info>
+
+### Team Settings
+
+For collaborative projects:
+
+- **Consistent AI settings** across team members
+- **Shared terminology** databases
+- **Project-specific** style guidelines
+- **Review workflows** for AI suggestions
+
+## Best Practices
+
+<Tip>
+**Effective AI Usage**:
+
+1. **Review all suggestions** - AI is a tool, not a replacement for expertise
+2. **Maintain your voice** - Accept style suggestions that match your intent
+3. **Verify citations** - Always check AI-suggested references for accuracy
+4. **Use incrementally** - Start with error correction, then explore other features
+5. **Provide feedback** - Rate suggestions to improve AI performance for your use case
+</Tip>
+
+### When to Use AI Features
+
+**Recommended for:**
+- Error detection and correction
+- Style consistency checking
+- Citation formatting help
+- Document structure optimization
+
+**Use with caution for:**
+- Technical accuracy verification
+- Field-specific terminology
+- Critical argument construction
+- Final proofreading (human review still essential)
+
+## Getting Started
+
+1. **Enable AI features** in your project settings
+2. **Choose your field** for specialized assistance
+3. **Set suggestion preferences** (automatic vs. manual)
+4. **Start writing** - AI assistance activates automatically
+5. **Review suggestions** using the AI panel
+6. **Customize settings** based on your experience
+
+---
+
+<Info>
+**Learn More**: Explore our [AI Tutorial Series](/learn/latex/how-to/ai-assisted-writing) for detailed examples and advanced techniques.
+</Info>

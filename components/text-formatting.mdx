@@ -1,0 +1,400 @@
+---
+title: Text Formatting
+description: Commands and techniques for formatting text in LaTeX documents
+---
+
+# Text Formatting
+
+LaTeX provides extensive control over text formatting, from basic styles to advanced typography. This reference covers all essential text formatting commands and techniques.
+
+## Font Styles
+
+### Basic Text Styles
+
+<CodeGroup>
+```latex Commands
+\textbf{Bold text}
+\textit{Italic text}
+\textsl{Slanted text}
+\texttt{Monospace/typewriter text}
+\textrm{Roman text}
+\textsf{Sans serif text}
+\textsc{Small Capitals}
+\emph{Emphasized text}
+\underline{Underlined text}
+```
+
+```latex Declarations
+{\bfseries Bold text}
+{\itshape Italic text}
+{\slshape Slanted text}
+{\ttfamily Monospace text}
+{\rmfamily Roman text}
+{\sffamily Sans serif text}
+{\scshape Small Capitals}
+{\em Emphasized text}
+```
+</CodeGroup>
+
+<Info>
+**Commands vs Declarations:**
+- Commands like `\textbf{}` affect only their argument
+- Declarations like `\bfseries` affect all following text in the current group
+</Info>
+
+### Combining Styles
+
+```latex
+% Nested commands
+\textbf{\textit{Bold italic text}}
+\texttt{\underline{Underlined monospace}}
+
+% Combined declarations
+{\bfseries\itshape Bold italic text}
+{\ttfamily\bfseries Bold monospace}
+```
+
+### Font Sizes
+
+From smallest to largest:
+
+```latex
+{\tiny Tiny text}
+{\scriptsize Script size}
+{\footnotesize Footnote size}
+{\small Small text}
+{\normalsize Normal size}
+{\large Large text}
+{\Large Larger text}
+{\LARGE Even larger}
+{\huge Huge text}
+{\Huge Largest text}
+```
+
+<Warning>
+Font size commands are declarations—use braces to limit their scope:
+```latex
+Normal text {\large only this is large} normal again
+```
+</Warning>
+
+## Text Alignment
+
+### Paragraph Alignment
+
+<CodeGroup>
+```latex Environments
+\begin{center}
+Centered text
+\end{center}
+
+\begin{flushleft}
+Left-aligned text
+\end{flushleft}
+
+\begin{flushright}
+Right-aligned text
+\end{flushright}
+```
+
+```latex Declarations
+{\centering
+Centered paragraph\par}
+
+{\raggedright
+Left-aligned paragraph\par}
+
+{\raggedleft
+Right-aligned paragraph\par}
+```
+</CodeGroup>
+
+### Justification Control
+
+```latex
+\usepackage{ragged2e}
+
+\justify     % Full justification (default)
+\RaggedRight % Better hyphenation than \raggedright
+\RaggedLeft  % Better hyphenation than \raggedleft
+\Centering   % Better hyphenation than \centering
+```
+
+## Color
+
+### Basic Colors
+
+```latex
+\usepackage{xcolor}
+
+\textcolor{red}{Red text}
+\textcolor{blue}{Blue text}
+\textcolor{green}{Green text}
+
+% Background color
+\colorbox{yellow}{Highlighted text}
+\fcolorbox{red}{yellow}{Framed color box}
+```
+
+### Custom Colors
+
+```latex
+% Define custom colors
+\definecolor{myblue}{RGB}{0,51,102}
+\definecolor{mygreen}{HTML}{00FF00}
+\definecolor{mygray}{gray}{0.8}
+
+% Use custom colors
+\textcolor{myblue}{Custom blue text}
+```
+
+### Color Models
+
+```latex
+\textcolor[RGB]{255,99,71}{Tomato}      % RGB values
+\textcolor[HTML]{FF6347}{Tomato}        % Hex code
+\textcolor[gray]{0.5}{50% gray}         % Grayscale
+\textcolor[cmyk]{0,0.61,0.72,0}{Orange} % CMYK
+```
+
+## Spacing
+
+### Horizontal Spacing
+
+```latex
+% Fixed spaces
+Text\,thin space            % 3/18 em
+Text\:medium space          % 4/18 em  
+Text\;thick space           % 5/18 em
+Text\ normal space          % Regular space
+Text\quad quad space        % 1 em
+Text\qquad double quad      % 2 em
+
+% Custom spacing
+Text\hspace{1cm}more text
+Text\hspace*{1cm}forced space
+
+% Rubber spacing
+Text\hfill right-aligned
+Left\hfill Center\hfill Right
+```
+
+### Vertical Spacing
+
+```latex
+First paragraph.
+
+\vspace{1cm}
+Second paragraph with space above.
+
+\smallskip
+Small vertical skip.
+
+\medskip
+Medium vertical skip.
+
+\bigskip
+Large vertical skip.
+
+\vfill
+Text pushed to bottom of page.
+```
+
+### Line Spacing
+
+```latex
+\usepackage{setspace}
+
+\singlespacing   % Default
+\onehalfspacing  % 1.5 line spacing
+\doublespacing   % Double spacing
+
+% Or use environment
+\begin{spacing}{1.5}
+This text has 1.5 line spacing.
+\end{spacing}
+
+% Change for whole document
+\linespread{1.3}
+```
+
+## Special Effects
+
+### Boxes and Frames
+
+```latex
+% Simple boxes
+\mbox{Unbreakable text}
+\fbox{Framed text}
+\framebox[5cm][c]{Centered in 5cm}
+
+% Paragraph boxes
+\parbox{4cm}{This is a paragraph
+in a 4cm wide box.}
+
+% Minipage environment
+\begin{minipage}{0.5\textwidth}
+Content in half-width minipage
+\end{minipage}
+```
+
+### Rotation and Scaling
+
+```latex
+\usepackage{graphicx}
+
+\rotatebox{45}{Rotated text}
+\scalebox{2}{Doubled size}
+\scalebox{0.5}{Half size}
+\reflectbox{Mirrored text}
+```
+
+### Strike-through and Underline
+
+```latex
+\usepackage{ulem}
+
+\sout{Strike through}
+\uline{Underline}
+\uwave{Wavy underline}
+\xout{Cross out}
+\dashuline{Dashed underline}
+\dotuline{Dotted underline}
+```
+
+## Advanced Typography
+
+### Microtype
+
+```latex
+\usepackage{microtype}  % Improves typography
+
+% Fine-tune settings
+\microtypesetup{
+    protrusion=true,    % Character protrusion
+    expansion=true,     % Font expansion
+    kerning=true,       % Kerning
+    tracking=true       % Letter spacing
+}
+```
+
+### Lettrine (Drop Caps)
+
+```latex
+\usepackage{lettrine}
+
+\lettrine{T}{his} paragraph starts with
+a decorative drop cap.
+
+\lettrine[lines=3,slope=2pt]{O}{nce} upon
+a time...
+```
+
+### Small Caps
+
+```latex
+% True small caps with fontspec (XeLaTeX/LuaLaTeX)
+\usepackage{fontspec}
+\setmainfont[SmallCapsFeatures={Letters=SmallCaps}]{TeX Gyre Termes}
+
+\textsc{Small Capitals}
+```
+
+## Lists with Custom Formatting
+
+### Inline Lists
+
+```latex
+\usepackage{enumitem}
+
+% Inline enumeration
+\begin{enumerate*}[label=(\roman*)]
+\item First \item Second \item Third
+\end{enumerate*}
+
+% Inline itemize
+\begin{itemize*}[label=\textbullet]
+\item One \item Two \item Three
+\end{itemize*}
+```
+
+### Custom List Styles
+
+```latex
+\usepackage{enumitem}
+
+\begin{itemize}[label=\textcolor{red}{$\diamond$}]
+\item Red diamond bullets
+\end{itemize}
+
+\begin{enumerate}[label=\textbf{Step \arabic*.}]
+\item Bold step numbering
+\end{enumerate}
+```
+
+## Quotes and Excerpts
+
+### Basic Quotes
+
+```latex
+% Single quotes
+`Single quoted text'
+
+% Double quotes
+``Double quoted text''
+
+% Nested quotes
+``She said, `Hello!' to me.''
+```
+
+### Quote Environments
+
+```latex
+% Short quotes
+\begin{quote}
+This is a short quotation that
+gets indented from both margins.
+\end{quote}
+
+% Longer quotes
+\begin{quotation}
+This environment is for longer quotes.
+It indents the first line of each
+paragraph like normal text.
+\end{quotation}
+
+% Verse
+\begin{verse}
+Roses are red,\\
+Violets are blue,\\
+LaTeX is great,\\
+And so are you!
+\end{verse}
+```
+
+## Best Practices
+
+<Tip>
+**Text formatting tips:**
+1. **Use semantic markup** - `\emph{}` for emphasis, not `\textit{}`
+2. **Avoid manual formatting** - Use styles and custom commands
+3. **Be consistent** - Choose a style and stick to it
+4. **Don't overformat** - Less is often more
+5. **Test readability** - Ensure formatting enhances, not distracts
+</Tip>
+
+## Quick Reference
+
+| Command | Effect | Example |
+|---------|--------|---------|
+| `\textbf{}` | Bold | `\textbf{Bold}` |
+| `\textit{}` | Italic | `\textit{Italic}` |
+| `\texttt{}` | Monospace | `\texttt{code}` |
+| `\emph{}` | Emphasis | `\emph{important}` |
+| `\textcolor{}{}` | Color | `\textcolor{red}{Red}` |
+| `\large` | Larger | `{\large Big}` |
+| `\centering` | Center | `{\centering Text}` |
+
+---
+
+Next: Learn about [Math Mode](/components/math-mode) for mathematical typesetting or explore [Lists and Enumerations](/components/lists-enumerations) for structured content.

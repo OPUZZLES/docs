@@ -103,23 +103,23 @@ First chapter content.
 Second chapter content.
 
 \chapter{Results}
-Results and analysis.
+Third chapter content.
 
 \chapter{Conclusion}
-Final chapter.
+Final chapter content.
 
 \end{document}
 ```
 </CodeGroup>
 
 **Report Features:**
-- Chapters available
-- Each chapter starts new page
-- Abstract environment
-- Default one-sided printing
+- `\chapter` command available
+- Abstract environment included
+- Separate title page by default
+- Good for documents 20-100 pages
 
 ### book
-For books and long documents.
+For books and very long documents.
 
 <CodeGroup>
 ```latex book-class.tex
@@ -127,10 +127,10 @@ For books and long documents.
 
 % Best for:
 % - Books
-% - Dissertations
-% - Long manuals
+% - Long theses/dissertations
 % - Textbooks
-% - Monographs
+% - Multi-volume works
+% - Complex documents
 
 % Structure hierarchy:
 % \part{}
@@ -143,7 +143,7 @@ For books and long documents.
 
 \begin{document}
 
-\frontmatter
+\frontmatter  % Roman page numbers, no chapter numbers
 \title{Book Title}
 \author{Author Name}
 \date{\today}
@@ -153,22 +153,18 @@ For books and long documents.
 \listoffigures
 \listoftables
 
-\mainmatter
+\mainmatter   % Arabic page numbers, normal numbering
 \part{First Part}
+
 \chapter{Introduction}
-Chapter content here.
+Chapter content begins here.
 
-\chapter{Literature Review}
-More chapters...
+\chapter{Background}
+More content here.
 
-\part{Second Part}
-\chapter{Methodology}
-Methodology content.
-
-\backmatter
+\backmatter   % No chapter numbers
 \appendix
-\chapter{Appendix A}
-Appendix content.
+\chapter{Additional Information}
 
 \bibliographystyle{plain}
 \bibliography{references}
@@ -178,93 +174,31 @@ Appendix content.
 </CodeGroup>
 
 **Book Features:**
-- Parts, chapters, and sections
-- Frontmatter, mainmatter, backmatter
-- Two-sided printing by default
-- No abstract environment
-- Sophisticated page numbering
+- Two-sided layout by default
+- Front matter, main matter, back matter
+- Parts and chapters available
+- Best for 100+ page documents
 
-## Document Class Options
-
-### Global Options
-
-<CodeGroup>
-```latex class-options.tex
-% Font sizes
-\documentclass[10pt]{article}  % 10pt, 11pt, 12pt
-
-% Paper sizes
-\documentclass[a4paper]{article}      % A4 (default in Europe)
-\documentclass[letterpaper]{article}  % Letter (default in US)
-\documentclass[legalpaper]{article}   % Legal size
-
-% Orientation
-\documentclass[landscape]{article}    % Landscape mode
-
-% Columns
-\documentclass[twocolumn]{article}    % Two-column layout
-\documentclass[onecolumn]{article}    % Single column (default)
-
-% Sides
-\documentclass[oneside]{article}      % One-sided (default for article/report)
-\documentclass[twoside]{article}      % Two-sided (default for book)
-
-% Open pages
-\documentclass[openright]{book}       % Chapters start on right page
-\documentclass[openany]{book}         % Chapters start on any page
-
-% Equation numbering
-\documentclass[leqno]{article}        % Left equation numbers
-\documentclass[fleqn]{article}        % Flush left equations
-
-% Draft mode
-\documentclass[draft]{article}        % Draft mode (shows overfull boxes)
-\documentclass[final]{article}        % Final mode (default)
-
-% Title page
-\documentclass[titlepage]{article}    % Separate title page
-\documentclass[notitlepage]{article}  % Title on first page (default)
-
-% Multiple options
-\documentclass[12pt,a4paper,twoside,draft]{report}
-```
-</CodeGroup>
-
-### Common Option Combinations
-
-<CodeGroup>
-```latex common-combinations.tex
-% Academic paper
-\documentclass[11pt,letterpaper,onecolumn]{article}
-
-% Thesis/dissertation
-\documentclass[12pt,a4paper,oneside,openany]{report}
-
-% Book manuscript
-\documentclass[11pt,a4paper,twoside,openright]{book}
-
-% Conference paper (often two-column)
-\documentclass[10pt,letterpaper,twocolumn]{article}
-
-% Draft version
-\documentclass[12pt,a4paper,draft,oneside]{article}
-```
-</CodeGroup>
-
-## Specialized Document Classes
-
-### Presentation Classes
-
-#### beamer
+### beamer
 For presentations and slides.
 
 <CodeGroup>
 ```latex beamer-class.tex
 \documentclass[options]{beamer}
 
-% Presentation themes
-\usetheme{Madrid}
-\usecolortheme{default}
+% Best for:
+% - Conference presentations
+% - Lecture slides
+% - Academic talks
+% - Business presentations
+
+% Slide structure:
+% \frame{} or \begin{frame}...\end{frame}
+% \section{} for navigation
+% \subsection{} for organization
+
+\usetheme{Warsaw}  % Choose theme
+\usecolortheme{dolphin}  % Choose colors
 
 \title{Presentation Title}
 \author{Author Name}
@@ -283,42 +217,46 @@ For presentations and slides.
 \section{Introduction}
 \begin{frame}
 \frametitle{Introduction}
-Slide content here.
+\begin{itemize}
+  \item First point
+  \item Second point
+  \item<2-> This appears on second click
+\end{itemize}
 \end{frame}
 
-\section{Main Topic}
+\section{Main Content}
 \begin{frame}
 \frametitle{Main Points}
-\begin{itemize}
-  \item Point 1
-  \item Point 2
-  \item Point 3
-\end{itemize}
+Content of the slide here.
 \end{frame}
 
 \end{document}
 ```
 </CodeGroup>
 
-**Beamer Options:**
-- `aspectratio=169` (16:9), `43` (4:3)
-- `handout` (for printing)
-- `notes` (speaker notes)
-- `trans` (transparency effects)
+**Beamer Features:**
+- Built-in themes and color schemes
+- Overlay specifications for animations
+- Navigation aids
+- PDF presentation format
 
-### Letter Classes
-
-#### letter
-For formal letters.
+### letter
+For correspondence.
 
 <CodeGroup>
 ```latex letter-class.tex
-\documentclass{letter}
+\documentclass[options]{letter}
 
-% Letter setup
-\address{Your Name\\Your Address\\City, State ZIP}
+% Best for:
+% - Business letters
+% - Formal correspondence
+% - Cover letters
+% - Official documents
+
+\usepackage[utf8]{inputenc}
+
 \signature{Your Name}
-\date{\today}
+\address{Your Address\\City, State ZIP}
 
 \begin{document}
 
@@ -326,88 +264,160 @@ For formal letters.
 
 \opening{Dear Sir or Madam,}
 
-Letter content goes here. This is the body of your formal letter.
-You can have multiple paragraphs.
+Body of the letter goes here. Multiple paragraphs
+are separated by blank lines.
 
-This is a second paragraph to demonstrate the formatting.
+This is the second paragraph of the letter.
 
 \closing{Sincerely,}
 
-\ps{P.S. This is a postscript.}
-\encl{Enclosure}
+\ps{P.S. Additional note here.}
+
+\encl{Enclosure list}
 
 \end{letter}
-
 \end{document}
 ```
 </CodeGroup>
 
-### Journal-Specific Classes
+**Letter Features:**
+- Automatic formatting for addresses
+- Date insertion
+- Signature placement
+- Standard letter conventions
 
-Many journals provide their own document classes:
+## Document Class Options
+
+### Font Size Options
 
 <CodeGroup>
-```latex journal-classes.tex
-% ACM journals
-\documentclass{acmart}
+```latex font-size-options.tex
+% Available font sizes
+\documentclass[10pt]{article}  % 10pt (default)
+\documentclass[11pt]{article}  % 11pt
+\documentclass[12pt]{article}  % 12pt
 
-% IEEE journals
-\documentclass{IEEEtran}
+% Font size affects:
+% - Body text size
+% - Section heading sizes
+% - Math formula sizes
+% - Footnote sizes
+```
+</CodeGroup>
 
-% Elsevier journals
-\documentclass{elsarticle}
+### Paper Size Options
 
-% Springer journals
-\documentclass{svjour3}
+<CodeGroup>
+```latex paper-size-options.tex
+% US paper sizes
+\documentclass[letterpaper]{article}  % 8.5 × 11 inches (default)
+\documentclass[legalpaper]{article}   % 8.5 × 14 inches
+\documentclass[executivepaper]{article} % 7.25 × 10.5 inches
 
-% AMS journals
-\documentclass{amsart}
+% International paper sizes
+\documentclass[a4paper]{article}      % 210 × 297 mm
+\documentclass[a5paper]{article}      % 148 × 210 mm
+\documentclass[b5paper]{article}      % 176 × 250 mm
 
-% Physical Review journals
-\documentclass{revtex4-1}
+% Custom paper size (with geometry package)
+\usepackage[paperwidth=8in,paperheight=10in]{geometry}
+```
+</CodeGroup>
+
+### Layout Options
+
+<CodeGroup>
+```latex layout-options.tex
+% Page orientation
+\documentclass[landscape]{article}    % Landscape orientation
+\documentclass[portrait]{article}     % Portrait (default)
+
+% Columns
+\documentclass[onecolumn]{article}    % Single column (default)
+\documentclass[twocolumn]{article}    % Two columns
+
+% Sides
+\documentclass[oneside]{article}      % Single-sided (default for article)
+\documentclass[twoside]{book}         % Double-sided (default for book)
+
+% Draft mode
+\documentclass[draft]{article}        % Shows overfull boxes, faster compilation
+\documentclass[final]{article}        % Final mode (default)
+```
+</CodeGroup>
+
+### Title Page Options
+
+<CodeGroup>
+```latex title-options.tex
+% Title page behavior
+\documentclass[titlepage]{article}    % Separate title page
+\documentclass[notitlepage]{report}   % Title on first page
+
+% Abstract behavior (for article)
+\documentclass[onecolumn]{article}    % Abstract spans full width
+\documentclass[twocolumn]{article}    % Abstract spans both columns
+```
+</CodeGroup>
+
+### Equation Options
+
+<CodeGroup>
+```latex equation-options.tex
+% Equation numbering
+\documentclass[leqno]{article}        % Equation numbers on left
+\documentclass[reqno]{article}        % Equation numbers on right (default)
+
+% Equation formatting
+\documentclass[fleqn]{article}        % Left-aligned equations
+% Default: centered equations
+```
+</CodeGroup>
+
+### Bibliography Options
+
+<CodeGroup>
+```latex bibliography-options.tex
+% Bibliography formatting
+\documentclass[openbib]{article}      % Open bibliography format
+% Default: closed bibliography format
 ```
 </CodeGroup>
 
 ## Custom Document Classes
 
-### Creating Simple Classes
+### Creating Custom Classes
 
 <CodeGroup>
 ```latex custom-class.cls
-% myclass.cls
+% File: myclass.cls
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{myclass}[2024/01/01 My Custom Class]
 
-% Base on existing class
+% Based on article class
 \LoadClass[11pt,a4paper]{article}
 
-% Load packages
+% Required packages
 \RequirePackage{geometry}
 \RequirePackage{fancyhdr}
-\RequirePackage{xcolor}
+\RequirePackage{graphicx}
 
-% Set page margins
+% Page layout
 \geometry{margin=1in}
 
-% Custom colors
-\definecolor{myblue}{RGB}{0,114,189}
+% Custom commands
+\newcommand{\institution}[1]{\def\@institution{#1}}
+\newcommand{\course}[1]{\def\@course{#1}}
 
 % Custom title format
-\renewcommand{\maketitle}{%
+\renewcommand{\maketitle}{
   \begin{center}
-    {\Large\bfseries\color{myblue}\@title}\\[1em]
-    {\large\@author}\\[0.5em]
-    \@date
+    {\LARGE\bfseries\@title}\\[1em]
+    {\large\@author}\\
+    {\large\@institution}\\
+    {\large\@course}\\
+    {\large\@date}
   \end{center}
-  \vspace{1em}
-}
-
-% Custom section format
-\renewcommand{\section}{%
-  \@startsection{section}{1}{0pt}%
-  {-2ex plus -1ex minus -.2ex}%
-  {1ex plus .2ex}%
-  {\large\bfseries\color{myblue}}%
 }
 ```
 
@@ -415,256 +425,229 @@ Many journals provide their own document classes:
 % Using the custom class
 \documentclass{myclass}
 
-\title{Document with Custom Class}
-\author{Author Name}
-\date{\today}
+\title{Assignment Title}
+\author{Student Name}
+\institution{University Name}
+\course{Course Code}
 
 \begin{document}
 \maketitle
 
-\section{Introduction}
-This document uses our custom class.
+Content goes here.
 
 \end{document}
 ```
 </CodeGroup>
 
-## Class Comparison
+## Academic Document Classes
+
+### Thesis Classes
+
+<CodeGroup>
+```latex thesis-classes.tex
+% University-specific thesis classes
+\documentclass{phdthesis}     % PhD thesis
+\documentclass{msthesis}      % Master's thesis
+\documentclass{ucthesis}      % UC system thesis
+
+% Generic thesis classes
+\documentclass[thesis]{memoir}
+\documentclass{scrbook}       % KOMA-Script book class
+
+% Configuration example
+\documentclass[12pt,oneside,openright]{report}
+\usepackage[margin=1.5in,left=2in]{geometry}
+\usepackage{setspace}
+\doublespacing
+```
+</CodeGroup>
+
+### Journal Classes
+
+<CodeGroup>
+```latex journal-classes.tex
+% IEEE papers
+\documentclass{IEEEtran}
+
+% ACM papers
+\documentclass{acmart}
+
+% Springer papers
+\documentclass{llncs}         % Lecture Notes in Computer Science
+\documentclass{svjour3}       % Springer journals
+
+% Elsevier papers
+\documentclass{elsarticle}
+
+% AMS papers
+\documentclass{amsart}
+```
+</CodeGroup>
+
+## KOMA-Script Classes
+
+Alternative to standard classes with enhanced features:
+
+<CodeGroup>
+```latex koma-script.tex
+% KOMA-Script equivalents
+\documentclass{scrartcl}      % Instead of article
+\documentclass{scrreprt}      % Instead of report
+\documentclass{scrbook}       % Instead of book
+\documentclass{scrlttr2}      % Instead of letter
+
+% Enhanced features
+\documentclass[
+  fontsize=11pt,
+  paper=a4,
+  twoside=false,
+  titlepage=false,
+  headings=small
+]{scrartcl}
+
+% KOMA options
+\KOMAoptions{
+  DIV=12,                     % Text area calculation
+  BCOR=8mm,                   % Binding correction
+  headinclude=true,           % Include header in text area
+  footinclude=false           % Exclude footer from text area
+}
+```
+</CodeGroup>
+
+## Memoir Class
+
+Highly customizable class for books and articles:
+
+<CodeGroup>
+```latex memoir-class.tex
+\documentclass[11pt,a4paper,oneside]{memoir}
+
+% Page layout
+\settrimmedsize{297mm}{210mm}{*}  % A4 paper
+\setlength{\trimtop}{0pt}
+\setlength{\trimedge}{\stockwidth}
+\addtolength{\trimedge}{-\paperwidth}
+\settypeblocksize{634pt}{448.13pt}{*}
+\setulmargins{4cm}{*}{*}
+\setlrmargins{2.5cm}{*}{*}
+\checkandfixthelayout
+
+% Chapter styles
+\chapterstyle{veelo}          % Pre-defined style
+% or create custom style
+\makechapterstyle{custom}{
+  \renewcommand{\chapternamenum}{}
+  \renewcommand{\printchaptername}{}
+  \renewcommand{\printchapternum}{\chapnumfont\thechapter\space}
+  \renewcommand{\afterchapternum}{}
+}
+```
+</CodeGroup>
+
+## Document Class Comparison
 
 ### When to Use Each Class
 
-| Class | Best For | Page Layout | Chapters |
-|-------|----------|-------------|----------|
-| **article** | Papers, essays, short reports | Compact | No |
-| **report** | Technical reports, theses | Structured | Yes |
-| **book** | Books, dissertations | Book-style | Yes |
-| **beamer** | Presentations | Slides | No |
-| **letter** | Formal correspondence | Letter format | No |
+<Tabs>
+<Tab title="article">
+**Best for:**
+- Research papers (5-30 pages)
+- Journal submissions
+- Conference papers
+- Technical reports
+- Essays and assignments
 
-### Feature Comparison
+**Features:**
+- No chapters
+- Compact layout
+- Abstract support
+- Bibliography integration
+</Tab>
 
-<CodeGroup>
-```latex feature-comparison.tex
-% Abstract environment
-\documentclass{article}   % Has abstract
-\documentclass{report}    % Has abstract  
-\documentclass{book}      % No abstract
+<Tab title="report">
+**Best for:**
+- Technical reports (20-100 pages)
+- Master's theses
+- Project documentation
+- Lab reports
+- User manuals
 
-% Default page style
-\documentclass{article}   % One-sided
-\documentclass{report}    % One-sided
-\documentclass{book}      % Two-sided
+**Features:**
+- Chapter support
+- Title page by default
+- Abstract support
+- Good for structured documents
+</Tab>
 
-% Chapter support
-\documentclass{article}   % No chapters
-\documentclass{report}    % Chapters available
-\documentclass{book}      % Chapters + parts
+<Tab title="book">
+**Best for:**
+- Books (100+ pages)
+- PhD dissertations
+- Textbooks
+- Reference manuals
+- Multi-volume works
 
-% Typical length
-\documentclass{article}   % 1-30 pages
-\documentclass{report}    % 10-100 pages
-\documentclass{book}      % 50+ pages
-```
-</CodeGroup>
+**Features:**
+- Two-sided by default
+- Front/main/back matter
+- Parts and chapters
+- Professional typography
+</Tab>
 
-## Document Structure by Class
+<Tab title="beamer">
+**Best for:**
+- Academic presentations
+- Conference talks
+- Lecture slides
+- Business presentations
 
-### Article Structure
-
-<CodeGroup>
-```latex article-structure.tex
-\documentclass{article}
-
-\begin{document}
-\maketitle
-\begin{abstract}...\end{abstract}
-\tableofcontents
-
-\section{Introduction}
-\section{Methods}
-\section{Results}
-\section{Discussion}
-\section{Conclusion}
-
-\bibliography{refs}
-\end{document}
-```
-</CodeGroup>
-
-### Report Structure
-
-<CodeGroup>
-```latex report-structure.tex
-\documentclass{report}
-
-\begin{document}
-\maketitle
-\begin{abstract}...\end{abstract}
-\tableofcontents
-\listoffigures
-\listoftables
-
-\chapter{Introduction}
-\chapter{Literature Review}
-\chapter{Methodology}
-\chapter{Results}
-\chapter{Discussion}
-\chapter{Conclusion}
-
-\appendix
-\chapter{Additional Data}
-
-\bibliography{refs}
-\end{document}
-```
-</CodeGroup>
-
-### Book Structure
-
-<CodeGroup>
-```latex book-structure.tex
-\documentclass{book}
-
-\begin{document}
-\frontmatter
-\maketitle
-\tableofcontents
-\listoffigures
-\listoftables
-
-\mainmatter
-\part{Background}
-\chapter{Introduction}
-\chapter{Literature Review}
-
-\part{Research}
-\chapter{Methodology}
-\chapter{Results}
-
-\part{Conclusion}
-\chapter{Discussion}
-\chapter{Conclusion}
-
-\backmatter
-\appendix
-\chapter{Appendix A}
-\chapter{Appendix B}
-
-\bibliography{refs}
-\end{document}
-```
-</CodeGroup>
-
-## Advanced Class Features
-
-### Conditional Content
-
-<CodeGroup>
-```latex conditional-content.tex
-% Different content based on class
-\makeatletter
-\@ifclassloaded{article}{%
-  % Article-specific code
-  \newcommand{\documenttype}{article}
-}{%
-  \@ifclassloaded{book}{%
-    % Book-specific code
-    \newcommand{\documenttype}{book}
-  }{%
-    % Default code
-    \newcommand{\documenttype}{other}
-  }
-}
-\makeatother
-
-% Usage
-This document is a \documenttype.
-```
-</CodeGroup>
-
-### Class Options Testing
-
-<CodeGroup>
-```latex class-options-testing.tex
-% Check if two-sided
-\makeatletter
-\if@twoside
-  \newcommand{\sidedness}{two-sided}
-\else
-  \newcommand{\sidedness}{one-sided}
-\fi
-
-% Check if draft mode
-\if@draft
-  \newcommand{\draftmode}{draft}
-\else
-  \newcommand{\draftmode}{final}
-\fi
-\makeatother
-```
-</CodeGroup>
+**Features:**
+- Frame-based content
+- Themes and animations
+- Navigation tools
+- PDF output optimized for projection
+</Tab>
+</Tabs>
 
 ## Best Practices
 
 <Tip>
-**Document class guidelines:**
+**Document class selection tips:**
 
-1. **Match purpose**: Choose class based on document type and length
-2. **Standard options**: Use common option combinations
-3. **Consistency**: Stick with one class throughout your document
-4. **Journal requirements**: Use journal-specific classes when submitting
-5. **Custom classes**: Only create custom classes for repeated use
-6. **Testing**: Test document with different options before finalizing
+1. **Start with standard classes** - They're well-tested and widely supported
+2. **Consider document length** - Article for short, report for medium, book for long
+3. **Check submission requirements** - Journals often require specific classes
+4. **Use options wisely** - Don't override default typography without good reason
+5. **Test compilation early** - Ensure your chosen class works with your packages
+6. **Read class documentation** - Each class has specific features and commands
 </Tip>
-
-## Common Issues
-
-<Warning>
-**Document class troubleshooting:**
-
-1. **Missing commands**: Some commands only work with specific classes
-2. **Option conflicts**: Some options are incompatible
-3. **Page numbering**: Different classes handle numbering differently
-4. **Float placement**: Behavior varies between classes
-5. **Font size limits**: Not all sizes available in all classes
-6. **Spacing**: Different default spacing in different classes
-</Warning>
 
 ## Quick Reference
 
-### Class Selection Guide
+### Standard Classes Summary
 
-```latex
-% For papers and articles
-\documentclass[11pt,letterpaper]{article}
+| Class | Purpose | Length | Chapters | Default Layout |
+|-------|---------|--------|----------|----------------|
+| `article` | Papers, reports | Short | No | One-sided |
+| `report` | Technical reports | Medium | Yes | One-sided |
+| `book` | Books, theses | Long | Yes | Two-sided |
+| `beamer` | Presentations | N/A | No | Slides |
+| `letter` | Correspondence | Short | No | Letter format |
 
-% For reports and theses
-\documentclass[12pt,a4paper]{report}
-
-% For books and long documents
-\documentclass[11pt,twoside]{book}
-
-% For presentations
-\documentclass[aspectratio=169]{beamer}
-
-% For letters
-\documentclass{letter}
-```
-
-### Essential Options
+### Common Options Summary
 
 | Option | Effect | Classes |
 |--------|--------|---------|
 | `10pt`, `11pt`, `12pt` | Font size | All |
-| `a4paper`, `letterpaper` | Paper size | All |
-| `oneside`, `twoside` | Page layout | All |
-| `onecolumn`, `twocolumn` | Columns | article, report |
+| `a4paper`, `letterpaper` | Paper size | All (except beamer) |
+| `oneside`, `twoside` | Page layout | All (except beamer) |
+| `onecolumn`, `twocolumn` | Column layout | article, report |
 | `titlepage`, `notitlepage` | Title page | article, report |
-| `openright`, `openany` | Chapter opening | book, report |
 | `draft`, `final` | Draft mode | All |
 
 ---
 
 <Info>
-**Congratulations!** You've completed the LaTeX documentation. Ready to start creating? Use LaTeX Cloud Studio to begin your first project with professional templates.
+**Next**: Learn about [LaTeX Packages](/learn/reference/packages) to extend document functionality, or explore [Document Structure](/learn/latex/basics/creating-first-document) for hands-on examples.
 </Info>

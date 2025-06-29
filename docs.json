@@ -7,7 +7,7 @@
     "light": "#FF8A6B",
     "dark": "#CC4E2D"
   },
-  "favicon": "/favicon.svg",
+  "favicon": "/favicon.ico",
   "metadata": {
     "og:site_name": "LaTeX Documentation",
     "og:type": "website",
@@ -54,7 +54,6 @@
               "learn/latex/formatting/lengths-units",
               "learn/latex/formatting/headers-footers",
               "learn/latex/formatting/page-numbering",
-              "learn/latex/formatting/single-double-sided",
               "learn/latex/formatting/multiple-columns",
               "learn/latex/formatting/counters-numbering",
               "learn/latex/formatting/code-listings-minted"
@@ -145,6 +144,15 @@
               "learn/reference/packages",
               "learn/reference/document-classes"
             ]
+          },
+          {
+            "group": "Detailed Syntax",
+            "pages": [
+              "components/basic-commands",
+              "components/document-structure",
+              "components/text-formatting",
+              "components/math-mode"
+            ]
           }
         ]
       },
@@ -166,26 +174,34 @@
             ]
           }
         ]
+      },
+      {
+        "tab": "Blog",
+        "pages": [
+          "blog/index",
+          "blog/from-word-to-latex-beginners-journey",
+          "blog/why-we-built-latex-cloud-studio",
+          "blog/welcome-to-latex-cloud-studio",
+          "blog/mastering-tikz-diagrams"
+        ]
+      },
+      {
+        "tab": "Platform",
+        "groups": [
+          {
+            "group": "Features",
+            "pages": [
+              "platform/ai-features",
+              "platform/collaboration", 
+              "platform/cloud-compilation",
+              "platform/security-privacy"
+            ]
+          }
+        ]
       }
     ],
     "global": {
-      "anchors": [
-        {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Community",
-          "href": "https://mintlify.com/community",
-          "icon": "slack"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
-        }
-      ]
+      "anchors": []
     }
   },
   "logo": {
@@ -210,6 +226,18 @@
       "x": "https://x.com/mintlify",
       "github": "https://github.com/mintlify",
       "linkedin": "https://linkedin.com/company/mintlify"
+    }
+  },
+  "analytics": {
+    "gtm": {
+      "tagId": "GTM-XXXXXXX"
+    },
+    "ga4": {
+      "measurementId": "G-XXXXXXXXXX"
+    },
+    "posthog": {
+      "apiKey": "phc_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+      "apiHost": "https://app.posthog.com"
     }
   }
 }

@@ -1,0 +1,335 @@
+---
+title: Document Structure
+description: Understanding LaTeX document structure, classes, and organization
+---
+
+# Document Structure
+
+Every LaTeX document follows a specific structure that separates content from formatting. Understanding this structure is essential for creating well-organized documents.
+
+## Basic Document Structure
+
+A LaTeX document consists of two main parts:
+
+```latex
+\documentclass{article}  % Preamble starts here
+
+% Package imports
+\usepackage{graphicx}
+\usepackage{amsmath}
+
+% Document settings
+\title{My Document}
+\author{Your Name}
+
+\begin{document}        % Document body starts here
+
+\maketitle
+
+Your content goes here...
+
+\end{document}
+```
+
+<Info>
+The **preamble** (before `\begin{document}`) contains global settings, package imports, and definitions. The **document body** (between `\begin{document}` and `\end{document}`) contains your actual content.
+</Info>
+
+## Document Classes
+
+The document class determines the overall layout and available commands:
+
+### Standard Classes
+
+```latex
+\documentclass[options]{class}
+```
+
+| Class | Purpose | Key Features |
+|-------|---------|--------------|
+| `article` | Short documents, papers | No chapters, sections start at 1 |
+| `report` | Technical reports, theses | Chapters available, new chapter starts new page |
+| `book` | Books, long documents | Two-sided by default, chapters, parts |
+| `letter` | Correspondence | Special letter commands |
+| `beamer` | Presentations | Slides, overlays, themes |
+
+### Class Options
+
+Common options for document classes:
+
+```latex
+\documentclass[11pt,a4paper,twocolumn]{article}
+```
+
+<CodeGroup>
+```latex Font Size
+% Available sizes
+\documentclass[10pt]{article}   % Default
+\documentclass[11pt]{article}
+\documentclass[12pt]{article}
+```
+
+```latex Paper Size
+% Common paper sizes
+\documentclass[a4paper]{article}     % A4 (210 × 297 mm)
+\documentclass[letterpaper]{article} % US Letter (8.5 × 11 in)
+\documentclass[a5paper]{article}     % A5 (148 × 210 mm)
+\documentclass[legalpaper]{article}  % US Legal (8.5 × 14 in)
+```
+
+```latex Layout Options
+% Single/double sided
+\documentclass[oneside]{report}  % Single-sided
+\documentclass[twoside]{report}  % Double-sided (default for book)
+
+% Column layout
+\documentclass[onecolumn]{article}  % Default
+\documentclass[twocolumn]{article}  % Two columns
+
+% Orientation
+\documentclass[landscape]{article}  % Landscape mode
+```
+</CodeGroup>
+
+## Document Organization
+
+### Title Information
+
+```latex
+% In preamble
+\title{Document Title}
+\author{First Author \and Second Author}
+\date{\today}  % or \date{January 2024}
+
+% In document
+\begin{document}
+\maketitle  % Creates title block
+```
+
+### Abstract
+
+For articles and reports:
+
+```latex
+\begin{abstract}
+This is a brief summary of the document's contents,
+typically 150-250 words.
+\end{abstract}
+```
+
+### Sectioning Commands
+
+LaTeX provides hierarchical sectioning:
+
+```latex
+% Book/Report class
+\part{Part Title}
+\chapter{Chapter Title}
+\section{Section Title}
+\subsection{Subsection Title}
+\subsubsection{Subsubsection Title}
+\paragraph{Paragraph Title}
+\subparagraph{Subparagraph Title}
+
+% Article class (no \chapter)
+\part{Part Title}
+\section{Section Title}
+\subsection{Subsection Title}
+% ... continues same as above
+```
+
+<Tip>
+Use starred versions for unnumbered sections: `\section*{Introduction}`
+</Tip>
+
+### Table of Contents
+
+```latex
+\tableofcontents  % Generates TOC
+\listoffigures    % List of figures
+\listoftables     % List of tables
+
+% Control TOC depth
+\setcounter{tocdepth}{2}  % Show up to subsections
+```
+
+## Page Layout
+
+### Margins and Geometry
+
+Using the `geometry` package:
+
+```latex
+\usepackage{geometry}
+\geometry{
+    a4paper,
+    left=2.5cm,
+    right=2.5cm,
+    top=3cm,
+    bottom=3cm
+}
+```
+
+### Headers and Footers
+
+Basic page numbering:
+
+```latex
+\pagestyle{plain}    % Page number at bottom center
+\pagestyle{empty}    % No headers or footers
+\pagestyle{headings} % Chapter/section in header
+```
+
+Custom headers with `fancyhdr`:
+
+```latex
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}  % Clear all
+\fancyhead[L]{Left Header}
+\fancyhead[C]{Center Header}
+\fancyhead[R]{Right Header}
+\fancyfoot[C]{\thepage}
+```
+
+## Multi-file Documents
+
+For large documents, split content into multiple files:
+
+### Main File (thesis.tex)
+
+```latex
+\documentclass{report}
+\usepackage{...}
+
+\begin{document}
+
+\include{chapters/introduction}
+\include{chapters/methodology}
+\include{chapters/results}
+\include{chapters/conclusion}
+
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}
+```
+
+### Chapter File (chapters/introduction.tex)
+
+```latex
+\chapter{Introduction}
+
+This chapter introduces...
+
+\section{Background}
+Content...
+```
+
+<Info>
+**`\include` vs `\input`:**
+- `\include{file}` - Starts new page, allows `\includeonly`
+- `\input{file}` - Inserts content inline, no page break
+</Info>
+
+## Appendices
+
+```latex
+\appendix  % Switch to appendix mode
+
+\chapter{Additional Data}  % Becomes "Appendix A"
+Content...
+
+\chapter{Source Code}      % Becomes "Appendix B"
+Content...
+```
+
+## Front Matter and Back Matter
+
+For books and reports:
+
+```latex
+\begin{document}
+
+\frontmatter  % Roman numerals, no chapter numbers
+\maketitle
+\tableofcontents
+\listoffigures
+
+\mainmatter   % Arabic numerals, normal numbering
+\chapter{Introduction}
+% Main content...
+
+\backmatter   % No chapter numbers
+\bibliography{refs}
+\printindex
+
+\end{document}
+```
+
+## Best Practices
+
+<Tip>
+**Document structure tips:**
+1. **Use consistent sectioning** - Don't skip levels
+2. **Organize with files** - One chapter per file for large documents
+3. **Comment your preamble** - Document package purposes
+4. **Use logical labels** - `\label{sec:intro}` not `\label{s1}`
+5. **Keep preamble clean** - Move custom commands to separate file
+</Tip>
+
+## Common Patterns
+
+### Academic Article
+
+```latex
+\documentclass[12pt,a4paper]{article}
+\usepackage{amsmath,graphicx,hyperref}
+
+\title{Research Title}
+\author{Author Name\\Institution}
+\date{\today}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+Summary...
+\end{abstract}
+
+\section{Introduction}
+\section{Methodology}
+\section{Results}
+\section{Conclusion}
+
+\bibliographystyle{plain}
+\bibliography{references}
+\end{document}
+```
+
+### Technical Report
+
+```latex
+\documentclass[11pt,a4paper]{report}
+\usepackage{geometry,fancyhdr,graphicx}
+
+\begin{document}
+\frontmatter
+\maketitle
+\tableofcontents
+
+\mainmatter
+\chapter{Executive Summary}
+\chapter{Technical Details}
+\chapter{Implementation}
+
+\appendix
+\chapter{Additional Information}
+
+\backmatter
+\bibliography{refs}
+\end{document}
+```
+
+---
+
+Next: Explore [Text Formatting](/components/text-formatting) commands or learn about [Math Mode](/components/math-mode) for mathematical content.

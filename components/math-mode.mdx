@@ -1,0 +1,409 @@
+---
+title: Math Mode
+description: Mathematical typesetting commands and environments in LaTeX
+---
+
+# Math Mode
+
+LaTeX excels at typesetting mathematical content. This reference covers math mode basics, symbols, equations, and advanced mathematical structures.
+
+## Math Mode Basics
+
+LaTeX has two math modes:
+
+<CardGroup cols={2}>
+<Card title="Inline Math" icon="equals">
+Math within text: $a^2 + b^2 = c^2$
+</Card>
+<Card title="Display Math" icon="square-root-variable">
+Math on separate lines with automatic centering
+</Card>
+</CardGroup>
+
+### Entering Math Mode
+
+<CodeGroup>
+```latex Inline Math
+% Dollar signs (most common)
+The equation $E = mc^2$ is famous.
+
+% \(...\) delimiters
+The equation \(E = mc^2\) is famous.
+
+% math environment
+The equation \begin{math}E = mc^2\end{math} is famous.
+```
+
+```latex Display Math  
+% Double dollars
+$$E = mc^2$$
+
+% \[...\] delimiters (recommended)
+\[E = mc^2\]
+
+% displaymath environment
+\begin{displaymath}
+E = mc^2
+\end{displaymath}
+
+% equation environment (numbered)
+\begin{equation}
+E = mc^2
+\end{equation}
+```
+</CodeGroup>
+
+<Warning>
+**Important:** Text-mode commands don't work in math mode. Use math-specific commands for formatting.
+</Warning>
+
+## Basic Math Commands
+
+### Superscripts and Subscripts
+
+```latex
+x^2              % Superscript
+x_i              % Subscript  
+x^{10}           % Multi-character superscript
+x_{ij}           % Multi-character subscript
+x^2_i            % Both
+x^{y^z}          % Nested superscripts
+\sum_{i=1}^{n}   % Limits on operators
+```
+
+### Fractions
+
+```latex
+\frac{a}{b}           % Standard fraction
+\dfrac{a}{b}          % Display style fraction (larger)
+\tfrac{a}{b}          % Text style fraction (smaller)
+\sfrac{1}{2}          % Slanted fraction (nicefrac package)
+\frac{1}{2+\frac{1}{3}} % Nested fractions
+```
+
+### Roots
+
+```latex
+\sqrt{x}              % Square root
+\sqrt[3]{x}           % Cube root
+\sqrt[n]{x}           % nth root
+\sqrt{\frac{a}{b}}    % Root of fraction
+```
+
+## Greek Letters
+
+### Lowercase Greek
+
+```latex
+\alpha    \beta     \gamma    \delta    
+\epsilon  \zeta     \eta      \theta    
+\iota     \kappa    \lambda   \mu       
+\nu       \xi       \pi       \rho      
+\sigma    \tau      \upsilon  \phi      
+\chi      \psi      \omega              
+
+% Variants
+\varepsilon  \vartheta  \varpi  
+\varrho      \varsigma  \varphi
+```
+
+### Uppercase Greek
+
+```latex
+\Gamma    \Delta    \Theta    \Lambda   
+\Xi       \Pi       \Sigma    \Upsilon  
+\Phi      \Psi      \Omega              
+```
+
+## Mathematical Operators
+
+### Binary Operators
+
+```latex
++         -         \times    \div      
+\pm       \mp       \cdot     \ast      
+\star     \circ     \bullet   \oplus    
+\ominus   \otimes   \oslash   \odot     
+```
+
+### Relational Operators
+
+```latex
+=         \neq      <         >         
+\leq      \geq      \ll       \gg       
+\approx   \sim      \simeq    \cong     
+\equiv    \propto   \subset   \supset   
+\in       \ni       \perp     \parallel 
+```
+
+### Arrows
+
+```latex
+\leftarrow     \rightarrow    \leftrightarrow
+\Leftarrow     \Rightarrow    \Leftrightarrow
+\uparrow       \downarrow     \updownarrow   
+\nearrow       \searrow       \swarrow       
+\nwarrow       \mapsto        \longmapsto    
+```
+
+### Large Operators
+
+```latex
+\sum_{i=1}^{n}      % Summation
+\prod_{i=1}^{n}     % Product
+\int_{a}^{b}        % Integral
+\oint               % Contour integral
+\bigcup_{i=1}^{n}   % Union
+\bigcap_{i=1}^{n}   % Intersection
+\lim_{x \to \infty} % Limit
+```
+
+## Delimiters
+
+### Basic Delimiters
+
+```latex
+(x)        [x]        \{x\}      |x|       
+\langle x \rangle    \lceil x \rceil        
+\lfloor x \rfloor    \| x \|                
+```
+
+### Automatic Sizing
+
+```latex
+% Manual sizing
+\big( \Big( \bigg( \Bigg(
+
+% Automatic sizing (recommended)
+\left( \frac{a}{b} \right)
+\left[ \sum_{i=1}^{n} x_i \right]
+\left\{ x : x > 0 \right\}
+\left. \frac{df}{dx} \right|_{x=0}
+```
+
+## Mathematical Environments
+
+### Single Equations
+
+```latex
+% Numbered equation
+\begin{equation}
+E = mc^2
+\label{eq:einstein}
+\end{equation}
+
+% Unnumbered equation
+\begin{equation*}
+E = mc^2
+\end{equation*}
+```
+
+### Multiple Equations
+
+<CodeGroup>
+```latex Aligned Equations
+\begin{align}
+x + y &= 5 \\
+2x - y &= 1
+\end{align}
+
+% With custom alignment
+\begin{align}
+f(x) &= x^2 + 2x + 1 \\
+     &= (x + 1)^2
+\end{align}
+```
+
+```latex Gathered Equations
+\begin{gather}
+x + y = 5 \\
+2x - y = 1
+\end{gather}
+
+% Multiple columns
+\begin{gather}
+a = b     \qquad c = d \\
+e = f     \qquad g = h
+\end{gather}
+```
+
+```latex Cases
+f(x) = \begin{cases}
+x^2 & \text{if } x \geq 0 \\
+-x^2 & \text{if } x < 0
+\end{cases}
+```
+</CodeGroup>
+
+### Matrices
+
+```latex
+% Basic matrix
+\begin{matrix}
+a & b \\
+c & d
+\end{matrix}
+
+% Matrix with delimiters
+\begin{pmatrix}        % Parentheses
+a & b \\
+c & d
+\end{pmatrix}
+
+\begin{bmatrix}        % Brackets
+a & b \\
+c & d
+\end{bmatrix}
+
+\begin{vmatrix}        % Vertical lines (determinant)
+a & b \\
+c & d
+\end{vmatrix}
+
+\begin{Vmatrix}        % Double vertical lines
+a & b \\
+c & d
+\end{Vmatrix}
+```
+
+## Advanced Features
+
+### Text in Math Mode
+
+```latex
+% Basic text
+\text{if } x > 0
+
+% Text with math inside
+\text{for all } x \in \mathbb{R}
+
+% Common text operators
+\sin x   \cos x   \tan x   \log x
+\exp x   \max x   \min x   \det A
+```
+
+### Math Fonts
+
+```latex
+\mathbb{R}     % Blackboard bold (reals)
+\mathbb{N}     % Natural numbers
+\mathbb{Z}     % Integers
+\mathbb{C}     % Complex numbers
+
+\mathcal{L}    % Calligraphic
+\mathscr{F}    % Script (mathrsfs package)
+\mathfrak{g}   % Fraktur (amssymb package)
+\mathbf{v}     % Bold (vectors)
+\boldsymbol{\alpha} % Bold Greek
+```
+
+### Spacing in Math
+
+```latex
+% Automatic spacing (usually best)
+a + b
+
+% Manual spacing
+a \, b         % Thin space
+a \: b         % Medium space  
+a \; b         % Thick space
+a \quad b      % Quad space
+a \qquad b     % Double quad
+
+% Negative space
+a \! b         % Negative thin space
+```
+
+### Theorems and Proofs
+
+```latex
+\usepackage{amsthm}
+
+% Define theorem environments
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proof}{Proof}
+
+% Use in document
+\begin{theorem}
+For all $x \in \mathbb{R}$, we have $x^2 \geq 0$.
+\end{theorem}
+
+\begin{proof}
+This follows from the definition of real numbers.
+\end{proof}
+```
+
+## Common Constructions
+
+### Derivatives
+
+```latex
+% Basic derivative
+\frac{df}{dx}
+
+% Partial derivative  
+\frac{\partial f}{\partial x}
+
+% Higher derivatives
+\frac{d^2f}{dx^2}
+
+% At a point
+\left.\frac{df}{dx}\right|_{x=0}
+```
+
+### Integrals
+
+```latex
+% Definite integral
+\int_0^1 x^2 \, dx
+
+% Indefinite integral
+\int f(x) \, dx
+
+% Multiple integrals
+\iint_D f(x,y) \, dx \, dy
+\iiint_V f(x,y,z) \, dV
+```
+
+### Sums and Products
+
+```latex
+% Sum
+\sum_{n=1}^{\infty} \frac{1}{n^2}
+
+% Product
+\prod_{i=1}^{n} x_i
+
+% Inline versions
+$\sum\limits_{i=1}^{n}$ % Forces display style
+$\sum\nolimits_{i=1}^{n}$ % Forces inline style
+```
+
+## Best Practices
+
+<Tip>
+**Math typesetting tips:**
+1. **Use proper math mode** - Never use text italic for math
+2. **Choose appropriate environments** - `align` for equations that should align
+3. **Label important equations** - Use `\label{eq:descriptive-name}`
+4. **Use `\text{}` for words** - Don't write words directly in math mode
+5. **Let LaTeX handle spacing** - Avoid manual spacing unless necessary
+</Tip>
+
+## Quick Reference
+
+| Symbol | Command | Symbol | Command |
+|--------|---------|--------|---------|
+| ± | `\pm` | ≤ | `\leq` |
+| × | `\times` | ≥ | `\geq` |
+| ÷ | `\div` | ≠ | `\neq` |
+| ∞ | `\infty` | ≈ | `\approx` |
+| ∑ | `\sum` | ∈ | `\in` |
+| ∫ | `\int` | ⊂ | `\subset` |
+| √ | `\sqrt{}` | ∪ | `\cup` |
+| α | `\alpha` | ∩ | `\cap` |
+
+---
+
+Next: Explore [Lists and Enumerations](/components/lists-enumerations) or learn about [Tables](/components/tables) for data presentation.
