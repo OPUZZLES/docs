@@ -50,7 +50,14 @@
               "learn/latex/text-formatting",
               "learn/latex/paragraphs-spacing",
               "learn/latex/fonts",
-              "learn/latex/basics/lists"
+              "learn/latex/basics/lists",
+              "learn/latex/formatting/lengths-units",
+              "learn/latex/formatting/headers-footers",
+              "learn/latex/formatting/page-numbering",
+              "learn/latex/formatting/single-double-sided",
+              "learn/latex/formatting/multiple-columns",
+              "learn/latex/formatting/counters-numbering",
+              "learn/latex/formatting/code-listings-minted"
             ]
           },
           {
@@ -70,6 +77,23 @@
               "learn/latex/tables/creating-tables",
               "learn/latex/tables/advanced-tables"
             ]
+          },
+          {
+            "group": "Specialized Notation",
+            "pages": [
+              "learn/latex/specialized/chemistry",
+              "learn/latex/specialized/music",
+              "learn/latex/specialized/circuits",
+              "learn/latex/specialized/linguistics",
+              "learn/latex/specialized/algorithms"
+            ]
+          },
+          {
+            "group": "Bibliography & References",
+            "pages": [
+              "learn/latex/bibliography-citations",
+              "learn/latex/cross-referencing"
+            ]
           }
         ]
       },
@@ -77,20 +101,35 @@
         "tab": "How-to Guides",
         "groups": [
           {
-            "group": "Document Types",
+            "group": "Getting Started",
             "pages": [
-              "learn/latex/how-to/articles",
-              "learn/latex/how-to/presentations",
-              "learn/latex/how-to/cv-resume",
-              "learn/latex/how-to/thesis"
+              "learn/latex/how-to/first-project",
+              "learn/latex/how-to/using-templates",
+              "learn/latex/how-to/fixing-compilation-errors"
             ]
           },
           {
-            "group": "Advanced Topics",
+            "group": "Document Creation",
             "pages": [
-              "learn/latex/bibliography-citations",
-              "learn/latex/cross-referencing",
-              "learn/latex/package-management"
+              "learn/latex/how-to/writing-research-paper",
+              "learn/latex/how-to/creating-posters",
+              "learn/latex/how-to/book-publishing"
+            ]
+          },
+          {
+            "group": "Working with Content",
+            "pages": [
+              "learn/latex/how-to/working-with-images",
+              "learn/latex/how-to/professional-tables",
+              "learn/latex/how-to/tikz-diagrams"
+            ]
+          },
+          {
+            "group": "Advanced Workflows",
+            "pages": [
+              "learn/latex/how-to/large-documents",
+              "learn/latex/how-to/collaboration-workflow",
+              "learn/latex/how-to/multi-language-documents"
             ]
           }
         ]

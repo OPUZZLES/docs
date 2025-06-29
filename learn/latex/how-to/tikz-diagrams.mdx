@@ -1,0 +1,1095 @@
+---
+title: Creating Diagrams with TikZ
+description: Master TikZ for creating professional diagrams in LaTeX. Learn drawing commands, libraries, flowcharts, graphs, and advanced visualization techniques.
+---
+
+Create publication-quality diagrams directly in LaTeX using TikZ. This comprehensive guide covers basic shapes to complex technical illustrations, including flowcharts, graphs, circuits, and scientific diagrams.
+
+<Info>
+**Prerequisites**: Basic LaTeX knowledge  
+**Time to complete**: 40-45 minutes  
+**Difficulty**: Intermediate to Advanced  
+**What you'll learn**: TikZ syntax, libraries, drawing techniques, and practical examples
+</Info>
+
+## Introduction to TikZ
+
+### What is TikZ?
+
+TikZ (TikZ ist kein Zeichenprogramm - TikZ is not a drawing program) is a powerful package for creating graphics programmatically in LaTeX. It provides:
+
+<CardGroup cols={2}>
+<Card title="Precise Control" icon="ruler">
+Exact positioning and measurements
+</Card>
+<Card title="Consistency" icon="palette">
+Matching document fonts and styles
+</Card>
+<Card title="Programmable" icon="code">
+Loops, variables, and calculations
+</Card>
+<Card title="Integration" icon="puzzle-piece">
+Seamless LaTeX integration
+</Card>
+</CardGroup>
+
+### Basic Setup
+
+<CodeGroup>
+```latex tikz-setup.tex
+\documentclass{article}
+\usepackage{tikz}
+
+% Load common libraries
+\usetikzlibrary{
+    arrows.meta,      % Arrow styles
+    positioning,      % Relative positioning
+    shapes.geometric, % Additional shapes
+    calc,            % Coordinate calculations
+    patterns,        % Fill patterns
+    decorations.pathmorphing, % Path decorations
+    backgrounds,     % Background layers
+    fit,            % Fitting nodes
+    chains,         % Chain positioning
+    shadows         % Drop shadows
+}
+
+\begin{document}
+
+% Inline TikZ
+\begin{tikzpicture}
+    \draw (0,0) -- (2,1);
+\end{tikzpicture}
+
+% Centered figure
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}
+        % Drawing commands here
+    \end{tikzpicture}
+    \caption{TikZ diagram}
+\end{figure}
+
+\end{document}
+```
+
+```latex basic-shapes.tex
+% Basic shapes and lines
+\begin{tikzpicture}
+    % Grid for reference (remove in final)
+    \draw[help lines, gray] (0,0) grid (6,4);
+    
+    % Lines
+    \draw (0,0) -- (2,1);                    % Straight line
+    \draw[thick] (3,0) -- (5,1);             % Thick line
+    \draw[dashed] (0,2) -- (2,3);            % Dashed line
+    \draw[->] (3,2) -- (5,3);                % Arrow
+    \draw[<->, red] (0,3.5) -- (2,3.5);      % Double arrow
+    
+    % Basic shapes
+    \draw (1,1) circle (0.5);                % Circle
+    \draw[fill=blue!20] (4,1) circle (0.5);  % Filled circle
+    \draw (0,0) rectangle (1,0.8);           % Rectangle
+    \draw[rounded corners] (3,0) rectangle (4,0.8); % Rounded
+    
+    % Nodes (shapes with text)
+    \node[circle, draw] at (1,3) {A};
+    \node[rectangle, draw, fill=green!20] at (4,3) {Box};
+\end{tikzpicture}
+```
+</CodeGroup>
+
+## Basic Drawing
+
+### Coordinates and Paths
+
+<CodeGroup>
+```latex coordinates.tex
+\begin{tikzpicture}[scale=1.5]
+    % Cartesian coordinates
+    \draw[->] (-0.5,0) -- (4,0) node[right] {$x$};
+    \draw[->] (0,-0.5) -- (0,3) node[above] {$y$};
+    
+    % Points
+    \fill (1,1) circle (2pt) node[below] {$(1,1)$};
+    \fill (3,2) circle (2pt) node[right] {$(3,2)$};
+    
+    % Path with multiple segments
+    \draw[thick, blue] (0,0) -- (1,1) -- (2,0.5) -- (3,2);
+    
+    % Curved path
+    \draw[thick, red] (0,2) .. controls (1,3) and (2,1) .. (3,2.5);
+    
+    % Closed path
+    \draw[thick, green, fill=green!20] 
+        (0.5,0.5) -- (1.5,0.5) -- (1,1.5) -- cycle;
+        
+    % Polar coordinates
+    \draw[purple] (0,0) -- (45:2) node[midway, above] {$(45:2)$};
+    
+    % Relative coordinates
+    \draw[orange, thick] (2,1) -- ++(1,0.5) -- ++(0.5,-0.5);
+\end{tikzpicture}
+```
+
+```latex path-operations.tex
+\begin{tikzpicture}[scale=1.2]
+    % Different path operations
+    
+    % Straight lines with corners
+    \draw[blue] (0,0) -| (2,1);  % Horizontal then vertical
+    \draw[red] (3,0) |- (5,1);   % Vertical then horizontal
+    
+    % Bezier curves
+    \draw[thick] (0,2) .. controls (1,3) .. (2,2);
+    \draw[thick, green] (3,2) .. controls (3.5,3) and (4.5,3) .. (5,2);
+    
+    % Arcs
+    \draw[thick, orange] (1,3) arc (0:90:1);
+    \draw[thick, purple] (4,3) arc (180:45:1.5);
+    
+    % Smooth curves through points
+    \draw[thick, brown] plot[smooth] coordinates {
+        (0,4) (0.5,4.5) (1,4.2) (1.5,4.8) (2,4.3)
+    };
+    
+    % Cycle back to start
+    \draw[thick, cyan, fill=cyan!20] 
+        (3,4) -- (4,4.5) -- (5,4) -- (4,3.5) -- cycle;
+\end{tikzpicture}
+```
+</CodeGroup>
+
+### Nodes and Labels
+
+<CodeGroup>
+```latex nodes-basics.tex
+\begin{tikzpicture}[
+    every node/.style={font=\sffamily},
+    main node/.style={circle, draw, minimum size=1cm}
+]
+    % Basic nodes
+    \node (A) at (0,0) {Simple text};
+    \node[draw] (B) at (3,0) {Boxed text};
+    \node[circle, draw] (C) at (6,0) {Circle};
+    
+    % Styled nodes
+    \node[main node, fill=blue!20] (D) at (0,2) {D};
+    \node[rectangle, draw, rounded corners, fill=red!20] (E) at (3,2) {Rect};
+    \node[ellipse, draw, fill=green!20] (F) at (6,2) {Ellipse};
+    
+    % Node connections
+    \draw[->] (A) -- (B);
+    \draw[->] (B) -- (C);
+    \draw[<->, thick] (D) -- (E);
+    \draw[->, dashed] (E) -- (F);
+    
+    % Labels on edges
+    \draw[->] (D) -- (A) node[midway, left] {edge};
+    \draw[->] (F) -- (C) node[near start, right] {label};
+\end{tikzpicture}
+```
+
+```latex node-positioning.tex
+\begin{tikzpicture}[
+    node distance=2cm,
+    box/.style={rectangle, draw, minimum width=2cm, minimum height=1cm}
+]
+    % Central node
+    \node[box, fill=yellow!30] (center) {Center};
+    
+    % Relative positioning
+    \node[box, above=of center] (top) {Above};
+    \node[box, below=of center] (bottom) {Below};
+    \node[box, left=of center] (left) {Left};
+    \node[box, right=of center] (right) {Right};
+    
+    % Diagonal positioning
+    \node[box, above right=of center] (tr) {Top Right};
+    \node[box, below left=of center] (bl) {Bottom Left};
+    
+    % Custom distances
+    \node[box, above=3cm of center] (far) {Far Above};
+    \node[box, right=1cm of center] (near) {Near Right};
+    
+    % Connect all to center
+    \foreach \n in {top, bottom, left, right, tr, bl, far, near}
+        \draw[->] (center) -- (\n);
+\end{tikzpicture}
+```
+</CodeGroup>
+
+## Flowcharts and Diagrams
+
+### Basic Flowcharts
+
+<CodeGroup>
+```latex simple-flowchart.tex
+\begin{tikzpicture}[
+    node distance=2cm,
+    startstop/.style={rectangle, rounded corners, draw, fill=red!30, minimum width=3cm, minimum height=1cm},
+    process/.style={rectangle, draw, fill=blue!30, minimum width=3cm, minimum height=1cm},
+    decision/.style={diamond, draw, fill=green!30, minimum width=3cm, minimum height=1cm, aspect=2},
+    io/.style={trapezium, trapezium left angle=70, trapezium right angle=110, draw, fill=yellow!30, minimum width=3cm, minimum height=1cm},
+    arrow/.style={thick, ->, >=stealth}
+]
+    % Nodes
+    \node[startstop] (start) {Start};
+    \node[io, below=of start] (input) {Input data};
+    \node[process, below=of input] (process1) {Process data};
+    \node[decision, below=of process1] (decision) {Valid?};
+    \node[process, below=of decision] (process2) {Generate output};
+    \node[startstop, below=of process2] (stop) {End};
+    
+    % Alternative path
+    \node[process, right=3cm of decision] (error) {Handle error};
+    
+    % Connections
+    \draw[arrow] (start) -- (input);
+    \draw[arrow] (input) -- (process1);
+    \draw[arrow] (process1) -- (decision);
+    \draw[arrow] (decision) -- node[left] {Yes} (process2);
+    \draw[arrow] (decision) -- node[above] {No} (error);
+    \draw[arrow] (error) |- (input);
+    \draw[arrow] (process2) -- (stop);
+\end{tikzpicture}
+```
+
+```latex complex-flowchart.tex
+\begin{tikzpicture}[
+    node distance=1.5cm and 2cm,
+    box/.style={rectangle, draw, fill=#1, minimum width=2.5cm, minimum height=0.8cm, font=\small},
+    decision/.style={diamond, draw, fill=orange!30, aspect=1.5, font=\small},
+    cloud/.style={cloud, draw, fill=gray!20, minimum width=2cm, minimum height=1cm},
+    database/.style={cylinder, draw, fill=purple!30, minimum width=2cm, minimum height=1cm, shape border rotate=90},
+    arr/.style={->, >=latex, thick}
+]
+    % System architecture flowchart
+    \node[cloud] (user) {User};
+    \node[box=blue!30, below=of user] (ui) {UI Layer};
+    \node[box=green!30, below=of ui] (api) {API Gateway};
+    \node[decision, below=of api] (auth) {Authenticated?};
+    \node[box=yellow!30, below left=of auth] (login) {Login Service};
+    \node[box=cyan!30, below right=of auth] (service) {Business Logic};
+    \node[database, below=of service] (db) {Database};
+    \node[box=red!30, right=of service] (cache) {Cache};
+    
+    % Connections with labels
+    \draw[arr] (user) -- (ui);
+    \draw[arr] (ui) -- (api) node[midway, right] {HTTP};
+    \draw[arr] (api) -- (auth);
+    \draw[arr] (auth) -- node[left] {No} (login);
+    \draw[arr] (auth) -- node[right] {Yes} (service);
+    \draw[arr] (login) -| (api);
+    \draw[arr] (service) -- (db) node[midway, right] {Query};
+    \draw[arr, <->] (service) -- (cache) node[midway, above] {Read/Write};
+    \draw[arr] (db) -| (cache) node[near start, left] {Update};
+\end{tikzpicture}
+```
+</CodeGroup>
+
+### State Diagrams
+
+<CodeGroup>
+```latex state-diagram.tex
+\begin{tikzpicture}[
+    >=stealth,
+    node distance=3cm,
+    state/.style={circle, draw, minimum size=1.5cm, font=\small},
+    initial/.style={state, fill=green!30},
+    final/.style={state, double, fill=red!30},
+    transition/.style={->, thick}
+]
+    % States
+    \node[initial] (idle) {Idle};
+    \node[state, right=of idle] (loading) {Loading};
+    \node[state, right=of loading] (active) {Active};
+    \node[state, below=of active] (error) {Error};
+    \node[final, below=of idle] (terminated) {Done};
+    
+    % Transitions
+    \draw[transition] (idle) -- node[above] {start} (loading);
+    \draw[transition] (loading) -- node[above] {success} (active);
+    \draw[transition] (loading) -- node[right] {fail} (error);
+    \draw[transition] (active) -- node[right] {complete} (terminated);
+    \draw[transition] (error) -- node[below] {retry} (loading);
+    \draw[transition] (error) -- node[left] {abort} (terminated);
+    \draw[transition, bend left=30] (active) to node[above] {reset} (idle);
+    
+    % Self loop
+    \draw[transition] (active) to[loop above] node {update} (active);
+\end{tikzpicture}
+```
+
+```latex automaton.tex
+\begin{tikzpicture}[
+    shorten >=1pt,
+    node distance=2.5cm,
+    on grid,
+    auto,
+    state/.style={circle, draw, minimum size=1.2cm},
+    accepting/.style={state, double}
+]
+    % Finite automaton
+    \node[state, initial] (q0) {$q_0$};
+    \node[state] (q1) [right=of q0] {$q_1$};
+    \node[state] (q2) [right=of q1] {$q_2$};
+    \node[accepting] (q3) [right=of q2] {$q_3$};
+    
+    % Transitions
+    \path[->]
+        (q0) edge node {0} (q1)
+        (q0) edge[loop above] node {1} (q0)
+        (q1) edge node {1} (q2)
+        (q1) edge[bend left] node {0} (q0)
+        (q2) edge node {0} (q3)
+        (q2) edge[bend left] node[below] {1} (q1)
+        (q3) edge[loop above] node {0,1} (q3);
+        
+    % Label
+    \node[below=2cm of q1, text width=6cm, align=center] {
+        Finite automaton accepting strings with exactly three 0s
+    };
+\end{tikzpicture}
+```
+</CodeGroup>
+
+## Graphs and Trees
+
+### Graph Structures
+
+<CodeGroup>
+```latex simple-graph.tex
+\begin{tikzpicture}[
+    node distance=2cm,
+    vertex/.style={circle, draw, fill=blue!20, minimum size=8mm},
+    edge/.style={thick}
+]
+    % Vertices
+    \node[vertex] (A) {A};
+    \node[vertex, right=of A] (B) {B};
+    \node[vertex, below right=of A] (C) {C};
+    \node[vertex, below left=of A] (D) {D};
+    \node[vertex, below=of C] (E) {E};
+    
+    % Edges
+    \draw[edge] (A) -- (B);
+    \draw[edge] (A) -- (C);
+    \draw[edge] (A) -- (D);
+    \draw[edge] (B) -- (C);
+    \draw[edge] (C) -- (D);
+    \draw[edge] (C) -- (E);
+    \draw[edge] (D) -- (E);
+    
+    % Edge labels
+    \draw[edge] (B) -- node[above right] {5} (E);
+\end{tikzpicture}
+```
+
+```latex directed-graph.tex
+\begin{tikzpicture}[
+    scale=1.5,
+    vertex/.style={circle, draw, fill=orange!30, minimum size=10mm, font=\footnotesize},
+    edge/.style={->, >=stealth, thick},
+    weight/.style={midway, font=\scriptsize, fill=white, inner sep=1pt}
+]
+    % Weighted directed graph
+    \node[vertex] (1) at (0,2) {1};
+    \node[vertex] (2) at (2,3) {2};
+    \node[vertex] (3) at (4,2) {3};
+    \node[vertex] (4) at (3,0) {4};
+    \node[vertex] (5) at (1,0) {5};
+    
+    % Weighted edges
+    \draw[edge] (1) -- node[weight] {3} (2);
+    \draw[edge] (2) -- node[weight] {1} (3);
+    \draw[edge] (3) -- node[weight] {4} (4);
+    \draw[edge] (4) -- node[weight] {2} (5);
+    \draw[edge] (5) -- node[weight] {6} (1);
+    \draw[edge] (1) -- node[weight] {5} (3);
+    \draw[edge] (2) -- node[weight] {2} (4);
+    
+    % Self loop
+    \draw[edge] (3) to[loop right] node[weight] {1} (3);
+\end{tikzpicture}
+```
+</CodeGroup>
+
+### Tree Structures
+
+<CodeGroup>
+```latex binary-tree.tex
+\begin{tikzpicture}[
+    level distance=1.5cm,
+    level 1/.style={sibling distance=4cm},
+    level 2/.style={sibling distance=2cm},
+    level 3/.style={sibling distance=1cm},
+    treenode/.style={circle, draw, fill=green!30, minimum size=8mm},
+    edge from parent/.style={draw, ->, >=stealth}
+]
+    % Binary tree
+    \node[treenode] {8}
+        child {
+            node[treenode] {3}
+            child {
+                node[treenode] {1}
+            }
+            child {
+                node[treenode] {6}
+                child {
+                    node[treenode] {4}
+                }
+                child {
+                    node[treenode] {7}
+                }
+            }
+        }
+        child {
+            node[treenode] {10}
+            child[missing] {}
+            child {
+                node[treenode] {14}
+                child {
+                    node[treenode] {13}
+                }
+                child[missing] {}
+            }
+        };
+\end{tikzpicture}
+```
+
+```latex tree-layouts.tex
+\begin{tikzpicture}[
+    grow=down,
+    level 1/.style={sibling distance=5cm},
+    level 2/.style={sibling distance=2.5cm},
+    level 3/.style={sibling distance=1.5cm},
+    edge from parent/.style={draw, thick},
+    nodeStyle/.style={rectangle, draw, fill=cyan!20, minimum width=2cm, minimum height=0.8cm, font=\small},
+    leafStyle/.style={nodeStyle, fill=yellow!30}
+]
+    % Organizational chart style tree
+    \node[nodeStyle] {CEO}
+        child {
+            node[nodeStyle] {CTO}
+            child {
+                node[nodeStyle] {Dev Team}
+                child { node[leafStyle] {Frontend} }
+                child { node[leafStyle] {Backend} }
+            }
+            child {
+                node[nodeStyle] {DevOps}
+                child { node[leafStyle] {Cloud} }
+                child { node[leafStyle] {Security} }
+            }
+        }
+        child {
+            node[nodeStyle] {CFO}
+            child { node[leafStyle] {Accounting} }
+            child { node[leafStyle] {Finance} }
+        }
+        child {
+            node[nodeStyle] {CMO}
+            child { node[leafStyle] {Marketing} }
+            child { node[leafStyle] {Sales} }
+        };
+        
+    % Alternative: horizontal tree
+    \begin{scope}[xshift=10cm]
+        \tikzset{
+            grow=right,
+            level 1/.style={sibling distance=2cm, level distance=2.5cm},
+            level 2/.style={sibling distance=1cm, level distance=2.5cm}
+        }
+        \node[nodeStyle] {Root}
+            child { 
+                node[nodeStyle] {A}
+                child { node[leafStyle] {A1} }
+                child { node[leafStyle] {A2} }
+            }
+            child {
+                node[nodeStyle] {B}
+                child { node[leafStyle] {B1} }
+            };
+    \end{scope}
+\end{tikzpicture}
+```
+</CodeGroup>
+
+## Scientific Diagrams
+
+### Mathematical Diagrams
+
+<CodeGroup>
+```latex function-plot.tex
+\begin{tikzpicture}[scale=1.5]
+    % Axes
+    \draw[->] (-0.5,0) -- (4,0) node[right] {$x$};
+    \draw[->] (0,-0.5) -- (0,3) node[above] {$y$};
+    
+    % Grid
+    \draw[gray, very thin] (0,0) grid (3.5,2.5);
+    
+    % Function plots
+    \draw[blue, thick, domain=0:3.5, samples=100] 
+        plot (\x, {0.5*\x*\x - \x + 1});
+    \draw[red, thick, domain=0:3.5, samples=100] 
+        plot (\x, {sin(\x r) + 1});
+    \draw[green, thick, domain=0.1:3.5, samples=100] 
+        plot (\x, {ln(\x) + 1});
+        
+    % Labels
+    \node[blue] at (3,2.2) {$f(x) = \frac{1}{2}x^2 - x + 1$};
+    \node[red] at (2,0.3) {$g(x) = \sin(x) + 1$};
+    \node[green] at (3.2,1.3) {$h(x) = \ln(x) + 1$};
+    
+    % Points of interest
+    \fill[blue] (2,1) circle (2pt) node[above right] {$(2,1)$};
+\end{tikzpicture}
+```
+
+```latex geometric-diagram.tex
+\begin{tikzpicture}[scale=2]
+    % Triangle with labels
+    \coordinate[label=left:$A$] (A) at (0,0);
+    \coordinate[label=right:$B$] (B) at (3,0);
+    \coordinate[label=above:$C$] (C) at (1.5,2);
+    
+    % Draw triangle
+    \draw[thick] (A) -- (B) -- (C) -- cycle;
+    
+    % Angles
+    \draw[fill=red!20] (A) -- (0.5,0) arc (0:53.13:0.5) -- cycle;
+    \draw[fill=blue!20] (B) -- (2.5,0) arc (180:126.87:0.5) -- cycle;
+    \draw[fill=green!20] (C) -- (1.5,1.5) arc (270:270-73.74:0.5) -- cycle;
+    
+    % Angle labels
+    \node at (0.7,0.2) {$\alpha$};
+    \node at (2.3,0.2) {$\beta$};
+    \node at (1.5,1.6) {$\gamma$};
+    
+    % Side labels
+    \node[below] at (1.5,0) {$c$};
+    \node[above right] at (2.25,1) {$a$};
+    \node[above left] at (0.75,1) {$b$};
+    
+    % Height
+    \draw[dashed] (C) -- (1.5,0) node[midway, right] {$h$};
+    \fill (1.5,0) circle (1pt);
+\end{tikzpicture}
+```
+</CodeGroup>
+
+### Physics Diagrams
+
+<CodeGroup>
+```latex physics-diagram.tex
+\begin{tikzpicture}[
+    force/.style={->, thick, blue},
+    mass/.style={rectangle, draw, fill=gray!30, minimum width=1.5cm, minimum height=1.5cm}
+]
+    % Free body diagram
+    \node[mass] (m) {$m$};
+    
+    % Forces
+    \draw[force] (m.north) -- ++(0,2) node[above] {$N$};
+    \draw[force] (m.south) -- ++(0,-2) node[below] {$mg$};
+    \draw[force] (m.east) -- ++(1.5,0) node[right] {$F$};
+    \draw[force] (m.west) -- ++(-1,0) node[left] {$f$};
+    
+    % Surface
+    \draw[thick] (-3,-0.75) -- (3,-0.75);
+    \foreach \x in {-3,-2.5,...,3} {
+        \draw (\x,-0.75) -- (\x-0.25,-1);
+    }
+    
+    % Angle for inclined plane
+    \begin{scope}[xshift=6cm]
+        \draw[thick] (0,0) -- (4,0) -- (4,2) -- cycle;
+        \node[mass, rotate=26.57] at (2.5,1.25) {$m$};
+        \draw[force] (2.5,1.25) -- ++(0,-2) node[below] {$mg$};
+        \draw[force, rotate=26.57] (2.5,1.25) -- ++(0,1.5) node[above] {$N$};
+        \node at (0.5,0.15) {$\theta$};
+    \end{scope}
+\end{tikzpicture}
+```
+
+```latex circuit-diagram.tex
+\begin{tikzpicture}[circuit ee IEC]
+    % Simple circuit
+    \draw (0,0) to[battery] (0,3)
+          to[ammeter] (3,3)
+          to[resistor={info=$R_1$}] (3,1.5)
+          to[resistor={info=$R_2$}] (3,0)
+          -- (0,0);
+          
+    % Parallel circuit
+    \begin{scope}[xshift=5cm]
+        \draw (0,0) to[voltage source] (0,3) -- (1,3)
+              to[resistor={info=$R_1$}] (3,3) -- (4,3)
+              -- (4,0) -- (0,0);
+        \draw (1,3) -- (1,2)
+              to[resistor={info=$R_2$}] (3,2) -- (3,3);
+        \draw (1,2) -- (1,1)
+              to[capacitor={info=$C$}] (3,1) -- (3,2);
+    \end{scope}
+\end{tikzpicture}
+```
+</CodeGroup>
+
+## Advanced Techniques
+
+### Loops and Automation
+
+<CodeGroup>
+```latex foreach-loops.tex
+\begin{tikzpicture}
+    % Grid of nodes using foreach
+    \foreach \x in {0,1,2,3,4} {
+        \foreach \y in {0,1,2,3} {
+            \node[circle, draw, fill=blue!\x0!green!\y0] 
+                at (\x,\y) {\tiny \x,\y};
+        }
+    }
+    
+    % Radial pattern
+    \begin{scope}[xshift=7cm, yshift=2cm]
+        \foreach \angle in {0,30,...,330} {
+            \draw[thick, color=red!\angle!blue] 
+                (0,0) -- (\angle:2);
+            \fill[color=red!\angle!blue] 
+                (\angle:2) circle (2pt);
+        }
+    \end{scope}
+    
+    % Connected graph
+    \begin{scope}[yshift=-5cm]
+        \foreach \i in {1,...,6} {
+            \node[circle, draw, fill=orange!30] 
+                (n\i) at ({360/6 * (\i-1)}:2) {\i};
+        }
+        \foreach \i in {1,...,6} {
+            \foreach \j in {\i,...,6} {
+                \draw[gray] (n\i) -- (n\j);
+            }
+        }
+    \end{scope}
+\end{tikzpicture}
+```
+
+```latex calculations.tex
+\begin{tikzpicture}
+    % Using calculations
+    \coordinate (A) at (0,0);
+    \coordinate (B) at (4,0);
+    \coordinate (C) at (2,3);
+    
+    % Midpoints
+    \coordinate (MAB) at ($(A)!0.5!(B)$);
+    \coordinate (MBC) at ($(B)!0.5!(C)$);
+    \coordinate (MCA) at ($(C)!0.5!(A)$);
+    
+    % Draw triangle and medians
+    \draw[thick] (A) -- (B) -- (C) -- cycle;
+    \draw[dashed, red] (A) -- (MBC);
+    \draw[dashed, red] (B) -- (MCA);
+    \draw[dashed, red] (C) -- (MAB);
+    
+    % Centroid (intersection of medians)
+    \coordinate (G) at (barycentric cs:A=1,B=1,C=1);
+    \fill[red] (G) circle (2pt) node[below] {$G$};
+    
+    % Perpendicular lines
+    \draw[blue, thick] (A) -- ($(B)!(A)!(C)$);
+    
+    % Circle through three points
+    \node[draw, circle through=(A)(B)(C)] {};
+\end{tikzpicture}
+```
+</CodeGroup>
+
+### Styles and Scopes
+
+<CodeGroup>
+```latex custom-styles.tex
+\begin{tikzpicture}[
+    % Define custom styles
+    my node/.style={
+        circle, 
+        draw=#1, 
+        fill=#1!20, 
+        minimum size=1cm,
+        font=\bfseries
+    },
+    my edge/.style={
+        thick,
+        ->,
+        >=stealth,
+        #1
+    },
+    important/.style={
+        my node=red,
+        drop shadow
+    },
+    normal/.style={
+        my node=blue
+    }
+]
+    % Use custom styles
+    \node[important] (A) at (0,0) {A};
+    \node[normal] (B) at (3,0) {B};
+    \node[normal] (C) at (3,3) {C};
+    \node[important] (D) at (0,3) {D};
+    
+    % Styled edges
+    \draw[my edge={red, dashed}] (A) -- (B);
+    \draw[my edge={blue}] (B) -- (C);
+    \draw[my edge={green, bend left}] (C) -- (D);
+    \draw[my edge={orange, bend right}] (D) -- (A);
+    
+    % Scope with different settings
+    \begin{scope}[xshift=6cm, scale=0.8, opacity=0.7]
+        \node[my node=purple] (E) at (0,0) {E};
+        \node[my node=cyan] (F) at (2,2) {F};
+        \draw[my edge={thick}] (E) -- (F);
+    \end{scope}
+\end{tikzpicture}
+```
+
+```latex layers.tex
+\begin{tikzpicture}
+    % Background layer
+    \begin{pgfonlayer}{background}
+        \fill[yellow!20] (-1,-1) rectangle (5,4);
+        \fill[blue!20] (1,0.5) circle (2);
+    \end{pgfonlayer}
+    
+    % Main layer
+    \draw[thick] (0,0) grid (4,3);
+    \node[circle, draw, fill=white] at (2,1.5) {Main};
+    
+    % Foreground layer
+    \begin{pgfonlayer}{foreground}
+        \node[rectangle, draw, fill=red!70, opacity=0.8] at (3,2) {Front};
+    \end{pgfonlayer}
+\end{tikzpicture}
+```
+</CodeGroup>
+
+### Decorations and Patterns
+
+<CodeGroup>
+```latex decorations.tex
+\begin{tikzpicture}[
+    decoration={
+        snake,
+        amplitude=.5mm,
+        segment length=3mm
+    }
+]
+    % Different decorations
+    \draw[decorate, thick] (0,0) -- (3,0) node[right] {snake};
+    
+    \draw[
+        decoration={coil, segment length=4mm},
+        decorate, thick
+    ] (0,1) -- (3,1) node[right] {coil};
+    
+    \draw[
+        decoration={zigzag, segment length=4mm},
+        decorate, thick
+    ] (0,2) -- (3,2) node[right] {zigzag};
+    
+    \draw[
+        decoration={random steps, segment length=3mm},
+        decorate, thick
+    ] (0,3) -- (3,3) node[right] {random};
+    
+    % Text along path
+    \draw[
+        decoration={
+            text along path,
+            text={This text follows the curve!}
+        },
+        decorate
+    ] (5,0) .. controls (6,2) and (7,2) .. (8,0);
+    
+    % Arrow decorations
+    \draw[
+        thick,
+        decoration={
+            markings,
+            mark=at position 0.25 with {\arrow{>}},
+            mark=at position 0.5 with {\arrow{>}},
+            mark=at position 0.75 with {\arrow{>}}
+        },
+        postaction={decorate}
+    ] (5,3) circle (1);
+\end{tikzpicture}
+```
+
+```latex patterns-fills.tex
+\begin{tikzpicture}
+    % Pattern fills
+    \fill[pattern=horizontal lines] (0,0) rectangle (2,1);
+    \fill[pattern=vertical lines] (2.5,0) rectangle (4.5,1);
+    \fill[pattern=north east lines] (5,0) rectangle (7,1);
+    \fill[pattern=grid] (7.5,0) rectangle (9.5,1);
+    
+    % Custom patterns
+    \fill[pattern=dots] (0,2) rectangle (2,3);
+    \fill[pattern=crosshatch] (2.5,2) rectangle (4.5,3);
+    \fill[pattern=fivepointed stars] (5,2) rectangle (7,3);
+    \fill[pattern=bricks] (7.5,2) rectangle (9.5,3);
+    
+    % Combining patterns and colors
+    \fill[pattern=north west lines, pattern color=blue] 
+        (0,4) rectangle (2,5);
+    \fill[pattern=checkerboard, pattern color=red] 
+        (2.5,4) rectangle (4.5,5);
+    
+    % Gradient fills
+    \shade[left color=red, right color=blue] (5,4) rectangle (7,5);
+    \shade[inner color=yellow, outer color=orange] (7.5,4) circle (0.5);
+\end{tikzpicture}
+```
+</CodeGroup>
+
+## Best Practices
+
+### Optimization Tips
+
+<Tip>
+**TikZ best practices**:
+1. **Use styles** - Define reusable styles for consistency
+2. **Name nodes** - Makes connections easier
+3. **Use calculations** - Let TikZ compute positions
+4. **Layer wisely** - Background, main, foreground
+5. **Externalize** - Compile complex diagrams separately
+6. **Comment code** - Especially for complex diagrams
+7. **Use libraries** - Don't reinvent the wheel
+8. **Test incrementally** - Build diagrams step by step
+</Tip>
+
+### Common Pitfalls
+
+<Warning>
+**Avoid these TikZ mistakes**:
+1. **Hardcoded positions** - Use relative positioning
+2. **Repeated code** - Use loops and styles
+3. **Complex paths** - Break into smaller parts
+4. **Missing libraries** - Load required libraries
+5. **Scale issues** - Test at final size
+6. **Memory problems** - Externalize large diagrams
+7. **Forgotten semicolons** - Every command needs one
+</Warning>
+
+## Complete Examples
+
+### Network Diagram
+
+<CodeGroup>
+```latex network-diagram.tex
+\documentclass{article}
+\usepackage{tikz}
+\usetikzlibrary{positioning, shapes.geometric, shadows, backgrounds}
+
+\begin{document}
+
+\begin{tikzpicture}[
+    node distance=2cm,
+    server/.style={
+        rectangle, draw, fill=blue!20,
+        minimum width=2cm, minimum height=1.5cm,
+        drop shadow, font=\small
+    },
+    client/.style={
+        rectangle, draw, fill=green!20,
+        minimum width=1.5cm, minimum height=1cm,
+        drop shadow, font=\small
+    },
+    database/.style={
+        cylinder, draw, fill=orange!20,
+        minimum width=2cm, minimum height=1.5cm,
+        shape border rotate=90,
+        drop shadow, font=\small
+    },
+    cloud/.style={
+        cloud, draw, fill=gray!20,
+        minimum width=3cm, minimum height=2cm,
+        drop shadow, font=\small
+    },
+    connection/.style={thick, ->, >=stealth},
+    label/.style={font=\footnotesize, fill=white, inner sep=2pt}
+]
+    % Core components
+    \node[cloud] (internet) {Internet};
+    \node[server, below=3cm of internet] (loadbalancer) {Load Balancer};
+    
+    % Web servers
+    \node[server, below left=2cm and 1cm of loadbalancer] (web1) {Web Server 1};
+    \node[server, below right=2cm and 1cm of loadbalancer] (web2) {Web Server 2};
+    
+    % Application servers
+    \node[server, below=of web1] (app1) {App Server 1};
+    \node[server, below=of web2] (app2) {App Server 2};
+    
+    % Databases
+    \node[database, below right=2cm and 0cm of app1] (db1) {Primary DB};
+    \node[database, right=1cm of db1] (db2) {Replica DB};
+    
+    % Clients
+    \node[client, left=3cm of internet] (client1) {Client 1};
+    \node[client, above left=1cm and 2cm of internet] (client2) {Client 2};
+    \node[client, above right=1cm and 2cm of internet] (client3) {Client 3};
+    
+    % Connections
+    \draw[connection] (client1) -- (internet);
+    \draw[connection] (client2) -- (internet);
+    \draw[connection] (client3) -- (internet);
+    
+    \draw[connection, <->] (internet) -- node[label] {HTTPS} (loadbalancer);
+    
+    \draw[connection] (loadbalancer) -- (web1);
+    \draw[connection] (loadbalancer) -- (web2);
+    
+    \draw[connection] (web1) -- (app1);
+    \draw[connection] (web2) -- (app2);
+    
+    \draw[connection] (app1) -- (db1);
+    \draw[connection] (app2) -- (db1);
+    \draw[connection, <->] (db1) -- node[label] {Sync} (db2);
+    
+    % Background regions
+    \begin{pgfonlayer}{background}
+        \fill[yellow!20, rounded corners] 
+            ([shift={(-0.5,0.5)}]loadbalancer.north west) 
+            rectangle 
+            ([shift={(0.5,-0.5)}]db2.south east);
+        \node[above] at (loadbalancer.north) {Data Center};
+    \end{pgfonlayer}
+\end{tikzpicture}
+
+\end{document}
+```
+</CodeGroup>
+
+### Data Flow Diagram
+
+<CodeGroup>
+```latex data-flow-diagram.tex
+\documentclass{article}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning, shapes, decorations.pathmorphing}
+
+\begin{document}
+
+\begin{tikzpicture}[
+    >=latex,
+    node distance=2.5cm,
+    process/.style={
+        rectangle, draw, fill=blue!30,
+        minimum width=3cm, minimum height=1cm,
+        rounded corners, font=\small\sffamily
+    },
+    data/.style={
+        trapezium, draw, fill=green!30,
+        trapezium left angle=70,
+        trapezium right angle=110,
+        minimum width=2.5cm, minimum height=0.8cm,
+        font=\small\sffamily
+    },
+    storage/.style={
+        rectangle, draw, fill=orange!30,
+        minimum width=2.5cm, minimum height=0.8cm,
+        path picture={
+            \draw ([xshift=0.1cm]path picture bounding box.north west) 
+                -- ([xshift=-0.1cm]path picture bounding box.north east);
+        },
+        font=\small\sffamily
+    },
+    flow/.style={thick, ->, >=stealth},
+    label/.style={font=\footnotesize, above, sloped}
+]
+    % Input layer
+    \node[data] (input) {Raw Data};
+    
+    % Processing pipeline
+    \node[process, below=of input] (validate) {Validate};
+    \node[process, below=of validate] (transform) {Transform};
+    \node[process, below=of transform] (analyze) {Analyze};
+    
+    % Storage
+    \node[storage, right=3cm of validate] (raw) {Raw Storage};
+    \node[storage, right=3cm of transform] (processed) {Processed DB};
+    \node[storage, right=3cm of analyze] (results) {Results Cache};
+    
+    % Output
+    \node[data, below=of analyze] (output) {Reports};
+    \node[process, right=of output] (visualize) {Visualize};
+    \node[data, right=of visualize] (dashboard) {Dashboard};
+    
+    % Main flow
+    \draw[flow] (input) -- node[label] {Stream} (validate);
+    \draw[flow] (validate) -- node[label] {Valid} (transform);
+    \draw[flow] (transform) -- node[label] {Clean} (analyze);
+    \draw[flow] (analyze) -- node[label] {Insights} (output);
+    
+    % Storage connections
+    \draw[flow, dashed] (validate) -- node[label] {Archive} (raw);
+    \draw[flow, dashed] (transform) -- node[label] {Store} (processed);
+    \draw[flow, dashed] (analyze) -- node[label] {Cache} (results);
+    
+    % Visualization flow
+    \draw[flow] (output) -- (visualize);
+    \draw[flow] (visualize) -- (dashboard);
+    \draw[flow, bend right] (results) to node[label, below] {Query} (visualize);
+    
+    % Error handling
+    \node[process, left=2cm of transform, fill=red!30] (error) {Error Handler};
+    \draw[flow, red, bend right] (validate) to node[label, below] {Invalid} (error);
+    \draw[flow, red, bend right] (transform) to node[label, below] {Failed} (error);
+    \draw[flow, red] (error) |- (input);
+    
+    % Decorations
+    \node[above=0.5cm of input, font=\large\bfseries] {Data Processing Pipeline};
+    
+    % Legend
+    \begin{scope}[xshift=8cm, yshift=-3cm]
+        \node[process, minimum width=2cm] (l1) at (0,0) {Process};
+        \node[data, minimum width=2cm] (l2) at (0,-1) {Data};
+        \node[storage, minimum width=2cm] (l3) at (0,-2) {Storage};
+        \draw[flow] (3,0) -- node[above] {Flow} (4.5,0);
+        \draw[flow, dashed] (3,-1) -- node[above] {Store} (4.5,-1);
+        \node[above=0.3cm of l1, font=\bfseries] {Legend};
+    \end{scope}
+\end{tikzpicture}
+
+\end{document}
+```
+</CodeGroup>
+
+## Next Steps
+
+Explore more LaTeX visualization:
+
+<CardGroup cols={2}>
+<Card title="PGFPlots" icon="chart-line" href="/learn/latex/visualization/pgfplots">
+Advanced plotting and charts
+</Card>
+<Card title="Circuit Diagrams" icon="microchip" href="/learn/latex/specialized/circuits">
+Electronic circuit drawings
+</Card>
+<Card title="Chemical Structures" icon="atom" href="/learn/latex/specialized/chemistry">
+Molecular diagrams
+</Card>
+<Card title="3D Graphics" icon="cube" href="/learn/latex/advanced/3d">
+Three-dimensional drawings
+</Card>
+</CardGroup>
+
+---
+
+<Info>
+**Pro tip**: Start simple and build complexity gradually. Use the TikZ manual (texdoc tikz) as your reference - it's comprehensive with excellent examples. Consider externalizing complex diagrams to speed up compilation of your main document.
+</Info>

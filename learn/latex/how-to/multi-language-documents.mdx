@@ -1,0 +1,1182 @@
+---
+title: Multi-language Documents in LaTeX
+description: Create documents in multiple languages with LaTeX. Learn babel, polyglossia, font selection, and internationalization best practices for global documents.
+---
+
+Master the creation of multi-language documents in LaTeX. This guide covers language packages, font configuration, bidirectional text, special characters, and internationalization strategies for professional multilingual publications.
+
+<Info>
+**Prerequisites**: Basic LaTeX knowledge  
+**Time to complete**: 30-35 minutes  
+**Difficulty**: Intermediate to Advanced  
+**What you'll learn**: Language packages, fonts, encoding, hyphenation, and localization
+</Info>
+
+## Multi-language Overview
+
+### Why Multi-language Support Matters
+
+<CardGroup cols={2}>
+<Card title="Global Reach" icon="globe">
+Create documents for international audiences
+</Card>
+<Card title="Academic Requirements" icon="graduation-cap">
+Citations and quotes in original languages
+</Card>
+<Card title="Business Documents" icon="briefcase">
+Multilingual reports and presentations
+</Card>
+<Card title="Cultural Accuracy" icon="language">
+Proper typography and formatting rules
+</Card>
+</CardGroup>
+
+### Language Support Methods
+
+<Tabs>
+<Tab title="babel">
+**Traditional package**
+- Wide language support
+- Works with pdfLaTeX
+- Extensive documentation
+- Active development
+</Tab>
+<Tab title="polyglossia">
+**Modern alternative**
+- Designed for XeLaTeX/LuaLaTeX
+- Better Unicode support
+- Advanced font features
+- Modern languages
+</Tab>
+<Tab title="CJK">
+**Asian languages**
+- Chinese, Japanese, Korean
+- Special considerations
+- Font requirements
+- Input methods
+</Tab>
+</Tabs>
+
+## Babel Package
+
+### Basic Setup
+
+<CodeGroup>
+```latex babel-basic.tex
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% Load languages (last one is default)
+\usepackage[spanish, french, english]{babel}
+
+\begin{document}
+
+% English (default)
+\section{Introduction}
+This document demonstrates multi-language support.
+
+% Switch to French
+\selectlanguage{french}
+\section{Introduction}
+Ce document démontre le support multilingue.
+
+% Switch to Spanish  
+\selectlanguage{spanish}
+\section{Introducción}
+Este documento demuestra el soporte multilingüe.
+
+% Back to English
+\selectlanguage{english}
+
+% Inline language switching
+This is English text with some \foreignlanguage{french}{mots français} 
+and \foreignlanguage{spanish}{palabras españolas}.
+
+\end{document}
+```
+
+```latex babel-advanced.tex
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[german, greek, english]{babel}
+
+% Language-specific commands
+\addto\captionsenglish{
+    \renewcommand{\contentsname}{Table of Contents}
+}
+
+\addto\captionsgerman{
+    \renewcommand{\contentsname}{Inhaltsverzeichnis}
+}
+
+\begin{document}
+
+\tableofcontents
+
+\section{Multilingual Document}
+
+% Environment for language switching
+\begin{otherlanguage}{german}
+\subsection{Deutscher Abschnitt}
+Dies ist ein deutscher Text mit korrekter Silbentrennung
+und Typografie. Beachten Sie die Anführungszeichen: "`deutsche Anführungszeichen"'.
+\end{otherlanguage}
+
+% Greek text
+\begin{otherlanguage}{greek}
+\subsection{Ελληνική ενότητα}
+Αυτό είναι ελληνικό κείμενο με σωστή υφενοποίηση.
+\end{otherlanguage}
+
+% Babel shorthands
+\selectlanguage{german}
+Das ist ein "Beispiel" mit deutschen Anführungszeichen.
+Der Bindestrich"=Trick funktioniert auch.
+
+\end{document}
+```
+</CodeGroup>
+
+### Language-specific Features
+
+<CodeGroup>
+```latex babel-features.tex
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[french, spanish, english]{babel}
+
+\begin{document}
+
+% Date formatting
+\selectlanguage{english}
+Today's date: \today
+
+\selectlanguage{french}
+Date d'aujourd'hui: \today
+
+\selectlanguage{spanish}
+Fecha de hoy: \today
+
+% Hyphenation patterns
+\selectlanguage{english}
+\hyphenation{hy-phen-a-tion ex-am-ple}
+This is a hyphenation example with very long words.
+
+% Language-specific typography
+\selectlanguage{french}
+\frenchspacing % French spacing rules
+Voici un exemple : avec les espaces françaises !
+
+% Quotes
+\selectlanguage{english}
+English ``quotes'' are different from \selectlanguage{french}\og guillemets français\fg{} 
+and \selectlanguage{spanish}<<comillas españolas>>.
+
+% Language attributes
+\selectlanguage{english}
+\languageattribute{english}{american} % American English
+Color, organize, analyze.
+
+\languageattribute{english}{british} % British English  
+Colour, organise, analyse.
+
+\end{document}
+```
+
+```latex babel-environments.tex
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian, german, english]{babel}
+
+% Define language environments
+\newenvironment{english}
+    {\begin{otherlanguage}{english}}
+    {\end{otherlanguage}}
+
+\newenvironment{german}
+    {\begin{otherlanguage}{german}}
+    {\end{otherlanguage}}
+
+\newenvironment{russian}
+    {\begin{otherlanguage}{russian}}
+    {\end{otherlanguage}}
+
+\begin{document}
+
+\section{Mixed Language Document}
+
+\begin{english}
+This is an English paragraph with proper hyphenation and formatting.
+\end{english}
+
+\begin{german}
+Dies ist ein deutscher Absatz mit korrekter Silbentrennung und Formatierung.
+\end{german}
+
+\begin{russian}
+Это русский абзац с правильным переносом и форматированием.
+\end{russian}
+
+% Mixed paragraph
+\begin{english}
+The German word \foreignlanguage{german}{Schadenfreude} has no direct
+English translation, while the Russian \foreignlanguage{russian}{тоска}
+expresses a deep spiritual anguish.
+\end{english}
+
+\end{document}
+```
+</CodeGroup>
+
+## Polyglossia Package
+
+### XeLaTeX/LuaLaTeX Setup
+
+<CodeGroup>
+```latex polyglossia-basic.tex
+\documentclass{article}
+\usepackage{polyglossia}
+
+% Set main language
+\setdefaultlanguage{english}
+
+% Set other languages
+\setotherlanguages{french, spanish, arabic, chinese}
+
+% Font configuration
+\usepackage{fontspec}
+\setmainfont{Linux Libertine O}
+\setsansfont{Linux Biolinum O}
+\setmonofont{Inconsolata}
+
+% Language-specific fonts
+\newfontfamily\arabicfont[Script=Arabic,Scale=1.2]{Amiri}
+\newfontfamily\chinesefont[Scale=0.9]{Noto Sans CJK SC}
+
+\begin{document}
+
+\section{Multilingual with Polyglossia}
+
+This is English text.
+
+\begin{french}
+Ceci est un texte français avec les bonnes règles typographiques.
+\end{french}
+
+\begin{spanish}  
+Este es un texto español con la tipografía correcta.
+\end{spanish}
+
+\begin{arabic}
+هذا نص عربي مع الاتجاه الصحيح من اليمين إلى اليسار.
+\end{arabic}
+
+\begin{chinese}
+这是中文文本，使用正确的字体。
+\end{chinese}
+
+\end{document}
+```
+
+```latex polyglossia-advanced.tex
+\documentclass{article}
+\usepackage{polyglossia}
+
+% Language setup with options
+\setdefaultlanguage[variant=american]{english}
+\setotherlanguage[variant=medieval,spelling=new,babelshorthands=true]{german}
+\setotherlanguage[numerals=arabic]{farsi}
+\setotherlanguage{japanese}
+
+% Fonts
+\usepackage{fontspec}
+\setmainfont{TeX Gyre Termes}
+
+% Language-specific fonts
+\newfontfamily\germanfont{UnifrakturMaguntia}
+\newfontfamily\farsifont[Script=Arabic,Numbers=Farsi]{Vazir}
+\newfontfamily\japanesefont{Noto Sans CJK JP}
+
+\begin{document}
+
+\section{Advanced Polyglossia Features}
+
+% Date in different languages
+English date: \today
+
+\begin{german}
+Deutsches Datum: \today
+
+% Medieval German with special font
+{\germanfont Hier ist mittelalterlicher deutscher Text in Fraktur.}
+\end{german}
+
+\begin{farsi}
+تاریخ فارسی: \today
+
+این متن فارسی با اعداد فارسی است: ۱۲۳۴۵۶۷۸۹۰
+\end{farsi}
+
+\begin{japanese}
+日本語のテキスト。今日の日付：\today
+\end{japanese}
+
+% Language-specific numbering
+\begin{english}
+\begin{enumerate}
+    \item First item
+    \item Second item
+\end{enumerate}
+\end{english}
+
+\begin{farsi}
+\begin{enumerate}
+    \item مورد اول
+    \item مورد دوم
+\end{enumerate}
+\end{farsi}
+
+\end{document}
+```
+</CodeGroup>
+
+### Bidirectional Text
+
+<CodeGroup>
+```latex bidi-text.tex
+\documentclass{article}
+\usepackage{polyglossia}
+\usepackage{bidi} % For older systems
+
+\setdefaultlanguage{english}
+\setotherlanguage{arabic}
+\setotherlanguage{hebrew}
+
+\usepackage{fontspec}
+\newfontfamily\arabicfont[Script=Arabic,Scale=1.2]{Scheherazade}
+\newfontfamily\hebrewfont[Script=Hebrew,Scale=1.1]{David CLM}
+
+\begin{document}
+
+\section{Bidirectional Text Support}
+
+This is left-to-right English text.
+
+\begin{arabic}
+\subsection{النص العربي}
+هذا نص من اليمين إلى اليسار. يمكن مزج \textLR{English words} في النص العربي.
+
+\begin{itemize}
+    \item البند الأول
+    \item البند الثاني مع \textLR{LTR text}
+    \item البند الثالث
+\end{itemize}
+\end{arabic}
+
+Mixed paragraph: The Arabic phrase \textarabic{السلام عليكم} means
+"peace be upon you" and the Hebrew \texthebrew{שלום} means "peace/hello".
+
+\begin{hebrew}
+\subsection{טקסט עברי}
+זהו טקסט מימין לשמאל בעברית. אפשר לשלב \textLR{English} בתוך העברית.
+\end{hebrew}
+
+% Tables with RTL text
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+English & \textarabic{عربي} & \texthebrew{עברית} \\
+\hline
+Hello & \textarabic{مرحبا} & \texthebrew{שלום} \\
+Goodbye & \textarabic{وداعا} & \texthebrew{להתראות} \\
+Thank you & \textarabic{شكرا} & \texthebrew{תודה} \\
+\hline
+\end{tabular}
+\caption{Multilingual greetings}
+\end{table}
+
+\end{document}
+```
+
+```latex mixed-directions.tex
+\documentclass{article}
+\usepackage{polyglossia}
+\setdefaultlanguage{english}
+\setotherlanguage{arabic}
+\setotherlanguage{french}
+
+\usepackage{fontspec}
+\newfontfamily\arabicfont[Script=Arabic]{Amiri}
+
+% Environments for direction control
+\newenvironment{RTL}
+    {\begin{arabic}\begin{flushright}}
+    {\end{flushright}\end{arabic}}
+
+\newenvironment{LTR}
+    {\begin{flushleft}}
+    {\end{flushleft}}
+
+\begin{document}
+
+\section{Complex Directional Layouts}
+
+\begin{RTL}
+هذه فقرة عربية مع اتجاه من اليمين إلى اليسار.
+يمكن إدراج \textLR{English text} و\textfrench{texte français} داخل النص العربي.
+\end{RTL}
+
+\begin{LTR}
+This is an English paragraph with embedded Arabic: \textarabic{مثال عربي}
+and continuing in English.
+\end{LTR}
+
+% Two-column layout with different directions
+\begin{minipage}[t]{0.45\textwidth}
+\begin{english}
+\subsection{Left Column}
+This is the English column with left-to-right text flow.
+\end{english}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.45\textwidth}
+\begin{RTL}
+\subsection{العمود الأيمن}
+هذا هو العمود العربي مع تدفق النص من اليمين إلى اليسار.
+\end{RTL}
+\end{minipage}
+
+\end{document}
+```
+</CodeGroup>
+
+## Font Configuration
+
+### Selecting Appropriate Fonts
+
+<CodeGroup>
+```latex font-selection.tex
+\documentclass{article}
+\usepackage{fontspec} % XeLaTeX/LuaLaTeX
+\usepackage{polyglossia}
+
+\setdefaultlanguage{english}
+\setotherlanguages{russian, greek, japanese, arabic}
+
+% Main document fonts
+\setmainfont[
+    Ligatures=TeX,
+    BoldFont={* Bold},
+    ItalicFont={* Italic},
+    BoldItalicFont={* Bold Italic}
+]{TeX Gyre Termes}
+
+\setsansfont[
+    Ligatures=TeX,
+    Scale=0.9
+]{TeX Gyre Heros}
+
+\setmonofont[
+    Scale=0.9
+]{Inconsolata}
+
+% Language-specific fonts
+\newfontfamily\russianfont[
+    Script=Cyrillic,
+    Ligatures=TeX
+]{PT Serif}
+
+\newfontfamily\greekfont[
+    Script=Greek,
+    Ligatures=TeX
+]{GFS Artemisia}
+
+\newfontfamily\japanesefont[
+    Script=CJK,
+    Scale=0.9
+]{Noto Sans CJK JP}
+
+\newfontfamily\arabicfont[
+    Script=Arabic,
+    Scale=1.2,
+    RightToLeft=true
+]{Scheherazade}
+
+\begin{document}
+
+\section{Font Configuration for Multiple Languages}
+
+Default English text uses TeX Gyre Termes.
+
+\begin{russian}
+Русский текст использует шрифт PT Serif, который хорошо поддерживает кириллицу.
+\end{russian}
+
+\begin{greek}
+Το ελληνικό κείμενο χρησιμοποιεί τη γραμματοσειρά GFS Artemisia.
+\end{greek}
+
+\begin{japanese}
+日本語のテキストはNoto Sans CJK JPフォントを使用します。
+\end{japanese}
+
+\begin{arabic}
+النص العربي يستخدم خط Scheherazade مع دعم كامل للغة العربية.
+\end{arabic}
+
+\end{document}
+```
+
+```latex fallback-fonts.tex
+\documentclass{article}
+\usepackage{fontspec}
+\usepackage[fallback]{polyglossia}
+
+% Define font with fallbacks
+\setmainfont[
+    Ligatures=TeX,
+    FallbackFont={
+        {Noto Sans CJK SC}[Scale=0.9],
+        {Noto Sans Arabic}[Scale=1.1],
+        {Noto Sans Devanagari},
+        {Symbola}
+    }
+]{Linux Libertine O}
+
+\begin{document}
+
+\section{Font Fallback System}
+
+This system allows mixing scripts seamlessly:
+- English text (default font)
+- 中文文字 (Chinese fallback)
+- العربية (Arabic fallback)  
+- हिन्दी (Devanagari fallback)
+- Symbols: 🌍 ✓ ♠ (Symbola fallback)
+
+All in one paragraph without manual font switching!
+
+\end{document}
+```
+</CodeGroup>
+
+### OpenType Features
+
+<CodeGroup>
+```latex opentype-features.tex
+\documentclass{article}
+\usepackage{fontspec}
+
+% Font with various OpenType features
+\setmainfont[
+    Numbers={OldStyle,Proportional},
+    Ligatures={Common,Contextual,Historic},
+    Letters=SmallCaps,
+    Style=Alternate
+]{EB Garamond}
+
+% Define font variations
+\newfontfamily\liningfont[Numbers={Lining,Monospaced}]{EB Garamond}
+\newfontfamily\swashfont[Style=Swash,Contextuals=Swash]{EB Garamond}
+\newfontfamily\historicfont[Style=Historic,Ligatures=Historic]{EB Garamond}
+
+\begin{document}
+
+\section{OpenType Features}
+
+% Number styles
+Default oldstyle figures: 0123456789
+
+{\liningfont Lining figures: 0123456789}
+
+% Ligatures
+Standard ligatures: ff fi fl ffi ffl
+
+{\addfontfeature{Ligatures=NoCommon}No ligatures: ff fi fl ffi ffl}
+
+% Small caps
+\textsc{Small Capitals for Emphasis}
+
+% Swash characters
+{\swashfont Swash variants for Q and &}
+
+% Historic forms
+{\historicfont Historic long s: distinction}
+
+% Fractions
+\addfontfeature{Fractions=On}
+Automatic fractions: 1/2 3/4 5/8
+
+\end{document}
+```
+</CodeGroup>
+
+## Special Characters and Symbols
+
+### Input Methods
+
+<CodeGroup>
+```latex special-chars.tex
+\documentclass{article}
+\usepackage[utf8]{inputenc} % For pdfLaTeX
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage[english, french, german]{babel}
+
+\begin{document}
+
+\section{Special Characters}
+
+% Direct Unicode input (with utf8)
+Café, naïve, Zürich, señor, Москва
+
+% LaTeX commands for special characters
+Caf\'e, na\"{\i}ve, Z\"urich, se\~nor
+
+% French special characters
+\selectlanguage{french}
+\oe uvre, c\oe ur, <<~guillemets~>>
+
+% German special characters
+\selectlanguage{german}
+"Anf"uhrungszeichen", "=, "~, "`German quotes"'
+
+% Text symbols
+\texttrademark{} \textregistered{} \textcopyright{} \texteuro{} \textyen{}
+
+% Accented characters
+\`{a} \'{e} \^{o} \~{n} \"{u} \={a} \.{c} \u{g} \v{s} \H{o}
+
+% Special ligatures
+\AE{} \ae{} \OE{} \oe{} \AA{} \aa{} \O{} \o{} \L{} \l{} \SS{} \ss{}
+
+\end{document}
+```
+
+```latex unicode-symbols.tex
+\documentclass{article}
+\usepackage{fontspec} % XeLaTeX/LuaLaTeX
+\usepackage{unicode-math}
+
+\setmainfont{TeX Gyre Termes}
+\setmathfont{TeX Gyre Termes Math}
+
+\begin{document}
+
+\section{Unicode Symbols and Characters}
+
+% Direct Unicode input
+Arrows: → ← ↑ ↓ ⇒ ⇐ ⇔ ↔
+
+Mathematical: ∀ ∃ ∈ ∉ ⊂ ⊃ ∪ ∩ ∅
+
+Greek: α β γ δ ε ζ η θ Γ Δ Θ Λ Ξ Π Σ Φ Ψ Ω
+
+Cyrillic: А Б В Г Д Е Ё Ж З И Й К Л М Н О П Р С Т У Ф
+
+Currency: € £ ¥ ₹ ₽ ¢ ¤
+
+Fractions: ½ ⅓ ¼ ⅕ ⅙ ⅐ ⅛ ⅑ ⅒
+
+Miscellaneous: © ® ™ ° § ¶ † ‡ • … ‰ ′ ″
+
+Box drawing: ┌─┬─┐ │ │ │ ├─┼─┤ └─┴─┘
+
+% Emoji (requires appropriate font)
+Emoji: 😀 🌍 ✓ ✗ ⚠ ℹ 🔍 📧
+
+\end{document}
+```
+</CodeGroup>
+
+## Hyphenation and Line Breaking
+
+### Language-specific Hyphenation
+
+<CodeGroup>
+```latex hyphenation-rules.tex
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, german, french]{babel}
+
+\begin{document}
+
+\section{Hyphenation Examples}
+
+% English hyphenation
+\selectlanguage{english}
+\hyphenation{hy-phen-a-tion ex-am-ple spe-cial-word}
+
+This is a demonstration of hyphenation in English with some 
+extraordinarily long words that need proper hyphenation patterns
+to break correctly at line endings.
+
+% German hyphenation
+\selectlanguage{german}
+\hyphenation{Sil-ben-tren-nung Bei-spiel-wör-ter}
+
+Dies ist eine Demonstration der Silbentrennung im Deutschen mit
+außergewöhnlich langen Wörtern, die ordnungsgemäße Trennmuster
+benötigen.
+
+% French hyphenation
+\selectlanguage{french}
+\hyphenation{hy-phe-na-tion ex-em-ple}
+
+Ceci est une démonstration de la césure en français avec des mots
+extraordinairement longs qui nécessitent des modèles de césure
+appropriés.
+
+% Prevent hyphenation
+\selectlanguage{english}
+\mbox{Unhyphenatable} word or \hbox{compound expression}.
+
+\end{document}
+```
+
+```latex custom-hyphenation.tex
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+% Global hyphenation exceptions
+\hyphenation{
+    ana-lysis
+    analy-ses
+    bio-log-i-cal
+    com-put-er
+    data-base
+    para-digm
+}
+
+% Language-specific patterns
+\makeatletter
+\addto\extrasenglish{
+    \def\englishhyphenmins{2 3} % min left/right
+}
+\makeatother
+
+\begin{document}
+
+\section{Custom Hyphenation Patterns}
+
+% Inline hyphenation hints
+The word analysis\-is can be hyphenated manually.
+
+% Discretionary hyphens
+Com\-pu\-ter\-ized data\-base man\-age\-ment sys\-tems.
+
+% Prevent hyphenation in specific text
+\begin{sloppypar}
+This paragraph will have looser spacing to avoid hyphenation
+of extraordinarily long technical terminology.
+\end{sloppypar}
+
+% Hyphenation with penalties
+\hyphenpenalty=10000 % Prevent hyphenation
+\exhyphenpenalty=10000 % Prevent hyphenation after explicit hyphen
+
+No hyphenation in this paragraph with very long words.
+
+\hyphenpenalty=50 % Allow hyphenation
+\exhyphenpenalty=50
+
+Normal hyphenation restored for this paragraph.
+
+\end{document}
+```
+</CodeGroup>
+
+## Document Structure
+
+### Multilingual Documents
+
+<CodeGroup>
+```latex multilingual-report.tex
+\documentclass{report}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, spanish, french, german]{babel}
+\usepackage{csquotes} % Context-sensitive quotes
+
+% Chapter names in different languages
+\addto\captionsenglish{\renewcommand{\chaptername}{Chapter}}
+\addto\captionsspanish{\renewcommand{\chaptername}{Capítulo}}
+\addto\captionsfrench{\renewcommand{\chaptername}{Chapitre}}
+\addto\captionsgerman{\renewcommand{\chaptername}{Kapitel}}
+
+\begin{document}
+
+% Title page in multiple languages
+\begin{titlepage}
+    \centering
+    \vspace*{2cm}
+    
+    {\Huge\bfseries Multilingual Report\\
+    Rapport Multilingue\\
+    Informe Multilingüe\\
+    Mehrsprachiger Bericht\par}
+    
+    \vspace{2cm}
+    
+    {\Large\itshape International Organization\\
+    Organisation Internationale\\
+    Organización Internacional\\
+    Internationale Organisation\par}
+    
+    \vfill
+    
+    {\large\today\par}
+\end{titlepage}
+
+\tableofcontents
+
+\selectlanguage{english}
+\chapter{Introduction}
+This report is written in multiple languages...
+
+\selectlanguage{french}
+\chapter{Introduction}
+Ce rapport est rédigé en plusieurs langues...
+
+\selectlanguage{spanish}
+\chapter{Introducción}
+Este informe está escrito en varios idiomas...
+
+\selectlanguage{german}
+\chapter{Einleitung}
+Dieser Bericht ist in mehreren Sprachen verfasst...
+
+\end{document}
+```
+
+```latex parallel-text.tex
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, latin]{babel}
+\usepackage{parallel}
+\usepackage{lipsum}
+
+\begin{document}
+
+\section{Parallel Texts}
+
+% Two-column parallel text
+\begin{Parallel}{0.48\textwidth}{0.48\textwidth}
+\ParallelLText{
+    \selectlanguage{english}
+    \subsection{English Version}
+    This is the English version of the text. It appears on the left side
+    and maintains proper hyphenation and justification for English.
+}
+\ParallelRText{
+    \selectlanguage{latin}
+    \subsection{Versio Latina}
+    Haec est versio Latina textus. In dextra parte apparet et propriam
+    hyphenationem iustificationemque Latinam servat.
+}
+\end{Parallel}
+
+% Side-by-side with different fonts
+\begin{minipage}[t]{0.48\textwidth}
+    \selectlanguage{english}
+    \subsubsection{Modern English}
+    Contemporary text with modern spelling and grammar conventions.
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.48\textwidth}
+    \selectlanguage{english}
+    \subsubsection{Middle English}
+    \fontfamily{uncl}\selectfont
+    Whan that Aprille with his shoures soote...
+\end{minipage}
+
+\end{document}
+```
+</CodeGroup>
+
+## Localization
+
+### Dates and Numbers
+
+<CodeGroup>
+```latex localization.tex
+\documentclass{article}
+\usepackage{polyglossia}
+\usepackage{datetime2}
+
+\setdefaultlanguage{english}
+\setotherlanguages{french, german, spanish, russian}
+
+\begin{document}
+
+\section{Localized Dates and Numbers}
+
+% Dates in different languages
+\begin{tabular}{ll}
+English: & \today \\
+\French French: & \today \\
+\German German: & \today \\
+\Spanish Spanish: & \today \\
+\Russian Russian: & \today \\
+\end{tabular}
+
+% Number formatting
+\begin{english}
+English: 1,234,567.89
+\end{english}
+
+\begin{french}
+French: 1 234 567,89
+\end{french}
+
+\begin{german}
+German: 1.234.567,89
+\end{german}
+
+% Ordinal numbers
+\begin{english}
+1st, 2nd, 3rd, 4th, 21st
+\end{english}
+
+\begin{french}
+1\textsuperscript{er}, 2\textsuperscript{e}, 
+3\textsuperscript{e}, 21\textsuperscript{e}
+\end{french}
+
+\begin{spanish}
+1\textsuperscript{o}, 2\textsuperscript{o}, 
+3\textsuperscript{o}, 21\textsuperscript{o}
+\end{spanish}
+
+\end{document}
+```
+
+```latex currency-units.tex
+\documentclass{article}
+\usepackage{siunitx}
+\usepackage[english, german, french]{babel}
+
+% SI unit localization
+\sisetup{
+    locale = US,
+    per-mode = symbol
+}
+
+\begin{document}
+
+\section{Units and Currency}
+
+% Currency in different locales
+\selectlanguage{english}
+Price: \$1,234.56 or \pounds 987.65
+
+\selectlanguage{german}
+Preis: 1.234,56\,€ oder 987,65\,£
+
+\selectlanguage{french}
+Prix: 1 234,56\,€ ou 987,65\,£
+
+% Units with localization
+\selectlanguage{english}
+\SI{123.456}{\kilo\meter\per\hour}
+
+\selectlanguage{german}
+\sisetup{locale = DE}
+\SI{123.456}{\kilo\meter\per\hour}
+
+\selectlanguage{french}
+\sisetup{locale = FR}
+\SI{123.456}{\kilo\meter\per\hour}
+
+\end{document}
+```
+</CodeGroup>
+
+## Best Practices
+
+### Multilingual Tips
+
+<Tip>
+✅ **Best practices checklist**:
+- [ ] Choose appropriate engine (pdfLaTeX vs XeLaTeX/LuaLaTeX)
+- [ ] Select suitable fonts for all languages
+- [ ] Test hyphenation patterns
+- [ ] Configure proper encoding
+- [ ] Set language-specific typography rules
+- [ ] Handle bidirectional text correctly
+- [ ] Use semantic markup for language switches
+- [ ] Maintain consistent style across languages
+- [ ] Test PDF searchability and copying
+- [ ] Consider accessibility requirements
+</Tip>
+
+### Common Issues
+
+<Warning>
+**Avoid these multilingual pitfalls**:
+1. **Wrong encoding** - Use UTF-8 consistently
+2. **Missing fonts** - Verify font support for all scripts
+3. **Hardcoded strings** - Use babel/polyglossia captions
+4. **Mixed directions** - Test RTL/LTR thoroughly
+5. **Hyphenation errors** - Load patterns for all languages
+6. **Quote styles** - Use csquotes for consistency
+7. **Number formats** - Respect locale conventions
+</Warning>
+
+## Complete Example
+
+<CodeGroup>
+```latex complete-multilingual.tex
+\documentclass{book}
+\usepackage{fontspec} % XeLaTeX
+\usepackage{polyglossia}
+\usepackage{csquotes}
+\usepackage{datetime2}
+\usepackage{siunitx}
+\usepackage{lipsum}
+
+% Language setup
+\setdefaultlanguage[variant=american]{english}
+\setotherlanguages{french, german, spanish, russian, arabic, japanese}
+
+% Font configuration
+\setmainfont{TeX Gyre Termes}
+\setsansfont{TeX Gyre Heros}
+\setmonofont{Inconsolata}
+
+% Language-specific fonts
+\newfontfamily\russianfont{PT Serif}
+\newfontfamily\arabicfont[Script=Arabic]{Amiri}
+\newfontfamily\japanesefont{Noto Sans CJK JP}
+
+% Metadata
+\title{Multilingual Document Example\\
+\large Exemple de Document Multilingue\\
+Mehrsprachiges Dokumentbeispiel}
+\author{International Author}
+\date{\today}
+
+\begin{document}
+
+\frontmatter
+\maketitle
+
+\begin{abstract}
+This document demonstrates comprehensive multilingual support in LaTeX,
+including various scripts, bidirectional text, and localization features.
+\end{abstract}
+
+\tableofcontents
+
+\mainmatter
+
+\chapter{Introduction}
+\section{English Section}
+
+This document showcases LaTeX's capabilities for handling multiple languages
+and scripts within a single document. We'll explore various features including:
+
+\begin{itemize}
+    \item Font selection and configuration
+    \item Bidirectional text support
+    \item Proper hyphenation and line breaking
+    \item Localized formatting
+    \item Special characters and symbols
+\end{itemize}
+
+\section{Section Française}
+\begin{french}
+Cette section démontre le support du français avec :
+\begin{itemize}
+    \item Les guillemets français : \enquote{exemple}
+    \item Les espaces insécables : voici !
+    \item La date : \today
+    \item Les nombres : \num{1234567.89}
+\end{itemize}
+\end{french}
+
+\section{Deutscher Abschnitt}
+\begin{german}
+Dieser Abschnitt zeigt die deutsche Unterstützung mit:
+\begin{itemize}
+    \item Deutsche Anführungszeichen: \enquote{Beispiel}
+    \item Datum: \today
+    \item Zahlen: \num{1234567.89}
+    \item Silbentrennung für lange Wörter
+\end{itemize}
+\end{german}
+
+\chapter{Advanced Features}
+
+\section{Bidirectional Text}
+\begin{english}
+This chapter includes Arabic text: \textarabic{مرحبا بالعالم} (Hello World)
+embedded within English paragraphs.
+\end{english}
+
+\begin{arabic}
+هذا قسم كامل باللغة العربية. يُظهر الدعم الكامل للنص من اليمين إلى اليسار
+مع الخطوط والتنسيق المناسبين. يمكن تضمين \textLR{English text} داخل العربية.
+\end{arabic}
+
+\section{Asian Languages}
+\begin{japanese}
+日本語のサポートも含まれています。これは日本語のテキストの例です。
+LaTeXは複雑な文字体系も処理できます。
+\end{japanese}
+
+\chapter{Reference Section}
+
+\section{Common Phrases}
+\begin{tabular}{llll}
+\textbf{English} & \textbf{Français} & \textbf{Deutsch} & \textbf{Español} \\
+Hello & Bonjour & Hallo & Hola \\
+Thank you & Merci & Danke & Gracias \\
+Goodbye & Au revoir & Auf Wiedersehen & Adiós \\
+\end{tabular}
+
+\backmatter
+\appendix
+
+\chapter{Technical Notes}
+This document was compiled with XeLaTeX to support Unicode and
+advanced font features. All languages are properly configured with
+appropriate hyphenation patterns and typography rules.
+
+\end{document}
+```
+</CodeGroup>
+
+## Next Steps
+
+Explore more advanced topics:
+
+<CardGroup cols={2}>
+<Card title="Book Publishing" icon="book" href="/learn/latex/how-to/book-publishing">
+Create multilingual books
+</Card>
+<Card title="Collaboration" icon="users" href="/learn/latex/how-to/collaboration">
+International team workflows
+</Card>
+<Card title="Templates" icon="copy" href="/learn/latex/how-to/templates">
+Multilingual templates
+</Card>
+<Card title="Typography" icon="font" href="/learn/latex/advanced/typography">
+Advanced typography
+</Card>
+</CardGroup>
+
+---
+
+<Info>
+**Pro tip**: Always test your multilingual documents thoroughly. Check that text is searchable and copyable in the PDF, verify that hyphenation works correctly, and ensure that all special characters display properly. Consider creating language-specific style files for frequently used configurations.
+</Info>

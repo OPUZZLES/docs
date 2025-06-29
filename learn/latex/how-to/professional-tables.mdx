@@ -1,0 +1,908 @@
+---
+title: Creating Professional Tables in LaTeX
+description: Master advanced table creation in LaTeX. Learn booktabs, multirow, multicolumn, longtable, and professional formatting techniques for publication-quality tables.
+---
+
+Create publication-quality tables with advanced formatting, proper alignment, and professional styling. This guide covers everything from basic tables to complex multi-page layouts with advanced features.
+
+<Info>
+**Prerequisites**: Basic LaTeX knowledge  
+**Time to complete**: 30-35 minutes  
+**Difficulty**: Intermediate to Advanced  
+**Key packages**: booktabs, multirow, longtable, tabularx, array
+</Info>
+
+## Professional Table Design Principles
+
+### Why Good Tables Matter
+
+<Tip>
+**Golden rules for professional tables**:
+1. **Never use vertical lines** - They clutter the table
+2. **Use horizontal lines sparingly** - Only for structure
+3. **Add appropriate spacing** - Don't compress data
+4. **Align numbers properly** - Decimal alignment for data
+5. **Use consistent formatting** - Same style throughout
+</Tip>
+
+### Essential Packages
+
+<CodeGroup>
+```latex table-packages.tex
+% Core packages for professional tables
+\usepackage{booktabs}      % Professional horizontal lines
+\usepackage{array}         % Enhanced column types
+\usepackage{multirow}      % Cells spanning multiple rows
+\usepackage{makecell}      % Line breaks in cells
+\usepackage{tabularx}      % Tables with calculated widths
+\usepackage{longtable}     % Multi-page tables
+\usepackage{xcolor}        % Colored cells
+\usepackage{colortbl}      % Colored columns
+\usepackage{siunitx}       % Number alignment
+\usepackage{threeparttable} % Tables with notes
+```
+</CodeGroup>
+
+## Basic Professional Tables
+
+### The Booktabs Approach
+
+<CodeGroup>
+```latex booktabs-basic.tex
+\documentclass{article}
+\usepackage{booktabs}
+
+\begin{document}
+
+% Bad example - what NOT to do
+\begin{table}[htbp]
+    \centering
+    \caption{Poor table design (avoid this)}
+    \begin{tabular}{|l|c|c|c|}
+        \hline
+        Item & Quantity & Unit Price & Total \\
+        \hline
+        Apples & 5 & \$1.20 & \$6.00 \\
+        \hline
+        Oranges & 3 & \$0.80 & \$2.40 \\
+        \hline
+        Bananas & 12 & \$0.30 & \$3.60 \\
+        \hline
+        \multicolumn{3}{|r|}{Total:} & \$12.00 \\
+        \hline
+    \end{tabular}
+\end{table}
+
+% Good example - professional design
+\begin{table}[htbp]
+    \centering
+    \caption{Professional table design}
+    \label{tab:good-example}
+    \begin{tabular}{lccc}
+        \toprule
+        Item & Quantity & Unit Price & Total \\
+        \midrule
+        Apples & 5 & \$1.20 & \$6.00 \\
+        Oranges & 3 & \$0.80 & \$2.40 \\
+        Bananas & 12 & \$0.30 & \$3.60 \\
+        \midrule
+        \multicolumn{3}{r}{Total:} & \$12.00 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\end{document}
+```
+
+```latex column-types.tex
+% Enhanced column types with array package
+\usepackage{array}
+
+\begin{table}[htbp]
+    \centering
+    \caption{Column type examples}
+    \begin{tabular}{
+        >{\bfseries}l  % Bold left-aligned
+        c              % Centered
+        >{\ttfamily}r  % Monospace right-aligned
+        S[table-format=3.2] % siunitx number column
+    }
+        \toprule
+        Name & Status & Code & {Value} \\
+        \midrule
+        Alpha & Active & A001 & 123.45 \\
+        Beta & Inactive & B002 & 67.89 \\
+        Gamma & Pending & C003 & 234.56 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+```
+</CodeGroup>
+
+### Column Specifications
+
+<CodeGroup>
+```latex advanced-columns.tex
+\usepackage{array}
+\usepackage{ragged2e}
+
+% Define custom column types
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}}
+\newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
+
+\begin{table}[htbp]
+    \centering
+    \caption{Custom column types}
+    \begin{tabular}{L{3cm} C{2cm} R{2cm} M{2cm}}
+        \toprule
+        Left aligned with fixed width & 
+        Centered fixed width & 
+        Right aligned width & 
+        Middle aligned \\
+        \midrule
+        This text will wrap and align to the left & 
+        Center & 
+        Right & 
+        Vertically centered \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+```
+</CodeGroup>
+
+## Numeric Tables
+
+### Aligning Numbers
+
+<CodeGroup>
+```latex numeric-alignment.tex
+\usepackage{siunitx}
+\usepackage{booktabs}
+
+\begin{table}[htbp]
+    \centering
+    \caption{Scientific data with proper alignment}
+    \begin{tabular}{
+        l
+        S[table-format=3.2(2)]  % 3 digits.2 decimals (2 uncertainty)
+        S[table-format=4.3e2]   % Scientific notation
+        S[table-format=2.1, table-space-text-post={\%}]  % Percentage
+    }
+        \toprule
+        Sample & {Measurement} & {Concentration} & {Efficiency} \\
+        & {(\si{\milli\gram})} & {(\si{\mole\per\liter})} & {(\%)} \\
+        \midrule
+        A & 123.45(23) & 1.234e-3 & 95.2\% \\
+        B & 67.89(12) & 5.678e-4 & 87.5\% \\
+        C & 234.56(34) & 9.012e-3 & 92.1\% \\
+        D & 12.34(5) & 3.456e-5 & 78.9\% \\
+        \midrule
+        Mean & 109.56 & 2.794e-3 & 88.4\% \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+% Configure siunitx globally
+\sisetup{
+    round-mode = places,
+    round-precision = 2,
+    group-separator = {,},
+    group-minimum-digits = 4
+}
+```
+
+```latex financial-tables.tex
+\usepackage{siunitx}
+\usepackage{booktabs}
+
+\begin{table}[htbp]
+    \centering
+    \caption{Financial report}
+    \sisetup{
+        table-format = 7.2,
+        group-separator = {,},
+        group-minimum-digits = 4
+    }
+    \begin{tabular}{
+        l
+        S[table-format=7.2]
+        S[table-format=7.2]
+        S[table-format=3.1, table-space-text-post={\%}]
+    }
+        \toprule
+        Department & {2022 (\$)} & {2023 (\$)} & {Change} \\
+        \midrule
+        Sales & 1234567.89 & 1456789.12 & 18.0\% \\
+        Marketing & 234567.89 & 267890.23 & 14.2\% \\
+        Operations & 3456789.01 & 3789012.34 & 9.6\% \\
+        R\&D & 567890.12 & 678901.23 & 19.5\% \\
+        \midrule
+        \textbf{Total} & \textbf{5493814.91} & \textbf{6193592.92} & \textbf{12.7\%} \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+```
+</CodeGroup>
+
+## Multi-row and Multi-column Tables
+
+### Spanning Cells
+
+<CodeGroup>
+```latex multirow-multicolumn.tex
+\usepackage{multirow}
+\usepackage{booktabs}
+
+\begin{table}[htbp]
+    \centering
+    \caption{Complex table with merged cells}
+    \begin{tabular}{lccccc}
+        \toprule
+        \multirow{2}{*}{Region} & 
+        \multicolumn{2}{c}{Q1 2023} & 
+        \multicolumn{2}{c}{Q2 2023} & 
+        \multirow{2}{*}{Total} \\
+        \cmidrule(lr){2-3} \cmidrule(lr){4-5}
+        & Sales & Profit & Sales & Profit & \\
+        \midrule
+        North & 120 & 24 & 135 & 28 & 307 \\
+        South & 98 & 18 & 102 & 20 & 238 \\
+        East & 156 & 31 & 162 & 33 & 382 \\
+        West & 134 & 26 & 141 & 29 & 330 \\
+        \midrule
+        \textbf{Total} & \textbf{508} & \textbf{99} & \textbf{540} & \textbf{110} & \textbf{1257} \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+% More complex example
+\begin{table}[htbp]
+    \centering
+    \caption{Product comparison matrix}
+    \begin{tabular}{lcccc}
+        \toprule
+        \multirow{3}{*}{\textbf{Feature}} & 
+        \multicolumn{4}{c}{\textbf{Product Models}} \\
+        \cmidrule{2-5}
+        & \multicolumn{2}{c}{Standard} & \multicolumn{2}{c}{Premium} \\
+        \cmidrule(lr){2-3} \cmidrule(lr){4-5}
+        & Basic & Plus & Pro & Elite \\
+        \midrule
+        Storage & 100GB & 500GB & 1TB & 5TB \\
+        \multirow{2}{*}{Support} & Email & Email & 24/7 & 24/7 \\
+        & -- & Chat & Phone & Priority \\
+        API Access & \multicolumn{2}{c}{Limited} & \multicolumn{2}{c}{Unlimited} \\
+        \midrule
+        Price/month & \$9 & \$19 & \$49 & \$99 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+```
+</CodeGroup>
+
+### Nested Tables
+
+<CodeGroup>
+```latex nested-tables.tex
+\usepackage{makecell}
+
+\begin{table}[htbp]
+    \centering
+    \caption{Table with nested content}
+    \begin{tabular}{lcc}
+        \toprule
+        Parameter & Configuration & Result \\
+        \midrule
+        Algorithm & 
+        \begin{tabular}[c]{@{}c@{}}
+            Method: SVM \\
+            Kernel: RBF \\
+            C: 1.0
+        \end{tabular} & 
+        \begin{tabular}[c]{@{}c@{}}
+            Accuracy: 95.2\% \\
+            F1: 0.94
+        \end{tabular} \\
+        \midrule
+        Dataset & 
+        \makecell{Training: 80\% \\ Validation: 10\% \\ Test: 10\%} &
+        \makecell{Total: 10,000 \\ Features: 25} \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+```
+</CodeGroup>
+
+## Wide Tables
+
+### Tables Wider Than Text
+
+<CodeGroup>
+```latex tabularx-example.tex
+\usepackage{tabularx}
+\usepackage{booktabs}
+
+% Table that automatically fits text width
+\begin{table}[htbp]
+    \centering
+    \caption{Table fitting text width with tabularx}
+    \begin{tabularx}{\textwidth}{lXXr}
+        \toprule
+        ID & Description & Comments & Score \\
+        \midrule
+        001 & This is a long description that would normally overflow & Additional comments here & 95 \\
+        002 & Another lengthy text entry & More commentary & 87 \\
+        003 & Short & Brief & 92 \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+
+% Custom column types for tabularx
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+\newcolumntype{Z}{>{\raggedleft\arraybackslash}X}
+
+\begin{table}[htbp]
+    \centering
+    \caption{Centered and right-aligned X columns}
+    \begin{tabularx}{\textwidth}{lYYZ}
+        \toprule
+        Item & Center 1 & Center 2 & Right \\
+        \midrule
+        A & Text & More text & 123 \\
+        B & Centered & Also centered & 456 \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+```
+
+```latex adjustbox-tables.tex
+\usepackage{adjustbox}
+
+% Scale table to fit
+\begin{table}[htbp]
+    \centering
+    \caption{Scaled table to fit page width}
+    \adjustbox{width=\textwidth}{%
+    \begin{tabular}{lcccccccc}
+        \toprule
+        Category & Jan & Feb & Mar & Apr & May & Jun & Jul & Aug \\
+        \midrule
+        Revenue & 1234 & 2345 & 3456 & 4567 & 5678 & 6789 & 7890 & 8901 \\
+        Expenses & 987 & 876 & 765 & 654 & 543 & 432 & 321 & 210 \\
+        Profit & 247 & 1469 & 2691 & 3913 & 5135 & 6357 & 7569 & 8691 \\
+        \bottomrule
+    \end{tabular}
+    }
+\end{table}
+
+% Rotate wide table
+\begin{table}[htbp]
+    \centering
+    \caption{Rotated wide table}
+    \adjustbox{angle=90}{%
+    \begin{tabular}{lccccccccccc}
+        \toprule
+        Metric & M1 & M2 & M3 & M4 & M5 & M6 & M7 & M8 & M9 & M10 & M11 \\
+        \midrule
+        Value A & 12 & 23 & 34 & 45 & 56 & 67 & 78 & 89 & 90 & 101 & 112 \\
+        Value B & 21 & 32 & 43 & 54 & 65 & 76 & 87 & 98 & 109 & 120 & 131 \\
+        \bottomrule
+    \end{tabular}
+    }
+\end{table}
+```
+</CodeGroup>
+
+## Multi-page Tables
+
+### Long Tables
+
+<CodeGroup>
+```latex longtable-example.tex
+\usepackage{longtable}
+\usepackage{booktabs}
+
+\begin{longtable}{lccr}
+    \caption{Multi-page data table} \label{tab:long} \\
+    
+    % First header
+    \toprule
+    Item & Quantity & Unit Price & Total \\
+    \midrule
+    \endfirsthead
+    
+    % Continued header
+    \multicolumn{4}{c}{\tablename\ \thetable{} -- continued from previous page} \\
+    \toprule
+    Item & Quantity & Unit Price & Total \\
+    \midrule
+    \endhead
+    
+    % Footer except last page
+    \midrule
+    \multicolumn{4}{r}{Continued on next page} \\
+    \endfoot
+    
+    % Last footer
+    \bottomrule
+    \multicolumn{3}{r}{Grand Total:} & \$12,345.67 \\
+    \bottomrule
+    \endlastfoot
+    
+    % Table data
+    Product A & 10 & \$12.50 & \$125.00 \\
+    Product B & 25 & \$8.75 & \$218.75 \\
+    Product C & 15 & \$15.00 & \$225.00 \\
+    % ... many more rows ...
+    Product Z & 100 & \$5.00 & \$500.00 \\
+    
+\end{longtable}
+```
+
+```latex longtabu-example.tex
+\usepackage{longtabu}
+
+% Combination of longtable and tabularx
+\begin{longtabu} to \textwidth {X[l] X[2,c] X[r]}
+    \caption{Flexible multi-page table} \\
+    \toprule
+    Left Column & Center Column (2x width) & Right Column \\
+    \midrule
+    \endhead
+    
+    Data 1 & This column gets more space & Value 1 \\
+    Data 2 & Automatically distributed & Value 2 \\
+    % ... more rows ...
+    
+\end{longtabu}
+```
+</CodeGroup>
+
+## Colored Tables
+
+### Row and Column Colors
+
+<CodeGroup>
+```latex colored-tables.tex
+\usepackage{xcolor}
+\usepackage{colortbl}
+
+% Define colors
+\definecolor{headerblue}{RGB}{20, 100, 200}
+\definecolor{rowgray}{RGB}{240, 240, 240}
+
+\begin{table}[htbp]
+    \centering
+    \caption{Table with colored rows}
+    \begin{tabular}{lccr}
+        \rowcolor{headerblue}
+        \textcolor{white}{\textbf{Product}} & 
+        \textcolor{white}{\textbf{Q1}} & 
+        \textcolor{white}{\textbf{Q2}} & 
+        \textcolor{white}{\textbf{Total}} \\
+        \rowcolor{rowgray}
+        Widget A & 120 & 135 & 255 \\
+        Widget B & 98 & 102 & 200 \\
+        \rowcolor{rowgray}
+        Widget C & 156 & 162 & 318 \\
+        Widget D & 134 & 141 & 275 \\
+        \midrule
+        \textbf{Total} & \textbf{508} & \textbf{540} & \textbf{1048} \\
+    \end{tabular}
+\end{table}
+
+% Alternating row colors
+\usepackage{array}
+\rowcolors{2}{rowgray}{white}
+
+\begin{table}[htbp]
+    \centering
+    \caption{Alternating row colors}
+    \begin{tabular}{lccc}
+        \toprule
+        \rowcolor{headerblue}
+        \textcolor{white}{Name} & 
+        \textcolor{white}{Score} & 
+        \textcolor{white}{Grade} & 
+        \textcolor{white}{Pass} \\
+        \midrule
+        Alice & 95 & A & Yes \\
+        Bob & 87 & B & Yes \\
+        Charlie & 78 & C & Yes \\
+        David & 92 & A & Yes \\
+        Eve & 68 & D & Yes \\
+        Frank & 55 & F & No \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+```
+
+```latex cell-colors.tex
+% Individual cell coloring
+\begin{table}[htbp]
+    \centering
+    \caption{Heat map style table}
+    \begin{tabular}{lccc}
+        \toprule
+        Metric & Low & Medium & High \\
+        \midrule
+        Risk & \cellcolor{green!30}2.1 & \cellcolor{yellow!30}5.4 & \cellcolor{red!30}8.9 \\
+        Cost & \cellcolor{green!30}Low & \cellcolor{yellow!30}Moderate & \cellcolor{red!30}High \\
+        Impact & \cellcolor{red!30}Major & \cellcolor{yellow!30}Minor & \cellcolor{green!30}None \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+```
+</CodeGroup>
+
+## Tables with Notes
+
+### Three-part Tables
+
+<CodeGroup>
+```latex threeparttable.tex
+\usepackage{threeparttable}
+\usepackage{booktabs}
+
+\begin{table}[htbp]
+    \centering
+    \begin{threeparttable}
+        \caption{Results with footnotes}
+        \begin{tabular}{lccc}
+            \toprule
+            Method & Accuracy\tnote{a} & Precision & Recall\tnote{b} \\
+            \midrule
+            SVM & 95.2 & 94.1 & 96.3 \\
+            Random Forest & 93.8 & 92.5 & 95.1 \\
+            Neural Network\tnote{c} & 97.1 & 96.8 & 97.4 \\
+            \bottomrule
+        \end{tabular}
+        \begin{tablenotes}
+            \small
+            \item[a] Average over 10-fold cross-validation
+            \item[b] Weighted average across all classes
+            \item[c] 3-layer architecture with dropout
+        \end{tablenotes}
+    \end{threeparttable}
+\end{table}
+
+% With source note
+\begin{table}[htbp]
+    \centering
+    \begin{threeparttable}
+        \caption{Economic indicators}
+        \begin{tabular}{lrrr}
+            \toprule
+            Country & GDP\tnote{*} & Growth & Inflation \\
+            \midrule
+            USA & 21,433 & 2.3\% & 1.8\% \\
+            China & 14,343 & 6.1\% & 2.9\% \\
+            Japan & 5,082 & 0.7\% & 0.5\% \\
+            \bottomrule
+        \end{tabular}
+        \begin{tablenotes}
+            \small
+            \item[*] In billions USD
+            \item[Source:] World Bank, 2023
+        \end{tablenotes}
+    \end{threeparttable}
+\end{table}
+```
+</CodeGroup>
+
+## Advanced Formatting
+
+### Custom Rules and Spacing
+
+<CodeGroup>
+```latex custom-formatting.tex
+\usepackage{booktabs}
+\usepackage{array}
+
+% Custom rule thickness
+\begin{table}[htbp]
+    \centering
+    \caption{Custom rule thickness}
+    \begin{tabular}{@{}lcc@{}}
+        \toprule[1.5pt]
+        Category & Value A & Value B \\
+        \midrule[0.8pt]
+        First & 123 & 456 \\
+        Second & 789 & 012 \\
+        \cmidrule[0.5pt](lr){2-3}
+        Total & 912 & 468 \\
+        \bottomrule[1.5pt]
+    \end{tabular}
+\end{table}
+
+% Custom spacing
+\begin{table}[htbp]
+    \centering
+    \caption{Custom spacing}
+    \setlength{\tabcolsep}{10pt} % Column separation
+    \renewcommand{\arraystretch}{1.5} % Row stretch
+    \begin{tabular}{lcc}
+        \toprule
+        Item & Quantity & Price \\
+        \midrule
+        Apple & 5 & \$2.50 \\
+        Orange & 3 & \$1.80 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+% Remove space around table
+\begin{table}[htbp]
+    \centering
+    \caption{Compact table}
+    \begin{tabular}{@{}lcc@{}}
+        \toprule
+        Compact & No Space & Edges \\
+        \midrule
+        Data & 123 & 456 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+```
+</CodeGroup>
+
+### Professional Examples
+
+<CodeGroup>
+```latex publication-table.tex
+\documentclass{article}
+\usepackage{booktabs}
+\usepackage{siunitx}
+\usepackage{threeparttable}
+
+\begin{document}
+
+\begin{table}[htbp]
+    \centering
+    \begin{threeparttable}
+        \caption{Comparison of machine learning algorithms on benchmark datasets}
+        \label{tab:ml-comparison}
+        \begin{tabular}{
+            l
+            S[table-format=2.1(2)]
+            S[table-format=2.1(2)]
+            S[table-format=2.1(2)]
+            S[table-format=3.1]
+            S[table-format=4.0]
+        }
+            \toprule
+            Algorithm & 
+            \multicolumn{3}{c}{Accuracy (\%)} & 
+            {Time} & 
+            {Memory} \\
+            \cmidrule(lr){2-4}
+            & {MNIST} & {CIFAR-10} & {ImageNet} & {(s)} & {(MB)} \\
+            \midrule
+            SVM & 94.5(5) & 68.2(8) & 45.3(12) & 12.3 & 1024 \\
+            Random Forest & 96.8(3) & 75.4(6) & 52.1(9) & 8.7 & 2048 \\
+            CNN\tnote{a} & 99.2(1) & 92.1(2) & 76.8(4) & 45.6 & 4096 \\
+            ResNet-50\tnote{b} & 99.5(1) & 94.5(2) & 82.3(3) & 123.4 & 8192 \\
+            Transformer\tnote{c} & 99.1(1) & 95.8(1) & 87.6(2) & 234.5 & 16384 \\
+            \midrule
+            \textbf{Best} & \textbf{99.5} & \textbf{95.8} & \textbf{87.6} & \textbf{8.7} & \textbf{1024} \\
+            \bottomrule
+        \end{tabular}
+        \begin{tablenotes}
+            \small
+            \item[a] Custom 5-layer architecture
+            \item[b] Pre-trained on ImageNet
+            \item[c] Vision Transformer (ViT-B/16)
+            \item Numbers in parentheses indicate standard deviation
+        \end{tablenotes}
+    \end{threeparttable}
+\end{table}
+
+\end{document}
+```
+</CodeGroup>
+
+## Best Practices
+
+### Table Design Checklist
+
+<Tip>
+✅ **Professional table checklist**:
+- [ ] Use booktabs for rules (no vertical lines)
+- [ ] Align numbers properly (decimal alignment)
+- [ ] Add appropriate spacing (not too cramped)
+- [ ] Use consistent formatting throughout
+- [ ] Include clear captions and labels
+- [ ] Add units in column headers, not cells
+- [ ] Use table notes for clarifications
+- [ ] Consider readability over decoration
+- [ ] Test table appearance in final document
+- [ ] Ensure tables fit within margins
+</Tip>
+
+### Common Mistakes to Avoid
+
+<Warning>
+**Avoid these common table mistakes**:
+1. **Too many rules** - Less is more
+2. **Vertical lines** - Almost never needed
+3. **Colored cells for data** - Use sparingly
+4. **Inconsistent alignment** - Pick one style
+5. **Missing captions** - Every table needs one
+6. **Poor number formatting** - Use siunitx
+7. **Cramped layout** - Add breathing room
+8. **Overwide tables** - Consider rotation or splitting
+</Warning>
+
+## Complete Example
+
+<CodeGroup>
+```latex complete-table-document.tex
+\documentclass[11pt]{article}
+\usepackage{booktabs}
+\usepackage{siunitx}
+\usepackage{multirow}
+\usepackage{xcolor}
+\usepackage{colortbl}
+\usepackage{threeparttable}
+\usepackage{tabularx}
+\usepackage{array}
+
+% Setup
+\sisetup{
+    round-mode = places,
+    round-precision = 2,
+    table-format = 3.2
+}
+
+\definecolor{headercolor}{RGB}{70, 130, 180}
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+
+\begin{document}
+
+\title{Professional Tables in LaTeX}
+\author{Your Name}
+\date{\today}
+\maketitle
+
+\section{Introduction}
+This document demonstrates professional table creation techniques.
+
+\section{Basic Professional Table}
+
+\begin{table}[htbp]
+    \centering
+    \caption{Quarterly sales report}
+    \label{tab:sales}
+    \begin{tabular}{lS[table-format=4.0]S[table-format=4.0]S[table-format=3.1]}
+        \toprule
+        Region & {Q1 Sales} & {Q2 Sales} & {Growth (\%)} \\
+        \midrule
+        North & 1234 & 1456 & 18.0 \\
+        South & 2345 & 2678 & 14.2 \\
+        East & 3456 & 3890 & 12.6 \\
+        West & 4567 & 5234 & 14.6 \\
+        \midrule
+        \textbf{Total} & \textbf{11602} & \textbf{13258} & \textbf{14.3} \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\section{Complex Multi-level Table}
+
+\begin{table}[htbp]
+    \centering
+    \caption{Product performance metrics}
+    \begin{tabular}{lccccc}
+        \toprule
+        \multirow{2}{*}{Product} & 
+        \multicolumn{2}{c}{Customer Satisfaction} & 
+        \multicolumn{2}{c}{Market Share} & 
+        \multirow{2}{*}{Revenue} \\
+        \cmidrule(lr){2-3} \cmidrule(lr){4-5}
+        & 2022 & 2023 & 2022 & 2023 & (Million \$) \\
+        \midrule
+        Product A & 4.2 & 4.5 & 23\% & 26\% & 45.6 \\
+        Product B & 3.8 & 4.1 & 18\% & 19\% & 34.2 \\
+        Product C & 4.5 & 4.6 & 31\% & 29\% & 67.8 \\
+        Product D & 3.9 & 4.3 & 28\% & 26\% & 52.4 \\
+        \midrule
+        \textbf{Average} & \textbf{4.1} & \textbf{4.4} & \textbf{25\%} & \textbf{25\%} & \textbf{200.0} \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\section{Scientific Data Table}
+
+\begin{table}[htbp]
+    \centering
+    \begin{threeparttable}
+        \caption{Experimental results with statistical analysis}
+        \begin{tabular}{
+            l
+            S[table-format=3.2(2)]
+            S[table-format=2.1(1)]
+            S[table-format=1.4]
+            c
+        }
+            \toprule
+            Sample & 
+            {Measurement} & 
+            {Error (\%)} & 
+            {$p$-value} & 
+            Significant \\
+            & {(\si{\micro\gram\per\milli\liter})} & & & \\
+            \midrule
+            Control & 100.00(0) & 0.0(0) & -- & -- \\
+            Treatment A & 145.67(23) & 2.3(4) & 0.0012 & *** \\
+            Treatment B & 132.45(18) & 1.8(3) & 0.0089 & ** \\
+            Treatment C & 118.23(15) & 1.5(2) & 0.0234 & * \\
+            Treatment D & 108.90(12) & 1.2(2) & 0.1234 & ns \\
+            \bottomrule
+        \end{tabular}
+        \begin{tablenotes}
+            \small
+            \item Significance levels: *** $p < 0.001$, ** $p < 0.01$, * $p < 0.05$, ns = not significant
+            \item Values shown as mean(SD) for n=10 replicates
+        \end{tablenotes}
+    \end{threeparttable}
+\end{table}
+
+\section{Wide Table}
+
+\begin{table}[htbp]
+    \centering
+    \caption{Comprehensive comparison across multiple criteria}
+    \small % Reduce font size for wide table
+    \begin{tabularx}{\textwidth}{lYYYYYY}
+        \toprule
+        \rowcolor{headercolor}
+        \textcolor{white}{Method} & 
+        \textcolor{white}{Speed} & 
+        \textcolor{white}{Accuracy} & 
+        \textcolor{white}{Precision} & 
+        \textcolor{white}{Recall} & 
+        \textcolor{white}{F1-Score} & 
+        \textcolor{white}{AUC-ROC} \\
+        \midrule
+        \rowcolor{gray!10}
+        Baseline & Fast & 85.2\% & 83.1\% & 87.4\% & 0.852 & 0.891 \\
+        Method A & Medium & 91.3\% & 90.2\% & 92.5\% & 0.913 & 0.942 \\
+        \rowcolor{gray!10}
+        Method B & Slow & 93.7\% & 92.8\% & 94.6\% & 0.937 & 0.961 \\
+        Method C & Fast & 89.5\% & 88.3\% & 90.8\% & 0.895 & 0.923 \\
+        \rowcolor{gray!10}
+        \textbf{Proposed} & \textbf{Medium} & \textbf{95.8\%} & \textbf{95.1\%} & \textbf{96.5\%} & \textbf{0.958} & \textbf{0.978} \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+
+\end{document}
+```
+</CodeGroup>
+
+## Next Steps
+
+Master more advanced LaTeX techniques:
+
+<CardGroup cols={2}>
+<Card title="Managing Large Documents" icon="folder-tree" href="/learn/latex/how-to/large-documents">
+Organize tables in multi-file projects
+</Card>
+<Card title="Creating Figures" icon="image" href="/learn/latex/how-to/working-with-images">
+Combine tables with figures
+</Card>
+<Card title="TikZ Diagrams" icon="draw-polygon" href="/learn/latex/how-to/tikz-diagrams">
+Create diagram-table combinations
+</Card>
+<Card title="Data Visualization" icon="chart-line" href="/learn/latex/how-to/data-visualization">
+Generate tables from data
+</Card>
+</CardGroup>
+
+---
+
+<Info>
+**Remember**: The best table is one that clearly communicates information without unnecessary decoration. Focus on clarity, consistency, and professional appearance.
+</Info>
