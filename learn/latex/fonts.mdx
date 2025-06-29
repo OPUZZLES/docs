@@ -1,0 +1,465 @@
+---
+title: Fonts in LaTeX
+description: Complete guide to font selection, customization, and typography in LaTeX. Learn about font families, packages, and advanced font features.
+---
+
+import { CodeGroup, Info, Tip, Warning, Card, CardGroup } from '/snippets/components.mdx'
+
+Typography is crucial for professional documents. This guide covers everything from basic font selection to advanced typography features in LaTeX.
+
+<Info>
+**Compiler note**: For system fonts and advanced typography, use XeLaTeX or LuaLaTeX. For traditional LaTeX fonts, pdfLaTeX works perfectly.
+</Info>
+
+## Font Basics
+
+### The Three Font Attributes
+
+LaTeX fonts have three independent attributes:
+
+<CodeGroup>
+```latex font-attributes.tex
+\documentclass{article}
+\begin{document}
+
+% Family (shape of letters)
+\textrm{Roman family (serif)}
+\textsf{Sans serif family}
+\texttt{Typewriter family (monospace)}
+
+% Series (weight/width)
+\textmd{Medium series (normal)}
+\textbf{Bold series}
+
+% Shape (slant/style)
+\textup{Upright shape}
+\textit{Italic shape}
+\textsl{Slanted shape}
+\textsc{Small Caps Shape}
+
+\end{document}
+```
+</CodeGroup>
+
+### Combining Font Attributes
+
+<CodeGroup>
+```latex combining-fonts.tex
+% All combinations work
+\textsf{\textbf{Sans serif bold}}
+\texttt{\textit{Typewriter italic}}
+\textrm{\textbf{\textit{Roman bold italic}}}
+\textsc{\textbf{Bold Small Caps}}
+
+% Using declarations
+{\sffamily\bfseries\itshape Sans serif bold italic}
+```
+</CodeGroup>
+
+## Font Packages (pdfLaTeX)
+
+### Popular Font Packages
+
+<CodeGroup>
+```latex font-packages.tex
+\documentclass{article}
+
+% Times-like fonts
+\usepackage{mathptmx}  % Times with math support
+% or
+\usepackage{newtxtext,newtxmath}  % New TX fonts
+
+% Palatino-like fonts
+\usepackage{mathpazo}  % Palatino with math
+% or
+\usepackage{newpxtext,newpxmath}  % New PX fonts
+
+% Computer Modern variants
+\usepackage{lmodern}   % Latin Modern
+\usepackage{cm-super}  % CM Super
+
+% Sans serif as default
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+% Other popular choices
+\usepackage{fourier}   % Utopia
+\usepackage{libertine} % Linux Libertine
+\usepackage{kpfonts}   % KP Fonts
+
+\begin{document}
+Your text here...
+\end{document}
+```
+</CodeGroup>
+
+### Font Package Comparison
+
+| Package | Style | Math Support | Use Case |
+|---------|-------|--------------|----------|
+| `lmodern` | Modern | Yes | Default improvement |
+| `mathptmx` | Times | Yes | Traditional papers |
+| `helvet` | Helvetica | No | Modern look |
+| `mathpazo` | Palatino | Yes | Books, elegant |
+| `libertine` | Libertine | Yes | Professional |
+| `fourier` | Utopia | Yes | Technical docs |
+
+## System Fonts (XeLaTeX/LuaLaTeX)
+
+### Using System Fonts
+
+<CodeGroup>
+```latex system-fonts.tex
+\documentclass{article}
+\usepackage{fontspec}
+
+% Set main font
+\setmainfont{Times New Roman}
+\setsansfont{Arial}
+\setmonofont{Consolas}
+
+% With options
+\setmainfont{Georgia}[
+  BoldFont = Georgia Bold,
+  ItalicFont = Georgia Italic,
+  BoldItalicFont = Georgia Bold Italic
+]
+
+% Alternative syntax
+\setmainfont[
+  Ligatures=TeX,
+  Numbers=OldStyle,
+  Scale=1.0
+]{Minion Pro}
+
+\begin{document}
+This document uses system fonts directly!
+\end{document}
+```
+</CodeGroup>
+
+### Font Selection by Name
+
+<CodeGroup>
+```latex font-by-name.tex
+\documentclass{article}
+\usepackage{fontspec}
+
+% Define custom font commands
+\newfontfamily\headingfont{Helvetica Neue}
+\newfontfamily\specialfont{Zapfino}
+\newfontfamily\codefont{Source Code Pro}
+
+\begin{document}
+
+{\headingfont\Large This is a heading in Helvetica Neue}
+
+Regular text in the main font.
+
+{\specialfont Special decorative text}
+
+{\codefont\small Code examples in Source Code Pro}
+
+\end{document}
+```
+</CodeGroup>
+
+## Font Features
+
+### OpenType Features (XeLaTeX/LuaLaTeX)
+
+<CodeGroup>
+```latex opentype-features.tex
+\documentclass{article}
+\usepackage{fontspec}
+
+\setmainfont{EB Garamond}[
+  Ligatures={Common, Rare},
+  Numbers=OldStyle,
+  Contextuals=Alternate,
+  Style=Historic
+]
+
+% Specific features
+\newfontfamily\displayfont{Adobe Garamond Pro}[
+  Numbers={Proportional,OldStyle},
+  Letters=SmallCaps,
+  Ligatures={Common,Discretionary}
+]
+
+\begin{document}
+
+% Ligatures
+Office, shelf, affiliate (fi, fl, ffi ligatures)
+
+% Old style numbers
+Regular: 0123456789 vs {\addfontfeatures{Numbers=OldStyle}0123456789}
+
+% Small caps
+{\scshape Small Capitals Text}
+
+% Stylistic sets
+{\addfontfeatures{StylisticSet=1}Stylistic Variant}
+
+\end{document}
+```
+</CodeGroup>
+
+### Microtype Package
+
+<CodeGroup>
+```latex microtype.tex
+\documentclass{article}
+\usepackage{microtype}
+
+% Full features (pdfLaTeX)
+\usepackage[
+  protrusion=true,
+  expansion=true,
+  tracking=true,
+  kerning=true,
+  spacing=true
+]{microtype}
+
+% Fine-tuning
+\microtypesetup{
+  protrusion={true,alltext},
+  expansion={true,alltext,compat}
+}
+
+\begin{document}
+Microtype improves typography through:
+\begin{itemize}
+\item Character protrusion (margin kerning)
+\item Font expansion (better justification)
+\item Tracking (letter spacing)
+\item Additional kerning
+\end{itemize}
+
+The improvements are subtle but create more professional results.
+\end{document}
+```
+</CodeGroup>
+
+## Font Sizes
+
+### Changing Font Size
+
+<CodeGroup>
+```latex font-sizes.tex
+\documentclass[12pt]{article}  % Base size: 10pt, 11pt, or 12pt
+
+% Exact sizes
+\fontsize{14}{17}\selectfont  % 14pt font, 17pt baseline
+This text is exactly 14 points.
+
+% Relative sizes
+{\tiny Tiny text (5pt at 10pt base)}
+{\small Small text (9pt at 10pt base)}
+{\large Large text (12pt at 10pt base)}
+{\Huge Huge text (25pt at 10pt base)}
+
+% Custom size commands
+\newcommand{\customsize}{\fontsize{13}{16}\selectfont}
+{\customsize Custom 13pt text}
+```
+</CodeGroup>
+
+### Size Commands Reference
+
+| Command | 10pt Article | 11pt Article | 12pt Article |
+|---------|--------------|--------------|--------------|
+| `\tiny` | 5pt | 6pt | 6pt |
+| `\scriptsize` | 7pt | 8pt | 8pt |
+| `\footnotesize` | 8pt | 9pt | 10pt |
+| `\small` | 9pt | 10pt | 10.95pt |
+| `\normalsize` | 10pt | 10.95pt | 12pt |
+| `\large` | 12pt | 12pt | 14.4pt |
+| `\Large` | 14.4pt | 14.4pt | 17.28pt |
+| `\LARGE` | 17.28pt | 17.28pt | 20.74pt |
+| `\huge` | 20.74pt | 20.74pt | 24.88pt |
+| `\Huge` | 24.88pt | 24.88pt | 24.88pt |
+
+## Mathematical Fonts
+
+### Math Font Packages
+
+<CodeGroup>
+```latex math-fonts.tex
+% Matching text and math fonts
+\usepackage{mathptmx}     % Times
+\usepackage{mathpazo}     % Palatino
+\usepackage{fourier}      % Utopia
+\usepackage{newtxmath}    % Times (modern)
+\usepackage{newpxmath}    % Palatino (modern)
+\usepackage{eulervm}      % Euler math
+\usepackage{stix2}        % STIX fonts
+
+% Math alphabets
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{mathrsfs}     % \mathscr
+\usepackage{bbm}          % \mathbbm
+
+% Usage
+$\mathbb{R}$, $\mathcal{A}$, $\mathscr{L}$, $\mathfrak{g}$
+```
+</CodeGroup>
+
+### Unicode Math (XeLaTeX/LuaLaTeX)
+
+<CodeGroup>
+```latex unicode-math.tex
+\documentclass{article}
+\usepackage{unicode-math}
+
+% Set math font
+\setmathfont{XITS Math}
+% or
+\setmathfont{Latin Modern Math}
+% or
+\setmathfont{TeX Gyre Termes Math}
+
+% With options
+\setmathfont{Cambria Math}[
+  Scale=MatchLowercase,
+  math-style=ISO,
+  bold-style=ISO
+]
+
+\begin{document}
+Unicode math allows: $α + β = γ$ and $∫_0^∞ e^{-x²} dx = \frac{√π}{2}$
+\end{document}
+```
+</CodeGroup>
+
+## Special Typography
+
+### Drop Caps
+
+<CodeGroup>
+```latex drop-caps.tex
+\documentclass{article}
+\usepackage{lettrine}
+\begin{document}
+
+\lettrine[lines=3]{O}{nce upon a time}, in a land far away, 
+there lived a typographer who loved beautiful drop caps. 
+This elegant initial letter adds a classic touch to the 
+beginning of chapters or sections.
+
+\lettrine[lines=2,loversize=0.1]{T}{his} is a smaller drop cap.
+
+\end{document}
+```
+</CodeGroup>
+
+### Custom Fonts for Special Text
+
+<CodeGroup>
+```latex special-fonts.tex
+\documentclass{article}
+\usepackage{fontspec}  % XeLaTeX/LuaLaTeX
+
+% Define special purpose fonts
+\newfontfamily\chapterfont{Bebas Neue}
+\newfontfamily\quotefont{Crimson Text}[Scale=1.1]
+\newfontfamily\emojifont{Apple Color Emoji}  % or Noto Color Emoji
+
+\begin{document}
+
+{\chapterfont\Huge Chapter One}
+
+{\quotefont\itshape "Beautiful typography is invisible, 
+yet it shapes how we perceive the written word."}
+
+{\emojifont 😊 📚 ✨}  % Emoji support!
+
+\end{document}
+```
+</CodeGroup>
+
+## Font Troubleshooting
+
+### Common Issues and Solutions
+
+<CodeGroup>
+```latex font-fixes.tex
+% Font not found (XeLaTeX/LuaLaTeX)
+\setmainfont{Arial}[
+  Extension = .ttf,
+  Path = /path/to/fonts/,
+  UprightFont = *-Regular,
+  BoldFont = *-Bold,
+  ItalicFont = *-Italic
+]
+
+% Missing characters
+\usepackage{textcomp}  % Additional symbols
+\usepackage[T1]{fontenc}  % Better encoding
+
+% Font substitution warnings
+\usepackage{silence}
+\WarningFilter{latexfont}{Font shape}
+
+% Check available fonts (XeLaTeX/LuaLaTeX)
+% Run in terminal: fc-list : family
+```
+</CodeGroup>
+
+## Best Practices
+
+<Tip>
+**Font guidelines:**
+
+1. **Consistency**: Use maximum 2-3 font families per document
+2. **Readability**: Test fonts at actual reading size
+3. **Purpose**: Match font to document type (serif for print, sans for screen)
+4. **Licensing**: Ensure fonts are properly licensed
+5. **Fallbacks**: Provide alternatives for missing fonts
+6. **Testing**: Check output on different systems/viewers
+</Tip>
+
+## Font Comparison
+
+<CardGroup cols={2}>
+  <Card title="For Traditional Documents" icon="file-alt">
+    - Times (mathptmx)
+    - Palatino (mathpazo)
+    - Computer Modern (default)
+    - Latin Modern (lmodern)
+  </Card>
+  <Card title="For Modern Documents" icon="laptop">
+    - Helvetica (helvet)
+    - Open Sans
+    - Source Sans Pro
+    - Roboto
+  </Card>
+  <Card title="For Technical Documents" icon="cog">
+    - Computer Modern
+    - STIX Two
+    - Libertinus
+    - KP Fonts
+  </Card>
+  <Card title="For Books" icon="book">
+    - Minion Pro
+    - Sabon
+    - Garamond
+    - Baskerville
+  </Card>
+</CardGroup>
+
+## Quick Reference
+
+| Task | pdfLaTeX | XeLaTeX/LuaLaTeX |
+|------|----------|------------------|
+| Times font | `\usepackage{mathptmx}` | `\setmainfont{Times New Roman}` |
+| Sans default | `\renewcommand{\familydefault}{\sfdefault}` | `\setmainfont{Arial}` |
+| Math fonts | `\usepackage{newtxmath}` | `\usepackage{unicode-math}` |
+| Custom font | Use packages | `\newfontfamily\myfont{FontName}` |
+
+---
+
+<Info>
+**Next**: Learn about [Mathematical equations](/learn/latex/mathematics/equations) to create complex mathematical expressions with proper formatting.
+</Info>

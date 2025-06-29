@@ -1,0 +1,604 @@
+---
+title: Advanced Table Features
+description: Master complex table layouts in LaTeX. Learn about long tables, landscape orientation, nested tables, and professional formatting techniques.
+---
+
+import { CodeGroup, Info, Tip, Warning } from '/snippets/components.mdx'
+
+This guide covers advanced table features for complex documents, including multi-page tables, professional layouts, and specialized table environments.
+
+<Info>
+**Prerequisites**: Familiarity with basic table creation. See [Creating Tables](/learn/latex/tables/creating-tables) if you need a refresher.
+</Info>
+
+## Long Tables
+
+### Tables Spanning Multiple Pages
+
+<CodeGroup>
+```latex longtable-basic.tex
+\documentclass{article}
+\usepackage{longtable}
+\begin{document}
+
+\begin{longtable}{lcc}
+\caption{Long table example} \label{tab:long} \\
+\hline
+\textbf{Name} & \textbf{Value} & \textbf{Unit} \\
+\hline
+\endfirsthead
+
+\multicolumn{3}{c}{\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
+\hline
+\textbf{Name} & \textbf{Value} & \textbf{Unit} \\
+\hline
+\endhead
+
+\hline
+\multicolumn{3}{r}{\textit{Continued on next page}} \\
+\endfoot
+
+\hline
+\endlastfoot
+
+% Table data
+Item 1 & 10.5 & kg \\
+Item 2 & 23.1 & kg \\
+Item 3 & 45.7 & kg \\
+% ... many more rows ...
+Item 50 & 89.2 & kg \\
+\end{longtable}
+
+\end{document}
+```
+</CodeGroup>
+
+### Longtable Features
+
+<CodeGroup>
+```latex longtable-advanced.tex
+\usepackage{longtable}
+\usepackage{booktabs}
+
+\begin{longtable}{@{}lrrr@{}}
+\caption{Sales data over multiple pages} \\
+\toprule
+Product & Q1 & Q2 & Q3 \\
+\midrule
+\endfirsthead
+
+\caption[]{(continued)} \\
+\toprule
+Product & Q1 & Q2 & Q3 \\
+\midrule
+\endhead
+
+\midrule
+\multicolumn{4}{r}{Continued on next page...} \\
+\endfoot
+
+\bottomrule
+\multicolumn{4}{r}{Total: \$1,234,567} \\
+\endlastfoot
+
+% Data rows
+Product A & 100 & 150 & 120 \\
+Product B & 200 & 180 & 220 \\
+% ... more data ...
+\end{longtable}
+
+% Column width control
+\setlength{\LTleft}{0pt}
+\setlength{\LTright}{0pt}
+\begin{longtable}{|p{3cm}|p{5cm}|p{4cm}|}
+% Table content
+\end{longtable}
+```
+</CodeGroup>
+
+## Landscape Tables
+
+### Rotating Large Tables
+
+<CodeGroup>
+```latex landscape-tables.tex
+\documentclass{article}
+\usepackage{rotating}
+\usepackage{pdflscape}
+\begin{document}
+
+% Sideways table
+\begin{sidewaystable}
+  \centering
+  \caption{Wide table in landscape}
+  \begin{tabular}{lccccccc}
+    \hline
+    Category & Jan & Feb & Mar & Apr & May & Jun & Jul \\
+    \hline
+    Sales & 100 & 120 & 135 & 110 & 145 & 160 & 155 \\
+    Costs & 80 & 85 & 90 & 88 & 95 & 100 & 98 \\
+    Profit & 20 & 35 & 45 & 22 & 50 & 60 & 57 \\
+    \hline
+  \end{tabular}
+\end{sidewaystable}
+
+% Landscape page with table
+\begin{landscape}
+\begin{table}
+  \centering
+  \caption{Very wide table on landscape page}
+  \begin{tabular}{l*{12}{c}}
+    % 12 columns of data
+  \end{tabular}
+\end{table}
+\end{landscape}
+
+\end{document}
+```
+</CodeGroup>
+
+### Rotating Table Content
+
+<CodeGroup>
+```latex rotating-content.tex
+\usepackage{rotating}
+\usepackage{array}
+
+% Rotate column headers
+\begin{tabular}{l*{5}{c}}
+\hline
+City & 
+\rotatebox{90}{Population} & 
+\rotatebox{90}{Area (km²)} & 
+\rotatebox{90}{Density} & 
+\rotatebox{90}{Founded} & 
+\rotatebox{90}{Elevation} \\
+\hline
+New York & 8.3M & 783 & 10,194 & 1624 & 10m \\
+London & 9.0M & 1,572 & 5,701 & 43 & 11m \\
+Tokyo & 13.9M & 2,194 & 6,349 & 1457 & 40m \\
+\hline
+\end{tabular}
+
+% Angled headers
+\newcolumntype{R}[1]{>{\rotatebox{45}\bgroup}l<{\egroup}}
+\begin{tabular}{l*{4}{R{1cm}}}
+Product & Price & Stock & Sales & Revenue \\
+\end{tabular}
+```
+</CodeGroup>
+
+## Nested and Complex Tables
+
+### Tables Within Tables
+
+<CodeGroup>
+```latex nested-tables.tex
+\documentclass{article}
+\usepackage{array}
+\begin{document}
+
+\begin{tabular}{|l|c|}
+\hline
+Category & Details \\
+\hline
+Group A & 
+\begin{tabular}{@{}lr@{}}
+  Item 1 & 10 \\
+  Item 2 & 20 \\
+  Item 3 & 30 \\
+  \hline
+  Total & 60
+\end{tabular} \\
+\hline
+Group B & 
+\begin{tabular}{@{}lr@{}}
+  Item X & 15 \\
+  Item Y & 25 \\
+  \hline
+  Total & 40
+\end{tabular} \\
+\hline
+\end{tabular}
+
+% More complex nesting
+\begin{tabular}{|l|l|}
+\hline
+\multicolumn{2}{|c|}{Main Table} \\
+\hline
+Left cell with table &
+\begin{tabular}[t]{@{}cc@{}}
+  \multicolumn{2}{c}{Subtable} \\
+  A & B \\
+  C & D
+\end{tabular} \\
+\hline
+\end{tabular}
+
+\end{document}
+```
+</CodeGroup>
+
+### Mixed Content Tables
+
+<CodeGroup>
+```latex mixed-content.tex
+\usepackage{graphicx}
+\usepackage{tikz}
+
+\begin{tabular}{lcp{5cm}}
+\hline
+Type & Visual & Description \\
+\hline
+Circle & 
+\begin{tikzpicture}[baseline=-0.5ex]
+  \draw[fill=blue!20] (0,0) circle (0.5cm);
+\end{tikzpicture} &
+A closed curve where all points are equidistant from the center. \\
+\hline
+Square & 
+\includegraphics[width=1cm]{square} &
+A quadrilateral with four equal sides and four right angles. \\
+\hline
+Formula &
+$E = mc^2$ &
+Einstein's mass-energy equivalence equation. \\
+\hline
+\end{tabular}
+```
+</CodeGroup>
+
+## Professional Table Packages
+
+### Using booktabs
+
+<CodeGroup>
+```latex booktabs-professional.tex
+\documentclass{article}
+\usepackage{booktabs}
+\usepackage{siunitx}
+\begin{document}
+
+% Professional table design
+\begin{table}
+  \centering
+  \caption{Experimental results with uncertainties}
+  \begin{tabular}{l S[table-format=3.1] @{${}\pm{}$} S[table-format=1.1] S[table-format=3.2]}
+    \toprule
+    Sample & \multicolumn{2}{c}{Mass (g)} & {Density (g/cm³)} \\
+    \midrule
+    A & 123.4 & 0.5 & 2.34 \\
+    B & 87.2 & 0.3 & 1.98 \\
+    C & 156.9 & 0.8 & 3.12 \\
+    \midrule
+    Mean & 122.5 & 0.5 & 2.48 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+% Publication-quality table
+\begin{table*} % Two-column span
+  \centering
+  \caption{Comparison of methods}
+  \begin{tabular}{@{}lrrrrr@{}}
+    \toprule
+    Method & \multicolumn{2}{c}{Dataset A} & \multicolumn{2}{c}{Dataset B} & Overall \\
+    \cmidrule(lr){2-3} \cmidrule(lr){4-5}
+    & Precision & Recall & Precision & Recall & F1-Score \\
+    \midrule
+    Baseline & 0.82 & 0.79 & 0.75 & 0.81 & 0.79 \\
+    Proposed & \textbf{0.91} & \textbf{0.88} & \textbf{0.87} & \textbf{0.90} & \textbf{0.89} \\
+    \bottomrule
+  \end{tabular}
+\end{table*}
+
+\end{document}
+```
+</CodeGroup>
+
+### Using threeparttable
+
+<CodeGroup>
+```latex threeparttable.tex
+\usepackage{threeparttable}
+\usepackage{booktabs}
+
+\begin{threeparttable}
+  \caption{Results with footnotes}
+  \begin{tabular}{lcc}
+    \toprule
+    Treatment & Response\tnote{a} & p-value \\
+    \midrule
+    Control & 23.4 ± 2.1 & — \\
+    Drug A & 31.2 ± 1.8\tnote{b} & 0.002 \\
+    Drug B & 28.9 ± 2.3 & 0.041 \\
+    Combined & 35.6 ± 1.5\tnote{b,c} & <0.001 \\
+    \bottomrule
+  \end{tabular}
+  \begin{tablenotes}
+    \item[a] Mean ± standard error
+    \item[b] Significantly different from control (p < 0.01)
+    \item[c] Synergistic effect observed
+  \end{tablenotes}
+\end{threeparttable}
+```
+</CodeGroup>
+
+## Advanced Formatting
+
+### Custom Column Types
+
+<CodeGroup>
+```latex custom-columns.tex
+\documentclass{article}
+\usepackage{array}
+\usepackage{ragged2e}
+\begin{document}
+
+% Define custom column types
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}}
+\newcolumntype{N}{@{}l@{}}
+
+\begin{tabular}{L{3cm} C{3cm} R{3cm}}
+\hline
+Left aligned text with wrapping &
+Centered text that wraps nicely &
+Right aligned text with automatic wrapping \\
+\hline
+\end{tabular}
+
+% Currency column
+\newcolumntype{$}{>{\global\let\currentrowstyle\relax}}
+\newcolumntype{^}{>{\currentrowstyle}}
+\begin{tabular}{l $r<{\,€}}
+Product & \multicolumn{1}{c}{Price} \\
+\hline
+Laptop & 1299.99 \\
+Mouse & 29.95 \\
+Total & \bfseries 1329.94 \\
+\end{tabular}
+
+\end{document}
+```
+</CodeGroup>
+
+### Conditional Formatting
+
+<CodeGroup>
+```latex conditional-formatting.tex
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{collcell}
+
+% Highlight negative numbers
+\newcommand{\colorednumber}[1]{%
+  \ifdim#1pt<0pt\color{red}\fi#1%
+}
+\newcolumntype{Q}{>{\collectcell\colorednumber}r<{\endcollectcell}}
+
+\begin{tabular}{lQ}
+\hline
+Item & Profit \\
+\hline
+Product A & 150.00 \\
+Product B & -25.50 \\
+Product C & 75.25 \\
+Product D & -10.00 \\
+\hline
+\end{tabular}
+
+% Conditional row coloring
+\newcommand{\rowcolor}[1]{\rowcolor{#1}}
+\begin{tabular}{lc}
+\hline
+Status & Count \\
+\hline
+\rowcolor{green!20} Success & 45 \\
+\rowcolor{red!20} Failed & 3 \\
+\rowcolor{yellow!20} Pending & 12 \\
+\hline
+\end{tabular}
+```
+</CodeGroup>
+
+## Table Automation
+
+### Generating Tables from Data
+
+<CodeGroup>
+```latex table-automation.tex
+\usepackage{pgfplotstable}
+\usepackage{filecontents}
+
+% Create data file
+\begin{filecontents*}{data.csv}
+Name,Score,Grade
+Alice,95,A
+Bob,87,B
+Carol,92,A
+David,78,C
+\end{filecontents*}
+
+% Load and display CSV
+\pgfplotstabletypeset[
+  col sep=comma,
+  string type,
+  columns={Name,Score,Grade},
+  every head row/.style={
+    before row=\toprule,
+    after row=\midrule
+  },
+  every last row/.style={
+    after row=\bottomrule
+  }
+]{data.csv}
+
+% With formatting
+\pgfplotstabletypeset[
+  col sep=comma,
+  string type,
+  columns={Name,Score,Grade},
+  columns/Score/.style={
+    column type={r},
+    postproc cell content/.style={
+      @cell content={##1\%}
+    }
+  }
+]{data.csv}
+```
+</CodeGroup>
+
+### Dynamic Table Generation
+
+<CodeGroup>
+```latex dynamic-tables.tex
+\usepackage{forloop}
+
+% Generate multiplication table
+\newcounter{row}
+\newcounter{col}
+\begin{tabular}{c|*{10}{c}}
+× & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 \\
+\hline
+\forloop{row}{1}{\value{row} < 11}{%
+  \therow &
+  \forloop{col}{1}{\value{col} < 11}{%
+    \number\numexpr\value{row}*\value{col}\relax
+    \ifnum\value{col}<10 & \fi
+  }\\
+}
+\end{tabular}
+
+% Calendar table
+\newcommand{\calendar}[2]{%
+  % #1 = month, #2 = year
+  \begin{tabular}{|*{7}{c|}}
+    \hline
+    \multicolumn{7}{|c|}{\textbf{#1 #2}} \\
+    \hline
+    S & M & T & W & T & F & S \\
+    \hline
+    % Calendar logic here
+  \end{tabular}
+}
+```
+</CodeGroup>
+
+## Table Positioning and Float Control
+
+### Precise Table Placement
+
+<CodeGroup>
+```latex table-placement.tex
+\usepackage{float}
+\usepackage{placeins}
+
+% Force table here
+\begin{table}[H]
+  \centering
+  \caption{This table appears exactly here}
+  \begin{tabular}{cc}
+    A & B \\
+  \end{tabular}
+\end{table}
+
+% Keep tables in section
+\FloatBarrier % No tables past this point
+
+% Adjust float parameters
+\renewcommand{\topfraction}{0.9}
+\renewcommand{\bottomfraction}{0.8}
+\setcounter{topnumber}{2}
+\setcounter{bottomnumber}{2}
+```
+</CodeGroup>
+
+## Performance Optimization
+
+### Large Table Optimization
+
+<CodeGroup>
+```latex optimize-tables.tex
+% For very large tables
+\usepackage{array}
+\usepackage{longtable}
+
+% Disable array stretching for speed
+\renewcommand{\arraystretch}{1.0}
+
+% Use simpler column types
+\begin{longtable}{lll} % Instead of complex types
+
+% Compile only table
+\usepackage{standalone}
+\documentclass[preview]{standalone}
+\begin{document}
+\begin{tabular}{...}
+% Table content
+\end{tabular}
+\end{document}
+
+% Then include in main document
+\includegraphics{table-output.pdf}
+```
+</CodeGroup>
+
+## Best Practices
+
+<Tip>
+**Advanced table guidelines:**
+
+1. **Long tables**: Use `longtable` for multi-page tables
+2. **Wide tables**: Consider landscape orientation or font size reduction
+3. **Complex layouts**: Break into smaller, simpler tables when possible
+4. **Performance**: For very large tables, consider external generation
+5. **Consistency**: Define custom column types for repeated formats
+6. **Documentation**: Comment complex table structures
+7. **Testing**: Check table appearance at different page positions
+</Tip>
+
+## Troubleshooting
+
+<Warning>
+**Common advanced table issues:**
+
+1. **Memory errors**: Large tables may exceed TeX memory - split or optimize
+2. **Float placement**: Use `\FloatBarrier` to control table positions
+3. **Column alignment**: Check array package column definitions
+4. **Page breaks**: Ensure longtable headers/footers are defined correctly
+5. **Compilation time**: Complex tables slow compilation - use caching
+</Warning>
+
+## Quick Reference
+
+### Package Summary
+
+| Package | Purpose |
+|---------|---------|
+| `longtable` | Multi-page tables |
+| `rotating` | Rotate tables |
+| `booktabs` | Professional formatting |
+| `tabularx` | Auto-width tables |
+| `threeparttable` | Tables with notes |
+| `array` | Enhanced columns |
+| `multirow` | Multi-row cells |
+| `colortbl` | Colored tables |
+
+### Advanced Commands
+
+```latex
+\toprule              % Top rule (booktabs)
+\midrule              % Middle rule (booktabs)
+\bottomrule           % Bottom rule (booktabs)
+\cmidrule(lr){i-j}   % Partial rule with trim
+\addlinespace        % Extra vertical space
+\arraybackslash      % Restore \\ in array cells
+```
+
+---
+
+<Info>
+**Next**: Ready to create your first LaTeX document? Check out our [How-to Guides](/learn/latex/how-to/articles) for practical examples and complete document templates.
+</Info>

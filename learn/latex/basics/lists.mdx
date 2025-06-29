@@ -1,0 +1,561 @@
+---
+title: Lists
+description: Create bullet points, numbered lists, and custom lists in LaTeX. Learn about itemize, enumerate, and description environments.
+---
+
+import { CodeGroup, Info, Tip, Warning } from '/snippets/components.mdx'
+
+Lists are fundamental for organizing information clearly. LaTeX provides three main list environments: unordered lists (bullets), ordered lists (numbers), and description lists.
+
+<Info>
+**Quick start**: Use `itemize` for bullets, `enumerate` for numbers, and `description` for term definitions.
+</Info>
+
+## Unordered Lists (Bullets)
+
+Use the `itemize` environment for bullet points:
+
+<CodeGroup>
+```latex basic-itemize.tex
+\documentclass{article}
+\begin{document}
+
+Shopping list:
+\begin{itemize}
+    \item Milk
+    \item Eggs
+    \item Bread
+    \item LaTeX books
+\end{itemize}
+
+\end{document}
+```
+
+```text Output
+Shopping list:
+• Milk
+• Eggs  
+• Bread
+• LaTeX books
+```
+</CodeGroup>
+
+### Nested Bullet Lists
+
+You can nest lists up to four levels deep:
+
+<CodeGroup>
+```latex nested-itemize.tex
+\documentclass{article}
+\begin{document}
+
+\begin{itemize}
+    \item First level
+    \begin{itemize}
+        \item Second level
+        \begin{itemize}
+            \item Third level
+            \begin{itemize}
+                \item Fourth level
+            \end{itemize}
+        \end{itemize}
+    \end{itemize}
+    \item Back to first level
+\end{itemize}
+
+\end{document}
+```
+
+```text Output
+• First level
+  ◦ Second level
+    ▪ Third level
+      ▸ Fourth level
+• Back to first level
+```
+</CodeGroup>
+
+## Ordered Lists (Numbers)
+
+Use the `enumerate` environment for numbered lists:
+
+<CodeGroup>
+```latex basic-enumerate.tex
+\documentclass{article}
+\begin{document}
+
+Recipe steps:
+\begin{enumerate}
+    \item Preheat oven to 350°F
+    \item Mix ingredients
+    \item Pour into pan
+    \item Bake for 30 minutes
+    \item Let cool and enjoy
+\end{enumerate}
+
+\end{document}
+```
+
+```text Output
+Recipe steps:
+1. Preheat oven to 350°F
+2. Mix ingredients
+3. Pour into pan
+4. Bake for 30 minutes
+5. Let cool and enjoy
+```
+</CodeGroup>
+
+### Nested Numbered Lists
+
+Different numbering styles at each level:
+
+<CodeGroup>
+```latex nested-enumerate.tex
+\documentclass{article}
+\begin{document}
+
+\begin{enumerate}
+    \item First item
+    \begin{enumerate}
+        \item Sub-item A
+        \item Sub-item B
+        \begin{enumerate}
+            \item Detail i
+            \item Detail ii
+        \end{enumerate}
+    \end{enumerate}
+    \item Second item
+\end{enumerate}
+
+\end{document}
+```
+
+```text Output
+1. First item
+   (a) Sub-item A
+   (b) Sub-item B
+       i. Detail i
+       ii. Detail ii
+2. Second item
+```
+</CodeGroup>
+
+## Description Lists
+
+Use the `description` environment for term-definition pairs:
+
+<CodeGroup>
+```latex description.tex
+\documentclass{article}
+\begin{document}
+
+\begin{description}
+    \item[LaTeX] A document preparation system
+    \item[PDF] Portable Document Format
+    \item[Typography] The art of arranging type
+    \item[Compiler] Software that processes LaTeX code
+\end{description}
+
+\end{document}
+```
+
+```text Output
+LaTeX         A document preparation system
+PDF           Portable Document Format
+Typography    The art of arranging type
+Compiler      Software that processes LaTeX code
+```
+</CodeGroup>
+
+## Mixing List Types
+
+You can combine different list types:
+
+<CodeGroup>
+```latex mixed-lists.tex
+\documentclass{article}
+\begin{document}
+
+\begin{enumerate}
+    \item Prepare ingredients:
+    \begin{itemize}
+        \item 2 cups flour
+        \item 1 cup sugar
+        \item 3 eggs
+    \end{itemize}
+    
+    \item Mixing process:
+    \begin{itemize}
+        \item Beat eggs
+        \item Add sugar gradually
+        \item Fold in flour
+    \end{itemize}
+    
+    \item Baking times:
+    \begin{description}
+        \item[Cupcakes] 15-20 minutes
+        \item[Layer cake] 25-30 minutes
+        \item[Bundt cake] 45-50 minutes
+    \end{description}
+\end{enumerate}
+
+\end{document}
+```
+</CodeGroup>
+
+## Customizing Lists
+
+### Custom Bullets
+
+<CodeGroup>
+```latex custom-bullets.tex
+\documentclass{article}
+\begin{document}
+
+% Temporarily change bullet symbol
+\begin{itemize}
+    \item[→] First point
+    \item[→] Second point
+    \item[→] Third point
+\end{itemize}
+
+% Using different symbols
+\begin{itemize}
+    \item[*] Asterisk bullet
+    \item[†] Dagger bullet
+    \item[§] Section symbol
+    \item[¶] Paragraph symbol
+\end{itemize}
+
+\end{document}
+```
+</CodeGroup>
+
+### Custom Numbering
+
+<CodeGroup>
+```latex custom-numbering.tex
+\documentclass{article}
+\begin{document}
+
+% Roman numerals
+\begin{enumerate}
+    \item[(i)] First item
+    \item[(ii)] Second item
+    \item[(iii)] Third item
+\end{enumerate}
+
+% Custom starting number
+\begin{enumerate}
+    \setcounter{enumi}{4}
+    \item This is item 5
+    \item This is item 6
+\end{enumerate}
+
+% Letters instead of numbers
+\begin{enumerate}
+    \item[(a)] Option A
+    \item[(b)] Option B
+    \item[(c)] Option C
+\end{enumerate}
+
+\end{document}
+```
+</CodeGroup>
+
+## List Spacing
+
+### Compact Lists
+
+<CodeGroup>
+```latex compact-lists.tex
+\documentclass{article}
+\usepackage{enumitem}
+\begin{document}
+
+% Normal spacing
+\begin{itemize}
+    \item First item
+    \item Second item
+    \item Third item
+\end{itemize}
+
+% Compact spacing
+\begin{itemize}[noitemsep]
+    \item First item
+    \item Second item
+    \item Third item
+\end{itemize}
+
+% No spacing at all
+\begin{itemize}[noitemsep,topsep=0pt]
+    \item First item
+    \item Second item
+    \item Third item
+\end{itemize}
+
+\end{document}
+```
+</CodeGroup>
+
+### Wide Spacing
+
+<CodeGroup>
+```latex wide-spacing.tex
+\documentclass{article}
+\usepackage{enumitem}
+\begin{document}
+
+\begin{enumerate}[itemsep=1em]
+    \item First item with extra space after
+    \item Second item with extra space after
+    \item Third item
+\end{enumerate}
+
+\end{document}
+```
+</CodeGroup>
+
+## Advanced List Formatting
+
+### The enumitem Package
+
+For full control over lists:
+
+<CodeGroup>
+```latex enumitem-examples.tex
+\documentclass{article}
+\usepackage{enumitem}
+\begin{document}
+
+% Custom labels
+\begin{enumerate}[label=\arabic*)]
+    \item First item
+    \item Second item
+\end{enumerate}
+
+\begin{enumerate}[label=\Alph*.]
+    \item First item
+    \item Second item
+\end{enumerate}
+
+% Inline lists
+\begin{enumerate*}[label=(\alph*)]
+    \item First \item Second \item Third
+\end{enumerate*}
+
+% Resume numbering
+\begin{enumerate}
+    \item First item
+    \item Second item
+\end{enumerate}
+Text in between...
+\begin{enumerate}[resume]
+    \item This is item 3
+    \item This is item 4
+\end{enumerate}
+
+\end{document}
+```
+</CodeGroup>
+
+### List Alignment
+
+<CodeGroup>
+```latex list-alignment.tex
+\documentclass{article}
+\usepackage{enumitem}
+\begin{document}
+
+% Left-aligned labels
+\begin{itemize}[align=left]
+    \item Short
+    \item A much longer item label
+\end{itemize}
+
+% Right-aligned labels
+\begin{enumerate}[align=right]
+    \item First
+    \item Second
+    \item Third
+\end{enumerate}
+
+% Hanging indent
+\begin{itemize}[leftmargin=*]
+    \item This is a long item that will wrap to the next line 
+          and maintain proper indentation
+    \item Another item
+\end{itemize}
+
+\end{document}
+```
+</CodeGroup>
+
+## Inline Lists
+
+For lists within paragraphs:
+
+<CodeGroup>
+```latex inline-lists.tex
+\documentclass{article}
+\usepackage{enumitem}
+\begin{document}
+
+The process involves: 
+\begin{enumerate*}[label=(\roman*)]
+    \item preparation,
+    \item execution,
+    \item evaluation, and
+    \item revision.
+\end{enumerate*}
+This keeps the list inline with the text.
+
+My favorite colors are:
+\begin{itemize*}
+    \item red,
+    \item blue, and
+    \item green.
+\end{itemize*}
+
+\end{document}
+```
+</CodeGroup>
+
+## Common List Patterns
+
+### To-Do Lists
+
+<CodeGroup>
+```latex todo-list.tex
+\documentclass{article}
+\begin{document}
+
+\begin{itemize}
+    \item[$\square$] Write introduction
+    \item[$\square$] Add examples
+    \item[$\boxtimes$] Review content
+    \item[$\square$] Submit document
+\end{itemize}
+
+\end{document}
+```
+</CodeGroup>
+
+### Pros and Cons
+
+<CodeGroup>
+```latex pros-cons.tex
+\documentclass{article}
+\begin{document}
+
+\textbf{Pros:}
+\begin{itemize}
+    \item[+] Easy to learn
+    \item[+] Professional output
+    \item[+] Free and open source
+\end{itemize}
+
+\textbf{Cons:}
+\begin{itemize}
+    \item[--] Initial setup required
+    \item[--] Compilation needed
+\end{itemize}
+
+\end{document}
+```
+</CodeGroup>
+
+### Multi-column Lists
+
+<CodeGroup>
+```latex multicolumn-lists.tex
+\documentclass{article}
+\usepackage{multicol}
+\begin{document}
+
+\begin{multicols}{2}
+\begin{itemize}
+    \item Apple
+    \item Banana
+    \item Cherry
+    \item Date
+    \item Elderberry
+    \item Fig
+\end{itemize}
+\end{multicols}
+
+\end{document}
+```
+</CodeGroup>
+
+## Best Practices
+
+<Tip>
+**List guidelines:**
+
+1. **Consistency** - Use the same list type for similar content
+2. **Parallel structure** - Start items with the same part of speech
+3. **Punctuation** - Be consistent with periods and commas
+4. **Nesting depth** - Rarely go beyond three levels
+5. **Item length** - Keep items concise when possible
+</Tip>
+
+## Common Mistakes
+
+<Warning>
+**Avoid these errors:**
+
+1. **Missing `\item`** - Every list entry needs this command
+2. **Incorrect nesting** - Close inner lists before outer ones
+3. **Too many levels** - More than 3-4 levels is hard to follow
+4. **Inconsistent formatting** - Match punctuation and capitalization
+5. **Wrong environment** - Use the appropriate list type
+</Warning>
+
+## Troubleshooting
+
+### List Not Appearing
+
+Check for:
+```latex
+% Wrong - missing \item
+\begin{itemize}
+First item  % Error!
+\end{itemize}
+
+% Correct
+\begin{itemize}
+\item First item
+\end{itemize}
+```
+
+### Spacing Issues
+
+Adjust with enumitem:
+```latex
+\usepackage{enumitem}
+\setlist{noitemsep} % Global setting
+
+% Or per-list
+\begin{itemize}[topsep=0pt, partopsep=0pt]
+```
+
+## Quick Reference
+
+| Environment | Purpose | Basic Syntax |
+|------------|---------|--------------|
+| `itemize` | Bullet points | `\item Text` |
+| `enumerate` | Numbered list | `\item Text` |
+| `description` | Term definitions | `\item[Term] Definition` |
+
+| Package | Purpose |
+|---------|---------|
+| `enumitem` | Full list customization |
+| `multicol` | Multi-column lists |
+
+---
+
+<Info>
+**Next**: Learn about handling [Errors](/learn/latex/basics/errors) in LaTeX to troubleshoot your documents effectively.
+</Info>

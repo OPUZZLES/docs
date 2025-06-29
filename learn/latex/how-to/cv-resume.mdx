@@ -1,0 +1,711 @@
+---
+title: Creating CVs and Resumes in LaTeX
+description: Design professional CVs and resumes using LaTeX. Learn modern templates, customization, and best practices for job applications.
+---
+
+import { CodeGroup, Info, Tip, Warning, Card, CardGroup } from '/snippets/components.mdx'
+
+Create stunning, professional CVs and resumes using LaTeX. This guide covers various styles, from traditional academic CVs to modern industry resumes.
+
+<Info>
+**Quick start**: LaTeX Cloud Studio offers ready-to-use CV and resume templates. Select "CV/Resume" when creating a new project to get started immediately.
+</Info>
+
+## Basic Resume Structure
+
+### Simple Resume
+
+<CodeGroup>
+```latex basic-resume.tex
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{enumitem}
+
+% Remove page numbers
+\pagestyle{empty}
+
+\begin{document}
+
+% Header
+\begin{center}
+{\LARGE \textbf{John Doe}}\\[2pt]
+Software Engineer\\[2pt]
+john.doe@email.com | +1-234-567-8900 | LinkedIn: /in/johndoe | GitHub: @johndoe
+\end{center}
+
+\section*{Summary}
+Experienced software engineer with 5+ years developing scalable web applications. 
+Expertise in Python, JavaScript, and cloud technologies.
+
+\section*{Experience}
+\textbf{Senior Software Engineer} \hfill \textit{Jan 2022 -- Present}\\
+Tech Company Inc., San Francisco, CA
+\begin{itemize}[noitemsep,topsep=0pt]
+  \item Led development of microservices architecture serving 1M+ users
+  \item Reduced API response time by 40\% through optimization
+  \item Mentored 3 junior developers
+\end{itemize}
+
+\textbf{Software Engineer} \hfill \textit{Jun 2019 -- Dec 2021}\\
+StartUp Co., San Francisco, CA
+\begin{itemize}[noitemsep,topsep=0pt]
+  \item Developed RESTful APIs using Python and FastAPI
+  \item Implemented CI/CD pipeline reducing deployment time by 60\%
+\end{itemize}
+
+\section*{Education}
+\textbf{Bachelor of Science in Computer Science} \hfill \textit{2015 -- 2019}\\
+University of California, Berkeley
+
+\section*{Skills}
+\textbf{Languages:} Python, JavaScript, Java, SQL\\
+\textbf{Technologies:} React, Node.js, Docker, Kubernetes, AWS\\
+\textbf{Tools:} Git, Jenkins, JIRA, PostgreSQL
+
+\end{document}
+```
+</CodeGroup>
+
+### Using Resume Class
+
+<CodeGroup>
+```latex resume-class.tex
+\documentclass{resume} % Uses res.cls
+\usepackage[left=0.75in,top=0.6in,right=0.75in,bottom=0.6in]{geometry}
+
+\name{Jane Smith}
+\address{123 Main Street \\ New York, NY 10001}
+\address{(555) 123-4567 \\ jane.smith@email.com}
+
+\begin{document}
+
+\begin{rSection}{Education}
+{\bf Massachusetts Institute of Technology} \hfill {\em June 2020} \\ 
+B.S. in Computer Science \& Engineering \\
+GPA: 3.9/4.0
+
+\end{rSection}
+
+\begin{rSection}{Experience}
+
+\begin{rSubsection}{Google Inc.}{July 2020 - Present}{Software Engineer}{Mountain View, CA}
+\item Developed machine learning models for search ranking improvements
+\item Collaborated with cross-functional teams on product launches
+\item Improved code efficiency reducing server costs by 15\%
+\end{rSubsection}
+
+\begin{rSubsection}{Microsoft}{Summer 2019}{Software Engineering Intern}{Redmond, WA}
+\item Built features for Azure cloud platform
+\item Participated in agile development processes
+\end{rSubsection}
+
+\end{rSection}
+
+\begin{rSection}{Technical Skills}
+\begin{tabular}{ @{} >{\bfseries}l @{\hspace{6ex}} l }
+Programming & Python, Java, C++, JavaScript, Go \\
+Frameworks & TensorFlow, PyTorch, React, Django \\
+Databases & MySQL, PostgreSQL, MongoDB, Redis \\
+Tools & Git, Docker, Kubernetes, Jenkins
+\end{tabular}
+\end{rSection}
+
+\end{document}
+```
+</CodeGroup>
+
+## Modern CV Templates
+
+### Using moderncv
+
+<CodeGroup>
+```latex moderncv-example.tex
+\documentclass[11pt,a4paper,sans]{moderncv}
+\moderncvstyle{banking} % casual, classic, banking, oldstyle, fancy
+\moderncvcolor{blue} % blue, orange, green, red, purple, grey, black
+
+\usepackage[utf8]{inputenc}
+\usepackage[scale=0.75]{geometry}
+
+% Personal data
+\name{David}{Johnson}
+\title{Data Scientist}
+\address{123 Tech Street}{San Francisco, CA 94102}{USA}
+\phone[mobile]{+1~(234)~567~890}
+\email{david.johnson@email.com}
+\homepage{www.davidjohnson.com}
+\social[linkedin]{davidjohnson}
+\social[github]{djohnson}
+\photo[64pt][0.4pt]{picture} % optional
+
+\begin{document}
+\makecvtitle
+
+\section{Education}
+\cventry{2016--2020}{Ph.D. in Computer Science}{Stanford University}{Stanford, CA}{}{
+  Dissertation: Deep Learning Applications in Natural Language Processing\\
+  GPA: 3.95/4.0}
+\cventry{2012--2016}{B.S. in Mathematics}{MIT}{Cambridge, MA}{Summa Cum Laude}{}
+
+\section{Experience}
+\cventry{2020--Present}{Senior Data Scientist}{Tech Giant Corp}{San Francisco, CA}{}{
+  \begin{itemize}
+    \item Led team of 5 data scientists on recommendation system project
+    \item Increased user engagement by 25\% through personalized algorithms
+    \item Published 3 papers in top-tier conferences
+  \end{itemize}}
+  
+\cventry{Summer 2019}{Data Science Intern}{AI Startup}{Palo Alto, CA}{}{
+  Developed computer vision models for autonomous vehicles}
+
+\section{Skills}
+\cvitem{Programming}{Python, R, SQL, Scala, Julia}
+\cvitem{ML/DL}{TensorFlow, PyTorch, Scikit-learn, XGBoost}
+\cvitem{Big Data}{Spark, Hadoop, Kafka, Airflow}
+\cvitem{Languages}{English (Native), Spanish (Fluent), Mandarin (Basic)}
+
+\section{Publications}
+\cvitem{2021}{Johnson, D. et al. "Attention Mechanisms in Neural Machine Translation." NeurIPS 2021.}
+\cvitem{2020}{Johnson, D. and Smith, J. "Efficient Training of Large Language Models." ICML 2020.}
+
+\end{document}
+```
+</CodeGroup>
+
+### Using altacv
+
+<CodeGroup>
+```latex altacv-example.tex
+\documentclass[10pt,a4paper,ragged2e,withhyper]{altacv}
+\geometry{left=1.25cm,right=1.25cm,top=1.5cm,bottom=1.5cm,columnsep=1.2cm}
+
+\usepackage{paracol}
+\usepackage[default]{lato}
+
+% Color customization
+\definecolor{SlateGrey}{HTML}{2E2E2E}
+\definecolor{LightGrey}{HTML}{666666}
+\definecolor{DarkPastelRed}{HTML}{450808}
+\definecolor{PastelRed}{HTML}{8F0D0D}
+\definecolor{GoldenEarth}{HTML}{E7D192}
+\colorlet{name}{black}
+\colorlet{tagline}{PastelRed}
+\colorlet{heading}{DarkPastelRed}
+\colorlet{headingrule}{GoldenEarth}
+\colorlet{subheading}{PastelRed}
+\colorlet{accent}{PastelRed}
+\colorlet{emphasis}{SlateGrey}
+\colorlet{body}{LightGrey}
+
+\begin{document}
+\name{Sarah Williams}
+\tagline{Full Stack Developer}
+\photoR{2.8cm}{photo}
+\personalinfo{%
+  \email{sarah.williams@email.com}
+  \phone{+1-234-567-8900}
+  \location{Seattle, WA}
+  \linkedin{sarahwilliams}
+  \github{swilliams}
+}
+
+\makecvheader
+
+\columnratio{0.6}
+\begin{paracol}{2}
+
+\cvsection{Experience}
+
+\cvevent{Lead Developer}{Amazon Web Services}{Jan 2021 -- Present}{Seattle, WA}
+\begin{itemize}
+  \item Architected serverless applications handling 10M+ requests daily
+  \item Led migration of legacy systems to microservices
+  \item Reduced infrastructure costs by 35\%
+\end{itemize}
+
+\divider
+
+\cvevent{Senior Software Engineer}{Microsoft}{2018 -- 2020}{Redmond, WA}
+\begin{itemize}
+  \item Developed features for Visual Studio Code
+  \item Contributed to open-source projects
+\end{itemize}
+
+\cvsection{Projects}
+
+\cvevent{E-commerce Platform}{Personal Project}{2022}{}
+Built scalable e-commerce platform using React, Node.js, and PostgreSQL.
+Features include real-time inventory, payment processing, and analytics.
+
+\switchcolumn
+
+\cvsection{Skills}
+
+\cvskill{JavaScript/TypeScript}{5}
+\cvskill{Python}{4}
+\cvskill{React/Node.js}{5}
+\cvskill{AWS/Cloud}{4}
+\cvskill{Docker/K8s}{4}
+
+\cvsection{Languages}
+
+\cvskill{English}{5}
+\cvskill{Spanish}{3}
+\cvskill{French}{2}
+
+\cvsection{Education}
+
+\cvevent{M.S. Computer Science}{University of Washington}{2016 -- 2018}{}
+
+\cvevent{B.S. Computer Engineering}{UC San Diego}{2012 -- 2016}{}
+
+\end{paracol}
+\end{document}
+```
+</CodeGroup>
+
+## Academic CV
+
+### Comprehensive Academic CV
+
+<CodeGroup>
+```latex academic-cv.tex
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\usepackage{enumitem}
+
+\pagestyle{empty}
+
+\begin{document}
+
+\begin{center}
+{\LARGE \textbf{Dr. Emily Chen}}\\[5pt]
+Associate Professor of Physics\\
+Department of Physics, Harvard University\\[5pt]
+emily.chen@harvard.edu | (617) 495-1234 | physics.harvard.edu/\textasciitilde echen
+\end{center}
+
+\section*{Education}
+\begin{itemize}[leftmargin=*,noitemsep]
+  \item \textbf{Ph.D. in Physics}, Massachusetts Institute of Technology, 2015
+    \begin{itemize}[noitemsep,topsep=0pt]
+      \item Dissertation: ``Quantum Phase Transitions in Strongly Correlated Systems''
+      \item Advisor: Prof. John Smith
+    \end{itemize}
+  \item \textbf{B.S. in Physics}, \textit{Summa Cum Laude}, Caltech, 2010
+\end{itemize}
+
+\section*{Academic Appointments}
+\begin{itemize}[leftmargin=*,noitemsep]
+  \item \textbf{Associate Professor}, Harvard University, 2021--present
+  \item \textbf{Assistant Professor}, Harvard University, 2015--2021
+  \item \textbf{Postdoctoral Fellow}, Princeton University, 2015
+\end{itemize}
+
+\section*{Research Interests}
+Quantum many-body physics, topological phases of matter, quantum computing, 
+condensed matter theory, strongly correlated electron systems
+
+\section*{Selected Publications}
+\begin{enumerate}[leftmargin=*]
+  \item Chen, E., et al. (2023). ``Topological quantum phase transitions in 
+        twisted bilayer graphene.'' \textit{Nature Physics}, 19(3), 412-418.
+  \item Chen, E. and Johnson, M. (2022). ``Emergent phenomena in quantum materials.'' 
+        \textit{Physical Review Letters}, 128, 045501.
+  \item Chen, E. (2021). ``Theory of quantum criticality in correlated systems.'' 
+        \textit{Reviews of Modern Physics}, 93, 025003.
+\end{enumerate}
+
+\section*{Grants and Funding}
+\begin{itemize}[leftmargin=*,noitemsep]
+  \item NSF CAREER Award, ``Quantum Phase Transitions,'' \$500,000, 2018--2023
+  \item DOE Early Career Award, ``Topological Materials,'' \$750,000, 2019--2024
+  \item Sloan Research Fellowship, \$70,000, 2017--2019
+\end{itemize}
+
+\section*{Teaching}
+\begin{itemize}[leftmargin=*,noitemsep]
+  \item Physics 251: Quantum Mechanics III (Graduate), Fall 2022, 2023
+  \item Physics 143: Quantum Mechanics I (Undergraduate), Spring 2021, 2022
+  \item Physics 15: Introductory Physics, Fall 2019, 2020
+\end{itemize}
+
+\section*{Awards and Honors}
+\begin{itemize}[leftmargin=*,noitemsep]
+  \item American Physical Society Fellow, 2022
+  \item Breakthrough New Horizons Prize in Physics, 2021
+  \item MIT Teaching Excellence Award, 2014
+\end{itemize}
+
+\section*{Service}
+\begin{itemize}[leftmargin=*,noitemsep]
+  \item Editorial Board, \textit{Physical Review B}, 2020--present
+  \item Program Committee, APS March Meeting, 2021, 2022
+  \item Department Graduate Admissions Committee, 2019--present
+\end{itemize}
+
+\end{document}
+```
+</CodeGroup>
+
+## Specialized CV Styles
+
+### Creative/Design CV
+
+<CodeGroup>
+```latex creative-cv.tex
+\documentclass[a4paper,10pt]{article}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{tikz}
+\usepackage{xcolor}
+\usepackage{fontawesome5}
+\usepackage[default]{raleway}
+
+\definecolor{accent}{RGB}{255,96,55} % LaTeX Cloud Studio orange
+\definecolor{heading}{RGB}{51,51,51}
+\definecolor{text}{RGB}{102,102,102}
+
+\pagestyle{empty}
+
+\begin{document}
+
+% Header with colored background
+\begin{tikzpicture}[remember picture,overlay]
+  \fill[accent] (current page.north west) rectangle ([yshift=-3cm]current page.north east);
+\end{tikzpicture}
+
+\vspace{-1cm}
+\begin{center}
+  \color{white}
+  {\Huge\bfseries Alex Rivera}\\[10pt]
+  {\Large UX/UI Designer}\\[10pt]
+  \faEnvelope\ alex@design.com \quad
+  \faPhone\ +1-234-567-8900 \quad
+  \faGlobe\ alexrivera.design
+\end{center}
+
+\vspace{1.5cm}
+
+% Two column layout
+\begin{minipage}[t]{0.3\textwidth}
+  \section*{\color{accent}Skills}
+  \textbf{Design}\\
+  Figma\\
+  Sketch\\
+  Adobe Creative Suite\\
+  Prototyping\\[5pt]
+  
+  \textbf{Development}\\
+  HTML/CSS\\
+  JavaScript\\
+  React\\[5pt]
+  
+  \textbf{Methods}\\
+  User Research\\
+  Wireframing\\
+  A/B Testing\\
+  Design Systems
+  
+  \section*{\color{accent}Languages}
+  English (Native)\\
+  Spanish (Fluent)\\
+  Portuguese (Basic)
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.65\textwidth}
+  \section*{\color{accent}Experience}
+  
+  \textbf{\color{heading}Senior UX Designer} | \textit{Tech Corp}\\
+  \textcolor{text}{2021 -- Present | San Francisco, CA}
+  \begin{itemize}
+    \item Redesigned mobile app increasing user retention by 40\%
+    \item Led design system implementation across 5 product teams
+    \item Conducted 50+ user interviews and usability tests
+  \end{itemize}
+  
+  \textbf{\color{heading}UX Designer} | \textit{StartupXYZ}\\
+  \textcolor{text}{2019 -- 2021 | New York, NY}
+  \begin{itemize}
+    \item Created wireframes and prototypes for B2B SaaS platform
+    \item Collaborated with engineers on implementation
+  \end{itemize}
+  
+  \section*{\color{accent}Education}
+  
+  \textbf{\color{heading}Master of Fine Arts in Design}\\
+  \textcolor{text}{Parsons School of Design | 2017 -- 2019}\\[5pt]
+  
+  \textbf{\color{heading}Bachelor of Arts in Graphic Design}\\
+  \textcolor{text}{Rhode Island School of Design | 2013 -- 2017}
+  
+  \section*{\color{accent}Portfolio Highlights}
+  
+  \textbf{Mobile Banking App Redesign} -- Led complete redesign resulting 
+  in 4.8★ app store rating\\[3pt]
+  \textbf{E-commerce Checkout Flow} -- Improved conversion rate by 25\% 
+  through streamlined UX
+\end{minipage}
+
+\end{document}
+```
+</CodeGroup>
+
+### Technical CV with Skill Bars
+
+<CodeGroup>
+```latex technical-cv.tex
+\documentclass[a4paper,10pt]{article}
+\usepackage[margin=0.75in]{geometry}
+\usepackage{tikz}
+\usepackage{xcolor}
+
+\definecolor{barcolor}{RGB}{100,150,200}
+
+% Skill bar command
+\newcommand{\skillbar}[2]{%
+  \begin{tikzpicture}
+    \draw[fill=gray!20] (0,0) rectangle (4,0.2);
+    \draw[fill=barcolor] (0,0) rectangle (#1*0.04,0.2);
+    \node[right] at (4.1,0.1) {\small #2\%};
+  \end{tikzpicture}
+}
+
+\pagestyle{empty}
+
+\begin{document}
+
+\begin{center}
+{\LARGE \textbf{Michael Zhang}}\\[5pt]
+DevOps Engineer | SRE\\[5pt]
+michael.zhang@email.com | github.com/mzhang
+\end{center}
+
+\section*{Technical Proficiency}
+
+\begin{minipage}[t]{0.45\textwidth}
+\textbf{Infrastructure \& Cloud}\\[5pt]
+AWS \hfill \skillbar{90}{90}\\
+Kubernetes \hfill \skillbar{85}{85}\\
+Docker \hfill \skillbar{90}{90}\\
+Terraform \hfill \skillbar{80}{80}\\[10pt]
+
+\textbf{Programming}\\[5pt]
+Python \hfill \skillbar{85}{85}\\
+Go \hfill \skillbar{75}{75}\\
+Bash \hfill \skillbar{90}{90}\\
+JavaScript \hfill \skillbar{70}{70}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.45\textwidth}
+\textbf{CI/CD \& Monitoring}\\[5pt]
+Jenkins \hfill \skillbar{85}{85}\\
+GitLab CI \hfill \skillbar{80}{80}\\
+Prometheus \hfill \skillbar{75}{75}\\
+ELK Stack \hfill \skillbar{70}{70}\\[10pt]
+
+\textbf{Databases}\\[5pt]
+PostgreSQL \hfill \skillbar{80}{80}\\
+MongoDB \hfill \skillbar{75}{75}\\
+Redis \hfill \skillbar{85}{85}\\
+Cassandra \hfill \skillbar{65}{65}
+\end{minipage}
+
+\section*{Professional Experience}
+
+\textbf{Senior DevOps Engineer} | \textit{CloudTech Inc.} \hfill 2020 -- Present
+\begin{itemize}
+  \item Architected Kubernetes-based platform serving 100M+ requests/day
+  \item Reduced deployment time from 2 hours to 15 minutes using GitOps
+  \item Implemented SLO-based monitoring achieving 99.99\% uptime
+  \item Saved \$500K annually through cloud cost optimization
+\end{itemize}
+
+\section*{Certifications}
+\begin{itemize}
+  \item AWS Certified Solutions Architect -- Professional
+  \item Certified Kubernetes Administrator (CKA)
+  \item Google Cloud Professional Cloud Architect
+\end{itemize}
+
+\end{document}
+```
+</CodeGroup>
+
+## ATS-Friendly Resume
+
+### Optimized for Applicant Tracking Systems
+
+<CodeGroup>
+```latex ats-resume.tex
+\documentclass[11pt,letterpaper]{article}
+\usepackage[margin=0.75in]{geometry}
+\usepackage{enumitem}
+
+% ATS-friendly: no graphics, simple formatting
+\pagestyle{empty}
+\setlist[itemize]{noitemsep,topsep=0pt,leftmargin=*}
+
+\begin{document}
+
+% Simple header - no special formatting
+\begin{flushleft}
+\textbf{\LARGE JENNIFER MARTINEZ}\\
+Data Analyst\\
+jennifer.martinez@email.com | (555) 123-4567 | New York, NY 10001\\
+LinkedIn: linkedin.com/in/jennifermartinez
+\end{flushleft}
+
+\vspace{10pt}
+\textbf{PROFESSIONAL SUMMARY}\\
+Data Analyst with 4+ years of experience in business intelligence, data visualization, and statistical analysis. Proficient in SQL, Python, and Tableau. Proven track record of delivering actionable insights that drive business decisions and increase revenue.
+
+\vspace{10pt}
+\textbf{WORK EXPERIENCE}
+
+\vspace{5pt}
+\textbf{Senior Data Analyst}\\
+Financial Services Corp, New York, NY\\
+March 2021 - Present
+\begin{itemize}
+  \item Analyze customer behavior data for 2M+ users to identify trends and opportunities
+  \item Created Tableau dashboards reducing reporting time by 75 percent
+  \item Developed Python scripts automating data collection saving 20 hours weekly
+  \item Collaborated with marketing team to optimize campaigns increasing CTR by 35 percent
+\end{itemize}
+
+\vspace{5pt}
+\textbf{Data Analyst}\\
+E-Commerce Company, New York, NY\\
+June 2019 - February 2021
+\begin{itemize}
+  \item Built predictive models for customer churn achieving 85 percent accuracy
+  \item Performed A/B testing analysis for website optimization
+  \item Maintained SQL databases and ensured data quality standards
+\end{itemize}
+
+\vspace{10pt}
+\textbf{EDUCATION}
+
+\vspace{5pt}
+\textbf{Master of Science in Data Science}\\
+New York University, New York, NY\\
+September 2017 - May 2019\\
+GPA: 3.8/4.0
+
+\vspace{5pt}
+\textbf{Bachelor of Science in Statistics}\\
+Columbia University, New York, NY\\
+September 2013 - May 2017\\
+GPA: 3.7/4.0
+
+\vspace{10pt}
+\textbf{TECHNICAL SKILLS}
+\begin{itemize}
+  \item Programming Languages: Python, R, SQL, SAS
+  \item Data Visualization: Tableau, Power BI, Matplotlib, Seaborn
+  \item Databases: MySQL, PostgreSQL, MongoDB, Snowflake
+  \item Tools: Excel, Git, Jupyter, Apache Spark, Airflow
+  \item Statistical Analysis: Regression, Time Series, Hypothesis Testing, Machine Learning
+\end{itemize}
+
+\vspace{10pt}
+\textbf{CERTIFICATIONS}
+\begin{itemize}
+  \item Google Data Analytics Professional Certificate (2023)
+  \item Tableau Desktop Specialist (2022)
+  \item AWS Certified Cloud Practitioner (2021)
+\end{itemize}
+
+\end{document}
+```
+</CodeGroup>
+
+## CV Customization Tips
+
+### Industry-Specific Formatting
+
+<CodeGroup>
+```latex industry-specific.tex
+% Finance/Banking CV
+\documentclass[10pt]{article}
+\usepackage{geometry}
+\geometry{margin=0.6in}
+
+% Conservative styling
+\usepackage{times} % Traditional font
+\usepackage{color}
+\definecolor{darkblue}{RGB}{0,0,139}
+
+% Tech Startup CV
+\documentclass[10pt]{article}
+\usepackage{geometry}
+\usepackage[sfdefault]{roboto} % Modern font
+\usepackage{xcolor}
+\definecolor{techblue}{RGB}{0,123,255}
+
+% Academic CV
+\documentclass[11pt]{article}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{mathpazo} % Academic font
+```
+</CodeGroup>
+
+## Best Practices
+
+<Tip>
+**CV/Resume guidelines:**
+
+1. **Length**: 1-2 pages for industry, unlimited for academic CVs
+2. **Font**: Use professional fonts (10-12pt)
+3. **Consistency**: Maintain uniform formatting throughout
+4. **Keywords**: Include relevant industry keywords for ATS
+5. **Quantify**: Use numbers to demonstrate impact
+6. **Proofread**: Check for typos and formatting issues
+7. **PDF**: Always export to PDF for submission
+8. **Tailoring**: Customize for each application
+</Tip>
+
+## Common Mistakes to Avoid
+
+<Warning>
+**CV/Resume pitfalls:**
+
+1. **Over-designing**: Too many colors, fonts, or graphics
+2. **Dense text**: Use white space effectively
+3. **Generic content**: Tailor to specific positions
+4. **Outdated info**: Keep content current
+5. **Missing keywords**: Research job requirements
+6. **Poor ATS compatibility**: Test with ATS checkers
+7. **Inconsistent formatting**: Use templates
+</Warning>
+
+## Quick Reference
+
+### Essential Packages
+```latex
+\usepackage{geometry}      % Page margins
+\usepackage{enumitem}      % List customization
+\usepackage{hyperref}      % Clickable links
+\usepackage{fontawesome5}  % Icons
+\usepackage{xcolor}        % Colors
+\usepackage{tikz}          % Graphics
+\usepackage{array}         % Table formatting
+```
+
+### Useful Commands
+```latex
+\section*{}               % Unnumbered section
+\textbf{}                 % Bold text
+\textit{}                 % Italic text
+\hfill                    % Horizontal fill
+\vspace{}                 % Vertical space
+\begin{itemize}[options]  % Customized lists
+```
+
+---
+
+<Info>
+**Next**: Write your [Thesis or dissertation](/learn/latex/how-to/thesis) using LaTeX for professional academic documents.
+</Info>

@@ -1,0 +1,591 @@
+---
+title: Matrices and Arrays
+description: Complete guide to creating matrices, determinants, and arrays in LaTeX. Learn different matrix types, custom layouts, and advanced techniques.
+---
+
+import { CodeGroup, Info, Tip, Warning } from '/snippets/components.mdx'
+
+Matrices are fundamental in mathematics, physics, and engineering. LaTeX provides powerful tools for typesetting matrices with various delimiters and layouts.
+
+<Info>
+**Package required**: Most matrix environments need `\usepackage{amsmath}`. Some advanced features require additional packages.
+</Info>
+
+## Basic Matrix Environments
+
+### Common Matrix Types
+
+<CodeGroup>
+```latex basic-matrices.tex
+\documentclass{article}
+\usepackage{amsmath}
+\begin{document}
+
+% Parentheses matrix
+$\begin{pmatrix}
+a & b \\
+c & d
+\end{pmatrix}$
+
+% Square bracket matrix
+$\begin{bmatrix}
+1 & 2 & 3 \\
+4 & 5 & 6 \\
+7 & 8 & 9
+\end{bmatrix}$
+
+% Curly brace matrix
+$\begin{Bmatrix}
+x_1 \\
+x_2 \\
+x_3
+\end{Bmatrix}$
+
+% Determinant (vertical bars)
+$\begin{vmatrix}
+a & b \\
+c & d
+\end{vmatrix} = ad - bc$
+
+% Norm (double vertical bars)
+$\begin{Vmatrix}
+1 & 2 \\
+3 & 4
+\end{Vmatrix}$
+
+% No delimiters
+$\begin{matrix}
+a & b \\
+c & d
+\end{matrix}$
+
+\end{document}
+```
+</CodeGroup>
+
+### Matrix Environment Summary
+
+| Environment | Delimiters | Common Use |
+|------------|------------|------------|
+| `matrix` | None | Building block |
+| `pmatrix` | ( ) | General matrices |
+| `bmatrix` | [ ] | General matrices |
+| `Bmatrix` | { } | Set notation |
+| `vmatrix` | \| \| | Determinants |
+| `Vmatrix` | \|\| \|\| | Norms |
+
+## Matrix Elements and Spacing
+
+### Basic Elements
+
+<CodeGroup>
+```latex matrix-elements.tex
+% Simple 2x2 matrix
+\begin{pmatrix}
+a_{11} & a_{12} \\
+a_{21} & a_{22}
+\end{pmatrix}
+
+% 3x3 matrix with alignment
+\begin{bmatrix}
+1 & -2 & 3 \\
+-4 & 5 & -6 \\
+7 & -8 & 9
+\end{bmatrix}
+
+% Column vector
+\begin{pmatrix}
+x_1 \\
+x_2 \\
+x_3 \\
+\vdots \\
+x_n
+\end{pmatrix}
+
+% Row vector
+\begin{pmatrix}
+a_1 & a_2 & a_3 & \cdots & a_n
+\end{pmatrix}
+```
+</CodeGroup>
+
+### Dots in Matrices
+
+<CodeGroup>
+```latex matrix-dots.tex
+% Various dots
+\begin{bmatrix}
+a_{11} & a_{12} & \cdots & a_{1n} \\
+a_{21} & a_{22} & \cdots & a_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+a_{m1} & a_{m2} & \cdots & a_{mn}
+\end{bmatrix}
+
+% Block matrix with dots
+\begin{pmatrix}
+A & B & \cdots \\
+C & D & \cdots \\
+\vdots & \vdots & \ddots
+\end{pmatrix}
+
+% Diagonal dots
+\begin{bmatrix}
+1 & 0 & \cdots & 0 \\
+0 & 2 & \ddots & \vdots \\
+\vdots & \ddots & \ddots & 0 \\
+0 & \cdots & 0 & n
+\end{bmatrix}
+```
+</CodeGroup>
+
+## Special Matrices
+
+### Identity and Diagonal Matrices
+
+<CodeGroup>
+```latex special-matrices.tex
+\documentclass{article}
+\usepackage{amsmath}
+\begin{document}
+
+% Identity matrix
+$I_3 = \begin{pmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 1
+\end{pmatrix}$
+
+% General identity
+$I_n = \begin{pmatrix}
+1 & 0 & \cdots & 0 \\
+0 & 1 & \cdots & 0 \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \cdots & 1
+\end{pmatrix}$
+
+% Diagonal matrix
+$D = \begin{pmatrix}
+d_1 & 0 & \cdots & 0 \\
+0 & d_2 & \cdots & 0 \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \cdots & d_n
+\end{pmatrix}$
+
+% Tridiagonal matrix
+$T = \begin{pmatrix}
+a_1 & b_1 & 0 & \cdots & 0 \\
+c_1 & a_2 & b_2 & \ddots & \vdots \\
+0 & c_2 & a_3 & \ddots & 0 \\
+\vdots & \ddots & \ddots & \ddots & b_{n-1} \\
+0 & \cdots & 0 & c_{n-1} & a_n
+\end{pmatrix}$
+
+\end{document}
+```
+</CodeGroup>
+
+### Zero and Ones Matrices
+
+<CodeGroup>
+```latex zero-ones-matrices.tex
+% Zero matrix
+$\mathbf{0} = \begin{pmatrix}
+0 & 0 & 0 \\
+0 & 0 & 0 \\
+0 & 0 & 0
+\end{pmatrix}$
+
+% Ones matrix
+$\mathbf{1} = \begin{pmatrix}
+1 & 1 & 1 \\
+1 & 1 & 1 \\
+1 & 1 & 1
+\end{pmatrix}$
+
+% Upper triangular
+$U = \begin{pmatrix}
+u_{11} & u_{12} & u_{13} \\
+0 & u_{22} & u_{23} \\
+0 & 0 & u_{33}
+\end{pmatrix}$
+
+% Lower triangular
+$L = \begin{pmatrix}
+l_{11} & 0 & 0 \\
+l_{21} & l_{22} & 0 \\
+l_{31} & l_{32} & l_{33}
+\end{pmatrix}$
+```
+</CodeGroup>
+
+## Advanced Matrix Layouts
+
+### Block Matrices
+
+<CodeGroup>
+```latex block-matrices.tex
+% Simple block matrix
+$\begin{pmatrix}
+A & B \\
+C & D
+\end{pmatrix}$
+
+% With lines (requires array)
+$\left(\begin{array}{c|c}
+A & B \\
+\hline
+C & D
+\end{array}\right)$
+
+% Multiple blocks
+$\begin{pmatrix}
+A_{11} & A_{12} & A_{13} \\
+A_{21} & A_{22} & A_{23} \\
+A_{31} & A_{32} & A_{33}
+\end{pmatrix}$
+
+% Mixed sizes
+$\begin{pmatrix}
+\begin{matrix}
+a & b \\
+c & d
+\end{matrix} & \mathbf{x} \\
+\mathbf{y}^T & z
+\end{pmatrix}$
+```
+</CodeGroup>
+
+### Augmented Matrices
+
+<CodeGroup>
+```latex augmented-matrices.tex
+% For linear systems
+$\left[\begin{array}{ccc|c}
+1 & 2 & 3 & 4 \\
+5 & 6 & 7 & 8 \\
+9 & 10 & 11 & 12
+\end{array}\right]$
+
+% Alternative notation
+$\begin{pmatrix}[ccc|c]
+a_{11} & a_{12} & a_{13} & b_1 \\
+a_{21} & a_{22} & a_{23} & b_2 \\
+a_{31} & a_{32} & a_{33} & b_3
+\end{pmatrix}$
+
+% For row operations
+$\left[\begin{array}{rrr|r}
+1 & -2 & 3 & 4 \\
+0 & 1 & -1 & 2 \\
+0 & 0 & 1 & -1
+\end{array}\right]$
+```
+</CodeGroup>
+
+## Custom Array Environments
+
+### Basic Array
+
+<CodeGroup>
+```latex array-environment.tex
+\documentclass{article}
+\usepackage{amsmath}
+\begin{document}
+
+% Basic array with alignment
+$\begin{array}{crl}
+\text{center} & \text{right} & \text{left} \\
+a + b & 12.3 & xyz \\
+c & 4.56 & pqr
+\end{array}$
+
+% Array with various column types
+$\left(\begin{array}{c|cc|c}
+1 & 2 & 3 & 4 \\
+\hline
+5 & 6 & 7 & 8 \\
+9 & 10 & 11 & 12
+\end{array}\right)$
+
+% Custom spacing
+$\begin{array}{r@{\,}c@{\,}l}
+x &=& 2y + 3z \\
+2x &=& y - z \\
+x + y &=& 4z
+\end{array}$
+
+\end{document}
+```
+</CodeGroup>
+
+### Advanced Array Features
+
+<CodeGroup>
+```latex advanced-arrays.tex
+% Multi-column entries
+$\begin{array}{|c|c|c|}
+\hline
+\multicolumn{2}{|c|}{Combined} & Single \\
+\hline
+a & b & c \\
+d & e & f \\
+\hline
+\end{array}$
+
+% Nested arrays
+$\begin{array}{cc}
+\begin{array}{cc}
+a & b \\
+c & d
+\end{array} &
+\begin{array}{cc}
+e & f \\
+g & h
+\end{array} \\
+\\
+\begin{array}{cc}
+i & j \\
+k & l
+\end{array} &
+\begin{array}{cc}
+m & n \\
+o & p
+\end{array}
+\end{array}$
+```
+</CodeGroup>
+
+## Matrix Operations
+
+### Basic Operations
+
+<CodeGroup>
+```latex matrix-operations.tex
+% Matrix multiplication
+$AB = \begin{pmatrix}
+a & b \\
+c & d
+\end{pmatrix}
+\begin{pmatrix}
+e & f \\
+g & h
+\end{pmatrix}$
+
+% Matrix transpose
+$A^T = \begin{pmatrix}
+a & c \\
+b & d
+\end{pmatrix}^T = 
+\begin{pmatrix}
+a & b \\
+c & d
+\end{pmatrix}$
+
+% Inverse
+$A^{-1} = \frac{1}{ad-bc}
+\begin{pmatrix}
+d & -b \\
+-c & a
+\end{pmatrix}$
+
+% Powers
+$A^2 = A \cdot A = \begin{pmatrix}
+a^2 + bc & ab + bd \\
+ac + cd & bc + d^2
+\end{pmatrix}$
+```
+</CodeGroup>
+
+### Determinants and Traces
+
+<CodeGroup>
+```latex det-trace.tex
+% Determinant notation
+$\det(A) = |A| = \begin{vmatrix}
+a & b \\
+c & d
+\end{vmatrix} = ad - bc$
+
+% 3x3 determinant
+$\begin{vmatrix}
+a_{11} & a_{12} & a_{13} \\
+a_{21} & a_{22} & a_{23} \\
+a_{31} & a_{32} & a_{33}
+\end{vmatrix}$
+
+% Trace
+$\text{tr}(A) = \sum_{i=1}^n a_{ii}$
+
+% Minor matrices
+$M_{ij} = \det(A_{ij})$
+```
+</CodeGroup>
+
+## Small Inline Matrices
+
+<CodeGroup>
+```latex inline-matrices.tex
+% Small inline matrix
+The matrix $\left(\begin{smallmatrix}
+a & b \\
+c & d
+\end{smallmatrix}\right)$ appears inline.
+
+% In text math
+The rotation matrix 
+$\bigl(\begin{smallmatrix}
+\cos\theta & -\sin\theta \\
+\sin\theta & \cos\theta
+\end{smallmatrix}\bigr)$ 
+rotates vectors.
+
+% Custom small matrix command
+\newcommand{\smallmat}[1]{\left(\begin{smallmatrix}#1\end{smallmatrix}\right)}
+Use $\smallmat{1 & 0 \\ 0 & 1}$ for identity.
+```
+</CodeGroup>
+
+## Matrices with Labels
+
+### Row and Column Labels
+
+<CodeGroup>
+```latex labeled-matrices.tex
+% Using array for labels
+$\begin{array}{c|ccc}
+& x_1 & x_2 & x_3 \\
+\hline
+y_1 & a & b & c \\
+y_2 & d & e & f \\
+y_3 & g & h & i
+\end{array}$
+
+% Matrix with equation labels
+$\bordermatrix{
+  & c_1 & c_2 & c_3 \cr
+  r_1 & 1 & 2 & 3 \cr
+  r_2 & 4 & 5 & 6 \cr
+  r_3 & 7 & 8 & 9
+}$
+
+% Using kbordermatrix package
+\usepackage{kbordermatrix}
+$\kbordermatrix{
+  & C_1 & C_2 & C_3 \\
+R_1 & a & b & c \\
+R_2 & d & e & f \\
+R_3 & g & h & i
+}$
+```
+</CodeGroup>
+
+## Special Techniques
+
+### Variable-size Matrices
+
+<CodeGroup>
+```latex variable-matrices.tex
+% Using \hdotsfor
+\begin{pmatrix}
+a_{11} & a_{12} & \hdotsfor{2} & a_{1n} \\
+a_{21} & a_{22} & \hdotsfor{2} & a_{2n} \\
+\hdotsfor{5} \\
+a_{m1} & a_{m2} & \hdotsfor{2} & a_{mn}
+\end{pmatrix}
+
+% Conditional size
+A_{m \times n} = \begin{cases}
+\begin{pmatrix}
+a
+\end{pmatrix} & \text{if } m = n = 1 \\
+\\
+\begin{pmatrix}
+a_{11} & \cdots & a_{1n} \\
+\vdots & \ddots & \vdots \\
+a_{m1} & \cdots & a_{mn}
+\end{pmatrix} & \text{otherwise}
+\end{cases}
+```
+</CodeGroup>
+
+### Matrix Decorations
+
+<CodeGroup>
+```latex matrix-decorations.tex
+% Highlighting elements
+\usepackage{color}
+\begin{pmatrix}
+\color{red}a & b & c \\
+d & \color{red}e & f \\
+g & h & \color{red}i
+\end{pmatrix}
+
+% Boxed elements
+\begin{pmatrix}
+\boxed{1} & 0 & 0 \\
+0 & \boxed{1} & 0 \\
+0 & 0 & \boxed{1}
+\end{pmatrix}
+
+% Underbrace/overbrace
+\underbrace{\begin{pmatrix}
+1 & 2 \\
+3 & 4
+\end{pmatrix}}_{A}
+\underbrace{\begin{pmatrix}
+5 \\
+6
+\end{pmatrix}}_{x}
+=
+\underbrace{\begin{pmatrix}
+17 \\
+39
+\end{pmatrix}}_{b}
+```
+</CodeGroup>
+
+## Best Practices
+
+<Tip>
+**Matrix typesetting guidelines:**
+
+1. **Consistency**: Use the same delimiter style throughout
+2. **Alignment**: Align numbers by decimal point when needed
+3. **Size**: Use `\small` or `smallmatrix` for large matrices
+4. **Spacing**: Add `\,` for better readability in dense matrices
+5. **Labels**: Clearly label rows/columns when helpful
+6. **Breaking**: Split very large matrices across lines
+</Tip>
+
+## Common Issues
+
+<Warning>
+**Troubleshooting matrix problems:**
+
+1. **Missing package**: Add `\usepackage{amsmath}`
+2. **Alignment issues**: Check column specifiers in array
+3. **Size problems**: Use `\small` or adjust font size
+4. **Delimiter size**: Use `\left` and `\right` for auto-sizing
+5. **Spacing**: Adjust with `\arraycolsep` or custom spacing
+</Warning>
+
+## Quick Reference
+
+### Matrix Environments
+
+| Environment | Output | Use Case |
+|------------|--------|----------|
+| `pmatrix` | (A) | General matrices |
+| `bmatrix` | [A] | General matrices |
+| `vmatrix` | \|A\| | Determinants |
+| `Vmatrix` | \|\|A\|\| | Norms |
+| `Bmatrix` | {A} | Set notation |
+| `matrix` | A | No delimiters |
+| `smallmatrix` | (ᴬ) | Inline matrices |
+| `array` | Custom | Full control |
+
+---
+
+<Info>
+**Next**: Learn about [Inserting images](/learn/latex/figures/inserting-images) to add visual elements to your documents.
+</Info>

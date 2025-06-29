@@ -1,0 +1,600 @@
+---
+title: LaTeX Mathematics - Getting Started
+description: Master mathematical typesetting in LaTeX. Learn how to write equations, use math symbols, and create beautiful mathematical documents.
+---
+
+import { Card, CardGroup, CodeGroup, Info, Tip, Warning } from '/snippets/components.mdx'
+
+LaTeX is renowned for its superior mathematical typesetting. This guide will take you from basic equations to advanced mathematical expressions.
+
+<Info>
+**Fun fact**: LaTeX's math rendering is so good that even Microsoft Word now uses a LaTeX-like syntax for its equation editor!
+</Info>
+
+## Why LaTeX for Math?
+
+Compare these approaches to writing the quadratic formula:
+
+**Plain text**: x = (-b +/- sqrt(b^2 - 4ac)) / 2a
+
+**LaTeX result**: $x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$
+
+The difference is clear – LaTeX produces publication-quality mathematics.
+
+## Math Modes
+
+LaTeX has two math modes:
+
+### 1. Inline Math Mode
+
+For math within text, use `$...$` or `\(...\)`:
+
+<CodeGroup>
+```latex inline-math.tex
+The famous equation $E = mc^2$ was 
+discovered by Einstein. We can also 
+write \(a^2 + b^2 = c^2\) for the 
+Pythagorean theorem.
+```
+
+```text Output
+The famous equation E = mc² was discovered 
+by Einstein. We can also write a² + b² = c² 
+for the Pythagorean theorem.
+```
+</CodeGroup>
+
+### 2. Display Math Mode
+
+For centered equations on their own line, use `\[...\]` or `equation` environment:
+
+<CodeGroup>
+```latex display-math.tex
+The quadratic formula is:
+\[x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}\]
+
+For numbered equations, use:
+\begin{equation}
+\int_0^\infty e^{-x^2} dx = \frac{\sqrt{\pi}}{2}
+\end{equation}
+```
+
+```text Output
+The quadratic formula is:
+       -b ± √(b² - 4ac)
+x = ─────────────────────
+           2a
+
+For numbered equations, use:
+∞
+∫ e^(-x²) dx = √π/2     (1)
+0
+```
+</CodeGroup>
+
+<Tip>
+Use `\[...\]` for important formulas you want to highlight. Use `$...$` for variables and simple expressions within sentences.
+</Tip>
+
+## Basic Math Elements
+
+### Superscripts and Subscripts
+
+<CodeGroup>
+```latex super-subscripts.tex
+% Superscripts with ^
+$x^2$, $x^{10}$, $x^{n+1}$
+
+% Subscripts with _
+$x_1$, $x_{10}$, $x_{i,j}$
+
+% Combined
+$x_1^2$, $a_n^{k+1}$
+
+% Chemical formulas
+$\text{H}_2\text{O}$, $\text{CO}_2$
+```
+
+```text Output
+x², x¹⁰, x^(n+1)
+x₁, x₁₀, x_(i,j)
+x₁², aₙ^(k+1)
+H₂O, CO₂
+```
+</CodeGroup>
+
+### Fractions
+
+<CodeGroup>
+```latex fractions.tex
+% Simple fractions
+$\frac{1}{2}$, $\frac{a}{b}$
+
+% Nested fractions
+$\frac{1}{1 + \frac{1}{2}}$
+
+% Display style in inline math
+$\displaystyle\frac{a+b}{c+d}$
+
+% Alternative notation
+$a/b$ or $^a/_b$
+```
+
+```text Output
+½, a/b
+
+    1
+─────────
+  1 + ½
+
+a + b
+─────
+c + d
+
+a/b or ᵃ/ᵇ
+```
+</CodeGroup>
+
+### Roots
+
+<CodeGroup>
+```latex roots.tex
+% Square root
+$\sqrt{2}$, $\sqrt{x^2 + y^2}$
+
+% nth root
+$\sqrt[3]{8}$, $\sqrt[n]{x}$
+
+% Nested roots
+$\sqrt{2 + \sqrt{3}}$
+```
+
+```text Output
+√2, √(x² + y²)
+³√8, ⁿ√x
+√(2 + √3)
+```
+</CodeGroup>
+
+## Common Math Symbols
+
+### Greek Letters
+
+<CodeGroup>
+```latex greek-letters.tex
+% Lowercase
+$\alpha, \beta, \gamma, \delta, \epsilon$
+$\theta, \lambda, \mu, \pi, \sigma, \phi$
+
+% Uppercase
+$\Gamma, \Delta, \Theta, \Lambda, \Sigma, \Phi$
+
+% Variants
+$\epsilon$ vs $\varepsilon$
+$\phi$ vs $\varphi$
+```
+
+```text Output
+α, β, γ, δ, ε
+θ, λ, μ, π, σ, φ
+
+Γ, Δ, Θ, Λ, Σ, Φ
+
+ε vs ɛ
+φ vs φ
+```
+</CodeGroup>
+
+### Operators and Relations
+
+<CodeGroup>
+```latex operators.tex
+% Basic operators
+$a + b - c \times d \div e$
+
+% Comparison
+$a < b \leq c = d \geq e > f$
+$a \neq b \approx c \equiv d$
+
+% Set operations
+$A \cup B \cap C \subset D$
+$x \in A, y \notin B$
+
+% Logic
+$p \land q \lor r \implies s$
+$\forall x \exists y$
+```
+
+```text Output
+a + b - c × d ÷ e
+
+a < b ≤ c = d ≥ e > f
+a ≠ b ≈ c ≡ d
+
+A ∪ B ∩ C ⊂ D
+x ∈ A, y ∉ B
+
+p ∧ q ∨ r ⟹ s
+∀x ∃y
+```
+</CodeGroup>
+
+### Arrows
+
+<CodeGroup>
+```latex arrows.tex
+% Basic arrows
+$\rightarrow, \leftarrow, \leftrightarrow$
+$\Rightarrow, \Leftarrow, \Leftrightarrow$
+
+% Long arrows
+$\longrightarrow, \longleftarrow$
+
+% Special arrows
+$\uparrow, \downarrow, \updownarrow$
+$\nearrow, \searrow, \swarrow, \nwarrow$
+```
+
+```text Output
+→, ←, ↔
+⇒, ⇐, ⇔
+
+⟶, ⟵
+
+↑, ↓, ↕
+↗, ↘, ↙, ↖
+```
+</CodeGroup>
+
+## Functions and Operators
+
+### Standard Functions
+
+<CodeGroup>
+```latex functions.tex
+% Trigonometric
+$\sin\theta, \cos\theta, \tan\theta$
+
+% Logarithms
+$\log x, \ln x, \log_2 x$
+
+% Limits
+$\lim_{x \to 0} \frac{\sin x}{x} = 1$
+
+% Min/Max
+$\min(a,b), \max(a,b)$
+```
+
+```text Output
+sin θ, cos θ, tan θ
+
+log x, ln x, log₂ x
+
+lim  sin x
+x→0  ───── = 1
+       x
+
+min(a,b), max(a,b)
+```
+</CodeGroup>
+
+### Sums and Products
+
+<CodeGroup>
+```latex sums-products.tex
+% Summation
+$\sum_{i=1}^{n} i = \frac{n(n+1)}{2}$
+
+% Product
+$\prod_{i=1}^{n} i = n!$
+
+% Multiple lines
+$\sum_{\substack{i=1 \\ i \neq j}}^{n} a_i$
+```
+
+```text Output
+ n          n(n+1)
+ Σ i = ─────────
+i=1           2
+
+ n
+ Π i = n!
+i=1
+
+  n
+  Σ   aᵢ
+i=1
+i≠j
+```
+</CodeGroup>
+
+## Integrals and Derivatives
+
+<CodeGroup>
+```latex calculus.tex
+% Derivatives
+$f'(x), f''(x), f^{(n)}(x)$
+$\frac{df}{dx}, \frac{d^2f}{dx^2}$
+$\frac{\partial f}{\partial x}$
+
+% Integrals
+$\int f(x)\,dx$
+$\int_a^b f(x)\,dx$
+$\iint_D f(x,y)\,dx\,dy$
+
+% Special notation
+$\oint_C F \cdot dr$
+```
+
+```text Output
+f'(x), f''(x), f⁽ⁿ⁾(x)
+df    d²f
+──, ─────
+dx    dx²
+∂f
+──
+∂x
+
+∫ f(x) dx
+ᵇ
+∫ f(x) dx
+ₐ
+∬ f(x,y) dx dy
+D
+
+∮ F · dr
+C
+```
+</CodeGroup>
+
+## Matrices and Arrays
+
+### Basic Matrices
+
+<CodeGroup>
+```latex matrices.tex
+% Using pmatrix (parentheses)
+$\begin{pmatrix}
+a & b \\
+c & d
+\end{pmatrix}$
+
+% Using bmatrix (brackets)
+$\begin{bmatrix}
+1 & 2 & 3 \\
+4 & 5 & 6 \\
+7 & 8 & 9
+\end{bmatrix}$
+
+% Using vmatrix (determinant)
+$\begin{vmatrix}
+a & b \\
+c & d
+\end{vmatrix} = ad - bc$
+```
+
+```text Output
+⎛a  b⎞
+⎝c  d⎠
+
+⎡1  2  3⎤
+⎢4  5  6⎥
+⎣7  8  9⎦
+
+|a  b|
+|c  d| = ad - bc
+```
+</CodeGroup>
+
+### Advanced Arrays
+
+<CodeGroup>
+```latex arrays.tex
+% Custom arrays
+$\left[
+\begin{array}{cc|c}
+1 & 2 & 3 \\
+4 & 5 & 6
+\end{array}
+\right]$
+
+% Cases (piecewise functions)
+$f(x) = \begin{cases}
+x^2 & \text{if } x \geq 0 \\
+-x & \text{if } x < 0
+\end{cases}$
+```
+
+```text Output
+⎡1  2 | 3⎤
+⎣4  5 | 6⎦
+
+      ⎧ x²   if x ≥ 0
+f(x) = ⎨
+      ⎩ -x   if x < 0
+```
+</CodeGroup>
+
+## Spacing in Math Mode
+
+<CodeGroup>
+```latex math-spacing.tex
+% Default spacing
+$a b$ vs $ab$
+
+% Manual spacing
+$a\,b$     % thin space
+$a\:b$     % medium space  
+$a\;b$     % thick space
+$a\quad b$ % quad space
+$a\qquad b$ % double quad
+
+% Negative space
+$a\!b$     % negative thin space
+```
+
+```text Output
+a b vs ab
+
+a b   (thin)
+a  b  (medium)
+a   b (thick)
+a    b (quad)
+a        b (double quad)
+
+ab (negative)
+```
+</CodeGroup>
+
+<Tip>
+Use `\,` before differentials in integrals: `\int f(x)\,dx` looks better than `\int f(x)dx`.
+</Tip>
+
+## Advanced Features
+
+### Theorem Environments
+
+<CodeGroup>
+```latex theorems.tex
+\documentclass{article}
+\usepackage{amsthm}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proof}{Proof}
+
+\begin{document}
+\begin{theorem}[Pythagoras]
+For a right triangle with legs $a$ and $b$ 
+and hypotenuse $c$, we have $a^2 + b^2 = c^2$.
+\end{theorem}
+
+\begin{proof}
+Consider a square with side length $a + b$...
+\end{proof}
+\end{document}
+```
+
+```text Output
+Theorem 1 (Pythagoras). For a right triangle 
+with legs a and b and hypotenuse c, we have 
+a² + b² = c².
+
+Proof. Consider a square with side length a + b...
+```
+</CodeGroup>
+
+### Aligning Equations
+
+<CodeGroup>
+```latex align.tex
+\begin{align}
+2x + 3y &= 7 \\
+x - y &= 1
+\end{align}
+
+% Multi-line derivation
+\begin{align}
+(x + y)^2 &= (x + y)(x + y) \\
+&= x^2 + xy + yx + y^2 \\
+&= x^2 + 2xy + y^2
+\end{align}
+```
+
+```text Output
+2x + 3y = 7     (1)
+  x - y = 1     (2)
+
+(x + y)² = (x + y)(x + y)     (3)
+        = x² + xy + yx + y²   (4)
+        = x² + 2xy + y²       (5)
+```
+</CodeGroup>
+
+## Common Mistakes to Avoid
+
+<Warning>
+**1. Forgetting braces for multi-character super/subscripts**
+- Wrong: `$x^10$` → x¹0
+- Right: `$x^{10}$` → x¹⁰
+
+**2. Using text in math mode**
+- Wrong: `$x = speed * time$`
+- Right: `$x = \text{speed} \times \text{time}$`
+
+**3. Incorrect fraction syntax**
+- Wrong: `$\frac{1/2}$`
+- Right: `$\frac{1}{2}$`
+</Warning>
+
+## Math Packages
+
+Essential packages for advanced mathematics:
+
+```latex
+\usepackage{amsmath}   % Advanced math environments
+\usepackage{amssymb}   % Additional symbols
+\usepackage{mathtools} % Enhanced amsmath
+\usepackage{physics}   % Physics notation
+\usepackage{siunitx}   % SI units
+```
+
+## Practice Exercises
+
+Try typesetting these formulas:
+
+1. **Euler's Identity**: $e^{i\pi} + 1 = 0$
+2. **Gaussian Integral**: $\int_{-\infty}^{\infty} e^{-x^2} dx = \sqrt{\pi}$
+3. **Binomial Theorem**: $(x+y)^n = \sum_{k=0}^{n} \binom{n}{k} x^{n-k} y^k$
+4. **Maxwell's Equation**: $\nabla \times \mathbf{E} = -\frac{\partial \mathbf{B}}{\partial t}$
+
+## Quick Reference
+
+| Feature | Syntax | Example |
+|---------|---------|---------|
+| Inline math | `$...$` | `$x^2$` |
+| Display math | `\[...\]` | `\[x^2\]` |
+| Fraction | `\frac{num}{den}` | `$\frac{a}{b}$` |
+| Square root | `\sqrt{x}` | `$\sqrt{2}$` |
+| Subscript | `_` | `$x_1$` |
+| Superscript | `^` | `$x^2$` |
+| Greek letter | `\alpha` | `$\alpha$` |
+| Sum | `\sum` | `$\sum_{i=1}^n$` |
+| Integral | `\int` | `$\int_a^b$` |
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card 
+    title="Math Symbols Reference" 
+    icon="symbols"
+    href="/learn/reference/symbols"
+  >
+    Complete list of mathematical symbols
+  </Card>
+  <Card 
+    title="Advanced Equations" 
+    icon="calculator"
+    href="/learn/latex/mathematics/equations"
+  >
+    Multi-line equations and advanced layouts
+  </Card>
+  <Card 
+    title="Matrices & Arrays" 
+    icon="table-cells"
+    href="/learn/latex/mathematics/matrices"
+  >
+    Complex matrix operations and layouts
+  </Card>
+  <Card 
+    title="Physics & Chemistry" 
+    icon="atom"
+    href="/learn/latex/mathematics/science"
+  >
+    Scientific notation and formulas
+  </Card>
+</CardGroup>
+
+---
+
+Ready to create beautiful mathematical documents? You now have the foundation to typeset any mathematical expression in LaTeX!

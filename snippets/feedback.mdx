@@ -1,0 +1,181 @@
+export const FeedbackWidget = () => (
+  <div style={{
+    marginTop: '3rem',
+    padding: '1.5rem',
+    backgroundColor: 'var(--bg-secondary)',
+    borderRadius: '8px',
+    border: '1px solid var(--border-color)'
+  }}>
+    <h3 style={{ 
+      marginTop: 0,
+      marginBottom: '1rem',
+      fontSize: '1.25rem'
+    }}>
+      Was this helpful?
+    </h3>
+    <div style={{ 
+      display: 'flex', 
+      gap: '1rem',
+      marginBottom: '1rem'
+    }}>
+      <button
+        style={{
+          padding: '0.5rem 1.5rem',
+          backgroundColor: '#FF6037',
+          color: 'white',
+          border: 'none',
+          borderRadius: '4px',
+          cursor: 'pointer',
+          fontSize: '1rem',
+          fontWeight: '500',
+          transition: 'background-color 0.2s'
+        }}
+        onMouseOver={(e) => e.target.style.backgroundColor = '#FF8A6B'}
+        onMouseOut={(e) => e.target.style.backgroundColor = '#FF6037'}
+      >
+        👍 Yes
+      </button>
+      <button
+        style={{
+          padding: '0.5rem 1.5rem',
+          backgroundColor: 'transparent',
+          color: 'var(--text-primary)',
+          border: '1px solid var(--border-color)',
+          borderRadius: '4px',
+          cursor: 'pointer',
+          fontSize: '1rem',
+          fontWeight: '500',
+          transition: 'border-color 0.2s'
+        }}
+        onMouseOver={(e) => e.target.style.borderColor = '#FF6037'}
+        onMouseOut={(e) => e.target.style.borderColor = 'var(--border-color)'}
+      >
+        👎 No
+      </button>
+    </div>
+    <p style={{ 
+      fontSize: '0.875rem',
+      color: 'var(--text-secondary)',
+      margin: 0
+    }}>
+      Help us improve our documentation. 
+      <a href="https://github.com/yourusername/latex-docs/issues" 
+         style={{ color: '#FF6037', marginLeft: '0.25rem' }}>
+        Report an issue
+      </a>
+    </p>
+  </div>
+);
+
+export const HelpfulnessRating = ({ pageId }) => (
+  <div style={{
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '0.5rem',
+    padding: '0.75rem 1rem',
+    backgroundColor: '#f5f5f5',
+    borderRadius: '6px',
+    fontSize: '0.875rem'
+  }}>
+    <span>Was this page helpful?</span>
+    <button
+      style={{
+        padding: '0.25rem 0.75rem',
+        backgroundColor: 'white',
+        border: '1px solid #e0e0e0',
+        borderRadius: '4px',
+        cursor: 'pointer',
+        fontSize: '0.875rem',
+        transition: 'all 0.2s'
+      }}
+      onMouseOver={(e) => {
+        e.target.style.borderColor = '#FF6037';
+        e.target.style.color = '#FF6037';
+      }}
+      onMouseOut={(e) => {
+        e.target.style.borderColor = '#e0e0e0';
+        e.target.style.color = 'inherit';
+      }}
+    >
+      Yes
+    </button>
+    <button
+      style={{
+        padding: '0.25rem 0.75rem',
+        backgroundColor: 'white',
+        border: '1px solid #e0e0e0',
+        borderRadius: '4px',
+        cursor: 'pointer',
+        fontSize: '0.875rem',
+        transition: 'all 0.2s'
+      }}
+      onMouseOver={(e) => {
+        e.target.style.borderColor = '#FF6037';
+        e.target.style.color = '#FF6037';
+      }}
+      onMouseOut={(e) => {
+        e.target.style.borderColor = '#e0e0e0';
+        e.target.style.color = 'inherit';
+      }}
+    >
+      No
+    </button>
+  </div>
+);
+
+export const ImproveThisPage = ({ filePath }) => (
+  <div style={{
+    marginTop: '2rem',
+    paddingTop: '2rem',
+    borderTop: '1px solid var(--border-color)',
+    fontSize: '0.875rem',
+    color: 'var(--text-secondary)'
+  }}>
+    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+      <span>📝</span>
+      <span>
+        Found a mistake? Want to contribute? 
+        <a 
+          href={`https://github.com/yourusername/latex-docs/edit/main/${filePath}`}
+          style={{ 
+            color: '#FF6037', 
+            marginLeft: '0.25rem',
+            textDecoration: 'none',
+            fontWeight: '500'
+          }}
+        >
+          Edit this page on GitHub
+        </a>
+      </span>
+    </div>
+  </div>
+);
+
+export const SuggestionBox = () => (
+  <div style={{
+    padding: '1rem',
+    backgroundColor: '#FFF5F3',
+    border: '1px solid #FFE0D9',
+    borderRadius: '6px',
+    marginTop: '2rem'
+  }}>
+    <h4 style={{ 
+      margin: '0 0 0.5rem 0',
+      color: '#FF6037',
+      fontSize: '1rem'
+    }}>
+      💡 Have suggestions?
+    </h4>
+    <p style={{ 
+      margin: 0,
+      fontSize: '0.875rem',
+      lineHeight: '1.5'
+    }}>
+      We'd love to hear how we can improve this documentation. 
+      Send us your feedback at{' '}
+      <a href="mailto:feedback@latexdocs.com" style={{ color: '#FF6037' }}>
+        feedback@latexdocs.com
+      </a>
+    </p>
+  </div>
+);

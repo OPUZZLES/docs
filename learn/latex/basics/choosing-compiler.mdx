@@ -1,0 +1,365 @@
+---
+title: Choosing a LaTeX Compiler
+description: Understand different LaTeX compilers and engines. Learn about pdfLaTeX, XeLaTeX, and LuaLaTeX to choose the right one for your documents.
+---
+
+import { CodeGroup, Info, Tip, Warning, Card, CardGroup } from '/snippets/components.mdx'
+
+A LaTeX compiler (also called an engine) transforms your `.tex` source files into the final output format (usually PDF). Understanding the differences between compilers helps you choose the right tool for your project.
+
+<Info>
+**In LaTeX Cloud Studio**: We handle compiler selection automatically, but you can switch between engines in your document settings for specific needs.
+</Info>
+
+## What is a LaTeX Compiler?
+
+A LaTeX compiler:
+1. **Reads** your source file (.tex)
+2. **Processes** all commands and content
+3. **Generates** output (PDF, DVI, etc.)
+4. **Reports** any errors or warnings
+
+Think of it as a translator that converts your human-readable LaTeX code into a beautifully formatted document.
+
+## Main LaTeX Compilers
+
+### pdfLaTeX (Default Choice)
+
+The most common and widely-supported compiler.
+
+**Pros:**
+- Fast compilation
+- Excellent compatibility
+- Mature and stable
+- Supports most packages
+- Default in most systems
+
+**Cons:**
+- Limited to 8-bit fonts
+- No direct Unicode support
+- Can't use system fonts
+
+**Best for:**
+- Most documents
+- Academic papers
+- When compatibility matters
+- Beginning LaTeX users
+
+<CodeGroup>
+```latex pdflatex-example.tex
+\documentclass{article}
+\usepackage[utf8]{inputenc} % Needed for special characters
+\usepackage[T1]{fontenc}     % Better font encoding
+
+\begin{document}
+This document compiles perfectly with pdfLaTeX!
+\end{document}
+```
+</CodeGroup>
+
+### XeLaTeX (Modern Typography)
+
+A modern engine with excellent font support.
+
+**Pros:**
+- Full Unicode support
+- Use any system font
+- Better multilingual support
+- Advanced typography features
+- Handles complex scripts
+
+**Cons:**
+- Slower compilation
+- Some packages incompatible
+- Larger file sizes
+
+**Best for:**
+- Documents with special fonts
+- Multilingual documents
+- Non-Latin scripts
+- Typography-focused work
+
+<CodeGroup>
+```latex xelatex-example.tex
+\documentclass{article}
+\usepackage{fontspec} % XeLaTeX font selection
+
+% Use any font installed on your system
+\setmainfont{Helvetica Neue}
+\setsansfont{Arial}
+\setmonofont{Consolas}
+
+\begin{document}
+XeLaTeX lets you use any font: English, 中文, العربية, ελληνικά!
+\end{document}
+```
+</CodeGroup>
+
+### LuaLaTeX (Programmable Power)
+
+The newest engine with embedded Lua scripting.
+
+**Pros:**
+- Full Unicode support
+- Lua scripting capability
+- Modern font handling
+- Microtype improvements
+- Active development
+
+**Cons:**
+- Slowest compilation
+- Newest (less documentation)
+- Some compatibility issues
+
+**Best for:**
+- Complex programmatic documents
+- Advanced typography
+- When you need scripting
+- Future-proof projects
+
+<CodeGroup>
+```latex lualatex-example.tex
+\documentclass{article}
+\usepackage{fontspec}
+\usepackage{luacode}
+
+\begin{document}
+LuaLaTeX can execute Lua code:
+
+\begin{luacode}
+for i = 1, 5 do
+    tex.print("Line " .. i .. "\\\\")
+end
+\end{luacode}
+\end{document}
+```
+</CodeGroup>
+
+## Comparison Table
+
+| Feature | pdfLaTeX | XeLaTeX | LuaLaTeX |
+|---------|----------|---------|-----------|
+| **Speed** | Fast ⚡⚡⚡ | Medium ⚡⚡ | Slow ⚡ |
+| **Unicode** | Limited | Full ✓ | Full ✓ |
+| **System Fonts** | No ✗ | Yes ✓ | Yes ✓ |
+| **Compatibility** | Excellent | Good | Good |
+| **Scripting** | No | No | Lua ✓ |
+| **Memory Usage** | Low | Medium | High |
+| **Output Quality** | Excellent | Excellent | Excellent |
+
+## How to Choose
+
+### Use pdfLaTeX when:
+- You're just starting with LaTeX
+- Writing standard academic documents
+- Need maximum compatibility
+- Want fastest compilation
+- Using traditional LaTeX packages
+
+### Use XeLaTeX when:
+- Need specific fonts (corporate branding)
+- Writing in multiple languages
+- Using non-Latin scripts
+- Want OpenType font features
+- Typography is crucial
+
+### Use LuaLaTeX when:
+- Need programmatic document generation
+- Want the latest features
+- Require advanced typography
+- Can accept slower compilation
+- Building complex automated documents
+
+## Compiler-Specific Commands
+
+### Checking Your Compiler
+
+You can make your document adapt to different compilers:
+
+<CodeGroup>
+```latex compiler-check.tex
+\documentclass{article}
+
+% Load appropriate packages based on compiler
+\usepackage{ifxetex,ifluatex}
+\ifxetex
+    \usepackage{fontspec}
+    \newcommand{\mycompiler}{XeLaTeX}
+\else\ifluatex
+    \usepackage{fontspec}
+    \newcommand{\mycompiler}{LuaLaTeX}
+\else
+    \usepackage[utf8]{inputenc}
+    \usepackage[T1]{fontenc}
+    \newcommand{\mycompiler}{pdfLaTeX}
+\fi\fi
+
+\begin{document}
+This document was compiled with \mycompiler.
+\end{document}
+```
+</CodeGroup>
+
+### Font Selection by Compiler
+
+<CodeGroup>
+```latex font-selection.tex
+\documentclass{article}
+\usepackage{ifxetex,ifluatex}
+
+% Modern font setup for XeLaTeX/LuaLaTeX
+\ifxetex\else\ifluatex\else
+    % pdfLaTeX font setup
+    \usepackage[T1]{fontenc}
+    \usepackage{lmodern} % Latin Modern fonts
+\fi\fi
+
+\ifxetex
+    \usepackage{fontspec}
+    \setmainfont{Times New Roman}
+\else\ifluatex
+    \usepackage{fontspec}
+    \setmainfont{Times New Roman}
+\fi\fi
+
+\begin{document}
+Fonts work correctly regardless of compiler!
+\end{document}
+```
+</CodeGroup>
+
+## Special Use Cases
+
+### Mathematical Documents
+**Recommended**: pdfLaTeX
+- Best package support
+- Fast compilation
+- All math packages work
+
+### Multilingual Documents
+**Recommended**: XeLaTeX
+- Full Unicode support
+- Easy font switching
+- Proper script handling
+
+### Presentations
+**Recommended**: pdfLaTeX with Beamer
+- Fast compilation for iterations
+- Full Beamer compatibility
+- Reliable output
+
+### Books with Custom Fonts
+**Recommended**: XeLaTeX or LuaLaTeX
+- Professional typography
+- Font flexibility
+- Advanced features
+
+## In LaTeX Cloud Studio
+
+LaTeX Cloud Studio makes compiler selection easy:
+
+1. **Automatic Detection**: We analyze your document and suggest the best compiler
+2. **Easy Switching**: Change compilers in document settings
+3. **Error Handling**: Clear messages if packages need a different compiler
+4. **Preconfiqured**: All compilers are ready to use
+
+### Setting Compiler in Your Document
+
+You can specify your preferred compiler using a magic comment:
+
+```latex
+% !TEX program = xelatex
+\documentclass{article}
+\usepackage{fontspec}
+...
+```
+
+## Troubleshooting Compiler Issues
+
+<Warning>
+**Common compiler-related errors:**
+
+1. **"Package requires XeLaTeX/LuaLaTeX"**
+   - Switch to the appropriate compiler
+   - Or use alternative packages
+
+2. **"Unicode character not set up"**
+   - Use XeLaTeX/LuaLaTeX for full Unicode
+   - Or add `\usepackage[utf8]{inputenc}` for pdfLaTeX
+
+3. **"Font not found"**
+   - System fonts need XeLaTeX/LuaLaTeX
+   - Or use LaTeX font packages with pdfLaTeX
+</Warning>
+
+## Migration Guide
+
+### From pdfLaTeX to XeLaTeX
+
+Remove these packages:
+```latex
+% Remove these:
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+% Add this:
+\usepackage{fontspec}
+```
+
+### From XeLaTeX to pdfLaTeX
+
+Replace font commands:
+```latex
+% Remove:
+\setmainfont{Arial}
+
+% Add:
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+```
+
+## Performance Tips
+
+<Tip>
+**Speed up compilation:**
+1. Use pdfLaTeX for drafts
+2. Switch to XeLaTeX/LuaLaTeX for final version
+3. Enable draft mode: `\documentclass[draft]{article}`
+4. Compile only changed parts during writing
+5. Use LaTeX Cloud Studio's incremental compilation
+</Tip>
+
+## Quick Decision Chart
+
+```
+Need special fonts? ──> Yes ──> XeLaTeX
+         │
+         No
+         │
+         ▼
+Need Unicode? ──> Yes ──> XeLaTeX/LuaLaTeX
+         │
+         No
+         │
+         ▼
+Need scripting? ──> Yes ──> LuaLaTeX
+         │
+         No
+         │
+         ▼
+    pdfLaTeX (Best default choice)
+```
+
+## Summary
+
+- **Start with pdfLaTeX** - It's fast and compatible
+- **Switch to XeLaTeX** - When you need fonts or languages
+- **Try LuaLaTeX** - For advanced programmable documents
+
+Remember: All compilers produce high-quality output. The differences are mainly about features and speed, not quality.
+
+---
+
+<Info>
+**Next step**: Learn about [Paragraphs and new lines](/learn/latex/basics/paragraphs-new-lines) to structure your content effectively.
+</Info>

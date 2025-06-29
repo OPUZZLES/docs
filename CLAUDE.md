@@ -4,14 +4,20 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a LaTeX documentation project built with Mintlify, designed to be a user-friendly, open-source alternative to Overleaf's documentation. The site uses MDX (Markdown with JSX) files to create interactive LaTeX learning resources.
+This is a LaTeX documentation project built with Mintlify for LaTeX Cloud Studio. The site uses MDX (Markdown with JSX) files to create interactive LaTeX learning resources with a focus on user-friendly design and comprehensive coverage.
 
 ## Project Goals
 
-- Create comprehensive LaTeX documentation similar to https://www.overleaf.com/learn
+- Create comprehensive LaTeX documentation for LaTeX Cloud Studio (https://www.latex-cloud-studio.com/)
 - Focus on user-friendly explanations and better design
 - Use accent color #FF6037 (orange-red) throughout the site
 - Organize content in a logical, progressive learning structure
+
+## Important Notes
+
+- **DO NOT mention Overleaf** anywhere in the documentation - we are a competitor
+- This documentation is specifically for LaTeX Cloud Studio, a cloud-based LaTeX editor
+- No installation guides needed since it's a SaaS platform
 
 ## Essential Commands
 

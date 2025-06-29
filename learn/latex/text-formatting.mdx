@@ -1,0 +1,483 @@
+---
+title: Text Formatting in LaTeX
+description: Master text formatting in LaTeX including font sizes, styles, colors, alignment, and special formatting techniques.
+---
+
+import { CodeGroup, Info, Tip, Warning, Card, CardGroup } from '/snippets/components.mdx'
+
+Beyond the basics of bold and italic, LaTeX offers extensive text formatting capabilities. This guide covers font sizes, families, shapes, colors, and advanced formatting options.
+
+<Info>
+**Quick tip**: LaTeX separates content from presentation. Define your formatting once and apply it consistently throughout your document.
+</Info>
+
+## Font Sizes
+
+LaTeX provides ten standard font size commands:
+
+<CodeGroup>
+```latex font-sizes.tex
+\documentclass{article}
+\begin{document}
+
+{\tiny This is tiny text}\\
+{\scriptsize This is scriptsize text}\\
+{\footnotesize This is footnotesize text}\\
+{\small This is small text}\\
+{\normalsize This is normalsize text}\\
+{\large This is large text}\\
+{\Large This is Large text}\\
+{\LARGE This is LARGE text}\\
+{\huge This is huge text}\\
+{\Huge This is Huge text}
+
+\end{document}
+```
+
+```text Output
+This is tiny text (5pt)
+This is scriptsize text (7pt)
+This is footnotesize text (8pt)
+This is small text (9pt)
+This is normalsize text (10pt)
+This is large text (12pt)
+This is Large text (14pt)
+This is LARGE text (17pt)
+This is huge text (20pt)
+This is Huge text (25pt)
+```
+</CodeGroup>
+
+### Using Font Sizes
+
+<CodeGroup>
+```latex using-sizes.tex
+% Inline usage
+This is {\large important} text.
+
+% Block usage
+{\Large
+This entire paragraph is in Large size.
+All text here maintains the same size.
+}
+
+% Environment usage
+\begin{large}
+Everything in this environment is large.
+\end{large}
+```
+</CodeGroup>
+
+## Font Families
+
+LaTeX has three main font families:
+
+<CodeGroup>
+```latex font-families.tex
+\documentclass{article}
+\begin{document}
+
+% Roman (serif) - default
+\textrm{This is Roman text (serif)}
+
+% Sans serif
+\textsf{This is Sans Serif text}
+
+% Typewriter (monospace)
+\texttt{This is Typewriter text}
+
+% Combining with other formatting
+\textsf{\textbf{Bold Sans Serif}}
+\texttt{\textit{Italic Typewriter}}
+
+\end{document}
+```
+</CodeGroup>
+
+### Setting Default Font Family
+
+<CodeGroup>
+```latex default-family.tex
+% Make sans serif the default
+\renewcommand{\familydefault}{\sfdefault}
+
+% Make typewriter the default
+\renewcommand{\familydefault}{\ttdefault}
+
+% Return to roman (default)
+\renewcommand{\familydefault}{\rmdefault}
+```
+</CodeGroup>
+
+## Font Shapes and Series
+
+### Font Shapes
+
+<CodeGroup>
+```latex font-shapes.tex
+\documentclass{article}
+\begin{document}
+
+% Upright (default)
+\textup{Upright text}
+
+% Italic
+\textit{Italic text}
+
+% Slanted (different from italic)
+\textsl{Slanted text}
+
+% Small caps
+\textsc{Small Capitals}
+
+% Emphasis (context-aware)
+\emph{Emphasized text}
+
+% Nested emphasis
+\textit{Italic with \emph{emphasized} text}
+
+\end{document}
+```
+</CodeGroup>
+
+### Font Series (Weight)
+
+<CodeGroup>
+```latex font-weight.tex
+% Medium (default)
+\textmd{Medium weight text}
+
+% Bold
+\textbf{Bold text}
+
+% Bold extended (if available)
+{\fontseries{bx}\selectfont Bold Extended}
+
+% Light (if available)
+{\fontseries{l}\selectfont Light text}
+```
+</CodeGroup>
+
+## Color Text
+
+<CodeGroup>
+```latex color-text.tex
+\documentclass{article}
+\usepackage{xcolor}
+\begin{document}
+
+% Basic colors
+\textcolor{red}{Red text}
+\textcolor{blue}{Blue text}
+\textcolor{green}{Green text}
+
+% Define custom colors
+\definecolor{myorange}{RGB}{255,96,55}
+\definecolor{darkblue}{HTML}{003366}
+\definecolor{lightgray}{gray}{0.8}
+
+% Use custom colors
+\textcolor{myorange}{LaTeX Cloud Studio orange}
+\textcolor{darkblue}{Dark blue text}
+\textcolor{lightgray}{Light gray text}
+
+% Background colors
+\colorbox{yellow}{Highlighted text}
+\colorbox{myorange}{\textcolor{white}{White on orange}}
+
+% Colored box with frame
+\fcolorbox{red}{yellow}{Text in box}
+
+\end{document}
+```
+</CodeGroup>
+
+### Color Models
+
+<CodeGroup>
+```latex color-models.tex
+% RGB (0-255)
+\definecolor{mycolor}{RGB}{255,128,0}
+
+% HTML hex
+\definecolor{mycolor}{HTML}{FF8000}
+
+% Gray scale (0-1)
+\definecolor{mycolor}{gray}{0.5}
+
+% CMYK (0-1)
+\definecolor{mycolor}{cmyk}{0,0.5,1,0}
+
+% HSB (0-360,0-1,0-1)
+\definecolor{mycolor}{hsb}{30,1,1}
+```
+</CodeGroup>
+
+## Text Alignment
+
+<CodeGroup>
+```latex alignment.tex
+\documentclass{article}
+\begin{document}
+
+% Left aligned (default)
+\begin{flushleft}
+This text is aligned to the left edge.
+Multiple lines maintain left alignment.
+\end{flushleft}
+
+% Centered
+\begin{center}
+This text is centered.\\
+Each line is individually centered.
+\end{center}
+
+% Right aligned
+\begin{flushright}
+This text is aligned to the right edge.\\
+All lines align to the right margin.
+\end{flushright}
+
+% Justified (default for normal text)
+This is justified text, which is the default in LaTeX. 
+The text is aligned to both left and right margins, 
+with spacing adjusted between words.
+
+% Ragged right (unjustified)
+\raggedright
+This text has a ragged right edge. 
+Lines break naturally without justification.
+
+\end{document}
+```
+</CodeGroup>
+
+## Special Text Effects
+
+### Underline Variations
+
+<CodeGroup>
+```latex underline-variations.tex
+\documentclass{article}
+\usepackage{ulem}
+\begin{document}
+
+% Normal underline
+\underline{Simple underline}
+
+% Better underlines with ulem
+\uline{Better underline}
+\uuline{Double underline}
+\uwave{Wavy underline}
+\sout{Strikethrough}
+\xout{Crossed out}
+\dashuline{Dashed underline}
+\dotuline{Dotted underline}
+
+\end{document}
+```
+</CodeGroup>
+
+### Text Decorations
+
+<CodeGroup>
+```latex decorations.tex
+\documentclass{article}
+\usepackage{soul}
+\begin{document}
+
+% Highlighting
+\hl{Highlighted text}
+
+% Letter spacing
+\so{S p a c e d  o u t}
+
+% Caps with spacing
+\caps{SPACED CAPITALS}
+
+% Strike out
+\st{Struck through text}
+
+% Underline with soul
+\ul{Underlined with soul package}
+
+\end{document}
+```
+</CodeGroup>
+
+## Text Boxes and Frames
+
+<CodeGroup>
+```latex text-boxes.tex
+\documentclass{article}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\begin{document}
+
+% Simple box
+\fbox{Text in a box}
+
+% Box with padding
+\fbox{\parbox{0.8\textwidth}{
+This is a longer text in a box with controlled width.
+}}
+
+% Colored boxes with tcolorbox
+\begin{tcolorbox}[colback=blue!5,colframe=blue!75!black]
+This is text in a fancy colored box.
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=red!5,colframe=red!75!black,title=Warning]
+This box has a title and custom colors.
+\end{tcolorbox}
+
+\end{document}
+```
+</CodeGroup>
+
+## Advanced Formatting
+
+### Rotating Text
+
+<CodeGroup>
+```latex rotating-text.tex
+\documentclass{article}
+\usepackage{rotating}
+\begin{document}
+
+Normal text \rotatebox{90}{Rotated 90°} more text
+
+\begin{turn}{45}
+This entire block is rotated 45 degrees
+\end{turn}
+
+% Sideways text
+\begin{sideways}
+This text appears sideways
+\end{sideways}
+
+\end{document}
+```
+</CodeGroup>
+
+### Scaling Text
+
+<CodeGroup>
+```latex scaling-text.tex
+\documentclass{article}
+\usepackage{graphicx}
+\begin{document}
+
+Normal \scalebox{2}{Scaled 2x} text
+
+\scalebox{1.5}[0.5]{Stretched horizontally}
+
+\scalebox{0.5}[1.5]{Stretched vertically}
+
+\resizebox{3cm}{!}{Resized to 3cm width}
+
+\resizebox{!}{1cm}{Resized to 1cm height}
+
+\end{document}
+```
+</CodeGroup>
+
+## Custom Commands for Consistent Formatting
+
+<CodeGroup>
+```latex custom-commands.tex
+\documentclass{article}
+\usepackage{xcolor}
+
+% Define custom commands
+\newcommand{\keyword}[1]{\textbf{\textcolor{blue}{#1}}}
+\newcommand{\important}[1]{\textcolor{red}{\textbf{#1}}}
+\newcommand{\code}[1]{\texttt{\colorbox{gray!20}{#1}}}
+\newcommand{\term}[1]{\textit{#1}}
+
+\begin{document}
+
+The \keyword{function} keyword declares a new function.
+
+\important{Warning:} This action cannot be undone.
+
+Use the \code{print()} function to display output.
+
+The \term{algorithm} processes data efficiently.
+
+\end{document}
+```
+</CodeGroup>
+
+## Multilingual Text
+
+<CodeGroup>
+```latex multilingual.tex
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{babel}
+
+% For XeLaTeX/LuaLaTeX
+% \usepackage{fontspec}
+% \usepackage{polyglossia}
+
+\begin{document}
+
+% Accented characters
+café, naïve, résumé, Zürich
+
+% Special characters
+€100, £50, ¥1000, °C, ±5%
+
+% Different languages
+\foreignlanguage{spanish}{¡Hola! ¿Cómo estás?}
+\foreignlanguage{german}{Größe, Übung, ähnlich}
+\foreignlanguage{french}{Château, œuvre, garçon}
+
+\end{document}
+```
+</CodeGroup>
+
+## Best Practices
+
+<Tip>
+**Formatting guidelines:**
+
+1. **Semantic markup**: Use `\emph{}` for emphasis, not just `\textit{}`
+2. **Consistency**: Define custom commands for repeated formatting
+3. **Avoid hardcoding**: Use relative sizes (em, ex) not absolute (pt)
+4. **Color sparingly**: Too many colors reduce professionalism
+5. **Test output**: Check how formatting appears in final PDF
+</Tip>
+
+## Common Pitfalls
+
+<Warning>
+**Avoid these mistakes:**
+
+1. **Over-formatting**: Don't use too many different styles
+2. **Manual spacing**: Let LaTeX handle spacing automatically
+3. **Absolute sizes**: Use relative sizes for better scaling
+4. **Direct formatting**: Define styles once, reuse throughout
+5. **Poor contrast**: Ensure colored text is readable
+</Warning>
+
+## Quick Reference
+
+| Command | Purpose | Example |
+|---------|---------|---------|
+| `\large` | Larger text | `{\large Big}` |
+| `\textbf{}` | Bold | `\textbf{Bold}` |
+| `\textit{}` | Italic | `\textit{Italic}` |
+| `\texttt{}` | Monospace | `\texttt{Code}` |
+| `\textsc{}` | Small caps | `\textsc{Name}` |
+| `\textcolor{}{}` | Colored text | `\textcolor{red}{Red}` |
+| `\colorbox{}{}` | Background | `\colorbox{yellow}{Hi}` |
+| `\underline{}` | Underline | `\underline{Text}` |
+
+---
+
+<Info>
+**Next**: Learn about [Paragraph spacing](/learn/latex/paragraphs-spacing) to control the layout and flow of your documents.
+</Info>

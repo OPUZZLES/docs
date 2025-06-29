@@ -1,0 +1,471 @@
+---
+title: LaTeX Common Errors & Troubleshooting
+description: Fix LaTeX errors quickly with our comprehensive troubleshooting guide. Solutions for the most common LaTeX compilation errors and warnings.
+---
+
+import { CodeGroup, Info, Tip, Warning, Card, CardGroup } from '/snippets/components.mdx'
+
+Don't panic! LaTeX errors can look scary, but most are easy to fix once you understand them. This guide covers the most common errors with clear solutions.
+
+<Info>
+**Quick tip**: LaTeX error messages show the line number where the error occurred. Look for `l.123` in the error message to find line 123 in your document.
+</Info>
+
+## Understanding LaTeX Error Messages
+
+LaTeX errors follow this pattern:
+```
+! LaTeX Error: [Error description]
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.123 \textbf{This is the problematic line
+```
+
+Key parts:
+- `!` indicates an error (not a warning)
+- Error description tells you what went wrong
+- `l.123` shows the line number
+- The line content helps locate the issue
+
+## Most Common Errors
+
+### 1. Missing $ inserted
+
+**Error message:**
+```
+! Missing $ inserted.
+<inserted text> 
+                $
+l.42 The value of x_1 is important
+```
+
+**Cause**: Math symbols used outside math mode
+
+**Solutions:**
+
+<CodeGroup>
+```latex wrong.tex
+The value of x_1 is important       % Wrong
+The equation x^2 + y^2 = r^2 holds  % Wrong
+```
+
+```latex correct.tex
+The value of $x_1$ is important       % Correct
+The equation $x^2 + y^2 = r^2$ holds % Correct
+```
+</CodeGroup>
+
+<Tip>
+Common math symbols that need math mode: `_`, `^`, `\alpha`, `\sum`, etc.
+</Tip>
+
+### 2. Undefined control sequence
+
+**Error message:**
+```
+! Undefined control sequence.
+l.15 \textcolor
+      {red}{This text}
+```
+
+**Cause**: Using a command that doesn't exist or missing package
+
+**Solutions:**
+
+<CodeGroup>
+```latex solution1.tex
+% Add required package
+\usepackage{xcolor}  % For \textcolor
+\usepackage{amsmath} % For \text
+\usepackage{graphicx} % For \includegraphics
+```
+
+```latex solution2.tex
+% Check spelling
+\texbf{bold}    % Wrong (missing 't')
+\textbf{bold}   % Correct
+
+\begin{centre}  % Wrong spelling
+\begin{center}  % Correct
+```
+</CodeGroup>
+
+### 3. Missing \begin{document}
+
+**Error message:**
+```
+! LaTeX Error: Missing \begin{document}.
+```
+
+**Cause**: Content before `\begin{document}` or missing the command entirely
+
+**Solution:**
+<CodeGroup>
+```latex wrong.tex
+\documentclass{article}
+\title{My Document}
+
+This is my text  % Wrong - content before \begin{document}
+
+\begin{document}
+\end{document}
+```
+
+```latex correct.tex
+\documentclass{article}
+\title{My Document}
+
+\begin{document}
+This is my text  % Correct - content after \begin{document}
+\end{document}
+```
+</CodeGroup>
+
+### 4. File not found
+
+**Error message:**
+```
+! LaTeX Error: File `mycustom.sty' not found.
+```
+
+**Cause**: Missing package, image, or bibliography file
+
+**Solutions:**
+1. Install missing package:
+   ```bash
+   tlmgr install packagename  # TeX Live
+   # or use your TeX distribution's package manager
+   ```
+
+2. Check file paths:
+   ```latex
+   \includegraphics{images/photo.png}  % Make sure path is correct
+   \bibliography{references}           % Check references.bib exists
+   ```
+
+3. Use correct file extensions:
+   ```latex
+   \usepackage{mycustom}     % Looks for mycustom.sty
+   \input{chapter1}          % Looks for chapter1.tex
+   ```
+
+### 5. Missing } inserted
+
+**Error message:**
+```
+! Missing } inserted.
+<inserted text> 
+                }
+l.33 \textbf{Bold text
+```
+
+**Cause**: Unmatched braces
+
+**Solution:**
+<CodeGroup>
+```latex wrong.tex
+\textbf{Bold text         % Missing closing brace
+\textit{Italic {nested}   % Missing closing brace
+$x^{2+3$                  % Missing closing brace
+```
+
+```latex correct.tex
+\textbf{Bold text}        % Correct
+\textit{Italic {nested}}  % Correct
+$x^{2+3}$                 % Correct
+```
+</CodeGroup>
+
+<Tip>
+Use a text editor with brace matching to catch these errors early.
+</Tip>
+
+### 6. Environment undefined
+
+**Error message:**
+```
+! LaTeX Error: Environment equation* undefined.
+```
+
+**Cause**: Using an environment that doesn't exist or missing package
+
+**Solution:**
+```latex
+% For equation* environment
+\usepackage{amsmath}
+
+% Check spelling
+\begin{ennumerate}  % Wrong
+\begin{enumerate}   % Correct
+```
+
+### 7. Runaway argument
+
+**Error message:**
+```
+Runaway argument?
+{This is a very long...
+! Paragraph ended before \textbf was complete.
+```
+
+**Cause**: Missing closing brace or bracket spanning paragraphs
+
+**Solution:**
+<CodeGroup>
+```latex wrong.tex
+\textbf{This is bold
+
+This is a new paragraph}  % Error - can't span paragraphs
+```
+
+```latex correct.tex
+\textbf{This is bold}
+
+This is a new paragraph   % Correct - close before paragraph
+```
+</CodeGroup>
+
+### 8. Overfull/Underfull hbox
+
+**Warning message:**
+```
+Overfull \hbox (15.0pt too wide) in paragraph at lines 42--45
+```
+
+**Cause**: Text doesn't fit properly in the line
+
+**Solutions:**
+1. Let LaTeX hyphenate:
+   ```latex
+   \usepackage[english]{babel}
+   ```
+
+2. Force hyphenation:
+   ```latex
+   super\-cali\-fragi\-listic
+   ```
+
+3. Rewrite the sentence
+
+4. Allow stretchy spacing:
+   ```latex
+   \sloppy  % For whole document
+   {\sloppy This problematic paragraph}  % For specific text
+   ```
+
+### 9. Table/Figure positioning problems
+
+**Issue**: Tables or figures appear in wrong locations
+
+**Solutions:**
+<CodeGroup>
+```latex positioning.tex
+% Use positioning options
+\begin{figure}[htbp]  % here, top, bottom, page
+\centering
+\includegraphics{image}
+\caption{My figure}
+\end{figure}
+
+% Force position (not recommended)
+\usepackage{float}
+\begin{figure}[H]  % Exactly Here
+```
+</CodeGroup>
+
+### 10. Bibliography not showing
+
+**Issue**: References not appearing
+
+**Solution sequence:**
+```bash
+pdflatex document.tex
+bibtex document       # or biber document
+pdflatex document.tex
+pdflatex document.tex
+```
+
+## Error Categories
+
+### Math Mode Errors
+
+<Warning>
+**Common math mode mistakes:**
+- Text in math: Use `\text{...}` from amsmath
+- Wrong delimiter size: Use `\left(` and `\right)`
+- Display math in wrong place: Can't use `$$` in some environments
+</Warning>
+
+<CodeGroup>
+```latex math-fixes.tex
+% Text in math mode
+$x = 2 when y = 3$        % Wrong
+$x = 2 \text{ when } y = 3$  % Correct
+
+% Delimiter sizing
+$(\frac{a}{b})$           % Small parentheses
+$\left(\frac{a}{b}\right)$    % Auto-sized parentheses
+
+% Display math
+\begin{center}
+$$x = y$$                 % Wrong in center environment
+\end{center}
+
+\begin{center}
+$x = y$                   % Correct
+\end{center}
+```
+</CodeGroup>
+
+### Package Conflicts
+
+Some packages don't work well together:
+
+```latex
+% Common conflicts
+\usepackage{subfigure}  % Old, conflicts with many
+\usepackage{subfig}     % Use this instead
+
+\usepackage{pdfpages}   % Load after graphicx
+\usepackage{hyperref}   % Usually load last
+```
+
+### Font Errors
+
+```latex
+% Font not found
+\usepackage{times}      % Deprecated
+\usepackage{mathptmx}   % Use this instead
+
+% Font size errors
+\fontsize{50}           % Wrong - missing unit
+\fontsize{50pt}{60pt}\selectfont  % Correct
+```
+
+## Debugging Strategies
+
+### 1. Binary Search Method
+
+Comment out half your document to isolate errors:
+```latex
+\begin{document}
+First part...
+%{
+Second part...  % This part is now commented
+%}
+\end{document}
+```
+
+### 2. Minimal Working Example (MWE)
+
+Create a minimal file that reproduces the error:
+```latex
+\documentclass{article}
+\usepackage{[only needed packages]}
+\begin{document}
+[Minimal code that causes error]
+\end{document}
+```
+
+### 3. Check the Log File
+
+Look for:
+- First error (fix this first)
+- Line numbers
+- Package warnings
+- Overfull/underfull boxes
+
+### 4. Common Quick Fixes
+
+<CardGroup cols={2}>
+  <Card title="Clear auxiliary files" icon="trash">
+    Delete `.aux`, `.log`, `.toc` files and recompile
+  </Card>
+  <Card title="Update packages" icon="download">
+    Keep your TeX distribution updated
+  </Card>
+  <Card title="Check encoding" icon="file-code">
+    Save files as UTF-8
+  </Card>
+  <Card title="Simplify first" icon="compress">
+    Remove packages/commands until it works
+  </Card>
+</CardGroup>
+
+## Prevention Tips
+
+<Tip>
+**Best practices to avoid errors:**
+1. Compile frequently (after every few lines when learning)
+2. Use a good editor with syntax highlighting
+3. Keep backups before major changes
+4. Organize long documents into multiple files
+5. Comment your code for complex parts
+6. Use version control (Git)
+</Tip>
+
+## Platform-Specific Issues
+
+### Windows
+- Path issues: Use forward slashes `/` or double backslashes `\\`
+- Font issues: Install fonts system-wide
+- Encoding: Save as UTF-8, not ANSI
+
+### macOS
+- Missing fonts: Install MacTeX fully
+- Path issues: Don't use spaces in filenames
+- Preview issues: Use external PDF viewer
+
+### Linux
+- Permission issues: Check file permissions
+- Missing packages: Use distribution package manager
+- Font issues: Update font cache
+
+## Getting Help
+
+When asking for help online, include:
+1. Minimal Working Example (MWE)
+2. Complete error message
+3. TeX distribution and version
+4. What you've already tried
+
+### Help Resources
+
+<CardGroup cols={2}>
+  <Card title="TeX StackExchange" icon="stack-overflow" href="https://tex.stackexchange.com">
+    Q&A community for TeX/LaTeX
+  </Card>
+  <Card title="LaTeX Community" icon="users" href="https://latex.org/forum/">
+    Official LaTeX forum
+  </Card>
+  <Card title="Reddit r/LaTeX" icon="reddit" href="https://reddit.com/r/latex">
+    Reddit community
+  </Card>
+  <Card title="CTAN" icon="box" href="https://ctan.org">
+    Package documentation
+  </Card>
+</CardGroup>
+
+## Quick Reference Card
+
+| Error | Quick Fix |
+|-------|-----------|
+| Missing $ | Wrap math in `$...$` |
+| Undefined control sequence | Check spelling or add package |
+| Missing } | Match all opening braces |
+| File not found | Check path and filename |
+| Overfull hbox | Add hyphenation or rewrite |
+| Figure in wrong place | Use `[htbp]` positioning |
+| Bibliography missing | Run BibTeX/Biber |
+| Package unknown | Install with package manager |
+
+---
+
+<Info>
+**Remember**: Every LaTeX user encounters errors. They're not a sign of failure but an opportunity to learn. The more errors you fix, the better you become at LaTeX!
+</Info>
+
+Still stuck? Create a [Minimal Working Example](/learn/debugging/mwe) and ask for help in the community forums. Happy TeXing!

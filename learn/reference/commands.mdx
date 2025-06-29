@@ -1,0 +1,708 @@
+---
+title: LaTeX Commands Reference
+description: Comprehensive reference guide for LaTeX commands. Find syntax, usage examples, and options for all essential LaTeX commands.
+---
+
+import { CodeGroup, Info, Tip, Warning, Card, CardGroup } from '/snippets/components.mdx'
+
+This reference provides a comprehensive guide to LaTeX commands organized by category. Each command includes syntax, options, and practical examples.
+
+<Info>
+**Quick tip**: Use Ctrl/Cmd + F to search for specific commands. Commands are organized alphabetically within each category.
+</Info>
+
+## Document Structure Commands
+
+### Document Class and Packages
+
+<CodeGroup>
+```latex document-setup.tex
+% Document class
+\documentclass[options]{class}
+\documentclass[12pt,a4paper]{article}
+\documentclass[11pt,twoside]{report}
+\documentclass[letterpaper,draft]{book}
+
+% Package loading
+\usepackage[options]{package}
+\usepackage{amsmath}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+```
+</CodeGroup>
+
+### Sectioning Commands
+
+| Command | Level | Numbered | Example |
+|---------|-------|----------|---------|
+| `\part{}` | -1 | Yes | `\part{Part Title}` |
+| `\chapter{}` | 0 | Yes | `\chapter{Chapter Title}` |
+| `\section{}` | 1 | Yes | `\section{Section Title}` |
+| `\subsection{}` | 2 | Yes | `\subsection{Subsection}` |
+| `\subsubsection{}` | 3 | Yes | `\subsubsection{Subsubsection}` |
+| `\paragraph{}` | 4 | No* | `\paragraph{Paragraph}` |
+| `\subparagraph{}` | 5 | No* | `\subparagraph{Subparagraph}` |
+
+*Can be numbered by adjusting `secnumdepth`
+
+<CodeGroup>
+```latex sectioning-examples.tex
+% Unnumbered sections
+\section*{Introduction}
+\subsection*{Background}
+
+% With short title for TOC
+\section[Short Title]{Long Descriptive Title for the Document}
+
+% Adjusting numbering depth
+\setcounter{secnumdepth}{3} % Number up to subsubsection
+\setcounter{tocdepth}{2}    % TOC up to subsection
+```
+</CodeGroup>
+
+### Document Parts
+
+<CodeGroup>
+```latex document-parts.tex
+% Title commands
+\title{Document Title}
+\author{Author Name \and Second Author}
+\date{\today} % or specific date
+\maketitle
+
+% Abstract
+\begin{abstract}
+Abstract content...
+\end{abstract}
+
+% Table of contents
+\tableofcontents
+\listoffigures
+\listoftables
+
+% Appendix
+\appendix
+\chapter{First Appendix}
+
+% Bibliography
+\bibliographystyle{plain}
+\bibliography{references}
+% or with biblatex
+\printbibliography
+```
+</CodeGroup>
+
+## Text Formatting Commands
+
+### Font Styles
+
+| Command | Effect | Example | Alternative |
+|---------|--------|---------|-------------|
+| `\textbf{}` | **Bold** | `\textbf{bold text}` | `{\bfseries text}` |
+| `\textit{}` | *Italic* | `\textit{italic text}` | `{\itshape text}` |
+| `\textsl{}` | *Slanted* | `\textsl{slanted text}` | `{\slshape text}` |
+| `\textsc{}` | Small Caps | `\textsc{small caps}` | `{\scshape text}` |
+| `\texttt{}` | `Monospace` | `\texttt{monospace}` | `{\ttfamily text}` |
+| `\textrm{}` | Roman | `\textrm{roman text}` | `{\rmfamily text}` |
+| `\textsf{}` | Sans Serif | `\textsf{sans serif}` | `{\sffamily text}` |
+| `\emph{}` | Emphasis | `\emph{emphasized}` | `{\em text}` |
+
+### Font Sizes
+
+<CodeGroup>
+```latex font-sizes.tex
+{\tiny tiny text}
+{\scriptsize scriptsize text}
+{\footnotesize footnotesize text}
+{\small small text}
+{\normalsize normalsize text}
+{\large large text}
+{\Large Large text}
+{\LARGE LARGE text}
+{\huge huge text}
+{\Huge Huge text}
+
+% As commands
+\tiny
+This text is tiny
+\normalsize
+Back to normal
+```
+</CodeGroup>
+
+### Text Alignment
+
+<CodeGroup>
+```latex text-alignment.tex
+% Environments
+\begin{center}
+Centered text
+\end{center}
+
+\begin{flushleft}
+Left-aligned text
+\end{flushleft}
+
+\begin{flushright}
+Right-aligned text
+\end{flushright}
+
+% Commands
+\centering
+Centered paragraph
+
+\raggedright
+Left-aligned paragraph
+
+\raggedleft
+Right-aligned paragraph
+```
+</CodeGroup>
+
+## Spacing Commands
+
+### Horizontal Spacing
+
+| Command | Space Type | Width |
+|---------|------------|-------|
+| `~` | Non-breaking space | Normal space |
+| `\,` | Thin space | 3/18 em |
+| `\:` | Medium space | 4/18 em |
+| `\;` | Thick space | 5/18 em |
+| `\!` | Negative thin space | -3/18 em |
+| `\ ` | Normal space | Normal space |
+| `\quad` | Em space | 1 em |
+| `\qquad` | 2 em space | 2 em |
+| `\hspace{length}` | Custom space | Specified |
+| `\hfill` | Stretchable space | Fill available |
+
+### Vertical Spacing
+
+<CodeGroup>
+```latex vertical-spacing.tex
+% Fixed vertical space
+\vspace{1cm}
+\vspace*{1cm} % Not removed at page breaks
+
+% Relative vertical space
+\smallskip  % About 3pt
+\medskip    % About 6pt
+\bigskip    % About 12pt
+
+% Fill vertical space
+\vfill
+
+% Page breaks
+\newpage    % Start new page
+\clearpage  % Clear floats and start new page
+\cleardoublepage % For two-sided documents
+
+% Line breaks
+\\ % New line
+\\[1cm] % New line with extra space
+\linebreak % Suggests line break
+\newline % Forces new line
+```
+</CodeGroup>
+
+### Paragraph Formatting
+
+<CodeGroup>
+```latex paragraph-formatting.tex
+% Paragraph indentation
+\setlength{\parindent}{0pt} % No indent
+\setlength{\parindent}{1cm} % 1cm indent
+\noindent % No indent for one paragraph
+
+% Paragraph spacing
+\setlength{\parskip}{1em}
+
+% Line spacing
+\usepackage{setspace}
+\singlespacing
+\onehalfspacing
+\doublespacing
+\setstretch{1.5} % Custom
+
+% Manual spacing
+\par % End paragraph
+\indent % Force indent
+```
+</CodeGroup>
+
+## List Commands
+
+### Itemize, Enumerate, Description
+
+<CodeGroup>
+```latex list-commands.tex
+% Itemize (bullets)
+\begin{itemize}
+  \item First item
+  \item Second item
+  \item[$\diamond$] Custom bullet
+\end{itemize}
+
+% Enumerate (numbered)
+\begin{enumerate}
+  \item First item
+  \item Second item
+  \item[3a.] Custom label
+\end{enumerate}
+
+% Description
+\begin{description}
+  \item[Term] Description of term
+  \item[Another term] Its description
+\end{description}
+
+% Nested lists
+\begin{enumerate}
+  \item First level
+  \begin{enumerate}
+    \item Second level
+    \begin{enumerate}
+      \item Third level
+    \end{enumerate}
+  \end{enumerate}
+\end{enumerate}
+```
+</CodeGroup>
+
+### List Customization
+
+<CodeGroup>
+```latex list-customization.tex
+\usepackage{enumitem}
+
+% Customize itemize
+\begin{itemize}[label=$\star$, itemsep=0pt]
+  \item Starred item
+\end{itemize}
+
+% Customize enumerate
+\begin{enumerate}[label=\alph*), start=5]
+  \item Fifth item (labeled 'e)')
+\end{enumerate}
+
+% Inline lists
+\begin{itemize*}[label=\textbullet]
+  \item One \item Two \item Three
+\end{itemize*}
+
+% Resume numbering
+\begin{enumerate}[resume]
+  \item Continues from before
+\end{enumerate}
+```
+</CodeGroup>
+
+## Math Commands
+
+### Math Environments
+
+<CodeGroup>
+```latex math-environments.tex
+% Inline math
+$E = mc^2$
+\(E = mc^2\)
+\begin{math}E = mc^2\end{math}
+
+% Display math
+$$E = mc^2$$
+\[E = mc^2\]
+\begin{displaymath}E = mc^2\end{displaymath}
+
+% Numbered equation
+\begin{equation}
+  E = mc^2
+\end{equation}
+
+% Aligned equations
+\begin{align}
+  a &= b + c \\
+  d &= e + f
+\end{align}
+
+% Cases
+\begin{cases}
+  x, & \text{if } x \geq 0 \\
+  -x, & \text{if } x < 0
+\end{cases}
+```
+</CodeGroup>
+
+### Common Math Commands
+
+| Command | Output | Usage |
+|---------|--------|-------|
+| `\frac{a}{b}` | $\frac{a}{b}$ | Fractions |
+| `\sqrt{x}` | $\sqrt{x}$ | Square root |
+| `\sqrt[n]{x}` | $\sqrt[n]{x}$ | nth root |
+| `x^{2}` | $x^{2}$ | Superscript |
+| `x_{i}` | $x_{i}$ | Subscript |
+| `\sum_{i=1}^{n}` | $\sum_{i=1}^{n}$ | Summation |
+| `\int_{a}^{b}` | $\int_{a}^{b}$ | Integral |
+| `\lim_{x \to 0}` | $\lim_{x \to 0}$ | Limit |
+| `\prod_{i=1}^{n}` | $\prod_{i=1}^{n}$ | Product |
+
+### Greek Letters
+
+<CodeGroup>
+```latex greek-letters.tex
+% Lowercase
+\alpha \beta \gamma \delta \epsilon \zeta \eta \theta
+\iota \kappa \lambda \mu \nu \xi \pi \rho
+\sigma \tau \upsilon \phi \chi \psi \omega
+
+% Uppercase
+\Gamma \Delta \Theta \Lambda \Xi \Pi
+\Sigma \Upsilon \Phi \Psi \Omega
+
+% Variants
+\varepsilon \vartheta \varpi \varrho \varsigma \varphi
+```
+</CodeGroup>
+
+## Table Commands
+
+### Basic Tables
+
+<CodeGroup>
+```latex table-basics.tex
+% Tabular
+\begin{tabular}{lcr}
+Left & Center & Right \\
+1 & 2 & 3 \\
+\end{tabular}
+
+% Table float
+\begin{table}[htbp]
+  \centering
+  \caption{Table caption}
+  \label{tab:label}
+  \begin{tabular}{|l|c|r|}
+    \hline
+    A & B & C \\
+    \hline
+    1 & 2 & 3 \\
+    \hline
+  \end{tabular}
+\end{table}
+```
+</CodeGroup>
+
+### Table Commands
+
+| Command | Purpose | Example |
+|---------|---------|---------|
+| `&` | Column separator | `A & B & C` |
+| `\\` | Row end | `A & B & C \\` |
+| `\hline` | Horizontal line | Full width |
+| `\cline{i-j}` | Partial line | `\cline{2-3}` |
+| `\multicolumn{n}{align}{text}` | Span columns | `\multicolumn{2}{c}{Centered}` |
+| `\multirow{n}{width}{text}` | Span rows | `\multirow{2}{*}{Text}` |
+
+## Figure Commands
+
+### Including Graphics
+
+<CodeGroup>
+```latex figure-commands.tex
+% Basic inclusion
+\includegraphics{image}
+\includegraphics[width=5cm]{image}
+\includegraphics[height=3cm]{image}
+\includegraphics[scale=0.5]{image}
+
+% Figure environment
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.8\textwidth]{image}
+  \caption{Figure caption}
+  \label{fig:label}
+\end{figure}
+
+% Subfigures
+\usepackage{subcaption}
+\begin{figure}
+  \begin{subfigure}{0.45\textwidth}
+    \includegraphics[width=\textwidth]{image1}
+    \caption{First}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}{0.45\textwidth}
+    \includegraphics[width=\textwidth]{image2}
+    \caption{Second}
+  \end{subfigure}
+  \caption{Main caption}
+\end{figure}
+```
+</CodeGroup>
+
+## Reference Commands
+
+### Labels and References
+
+<CodeGroup>
+```latex references.tex
+% Creating labels
+\label{sec:intro}
+\label{fig:diagram}
+\label{tab:results}
+\label{eq:einstein}
+
+% Basic references
+\ref{sec:intro}     % 1.1
+\pageref{sec:intro} % 5
+
+% With packages
+\usepackage{hyperref}
+\autoref{sec:intro} % Section 1.1
+
+\usepackage{cleveref}
+\cref{sec:intro}    % section 1.1
+\Cref{sec:intro}    % Section 1.1
+\cref{fig:a,fig:b}  % figures 1 and 2
+```
+</CodeGroup>
+
+### Citations
+
+<CodeGroup>
+```latex citations.tex
+% With natbib
+\cite{key}          % [1]
+\citep{key}         % (Author, Year)
+\citet{key}         % Author (Year)
+\citeauthor{key}    % Author
+\citeyear{key}      % Year
+
+% With biblatex
+\cite{key}
+\parencite{key}
+\textcite{key}
+\footcite{key}
+\fullcite{key}
+
+% Multiple citations
+\cite{key1,key2,key3}
+```
+</CodeGroup>
+
+## Special Characters
+
+### Escaped Characters
+
+| Character | Command | Output |
+|-----------|---------|--------|
+| `#` | `\#` | # |
+| `$` | `\$` | $ |
+| `%` | `\%` | % |
+| `&` | `\&` | & |
+| `_` | `\_` | _ |
+| `{` | `\{` | { |
+| `}` | `\}` | } |
+| `~` | `\textasciitilde` | ~ |
+| `^` | `\textasciicircum` | ^ |
+| `\` | `\textbackslash` | \ |
+
+### Quotes and Dashes
+
+<CodeGroup>
+```latex quotes-dashes.tex
+% Quotes
+`single quotes'
+``double quotes''
+\textquoteleft text\textquoteright
+\textquotedblleft text\textquotedblright
+
+% Dashes
+- % Hyphen
+-- % En dash (ranges)
+--- % Em dash (punctuation)
+
+% Special spaces
+Non~breaking~space
+Thin\,space
+```
+</CodeGroup>
+
+## Box Commands
+
+### Text Boxes
+
+<CodeGroup>
+```latex box-commands.tex
+% Horizontal boxes
+\mbox{unbreakable text}
+\makebox[5cm][c]{centered in 5cm}
+\fbox{framed text}
+\framebox[5cm][r]{right-aligned frame}
+
+% Vertical boxes
+\parbox{5cm}{Paragraph in 5cm box}
+\parbox[t]{5cm}{Top-aligned}
+\parbox[b]{5cm}{Bottom-aligned}
+
+% Minipage
+\begin{minipage}{0.5\textwidth}
+Content in half-width box
+\end{minipage}
+
+% Save boxes
+\newsavebox{\mybox}
+\savebox{\mybox}{Saved content}
+\usebox{\mybox}
+```
+</CodeGroup>
+
+## Color Commands
+
+### Using Colors
+
+<CodeGroup>
+```latex color-commands.tex
+\usepackage{xcolor}
+
+% Text color
+\textcolor{red}{Red text}
+\textcolor{blue}{Blue text}
+\textcolor[RGB]{255,128,0}{Orange text}
+
+% Background color
+\colorbox{yellow}{Highlighted}
+\fcolorbox{red}{yellow}{Framed}
+
+% Define colors
+\definecolor{myblue}{RGB}{0,114,189}
+\definecolor{mygreen}{HTML}{00A86B}
+
+% Page/text color
+{\color{blue} Blue paragraph}
+\pagecolor{gray!10}
+```
+</CodeGroup>
+
+## Length Commands
+
+### Setting Lengths
+
+<CodeGroup>
+```latex length-commands.tex
+% Define new length
+\newlength{\mylength}
+\setlength{\mylength}{2cm}
+\addtolength{\mylength}{1cm}
+
+% Common lengths
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1em}
+\setlength{\textwidth}{15cm}
+\setlength{\textheight}{25cm}
+
+% Calculations
+\setlength{\mylength}{0.5\textwidth}
+\setlength{\mylength}{\textwidth-2cm}
+
+% Using calc package
+\usepackage{calc}
+\setlength{\mylength}{\widthof{Sample text}+1cm}
+```
+</CodeGroup>
+
+## Counter Commands
+
+### Using Counters
+
+<CodeGroup>
+```latex counter-commands.tex
+% New counter
+\newcounter{mycounter}
+\setcounter{mycounter}{0}
+\stepcounter{mycounter}
+\addtocounter{mycounter}{5}
+
+% Display counter
+\arabic{mycounter}    % 1, 2, 3
+\roman{mycounter}     % i, ii, iii
+\Roman{mycounter}     % I, II, III
+\alph{mycounter}      % a, b, c
+\Alph{mycounter}      % A, B, C
+
+% Page numbering
+\pagenumbering{roman}
+\setcounter{page}{1}
+```
+</CodeGroup>
+
+## Environment Commands
+
+### Custom Environments
+
+<CodeGroup>
+```latex custom-environments.tex
+% Define environment
+\newenvironment{myenv}
+  {\begin{center}\bfseries}  % Begin
+  {\end{center}}             % End
+
+% Usage
+\begin{myenv}
+Bold centered text
+\end{myenv}
+
+% With arguments
+\newenvironment{mybox}[1]
+  {\begin{center}\fbox{\begin{minipage}{#1}}}
+  {\end{minipage}}\end{center}}
+
+\begin{mybox}{5cm}
+Content in 5cm box
+\end{mybox}
+```
+</CodeGroup>
+
+## Useful Macros
+
+### Common Custom Commands
+
+<CodeGroup>
+```latex custom-commands.tex
+% Simple macros
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\vect}[1]{\mathbf{#1}}
+\newcommand{\norm}[1]{\left\|#1\right\|}
+
+% With optional arguments
+\newcommand{\myitem}[1][\textbullet]{#1~}
+
+% Renewing commands
+\renewcommand{\thesection}{\Roman{section}}
+\renewcommand{\arraystretch}{1.5}
+
+% Conditional commands
+\newcommand{\ie}{\textit{i.e.}}
+\newcommand{\eg}{\textit{e.g.}}
+```
+</CodeGroup>
+
+## Quick Reference Card
+
+### Essential Commands
+
+| Category | Commands |
+|----------|----------|
+| **Structure** | `\section`, `\subsection`, `\chapter` |
+| **Formatting** | `\textbf`, `\textit`, `\emph` |
+| **Math** | `$...$`, `\[...\]`, `\frac`, `\sqrt` |
+| **Lists** | `itemize`, `enumerate`, `description` |
+| **References** | `\label`, `\ref`, `\cite` |
+| **Spacing** | `\\`, `\vspace`, `\hspace` |
+| **Special** | `\%`, `\&`, `\_`, `\#` |
+
+---
+
+<Info>
+**Next**: Explore essential [LaTeX packages](/learn/reference/packages) to extend functionality and add features to your documents.
+</Info>

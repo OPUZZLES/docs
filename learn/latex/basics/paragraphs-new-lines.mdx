@@ -1,0 +1,398 @@
+---
+title: Paragraphs and new lines
+description: Master paragraph formatting and line breaks in LaTeX. Learn how to control spacing, indentation, and text flow in your documents.
+---
+
+import { CodeGroup, Info, Tip, Warning } from '/snippets/components.mdx'
+
+Understanding how LaTeX handles paragraphs and line breaks is essential for controlling your document's appearance. LaTeX has its own rules for formatting text, which might surprise you if you're coming from word processors.
+
+<Info>
+**Key concept**: LaTeX decides line breaks for you to create optimal text flow. You control paragraph breaks, and LaTeX handles the rest.
+</Info>
+
+## How LaTeX Handles Paragraphs
+
+### Creating Paragraphs
+
+In LaTeX, a blank line creates a new paragraph:
+
+<CodeGroup>
+```latex paragraphs.tex
+\documentclass{article}
+\begin{document}
+
+This is the first paragraph. It can span multiple lines in your source file, but LaTeX will format it as one continuous paragraph in the output.
+
+This is the second paragraph. Notice the blank line above - that's what tells LaTeX to start a new paragraph. LaTeX automatically indents the first line.
+
+\end{document}
+```
+
+```text Output
+This is the first paragraph. It can span
+multiple lines in your source file, but LaTeX
+will format it as one continuous paragraph
+in the output.
+
+    This is the second paragraph. Notice the
+blank line above - that's what tells LaTeX to
+start a new paragraph. LaTeX automatically
+indents the first line.
+```
+</CodeGroup>
+
+### Multiple Spaces and Line Breaks
+
+LaTeX treats multiple spaces as one and ignores single line breaks:
+
+<CodeGroup>
+```latex spacing.tex
+This    has    multiple    spaces.
+This is on
+multiple lines
+in the source.
+
+This is a new paragraph.
+```
+
+```text Output
+This has multiple spaces. This is on multiple lines in the source.
+
+    This is a new paragraph.
+```
+</CodeGroup>
+
+<Tip>
+LaTeX ignores extra whitespace to give you flexibility in formatting your source code without affecting the output.
+</Tip>
+
+## Manual Line Breaks
+
+### Using Double Backslash
+
+Force a line break within a paragraph using `\\`:
+
+<CodeGroup>
+```latex line-breaks.tex
+\documentclass{article}
+\begin{document}
+
+First line\\
+Second line\\
+Third line
+
+This is still the same paragraph, but with forced line breaks.
+
+This is a new paragraph.
+
+\end{document}
+```
+
+```text Output
+First line
+Second line
+Third line
+This is still the same paragraph, but with forced line breaks.
+
+    This is a new paragraph.
+```
+</CodeGroup>
+
+### Line Break with Extra Space
+
+Add vertical space after a line break:
+
+<CodeGroup>
+```latex line-break-space.tex
+First line\\[10pt]
+Second line with 10pt gap\\[0.5cm]
+Third line with 0.5cm gap
+
+Normal line break:\\
+Next line
+```
+</CodeGroup>
+
+### The \newline Command
+
+Alternative to `\\`:
+
+```latex
+This is one line\newline
+This is the next line
+```
+
+## Preventing Line Breaks
+
+### Non-breaking Space
+
+Use `~` to prevent line breaks between words:
+
+<CodeGroup>
+```latex non-breaking.tex
+% Prevent breaks in names
+Dr.~Smith wrote Chapter~5.
+
+% Keep units together  
+The temperature is 25~°C.
+
+% Prevent awkward breaks
+See Figure~\ref{fig:example} on page~\pageref{fig:example}.
+```
+</CodeGroup>
+
+### \mbox Command
+
+Keep text together on one line:
+
+```latex
+The URL is \mbox{www.example.com/very-long-path}.
+```
+
+## Paragraph Formatting
+
+### Paragraph Indentation
+
+Control first-line indentation:
+
+<CodeGroup>
+```latex indentation.tex
+\documentclass{article}
+
+% Remove indentation globally
+\setlength{\parindent}{0pt}
+
+% Or set custom indentation
+% \setlength{\parindent}{1cm}
+
+\begin{document}
+
+This paragraph has no indentation because we set parindent to 0pt.
+
+This paragraph also has no indentation. All paragraphs follow the global setting.
+
+\indent This paragraph is manually indented using the indent command.
+
+\noindent This paragraph has no indentation even if parindent is set.
+
+\end{document}
+```
+</CodeGroup>
+
+### Paragraph Spacing
+
+Control space between paragraphs:
+
+<CodeGroup>
+```latex paragraph-spacing.tex
+\documentclass{article}
+
+% Add space between paragraphs
+\setlength{\parskip}{1em}
+
+% Remove indent when using parskip
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+First paragraph with spacing after it.
+
+Second paragraph with spacing before and after it.
+
+Third paragraph.
+
+\end{document}
+```
+</CodeGroup>
+
+## Special Paragraph Commands
+
+### \par Command
+
+Explicitly end a paragraph:
+
+```latex
+This is a paragraph.\par
+This is another paragraph.
+```
+
+### Centered Text
+
+<CodeGroup>
+```latex centering.tex
+\begin{center}
+This text is centered.\\
+Multiple lines\\
+can be centered.
+\end{center}
+
+% Or for short text:
+{\centering This is also centered.\par}
+```
+</CodeGroup>
+
+### Flush Left and Right
+
+<CodeGroup>
+```latex alignment.tex
+\begin{flushleft}
+This text is\\
+aligned to\\
+the left.
+\end{flushleft}
+
+\begin{flushright}
+This text is\\
+aligned to\\
+the right.
+\end{flushright}
+```
+</CodeGroup>
+
+## Advanced Line Breaking
+
+### Preventing Hyphenation
+
+<CodeGroup>
+```latex hyphenation.tex
+% Prevent hyphenation for specific words
+\hyphenation{LaTeX JavaScript Python}
+
+% Prevent hyphenation in a word
+\mbox{unbreakableword}
+
+% Allow hyphenation at specific points
+super\-cali\-fragi\-listic
+```
+</CodeGroup>
+
+### Line Breaking Commands
+
+| Command | Effect | Usage |
+|---------|--------|-------|
+| `\\` | Line break | Most common |
+| `\\*` | Line break (no page break) | Keeps lines together |
+| `\newline` | Line break | Alternative to `\\` |
+| `\linebreak` | Suggests line break | LaTeX decides |
+| `\nolinebreak` | Prevents line break | Keeps on same line |
+
+### Page Breaking
+
+Control where pages break:
+
+```latex
+\newpage     % Start new page
+\pagebreak   % Suggest page break
+\nopagebreak % Prevent page break
+\clearpage   % New page after floats
+```
+
+## Common Patterns
+
+### Address Format
+
+<CodeGroup>
+```latex address.tex
+John Smith\\
+123 Main Street\\
+Anytown, ST 12345\\
+USA
+```
+</CodeGroup>
+
+### Poetry or Verses
+
+<CodeGroup>
+```latex poetry.tex
+\begin{verse}
+Roses are red,\\
+Violets are blue,\\
+LaTeX is awesome,\\
+And so are you!
+\end{verse}
+```
+</CodeGroup>
+
+### Quotations
+
+<CodeGroup>
+```latex quotations.tex
+\begin{quote}
+This is a short quotation. It's indented from both margins and has no paragraph indentation.
+\end{quote}
+
+\begin{quotation}
+This is a longer quotation that might span multiple paragraphs. The first line of each paragraph is indented.
+
+This is the second paragraph of the quotation.
+\end{quotation}
+```
+</CodeGroup>
+
+## Best Practices
+
+<Tip>
+**Paragraph and line break tips:**
+
+1. **Let LaTeX decide** - Don't force line breaks unless necessary
+2. **Use blank lines** - Clear paragraph separation in source
+3. **Be consistent** - Choose either indentation or spacing
+4. **Use non-breaking spaces** - Keep related items together
+5. **Avoid `\\` at paragraph ends** - Use blank lines instead
+</Tip>
+
+## Common Mistakes
+
+<Warning>
+**Avoid these errors:**
+
+1. **Using `\\` for paragraph breaks** - Use blank lines
+2. **Multiple `\\` in a row** - Use `\\[space]` instead
+3. **Ending paragraphs with `\\`** - Creates underfull hbox warnings
+4. **Too many manual breaks** - Trust LaTeX's algorithm
+</Warning>
+
+## Troubleshooting
+
+### Underfull/Overfull hbox
+
+If you get these warnings:
+- Let LaTeX handle line breaking
+- Use `\sloppy` for problematic paragraphs
+- Rewrite sentences if needed
+
+### Unwanted Page Breaks
+
+```latex
+% Keep content together
+\begin{samepage}
+This content stays together on one page.
+\end{samepage}
+```
+
+### Inconsistent Spacing
+
+Check these settings:
+```latex
+\setlength{\parindent}{15pt}  % First line indent
+\setlength{\parskip}{0pt}     % Between paragraphs
+\setlength{\baselineskip}{12pt} % Between lines
+```
+
+## Quick Reference
+
+| What you want | How to do it | Example |
+|--------------|--------------|---------|
+| New paragraph | Blank line | `text\n\ntext` |
+| Line break | `\\` | `line\\line` |
+| No indentation | `\noindent` | `\noindent Text` |
+| Keep together | `~` | `Fig.~1` |
+| Center text | `\begin{center}` | Centered |
+| Extra space | `\\[1cm]` | With gap |
+
+---
+
+<Info>
+**Next**: Learn about [Bold, italics and underlining](/learn/latex/basics/bold-italics-underlining) to add emphasis to your text.
+</Info>

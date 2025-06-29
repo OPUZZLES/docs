@@ -1,0 +1,486 @@
+---
+title: Mathematical Equations
+description: Master complex mathematical equations in LaTeX. Learn multi-line equations, alignment, numbering, and advanced equation environments.
+---
+
+import { CodeGroup, Info, Tip, Warning } from '/snippets/components.mdx'
+
+Building on the math basics, this guide covers advanced equation formatting, multi-line equations, alignment, and professional mathematical typesetting.
+
+<Info>
+**Prerequisites**: Familiarity with basic math mode (`$...$` and `\[...\]`). See our [Mathematics Basics](/learn/latex/mathematics/basics) guide if needed.
+</Info>
+
+## Single Equations
+
+### Basic Display Equations
+
+<CodeGroup>
+```latex display-equations.tex
+\documentclass{article}
+\usepackage{amsmath}
+\begin{document}
+
+% Simple display equation
+\[ E = mc^2 \]
+
+% With equation number
+\begin{equation}
+  E = mc^2
+\end{equation}
+
+% Without equation number
+\begin{equation*}
+  E = mc^2
+\end{equation*}
+
+% Reference an equation
+\begin{equation}\label{eq:energy}
+  E = mc^2
+\end{equation}
+As shown in Equation \ref{eq:energy}, energy and mass are related.
+
+% Using \eqref for parentheses
+As shown in Equation \eqref{eq:energy}...
+
+\end{document}
+```
+</CodeGroup>
+
+### Equation Numbering Control
+
+<CodeGroup>
+```latex equation-numbering.tex
+% Suppress numbering for specific equation
+\begin{equation}
+  a^2 + b^2 = c^2 \nonumber
+\end{equation}
+
+% Custom numbering
+\begin{equation}
+  F = ma \tag{Newton's 2nd Law}
+\end{equation}
+
+% Numbered with custom tag
+\begin{equation}
+  e^{i\pi} + 1 = 0 \tag{$\star$}
+\end{equation}
+
+% Subequations
+\begin{subequations}
+\begin{equation}
+  x + y = 5
+\end{equation}
+\begin{equation}
+  2x - y = 1
+\end{equation}
+\end{subequations}
+```
+</CodeGroup>
+
+## Multi-line Equations
+
+### Split Environment
+
+For single equations that are too long:
+
+<CodeGroup>
+```latex split-environment.tex
+\documentclass{article}
+\usepackage{amsmath}
+\begin{document}
+
+\begin{equation}
+\begin{split}
+  (a + b)^4 &= (a + b)^2(a + b)^2 \\
+            &= (a^2 + 2ab + b^2)(a^2 + 2ab + b^2) \\
+            &= a^4 + 4a^3b + 6a^2b^2 + 4ab^3 + b^4
+\end{split}
+\end{equation}
+
+% Left-aligned split
+\begin{equation}
+\begin{split}
+  \text{LHS} &= \text{some long expression} \\
+  &\quad + \text{continuation} \\
+  &\quad + \text{more terms} \\
+  &= \text{RHS}
+\end{split}
+\end{equation}
+
+\end{document}
+```
+</CodeGroup>
+
+### Multline Environment
+
+For very long single equations:
+
+<CodeGroup>
+```latex multline-environment.tex
+\begin{multline}
+  \int_0^1 \biggl\{ \sum_{i=1}^n x_i^2 + \sum_{j=1}^m y_j^2 
+  + \sum_{k=1}^p z_k^2 \biggr\} \, dx \\
+  + \int_1^2 \biggl\{ \sum_{i=1}^n x_i^3 + \sum_{j=1}^m y_j^3 
+  + \sum_{k=1}^p z_k^3 \biggr\} \, dx \\
+  = \text{some complicated result}
+\end{multline}
+
+% Control positioning
+\begin{multline}
+  \text{First line flush left} \\
+  \text{Middle lines centered} \\
+  \shoveleft{\text{This line shoved left}} \\
+  \shoveright{\text{This line shoved right}} \\
+  \text{Last line flush right}
+\end{multline}
+```
+</CodeGroup>
+
+## Aligned Equations
+
+### Align Environment
+
+The most versatile environment for multiple equations:
+
+<CodeGroup>
+```latex align-environment.tex
+\documentclass{article}
+\usepackage{amsmath}
+\begin{document}
+
+% Basic alignment
+\begin{align}
+  2x + 3y &= 7 \\
+  5x - 2y &= 4
+\end{align}
+
+% Multiple alignment points
+\begin{align}
+  x &= a + b     &\qquad y &= c + d \\
+  2x &= 2(a + b) &\qquad 3y &= 3(c + d)
+\end{align}
+
+% Without numbering
+\begin{align*}
+  \sin^2\theta + \cos^2\theta &= 1 \\
+  1 + \tan^2\theta &= \sec^2\theta \\
+  1 + \cot^2\theta &= \csc^2\theta
+\end{align*}
+
+% Selective numbering
+\begin{align}
+  a &= b + c \\
+  d &= e + f \nonumber \\
+  g &= h + i
+\end{align}
+
+\end{document}
+```
+</CodeGroup>
+
+### Aligned Within Equation
+
+<CodeGroup>
+```latex aligned-within.tex
+% For alignment within a single equation number
+\begin{equation}
+\begin{aligned}
+  f(x) &= (x+a)(x+b) \\
+       &= x^2 + (a+b)x + ab
+\end{aligned}
+\end{equation}
+
+% Multiple aligned blocks
+\begin{equation}
+\left\{
+\begin{aligned}
+  x + y + z &= 1 \\
+  2x - y + 3z &= 0 \\
+  x - 2y - z &= 4
+\end{aligned}
+\right.
+\end{equation}
+```
+</CodeGroup>
+
+## Equation Arrays
+
+### Eqnarray (Deprecated)
+
+<Warning>
+**Note**: `eqnarray` is deprecated. Use `align` instead. Shown here for reference only.
+</Warning>
+
+### Array Environment
+
+For complex layouts:
+
+<CodeGroup>
+```latex array-equations.tex
+\begin{equation}
+\begin{array}{lcl}
+  f(x) &=& (x+1)^2 \\
+       &=& x^2 + 2x + 1
+\end{array}
+\end{equation}
+
+% Multiple columns
+\begin{equation}
+\begin{array}{ccc}
+  a_{11} & a_{12} & a_{13} \\
+  a_{21} & a_{22} & a_{23} \\
+  a_{31} & a_{32} & a_{33}
+\end{array}
+\end{equation}
+```
+</CodeGroup>
+
+## Cases and Piecewise Functions
+
+### Cases Environment
+
+<CodeGroup>
+```latex cases-environment.tex
+\documentclass{article}
+\usepackage{amsmath}
+\begin{document}
+
+% Basic cases
+\begin{equation}
+f(x) = \begin{cases}
+  x^2 & \text{if } x \geq 0 \\
+  -x^2 & \text{if } x < 0
+\end{cases}
+\end{equation}
+
+% Multiple conditions
+\begin{equation}
+\text{sgn}(x) = \begin{cases}
+  1 & \text{if } x > 0 \\
+  0 & \text{if } x = 0 \\
+  -1 & \text{if } x < 0
+\end{cases}
+\end{equation}
+
+% Nested cases
+\begin{equation}
+f(x,y) = \begin{cases}
+  \begin{cases}
+    1 & \text{if } y > x \\
+    0 & \text{if } y = x
+  \end{cases} & \text{if } x \geq 0 \\
+  -1 & \text{if } x < 0
+\end{cases}
+\end{equation}
+
+% Left cases
+\begin{equation}
+\begin{rcases}
+  x^2 + y^2 = 1 \\
+  x + y = 0
+\end{rcases} \text{defines a curve}
+\end{equation}
+
+\end{document}
+```
+</CodeGroup>
+
+## Gathered and Centered Equations
+
+<CodeGroup>
+```latex gathered-equations.tex
+% Multiple centered lines with one number
+\begin{equation}
+\begin{gathered}
+  (a + b)^2 = a^2 + 2ab + b^2 \\
+  (a - b)^2 = a^2 - 2ab + b^2 \\
+  (a + b)(a - b) = a^2 - b^2
+\end{gathered}
+\end{equation}
+
+% Within text
+The identities $\begin{gathered}
+  \sin^2\theta + \cos^2\theta = 1 \\
+  \tan\theta = \frac{\sin\theta}{\cos\theta}
+\end{gathered}$ are fundamental.
+```
+</CodeGroup>
+
+## Advanced Alignment
+
+### Complex Alignment Patterns
+
+<CodeGroup>
+```latex complex-alignment.tex
+% Aligning equals signs and operators
+\begin{align}
+  f(x) &= x^2 + 2x + 1 \\
+       &= (x + 1)^2 \\
+       &> 0 \quad \text{for all } x \neq -1
+\end{align}
+
+% Multiple columns
+\begin{align}
+  a_1 &= b_1 + c_1 & a_2 &= b_2 + c_2 \\
+  d_1 &= e_1 + f_1 & d_2 &= e_2 + f_2
+\end{align}
+
+% Alignment with text
+\begin{align}
+  2x + 3 &= 7 & &\text{(given)} \\
+  2x &= 4 & &\text{(subtract 3)} \\
+  x &= 2 & &\text{(divide by 2)}
+\end{align}
+```
+</CodeGroup>
+
+### Intertext and Shortintertext
+
+<CodeGroup>
+```latex intertext.tex
+\begin{align}
+  a &= b + c \\
+  &= d + e + f
+\intertext{Now we substitute the known values:}
+  &= 1 + 2 + 3 \\
+  &= 6
+\end{align}
+
+% Shorter spacing
+\begin{align}
+  x^2 + y^2 &= r^2
+\shortintertext{and}
+  x &= r\cos\theta \\
+  y &= r\sin\theta
+\end{align}
+```
+</CodeGroup>
+
+## Boxed and Highlighted Equations
+
+<CodeGroup>
+```latex boxed-equations.tex
+% Simple box
+\begin{equation}
+\boxed{E = mc^2}
+\end{equation}
+
+% Colored box
+\usepackage{xcolor}
+\begin{equation}
+\colorbox{yellow}{$x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$}
+\end{equation}
+
+% Framed important result
+\begin{equation}
+\boxed{
+  \int_{-\infty}^{\infty} e^{-x^2} \, dx = \sqrt{\pi}
+}
+\end{equation}
+
+% Highlight part of equation
+\begin{equation}
+f(x) = \underbrace{x^2 + 2x}_{\text{quadratic}} + 
+       \overbrace{3x + 4}^{\text{linear}}
+\end{equation}
+```
+</CodeGroup>
+
+## Equation Spacing
+
+### Manual Spacing in Equations
+
+<CodeGroup>
+```latex equation-spacing.tex
+% Spacing commands
+\begin{align}
+  f(x) &= x^2+2x+1 \\              % No space
+  f(x) &= x^2 + 2x + 1 \\          % Normal space
+  f(x) &= x^2\,+\,2x\,+\,1 \\      % Thin space
+  f(x) &= x^2\:+\:2x\:+\:1 \\      % Medium space
+  f(x) &= x^2\;+\;2x\;+\;1 \\      % Thick space
+  f(x) &= x^2\quad+\quad2x\quad+\quad1  % Quad space
+\end{align}
+
+% Negative space
+\begin{equation}
+  \int\!\!\!\int f(x,y) \, dx \, dy  % Bring integral signs closer
+\end{equation}
+```
+</CodeGroup>
+
+## Best Practices
+
+<Tip>
+**Equation guidelines:**
+
+1. **Consistency**: Use the same alignment style throughout
+2. **Readability**: Don't over-align; prioritize clarity
+3. **References**: Label important equations for cross-referencing
+4. **Spacing**: Use `\,` before differentials in integrals
+5. **Breaking**: Break long equations at operators (+, -, =)
+6. **Grouping**: Use `subequations` for related equations
+</Tip>
+
+## Common Patterns
+
+### System of Equations
+
+<CodeGroup>
+```latex system-equations.tex
+% Using array
+\begin{equation}
+\left\{
+\begin{array}{rcrcrcr}
+  2x & + & 3y & - &  z & = & 4 \\
+   x & - &  y & + & 2z & = & 1 \\
+  3x & + &  y & - &  z & = & 0
+\end{array}
+\right.
+\end{equation}
+
+% Using aligned
+\begin{equation}
+\left\{
+\begin{aligned}
+  2x + 3y - z &= 4 \\
+  x - y + 2z &= 1 \\
+  3x + y - z &= 0
+\end{aligned}
+\right.
+\end{equation}
+```
+</CodeGroup>
+
+### Derivations
+
+<CodeGroup>
+```latex derivations.tex
+\begin{align}
+  (x + y)^2 &= (x + y)(x + y) \\
+            &= x(x + y) + y(x + y) \\
+            &= x^2 + xy + yx + y^2 \\
+            &= x^2 + 2xy + y^2
+\end{align}
+```
+</CodeGroup>
+
+## Quick Reference
+
+| Environment | Purpose | Numbering |
+|------------|---------|-----------|
+| `equation` | Single equation | Yes |
+| `equation*` | Single equation | No |
+| `align` | Multiple aligned equations | Yes (each) |
+| `align*` | Multiple aligned equations | No |
+| `split` | Split long equation | One number |
+| `multline` | Very long equation | One number |
+| `gather` | Centered equations | Yes (each) |
+| `cases` | Piecewise functions | Within equation |
+
+---
+
+<Info>
+**Next**: Explore [Mathematical symbols](/learn/latex/mathematics/symbols) for a comprehensive guide to mathematical notation in LaTeX.
+</Info>

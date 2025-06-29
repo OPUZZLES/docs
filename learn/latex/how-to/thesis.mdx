@@ -1,0 +1,716 @@
+---
+title: Writing a Thesis or Dissertation in LaTeX
+description: Complete guide to writing academic theses and dissertations in LaTeX. Learn structure, formatting, bibliography management, and university requirements.
+---
+
+import { CodeGroup, Info, Tip, Warning, Card, CardGroup } from '/snippets/components.mdx'
+
+Master the art of writing professional theses and dissertations using LaTeX. This comprehensive guide covers everything from initial setup to final submission.
+
+<Info>
+**Quick start**: LaTeX Cloud Studio provides thesis templates for various universities. Select "Thesis/Dissertation" when creating a new project.
+</Info>
+
+## Thesis Document Structure
+
+### Basic Thesis Setup
+
+<CodeGroup>
+```latex basic-thesis.tex
+\documentclass[12pt,a4paper,oneside]{book}
+% or use report class for shorter documents
+% \documentclass[12pt,a4paper]{report}
+
+% Essential packages
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[margin=1.5in]{geometry}
+\usepackage{setspace}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{hyperref}
+\usepackage[backend=biber,style=authoryear]{biblatex}
+\addbibresource{references.bib}
+
+% Line spacing
+\onehalfspacing % or \doublespacing
+
+% Theorem environments
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\begin{document}
+
+% Front matter
+\frontmatter
+\input{titlepage}
+\input{abstract}
+\input{acknowledgments}
+\tableofcontents
+\listoffigures
+\listoftables
+
+% Main matter
+\mainmatter
+\input{chapters/introduction}
+\input{chapters/literature_review}
+\input{chapters/methodology}
+\input{chapters/results}
+\input{chapters/discussion}
+\input{chapters/conclusion}
+
+% Back matter
+\appendix
+\input{appendices/appendixA}
+\input{appendices/appendixB}
+
+\backmatter
+\printbibliography[heading=bibintoc]
+
+\end{document}
+```
+</CodeGroup>
+
+### Title Page
+
+<CodeGroup>
+```latex titlepage.tex
+% titlepage.tex
+\begin{titlepage}
+\centering
+\vspace*{1cm}
+
+\Huge
+\textbf{Your Thesis Title}
+
+\vspace{0.5cm}
+\LARGE
+Subtitle if Needed
+
+\vspace{1.5cm}
+
+\textbf{Author Name}
+
+\vfill
+
+A thesis presented for the degree of\\
+Doctor of Philosophy
+
+\vspace{0.8cm}
+
+\includegraphics[width=0.4\textwidth]{university-logo}
+
+\Large
+Department of Computer Science\\
+University Name\\
+Month Year
+
+\end{titlepage}
+```
+</CodeGroup>
+
+### Abstract
+
+<CodeGroup>
+```latex abstract.tex
+% abstract.tex
+\chapter*{Abstract}
+\addcontentsline{toc}{chapter}{Abstract}
+
+This thesis investigates... [300-500 words summarizing your research]
+
+The main contributions of this work are:
+\begin{itemize}
+  \item First major contribution
+  \item Second major contribution
+  \item Third major contribution
+\end{itemize}
+
+\textbf{Keywords:} keyword1, keyword2, keyword3, keyword4, keyword5
+```
+</CodeGroup>
+
+## Chapter Organization
+
+### Chapter Structure
+
+<CodeGroup>
+```latex chapter-template.tex
+% chapters/introduction.tex
+\chapter{Introduction}
+\label{chap:introduction}
+
+\section{Background and Motivation}
+\label{sec:background}
+
+The field of study has seen significant developments...
+
+\section{Problem Statement}
+\label{sec:problem}
+
+This research addresses the following key problems:
+\begin{enumerate}
+  \item First problem description
+  \item Second problem description
+\end{enumerate}
+
+\section{Research Questions}
+\label{sec:questions}
+
+This thesis aims to answer:
+\begin{itemize}
+  \item \textbf{RQ1:} How does...?
+  \item \textbf{RQ2:} What is the impact of...?
+  \item \textbf{RQ3:} Can we develop...?
+\end{itemize}
+
+\section{Contributions}
+\label{sec:contributions}
+
+The main contributions are:
+\begin{enumerate}
+  \item \textbf{Novel algorithm:} We propose...
+  \item \textbf{Empirical analysis:} We conduct...
+  \item \textbf{Theoretical framework:} We develop...
+\end{enumerate}
+
+\section{Thesis Organization}
+\label{sec:organization}
+
+The remainder of this thesis is organized as follows:
+\begin{itemize}
+  \item Chapter~\ref{chap:literature} reviews...
+  \item Chapter~\ref{chap:methodology} presents...
+  \item Chapter~\ref{chap:results} discusses...
+  \item Chapter~\ref{chap:conclusion} concludes...
+\end{itemize}
+```
+</CodeGroup>
+
+### Literature Review
+
+<CodeGroup>
+```latex literature-review.tex
+\chapter{Literature Review}
+\label{chap:literature}
+
+\section{Theoretical Background}
+\label{sec:theory}
+
+The foundational work by \textcite{smith2010} established...
+
+\subsection{Classical Approaches}
+Early research by \textcite{jones2005,brown2008} focused on...
+
+\subsection{Recent Developments}
+More recently, \textcite{wilson2020} proposed...
+
+\section{Related Work}
+\label{sec:related}
+
+\begin{table}[htbp]
+\centering
+\caption{Comparison of existing approaches}
+\label{tab:comparison}
+\begin{tabular}{lcccc}
+\toprule
+Method & Accuracy & Speed & Scalability & Year \\
+\midrule
+\citeauthor{smith2010} & High & Low & Limited & 2010 \\
+\citeauthor{jones2015} & Medium & High & Good & 2015 \\
+\citeauthor{brown2018} & High & Medium & Excellent & 2018 \\
+Our approach & Very High & High & Excellent & 2024 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Research Gap}
+\label{sec:gap}
+
+Despite these advances, several limitations remain:
+\begin{enumerate}
+  \item No existing work addresses...
+  \item Current methods fail to consider...
+  \item The scalability issue remains unsolved...
+\end{enumerate}
+```
+</CodeGroup>
+
+## Managing Large Documents
+
+### Multi-file Organization
+
+<CodeGroup>
+```latex thesis-structure.txt
+thesis/
+├── main.tex
+├── references.bib
+├── preamble/
+│   ├── packages.tex
+│   ├── commands.tex
+│   └── settings.tex
+├── frontmatter/
+│   ├── titlepage.tex
+│   ├── abstract.tex
+│   ├── acknowledgments.tex
+│   └── dedication.tex
+├── chapters/
+│   ├── introduction.tex
+│   ├── literature_review.tex
+│   ├── methodology.tex
+│   ├── results.tex
+│   ├── discussion.tex
+│   └── conclusion.tex
+├── appendices/
+│   ├── appendixA.tex
+│   └── appendixB.tex
+└── figures/
+    ├── chapter1/
+    ├── chapter2/
+    └── ...
+```
+</CodeGroup>
+
+### Main File with Includes
+
+<CodeGroup>
+```latex main-modular.tex
+\documentclass[12pt,a4paper]{book}
+
+% Load all packages and settings
+\input{preamble/packages}
+\input{preamble/commands}
+\input{preamble/settings}
+
+\begin{document}
+
+% Use \includeonly for faster compilation during writing
+% \includeonly{chapters/methodology}
+
+\frontmatter
+\include{frontmatter/titlepage}
+\include{frontmatter/abstract}
+\include{frontmatter/acknowledgments}
+\tableofcontents
+\listoffigures
+\listoftables
+
+\mainmatter
+\include{chapters/introduction}
+\include{chapters/literature_review}
+\include{chapters/methodology}
+\include{chapters/results}
+\include{chapters/discussion}
+\include{chapters/conclusion}
+
+\appendix
+\include{appendices/appendixA}
+\include{appendices/appendixB}
+
+\backmatter
+\printbibliography[heading=bibintoc]
+
+\end{document}
+```
+</CodeGroup>
+
+## Figures and Tables
+
+### Managing Figures
+
+<CodeGroup>
+```latex thesis-figures.tex
+% In preamble/packages.tex
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{float}
+
+% Set figure path
+\graphicspath{{figures/}{figures/chapter1/}{figures/chapter2/}}
+
+% In chapters
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.8\textwidth]{experiment-setup}
+  \caption[Short caption for list]{Detailed caption explaining the experimental setup and all relevant parameters for understanding the figure.}
+  \label{fig:experiment-setup}
+\end{figure}
+
+% Multiple subfigures
+\begin{figure}[htbp]
+  \centering
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{result1}
+    \caption{First result}
+    \label{fig:result1}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{result2}
+    \caption{Second result}
+    \label{fig:result2}
+  \end{subfigure}
+  \caption{Comparison of results under different conditions}
+  \label{fig:results-comparison}
+\end{figure}
+```
+</CodeGroup>
+
+### Complex Tables
+
+<CodeGroup>
+```latex thesis-tables.tex
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{siunitx}
+
+\begin{table}[htbp]
+\centering
+\caption{Experimental results across different datasets}
+\label{tab:results}
+\begin{tabular}{l*{4}{S[table-format=2.1]}}
+\toprule
+\multirow{2}{*}{Method} & \multicolumn{2}{c}{Dataset A} & \multicolumn{2}{c}{Dataset B} \\
+\cmidrule(lr){2-3} \cmidrule(lr){4-5}
+& {Precision} & {Recall} & {Precision} & {Recall} \\
+\midrule
+Baseline & 82.3 & 79.1 & 75.6 & 81.2 \\
+Method 1 & 85.7 & 83.4 & 79.2 & 84.5 \\
+Method 2 & 87.2 & 85.9 & 81.8 & 86.3 \\
+\textbf{Proposed} & \textbf{91.4} & \textbf{89.6} & \textbf{86.7} & \textbf{90.1} \\
+\bottomrule
+\end{tabular}
+\end{table}
+```
+</CodeGroup>
+
+## Bibliography Management
+
+### Using BibLaTeX
+
+<CodeGroup>
+```latex bibliography-setup.tex
+% In preamble
+\usepackage[
+  backend=biber,
+  style=authoryear, % or numeric, alphabetic, etc.
+  sorting=nyt,
+  maxbibnames=99,
+  maxcitenames=2,
+  uniquelist=false,
+  url=false,
+  doi=true,
+  isbn=false
+]{biblatex}
+
+\addbibresource{references.bib}
+
+% Custom citation commands
+\DeclareCiteCommand{\citeauthor}
+  {\boolfalse{citetracker}%
+   \boolfalse{pagetracker}%
+   \usebibmacro{prenote}}
+  {\ifciteindex
+     {\indexnames{labelname}}
+     {}%
+   \printnames{labelname}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+```
+
+```bibtex references.bib
+@phdthesis{smith2020thesis,
+  author = {Smith, John},
+  title = {Advanced Machine Learning Techniques for Natural Language Processing},
+  school = {Massachusetts Institute of Technology},
+  year = {2020},
+  type = {PhD thesis}
+}
+
+@article{jones2021,
+  author = {Jones, Alice and Brown, Bob},
+  title = {Deep Learning Approaches to Computer Vision},
+  journal = {Journal of Artificial Intelligence Research},
+  volume = {45},
+  number = {3},
+  pages = {123--156},
+  year = {2021},
+  doi = {10.1234/jair.2021.45.123}
+}
+
+@inproceedings{wilson2022,
+  author = {Wilson, Carol and Davis, David},
+  title = {Efficient Algorithms for Large-Scale Data Processing},
+  booktitle = {Proceedings of the International Conference on Machine Learning},
+  year = {2022},
+  pages = {234--245},
+  publisher = {PMLR}
+}
+```
+</CodeGroup>
+
+### Citation Styles
+
+<CodeGroup>
+```latex citation-examples.tex
+% Different citation styles
+According to \textcite{smith2020thesis}, the problem...
+This was confirmed by recent studies \parencite{jones2021,wilson2022}.
+\citeauthor{brown2019} argues that...
+In \citeyear{taylor2023}, researchers demonstrated...
+
+% For numeric styles
+As shown in \cite{ref1}, the algorithm...
+Multiple studies \cite{ref1,ref2,ref3} confirm...
+
+% Footnote citations
+Some researchers claim this\footcite{smith2020thesis}.
+
+% Full citations in text
+\fullcite{jones2021}
+```
+</CodeGroup>
+
+## Cross-References
+
+### Advanced Referencing
+
+<CodeGroup>
+```latex cross-references.tex
+% Load packages
+\usepackage{hyperref}
+\usepackage{cleveref}
+
+% Configure hyperref
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  citecolor=blue,
+  urlcolor=blue,
+  bookmarks=true,
+  bookmarksopen=true,
+  pdftitle={Your Thesis Title},
+  pdfauthor={Your Name},
+  pdfsubject={PhD Thesis},
+  pdfkeywords={keyword1, keyword2, keyword3}
+}
+
+% Configure cleveref
+\crefname{figure}{Figure}{Figures}
+\crefname{table}{Table}{Tables}
+\crefname{equation}{Equation}{Equations}
+\crefname{chapter}{Chapter}{Chapters}
+\crefname{section}{Section}{Sections}
+
+% Usage examples
+As shown in \cref{fig:results}, the performance...
+\Cref{chap:methodology} describes our approach...
+The results in \cref{tab:comparison,tab:results} demonstrate...
+\Cref{eq:main,eq:secondary,eq:tertiary} define...
+
+% Range references
+\crefrange{fig:first}{fig:last} show the progression...
+Chapters~\ref{chap:intro}--\ref{chap:conclusion} cover...
+```
+</CodeGroup>
+
+## Formatting Requirements
+
+### University-Specific Formatting
+
+<CodeGroup>
+```latex university-format.tex
+% Page margins (check your university's requirements)
+\usepackage[
+  top=1.5in,
+  bottom=1.5in,
+  left=1.5in,
+  right=1in,
+  headheight=15pt
+]{geometry}
+
+% Line spacing
+\usepackage{setspace}
+\doublespacing % Most universities require double spacing
+
+% Page numbering
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+
+% Chapter heading format
+\usepackage{titlesec}
+\titleformat{\chapter}[display]
+  {\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\Huge}
+\titlespacing*{\chapter}{0pt}{0pt}{40pt}
+
+% Table of contents depth
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{3}
+```
+</CodeGroup>
+
+### Copyright and Declaration
+
+<CodeGroup>
+```latex copyright-page.tex
+\chapter*{Declaration}
+\addcontentsline{toc}{chapter}{Declaration}
+
+I declare that this thesis is my own work and has not been submitted in any form for another degree or diploma at any university or other institution of tertiary education. Information derived from the published or unpublished work of others has been acknowledged in the text and a list of references is given.
+
+\vspace{2cm}
+\noindent
+\begin{tabular}{@{}ll}
+Signature: & \makebox[3in]{\hrulefill} \\[0.5cm]
+Date: & \makebox[3in]{\hrulefill}
+\end{tabular}
+
+\newpage
+
+\chapter*{Copyright}
+\addcontentsline{toc}{chapter}{Copyright}
+
+\textcopyright\ \the\year\ Author Name
+
+All rights reserved. No part of this publication may be reproduced, stored in a retrieval system, or transmitted in any form or by any means without the prior written permission of the author.
+```
+</CodeGroup>
+
+## Appendices
+
+### Complex Appendices
+
+<CodeGroup>
+```latex appendices.tex
+% appendices/appendixA.tex
+\chapter{Mathematical Proofs}
+\label{app:proofs}
+
+\section{Proof of Theorem~\ref{thm:main}}
+
+\begin{proof}
+Let $X$ be a compact metric space and $f: X \to X$ be continuous...
+[detailed mathematical proof]
+\end{proof}
+
+% appendices/appendixB.tex
+\chapter{Supplementary Data}
+\label{app:data}
+
+\section{Dataset Description}
+
+\begin{longtable}{lp{8cm}r}
+\caption{Detailed dataset characteristics} \\
+\toprule
+Dataset & Description & Size \\
+\midrule
+\endfirsthead
+\multicolumn{3}{c}{\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
+\toprule
+Dataset & Description & Size \\
+\midrule
+\endhead
+\midrule
+\multicolumn{3}{r}{\textit{Continued on next page}} \\
+\endfoot
+\bottomrule
+\endlastfoot
+% Table data
+Dataset A & Collection of text documents from... & 10,000 \\
+Dataset B & Images collected from... & 50,000 \\
+% ... more rows
+\end{longtable}
+```
+</CodeGroup>
+
+## Best Practices
+
+<Tip>
+**Thesis writing guidelines:**
+
+1. **Start early**: Set up your document structure before writing
+2. **Version control**: Use Git to track changes
+3. **Regular backups**: Keep multiple backups in different locations
+4. **Consistent style**: Define custom commands for repeated elements
+5. **Compile often**: Catch errors early
+6. **Separate content**: One file per chapter
+7. **Comments**: Document complex LaTeX code
+8. **Templates**: Check if your university provides a template
+</Tip>
+
+## Submission Checklist
+
+<Warning>
+**Before submitting your thesis:**
+
+- [ ] Check university formatting requirements
+- [ ] Verify margins, spacing, and font size
+- [ ] Ensure all citations are included
+- [ ] Check figure and table numbering
+- [ ] Verify page numbers are correct
+- [ ] Include all required sections
+- [ ] Run spell check
+- [ ] Check PDF/A compliance if required
+- [ ] Verify hyperlinks work correctly
+- [ ] Test print quality
+</Warning>
+
+## Quick Templates
+
+### Minimal Thesis Template
+
+```latex
+\documentclass[12pt,a4paper]{report}
+\usepackage[margin=1.5in]{geometry}
+\usepackage{setspace}
+\doublespacing
+\usepackage[backend=biber]{biblatex}
+\addbibresource{references.bib}
+
+\title{Thesis Title}
+\author{Your Name}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Abstract text...
+\end{abstract}
+
+\tableofcontents
+\listoffigures
+\listoftables
+
+\chapter{Introduction}
+\chapter{Literature Review}
+\chapter{Methodology}
+\chapter{Results}
+\chapter{Conclusion}
+
+\printbibliography
+
+\appendix
+\chapter{Additional Material}
+
+\end{document}
+```
+
+---
+
+<Info>
+**Next**: Explore the [Reference section](/learn/reference/commands) for comprehensive LaTeX command documentation.
+</Info>

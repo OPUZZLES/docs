@@ -1,0 +1,501 @@
+---
+title: Advanced Paragraph Spacing
+description: Master paragraph spacing, indentation, line spacing, and vertical space control in LaTeX for professional document layout.
+---
+
+import { CodeGroup, Info, Tip, Warning } from '/snippets/components.mdx'
+
+Proper spacing is crucial for readable, professional documents. This guide covers advanced techniques for controlling paragraph spacing, indentation, line spacing, and vertical space in LaTeX.
+
+<Info>
+**Key principle**: LaTeX handles most spacing automatically. Only adjust when necessary for specific formatting requirements.
+</Info>
+
+## Paragraph Spacing Basics
+
+### Default Behavior
+
+LaTeX's default paragraph handling:
+- First line indented
+- No extra space between paragraphs
+- Justified text alignment
+
+<CodeGroup>
+```latex default-paragraphs.tex
+\documentclass{article}
+\begin{document}
+
+This is the first paragraph. It demonstrates LaTeX's default 
+formatting with first-line indentation and no extra spacing 
+between paragraphs.
+
+This is the second paragraph. Notice how it starts with an 
+indent but has no extra vertical space separating it from 
+the previous paragraph.
+
+\end{document}
+```
+</CodeGroup>
+
+### Controlling Paragraph Spacing
+
+<CodeGroup>
+```latex paragraph-spacing.tex
+\documentclass{article}
+
+% Add space between paragraphs
+\setlength{\parskip}{1em}
+
+% Remove first-line indent
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+This paragraph has no indentation and is followed by extra space.
+
+This paragraph also has no indentation. The space between 
+paragraphs makes the document structure clearer.
+
+% Temporarily change spacing
+{\setlength{\parskip}{2em}
+These paragraphs have even more space between them.
+
+See how the larger gap creates stronger visual separation.
+}
+
+Back to normal spacing here.
+
+\end{document}
+```
+</CodeGroup>
+
+## Line Spacing
+
+### Basic Line Spacing Commands
+
+<CodeGroup>
+```latex line-spacing.tex
+\documentclass{article}
+\usepackage{setspace}
+\begin{document}
+
+% Single spacing (default)
+\singlespacing
+This text uses single spacing, which is the LaTeX default.
+
+% One and a half spacing
+\onehalfspacing
+This text uses one-and-a-half spacing, providing more space 
+between lines for better readability.
+
+% Double spacing
+\doublespacing
+This text uses double spacing, often required for academic 
+manuscripts and drafts.
+
+% Custom spacing
+\setstretch{1.25}
+This text uses custom 1.25 line spacing.
+
+% Return to single
+\singlespacing
+
+\end{document}
+```
+</CodeGroup>
+
+### Local Line Spacing
+
+<CodeGroup>
+```latex local-spacing.tex
+\documentclass{article}
+\usepackage{setspace}
+\begin{document}
+
+Normal spacing paragraph here.
+
+\begin{doublespace}
+This paragraph uses double spacing. It's useful for quotes 
+or sections that need emphasis through spacing.
+\end{doublespace}
+
+Back to normal spacing.
+
+% Inline spacing change
+{\onehalfspacing
+This paragraph temporarily uses 1.5 spacing without affecting 
+the rest of the document.
+}
+
+\end{document}
+```
+</CodeGroup>
+
+## Vertical Spacing
+
+### Adding Vertical Space
+
+<CodeGroup>
+```latex vertical-space.tex
+\documentclass{article}
+\begin{document}
+
+First paragraph.
+
+\vspace{1cm}
+This paragraph has 1cm of extra space above it.
+
+\vspace{10pt}
+This has 10 points of space above.
+
+\bigskip
+The bigskip command adds a large vertical space.
+
+\medskip
+The medskip command adds medium vertical space.
+
+\smallskip
+The smallskip command adds small vertical space.
+
+% Negative space (move up)
+\vspace{-5mm}
+This paragraph is moved up by 5mm.
+
+\end{document}
+```
+</CodeGroup>
+
+### Flexible Vertical Space
+
+<CodeGroup>
+```latex flexible-space.tex
+% Fixed space
+\vspace{2cm}
+
+% Flexible space (can shrink/stretch)
+\vspace{2cm plus 1cm minus 0.5cm}
+
+% Fill remaining space
+\vfill
+
+% Multiple fills for proportional spacing
+Text at top
+\vfill
+Text in middle (1/3 down)
+\vfill
+\vfill
+Text at bottom
+```
+</CodeGroup>
+
+## Indentation Control
+
+### Managing Paragraph Indentation
+
+<CodeGroup>
+```latex indentation.tex
+\documentclass{article}
+\begin{document}
+
+% Default indented paragraph
+This paragraph has the default indentation.
+
+\noindent
+This paragraph has no indentation because of the noindent command.
+
+\indent
+This paragraph is indented even if global indentation is turned off.
+
+% Change indent size
+\setlength{\parindent}{2cm}
+This paragraph has a 2cm indent.
+
+% Remove all indentation
+\setlength{\parindent}{0pt}
+Now all paragraphs have no indentation by default.
+
+\end{document}
+```
+</CodeGroup>
+
+### Hanging Indentation
+
+<CodeGroup>
+```latex hanging-indent.tex
+\documentclass{article}
+\begin{document}
+
+% Simple hanging indent
+\hangindent=2cm
+\hangafter=1
+This paragraph has a hanging indent. The first line starts at the 
+left margin, but all subsequent lines are indented by 2cm. This is 
+useful for bibliographies and lists.
+
+% Negative hanging indent
+\hangindent=-2cm
+\hangafter=1
+This paragraph has a reverse hanging indent. The first line is 
+indented to the right, while subsequent lines extend to the left 
+margin.
+
+% Multiple line hanging
+\hangindent=1.5cm
+\hangafter=2
+This paragraph's hanging indent starts after the second line. 
+The first two lines are normal, then all following lines are 
+indented. This creates an interesting visual effect.
+
+\end{document}
+```
+</CodeGroup>
+
+## Special Spacing Environments
+
+### Quote and Quotation Environments
+
+<CodeGroup>
+```latex quotes.tex
+\documentclass{article}
+\begin{document}
+
+Regular paragraph before the quote.
+
+\begin{quote}
+This is a short quote. It's indented from both margins and 
+has no paragraph indentation. Perfect for short excerpts.
+\end{quote}
+
+\begin{quotation}
+This is a longer quotation environment. Unlike the quote 
+environment, it indents the first line of each paragraph.
+
+This is the second paragraph in the quotation, showing 
+the first-line indentation.
+\end{quotation}
+
+Regular text continues here.
+
+\end{document}
+```
+</CodeGroup>
+
+### Custom Spacing Environments
+
+<CodeGroup>
+```latex custom-environments.tex
+\documentclass{article}
+
+% Define custom environment
+\newenvironment{widespace}
+  {\par\vspace{1em}\begin{minipage}{\textwidth}\setstretch{1.5}}
+  {\end{minipage}\vspace{1em}\par}
+
+\begin{document}
+
+Normal spacing paragraph.
+
+\begin{widespace}
+This custom environment adds vertical space before and after, 
+plus increases line spacing. It's useful for important passages 
+that need visual emphasis.
+\end{widespace}
+
+Back to normal spacing.
+
+\end{document}
+```
+</CodeGroup>
+
+## List Spacing
+
+### Controlling List Spacing
+
+<CodeGroup>
+```latex list-spacing.tex
+\documentclass{article}
+\usepackage{enumitem}
+\begin{document}
+
+% Compact list
+\begin{itemize}[noitemsep,topsep=0pt]
+\item First item
+\item Second item
+\item Third item
+\end{itemize}
+
+% Wide spacing
+\begin{enumerate}[itemsep=1em,topsep=1em]
+\item First item with extra space
+\item Second item with extra space
+\item Third item with extra space
+\end{enumerate}
+
+% Custom spacing
+\begin{itemize}[
+  topsep=5pt,      % Space before list
+  partopsep=0pt,   % Space before list if new paragraph
+  itemsep=10pt,    % Space between items
+  parsep=5pt,      % Space between paragraphs within item
+  leftmargin=2cm   % Indent from left
+]
+\item First customized item
+\item Second customized item
+\end{itemize}
+
+\end{document}
+```
+</CodeGroup>
+
+## Page Layout Spacing
+
+### Margins and Text Area
+
+<CodeGroup>
+```latex page-layout.tex
+\documentclass{article}
+\usepackage[
+  top=2.5cm,
+  bottom=2.5cm,
+  left=3cm,
+  right=2cm,
+  headheight=15pt
+]{geometry}
+
+% Or use individual commands
+% \setlength{\topmargin}{0pt}
+% \setlength{\textheight}{9in}
+% \setlength{\textwidth}{6.5in}
+% \setlength{\oddsidemargin}{0pt}
+% \setlength{\evensidemargin}{0pt}
+
+\begin{document}
+Content with custom margins...
+\end{document}
+```
+</CodeGroup>
+
+### Section Spacing
+
+<CodeGroup>
+```latex section-spacing.tex
+\documentclass{article}
+\usepackage{titlesec}
+
+% Customize section spacing
+\titlespacing{\section}
+  {0pt}      % Left indent
+  {12pt}     % Space before
+  {6pt}      % Space after
+
+\titlespacing{\subsection}
+  {0pt}{8pt}{4pt}
+
+\begin{document}
+
+\section{First Section}
+Text after section heading.
+
+\subsection{Subsection}
+Text after subsection.
+
+\end{document}
+```
+</CodeGroup>
+
+## Advanced Techniques
+
+### Baseline Skip Control
+
+<CodeGroup>
+```latex baseline-skip.tex
+\documentclass{article}
+\begin{document}
+
+% Normal baseline skip
+Normal text with default spacing between lines.
+
+% Increase baseline skip
+{\setlength{\baselineskip}{20pt}
+This text has increased baseline skip, creating more space 
+between lines without changing the font size.}
+
+% Proportional baseline skip
+{\setlength{\baselineskip}{1.5\baselineskip}
+This uses proportional spacing based on the current value.}
+
+\end{document}
+```
+</CodeGroup>
+
+### Rubber Lengths
+
+<CodeGroup>
+```latex rubber-lengths.tex
+% Stretchable space
+\hspace{1cm plus 2cm minus 0.5cm}
+
+% Paragraph skip with flexibility
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+
+% Flexible vertical space
+\vspace{1cm plus 0.5cm minus 0.2cm}
+
+% Fill space examples
+Text\hfill Text  % Horizontal fill
+\vfill          % Vertical fill
+```
+</CodeGroup>
+
+## Troubleshooting Spacing Issues
+
+### Common Problems and Solutions
+
+<CodeGroup>
+```latex spacing-fixes.tex
+% Unwanted page breaks
+\begin{samepage}
+Keep this content together on one page.
+\end{samepage}
+
+% Orphan/widow control
+\widowpenalty=10000
+\clubpenalty=10000
+
+% Prevent spacing at page top
+\raggedbottom  % Don't stretch vertical space
+
+% Fix spacing after floats
+\clearpage     % Force new page after floats
+```
+</CodeGroup>
+
+## Best Practices
+
+<Tip>
+**Spacing guidelines:**
+
+1. **Consistency**: Use the same spacing throughout similar elements
+2. **Readability first**: Don't sacrifice readability for density
+3. **Document class**: Choose appropriate class for spacing defaults
+4. **Global settings**: Set document-wide spacing in preamble
+5. **Local changes**: Use grouping `{}` for temporary changes
+</Tip>
+
+## Quick Reference
+
+| Command | Purpose | Example |
+|---------|---------|---------|
+| `\parskip` | Space between paragraphs | `\setlength{\parskip}{1em}` |
+| `\parindent` | Paragraph indentation | `\setlength{\parindent}{0pt}` |
+| `\baselineskip` | Space between lines | `\setlength{\baselineskip}{15pt}` |
+| `\vspace{}` | Vertical space | `\vspace{1cm}` |
+| `\hspace{}` | Horizontal space | `\hspace{2em}` |
+| `\bigskip` | Large vertical space | `\bigskip` |
+| `\noindent` | No indent for paragraph | `\noindent Text` |
+
+---
+
+<Info>
+**Next**: Explore [Font selection and customization](/learn/latex/fonts) to enhance your document's typography.
+</Info>

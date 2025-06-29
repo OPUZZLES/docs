@@ -1,0 +1,434 @@
+---
+title: LaTeX Article Template
+description: Professional article template for academic papers, reports, and general documents. Includes sections, bibliography, and formatting.
+---
+
+import { CodeGroup, Info, Tip, Warning, Card, CardGroup } from '/snippets/components.mdx'
+
+A professional article template perfect for academic papers, technical reports, and general documents. This template includes all the essential elements you need.
+
+<Info>
+**Download**: [article-template.tex](/templates/files/article-template.tex)  
+**Preview**: [article-template.pdf](/templates/files/article-template.pdf)  
+**License**: Free to use and modify
+</Info>
+
+## Quick Start
+
+Copy this template to get started immediately:
+
+<CodeGroup>
+```latex article-template.tex
+\documentclass[11pt,a4paper]{article}
+
+% Essential packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[margin=1in]{geometry}
+\usepackage{enumitem}
+\usepackage{cite}
+
+% Metadata
+\title{Your Article Title Here}
+\author{
+    First Author\thanks{Department of Mathematics, University Name} \\
+    \texttt{first.author@email.com} \\
+    \and
+    Second Author\thanks{Department of Physics, Another University} \\
+    \texttt{second.author@email.com}
+}
+\date{\today}
+
+% Custom commands (optional)
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This abstract should summarize your article in 150-250 words. Include the main objectives, methodology, key findings, and conclusions. Make it self-contained so readers can understand your work without reading the full article.
+
+\textbf{Keywords:} keyword1, keyword2, keyword3, keyword4
+\end{abstract}
+
+\section{Introduction}
+
+Begin your article with context and motivation. Explain why this topic is important and what problem you're addressing. Include relevant background information and cite previous work \cite{example2023}.
+
+State your main contributions clearly:
+\begin{itemize}
+    \item First contribution
+    \item Second contribution  
+    \item Third contribution
+\end{itemize}
+
+\section{Background and Related Work}
+
+Provide necessary background information and review related literature. This helps readers understand the context of your work.
+
+\subsection{Theoretical Background}
+
+Explain key concepts and theories. For example, consider the equation:
+\begin{equation}
+    E = mc^2
+    \label{eq:einstein}
+\end{equation}
+
+As shown in Equation \ref{eq:einstein}, energy and mass are related...
+
+\subsection{Previous Approaches}
+
+Discuss how others have approached this problem. Compare and contrast different methods, highlighting their strengths and limitations.
+
+\section{Methodology}
+
+\subsection{Problem Formulation}
+
+Clearly define your problem. Use mathematical notation when appropriate:
+
+\begin{definition}
+Let $X$ be a set and $f: X \to \R$ be a function. We say $f$ is \emph{continuous} if...
+\end{definition}
+
+\subsection{Proposed Solution}
+
+Describe your approach in detail. Use algorithms, flowcharts, or diagrams as needed.
+
+\begin{theorem}
+Under conditions A and B, our method converges in $O(n \log n)$ time.
+\end{theorem}
+
+\begin{proof}
+The proof follows from...
+\end{proof}
+
+\section{Results and Discussion}
+
+\subsection{Experimental Setup}
+
+Describe your experiments, data, and evaluation metrics.
+
+\subsection{Results}
+
+Present your findings using tables and figures:
+
+\begin{table}[h]
+\centering
+\caption{Comparison of different methods}
+\label{tab:results}
+\begin{tabular}{|l|c|c|c|}
+\hline
+\textbf{Method} & \textbf{Accuracy} & \textbf{Speed} & \textbf{Memory} \\
+\hline
+Baseline & 85.2\% & 1.0x & 100 MB \\
+Our Method & \textbf{92.7\%} & 0.8x & 95 MB \\
+State-of-art & 91.3\% & 0.5x & 150 MB \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{figure1.png}
+\caption{Performance comparison across different datasets}
+\label{fig:performance}
+\end{figure}
+
+\subsection{Discussion}
+
+Analyze your results. Discuss:
+\begin{itemize}
+    \item Why your method works
+    \item Limitations and edge cases
+    \item Comparison with existing approaches
+    \item Practical implications
+\end{itemize}
+
+\section{Conclusion}
+
+Summarize your key findings and contributions. Discuss the broader impact of your work and suggest future research directions.
+
+\subsection{Future Work}
+
+Outline potential extensions:
+\begin{enumerate}
+    \item Extension to other domains
+    \item Improving computational efficiency
+    \item Addressing current limitations
+\end{enumerate}
+
+\section*{Acknowledgments}
+
+Thank funding agencies, collaborators, and anyone who helped with the work.
+
+% Bibliography
+\bibliographystyle{plain}
+\bibliography{references}
+
+% Or use manual bibliography
+\begin{thebibliography}{9}
+\bibitem{example2023}
+Author, A. B., 
+\textit{Title of the Article}, 
+Journal Name, vol. 10, no. 2, pp. 123-145, 2023.
+
+\bibitem{book2022}
+Writer, C. D.,
+\textit{Book Title}, 
+Publisher, 2nd ed., 2022.
+\end{thebibliography}
+
+% Appendix (optional)
+\appendix
+\section{Additional Proofs}
+
+Include lengthy proofs or technical details that would interrupt the main flow.
+
+\section{Implementation Details}
+
+Provide code snippets or algorithms:
+
+\begin{verbatim}
+def algorithm(data):
+    # Process data
+    result = process(data)
+    return result
+\end{verbatim}
+
+\end{document}
+```
+</CodeGroup>
+
+## Template Features
+
+### Document Structure
+- Professional formatting with 11pt font on A4 paper
+- Proper margins and spacing
+- Automatic section numbering
+- Table of contents support (add `\tableofcontents`)
+
+### Mathematics Support
+- Full AMS math packages included
+- Theorem environments ready to use
+- Custom math commands defined
+
+### Bibliography
+- Two options: BibTeX or manual bibliography
+- Proper citation formatting
+- Hyperlinked references
+
+### Figures and Tables
+- Centered figures with captions
+- Professional table formatting
+- Cross-referencing support
+
+## Customization Guide
+
+### Changing Document Class Options
+
+```latex
+% Two-column layout
+\documentclass[11pt,a4paper,twocolumn]{article}
+
+% Draft mode (shows overfull boxes)
+\documentclass[11pt,a4paper,draft]{article}
+
+% US Letter paper
+\documentclass[11pt,letterpaper]{article}
+```
+
+### Adding More Packages
+
+<CodeGroup>
+```latex packages.tex
+% For code listings
+\usepackage{listings}
+\usepackage{xcolor}
+
+% For better tables
+\usepackage{booktabs}
+\usepackage{multirow}
+
+% For subfigures
+\usepackage{subcaption}
+
+% For algorithms
+\usepackage{algorithm}
+\usepackage{algorithmic}
+```
+</CodeGroup>
+
+### Custom Theorem Environments
+
+<CodeGroup>
+```latex theorems.tex
+% Define custom environments
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{note}[theorem]{Note}
+```
+</CodeGroup>
+
+### Header and Footer Customization
+
+<CodeGroup>
+```latex headers.tex
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+% Clear default headers
+\fancyhf{}
+
+% Custom headers
+\fancyhead[L]{\small Your Article Title}
+\fancyhead[R]{\small \thepage}
+
+% Custom footers
+\fancyfoot[C]{\small Draft Version - \today}
+
+% Header line
+\renewcommand{\headrulewidth}{0.4pt}
+```
+</CodeGroup>
+
+## Best Practices
+
+<Tip>
+**Structure Tips:**
+- Keep sections balanced in length
+- Use subsections for better organization
+- Number equations only when referenced
+- Place figures and tables near their first reference
+</Tip>
+
+### Writing Style
+1. **Abstract**: Make it self-contained and informative
+2. **Introduction**: Start broad, then narrow to your specific problem
+3. **Methodology**: Be detailed enough for reproduction
+4. **Results**: Let data speak first, then interpret
+5. **Conclusion**: No new information, only synthesis
+
+### Common Pitfalls to Avoid
+
+<Warning>
+- Don't use too many packages (conflicts can occur)
+- Avoid manual spacing (`\\[1cm]` etc.) - use proper LaTeX spacing
+- Don't hardcode references - use `\label` and `\ref`
+- Check journal requirements for specific formatting
+</Warning>
+
+## Advanced Features
+
+### Multi-column Sections
+
+<CodeGroup>
+```latex multicol.tex
+\usepackage{multicol}
+
+\begin{multicols}{2}
+This text will be formatted in two columns.
+Great for saving space in certain sections.
+\end{multicols}
+```
+</CodeGroup>
+
+### Code Listings
+
+<CodeGroup>
+```latex code.tex
+\usepackage{listings}
+\lstset{
+    language=Python,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue},
+    commentstyle=\color{green},
+    numbers=left,
+    numberstyle=\tiny,
+    frame=single
+}
+
+\begin{lstlisting}
+def hello_world():
+    print("Hello, LaTeX!")
+    return True
+\end{lstlisting}
+```
+</CodeGroup>
+
+### Hyperlinks and Metadata
+
+<CodeGroup>
+```latex hyperref.tex
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Your Article Title},
+    pdfauthor={Your Name},
+    pdfsubject={Subject},
+    pdfkeywords={keyword1, keyword2}
+}
+```
+</CodeGroup>
+
+## Download Options
+
+<CardGroup cols={2}>
+  <Card 
+    title="Basic Template" 
+    icon="file"
+    href="/templates/files/article-basic.tex"
+  >
+    Minimal template for quick start
+  </Card>
+  <Card 
+    title="Extended Template" 
+    icon="file-lines"
+    href="/templates/files/article-extended.tex"
+  >
+    Full template with all features
+  </Card>
+  <Card 
+    title="Journal Template" 
+    icon="newspaper"
+    href="/templates/files/article-journal.tex"
+  >
+    IEEE/ACM style template
+  </Card>
+  <Card 
+    title="Examples Archive" 
+    icon="file-zipper"
+    href="/templates/files/article-examples.zip"
+  >
+    ZIP with multiple examples
+  </Card>
+</CardGroup>
+
+## Related Templates
+
+- [Report Template](/templates/report) - For longer documents with chapters
+- [Thesis Template](/templates/thesis) - For dissertations and theses
+- [Letter Template](/templates/letter) - For formal correspondence
+
+---
+
+<Info>
+**Pro tip**: Save this template as `template.tex` in your projects folder. Copy it whenever you start a new article and customize as needed.
+</Info>
+
+Ready to write your article? Copy the template above and start writing! For more LaTeX tips, check our [writing guide](/learn/how-to/articles).

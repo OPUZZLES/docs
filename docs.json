@@ -8,48 +8,123 @@
     "dark": "#CC4E2D"
   },
   "favicon": "/favicon.svg",
+  "metadata": {
+    "og:site_name": "LaTeX Documentation",
+    "og:type": "website",
+    "twitter:card": "summary_large_image"
+  },
+  "seo": {
+    "indexHiddenPages": false
+  },
+  "search": {
+    "prompt": "Search documentation..."
+  },
   "navigation": {
     "tabs": [
       {
-        "tab": "Guides",
+        "tab": "Learn",
         "groups": [
           {
-            "group": "Get Started",
+            "group": "Getting Started",
             "pages": [
               "index",
-              "quickstart",
-              "development"
+              "learn/latex-in-30-minutes"
             ]
           },
           {
-            "group": "Essentials",
+            "group": "LaTeX Basics",
             "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/settings",
-              "essentials/navigation",
-              "essentials/reusable-snippets"
+              "learn/latex-in-30-minutes",
+              "learn/latex/basics/creating-first-document",
+              "learn/latex/basics/choosing-compiler",
+              "learn/latex/basics/paragraphs-new-lines",
+              "learn/latex/basics/bold-italics-underlining",
+              "learn/latex/basics/lists",
+              "learn/latex/basics/errors"
+            ]
+          },
+          {
+            "group": "Text & Formatting",
+            "pages": [
+              "learn/latex/text-formatting",
+              "learn/latex/paragraphs-spacing",
+              "learn/latex/fonts",
+              "learn/latex/lists"
+            ]
+          },
+          {
+            "group": "Mathematics",
+            "pages": [
+              "learn/latex/mathematics/basics",
+              "learn/latex/mathematics/equations",
+              "learn/latex/mathematics/symbols",
+              "learn/latex/mathematics/matrices"
+            ]
+          },
+          {
+            "group": "Figures & Tables",
+            "pages": [
+              "learn/latex/figures/inserting-images",
+              "learn/latex/figures/positioning",
+              "learn/latex/tables/creating-tables",
+              "learn/latex/tables/advanced-tables"
             ]
           }
         ]
       },
       {
-        "tab": "API Reference",
+        "tab": "How-to Guides",
         "groups": [
           {
-            "group": "API Documentation",
+            "group": "Document Types",
             "pages": [
-              "api-reference/introduction"
+              "learn/how-to/articles",
+              "learn/how-to/presentations",
+              "learn/how-to/cv-resume",
+              "learn/how-to/thesis"
             ]
           },
           {
-            "group": "Endpoint Examples",
+            "group": "Advanced Topics",
             "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
+              "learn/latex/bibliography",
+              "learn/latex/custom-commands",
+              "learn/latex/packages"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Reference",
+        "groups": [
+          {
+            "group": "Quick Reference",
+            "pages": [
+              "learn/reference/symbols",
+              "learn/reference/commands",
+              "learn/reference/packages",
+              "learn/reference/document-classes"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Templates",
+        "groups": [
+          {
+            "group": "Academic",
+            "pages": [
+              "templates/article",
+              "templates/report",
+              "templates/thesis"
+            ]
+          },
+          {
+            "group": "Professional",
+            "pages": [
+              "templates/cv",
+              "templates/letter",
+              "templates/presentation"
             ]
           }
         ]

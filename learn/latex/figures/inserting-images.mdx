@@ -1,0 +1,460 @@
+---
+title: Inserting Images in LaTeX
+description: Learn how to insert, scale, and format images in LaTeX documents. Covers supported formats, the graphicx package, and image customization.
+---
+
+import { CodeGroup, Info, Tip, Warning, Card, CardGroup } from '/snippets/components.mdx'
+
+Images enhance your documents by providing visual information, breaking up text, and illustrating concepts. This guide covers everything you need to know about working with images in LaTeX.
+
+<Info>
+**Package required**: You must include `\usepackage{graphicx}` in your preamble to work with images.
+</Info>
+
+## Basic Image Insertion
+
+### Simple Image Include
+
+<CodeGroup>
+```latex basic-image.tex
+\documentclass{article}
+\usepackage{graphicx}
+\begin{document}
+
+% Basic image insertion
+\includegraphics{example-image}
+
+% With file extension
+\includegraphics{photo.jpg}
+
+% From subfolder
+\includegraphics{images/diagram.png}
+
+% With full path (use forward slashes)
+\includegraphics{/Users/name/pictures/graph.pdf}
+
+\end{document}
+```
+</CodeGroup>
+
+### Supported Image Formats
+
+| Compiler | Formats Supported |
+|----------|------------------|
+| **pdfLaTeX** | PDF, PNG, JPG/JPEG |
+| **XeLaTeX** | PDF, PNG, JPG/JPEG, EPS* |
+| **LuaLaTeX** | PDF, PNG, JPG/JPEG, EPS* |
+| **LaTeX (DVI)** | EPS, PS |
+
+*EPS requires additional configuration
+
+<Tip>
+**Best practices for formats:**
+- **PDF**: Vector graphics, diagrams, plots
+- **PNG**: Screenshots, images with transparency
+- **JPG**: Photographs, images without transparency
+</Tip>
+
+## Scaling Images
+
+### Width and Height Control
+
+<CodeGroup>
+```latex scaling-images.tex
+\documentclass{article}
+\usepackage{graphicx}
+\begin{document}
+
+% Scale by width
+\includegraphics[width=5cm]{image}
+\includegraphics[width=0.8\textwidth]{image}
+\includegraphics[width=\columnwidth]{image}
+
+% Scale by height
+\includegraphics[height=3cm]{image}
+\includegraphics[height=0.25\textheight]{image}
+
+% Scale by both (may distort)
+\includegraphics[width=5cm,height=3cm]{image}
+
+% Keep aspect ratio with one dimension
+\includegraphics[width=5cm,keepaspectratio]{image}
+
+% Scale factor
+\includegraphics[scale=0.5]{image}  % 50% of original
+\includegraphics[scale=1.2]{image}  % 120% of original
+
+\end{document}
+```
+</CodeGroup>
+
+### Common Width References
+
+<CodeGroup>
+```latex width-references.tex
+% Page dimensions
+\includegraphics[width=\textwidth]{image}      % Full text width
+\includegraphics[width=\columnwidth]{image}    % Column width
+\includegraphics[width=\linewidth]{image}      % Current line width
+\includegraphics[width=\paperwidth]{image}     % Full paper width
+
+% Relative sizes
+\includegraphics[width=0.5\textwidth]{image}   % Half text width
+\includegraphics[width=0.33\columnwidth]{image} % Third of column
+
+% Using calc package
+\usepackage{calc}
+\includegraphics[width=\textwidth-2cm]{image}  % Text width minus 2cm
+```
+</CodeGroup>
+
+## Figure Environment
+
+### Basic Figure
+
+<CodeGroup>
+```latex figure-environment.tex
+\documentclass{article}
+\usepackage{graphicx}
+\begin{document}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.6\textwidth]{example-image}
+  \caption{A sample figure with caption}
+  \label{fig:sample}
+\end{figure}
+
+As shown in Figure \ref{fig:sample}, the image demonstrates...
+
+% Alternative with short caption for list of figures
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.5\textwidth]{graph}
+  \caption[Short caption]{Long descriptive caption that appears below the figure}
+  \label{fig:graph}
+\end{figure}
+
+\end{document}
+```
+</CodeGroup>
+
+### Figure Placement Options
+
+| Option | Meaning | Priority |
+|--------|---------|----------|
+| `h` | Here (approximately) | Low |
+| `t` | Top of page | Medium |
+| `b` | Bottom of page | Medium |
+| `p` | Page of floats | Low |
+| `H` | HERE (exactly)* | Forced |
+| `!` | Override LaTeX's rules | Modifier |
+
+*Requires `\usepackage{float}`
+
+<CodeGroup>
+```latex figure-placement.tex
+% Preferred placement order
+\begin{figure}[htbp]  % Try here, then top, bottom, finally float page
+
+% Force placement
+\usepackage{float}
+\begin{figure}[H]  % Place exactly here
+
+% Override LaTeX's aesthetic rules
+\begin{figure}[!h]  % Try harder to place here
+```
+</CodeGroup>
+
+## Multiple Images
+
+### Side by Side Images
+
+<CodeGroup>
+```latex side-by-side.tex
+\documentclass{article}
+\usepackage{graphicx}
+\begin{document}
+
+% Method 1: Simple side by side
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.45\textwidth]{image1}
+  \hfill
+  \includegraphics[width=0.45\textwidth]{image2}
+  \caption{Two images side by side}
+\end{figure}
+
+% Method 2: With individual captions (subcaption package)
+\usepackage{subcaption}
+\begin{figure}[h]
+  \centering
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{image1}
+    \caption{First subcaption}
+    \label{fig:sub1}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{image2}
+    \caption{Second subcaption}
+    \label{fig:sub2}
+  \end{subfigure}
+  \caption{Main figure caption}
+  \label{fig:main}
+\end{figure}
+
+\end{document}
+```
+</CodeGroup>
+
+### Grid of Images
+
+<CodeGroup>
+```latex image-grid.tex
+\usepackage{subcaption}
+
+\begin{figure}[h]
+  \centering
+  % First row
+  \begin{subfigure}[b]{0.3\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{img1}
+    \caption{Image 1}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.3\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{img2}
+    \caption{Image 2}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.3\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{img3}
+    \caption{Image 3}
+  \end{subfigure}
+  
+  % Second row
+  \begin{subfigure}[b]{0.3\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{img4}
+    \caption{Image 4}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.3\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{img5}
+    \caption{Image 5}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.3\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{img6}
+    \caption{Image 6}
+  \end{subfigure}
+  
+  \caption{Grid of six images}
+\end{figure}
+```
+</CodeGroup>
+
+## Image Transformations
+
+### Rotation and Flipping
+
+<CodeGroup>
+```latex transformations.tex
+\documentclass{article}
+\usepackage{graphicx}
+\begin{document}
+
+% Rotate image
+\includegraphics[angle=90]{image}              % 90 degrees
+\includegraphics[angle=-45]{image}             % -45 degrees
+\includegraphics[angle=180]{image}             % Upside down
+
+% Rotate and scale
+\includegraphics[angle=45,width=5cm]{image}
+
+% Origin of rotation
+\includegraphics[angle=90,origin=c]{image}     % Center (default)
+\includegraphics[angle=90,origin=tl]{image}    % Top left
+\includegraphics[angle=90,origin=br]{image}    % Bottom right
+
+% Reflection (negative scaling)
+\includegraphics[width=5cm]{image}             % Normal
+\includegraphics[width=-5cm]{image}            % Horizontal flip
+\includegraphics[width=5cm,height=-3cm]{image} % Vertical flip
+
+\end{document}
+```
+</CodeGroup>
+
+### Clipping and Trimming
+
+<CodeGroup>
+```latex clipping.tex
+% Trim: left bottom right top
+\includegraphics[trim=1cm 2cm 1cm 2cm,clip]{image}
+
+% Trim and scale
+\includegraphics[trim=1cm 1cm 1cm 1cm,clip,width=5cm]{image}
+
+% Viewport (absolute coordinates)
+\includegraphics[viewport=20 20 200 200,clip]{image}
+
+% Show only part of image
+\includegraphics[trim=0 0 0 50mm,clip,width=\textwidth]{panorama}
+```
+</CodeGroup>
+
+## Advanced Techniques
+
+### Wrapping Text Around Images
+
+<CodeGroup>
+```latex wrap-text.tex
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\begin{document}
+
+\begin{wrapfigure}{r}{0.4\textwidth}
+  \centering
+  \includegraphics[width=0.38\textwidth]{image}
+  \caption{A wrapped figure}
+\end{wrapfigure}
+
+This text wraps around the figure. The figure is positioned on the 
+right side of the page, and the text flows around it naturally. 
+This is useful for smaller images that don't need the full width 
+of the page. Continue with more text to see the wrapping effect...
+
+% Options: r (right), l (left), i (inner), o (outer)
+\begin{wrapfigure}{l}{0.3\textwidth}
+  \vspace{-20pt}  % Adjust vertical position
+  \centering
+  \includegraphics[width=0.28\textwidth]{small-image}
+  \vspace{-20pt}
+  \caption{Left aligned}
+  \vspace{-10pt}
+\end{wrapfigure}
+
+\end{document}
+```
+</CodeGroup>
+
+### Image Paths
+
+<CodeGroup>
+```latex image-paths.tex
+% Set graphics path
+\graphicspath{{images/}{figures/}{../pics/}}
+
+% Now you can use just the filename
+\includegraphics{photo}  % Searches in all specified paths
+
+% Multiple paths with subdirectories
+\graphicspath{
+  {./images/}
+  {./figures/photos/}
+  {./figures/diagrams/}
+  {../common/images/}
+}
+```
+</CodeGroup>
+
+### Draft Mode
+
+<CodeGroup>
+```latex draft-mode.tex
+% Show boxes instead of images (faster compilation)
+\usepackage[draft]{graphicx}
+
+% Or document-wide
+\documentclass[draft]{article}
+
+% Override draft mode for specific image
+\includegraphics[draft=false,width=5cm]{important-image}
+```
+</CodeGroup>
+
+## Image Formats and Conversion
+
+### Working with Different Formats
+
+<CodeGroup>
+```latex format-handling.tex
+% Let LaTeX determine format
+\DeclareGraphicsExtensions{.pdf,.png,.jpg,.jpeg}
+\includegraphics{image}  % Finds image.pdf, image.png, etc.
+
+% Force specific format
+\includegraphics[ext=.png]{image}
+
+% EPS to PDF conversion (pdfLaTeX)
+\usepackage{epstopdf}
+\includegraphics{diagram.eps}  % Automatically converted
+```
+</CodeGroup>
+
+## Best Practices
+
+<Tip>
+**Image guidelines:**
+
+1. **Resolution**: Use 300 DPI for print, 96-150 DPI for screen
+2. **File size**: Optimize images before including them
+3. **Formats**: Use vector (PDF) for diagrams, raster (PNG/JPG) for photos
+4. **Naming**: Avoid spaces and special characters in filenames
+5. **Organization**: Keep images in a dedicated folder
+6. **Captions**: Always include descriptive captions
+7. **References**: Label all figures for cross-referencing
+</Tip>
+
+## Troubleshooting
+
+<Warning>
+**Common image problems:**
+
+1. **Image not found**: Check path and filename (case-sensitive)
+2. **Wrong format**: Ensure format is supported by your compiler
+3. **Distorted image**: Use only width OR height, not both
+4. **Image too large**: Scale relative to `\textwidth`
+5. **Bad placement**: Use `[htbp]` for flexible positioning
+6. **Missing package**: Add `\usepackage{graphicx}`
+</Warning>
+
+## Quick Reference
+
+### Essential Commands
+
+| Command | Purpose | Example |
+|---------|---------|---------|
+| `\includegraphics{}` | Insert image | `\includegraphics{pic}` |
+| `width=` | Set width | `width=5cm` |
+| `height=` | Set height | `height=3cm` |
+| `scale=` | Scale factor | `scale=0.5` |
+| `angle=` | Rotate | `angle=90` |
+| `\caption{}` | Add caption | `\caption{Description}` |
+| `\label{}` | Add reference | `\label{fig:name}` |
+
+### Figure Template
+
+```latex
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.8\textwidth]{filename}
+  \caption{Descriptive caption}
+  \label{fig:reference-name}
+\end{figure}
+```
+
+---
+
+<Info>
+**Next**: Master [Figure positioning](/learn/latex/figures/positioning) to control exactly where your images appear in the document.
+</Info>

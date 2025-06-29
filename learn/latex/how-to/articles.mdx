@@ -1,0 +1,657 @@
+---
+title: Writing Articles in LaTeX
+description: Complete guide to writing professional articles in LaTeX. Learn document structure, formatting, citations, and best practices for academic papers.
+---
+
+import { CodeGroup, Info, Tip, Warning, Card, CardGroup } from '/snippets/components.mdx'
+
+Learn how to create professional articles and papers using LaTeX. This guide covers everything from basic document structure to advanced formatting for publication-ready documents.
+
+<Info>
+**Quick start**: LaTeX Cloud Studio provides ready-to-use article templates. Click "New Project" and select "Article" to get started immediately.
+</Info>
+
+## Basic Article Structure
+
+### Minimal Article Document
+
+<CodeGroup>
+```latex basic-article.tex
+\documentclass[12pt,a4paper]{article}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{hyperref}
+
+% Document information
+\title{Your Article Title}
+\author{Your Name}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Your abstract goes here. This should be a brief summary of your article,
+typically 150-250 words.
+\end{abstract}
+
+\section{Introduction}
+Your introduction text here.
+
+\section{Methodology}
+Describe your methods.
+
+\section{Results}
+Present your findings.
+
+\section{Conclusion}
+Summarize your work.
+
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}
+```
+</CodeGroup>
+
+### Document Class Options
+
+<CodeGroup>
+```latex document-options.tex
+% Font sizes
+\documentclass[10pt]{article}  % 10pt, 11pt, 12pt
+
+% Paper sizes
+\documentclass[a4paper]{article}  % a4paper, letterpaper, legalpaper
+\documentclass[letterpaper]{article}
+
+% Layout options
+\documentclass[twocolumn]{article}  % Two-column layout
+\documentclass[landscape]{article}  % Landscape orientation
+\documentclass[draft]{article}      % Draft mode
+
+% Multiple options
+\documentclass[11pt,a4paper,twocolumn,draft]{article}
+```
+</CodeGroup>
+
+## Author and Title Information
+
+### Single Author
+
+<CodeGroup>
+```latex single-author.tex
+\title{The Impact of Climate Change on Marine Ecosystems}
+\author{Jane Smith\\
+  Department of Marine Biology\\
+  University of Example\\
+  \texttt{j.smith@example.edu}}
+\date{March 2024}
+
+\maketitle
+```
+</CodeGroup>
+
+### Multiple Authors
+
+<CodeGroup>
+```latex multiple-authors.tex
+\documentclass{article}
+\usepackage{authblk}
+
+\title{Collaborative Research in Quantum Computing}
+
+\author[1]{Alice Johnson}
+\author[2]{Bob Chen}
+\author[1,2]{Carol Williams}
+
+\affil[1]{Department of Physics, University A}
+\affil[2]{Computer Science Department, University B}
+
+\date{\today}
+
+\begin{document}
+\maketitle
+
+% Alternative without authblk package
+\author{Alice Johnson$^1$, Bob Chen$^2$, and Carol Williams$^{1,2}$\\
+  $^1$Department of Physics, University A\\
+  $^2$Computer Science Department, University B\\
+  \texttt{\{ajohnson,cwilliams\}@unia.edu, bchen@unib.edu}}
+\end{document}
+```
+</CodeGroup>
+
+## Abstract and Keywords
+
+<CodeGroup>
+```latex abstract-keywords.tex
+\documentclass{article}
+\usepackage{abstract}
+
+\begin{document}
+
+\title{Machine Learning Applications in Healthcare}
+\author{Research Team}
+\date{\today}
+
+\maketitle
+
+\begin{abstract}
+\noindent
+This paper presents a comprehensive review of machine learning applications
+in modern healthcare systems. We analyze various algorithms and their 
+effectiveness in disease diagnosis, treatment planning, and patient outcome
+prediction. Our findings suggest that deep learning models achieve 95\%
+accuracy in early cancer detection.
+\end{abstract}
+
+\textbf{Keywords:} machine learning, healthcare, deep learning, 
+medical diagnosis, artificial intelligence
+
+% Alternative abstract style
+\renewcommand{\abstractname}{Executive Summary}
+\begin{abstract}
+Your executive summary here...
+\end{abstract}
+\end{document}
+```
+</CodeGroup>
+
+## Sections and Structure
+
+### Section Hierarchy
+
+<CodeGroup>
+```latex section-hierarchy.tex
+\documentclass{article}
+\setcounter{secnumdepth}{3} % Number subsubsections
+\setcounter{tocdepth}{3}    % Include in table of contents
+
+\begin{document}
+
+\tableofcontents
+\newpage
+
+\section{Introduction}
+Main section text.
+
+\subsection{Background}
+Subsection text.
+
+\subsubsection{Historical Context}
+Subsubsection text.
+
+\paragraph{Important Note}
+Paragraph-level heading (usually unnumbered).
+
+\subparagraph{Detail}
+Subparagraph-level heading.
+
+% Unnumbered sections
+\section*{Acknowledgments}
+Thanks to...
+
+% Custom numbering
+\setcounter{section}{0}
+\renewcommand{\thesection}{\Alph{section}}
+\section{Appendix A}
+
+\end{document}
+```
+</CodeGroup>
+
+### Cross-References
+
+<CodeGroup>
+```latex cross-references.tex
+\section{Introduction}
+\label{sec:intro}
+As we will discuss in Section~\ref{sec:methods}, our approach...
+
+\subsection{Problem Statement}
+\label{subsec:problem}
+The main equation is shown in Eq.~\eqref{eq:main}.
+
+\section{Methods}
+\label{sec:methods}
+Building on the problem stated in Section~\ref{subsec:problem}...
+
+\begin{equation}
+E = mc^2
+\label{eq:main}
+\end{equation}
+
+% Using cleveref package for better references
+\usepackage{cleveref}
+\cref{sec:intro} shows...  % Automatically adds "Section"
+\Cref{eq:main} demonstrates...  % Capital version
+```
+</CodeGroup>
+
+## Figures and Tables
+
+### Figure Placement
+
+<CodeGroup>
+```latex article-figures.tex
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{float}
+
+\begin{document}
+
+\section{Results}
+
+Figure~\ref{fig:results} shows our experimental results.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.8\textwidth]{results.png}
+  \caption{Experimental results showing the relationship between 
+           temperature and reaction rate.}
+  \label{fig:results}
+\end{figure}
+
+% Two figures side by side
+\begin{figure}[htbp]
+  \centering
+  \begin{minipage}{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{fig1.png}
+    \caption{First result}
+    \label{fig:first}
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{fig2.png}
+    \caption{Second result}
+    \label{fig:second}
+  \end{minipage}
+\end{figure}
+
+\end{document}
+```
+</CodeGroup>
+
+### Professional Tables
+
+<CodeGroup>
+```latex article-tables.tex
+\documentclass{article}
+\usepackage{booktabs}
+\usepackage{siunitx}
+
+\begin{document}
+
+\section{Data Analysis}
+
+Table~\ref{tab:results} summarizes our findings.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Comparison of algorithm performance}
+  \label{tab:results}
+  \begin{tabular}{lS[table-format=2.1]S[table-format=2.1]S[table-format=1.2]}
+    \toprule
+    Algorithm & {Time (s)} & {Memory (MB)} & {Accuracy} \\
+    \midrule
+    Method A & 12.3 & 45.6 & 0.92 \\
+    Method B & 8.7 & 67.8 & 0.95 \\
+    Method C & 15.2 & 23.4 & 0.89 \\
+    \midrule
+    Baseline & 20.1 & 89.0 & 0.85 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\end{document}
+```
+</CodeGroup>
+
+## Citations and Bibliography
+
+### Using BibTeX
+
+<CodeGroup>
+```latex bibtex-citations.tex
+\documentclass{article}
+\usepackage{natbib} % or biblatex
+
+\begin{document}
+
+\section{Literature Review}
+
+% Citation styles
+According to \citet{smith2020}, climate change affects...
+Recent studies \citep{jones2021,brown2022} show...
+As demonstrated by \citeauthor{wilson2019}...
+In \citeyear{taylor2023}, researchers found...
+
+% Multiple citations
+Several works \citep{ref1,ref2,ref3} address this issue.
+
+\bibliographystyle{apalike} % or plain, abbrv, unsrt, alpha
+\bibliography{references} % references.bib file
+
+\end{document}
+```
+
+```bibtex references.bib
+@article{smith2020,
+  author = {Smith, John and Doe, Jane},
+  title = {Climate Change Impacts on Marine Life},
+  journal = {Nature Climate Change},
+  year = {2020},
+  volume = {10},
+  number = {3},
+  pages = {234--245},
+  doi = {10.1038/s41558-020-0734-z}
+}
+
+@book{jones2021,
+  author = {Jones, Alice B.},
+  title = {Introduction to Environmental Science},
+  publisher = {Academic Press},
+  year = {2021},
+  edition = {3rd},
+  address = {New York}
+}
+
+@inproceedings{brown2022,
+  author = {Brown, Charlie and Green, David},
+  title = {Machine Learning for Climate Prediction},
+  booktitle = {Proceedings of ICML 2022},
+  year = {2022},
+  pages = {1234--1245}
+}
+```
+</CodeGroup>
+
+### Using biblatex
+
+<CodeGroup>
+```latex biblatex-citations.tex
+\documentclass{article}
+\usepackage[backend=biber,style=authoryear]{biblatex}
+\addbibresource{references.bib}
+
+\begin{document}
+
+% In-text citations
+\textcite{smith2020} found that...
+This was confirmed \parencite{jones2021}.
+\citeauthor{brown2022} argues...
+
+% Footnote citations
+Some claim this is true.\footcite{wilson2019}
+
+\printbibliography
+
+\end{document}
+```
+</CodeGroup>
+
+## Mathematical Content
+
+### Equations in Articles
+
+<CodeGroup>
+```latex article-math.tex
+\documentclass{article}
+\usepackage{amsmath,amssymb,amsthm}
+
+% Define theorem environments
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\begin{document}
+
+\section{Mathematical Framework}
+
+\begin{definition}[Convergence]
+A sequence $(x_n)$ converges to $x$ if for every $\epsilon > 0$,
+there exists $N \in \mathbb{N}$ such that $|x_n - x| < \epsilon$
+for all $n > N$.
+\end{definition}
+
+\begin{theorem}[Fundamental Theorem]
+\label{thm:fundamental}
+Let $f: [a,b] \to \mathbb{R}$ be continuous. Then
+\begin{equation}
+\int_a^b f'(x)\,dx = f(b) - f(a)
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+The proof follows from... \qed
+\end{proof}
+
+\end{document}
+```
+</CodeGroup>
+
+## Page Layout and Formatting
+
+### Custom Page Layout
+
+<CodeGroup>
+```latex page-layout.tex
+\documentclass[12pt,a4paper]{article}
+\usepackage{geometry}
+
+% Adjust margins
+\geometry{
+  left=25mm,
+  right=25mm,
+  top=30mm,
+  bottom=30mm,
+  headheight=15pt
+}
+
+% Headers and footers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{} % Clear all headers/footers
+\fancyhead[L]{Article Title}
+\fancyhead[R]{\thepage}
+\fancyfoot[C]{Journal Name, Vol. X, No. Y, 2024}
+
+% Line spacing
+\usepackage{setspace}
+\onehalfspacing % or \doublespacing
+
+% Paragraph formatting
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1em}
+
+\begin{document}
+% Content here
+\end{document}
+```
+</CodeGroup>
+
+### Journal-Specific Formatting
+
+<CodeGroup>
+```latex journal-format.tex
+% IEEE format
+\documentclass[journal]{IEEEtran}
+
+% ACM format
+\documentclass[sigconf]{acmart}
+
+% Elsevier format
+\documentclass[preprint,12pt]{elsarticle}
+
+% Springer format
+\documentclass[smallextended]{svjour3}
+
+% Each journal class has specific requirements
+% Always check the journal's author guidelines
+```
+</CodeGroup>
+
+## Advanced Features
+
+### Code Listings
+
+<CodeGroup>
+```latex code-listings.tex
+\documentclass{article}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\lstset{
+  language=Python,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{blue},
+  commentstyle=\color{green!60!black},
+  stringstyle=\color{red},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  breaklines=true,
+  frame=single,
+  captionpos=b
+}
+
+\begin{document}
+
+\section{Implementation}
+
+\begin{lstlisting}[caption={Python implementation},label={lst:python}]
+def calculate_mean(data):
+    """Calculate the mean of a dataset."""
+    return sum(data) / len(data)
+
+# Example usage
+data = [1, 2, 3, 4, 5]
+mean = calculate_mean(data)
+print(f"Mean: {mean}")
+\end{lstlisting}
+
+\end{document}
+```
+</CodeGroup>
+
+### Appendices
+
+<CodeGroup>
+```latex appendices.tex
+\documentclass{article}
+\usepackage{appendix}
+
+\begin{document}
+
+\section{Introduction}
+Main content...
+
+\section{Results}
+More content...
+
+\appendix
+\section{Detailed Calculations}
+\label{app:calculations}
+Extended mathematical derivations...
+
+\section{Additional Data}
+\label{app:data}
+Supplementary tables and figures...
+
+% Alternative approach
+\begin{appendices}
+\section{First Appendix}
+Content...
+\section{Second Appendix}
+More content...
+\end{appendices}
+
+\end{document}
+```
+</CodeGroup>
+
+## Best Practices
+
+<Tip>
+**Article writing guidelines:**
+
+1. **Structure**: Follow the standard IMRaD format (Introduction, Methods, Results, and Discussion)
+2. **Clarity**: Write clear, concise sentences and paragraphs
+3. **Consistency**: Use consistent notation and terminology throughout
+4. **Citations**: Cite all sources properly and consistently
+5. **Figures**: Ensure all figures are high-quality and properly labeled
+6. **Proofreading**: Always compile and proofread the final PDF
+7. **Templates**: Use journal-specific templates when available
+</Tip>
+
+## Submission Checklist
+
+<Warning>
+**Before submitting your article:**
+
+- [ ] Check journal formatting requirements
+- [ ] Verify all citations are included
+- [ ] Ensure figures are high resolution (300+ DPI)
+- [ ] Remove all draft/todo comments
+- [ ] Check page limits and word count
+- [ ] Include all required sections
+- [ ] Validate references format
+- [ ] Test compile on clean system
+</Warning>
+
+## Quick Templates
+
+### Research Article Template
+
+```latex
+\documentclass[twocolumn]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{times}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{cite}
+
+\title{Your Research Title}
+\author{Author Name\\Institution}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Abstract text (150-250 words)
+\end{abstract}
+
+\section{Introduction}
+\section{Related Work}
+\section{Methodology}
+\section{Results}
+\section{Discussion}
+\section{Conclusion}
+
+\bibliographystyle{plain}
+\bibliography{refs}
+
+\end{document}
+```
+
+---
+
+<Info>
+**Next**: Learn how to create [Professional presentations](/learn/latex/how-to/presentations) using LaTeX and Beamer.
+</Info>

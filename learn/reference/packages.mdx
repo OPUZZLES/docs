@@ -1,0 +1,841 @@
+---
+title: LaTeX Packages Reference
+description: Complete guide to essential LaTeX packages. Learn what each package does, how to use it, and see practical examples.
+---
+
+import { CodeGroup, Info, Tip, Warning, Card, CardGroup } from '/snippets/components.mdx'
+
+This reference covers the most important LaTeX packages organized by functionality. Each entry includes the package purpose, basic usage, and practical examples.
+
+<Info>
+**Package installation**: LaTeX Cloud Studio includes all standard packages. No installation needed - just use `\usepackage{packagename}`.
+</Info>
+
+## Essential Packages
+
+### Core Document Setup
+
+<CodeGroup>
+```latex essential-packages.tex
+% Input encoding (for older documents)
+\usepackage[utf8]{inputenc}
+
+% Font encoding
+\usepackage[T1]{fontenc}
+
+% Language support
+\usepackage[english]{babel}
+% or multiple languages
+\usepackage[english,spanish,french]{babel}
+
+% Better fonts
+\usepackage{lmodern}
+
+% Microtype (better typography)
+\usepackage{microtype}
+```
+</CodeGroup>
+
+### Page Layout
+
+#### geometry
+Controls page dimensions and margins.
+
+<CodeGroup>
+```latex geometry-package.tex
+\usepackage{geometry}
+
+% Common configurations
+\geometry{margin=1in}
+\geometry{left=1.5in, right=1in, top=1in, bottom=1in}
+\geometry{a4paper, margin=2.5cm}
+\geometry{letterpaper, landscape}
+
+% Advanced options
+\geometry{
+  paperwidth=210mm,
+  paperheight=297mm,
+  left=25mm,
+  right=25mm,
+  top=30mm,
+  bottom=30mm,
+  headheight=15pt,
+  headsep=10mm,
+  footskip=15mm
+}
+```
+</CodeGroup>
+
+#### fancyhdr
+Custom headers and footers.
+
+<CodeGroup>
+```latex fancyhdr-package.tex
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+% Clear defaults
+\fancyhf{}
+
+% Custom headers/footers
+\fancyhead[L]{Left Header}
+\fancyhead[C]{Center Header}
+\fancyhead[R]{\thepage}
+\fancyfoot[C]{Footer Text}
+
+% Different odd/even pages
+\fancyhead[LE,RO]{\thepage}
+\fancyhead[LO,RE]{\leftmark}
+
+% Custom styles
+\fancypagestyle{plain}{
+  \fancyhf{}
+  \fancyfoot[C]{\thepage}
+}
+```
+</CodeGroup>
+
+## Mathematics Packages
+
+### amsmath
+Extended math environments and commands.
+
+<CodeGroup>
+```latex amsmath-package.tex
+\usepackage{amsmath}
+
+% Provides environments:
+\begin{align}
+  f(x) &= x^2 + 2x + 1 \\
+  &= (x + 1)^2
+\end{align}
+
+\begin{gather}
+  a = b + c \\
+  d = e + f
+\end{gather}
+
+\begin{split}
+  (a + b)^3 &= a^3 + 3a^2b \\
+  &\quad + 3ab^2 + b^3
+\end{split}
+
+% Commands
+\text{text in math}
+\tfrac{a}{b}  % Text-style fraction
+\dfrac{a}{b}  % Display-style fraction
+\binom{n}{k}  % Binomial coefficient
+```
+</CodeGroup>
+
+### amssymb
+Additional mathematical symbols.
+
+<CodeGroup>
+```latex amssymb-package.tex
+\usepackage{amssymb}
+
+% Provides symbols like:
+\mathbb{R}    % Real numbers
+\mathbb{Z}    % Integers
+\mathbb{N}    % Natural numbers
+\varnothing   % Empty set
+\therefore    % Therefore
+\because      % Because
+\blacksquare  % QED symbol
+\leqslant     % Less or equal (slanted)
+\geqslant     % Greater or equal (slanted)
+```
+</CodeGroup>
+
+### amsthm
+Theorem environments.
+
+<CodeGroup>
+```latex amsthm-package.tex
+\usepackage{amsthm}
+
+% Define theorem environments
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+% Usage
+\begin{theorem}[Fermat's Last Theorem]
+No three positive integers $a$, $b$, and $c$ satisfy...
+\end{theorem}
+
+\begin{proof}
+The proof is left as an exercise.
+\end{proof}
+```
+</CodeGroup>
+
+### mathtools
+Enhanced version of amsmath.
+
+<CodeGroup>
+```latex mathtools-package.tex
+\usepackage{mathtools}
+
+% Additional features
+\begin{align}
+  f(x) &= \begin{cases}
+    x^2 & \text{if } x > 0 \\
+    0 & \text{otherwise}
+  \end{cases}
+\end{align}
+
+% Better spacing
+\coloneqq     % :=
+\Coloneqq     % ::=
+\eqqcolon     % =:
+
+% Paired delimiters
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}
+
+$\abs{x}$, $\abs*{\frac{a}{b}}$
+$\norm{v}$, $\norm*{\sum_{i=1}^n x_i}$
+```
+</CodeGroup>
+
+## Graphics Packages
+
+### graphicx
+Including and manipulating images.
+
+<CodeGroup>
+```latex graphicx-package.tex
+\usepackage{graphicx}
+
+% Include images
+\includegraphics{image.png}
+\includegraphics[width=5cm]{image.png}
+\includegraphics[height=3cm]{image.png}
+\includegraphics[scale=0.5]{image.png}
+\includegraphics[angle=90]{image.png}
+
+% Set graphics path
+\graphicspath{{images/}{figures/}{../pics/}}
+
+% Figure environment
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.8\textwidth]{diagram}
+  \caption{Figure caption}
+  \label{fig:diagram}
+\end{figure}
+```
+</CodeGroup>
+
+### tikz
+Creating graphics programmatically.
+
+<CodeGroup>
+```latex tikz-package.tex
+\usepackage{tikz}
+\usetikzlibrary{arrows,shapes,positioning}
+
+% Simple drawing
+\begin{tikzpicture}
+  \draw (0,0) -- (2,0) -- (1,1.732) -- cycle;
+  \draw[red,thick] (1,0.577) circle (0.577);
+  \node at (1,0.577) {Center};
+\end{tikzpicture}
+
+% Flowchart
+\begin{tikzpicture}[
+  box/.style={rectangle, draw, minimum width=2cm, minimum height=1cm},
+  arrow/.style={->, thick}
+]
+  \node[box] (A) {Start};
+  \node[box, below=of A] (B) {Process};
+  \node[box, below=of B] (C) {End};
+  
+  \draw[arrow] (A) -- (B);
+  \draw[arrow] (B) -- (C);
+\end{tikzpicture}
+```
+</CodeGroup>
+
+### subcaption
+Subfigures and subtables.
+
+<CodeGroup>
+```latex subcaption-package.tex
+\usepackage{subcaption}
+
+\begin{figure}
+  \centering
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{fig1}
+    \caption{First subfigure}
+    \label{fig:sub1}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{fig2}
+    \caption{Second subfigure}
+    \label{fig:sub2}
+  \end{subfigure}
+  \caption{Main figure caption}
+  \label{fig:main}
+\end{figure}
+```
+</CodeGroup>
+
+## Table Packages
+
+### booktabs
+Professional-looking tables.
+
+<CodeGroup>
+```latex booktabs-package.tex
+\usepackage{booktabs}
+
+\begin{table}
+\centering
+\begin{tabular}{lcc}
+\toprule
+Method & Accuracy & Speed \\
+\midrule
+Algorithm A & 95\% & Fast \\
+Algorithm B & 92\% & Medium \\
+Algorithm C & 98\% & Slow \\
+\bottomrule
+\end{tabular}
+\caption{Comparison of methods}
+\end{table}
+
+% Additional rules
+\cmidrule{2-3}  % Partial rule
+\cmidrule(lr){2-3}  % With trimming
+\addlinespace  % Extra vertical space
+```
+</CodeGroup>
+
+### array
+Enhanced column specifications.
+
+<CodeGroup>
+```latex array-package.tex
+\usepackage{array}
+
+% New column types
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}}
+
+\begin{tabular}{L{3cm}C{3cm}R{3cm}}
+Left aligned & Centered & Right aligned \\
+with fixed & column & widths \\
+\end{tabular}
+
+% Pre/post column material
+\begin{tabular}{>{\bfseries}l<{:}cr}
+Name & Value & Unit \\
+\end{tabular}
+```
+</CodeGroup>
+
+### tabularx
+Tables with calculated column widths.
+
+<CodeGroup>
+```latex tabularx-package.tex
+\usepackage{tabularx}
+
+% X columns expand to fill width
+\begin{tabularx}{\textwidth}{lXr}
+\toprule
+Fixed & Expanding column fills available space & Fixed \\
+A & This column automatically adjusts its width & 123 \\
+\bottomrule
+\end{tabularx}
+
+% Multiple X columns share space
+\begin{tabularx}{\textwidth}{|X|X|X|}
+\hline
+Equal & Width & Columns \\
+\hline
+\end{tabularx}
+```
+</CodeGroup>
+
+### longtable
+Multi-page tables.
+
+<CodeGroup>
+```latex longtable-package.tex
+\usepackage{longtable}
+
+\begin{longtable}{lcc}
+\caption{Long table example} \label{tab:long} \\
+\toprule
+Name & Value & Unit \\
+\midrule
+\endfirsthead
+
+\multicolumn{3}{c}{\tablename\ \thetable\ -- \textit{Continued}} \\
+\toprule
+Name & Value & Unit \\
+\midrule
+\endhead
+
+\midrule
+\multicolumn{3}{r}{\textit{Continued on next page}} \\
+\endfoot
+
+\bottomrule
+\endlastfoot
+
+% Table data
+Item 1 & 10 & kg \\
+Item 2 & 20 & kg \\
+% ... many rows ...
+\end{longtable}
+```
+</CodeGroup>
+
+## Font Packages
+
+### Font Families
+
+<CodeGroup>
+```latex font-packages.tex
+% Times
+\usepackage{times}
+\usepackage{newtxtext,newtxmath}
+
+% Palatino
+\usepackage{palatino}
+\usepackage{newpxtext,newpxmath}
+
+% Computer Modern (enhanced)
+\usepackage{lmodern}
+
+% Helvetica
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+% Courier
+\usepackage{courier}
+
+% Custom combinations
+\usepackage{mathpazo}  % Palatino with matching math
+\usepackage{mathptmx}  % Times with matching math
+```
+</CodeGroup>
+
+### fontspec (XeLaTeX/LuaLaTeX)
+
+<CodeGroup>
+```latex fontspec-package.tex
+\usepackage{fontspec}
+
+% System fonts
+\setmainfont{Times New Roman}
+\setsansfont{Arial}
+\setmonofont{Consolas}
+
+% With options
+\setmainfont{Georgia}[
+  Numbers=OldStyle,
+  Ligatures=TeX
+]
+
+% Custom fonts
+\newfontfamily\headingfont{Helvetica Neue}[
+  Scale=1.1,
+  LetterSpace=2
+]
+
+{\headingfont\Large This is a heading}
+```
+</CodeGroup>
+
+## Citation Packages
+
+### biblatex
+Modern bibliography management.
+
+<CodeGroup>
+```latex biblatex-package.tex
+\usepackage[
+  backend=biber,
+  style=authoryear,  % or numeric, alphabetic, etc.
+  sorting=nyt,
+  maxbibnames=10,
+  maxcitenames=2
+]{biblatex}
+
+\addbibresource{references.bib}
+
+% In document
+\textcite{smith2020}  % Smith (2020)
+\parencite{smith2020} % (Smith 2020)
+\footcite{smith2020}  % Footnote citation
+
+% Multiple citations
+\parencite{ref1,ref2,ref3}
+
+% Print bibliography
+\printbibliography
+\printbibliography[type=book,title={Books}]
+```
+</CodeGroup>
+
+### natbib
+Traditional bibliography management.
+
+<CodeGroup>
+```latex natbib-package.tex
+\usepackage[round]{natbib}
+
+% Citation commands
+\cite{key}          % Jones et al. (1990)
+\citep{key}         % (Jones et al., 1990)
+\citet{key}         % Jones et al. (1990)
+\citealp{key}       % Jones et al., 1990
+\citeauthor{key}    % Jones et al.
+\citeyear{key}      % 1990
+
+% Multiple citations
+\citep{key1,key2}   % (Jones et al., 1990; Smith, 1991)
+
+% Bibliography
+\bibliographystyle{plainnat}
+\bibliography{references}
+```
+</CodeGroup>
+
+## List Packages
+
+### enumitem
+Customizable lists.
+
+<CodeGroup>
+```latex enumitem-package.tex
+\usepackage{enumitem}
+
+% Customize spacing
+\begin{itemize}[noitemsep,topsep=0pt]
+  \item Compact list
+  \item No extra spacing
+\end{itemize}
+
+% Custom labels
+\begin{enumerate}[label=(\alph*)]
+  \item First item (a)
+  \item Second item (b)
+\end{enumerate}
+
+% Resume numbering
+\begin{enumerate}[start=5]
+  \item Fifth item
+\end{enumerate}
+\begin{enumerate}[resume]
+  \item Sixth item
+\end{enumerate}
+
+% Inline lists
+\begin{enumerate*}[label=(\roman*)]
+  \item one \item two \item three
+\end{enumerate*}
+```
+</CodeGroup>
+
+## Color Packages
+
+### xcolor
+Extended color support.
+
+<CodeGroup>
+```latex xcolor-package.tex
+\usepackage[dvipsnames,svgnames,table]{xcolor}
+
+% Basic colors
+\textcolor{red}{Red text}
+\textcolor{blue!50}{50\% blue}
+\textcolor{red!30!blue}{Mixed color}
+
+% Define colors
+\definecolor{myblue}{RGB}{0,114,189}
+\definecolor{mygreen}{HTML}{00FF00}
+\definecolor{mygray}{gray}{0.8}
+
+% Background colors
+\colorbox{yellow}{Highlighted}
+\fcolorbox{red}{yellow}{Framed and filled}
+
+% Table colors
+\rowcolor{gray!20}
+\cellcolor{blue!10}
+\columncolor{green!5}
+```
+</CodeGroup>
+
+## Code Listing Packages
+
+### listings
+Source code formatting.
+
+<CodeGroup>
+```latex listings-package.tex
+\usepackage{listings}
+\usepackage{xcolor}
+
+\lstset{
+  language=Python,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{blue}\bfseries,
+  stringstyle=\color{red},
+  commentstyle=\color{gray}\itshape,
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  stepnumber=1,
+  numbersep=5pt,
+  backgroundcolor=\color{gray!10},
+  frame=single,
+  breaklines=true,
+  captionpos=b
+}
+
+\begin{lstlisting}[caption=Python example]
+def factorial(n):
+    """Calculate factorial of n"""
+    if n <= 1:
+        return 1
+    return n * factorial(n - 1)
+\end{lstlisting}
+
+% Inline code
+\lstinline|print("Hello")|
+```
+</CodeGroup>
+
+### minted (requires --shell-escape)
+Syntax highlighting with Pygments.
+
+<CodeGroup>
+```latex minted-package.tex
+\usepackage{minted}
+
+\begin{minted}[
+  frame=lines,
+  framesep=2mm,
+  baselinestretch=1.2,
+  bgcolor=gray!10,
+  fontsize=\footnotesize,
+  linenos
+]{python}
+def quicksort(arr):
+    if len(arr) <= 1:
+        return arr
+    pivot = arr[0]
+    left = [x for x in arr[1:] if x < pivot]
+    right = [x for x in arr[1:] if x >= pivot]
+    return quicksort(left) + [pivot] + quicksort(right)
+\end{minted}
+
+% Inline
+\mintinline{python}{lambda x: x**2}
+```
+</CodeGroup>
+
+## Hyperlink Packages
+
+### hyperref
+Hyperlinks and PDF features.
+
+<CodeGroup>
+```latex hyperref-package.tex
+\usepackage{hyperref}
+
+% Configuration
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  filecolor=magenta,
+  urlcolor=cyan,
+  citecolor=green,
+  pdftitle={Document Title},
+  pdfauthor={Author Name},
+  pdfsubject={Subject},
+  pdfkeywords={keyword1, keyword2},
+  bookmarks=true,
+  bookmarksopen=true
+}
+
+% Links
+\href{https://example.com}{Link text}
+\url{https://example.com}
+\href{mailto:email@example.com}{Email}
+
+% Internal links
+\hyperref[sec:intro]{Go to introduction}
+\autoref{fig:diagram}  % "Figure 1"
+```
+</CodeGroup>
+
+### cleveref
+Smart cross-references.
+
+<CodeGroup>
+```latex cleveref-package.tex
+\usepackage{cleveref}
+
+% Automatic reference types
+\cref{eq:einstein}     % eq. (1)
+\Cref{sec:intro}       % Section 1
+\cref{fig:a,fig:b}     % figs. 1 and 2
+\crefrange{eq:1}{eq:5} % eqs. (1) to (5)
+
+% Customization
+\crefname{equation}{equation}{equations}
+\Crefname{equation}{Equation}{Equations}
+```
+</CodeGroup>
+
+## Special Purpose Packages
+
+### siunitx
+Typesetting units and numbers.
+
+<CodeGroup>
+```latex siunitx-package.tex
+\usepackage{siunitx}
+
+% Numbers
+\num{12345.67890}      % 12,345.678 90
+\num{1.23e-4}          % 1.23 × 10^{-4}
+\num[round-mode=places,round-precision=2]{1.2345}  % 1.23
+
+% Units
+\si{kg.m/s^2}          % kg⋅m/s²
+\si{\kilo\gram\meter\per\second\squared}
+\SI{9.81}{m/s^2}       % 9.81 m/s²
+\SI{20}{\celsius}      % 20 °C
+
+% Ranges
+\SIrange{10}{20}{\meter}     % 10 m to 20 m
+\numrange{1e3}{1e5}          % 1 × 10³ to 1 × 10⁵
+
+% Tables
+\begin{tabular}{S[table-format=3.2]}
+  {Number} \\
+  12.34 \\
+  123.4 \\
+  1.234 \\
+\end{tabular}
+```
+</CodeGroup>
+
+### algorithm2e
+Algorithm typesetting.
+
+<CodeGroup>
+```latex algorithm2e-package.tex
+\usepackage{algorithm2e}
+
+\begin{algorithm}[H]
+\SetAlgoLined
+\KwData{Array $A$ of $n$ elements}
+\KwResult{Sorted array $A$}
+\For{$i \leftarrow 1$ \KwTo $n-1$}{
+  $key \leftarrow A[i]$\;
+  $j \leftarrow i - 1$\;
+  \While{$j \geq 0$ \textbf{and} $A[j] > key$}{
+    $A[j+1] \leftarrow A[j]$\;
+    $j \leftarrow j - 1$\;
+  }
+  $A[j+1] \leftarrow key$\;
+}
+\caption{Insertion Sort}
+\end{algorithm}
+```
+</CodeGroup>
+
+## Best Practices
+
+<Tip>
+**Package usage tips:**
+
+1. **Load order matters**: Some packages must be loaded in specific order
+2. **Avoid conflicts**: Some packages are incompatible with others
+3. **Options**: Many packages accept options to customize behavior
+4. **Documentation**: Use `texdoc packagename` to read documentation
+5. **Minimal loading**: Only load packages you actually use
+6. **Updates**: Keep packages updated for bug fixes and features
+</Tip>
+
+## Common Package Conflicts
+
+<Warning>
+**Known conflicts and solutions:**
+
+- `hyperref`: Load last (with few exceptions like `cleveref`)
+- `float` + `floatrow`: Use one or the other
+- `subfigure` vs `subcaption`: Use `subcaption` (newer)
+- `times` + `mathptmx`: Use `newtxtext` + `newtxmath` instead
+- `enumerate` + `enumitem`: Use `enumitem` only
+</Warning>
+
+## Package Loading Order
+
+Recommended loading order for common packages:
+
+```latex
+\documentclass{article}
+
+% 1. Font encoding
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% 2. Language
+\usepackage[english]{babel}
+
+% 3. Fonts
+\usepackage{lmodern}
+
+% 4. Page layout
+\usepackage{geometry}
+
+% 5. Math packages
+\usepackage{amsmath,amssymb,amsthm}
+
+% 6. Graphics
+\usepackage{graphicx}
+\usepackage{xcolor}
+
+% 7. Tables
+\usepackage{booktabs}
+\usepackage{array}
+
+% 8. Lists
+\usepackage{enumitem}
+
+% 9. Bibliography
+\usepackage{biblatex}
+
+% 10. Hyperref (near last)
+\usepackage{hyperref}
+
+% 11. Cleveref (after hyperref)
+\usepackage{cleveref}
+```
+
+---
+
+<Info>
+**Next**: Learn about different [Document classes](/learn/reference/document-classes) and when to use each one.
+</Info>

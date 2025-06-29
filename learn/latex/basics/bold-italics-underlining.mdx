@@ -1,0 +1,487 @@
+---
+title: Bold, italics and underlining
+description: Learn how to emphasize text in LaTeX using bold, italics, underline, and other formatting options. Complete guide with examples.
+---
+
+import { CodeGroup, Info, Tip, Warning } from '/snippets/components.mdx'
+
+Text formatting is essential for emphasizing important information and improving readability. LaTeX provides several commands for making text bold, italic, underlined, and more.
+
+<Info>
+**Quick reference**: `\textbf{bold}`, `\textit{italic}`, `\underline{underline}`
+</Info>
+
+## Basic Text Formatting
+
+### Bold Text
+
+Use `\textbf{}` to make text bold:
+
+<CodeGroup>
+```latex bold.tex
+\documentclass{article}
+\begin{document}
+
+This is \textbf{bold text} in a sentence.
+
+\textbf{This entire sentence is bold.}
+
+You can \textbf{nest other commands like \textit{italic} inside bold}.
+
+\end{document}
+```
+
+```text Output
+This is bold text in a sentence.
+
+This entire sentence is bold.
+
+You can nest other commands like italic inside bold.
+```
+</CodeGroup>
+
+### Italic Text
+
+Use `\textit{}` for italics:
+
+<CodeGroup>
+```latex italic.tex
+\documentclass{article}
+\begin{document}
+
+This is \textit{italic text} in a sentence.
+
+\textit{This entire sentence is italicized.}
+
+LaTeX uses \textit{emphasis} for semantic meaning.
+
+\end{document}
+```
+
+```text Output
+This is italic text in a sentence.
+
+This entire sentence is italicized.
+
+LaTeX uses emphasis for semantic meaning.
+```
+</CodeGroup>
+
+### Underlined Text
+
+Use `\underline{}` for underlining:
+
+<CodeGroup>
+```latex underline.tex
+\documentclass{article}
+\begin{document}
+
+This is \underline{underlined text} in a sentence.
+
+\underline{This entire sentence is underlined.}
+
+% Note: Underlining can look messy with descenders
+The letters \underline{g, j, p, q, y} have descenders.
+
+\end{document}
+```
+</CodeGroup>
+
+<Warning>
+**Avoid overusing underline**: In professional typography, underlining is rarely used. Consider bold or italic for emphasis instead.
+</Warning>
+
+## Combining Formats
+
+You can combine multiple formatting commands:
+
+<CodeGroup>
+```latex combining.tex
+\documentclass{article}
+\begin{document}
+
+% Bold and italic
+\textbf{\textit{Bold and italic text}}
+
+% Italic and underlined
+\textit{\underline{Italic and underlined}}
+
+% All three
+\textbf{\textit{\underline{Bold, italic, and underlined}}}
+
+% Alternative nesting order (same result)
+\underline{\textbf{\textit{Also all three formats}}}
+
+\end{document}
+```
+</CodeGroup>
+
+## Emphasis Command
+
+The `\emph{}` command provides semantic emphasis:
+
+<CodeGroup>
+```latex emphasis.tex
+\documentclass{article}
+\begin{document}
+
+% Normal emphasis (produces italic)
+This is \emph{emphasized text}.
+
+% Nested emphasis (toggles back to normal)
+\emph{This is italic with \emph{nested} emphasis.}
+
+% Emphasis is semantic - it adapts to context
+\textit{In italic text, \emph{emphasis} becomes upright.}
+
+\end{document}
+```
+
+```text Output
+This is emphasized text.
+
+This is italic with nested emphasis.
+
+In italic text, emphasis becomes upright.
+```
+</CodeGroup>
+
+<Tip>
+Use `\emph{}` when you want to emphasize meaning. Use `\textit{}` when you specifically want italic style.
+</Tip>
+
+## Additional Text Styles
+
+### Small Caps
+
+<CodeGroup>
+```latex smallcaps.tex
+\documentclass{article}
+\begin{document}
+
+% Small capitals
+\textsc{Small Capitals Look Like This}
+
+% Useful for names and acronyms
+\textsc{nasa} announced the launch.
+
+Written by \textsc{John Smith}, \textsc{phd}.
+
+\end{document}
+```
+</CodeGroup>
+
+### Typewriter (Monospace)
+
+<CodeGroup>
+```latex typewriter.tex
+\documentclass{article}
+\begin{document}
+
+% Monospace font for code
+Type \texttt{latex document.tex} to compile.
+
+% File paths
+Save your file as \texttt{/home/user/document.tex}
+
+% Inline code
+The \texttt{\\textbf} command makes text bold.
+
+\end{document}
+```
+</CodeGroup>
+
+### Sans Serif
+
+<CodeGroup>
+```latex sans-serif.tex
+\documentclass{article}
+\begin{document}
+
+% Sans serif text
+\textsf{This is sans serif text.}
+
+% Useful for modern look
+\textsf{\textbf{Bold Sans Serif Heading}}
+
+\end{document}
+```
+</CodeGroup>
+
+### Slanted Text
+
+<CodeGroup>
+```latex slanted.tex
+\documentclass{article}
+\begin{document}
+
+% Slanted is different from italic
+\textsl{This is slanted text.}
+
+Compare: \textit{italic} vs \textsl{slanted}
+
+\end{document}
+```
+</CodeGroup>
+
+## Font Size Commands
+
+Combine with text formatting:
+
+<CodeGroup>
+```latex sizes.tex
+\documentclass{article}
+\begin{document}
+
+{\large \textbf{Large Bold Text}}
+
+{\Large \textit{Even Larger Italic}}
+
+{\small \texttt{Small monospace text}}
+
+% Size commands from smallest to largest:
+{\tiny tiny}
+{\scriptsize scriptsize}
+{\footnotesize footnotesize}
+{\small small}
+{\normalsize normalsize}
+{\large large}
+{\Large Large}
+{\LARGE LARGE}
+{\huge huge}
+{\Huge Huge}
+
+\end{document}
+```
+</CodeGroup>
+
+## Color Text (Optional Package)
+
+Add color to your formatting:
+
+<CodeGroup>
+```latex color.tex
+\documentclass{article}
+\usepackage{xcolor}
+\begin{document}
+
+% Basic colors
+\textcolor{red}{Red text}
+\textcolor{blue}{\textbf{Bold blue text}}
+\textcolor{green}{\textit{Italic green text}}
+
+% Custom colors
+\definecolor{myorange}{RGB}{255, 96, 55}
+\textcolor{myorange}{Custom orange color}
+
+% Highlighting
+\colorbox{yellow}{Highlighted text}
+
+\end{document}
+```
+</CodeGroup>
+
+## Advanced Formatting
+
+### Strikethrough
+
+<CodeGroup>
+```latex strikethrough.tex
+\documentclass{article}
+\usepackage{soul}
+\begin{document}
+
+% Strikethrough
+\st{This text is struck through}
+
+% Highlighting with soul package
+\hl{This text is highlighted}
+
+% Letter spacing
+\so{SPACED OUT TEXT}
+
+\end{document}
+```
+</CodeGroup>
+
+### Better Underlines
+
+<CodeGroup>
+```latex better-underline.tex
+\documentclass{article}
+\usepackage{ulem}
+\begin{document}
+
+% Normal underline
+\uline{Better underline with ulem}
+
+% Double underline
+\uuline{Double underlined text}
+
+% Wavy underline
+\uwave{Wavy underline for errors}
+
+% Strike out
+\sout{Struck out text}
+
+\end{document}
+```
+</CodeGroup>
+
+## Environment-Based Formatting
+
+For longer passages:
+
+<CodeGroup>
+```latex environments.tex
+\documentclass{article}
+\begin{document}
+
+% Bold environment
+\begin{bfseries}
+This entire paragraph is bold. You can write multiple sentences
+and they will all be bold. This is useful for longer passages.
+\end{bfseries}
+
+% Italic environment
+\begin{itshape}
+This entire paragraph is in italics. Every sentence here
+will be italicized until we close the environment.
+\end{itshape}
+
+% Typewriter environment
+\begin{ttfamily}
+This looks like computer code.
+All text here is monospaced.
+\end{ttfamily}
+
+\end{document}
+```
+</CodeGroup>
+
+## Declaration Commands
+
+Alternative syntax using declarations:
+
+<CodeGroup>
+```latex declarations.tex
+\documentclass{article}
+\begin{document}
+
+% Declarations affect all following text
+{\bfseries Bold text using declaration}
+
+{\itshape Italic text using declaration}
+
+{\bfseries\itshape Bold and italic together}
+
+% Limiting scope with braces
+Normal text {\sffamily sans serif text} normal again
+
+\end{document}
+```
+</CodeGroup>
+
+## Common Use Cases
+
+### Document Structure
+
+<CodeGroup>
+```latex structure.tex
+\documentclass{article}
+\begin{document}
+
+\textbf{\large 1. Introduction}
+
+This section introduces the topic with \emph{emphasis} on key concepts.
+
+\textbf{Key Terms:}
+\begin{itemize}
+\item \textbf{LaTeX:} A typesetting system
+\item \textbf{Markup:} Text with formatting codes
+\item \textbf{Compiler:} Processes \texttt{.tex} files
+\end{itemize}
+
+\end{document}
+```
+</CodeGroup>
+
+### Academic Writing
+
+<CodeGroup>
+```latex academic.tex
+\documentclass{article}
+\begin{document}
+
+According to \textit{Smith et al.} (2023), the results were 
+\textbf{statistically significant} (p < 0.05).
+
+\emph{Note:} These findings contradict earlier work by 
+\textsc{Johnson} (2020).
+
+\end{document}
+```
+</CodeGroup>
+
+## Best Practices
+
+<Tip>
+**Formatting guidelines:**
+
+1. **Use sparingly** - Too much formatting reduces impact
+2. **Be consistent** - Use the same style for similar elements
+3. **Semantic meaning** - Use `\emph` for emphasis, not just italics
+4. **Avoid underlines** - Use bold or italic instead
+5. **Consider readers** - Some formats don't work well in all media
+</Tip>
+
+## Common Mistakes
+
+<Warning>
+**Avoid these errors:**
+
+1. **Over-formatting** - Don't combine too many styles
+2. **Underline with descenders** - Looks messy with g, j, p, q, y
+3. **All caps** - Use `\textsc{}` for small caps instead
+4. **Forgetting braces** - `\textbf{text}` not `\textbf text`
+5. **Wrong nesting** - Close commands in reverse order
+</Warning>
+
+## Quick Reference Table
+
+| Command | Output | Usage |
+|---------|--------|-------|
+| `\textbf{text}` | **text** | Bold |
+| `\textit{text}` | *text* | Italic |
+| `\underline{text}` | <u>text</u> | Underline |
+| `\emph{text}` | *text* | Emphasis |
+| `\textsc{text}` | TEXT | Small caps |
+| `\texttt{text}` | `text` | Monospace |
+| `\textsf{text}` | text | Sans serif |
+| `\textsl{text}` | *text* | Slanted |
+
+## Troubleshooting
+
+### Text Not Formatting
+
+Check for:
+- Missing braces: `\textbf{text}` not `\textbf text`
+- Typos in commands
+- Missing packages for special formatting
+
+### Nested Commands Not Working
+
+Ensure proper nesting:
+```latex
+% Correct
+\textbf{\textit{text}}
+
+% Incorrect
+\textbf{\textit{text}}
+```
+
+---
+
+<Info>
+**Next**: Learn how to create [Lists](/learn/latex/basics/lists) for organizing information effectively.
+</Info>

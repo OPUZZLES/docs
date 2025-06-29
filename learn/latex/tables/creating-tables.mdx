@@ -1,0 +1,553 @@
+---
+title: Creating Tables in LaTeX
+description: Learn how to create professional tables in LaTeX. Master basic tabular environments, formatting, alignment, and essential table features.
+---
+
+import { CodeGroup, Info, Tip, Warning } from '/snippets/components.mdx'
+
+Tables are essential for presenting structured data clearly. LaTeX provides powerful tools for creating professional tables with precise control over formatting and layout.
+
+<Info>
+**Key concept**: Tables in LaTeX consist of two main components: the `table` environment (float container) and the `tabular` environment (actual table content).
+</Info>
+
+## Basic Table Structure
+
+### Simple Tabular Environment
+
+<CodeGroup>
+```latex basic-table.tex
+\documentclass{article}
+\begin{document}
+
+% Basic table without float
+\begin{tabular}{lcr}
+Left & Center & Right \\
+1 & 2 & 3 \\
+4 & 5 & 6
+\end{tabular}
+
+% With horizontal lines
+\begin{tabular}{|l|c|r|}
+\hline
+Name & Age & Score \\
+\hline
+Alice & 25 & 95 \\
+Bob & 30 & 87 \\
+Carol & 28 & 92 \\
+\hline
+\end{tabular}
+
+\end{document}
+```
+</CodeGroup>
+
+### Column Specifications
+
+| Specifier | Alignment | Description |
+|-----------|-----------|-------------|
+| `l` | Left | Left-aligned column |
+| `c` | Center | Centered column |
+| `r` | Right | Right-aligned column |
+| `p{width}` | Justified | Paragraph column with fixed width |
+| `|` | — | Vertical line |
+| `@{...}` | — | Custom column separator |
+
+<CodeGroup>
+```latex column-types.tex
+% Various column types
+\begin{tabular}{lcrp{3cm}}
+Left & Center & Right & Paragraph text that wraps \\
+\end{tabular}
+
+% Custom spacing
+\begin{tabular}{l@{\hspace{2cm}}r}
+Name & Value \\
+\end{tabular}
+
+% Remove default spacing
+\begin{tabular}{@{}lcr@{}}
+No space & on & sides \\
+\end{tabular}
+```
+</CodeGroup>
+
+## Table Float Environment
+
+### Basic Table with Caption
+
+<CodeGroup>
+```latex table-float.tex
+\documentclass{article}
+\usepackage{caption}
+\begin{document}
+
+\begin{table}[htbp]
+  \centering
+  \caption{Student grades}
+  \label{tab:grades}
+  \begin{tabular}{lcc}
+    \hline
+    Student & Midterm & Final \\
+    \hline
+    Alice & 85 & 92 \\
+    Bob & 78 & 88 \\
+    Carol & 92 & 95 \\
+    \hline
+  \end{tabular}
+\end{table}
+
+As shown in Table \ref{tab:grades}, all students improved.
+
+\end{document}
+```
+</CodeGroup>
+
+### Table Positioning
+
+<CodeGroup>
+```latex table-positioning.tex
+% Positioning options
+\begin{table}[h]    % Here
+\begin{table}[t]    % Top of page
+\begin{table}[b]    % Bottom of page
+\begin{table}[p]    % Page of floats
+\begin{table}[htbp] % Try here, top, bottom, page
+
+% Force exact placement
+\usepackage{float}
+\begin{table}[H]    % HERE exactly
+```
+</CodeGroup>
+
+## Lines and Rules
+
+### Horizontal Lines
+
+<CodeGroup>
+```latex horizontal-lines.tex
+\documentclass{article}
+\usepackage{booktabs} % For professional tables
+\begin{document}
+
+% Basic lines
+\begin{tabular}{lcc}
+\hline
+Header 1 & Header 2 & Header 3 \\
+\hline
+Data 1 & Data 2 & Data 3 \\
+\hline
+\end{tabular}
+
+% Professional tables with booktabs
+\begin{tabular}{lcc}
+\toprule
+Header 1 & Header 2 & Header 3 \\
+\midrule
+Data 1 & Data 2 & Data 3 \\
+Data 4 & Data 5 & Data 6 \\
+\bottomrule
+\end{tabular}
+
+% Partial horizontal lines
+\begin{tabular}{lcr}
+Full line \\
+\hline
+Partial & line & below \\
+\cline{2-3}
+Only & under & these \\
+\end{tabular}
+
+\end{document}
+```
+</CodeGroup>
+
+<Tip>
+**Best practice**: Use the `booktabs` package for professional-looking tables. It provides better spacing and line weights than standard LaTeX rules.
+</Tip>
+
+### Vertical Lines
+
+<CodeGroup>
+```latex vertical-lines.tex
+% Single vertical lines
+\begin{tabular}{l|c|r}
+Left & Center & Right \\
+\end{tabular}
+
+% Double vertical lines
+\begin{tabular}{l||c||r}
+Left & Center & Right \\
+\end{tabular}
+
+% Mixed lines
+\begin{tabular}{|l|c|r|}
+\hline
+A & B & C \\
+\hline
+1 & 2 & 3 \\
+\hline
+\end{tabular}
+```
+</CodeGroup>
+
+<Warning>
+**Note**: Vertical lines are generally discouraged in professional tables. They can make tables look cluttered and harder to read.
+</Warning>
+
+## Column Formatting
+
+### Text Alignment and Width
+
+<CodeGroup>
+```latex column-formatting.tex
+\documentclass{article}
+\usepackage{array} % Enhanced column types
+\begin{document}
+
+% Fixed width columns
+\begin{tabular}{p{3cm}p{3cm}p{3cm}}
+This is a paragraph column & 
+Text wraps automatically & 
+Within the specified width \\
+\end{tabular}
+
+% Array package column types
+\begin{tabular}{>{\bfseries}l c >{\itshape}r}
+Bold & Normal & Italic \\
+Left & Center & Right \\
+\end{tabular}
+
+% Centered fixed-width columns
+\usepackage{array}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\begin{tabular}{C{3cm}C{3cm}}
+Centered & Fixed Width \\
+\end{tabular}
+
+\end{document}
+```
+</CodeGroup>
+
+### Multi-column Cells
+
+<CodeGroup>
+```latex multicolumn.tex
+\begin{tabular}{lcr}
+\hline
+\multicolumn{3}{c}{Spanning Three Columns} \\
+\hline
+Left & Center & Right \\
+A & B & C \\
+\multicolumn{2}{l}{Span two} & Right \\
+\hline
+\end{tabular}
+
+% Complex headers
+\begin{tabular}{lcc}
+\hline
+\multicolumn{1}{c}{Item} & 
+\multicolumn{2}{c}{Measurements} \\
+\cline{2-3}
+& Length & Width \\
+\hline
+Box A & 10 cm & 5 cm \\
+Box B & 15 cm & 8 cm \\
+\hline
+\end{tabular}
+```
+</CodeGroup>
+
+### Multi-row Cells
+
+<CodeGroup>
+```latex multirow.tex
+\documentclass{article}
+\usepackage{multirow}
+\begin{document}
+
+\begin{tabular}{lcc}
+\hline
+\multirow{2}{*}{Category} & Value 1 & Value 2 \\
+& 10 & 20 \\
+\hline
+\multirow{3}{*}{Group A} & Item 1 & 100 \\
+& Item 2 & 200 \\
+& Item 3 & 300 \\
+\hline
+\end{tabular}
+
+% With width specification
+\begin{tabular}{lp{3cm}c}
+\hline
+\multirow{2}{3cm}{Long text that needs wrapping} & 
+Description & Value \\
+& More info & 42 \\
+\hline
+\end{tabular}
+
+\end{document}
+```
+</CodeGroup>
+
+## Numeric Alignment
+
+### Decimal Alignment
+
+<CodeGroup>
+```latex decimal-alignment.tex
+\documentclass{article}
+\usepackage{siunitx} % For numeric alignment
+\begin{document}
+
+% Using siunitx S column
+\begin{tabular}{l S[table-format=3.2]}
+\hline
+Item & {Value} \\
+\hline
+Product A & 12.5 \\
+Product B & 123.45 \\
+Product C & 1.234 \\
+\hline
+\end{tabular}
+
+% Multiple numeric columns
+\begin{tabular}{l *{3}{S[table-format=2.1]}}
+\hline
+Test & {Run 1} & {Run 2} & {Run 3} \\
+\hline
+A & 9.5 & 10.2 & 9.8 \\
+B & 12.1 & 11.9 & 12.3 \\
+C & 8.7 & 8.9 & 8.8 \\
+\hline
+\end{tabular}
+
+\end{document}
+```
+</CodeGroup>
+
+### Currency and Units
+
+<CodeGroup>
+```latex currency-units.tex
+\usepackage{siunitx}
+
+% Currency alignment
+\begin{tabular}{l S[table-format=4.2, table-space-text-pre=\$]}
+\hline
+Item & {Price} \\
+\hline
+Laptop & \$1299.99 \\
+Mouse & \$29.95 \\
+Keyboard & \$89.50 \\
+\hline
+Total & \$1419.44 \\
+\hline
+\end{tabular}
+
+% Units in headers
+\begin{tabular}{l S[table-format=3.1]}
+\hline
+Material & {Density (\si{g/cm^3})} \\
+\hline
+Water & 1.0 \\
+Iron & 7.9 \\
+Gold & 19.3 \\
+\hline
+\end{tabular}
+```
+</CodeGroup>
+
+## Coloring Tables
+
+### Row and Cell Colors
+
+<CodeGroup>
+```latex colored-tables.tex
+\documentclass{article}
+\usepackage[table]{xcolor}
+\begin{document}
+
+% Alternating row colors
+\begin{tabular}{lcc}
+\rowcolor{gray!20}
+Header 1 & Header 2 & Header 3 \\
+Row 1 & Data & Data \\
+\rowcolor{gray!10}
+Row 2 & Data & Data \\
+Row 3 & Data & Data \\
+\rowcolor{gray!10}
+Row 4 & Data & Data \\
+\end{tabular}
+
+% Individual cell colors
+\begin{tabular}{lcc}
+\hline
+Normal & \cellcolor{yellow}Highlighted & Normal \\
+\cellcolor{red!20}Light red & Normal & \cellcolor{blue!20}Light blue \\
+\hline
+\end{tabular}
+
+% Column colors
+\begin{tabular}{>{\columncolor{gray!20}}l cc}
+Gray column & Normal & Normal \\
+\end{tabular}
+
+\end{document}
+```
+</CodeGroup>
+
+### Professional Striped Tables
+
+<CodeGroup>
+```latex striped-tables.tex
+\usepackage[table]{xcolor}
+\usepackage{booktabs}
+
+% Define alternating colors
+\rowcolors{2}{white}{gray!10}
+
+\begin{tabular}{lcc}
+\toprule
+\rowcolor{gray!40}
+Product & Quantity & Price \\
+\midrule
+Apples & 10 & \$5.00 \\
+Oranges & 15 & \$7.50 \\
+Bananas & 20 & \$4.00 \\
+Grapes & 5 & \$6.00 \\
+\bottomrule
+\end{tabular}
+```
+</CodeGroup>
+
+## Table Width Control
+
+### Full Width Tables
+
+<CodeGroup>
+```latex full-width-tables.tex
+\documentclass{article}
+\usepackage{tabularx}
+\begin{document}
+
+% Using tabularx
+\begin{tabularx}{\textwidth}{lXr}
+\hline
+Left & Expanding middle column & Right \\
+\hline
+A & This column expands to fill available space & 100 \\
+B & Automatically adjusts width & 200 \\
+\hline
+\end{tabularx}
+
+% Multiple X columns
+\begin{tabularx}{\textwidth}{|X|X|X|}
+\hline
+Equal & Width & Columns \\
+\hline
+These three columns & share the available & space equally \\
+\hline
+\end{tabularx}
+
+% Custom width distribution
+\begin{tabularx}{\textwidth}{l>{\hsize=.5\hsize}X>{\hsize=1.5\hsize}Xr}
+Fixed & Narrow & Wide expanding column & Fixed \\
+\end{tabularx}
+
+\end{document}
+```
+</CodeGroup>
+
+### Resizing Tables
+
+<CodeGroup>
+```latex resizing-tables.tex
+\usepackage{graphicx}
+
+% Scale to specific width
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lcccccc}
+\hline
+Many & Columns & That & Would & Be & Too & Wide \\
+\hline
+Data & Data & Data & Data & Data & Data & Data \\
+\hline
+\end{tabular}
+}
+
+% Scale to fit column width
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{lcr}
+% Table content
+\end{tabular}
+}
+
+% Scale by percentage
+\scalebox{0.8}{%
+\begin{tabular}{lcr}
+% 80% of original size
+\end{tabular}
+}
+```
+</CodeGroup>
+
+## Best Practices
+
+<Tip>
+**Table design guidelines:**
+
+1. **Simplicity**: Less is more - avoid excessive lines and decoration
+2. **Alignment**: Right-align numbers, left-align text
+3. **Spacing**: Use adequate white space for readability
+4. **Captions**: Place captions above tables (convention)
+5. **Consistency**: Use the same style throughout your document
+6. **Booktabs**: Use `\toprule`, `\midrule`, `\bottomrule` for professional appearance
+7. **Width**: Avoid tables wider than text width
+</Tip>
+
+## Common Issues and Solutions
+
+<Warning>
+**Troubleshooting tables:**
+
+1. **Table too wide**: Use `tabularx`, `\small`, or rotate the table
+2. **Text not wrapping**: Use `p{width}` columns instead of `l`, `c`, or `r`
+3. **Vertical alignment**: Use `[t]`, `[c]`, or `[b]` with `p` columns
+4. **Missing package errors**: Load required packages (`array`, `booktabs`, etc.)
+5. **Spacing issues**: Adjust `\arraystretch` or use `\renewcommand{\arraystretch}{1.2}`
+</Warning>
+
+## Quick Reference
+
+### Essential Commands
+
+| Command | Purpose |
+|---------|---------|
+| `\hline` | Horizontal line |
+| `\cline{i-j}` | Partial horizontal line |
+| `\multicolumn{n}{format}{text}` | Span n columns |
+| `\multirow{n}{width}{text}` | Span n rows |
+| `&` | Column separator |
+| `\\` | Row separator |
+| `\caption{}` | Table caption |
+| `\label{}` | Reference label |
+
+### Column Types Summary
+
+```latex
+l              % left-aligned
+c              % centered  
+r              % right-aligned
+p{3cm}         % paragraph, fixed width
+|              % vertical line
+@{text}        % custom separator
+>{decl}col     % apply declaration to column
+<{decl}        % apply declaration after column
+```
+
+---
+
+<Info>
+**Next**: Learn about [Advanced table features](/learn/latex/tables/advanced-tables) including complex layouts, long tables, and professional formatting techniques.
+</Info>

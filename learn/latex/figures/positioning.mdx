@@ -1,0 +1,469 @@
+---
+title: Figure Positioning and Layout
+description: Master figure positioning in LaTeX. Learn about float placement, positioning options, and advanced layout techniques for professional documents.
+---
+
+import { CodeGroup, Info, Tip, Warning } from '/snippets/components.mdx'
+
+Controlling where figures appear in your document is crucial for professional layouts. This guide covers float behavior, positioning options, and advanced techniques for precise figure placement.
+
+<Info>
+**Key concept**: Figures are "floats" in LaTeX - they can move to optimize page layout. Understanding this behavior is essential for controlling positioning.
+</Info>
+
+## Understanding Floats
+
+### What Are Floats?
+
+Floats are elements (figures, tables) that LaTeX can move to avoid awkward page breaks and maintain good typography. LaTeX uses sophisticated algorithms to determine optimal placement.
+
+<CodeGroup>
+```latex float-basics.tex
+\documentclass{article}
+\usepackage{graphicx}
+\begin{document}
+
+Text before the figure.
+
+\begin{figure}[h]  % 'h' suggests "here"
+  \centering
+  \includegraphics[width=0.5\textwidth]{example-image}
+  \caption{LaTeX may move this figure}
+  \label{fig:float}
+\end{figure}
+
+Text after the figure definition continues here, but the 
+figure might appear elsewhere in the final document.
+
+\end{document}
+```
+</CodeGroup>
+
+### Why Floats Move
+
+LaTeX moves floats to:
+- Avoid large white spaces
+- Prevent awkward page breaks
+- Keep related content together
+- Maintain consistent page density
+
+## Positioning Options
+
+### Basic Float Specifiers
+
+<CodeGroup>
+```latex positioning-options.tex
+% Single option
+\begin{figure}[h]   % Here
+\begin{figure}[t]   % Top of page  
+\begin{figure}[b]   % Bottom of page
+\begin{figure}[p]   % Page of floats
+
+% Multiple options (order matters)
+\begin{figure}[ht]  % Try here, then top
+\begin{figure}[hb]  % Try here, then bottom
+\begin{figure}[tb]  % Try top, then bottom
+\begin{figure}[htbp] % Try all positions
+
+% With override
+\begin{figure}[!h]  % Try harder to place here
+\begin{figure}[!t]  % Override constraints for top
+```
+</CodeGroup>
+
+### Positioning Priority
+
+| Specifier | Placement | Notes |
+|-----------|-----------|-------|
+| `h` | Here (approximately) | Where defined in source |
+| `t` | Top of page | Current or next page |
+| `b` | Bottom of page | Current or next page |
+| `p` | Float page | Page with only floats |
+| `!` | Override | Relax LaTeX's rules |
+
+### Forcing Exact Placement
+
+<CodeGroup>
+```latex force-placement.tex
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{float}  % Required for H
+\begin{document}
+
+% Force exact placement
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.5\textwidth]{image}
+  \caption{This appears exactly here}
+\end{figure}
+
+% Alternative: suppress floating
+\begin{center}
+  \includegraphics[width=0.5\textwidth]{image}
+  \captionof{figure}{Non-floating figure}
+  \label{fig:nonfloat}
+\end{center}
+
+\end{document}
+```
+</CodeGroup>
+
+<Warning>
+**Caution**: Using `[H]` can create large white spaces and poor page breaks. Use sparingly.
+</Warning>
+
+## Advanced Positioning Control
+
+### Float Parameters
+
+<CodeGroup>
+```latex float-parameters.tex
+% Control float placement rules
+\setcounter{topnumber}{2}        % Max floats at top of page
+\setcounter{bottomnumber}{1}     % Max floats at bottom
+\setcounter{totalnumber}{3}      % Max floats per page
+
+% Fraction of page for floats
+\renewcommand{\topfraction}{0.8}    % Max 80% of page for top floats
+\renewcommand{\bottomfraction}{0.5} % Max 50% for bottom floats
+\renewcommand{\textfraction}{0.2}   % Min 20% must be text
+\renewcommand{\floatpagefraction}{0.7} % Min 70% of float page
+
+% Vertical spacing
+\setlength{\floatsep}{12pt}      % Between floats
+\setlength{\textfloatsep}{20pt}  % Between text and float
+\setlength{\intextsep}{12pt}     % For wrapfig
+```
+</CodeGroup>
+
+### Clearing Floats
+
+<CodeGroup>
+```latex clearing-floats.tex
+% Force all pending floats
+\clearpage  % Start new page after floats
+
+% Clear without page break
+\usepackage{afterpage}
+\afterpage{\clearpage}  % Clear after current page
+
+% Clear specific float type
+\usepackage{placeins}
+\FloatBarrier  % Prevent floats from passing
+
+% Section-wise float barriers
+\usepackage[section]{placeins}  % Floats don't cross sections
+```
+</CodeGroup>
+
+## Multiple Figures Layout
+
+### Side-by-Side Positioning
+
+<CodeGroup>
+```latex side-by-side-advanced.tex
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\begin{document}
+
+% Method 1: Minipage
+\begin{figure}[htbp]
+  \centering
+  \begin{minipage}{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{image1}
+    \caption{First figure}
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{image2}
+    \caption{Second figure}
+  \end{minipage}
+\end{figure}
+
+% Method 2: Subfigures with references
+\begin{figure}[htbp]
+  \centering
+  \begin{subfigure}[t]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{imageA}
+    \caption{Subfigure A}
+    \label{fig:subA}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[t]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{imageB}
+    \caption{Subfigure B}
+    \label{fig:subB}
+  \end{subfigure}
+  \caption{Main caption for both figures}
+  \label{fig:both}
+\end{figure}
+
+Reference: Figure \ref{fig:subA} shows X, while Figure \ref{fig:subB} shows Y.
+
+\end{document}
+```
+</CodeGroup>
+
+### Custom Arrangements
+
+<CodeGroup>
+```latex custom-arrangements.tex
+% Three figures with different sizes
+\begin{figure}[htbp]
+  \centering
+  % Large figure on left
+  \begin{minipage}{0.5\textwidth}
+    \includegraphics[width=\textwidth]{large}
+  \end{minipage}
+  \hfill
+  % Two small figures on right
+  \begin{minipage}{0.45\textwidth}
+    \includegraphics[width=\textwidth]{small1}\\[0.5cm]
+    \includegraphics[width=\textwidth]{small2}
+  \end{minipage}
+  \caption{Custom arrangement}
+\end{figure}
+
+% L-shaped arrangement
+\begin{figure}[htbp]
+  \centering
+  \begin{tabular}{cc}
+    \includegraphics[width=0.3\textwidth]{img1} &
+    \includegraphics[width=0.3\textwidth]{img2} \\
+    \multicolumn{2}{c}{
+      \includegraphics[width=0.6\textwidth]{img3}
+    }
+  \end{tabular}
+  \caption{L-shaped layout}
+\end{figure}
+```
+</CodeGroup>
+
+## Page-Wide Figures
+
+### Full Width in Two-Column
+
+<CodeGroup>
+```latex full-width.tex
+\documentclass[twocolumn]{article}
+\usepackage{graphicx}
+\begin{document}
+
+% Regular figure (one column)
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\columnwidth]{small-image}
+  \caption{Column-width figure}
+\end{figure}
+
+% Full page width
+\begin{figure*}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{wide-image}
+  \caption{Full page-width figure}
+\end{figure*}
+
+\end{document}
+```
+</CodeGroup>
+
+### Landscape Figures
+
+<CodeGroup>
+```latex landscape-figures.tex
+\usepackage{rotating}
+\usepackage{pdflscape}  % Rotates PDF page
+
+% Rotated figure
+\begin{sidewaysfigure}
+  \centering
+  \includegraphics[width=\textwidth]{wide-diagram}
+  \caption{Rotated to fit}
+\end{sidewaysfigure}
+
+% Landscape page
+\begin{landscape}
+\begin{figure}
+  \centering
+  \includegraphics[width=\linewidth]{very-wide-image}
+  \caption{On landscape page}
+\end{figure}
+\end{landscape}
+```
+</CodeGroup>
+
+## Precise Positioning
+
+### Absolute Positioning
+
+<CodeGroup>
+```latex absolute-positioning.tex
+\usepackage{tikz}
+\usepackage{eso-pic}
+
+% Place at specific coordinates
+\AddToShipoutPictureBG{%
+  \AtPageUpperLeft{%
+    \put(2cm,-5cm){%
+      \includegraphics[width=3cm]{logo}
+    }%
+  }%
+}
+
+% Using TikZ
+\begin{tikzpicture}[remember picture,overlay]
+  \node at (current page.center) {
+    \includegraphics[width=5cm]{watermark}
+  };
+\end{tikzpicture}
+```
+</CodeGroup>
+
+### Margin Figures
+
+<CodeGroup>
+```latex margin-figures.tex
+% For books/reports with wide margins
+\marginpar{
+  \centering
+  \includegraphics[width=\marginparwidth]{small-image}
+  \captionof{figure}{Margin figure}
+}
+
+% Using marginfigure (tufte-latex)
+\begin{marginfigure}
+  \includegraphics[width=\textwidth]{image}
+  \caption{In the margin}
+\end{marginfigure}
+```
+</CodeGroup>
+
+## Float Management Strategies
+
+### Document-Wide Settings
+
+<CodeGroup>
+```latex global-settings.tex
+% Preamble settings for better float handling
+
+% Allow more floats
+\setcounter{totalnumber}{6}
+\setcounter{topnumber}{4}
+\setcounter{bottomnumber}{4}
+
+% Relax float constraints
+\renewcommand{\topfraction}{0.9}
+\renewcommand{\bottomfraction}{0.8}
+\renewcommand{\textfraction}{0.1}
+\renewcommand{\floatpagefraction}{0.8}
+
+% Penalties for float placement
+\setlength{\floatsep}{10pt plus 3pt minus 2pt}
+\setlength{\textfloatsep}{15pt plus 3pt minus 3pt}
+\setlength{\intextsep}{10pt plus 3pt minus 2pt}
+
+% Stricter float placement
+\usepackage[section]{placeins}  % Floats within sections
+```
+</CodeGroup>
+
+### Managing Many Figures
+
+<CodeGroup>
+```latex many-figures.tex
+% Strategy 1: Group related figures
+\begin{figure}[p]  % Float page
+  \centering
+  \includegraphics[width=0.45\textwidth]{fig1}
+  \includegraphics[width=0.45\textwidth]{fig2}\\[1em]
+  \includegraphics[width=0.45\textwidth]{fig3}
+  \includegraphics[width=0.45\textwidth]{fig4}
+  \caption{Related figures grouped}
+\end{figure}
+
+% Strategy 2: Process floats periodically
+Text and figures...
+\clearpage  % Force processing
+
+% Strategy 3: Use non-floating alternatives
+\begin{center}
+  \includegraphics[width=0.8\textwidth]{image}
+  \captionof{figure}{Non-floating alternative}
+\end{center}
+```
+</CodeGroup>
+
+## Debugging Float Issues
+
+### Common Problems and Solutions
+
+<CodeGroup>
+```latex float-debugging.tex
+% Problem: Figure appears too late
+% Solution 1: Add more placement options
+\begin{figure}[!htbp]  % Try harder
+
+% Solution 2: Clear floats
+\clearpage  % Before problematic section
+
+% Problem: "Too many unprocessed floats"
+% Solution: Process pending floats
+\clearpage
+% Or increase counter
+\usepackage{morefloats}  % Allows more floats
+
+% Problem: Large gaps
+% Solution: Adjust parameters
+\setlength{\textfloatsep}{10pt plus 2pt minus 2pt}
+
+% Check float queue
+\usepackage{showframe}  % Shows page layout
+\usepackage{layout}     % \layout command
+```
+</CodeGroup>
+
+## Best Practices
+
+<Tip>
+**Float positioning guidelines:**
+
+1. **Default first**: Start with `[htbp]` for most figures
+2. **Avoid `[h]` only**: Too restrictive, add alternatives
+3. **Group related**: Put related figures together
+4. **Clear periodically**: Use `\clearpage` at chapter/section ends
+5. **Size appropriately**: Oversized figures cause problems
+6. **Think document-wide**: Consider overall flow, not just local placement
+7. **Use packages wisely**: `float`, `placeins`, `afterpage` for control
+</Tip>
+
+## Quick Reference
+
+### Placement Options
+```latex
+[h]     % Here
+[t]     % Top
+[b]     % Bottom  
+[p]     % Page of floats
+[!]     % Override constraints
+[H]     % HERE (requires float package)
+[htbp]  % Recommended default
+```
+
+### Key Commands
+| Command | Purpose |
+|---------|---------|
+| `\clearpage` | Process all floats |
+| `\FloatBarrier` | Boundary for floats |
+| `\captionof{figure}{}` | Caption without float |
+| `figure*` | Full width in two-column |
+
+---
+
+<Info>
+**Next**: Learn about [Creating tables](/learn/latex/tables/creating-tables) to present structured data effectively.
+</Info>

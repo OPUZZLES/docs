@@ -1,0 +1,709 @@
+---
+title: LaTeX Thesis & Dissertation Template
+description: Comprehensive LaTeX templates for PhD dissertations and Master's theses. Includes all necessary components for academic submissions.
+---
+
+import { CodeGroup, Info, Tip, Warning, Card, CardGroup } from '/snippets/components.mdx'
+
+Professional templates for writing your thesis or dissertation. These templates comply with most university requirements and include all necessary components for a complete academic document.
+
+<Info>
+**Downloads:**
+- [PhD Dissertation Template](/templates/files/dissertation.tex)
+- [Master's Thesis Template](/templates/files/thesis-masters.tex)
+- [Undergraduate Thesis](/templates/files/thesis-undergrad.tex)
+- [Complete Example with Chapters](/templates/files/thesis-complete.zip)
+</Info>
+
+## Complete Thesis Template
+
+This comprehensive template includes everything you need:
+
+<CodeGroup>
+```latex thesis-main.tex
+\documentclass[12pt,oneside]{book}
+
+% Essential packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[margin=1.5in]{geometry}
+\usepackage{setspace}
+\usepackage{tocloft}
+\usepackage{appendix}
+\usepackage{biblatex}
+\addbibresource{references.bib}
+
+% Line spacing
+\doublespacing
+
+% Chapter title formatting
+\usepackage{titlesec}
+\titleformat{\chapter}[display]
+  {\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\Huge}
+\titlespacing*{\chapter}{0pt}{0pt}{40pt}
+
+% Theorem environments
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+% Document information
+\title{Title of Your Thesis}
+\author{Your Full Name}
+\date{Month Year}
+
+\begin{document}
+
+% Title Page
+\begin{titlepage}
+\begin{center}
+\vspace*{1cm}
+
+\textbf{\LARGE Title of Your Thesis}\\
+\vspace{0.5cm}
+\large Subtitle if Applicable
+
+\vfill
+
+A Dissertation\\
+Presented to the Faculty of the Graduate School\\
+of\\
+\textbf{University Name}\\
+in Partial Fulfillment\\
+of the Requirements for the Degree\\
+\textbf{Doctor of Philosophy}
+
+\vfill
+
+by\\
+\textbf{Your Full Name}\\
+Month Year
+
+\end{center}
+\end{titlepage}
+
+% Copyright Page (optional)
+\clearpage
+\thispagestyle{empty}
+\vspace*{\fill}
+\begin{center}
+Copyright \copyright\ Year by Your Name\\
+All Rights Reserved
+\end{center}
+\vspace*{\fill}
+\clearpage
+
+% Abstract
+\chapter*{Abstract}
+\addcontentsline{toc}{chapter}{Abstract}
+
+This abstract should summarize your entire thesis in 150-350 words. Include:
+\begin{itemize}
+    \item The research problem and its significance
+    \item Your methodology or approach
+    \item Key findings or results
+    \item Main conclusions and contributions
+\end{itemize}
+
+The abstract should be self-contained and understandable without reading the full thesis.
+
+\textbf{Keywords:} keyword1, keyword2, keyword3, keyword4, keyword5
+
+% Dedication (optional)
+\chapter*{Dedication}
+\addcontentsline{toc}{chapter}{Dedication}
+\begin{center}
+\textit{To my family, for their unwavering support}
+\end{center}
+
+% Acknowledgments
+\chapter*{Acknowledgments}
+\addcontentsline{toc}{chapter}{Acknowledgments}
+
+I would like to express my deepest gratitude to:
+
+My advisor, Professor Name, for invaluable guidance and mentorship throughout this journey.
+
+My committee members, Professors X, Y, and Z, for their insightful feedback and support.
+
+My colleagues in the research group for stimulating discussions and collaboration.
+
+My family and friends for their patience and encouragement.
+
+This work was supported by Grant Number XXX from Funding Agency.
+
+% Table of Contents
+\tableofcontents
+
+% List of Figures
+\listoffigures
+\addcontentsline{toc}{chapter}{List of Figures}
+
+% List of Tables
+\listoftables
+\addcontentsline{toc}{chapter}{List of Tables}
+
+% List of Abbreviations (optional)
+\chapter*{List of Abbreviations}
+\addcontentsline{toc}{chapter}{List of Abbreviations}
+\begin{tabular}{ll}
+AI & Artificial Intelligence\\
+ML & Machine Learning\\
+NLP & Natural Language Processing\\
+API & Application Programming Interface\\
+\end{tabular}
+
+% Main Content
+\mainmatter
+
+\chapter{Introduction}
+\label{ch:introduction}
+
+\section{Background and Motivation}
+
+Begin with the broader context of your research area. Explain why this topic is important and what problems exist that need solving.
+
+\section{Problem Statement}
+
+Clearly define the specific problem your thesis addresses. Be precise about:
+\begin{itemize}
+    \item What is the gap in current knowledge?
+    \item Why is this gap significant?
+    \item What are the challenges in addressing it?
+\end{itemize}
+
+\section{Research Questions}
+
+State your research questions or hypotheses explicitly:
+\begin{enumerate}
+    \item Research Question 1
+    \item Research Question 2
+    \item Research Question 3
+\end{enumerate}
+
+\section{Contributions}
+
+Summarize the main contributions of your thesis:
+\begin{itemize}
+    \item \textbf{Contribution 1}: Brief description
+    \item \textbf{Contribution 2}: Brief description
+    \item \textbf{Contribution 3}: Brief description
+\end{itemize}
+
+\section{Thesis Organization}
+
+Provide a roadmap for the reader:
+
+Chapter \ref{ch:literature} reviews the relevant literature and positions our work within the existing body of knowledge.
+
+Chapter \ref{ch:methodology} presents our methodology and theoretical framework.
+
+Chapter \ref{ch:results} details our experimental results and analysis.
+
+Chapter \ref{ch:discussion} discusses the implications of our findings.
+
+Chapter \ref{ch:conclusion} concludes the thesis and suggests future research directions.
+
+\chapter{Literature Review}
+\label{ch:literature}
+
+\section{Theoretical Background}
+
+Review the fundamental theories and concepts relevant to your work.
+
+\subsection{Classical Approaches}
+
+Discuss traditional methods and their limitations.
+
+\subsection{Recent Developments}
+
+Cover recent advances in the field, citing key papers \cite{author2023}.
+
+\section{Related Work}
+
+\subsection{Approach A}
+Discuss how others have approached similar problems...
+
+\subsection{Approach B}
+Another line of research has focused on...
+
+\section{Gap Analysis}
+
+Synthesize the literature to clearly identify the gap your thesis fills.
+
+\chapter{Methodology}
+\label{ch:methodology}
+
+\section{Research Design}
+
+Describe your overall research approach and justify your choices.
+
+\section{Theoretical Framework}
+
+Present any theoretical models or frameworks you've developed.
+
+\begin{definition}
+A \emph{key concept} is defined as...
+\end{definition}
+
+\begin{theorem}
+Under conditions X and Y, the following holds...
+\end{theorem}
+
+\begin{proof}
+We proceed by induction...
+\end{proof}
+
+\section{Data Collection}
+
+If applicable, describe your data sources and collection methods.
+
+\section{Analysis Methods}
+
+Detail your analytical approaches, algorithms, or experimental procedures.
+
+\chapter{Results}
+\label{ch:results}
+
+\section{Experimental Setup}
+
+Describe your experimental environment, parameters, and implementation details.
+
+\section{Main Results}
+
+Present your findings with appropriate figures and tables.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{result1.png}
+\caption{Main experimental results showing...}
+\label{fig:main-results}
+\end{figure}
+
+\begin{table}[h]
+\centering
+\caption{Comparison of different approaches}
+\label{tab:comparison}
+\begin{tabular}{|l|c|c|c|}
+\hline
+\textbf{Method} & \textbf{Metric 1} & \textbf{Metric 2} & \textbf{Metric 3} \\
+\hline
+Baseline & 0.75 & 0.82 & 0.69 \\
+Our Method & \textbf{0.89} & \textbf{0.91} & \textbf{0.85} \\
+\hline
+\end{tabular}
+\end{table}
+
+\section{Statistical Analysis}
+
+Include any statistical validation of your results.
+
+\section{Additional Experiments}
+
+Present supplementary experiments that support your main findings.
+
+\chapter{Discussion}
+\label{ch:discussion}
+
+\section{Interpretation of Results}
+
+Explain what your results mean in the context of your research questions.
+
+\section{Implications}
+
+\subsection{Theoretical Implications}
+How do your findings advance theoretical understanding?
+
+\subsection{Practical Implications}
+What are the real-world applications of your work?
+
+\section{Limitations}
+
+Honestly discuss the limitations of your study:
+\begin{itemize}
+    \item Limitation 1 and its potential impact
+    \item Limitation 2 and how it might be addressed
+    \item Limitation 3 and future considerations
+\end{itemize}
+
+\section{Comparison with Prior Work}
+
+Compare your results with those reported in the literature.
+
+\chapter{Conclusion}
+\label{ch:conclusion}
+
+\section{Summary of Contributions}
+
+Recapitulate your main contributions and findings.
+
+\section{Answers to Research Questions}
+
+Explicitly answer each research question posed in Chapter 1.
+
+\section{Future Work}
+
+Suggest directions for future research:
+\begin{enumerate}
+    \item Extension 1: Description
+    \item Extension 2: Description
+    \item New Direction: Description
+\end{enumerate}
+
+\section{Final Remarks}
+
+Conclude with the broader impact and significance of your work.
+
+% Bibliography
+\printbibliography[heading=bibintoc,title={References}]
+
+% Appendices
+\appendix
+
+\chapter{Additional Proofs}
+\label{app:proofs}
+
+Include lengthy mathematical proofs that would interrupt the main text.
+
+\chapter{Implementation Details}
+\label{app:implementation}
+
+Provide code snippets, algorithms, or technical details.
+
+\begin{verbatim}
+def main_algorithm(data):
+    # Implementation details
+    processed = preprocess(data)
+    result = analyze(processed)
+    return result
+\end{verbatim}
+
+\chapter{Supplementary Data}
+\label{app:data}
+
+Include additional tables, figures, or datasets.
+
+\end{document}
+```
+</CodeGroup>
+
+## University-Specific Formatting
+
+### Page Setup Options
+
+<CodeGroup>
+```latex formatting.tex
+% US Letter with 1" margins
+\usepackage[letterpaper,margin=1in]{geometry}
+
+% A4 with custom margins
+\usepackage[a4paper,left=1.5in,right=1in,top=1in,bottom=1in]{geometry}
+
+% Double spacing (most common requirement)
+\usepackage{setspace}
+\doublespacing
+
+% Page numbers at bottom center
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+```
+</CodeGroup>
+
+### Front Matter Components
+
+<CodeGroup>
+```latex frontmatter.tex
+% Approval Page
+\chapter*{Approval Page}
+\thispagestyle{empty}
+\begin{center}
+This dissertation by YOUR NAME has been approved by:\\
+\vspace{2cm}
+
+\rule{0.5\textwidth}{0.4pt}\\
+Committee Chair Name, Ph.D.\\
+\vspace{1cm}
+
+\rule{0.5\textwidth}{0.4pt}\\
+Committee Member Name, Ph.D.\\
+\vspace{1cm}
+
+\rule{0.5\textwidth}{0.4pt}\\
+External Examiner Name, Ph.D.\\
+\vspace{2cm}
+
+Date: \rule{0.3\textwidth}{0.4pt}
+\end{center}
+
+% Declaration of Originality
+\chapter*{Declaration of Originality}
+I hereby declare that this thesis is my own work and effort...
+```
+</CodeGroup>
+
+## Chapter Organization
+
+### Using Separate Files
+
+<CodeGroup>
+```latex main-modular.tex
+% main.tex
+\documentclass[12pt]{book}
+% ... preamble ...
+
+\begin{document}
+% Front matter
+\include{frontmatter/titlepage}
+\include{frontmatter/abstract}
+\include{frontmatter/acknowledgments}
+
+\tableofcontents
+\listoffigures
+\listoftables
+
+% Main chapters
+\include{chapters/introduction}
+\include{chapters/literature}
+\include{chapters/methodology}
+\include{chapters/results}
+\include{chapters/discussion}
+\include{chapters/conclusion}
+
+% Back matter
+\printbibliography
+\include{appendices/appendixA}
+\include{appendices/appendixB}
+
+\end{document}
+```
+</CodeGroup>
+
+### Chapter File Example
+
+<CodeGroup>
+```latex chapter-introduction.tex
+% chapters/introduction.tex
+\chapter{Introduction}
+\label{ch:introduction}
+
+\section{Background}
+Content here...
+
+\section{Motivation}
+More content...
+
+% Note: Don't include \begin{document} in chapter files
+```
+</CodeGroup>
+
+## Bibliography Management
+
+### Using BibLaTeX (Recommended)
+
+<CodeGroup>
+```latex biblatex-setup.tex
+% In preamble
+\usepackage[style=apa,backend=biber]{biblatex}
+\addbibresource{references.bib}
+
+% Where you want the bibliography
+\printbibliography[heading=bibintoc]
+```
+</CodeGroup>
+
+### Sample Bibliography File
+
+<CodeGroup>
+```bibtex references.bib
+@article{smith2023,
+  author = {Smith, John and Doe, Jane},
+  title = {Revolutionary Findings in Field X},
+  journal = {Journal of Important Research},
+  volume = {42},
+  number = {3},
+  pages = {123--145},
+  year = {2023},
+  doi = {10.1234/jir.2023.42.3.123}
+}
+
+@book{johnson2022,
+  author = {Johnson, Sarah},
+  title = {Comprehensive Guide to Topic Y},
+  publisher = {Academic Press},
+  year = {2022},
+  edition = {3rd},
+  address = {New York, NY}
+}
+
+@inproceedings{lee2023,
+  author = {Lee, Kevin and Wang, Lisa},
+  title = {Novel Approach to Problem Z},
+  booktitle = {Proceedings of the International Conference},
+  pages = {456--467},
+  year = {2023},
+  organization = {IEEE}
+}
+```
+</CodeGroup>
+
+## Common Thesis Elements
+
+### Equations and Theorems
+
+<CodeGroup>
+```latex math-elements.tex
+% Numbered equation
+\begin{equation}
+\label{eq:main}
+f(x) = \int_0^\infty g(t) e^{-xt} dt
+\end{equation}
+
+% Multi-line equation
+\begin{align}
+H(X) &= -\sum_{i=1}^n p_i \log p_i \\
+     &= \mathbb{E}[-\log p(X)]
+\end{align}
+
+% Theorem with proof
+\begin{theorem}[Convergence]
+\label{thm:convergence}
+Under assumptions A1-A3, the algorithm converges 
+to the global optimum with probability 1.
+\end{theorem}
+
+\begin{proof}
+Let $\epsilon > 0$ be arbitrary...
+\end{proof}
+```
+</CodeGroup>
+
+### Algorithms
+
+<CodeGroup>
+```latex algorithms.tex
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+\begin{algorithm}
+\caption{Main Processing Algorithm}
+\label{alg:main}
+\begin{algorithmic}[1]
+\REQUIRE Input data $X$
+\ENSURE Processed result $Y$
+\STATE Initialize parameters $\theta$
+\WHILE{not converged}
+    \STATE $\theta \leftarrow \text{UpdateStep}(\theta, X)$
+    \IF{$\|\theta - \theta_{old}\| < \epsilon$}
+        \STATE \textbf{break}
+    \ENDIF
+\ENDWHILE
+\RETURN $Y = f(X, \theta)$
+\end{algorithmic}
+\end{algorithm}
+```
+</CodeGroup>
+
+## Formatting Tips
+
+<Tip>
+**Essential Formatting Guidelines:**
+1. Check your university's specific requirements early
+2. Use consistent formatting throughout
+3. Number all pages except title page
+4. Include page numbers in TOC for all sections
+5. Ensure figures and tables are referenced in text
+6. Keep one backup version before major changes
+</Tip>
+
+### Common Requirements
+
+| Element | Common Requirement |
+|---------|-------------------|
+| Font | Times New Roman 12pt |
+| Spacing | Double spaced |
+| Margins | 1" all sides (or 1.5" left for binding) |
+| Page Numbers | Bottom center or top right |
+| Chapter Titles | Bold, centered, or flush left |
+| Citations | Consistent style throughout |
+
+## Troubleshooting
+
+<Warning>
+**Common Issues:**
+- **Missing references**: Run BibTeX/Biber between LaTeX compilations
+- **Incorrect numbering**: Clear auxiliary files and recompile
+- **Overfull hboxes**: Adjust text or use `\sloppy` in problematic paragraphs
+- **Figure placement**: Use `[htbp]` for flexible positioning
+</Warning>
+
+## Compilation Workflow
+
+```bash
+# For BibLaTeX
+pdflatex thesis.tex
+biber thesis
+pdflatex thesis.tex
+pdflatex thesis.tex
+
+# For traditional BibTeX
+pdflatex thesis.tex
+bibtex thesis
+pdflatex thesis.tex
+pdflatex thesis.tex
+```
+
+## Additional Resources
+
+<CardGroup cols={2}>
+  <Card 
+    title="University Templates" 
+    icon="university"
+    href="/templates/university-specific"
+  >
+    Templates for specific universities
+  </Card>
+  <Card 
+    title="Citation Styles" 
+    icon="quote"
+    href="/learn/latex/bibliography"
+  >
+    Guide to different citation formats
+  </Card>
+  <Card 
+    title="Figure Best Practices" 
+    icon="image"
+    href="/learn/latex/figures"
+  >
+    Creating publication-quality figures
+  </Card>
+  <Card 
+    title="Table Guidelines" 
+    icon="table"
+    href="/learn/latex/tables"
+  >
+    Professional table formatting
+  </Card>
+</CardGroup>
+
+---
+
+<Info>
+**Final Tip**: Start writing early, even if just outlines. LaTeX makes it easy to reorganize content as your thesis evolves. Focus on content first, formatting second.
+</Info>
+
+Good luck with your thesis! Remember to take regular breaks and celebrate small victories along the way.

@@ -1,0 +1,246 @@
+---
+title: Creating your first LaTeX document
+description: Learn how to create your first LaTeX document from scratch. Step-by-step guide for beginners using LaTeX Cloud Studio.
+---
+
+import { CodeGroup, Info, Tip, Warning } from '/snippets/components.mdx'
+
+Let's create your very first LaTeX document! This guide will walk you through the essential steps to get started with LaTeX using LaTeX Cloud Studio.
+
+<Info>
+**Time needed**: 5 minutes  
+**Prerequisites**: Access to LaTeX Cloud Studio  
+**What you'll learn**: Basic document structure, compiling, and viewing output
+</Info>
+
+## The Simplest LaTeX Document
+
+Every LaTeX journey begins with a simple "Hello World" document. Here's the absolute minimum you need:
+
+<CodeGroup>
+```latex hello-world.tex
+\documentclass{article}
+\begin{document}
+Hello World!
+\end{document}
+```
+</CodeGroup>
+
+That's it! These four lines create a complete LaTeX document.
+
+## Understanding Each Line
+
+Let's break down what each line does:
+
+### 1. Document Class
+```latex
+\documentclass{article}
+```
+
+This tells LaTeX what kind of document you're creating. The `article` class is perfect for:
+- Short documents
+- Academic papers
+- Reports
+- General documents
+
+Other common classes include:
+- `report` - for longer documents with chapters
+- `book` - for books with parts, chapters, and sections
+- `letter` - for formal letters
+- `beamer` - for presentations
+
+### 2. Document Environment
+```latex
+\begin{document}
+...content...
+\end{document}
+```
+
+Everything between these commands is your actual document content. Think of it as the "body" of your HTML page.
+
+## Creating a More Complete Document
+
+Let's expand our document with common elements:
+
+<CodeGroup>
+```latex complete-first.tex
+\documentclass{article}
+
+% Preamble - setup goes here
+\title{My First LaTeX Document}
+\author{Your Name}
+\date{December 2024}
+
+\begin{document}
+
+% Create title from preamble info
+\maketitle
+
+% First section
+\section{Introduction}
+Welcome to my first LaTeX document! This is an exciting moment in my journey to create professional documents.
+
+\section{Why I'm Learning LaTeX}
+I'm learning LaTeX because:
+\begin{itemize}
+    \item It creates beautiful documents
+    \item It handles mathematics perfectly
+    \item It's used by professionals worldwide
+    \item It gives me complete control over formatting
+\end{itemize}
+
+\section{My First Equation}
+Einstein's famous equation is $E = mc^2$, which shows the relationship between energy and mass.
+
+\section{Conclusion}
+This is just the beginning of my LaTeX journey!
+
+\end{document}
+```
+</CodeGroup>
+
+## How to Create This in LaTeX Cloud Studio
+
+1. **Open LaTeX Cloud Studio** in your browser
+2. **Create a new document** using the "New Document" button
+3. **Copy and paste** the code above into the editor
+4. **Click "Compile"** to generate your PDF
+5. **View the result** in the preview pane
+
+<Tip>
+LaTeX Cloud Studio automatically saves your work and provides real-time preview, making it perfect for beginners!
+</Tip>
+
+## The Document Structure
+
+A LaTeX document has two main parts:
+
+### 1. The Preamble
+Everything before `\begin{document}` is the preamble. This is where you:
+- Set the document class
+- Load packages (extensions)
+- Define document information (title, author, date)
+- Set up custom commands
+- Configure document settings
+
+### 2. The Document Body
+Everything between `\begin{document}` and `\end{document}` is your content. This includes:
+- Text
+- Sections and chapters
+- Equations
+- Figures and tables
+- References
+
+## Your First Compilation
+
+When you compile a LaTeX document, here's what happens:
+
+1. **LaTeX reads your source file** (.tex)
+2. **Processes the commands** and markup
+3. **Generates a PDF** (or other output format)
+4. **Shows any errors** if something went wrong
+
+In LaTeX Cloud Studio, this happens automatically when you click "Compile" or enable auto-compilation.
+
+## Common Beginner Mistakes
+
+<Warning>
+**Avoid these common errors:**
+
+1. **Forgetting `\end{document}`** - Every document must end with this
+2. **Content before `\begin{document}`** - Only setup goes in the preamble
+3. **Mismatched braces** - Every `{` needs a matching `}`
+4. **Wrong quotes** - Use `` ` ` '' for quotes, not " "
+</Warning>
+
+## Adding More Elements
+
+### Comments
+Use `%` to add comments that won't appear in the output:
+
+```latex
+% This is a comment
+This text appears % but this comment doesn't
+```
+
+### Paragraphs
+Leave a blank line to start a new paragraph:
+
+```latex
+This is the first paragraph. It can be as long as you want.
+
+This is the second paragraph. LaTeX automatically handles spacing.
+```
+
+### Basic Formatting
+```latex
+\textbf{Bold text}
+\textit{Italic text}
+\underline{Underlined text}
+\texttt{Monospace text}
+```
+
+## Practice Exercise
+
+Try creating this document:
+
+<CodeGroup>
+```latex exercise.tex
+\documentclass{article}
+\title{My LaTeX Practice}
+\author{[Your Name]}
+\date{\today} % Automatically uses today's date
+
+\begin{document}
+\maketitle
+
+\section{About Me}
+% Write a paragraph about yourself
+
+\section{My Favorite Formula}
+% Add a simple math equation using $ $
+
+\section{Things I Want to Learn}
+% Create a list using \begin{itemize}
+
+\end{document}
+```
+</CodeGroup>
+
+## What's Next?
+
+Now that you've created your first document, you can:
+
+1. **Experiment with different document classes** - Try `report` or `book`
+2. **Add more sections** - Use `\subsection` and `\subsubsection`
+3. **Include mathematics** - Learn about math mode
+4. **Format your text** - Explore fonts and styling
+5. **Add images and tables** - Make your documents visual
+
+## Quick Reference
+
+| Command | Purpose | Example |
+|---------|---------|---------|
+| `\documentclass{}` | Set document type | `\documentclass{article}` |
+| `\begin{document}` | Start document content | Required |
+| `\end{document}` | End document content | Required |
+| `\title{}` | Set document title | `\title{My Report}` |
+| `\author{}` | Set author name | `\author{Jane Doe}` |
+| `\date{}` | Set date | `\date{\today}` |
+| `\maketitle` | Create title block | Place after `\begin{document}` |
+| `\section{}` | Create a section | `\section{Introduction}` |
+| `%` | Comment | `% This is a note` |
+
+## Tips for Success
+
+<Tip>
+1. **Start simple** - Don't try to use every feature at once
+2. **Compile often** - Check your work frequently
+3. **Read error messages** - They usually point to the exact problem
+4. **Use templates** - Build on working examples
+5. **Keep the documentation handy** - Reference it as you work
+</Tip>
+
+---
+
+Congratulations! You've created your first LaTeX document. This is the foundation for creating professional documents of any complexity. Continue with [Choosing a LaTeX Compiler](/learn/latex/basics/choosing-compiler) to understand how LaTeX processes your documents.

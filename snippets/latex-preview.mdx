@@ -1,0 +1,137 @@
+export const LaTeXPreview = ({ code, title }) => (
+  <div className="latex-preview-container" style={{ marginBottom: '1.5rem' }}>
+    {title && (
+      <div style={{ 
+        fontSize: '0.875rem', 
+        fontWeight: '600', 
+        marginBottom: '0.5rem',
+        color: 'var(--text-secondary)'
+      }}>
+        {title}
+      </div>
+    )}
+    <div style={{ 
+      display: 'grid', 
+      gridTemplateColumns: '1fr 1fr', 
+      gap: '1rem',
+      border: '1px solid var(--border-color)',
+      borderRadius: '8px',
+      overflow: 'hidden'
+    }}>
+      <div style={{ 
+        backgroundColor: 'var(--code-bg)', 
+        padding: '1rem',
+        borderRight: '1px solid var(--border-color)'
+      }}>
+        <div style={{ 
+          fontSize: '0.75rem', 
+          textTransform: 'uppercase', 
+          marginBottom: '0.5rem',
+          opacity: 0.7
+        }}>
+          LaTeX Code
+        </div>
+        <pre style={{ 
+          margin: 0, 
+          fontSize: '0.875rem',
+          overflow: 'auto'
+        }}>
+          <code>{code}</code>
+        </pre>
+      </div>
+      <div style={{ 
+        backgroundColor: 'var(--bg-secondary)', 
+        padding: '1rem',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}>
+        <div style={{ textAlign: 'center' }}>
+          <div style={{ 
+            fontSize: '0.75rem', 
+            textTransform: 'uppercase', 
+            marginBottom: '0.5rem',
+            opacity: 0.7
+          }}>
+            Rendered Output
+          </div>
+          <div style={{ 
+            fontSize: '1.125rem',
+            fontFamily: 'serif'
+          }}>
+            {/* This would ideally render actual LaTeX, but for now shows placeholder */}
+            <em>[LaTeX output visualization]</em>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
+export const LaTeXExample = ({ children, output }) => (
+  <div className="latex-example" style={{ marginBottom: '1.5rem' }}>
+    <div style={{ 
+      display: 'grid', 
+      gridTemplateColumns: '1fr 1fr', 
+      gap: '1rem',
+      alignItems: 'stretch'
+    }}>
+      <div>
+        <div style={{ 
+          fontSize: '0.875rem', 
+          fontWeight: '600', 
+          marginBottom: '0.5rem',
+          color: '#FF6037'
+        }}>
+          LaTeX Code
+        </div>
+        <div style={{ 
+          backgroundColor: '#f5f5f5', 
+          padding: '1rem', 
+          borderRadius: '4px',
+          fontFamily: 'monospace',
+          fontSize: '0.875rem',
+          whiteSpace: 'pre-wrap'
+        }}>
+          {children}
+        </div>
+      </div>
+      <div>
+        <div style={{ 
+          fontSize: '0.875rem', 
+          fontWeight: '600', 
+          marginBottom: '0.5rem',
+          color: '#FF6037'
+        }}>
+          Result
+        </div>
+        <div style={{ 
+          backgroundColor: '#ffffff', 
+          padding: '1rem', 
+          borderRadius: '4px',
+          border: '1px solid #e0e0e0',
+          minHeight: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}>
+          <div style={{ fontFamily: 'serif', fontSize: '1.125rem' }}>
+            {output}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
+export const LaTeXInline = ({ children }) => (
+  <span style={{ 
+    fontFamily: 'monospace', 
+    fontSize: '0.9em',
+    backgroundColor: '#f0f0f0',
+    padding: '0.125rem 0.25rem',
+    borderRadius: '3px'
+  }}>
+    {children}
+  </span>
+);

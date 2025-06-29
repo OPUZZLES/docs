@@ -1,0 +1,495 @@
+---
+title: Learn LaTeX in 30 minutes
+description: The quickest way to learn LaTeX. Create your first professional document in just 30 minutes with our beginner-friendly tutorial.
+---
+
+import { Card, CardGroup, CodeGroup, Info, Tip, Warning } from '/snippets/components.mdx'
+
+Welcome! In just 30 minutes, you'll go from complete beginner to creating your first professional LaTeX document. No prior experience needed.
+
+<Info>
+**Time to complete**: 30 minutes  
+**Prerequisites**: None  
+**What you'll learn**: Document creation, formatting, images, math, and tables
+</Info>
+
+## What is LaTeX?
+
+LaTeX (pronounced "LAH-tek" or "LAY-tek") is a document preparation system that produces professional-quality documents. Unlike word processors where you see the final result as you type, LaTeX uses plain text files with markup commands that get compiled into beautiful documents.
+
+### Why use LaTeX?
+
+Think of LaTeX like HTML for documents. You write structured text, and LaTeX handles all the formatting consistently and professionally. It's especially powerful for:
+
+- Academic papers and theses
+- Mathematical and scientific documents  
+- Books and long-form content
+- Professional reports and presentations
+
+## Your First LaTeX Document
+
+Let's dive right in! Here's the simplest possible LaTeX document:
+
+<CodeGroup>
+```latex basic-document.tex
+\documentclass{article}
+\begin{document}
+Hello, LaTeX!
+\end{document}
+```
+
+```text Output
+Hello, LaTeX!
+```
+</CodeGroup>
+
+### Understanding the Structure
+
+Every LaTeX document has two main parts:
+
+1. **Preamble** (before `\begin{document}`): Document settings and package imports
+2. **Body** (between `\begin{document}` and `\end{document}`): Your actual content
+
+<Tip>
+LaTeX commands always start with a backslash `\` and are case-sensitive.
+</Tip>
+
+## Adding Title and Author
+
+Let's make our document more professional by adding metadata:
+
+<CodeGroup>
+```latex document-with-title.tex
+\documentclass{article}
+\title{My First LaTeX Document}
+\author{Your Name}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+Welcome to my first LaTeX document! This is an exciting journey into professional document preparation.
+
+\end{document}
+```
+
+```text Output
+                My First LaTeX Document
+                     Your Name
+                  December 29, 2025
+
+Welcome to my first LaTeX document! This is an exciting journey into professional document preparation.
+```
+</CodeGroup>
+
+The `\maketitle` command creates a nicely formatted title block using the information you provided in the preamble.
+
+## Text Formatting
+
+LaTeX provides simple commands for text formatting:
+
+<CodeGroup>
+```latex text-formatting.tex
+\documentclass{article}
+\begin{document}
+
+\textbf{Bold text} is important.
+
+\textit{Italic text} adds emphasis.
+
+\underline{Underlined text} stands out.
+
+\texttt{Monospace text} for code.
+
+You can also \textbf{\textit{combine}} formats!
+
+\end{document}
+```
+
+```text Output
+Bold text is important.
+
+Italic text adds emphasis.
+
+Underlined text stands out.
+
+Monospace text for code.
+
+You can also combine formats!
+```
+</CodeGroup>
+
+### Paragraphs and Line Breaks
+
+- Leave a blank line to start a new paragraph
+- Use `\\` to force a line break within a paragraph
+- Use `\newpage` to start a new page
+
+## Creating Lists
+
+LaTeX makes it easy to create both bullet points and numbered lists:
+
+<CodeGroup>
+```latex lists.tex
+\documentclass{article}
+\begin{document}
+
+\section{Shopping List}
+\begin{itemize}
+    \item Milk
+    \item Eggs
+    \item Bread
+    \item LaTeX tutorials
+\end{itemize}
+
+\section{Recipe Steps}
+\begin{enumerate}
+    \item Mix ingredients
+    \item Bake for 30 minutes
+    \item Let cool
+    \item Enjoy!
+\end{enumerate}
+
+\end{document}
+```
+
+```text Output
+1 Shopping List
+• Milk
+• Eggs  
+• Bread
+• LaTeX tutorials
+
+2 Recipe Steps
+1. Mix ingredients
+2. Bake for 30 minutes
+3. Let cool
+4. Enjoy!
+```
+</CodeGroup>
+
+## Adding Math Equations
+
+This is where LaTeX truly shines! You can add math inline with `$...$` or as display equations with `\[...\]`:
+
+<CodeGroup>
+```latex math-examples.tex
+\documentclass{article}
+\begin{document}
+
+Einstein's famous equation is $E = mc^2$.
+
+The quadratic formula is:
+\[x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}\]
+
+Here's a more complex example:
+\[\int_{0}^{\infty} e^{-x^2} dx = \frac{\sqrt{\pi}}{2}\]
+
+\end{document}
+```
+
+```text Output
+Einstein's famous equation is E = mc².
+
+The quadratic formula is:
+       -b ± √(b² - 4ac)
+x = ─────────────────────
+           2a
+
+Here's a more complex example:
+∞
+∫ e^(-x²) dx = √π/2
+0
+```
+</CodeGroup>
+
+<Info>
+LaTeX has hundreds of mathematical symbols and operators. Check our [math reference guide](/learn/reference/math-symbols) for a complete list.
+</Info>
+
+## Inserting Images
+
+To add images to your document, you'll need the `graphicx` package:
+
+<CodeGroup>
+```latex images.tex
+\documentclass{article}
+\usepackage{graphicx}
+
+\begin{document}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{example-image}
+    \caption{A sample image in LaTeX}
+    \label{fig:sample}
+\end{figure}
+
+As we can see in Figure \ref{fig:sample}, images are easy to add!
+
+\end{document}
+```
+</CodeGroup>
+
+### Image Positioning Options
+
+- `[h]` - here (approximately)
+- `[t]` - top of page
+- `[b]` - bottom of page
+- `[p]` - separate page for floats
+
+## Creating Tables
+
+Tables in LaTeX are powerful but need a bit of practice:
+
+<CodeGroup>
+```latex simple-table.tex
+\documentclass{article}
+\begin{document}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|c|r|}
+\hline
+\textbf{Item} & \textbf{Quantity} & \textbf{Price} \\
+\hline
+Apples & 5 & \$2.50 \\
+Bananas & 12 & \$3.00 \\
+Oranges & 8 & \$4.20 \\
+\hline
+\textbf{Total} & \textbf{25} & \textbf{\$9.70} \\
+\hline
+\end{tabular}
+\caption{Fruit inventory}
+\end{table}
+
+\end{document}
+```
+
+```text Output
+┌─────────┬──────────┬────────┐
+│  Item   │ Quantity │ Price  │
+├─────────┼──────────┼────────┤
+│ Apples  │    5     │ $2.50  │
+│ Bananas │   12     │ $3.00  │
+│ Oranges │    8     │ $4.20  │
+├─────────┼──────────┼────────┤
+│ Total   │   25     │ $9.70  │
+└─────────┴──────────┴────────┘
+     Table 1: Fruit inventory
+```
+</CodeGroup>
+
+### Table Column Alignment
+
+- `l` - left aligned
+- `c` - centered
+- `r` - right aligned
+- `|` - vertical line
+
+## Document Structure
+
+For longer documents, use sections to organize your content:
+
+<CodeGroup>
+```latex document-structure.tex
+\documentclass{article}
+\begin{document}
+
+\tableofcontents
+\newpage
+
+\section{Introduction}
+This is the introduction to my document.
+
+\subsection{Background}
+Some background information here.
+
+\subsection{Objectives}
+What we aim to achieve.
+
+\section{Methods}
+How we'll do it.
+
+\section{Conclusion}
+What we learned.
+
+\end{document}
+```
+</CodeGroup>
+
+The `\tableofcontents` command automatically generates a table of contents based on your sections!
+
+## Comments in LaTeX
+
+Use `%` to add comments that won't appear in the output:
+
+```latex
+\documentclass{article}
+\begin{document}
+
+This text will appear. % This comment won't
+
+% You can also have full-line comments
+% They're great for:
+% - TODO notes
+% - Temporarily disabling content
+% - Explaining complex code
+
+\end{document}
+```
+
+## Common Packages
+
+Extend LaTeX's functionality with packages. Here are essential ones:
+
+```latex
+\documentclass{article}
+% Essential packages
+\usepackage{graphicx}  % Images
+\usepackage{amsmath}   % Advanced math
+\usepackage{hyperref}  % Clickable links
+\usepackage{geometry}  % Page margins
+\usepackage{enumitem}  % Better lists
+\usepackage{xcolor}    % Colors
+
+\begin{document}
+% Your content here
+\end{document}
+```
+
+## Troubleshooting Common Errors
+
+<Warning>
+LaTeX errors can be cryptic. Here are the most common ones and how to fix them:
+</Warning>
+
+### Missing $ inserted
+**Problem**: Math mode content outside math mode  
+**Solution**: Wrap math symbols in `$...$`
+
+### Undefined control sequence
+**Problem**: Misspelled command or missing package  
+**Solution**: Check spelling and load required packages
+
+### Missing \begin{document}
+**Problem**: Content before document begins  
+**Solution**: Move content after `\begin{document}`
+
+## Your Complete First Document
+
+Let's put it all together! Here's a complete document showcasing everything you've learned:
+
+<CodeGroup>
+```latex complete-document.tex
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{hyperref}
+
+\title{My LaTeX Journey}
+\author{Your Name}
+\date{\today}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Introduction}
+Welcome to my first complete LaTeX document! I've learned how to create professional documents with ease.
+
+\section{What I've Learned}
+
+\subsection{Text Formatting}
+I can make text \textbf{bold}, \textit{italic}, and \underline{underlined}. I can even \textbf{\textit{combine}} them!
+
+\subsection{Mathematics}
+LaTeX makes math beautiful. Here's the quadratic formula:
+\[x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}\]
+
+\subsection{Lists and Tables}
+\begin{itemize}
+    \item Create bullet points
+    \item Make numbered lists
+    \item Build professional tables
+\end{itemize}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Feature} & \textbf{Learned} \\
+\hline
+Basic formatting & ✓ \\
+Mathematics & ✓ \\
+Images & ✓ \\
+Tables & ✓ \\
+\hline
+\end{tabular}
+\caption{My LaTeX progress}
+\end{table}
+
+\section{Conclusion}
+In just 30 minutes, I've gone from zero to creating professional documents with LaTeX. The journey continues!
+
+\end{document}
+```
+</CodeGroup>
+
+## Next Steps
+
+Congratulations! You've just created your first LaTeX documents. Here's what to explore next:
+
+<CardGroup cols={2}>
+  <Card 
+    title="Document Classes" 
+    icon="file"
+    href="/learn/latex/document-classes"
+  >
+    Learn about article, report, book, and more
+  </Card>
+  <Card 
+    title="Advanced Math" 
+    icon="square-root-variable"
+    href="/learn/latex/mathematics"
+  >
+    Matrices, theorems, and complex equations
+  </Card>
+  <Card 
+    title="Bibliography" 
+    icon="book"
+    href="/learn/latex/bibliography"
+  >
+    Manage citations and references
+  </Card>
+  <Card 
+    title="Custom Styling" 
+    icon="paintbrush"
+    href="/learn/latex/styling"
+  >
+    Fonts, colors, and page layouts
+  </Card>
+</CardGroup>
+
+## Quick Reference Card
+
+Keep this handy as you write:
+
+| Command | Purpose | Example |
+|---------|---------|---------|
+| `\textbf{}` | Bold text | `\textbf{Important}` |
+| `\textit{}` | Italic text | `\textit{emphasis}` |
+| `\section{}` | New section | `\section{Introduction}` |
+| `$...$` | Inline math | `$E = mc^2$` |
+| `\[...\]` | Display math | `\[x = \frac{a}{b}\]` |
+| `\\` | Line break | `First line\\Second line` |
+| `%` | Comment | `% This is a comment` |
+
+---
+
+<Tip>
+**Pro tip**: Save this page as a bookmark! You'll refer back to these basics often as you learn more advanced features.
+</Tip>
+
+Ready to dive deeper? Continue with our [comprehensive LaTeX basics guide](/learn/latex/basics) or explore [specific topics](/learn) that interest you!

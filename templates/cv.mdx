@@ -1,0 +1,513 @@
+---
+title: LaTeX CV/Resume Template
+description: Professional CV and resume templates for job applications. Clean, ATS-friendly designs with multiple layout options.
+---
+
+import { CodeGroup, Info, Tip, Warning, Card, CardGroup } from '/snippets/components.mdx'
+
+Create stunning, professional CVs and resumes that stand out. Our templates are ATS-friendly, customizable, and designed to highlight your achievements.
+
+<Info>
+**Quick Downloads:**
+- [Modern CV Template](/templates/files/cv-modern.tex)
+- [Classic Resume Template](/templates/files/resume-classic.tex)
+- [Academic CV Template](/templates/files/cv-academic.tex)
+- [Tech Resume Template](/templates/files/resume-tech.tex)
+</Info>
+
+## Modern Professional CV
+
+A clean, modern design perfect for most industries:
+
+<CodeGroup>
+```latex cv-modern.tex
+\documentclass[11pt,a4paper,sans]{moderncv}
+
+% Modern CV theme
+\moderncvstyle{banking} % Options: casual, classic, banking, oldstyle, fancy
+\moderncvcolor{blue}    % Options: blue, orange, green, red, purple, grey, black
+
+% Character encoding
+\usepackage[utf8]{inputenc}
+\usepackage[scale=0.85]{geometry}
+
+% Personal Information
+\name{John}{Smith}
+\title{Senior Software Engineer}
+\address{123 Tech Street}{San Francisco, CA 94105}{USA}
+\phone[mobile]{+1~(555)~123~4567}
+\email{john.smith@email.com}
+\homepage{www.johnsmith.com}
+\social[linkedin]{johnsmith}
+\social[github]{johnsmith}
+\social[twitter]{@johnsmith}
+
+% Photo (optional)
+% \photo[70pt][0.4pt]{picture}
+
+\begin{document}
+\makecvtitle
+
+\section{Professional Summary}
+Experienced software engineer with 8+ years developing scalable web applications. 
+Expert in Python, JavaScript, and cloud technologies. Proven track record of leading 
+teams and delivering high-impact projects on time and within budget.
+
+\section{Experience}
+
+\cventry{2020--Present}{Senior Software Engineer}{Tech Corp}{San Francisco, CA}{}{
+  \begin{itemize}
+    \item Led development of microservices architecture serving 10M+ users daily
+    \item Reduced API response time by 40\% through optimization and caching strategies
+    \item Mentored team of 5 junior developers and conducted code reviews
+    \item Technologies: Python, Django, React, AWS, Docker, Kubernetes
+  \end{itemize}
+}
+
+\cventry{2018--2020}{Software Engineer}{StartupXYZ}{San Francisco, CA}{}{
+  \begin{itemize}
+    \item Built RESTful APIs and real-time features using Node.js and Socket.io
+    \item Implemented CI/CD pipeline reducing deployment time by 60\%
+    \item Collaborated with product team to deliver features improving user retention by 25\%
+    \item Technologies: JavaScript, Node.js, MongoDB, Redis, Jenkins
+  \end{itemize}
+}
+
+\cventry{2016--2018}{Junior Developer}{Digital Agency}{Los Angeles, CA}{}{
+  \begin{itemize}
+    \item Developed responsive websites for 20+ clients using modern frameworks
+    \item Maintained and optimized existing codebases
+    \item Participated in agile development process
+    \item Technologies: HTML, CSS, JavaScript, PHP, MySQL
+  \end{itemize}
+}
+
+\section{Education}
+\cventry{2012--2016}{Bachelor of Science in Computer Science}{University of California}{Berkeley, CA}{GPA: 3.8/4.0}{
+  \begin{itemize}
+    \item Dean's List: Fall 2014, Spring 2015
+    \item Relevant Coursework: Data Structures, Algorithms, Software Engineering, Database Systems
+  \end{itemize}
+}
+
+\section{Technical Skills}
+\cvitem{Languages}{Python, JavaScript, Java, C++, SQL}
+\cvitem{Frameworks}{Django, React, Node.js, Express, Spring Boot}
+\cvitem{Databases}{PostgreSQL, MongoDB, Redis, MySQL}
+\cvitem{Cloud/DevOps}{AWS, Docker, Kubernetes, CI/CD, Terraform}
+\cvitem{Tools}{Git, JIRA, VS Code, IntelliJ IDEA}
+
+\section{Projects}
+\cventry{2023}{Open Source Contributor}{AsyncAPI}{}{}{
+  Contributed to AsyncAPI specification and tooling. Implemented new features 
+  for code generation improving developer experience.
+  \newline{}\textit{GitHub: github.com/asyncapi/asyncapi}
+}
+
+\cventry{2022}{Personal Project}{Task Management API}{}{}{
+  Built RESTful API with authentication, real-time updates, and integrations.
+  Deployed on AWS with 99.9\% uptime.
+  \newline{}\textit{Technologies: Python, FastAPI, PostgreSQL, Redis, AWS}
+}
+
+\section{Certifications}
+\cvitem{2023}{AWS Certified Solutions Architect - Professional}
+\cvitem{2022}{Google Cloud Professional Cloud Developer}
+\cvitem{2021}{Certified Kubernetes Administrator (CKA)}
+
+\section{Awards \& Achievements}
+\cvitem{2023}{Employee of the Year - Tech Corp}
+\cvitem{2022}{Best Innovation Award - Internal Hackathon}
+\cvitem{2021}{Speaker at PyCon - "Scaling Python Applications"}
+
+\section{Languages}
+\cvitemwithcomment{English}{Native}{}
+\cvitemwithcomment{Spanish}{Professional Working Proficiency}{}
+\cvitemwithcomment{Mandarin}{Basic}{}
+
+\end{document}
+```
+</CodeGroup>
+
+## Classic One-Page Resume
+
+Perfect for US job applications with ATS optimization:
+
+<CodeGroup>
+```latex resume-classic.tex
+\documentclass[11pt,letterpaper]{article}
+\usepackage[margin=0.75in]{geometry}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage[T1]{fontenc}
+
+% Disable page numbers
+\pagestyle{empty}
+
+% Custom commands
+\newcommand{\resumeSection}[1]{
+  \vspace{2mm}
+  {\large\textbf{#1}}
+  \vspace{1mm}
+  \hrule
+  \vspace{2mm}
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{1mm}
+  \begin{tabular*}{\textwidth}[t]{l@{\extracolsep{\fill}}r}
+    \textbf{#1} & #2 \\
+    \textit{#3} & \textit{#4} \\
+  \end{tabular*}
+  \vspace{-2mm}
+}
+
+\newcommand{\resumeItem}[1]{
+  \item{#1}
+}
+
+\begin{document}
+
+% Header
+\begin{center}
+  {\LARGE\textbf{Jane Doe}} \\
+  \vspace{2mm}
+  Seattle, WA | (555) 987-6543 | jane.doe@email.com | linkedin.com/in/janedoe | github.com/janedoe
+\end{center}
+
+\resumeSection{PROFESSIONAL SUMMARY}
+Results-driven Marketing Manager with 6+ years of experience driving growth through data-driven strategies. 
+Proven track record of increasing brand awareness by 150\% and generating \$2M+ in revenue through integrated campaigns. 
+Expert in digital marketing, content strategy, and team leadership.
+
+\resumeSection{EXPERIENCE}
+
+\resumeSubheading
+{Marketing Manager}{Seattle, WA}
+{TechStart Inc.}{Mar 2021 -- Present}
+\begin{itemize}[leftmargin=*, labelindent=0pt, itemsep=-0.5mm]
+  \resumeItem{Led cross-functional team of 8 to launch product rebrand, resulting in 45\% increase in brand recognition}
+  \resumeItem{Developed and executed digital marketing strategy increasing website traffic by 200\% and leads by 150\%}
+  \resumeItem{Managed \$1.5M annual marketing budget, optimizing spend to achieve 3:1 ROI across all channels}
+  \resumeItem{Implemented marketing automation workflows improving lead nurturing efficiency by 60\%}
+\end{itemize}
+
+\resumeSubheading
+{Senior Marketing Specialist}{Portland, OR}
+{Digital Solutions Co.}{Jun 2019 -- Feb 2021}
+\begin{itemize}[leftmargin=*, labelindent=0pt, itemsep=-0.5mm]
+  \resumeItem{Created content strategy resulting in 300\% increase in organic search traffic over 18 months}
+  \resumeItem{Managed social media presence across 5 platforms, growing followers by 10K+ and engagement by 85\%}
+  \resumeItem{Collaborated with sales team to develop materials contributing to \$500K in new business}
+  \resumeItem{Analyzed campaign performance using Google Analytics and provided actionable insights}
+\end{itemize}
+
+\resumeSubheading
+{Marketing Coordinator}{San Francisco, CA}
+{StartupABC}{Aug 2017 -- May 2019}
+\begin{itemize}[leftmargin=*, labelindent=0pt, itemsep=-0.5mm]
+  \resumeItem{Coordinated 20+ marketing campaigns from conception to execution}
+  \resumeItem{Wrote compelling copy for websites, emails, and advertisements}
+  \resumeItem{Assisted in organizing 5 industry events with 200+ attendees each}
+\end{itemize}
+
+\resumeSection{EDUCATION}
+
+\resumeSubheading
+{Bachelor of Arts in Marketing}{Seattle, WA}
+{University of Washington}{Sep 2013 -- Jun 2017}
+\begin{itemize}[leftmargin=*, labelindent=0pt, itemsep=-0.5mm]
+  \resumeItem{GPA: 3.7/4.0 | Dean's List: 4 semesters}
+  \resumeItem{Relevant Coursework: Digital Marketing, Consumer Behavior, Data Analytics, Brand Management}
+\end{itemize}
+
+\resumeSection{SKILLS}
+
+\begin{itemize}[leftmargin=*, labelindent=0pt, itemsep=-0.5mm]
+  \resumeItem{\textbf{Marketing:} SEO/SEM, Content Marketing, Email Marketing, Social Media, PPC, Marketing Automation}
+  \resumeItem{\textbf{Analytics:} Google Analytics, Tableau, Excel, SQL, A/B Testing, Data Visualization}
+  \resumeItem{\textbf{Tools:} HubSpot, Salesforce, Mailchimp, Hootsuite, Adobe Creative Suite, WordPress}
+  \resumeItem{\textbf{Soft Skills:} Leadership, Strategic Planning, Project Management, Communication, Problem-Solving}
+\end{itemize}
+
+\resumeSection{CERTIFICATIONS \& ACHIEVEMENTS}
+
+\begin{itemize}[leftmargin=*, labelindent=0pt, itemsep=-0.5mm]
+  \resumeItem{Google Analytics Certified (2023) | HubSpot Content Marketing Certified (2022)}
+  \resumeItem{Marketing Excellence Award - TechStart Inc. (2022)}
+  \resumeItem{Published Article: "The Future of B2B Marketing" - Marketing Weekly (2023)}
+\end{itemize}
+
+\end{document}
+```
+</CodeGroup>
+
+## Academic CV Template
+
+Comprehensive template for academic positions:
+
+<CodeGroup>
+```latex cv-academic.tex
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\usepackage{enumitem}
+
+\begin{document}
+
+% Header
+\begin{center}
+{\LARGE\textbf{Dr. Sarah Johnson}} \\
+\vspace{3mm}
+Department of Computer Science \\
+University of Excellence \\
+123 Academic Way, Boston, MA 02115 \\
+Phone: (555) 123-4567 | Email: sjohnson@university.edu \\
+Web: www.cs.university.edu/~sjohnson | ORCID: 0000-0000-0000-0000
+\end{center}
+
+\section*{Research Interests}
+Machine Learning, Natural Language Processing, Deep Learning, AI Ethics, 
+Computational Linguistics, Neural Networks
+
+\section*{Education}
+\textbf{Ph.D. in Computer Science}, Massachusetts Institute of Technology, 2018 \\
+\textit{Dissertation:} "Deep Learning Approaches for Natural Language Understanding" \\
+\textit{Advisor:} Prof. John Smith
+
+\textbf{M.S. in Computer Science}, Stanford University, 2014 \\
+\textit{Thesis:} "Statistical Methods in Machine Translation"
+
+\textbf{B.S. in Computer Science}, \textit{Magna Cum Laude}, UC Berkeley, 2012 \\
+\textit{GPA:} 3.9/4.0
+
+\section*{Academic Appointments}
+\textbf{Assistant Professor}, University of Excellence, 2019--Present \\
+Department of Computer Science
+
+\textbf{Postdoctoral Researcher}, MIT CSAIL, 2018--2019 \\
+Advisor: Prof. Jane Doe
+
+\section*{Publications}
+
+\subsection*{Peer-Reviewed Journal Articles}
+\begin{enumerate}[leftmargin=*]
+\item Johnson, S., Smith, J., \& Doe, J. (2023). "Transformer-based Models for Cross-lingual Understanding." 
+\textit{Journal of Artificial Intelligence Research}, 75, 123-145.
+
+\item Johnson, S. \& Lee, K. (2022). "Ethical Considerations in Large Language Models." 
+\textit{AI \& Society}, 37(3), 567-582.
+
+\item Johnson, S. (2021). "Attention Mechanisms in Neural Machine Translation: A Survey." 
+\textit{Computational Linguistics}, 47(2), 234-267.
+\end{enumerate}
+
+\subsection*{Conference Proceedings}
+\begin{enumerate}[leftmargin=*, resume]
+\item Johnson, S., et al. (2023). "Few-shot Learning for Low-resource Languages." 
+In \textit{Proceedings of ACL 2023}, pp. 1234-1245.
+
+\item Johnson, S. \& Wang, L. (2022). "Robust NLP Systems for Domain Adaptation." 
+In \textit{Proceedings of NeurIPS 2022}, pp. 567-578.
+\end{enumerate}
+
+\section*{Grants and Funding}
+\textbf{NSF CAREER Award}, "Advancing Multilingual NLP," \$500,000, 2022--2027 \\
+\textit{Role:} Principal Investigator
+
+\textbf{Google Faculty Research Award}, "AI for Social Good," \$75,000, 2021 \\
+\textit{Role:} Principal Investigator
+
+\section*{Teaching Experience}
+\textbf{University of Excellence} (2019--Present)
+\begin{itemize}[leftmargin=*]
+\item CS 521: Machine Learning (Graduate) - Fall 2023, Fall 2022
+\item CS 321: Introduction to AI (Undergraduate) - Spring 2023, Spring 2022
+\item CS 622: Advanced NLP (Graduate) - Fall 2021
+\end{itemize}
+
+\section*{Awards and Honors}
+\begin{itemize}[leftmargin=*]
+\item Best Paper Award, ACL 2023
+\item Outstanding Teaching Award, University of Excellence, 2022
+\item MIT Presidential Fellowship, 2014--2018
+\end{itemize}
+
+\section*{Service}
+\textbf{Editorial Boards:} Associate Editor, Journal of AI Research (2021--Present)
+
+\textbf{Program Committees:} ACL (2020--2023), NeurIPS (2021--2023), ICML (2022--2023)
+
+\textbf{University Service:} Graduate Admissions Committee (2020--Present)
+
+\section*{Selected Invited Talks}
+\begin{itemize}[leftmargin=*]
+\item "The Future of Multilingual AI," Keynote at EMNLP 2023, Singapore
+\item "Ethics in NLP," Google AI Research, Mountain View, CA, 2022
+\item "Deep Learning for Languages," MIT CSAIL Seminar Series, 2021
+\end{itemize}
+
+\end{document}
+```
+</CodeGroup>
+
+## Customization Tips
+
+### Color Schemes
+
+<CodeGroup>
+```latex colors.tex
+% For moderncv
+\moderncvcolor{blue}    % Professional
+\moderncvcolor{green}   % Fresh
+\moderncvcolor{orange}  % Creative
+\moderncvcolor{red}     % Bold
+
+% Custom colors
+\definecolor{customblue}{RGB}{0,102,204}
+\definecolor{customgray}{RGB}{100,100,100}
+```
+</CodeGroup>
+
+### Font Options
+
+<CodeGroup>
+```latex fonts.tex
+% Modern fonts
+\usepackage{lmodern}
+\usepackage{helvet}  % Helvetica
+\usepackage{charter} % Charter
+
+% Sans-serif for modern look
+\renewcommand{\familydefault}{\sfdefault}
+```
+</CodeGroup>
+
+### Adding Icons
+
+<CodeGroup>
+```latex icons.tex
+\usepackage{fontawesome5}
+
+% Usage examples
+\faPhone\ (555) 123-4567
+\faEnvelope\ email@example.com
+\faLinkedin\ linkedin.com/in/yourname
+\faGithub\ github.com/yourname
+\faGlobe\ www.yourwebsite.com
+```
+</CodeGroup>
+
+## ATS Optimization Tips
+
+<Warning>
+**Essential for ATS Compatibility:**
+- Use standard section headings (Experience, Education, Skills)
+- Avoid tables, columns, or complex formatting for main content
+- Use standard fonts (Arial, Times New Roman, Calibri)
+- Save as .docx after creating PDF for online applications
+- Include keywords from job description
+</Warning>
+
+### Keyword Optimization
+
+```latex
+% Include relevant keywords naturally
+\section{Technical Skills}
+\begin{itemize}
+  \item Programming: Python (Expert), Java (Proficient), SQL (Proficient)
+  \item Frameworks: Django, React, Spring Boot
+  \item Tools: Git, Docker, Kubernetes, AWS
+\end{itemize}
+```
+
+## Design Variations
+
+<CardGroup cols={2}>
+  <Card 
+    title="Two-Column CV" 
+    icon="columns"
+    href="/templates/files/cv-twocolumn.tex"
+  >
+    Modern design with sidebar
+  </Card>
+  <Card 
+    title="Minimal Resume" 
+    icon="minimize"
+    href="/templates/files/resume-minimal.tex"
+  >
+    Clean, no-frills design
+  </Card>
+  <Card 
+    title="Creative CV" 
+    icon="palette"
+    href="/templates/files/cv-creative.tex"
+  >
+    For design-oriented roles
+  </Card>
+  <Card 
+    title="Executive Resume" 
+    icon="briefcase"
+    href="/templates/files/resume-executive.tex"
+  >
+    For senior positions
+  </Card>
+</CardGroup>
+
+## Best Practices
+
+<Tip>
+**Content Tips:**
+1. **Quantify achievements**: Use numbers and percentages
+2. **Action verbs**: Start bullets with strong verbs (Led, Developed, Increased)
+3. **Relevance**: Tailor content to each job application
+4. **Consistency**: Use consistent formatting and tense
+5. **Proofread**: Zero tolerance for typos in CVs/resumes
+</Tip>
+
+### Length Guidelines
+
+- **Entry Level**: 1 page maximum
+- **Mid-Career**: 1-2 pages
+- **Senior/Executive**: 2-3 pages
+- **Academic CV**: No limit (include all publications)
+
+### Section Order
+
+1. **Contact Information**
+2. **Summary/Objective** (optional)
+3. **Experience** (or Education if recent grad)
+4. **Education**
+5. **Skills**
+6. **Additional Sections** (Certifications, Projects, etc.)
+
+## Compilation Tips
+
+```bash
+# Basic compilation
+pdflatex cv.tex
+
+# For moderncv (compile twice)
+pdflatex cv.tex
+pdflatex cv.tex
+
+# With bibliography
+pdflatex cv.tex
+bibtex cv
+pdflatex cv.tex
+pdflatex cv.tex
+```
+
+## Related Resources
+
+- [Cover Letter Template](/templates/letter) - Matching cover letters
+- [Academic Article Template](/templates/article) - For publications
+- [LinkedIn Optimization Guide](/learn/how-to/linkedin) - Complement your CV
+
+---
+
+<Info>
+**Remember**: Your CV/resume is a marketing document, not an autobiography. Focus on achievements and value you bring to employers.
+</Info>
+
+Ready to create your perfect CV or resume? Choose a template above and customize it to highlight your unique qualifications!
