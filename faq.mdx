@@ -1,0 +1,258 @@
+---
+title: Frequently Asked Questions
+description: Common questions about LaTeX Cloud Studio, LaTeX typesetting, and document creation
+---
+
+# Frequently Asked Questions
+
+Find answers to common questions about LaTeX Cloud Studio and LaTeX document creation.
+
+## LaTeX Cloud Studio Platform
+
+<Accordion title="What is LaTeX Cloud Studio?">
+LaTeX Cloud Studio is a cloud-based LaTeX editor that makes professional document creation accessible to everyone. No installation required – just sign in and start creating beautiful documents with real-time collaboration, instant compilation, and AI-powered assistance.
+</Accordion>
+
+<Accordion title="Do I need to install anything to use LaTeX Cloud Studio?">
+No! LaTeX Cloud Studio runs entirely in your browser. We handle all the LaTeX installation, package management, and compilation on our servers. You just need a modern web browser and internet connection.
+</Accordion>
+
+<Accordion title="Is LaTeX Cloud Studio free to use?">
+Yes, LaTeX Cloud Studio offers a free tier that includes:
+- Unlimited public projects
+- Real-time collaboration with up to 3 users
+- Access to all LaTeX packages
+- Basic compilation features
+
+Pro plans are available for advanced features like private projects, priority compilation, and enhanced collaboration tools.
+</Accordion>
+
+<Accordion title="How do I collaborate with others?">
+Collaboration is built into LaTeX Cloud Studio:
+1. Click the "Share" button in your project
+2. Invite collaborators by email
+3. Set permissions (view, comment, or edit)
+4. Work together in real-time with live cursors
+
+See our [collaboration guide](/learn/latex/how-to/collaboration-workflow) for detailed instructions.
+</Accordion>
+
+<Accordion title="Can I work offline?">
+Currently, LaTeX Cloud Studio requires an internet connection. However, we're developing offline capabilities that will allow you to:
+- Edit documents offline
+- Sync changes when reconnected
+- Export projects for local editing
+</Accordion>
+
+## Getting Started with LaTeX
+
+<Accordion title="I'm new to LaTeX. Where should I start?">
+Great question! We recommend:
+1. Start with our [LaTeX in 30 Minutes](/learn/latex-in-30-minutes) guide
+2. Try our [Getting Started tutorial](/getting-started/cloud-studio)
+3. Use our pre-made [templates](/templates) for common document types
+4. Check out [beginner-friendly tutorials](/learn/latex/basics/creating-first-document)
+
+LaTeX Cloud Studio is designed to make learning LaTeX easier with helpful error messages and AI assistance.
+</Accordion>
+
+<Accordion title="What's the difference between LaTeX and Word?">
+LaTeX and Word serve different purposes:
+
+**LaTeX excels at:**
+- Professional typesetting and consistent formatting
+- Mathematical equations and scientific notation
+- Large documents (theses, books)
+- Version control and collaboration
+- Cross-references and bibliographies
+
+**Word excels at:**
+- Quick documents and letters
+- WYSIWYG editing
+- Track changes and comments
+- Integration with Office suite
+
+Many academics and professionals use both, choosing the right tool for each task.
+</Accordion>
+
+<Accordion title="How do I convert my Word document to LaTeX?">
+While there's no perfect automatic conversion, here are your options:
+1. **Manual conversion**: Copy text content and apply LaTeX formatting
+2. **Pandoc**: Use this tool for basic conversions
+3. **Start fresh**: Often it's easier to recreate the document in LaTeX
+
+See our guide: [From Word to LaTeX](/blog/from-word-to-latex-beginners-journey)
+</Accordion>
+
+## Common LaTeX Questions
+
+<Accordion title="How do I insert images in LaTeX?">
+Use the `graphicx` package:
+
+```latex
+\usepackage{graphicx}
+...
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{image.png}
+    \caption{Your caption here}
+    \label{fig:mylabel}
+\end{figure}
+```
+
+See our [complete guide to images](/learn/latex/how-to/working-with-images).
+</Accordion>
+
+<Accordion title="How do I create tables in LaTeX?">
+Basic table example:
+
+```latex
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|l|c|r|}
+        \hline
+        Left & Center & Right \\
+        \hline
+        Data & Data & Data \\
+        \hline
+    \end{tabular}
+    \caption{Table caption}
+\end{table}
+```
+
+For advanced tables, see our [tables tutorial](/learn/latex/tables-tabular).
+</Accordion>
+
+<Accordion title="How do I write mathematical equations?">
+LaTeX has two math modes:
+
+**Inline math**: `$E = mc^2$` produces $E = mc^2$
+
+**Display math**:
+```latex
+\begin{equation}
+    \int_{0}^{\infty} e^{-x^2} dx = \frac{\sqrt{\pi}}{2}
+\end{equation}
+```
+
+Learn more in our [mathematics guide](/learn/latex/mathematics/mathematical-expressions).
+</Accordion>
+
+<Accordion title="How do I manage bibliography and citations?">
+Use BibTeX or BibLaTeX:
+
+1. Create a `.bib` file with your references
+2. Cite with `\cite{key}`
+3. Add bibliography with `\bibliography{references}`
+
+Full tutorial: [Bibliography and Citations](/learn/latex/bibliography-citations)
+</Accordion>
+
+## Troubleshooting
+
+<Accordion title="Why won't my document compile?">
+Common compilation issues:
+1. **Missing packages**: Ensure all `\usepackage{}` commands are in the preamble
+2. **Syntax errors**: Check for missing braces `{}` or brackets `[]`
+3. **Undefined references**: Run compilation twice for cross-references
+4. **Special characters**: Escape characters like `&`, `%`, `$` with backslash
+
+Our [error fixing guide](/learn/latex/how-to/fixing-compilation-errors) covers solutions in detail.
+</Accordion>
+
+<Accordion title="How do I fix 'Undefined control sequence' errors?">
+This error means LaTeX doesn't recognize a command. Common causes:
+- Typo in command name (e.g., `\textbf` not `\txetbf`)
+- Missing package that defines the command
+- Command used outside its valid scope
+
+LaTeX Cloud Studio's AI assistant can help identify and fix these errors automatically.
+</Accordion>
+
+<Accordion title="Why are my figures appearing in the wrong place?">
+LaTeX optimizes figure placement. To control positioning:
+- Use placement specifiers: `[h]` (here), `[t]` (top), `[b]` (bottom)
+- Try `[H]` with the `float` package for strict placement
+- Use `\clearpage` to force all floats to appear
+
+See [figure positioning guide](/learn/latex/basics/figures) for more control options.
+</Accordion>
+
+## Advanced Topics
+
+<Accordion title="Can I create presentations in LaTeX?">
+Yes! Use the Beamer package:
+```latex
+\documentclass{beamer}
+\begin{document}
+\begin{frame}
+    \frametitle{Slide Title}
+    Your content here
+\end{frame}
+\end{document}
+```
+
+Check our [presentation templates](/templates/presentation) and [Beamer guide](/learn/latex/how-to/creating-presentations).
+</Accordion>
+
+<Accordion title="How do I use custom fonts in LaTeX?">
+LaTeX Cloud Studio supports various font packages:
+- `\usepackage{times}` for Times Roman
+- `\usepackage{helvet}` for Helvetica
+- `\usepackage{palatino}` for Palatino
+
+For custom fonts with XeLaTeX/LuaLaTeX:
+```latex
+\usepackage{fontspec}
+\setmainfont{Arial}
+```
+
+See our [fonts guide](/learn/latex/fonts) for comprehensive coverage.
+</Accordion>
+
+<Accordion title="Can I use LaTeX for languages other than English?">
+Absolutely! LaTeX has excellent multilingual support:
+```latex
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+```
+
+We support all major languages including Arabic, Chinese, Japanese, and more. See our [multilingual guide](/learn/latex/how-to/multi-language-documents).
+</Accordion>
+
+## Platform-Specific Questions
+
+<Accordion title="How do I export my project?">
+Export options in LaTeX Cloud Studio:
+1. **PDF**: Click "Download PDF" after compilation
+2. **Source files**: Project menu → "Download Source"
+3. **ZIP archive**: Project menu → "Download as ZIP"
+
+You can also sync with GitHub for version control.
+</Accordion>
+
+<Accordion title="Is my data secure on LaTeX Cloud Studio?">
+Yes, we take security seriously:
+- All data is encrypted in transit (HTTPS) and at rest
+- Regular security audits and backups
+- GDPR compliant with data centers in the EU
+- You retain full ownership of your documents
+
+Read our full [security policy](/platform/security-privacy).
+</Accordion>
+
+<Accordion title="Can I use LaTeX Cloud Studio for commercial projects?">
+Yes! You can use LaTeX Cloud Studio for:
+- Commercial documents and reports
+- Published books and articles
+- Client work and consulting
+- Any professional use
+
+Your content is your own, and we don't claim any rights to documents you create.
+</Accordion>
+
+---
+
+<Card title="Still have questions?" icon="message-question" href="mailto:support@latex-cloud-studio.com">
+Contact our support team for personalized help with your LaTeX documents
+</Card>
