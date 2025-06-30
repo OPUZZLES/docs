@@ -1,0 +1,454 @@
+---
+title: Music Notation
+description: Master music notation in LaTeX. Learn musical symbols, notes, chord notation, and how to create professional music scores and examples.
+---
+
+Learn how to typeset musical notation, symbols, and scores professionally in LaTeX.
+
+## Essential Music Packages
+
+<CodeGroup>
+```latex packages
+\usepackage{musixtex}       % Complete music typesetting
+\usepackage{harmony}        % Chord symbols
+\usepackage{guitar}         % Guitar chord diagrams
+\usepackage{abc}            % ABC notation support
+\usepackage{lilyglyphs}     % LilyPond symbols
+\usepackage{leadsheets}     % Lead sheets and songs
+```
+</CodeGroup>
+
+## Musical Symbols
+
+<div style={{ fontSize: '1.05em', lineHeight: '1.8' }}>
+
+| Symbol | LaTeX | Description |
+|:------:|:------|:------------|
+| **♩** | `\quarternote` | Quarter note |
+| **♪** | `\eighthnote` | Eighth note |
+| **♫** | `\twonotes` | Beamed eighth notes |
+| **♭** | `\flat` | Flat |
+| **♯** | `\sharp` | Sharp |
+| **♮** | `\natural` | Natural |
+| **𝄞** | `\trebleclef` | Treble clef |
+| **𝄢** | `\bassclef` | Bass clef |
+| **𝄐** | `\textmusicalnote` | Generic note |
+
+</div>
+
+## Basic Music Notation
+
+### Note Values and Rests
+
+<CodeGroup>
+```latex notes
+% Note values
+\whole          % Whole note
+\half           % Half note
+\quarter        % Quarter note
+\eighth         % Eighth note
+\sixteenth      % Sixteenth note
+
+% Rests
+\wholerest      % Whole rest
+\halfrest       % Half rest
+\quarterrest    % Quarter rest
+\eighthrest     % Eighth rest
+
+% Dotted notes
+\quarter.       % Dotted quarter
+\half..         % Double dotted half
+```
+</CodeGroup>
+
+### Accidentals and Key Signatures
+
+<CodeGroup>
+```latex accidentals
+% Accidentals
+C\sharp         % C sharp
+B\flat          % B flat
+F\natural       % F natural
+G\doublesharp   % G double sharp
+D\doubleflat    % D double flat
+
+% Key signatures
+\keysignature{3\sharp}    % A major / F# minor
+\keysignature{2\flat}     % Bb major / G minor
+\keysignature{0}          % C major / A minor
+```
+</CodeGroup>
+
+## Chord Notation
+
+### Chord Symbols with harmony
+
+<CodeGroup>
+```latex chords
+% Basic chords
+\Cma            % C major
+\Cmi            % C minor
+\Cdim           % C diminished
+\Caug           % C augmented
+
+% Seventh chords
+\CmaSe          % C major 7
+\CmiSe          % C minor 7
+\Cdom           % C7 (dominant)
+\CmiSeFlat      % C minor 7 flat 5
+
+% Extended chords
+\Cnine          % C9
+\Celeven        % C11
+\Cthirteen      % C13
+
+% Slash chords
+C/G             % C major over G
+Am/F            % A minor over F
+```
+</CodeGroup>
+
+**Visual examples:**
+
+<div style={{ backgroundColor: '#f5f5f5', padding: '1em', borderRadius: '8px', margin: '1em 0' }}>
+  <table style={{ width: '100%', fontSize: '1.3em' }}>
+    <tr>
+      <td><code>\Cma</code></td>
+      <td style={{ textAlign: 'center' }}>→</td>
+      <td><strong>C</strong></td>
+    </tr>
+    <tr>
+      <td><code>\CmaSe</code></td>
+      <td style={{ textAlign: 'center' }}>→</td>
+      <td><strong>Cmaj7</strong></td>
+    </tr>
+    <tr>
+      <td><code>\CmiSeFlat</code></td>
+      <td style={{ textAlign: 'center' }}>→</td>
+      <td><strong>Cm7♭5</strong></td>
+    </tr>
+    <tr>
+      <td><code>F\sharp mi</code></td>
+      <td style={{ textAlign: 'center' }}>→</td>
+      <td><strong>F♯m</strong></td>
+    </tr>
+  </table>
+</div>
+
+## Guitar Chord Diagrams
+
+### Using the guitar Package
+
+<CodeGroup>
+```latex guitar-chords
+% Basic chord diagram
+\gtab{C}{3:002010}
+\gtab{G}{3:002220}
+\gtab{Am}{X02210}
+\gtab{F}{1:X33211}
+
+% With finger positions
+\gtab*{D}{XX0232:000132}
+\gtab*{Em}{022000:012000}
+
+% Barre chords
+\gtab{Bm}{2:X13321}
+\gtab{F\sharp m}{2:133111}
+```
+</CodeGroup>
+
+## Simple Scores with MusiXTeX
+
+### Basic Staff Notation
+
+<CodeGroup>
+```latex simple-score
+\begin{music}
+\instrumentnumber{1}
+\setstaffs1{1}
+\generalmeter{\meterfrac44}
+\startpiece
+
+% Simple melody
+\notes\qu c\en    % Quarter note C
+\notes\hu d\en    % Half note D
+\notes\qu{ef}\en  % Quarter notes E and F
+\notes\wh g\en    % Whole note G
+
+\endpiece
+\end{music}
+```
+</CodeGroup>
+
+### Two-Staff System
+
+<CodeGroup>
+```latex piano-score
+\begin{music}
+\instrumentnumber{1}
+\setstaffs1{2}              % Two staves
+\setclef1{\treble\bass}     % Treble and bass clefs
+\generalmeter{\meterfrac44}
+\startpiece
+
+% Right hand
+\notes\qu{ceg}\en           % C major chord
+\notes\qu{ceg}\en
+% Left hand
+\Notes\ql{C}\en
+\Notes\ql{G}\en
+
+\endpiece
+\end{music}
+```
+</CodeGroup>
+
+## Lead Sheets with leadsheets
+
+### Song Structure
+
+<CodeGroup>
+```latex lead-sheet
+\begin{song}{title={My Song}, 
+             composer={John Doe}, 
+             key={C major}}
+
+\begin{verse}
+\chord{C}This is the \chord{Am}first line
+\chord{F}Of my \chord{G}song \chord{C}today
+\end{verse}
+
+\begin{chorus}
+\chord{F}Sing a\chord{C}long
+\chord{G}Everyone \chord{C}sing
+\end{chorus}
+
+\end{song}
+```
+</CodeGroup>
+
+## Rhythm Notation
+
+### Time Signatures and Tempo
+
+<CodeGroup>
+```latex rhythm
+% Time signatures
+\timesignature{4}{4}        % 4/4 time
+\timesignature{3}{4}        % 3/4 time
+\timesignature{6}{8}        % 6/8 time
+\timesignature{5}{4}        % 5/4 time
+
+% Tempo markings
+\tempo{Allegro}
+\tempo{Andante \quarternote = 72}
+\tempo{Presto \halfnote = 140}
+
+% Metronome markings
+MM \quarternote = 120
+MM \halfnote. = 60
+```
+</CodeGroup>
+
+## Musical Expressions
+
+### Dynamics and Articulation
+
+<CodeGroup>
+```latex dynamics
+% Dynamics
+\pp     % Pianissimo
+\p      % Piano
+\mp     % Mezzo-piano
+\mf     % Mezzo-forte
+\f      % Forte
+\ff     % Fortissimo
+
+% Crescendo and diminuendo
+\cresc  % Crescendo
+\dim    % Diminuendo
+\<      % Hairpin crescendo
+\>      % Hairpin diminuendo
+
+% Articulation
+\staccato       % Staccato dot
+\accent         % Accent mark
+\tenuto         % Tenuto line
+\fermata        % Fermata
+```
+</CodeGroup>
+
+## ABC Notation Integration
+
+### Using ABC Notation
+
+<CodeGroup>
+```latex abc-notation
+% ABC notation example
+\begin{abc}[name=melody]
+X:1
+T:Simple Melody
+M:4/4
+L:1/4
+K:C
+C D E F | G2 G2 | F E D C | C4 ||
+\end{abc}
+
+% Inline ABC
+\abcinline{C D E F G}
+```
+</CodeGroup>
+
+## Musical Analysis
+
+### Roman Numeral Analysis
+
+<CodeGroup>
+```latex analysis
+% Roman numerals for harmony
+\newcommand{\romnum}[1]{\textsc{#1}}
+
+In C major: \romnum{I} - \romnum{IV} - \romnum{V} - \romnum{I}
+
+% With inversions
+\romnum{I}\textsuperscript{6} - \romnum{IV}\textsuperscript{6/4} - \romnum{V}\textsuperscript{7}
+
+% Minor keys (lowercase)
+In A minor: \romnum{i} - \romnum{iv} - \romnum{V} - \romnum{i}
+```
+</CodeGroup>
+
+### Form Analysis
+
+<CodeGroup>
+```latex form-analysis
+% Sections
+\textbf{A:} mm. 1-8
+\textbf{B:} mm. 9-16
+\textbf{A':} mm. 17-24
+
+% Phrases
+\begin{tikzpicture}
+\draw[thick] (0,0) -- (4,0);
+\draw[thick] (0,0) -- (0,0.2);
+\draw[thick] (4,0) -- (4,0.2);
+\node at (2,-0.3) {4 measures};
+\end{tikzpicture}
+```
+</CodeGroup>
+
+## Lyrics and Text
+
+### Aligning Lyrics to Music
+
+<CodeGroup>
+```latex lyrics
+\begin{music}
+\instrumentnumber{1}
+\setstaffs1{1}
+\setlyrics1{1}
+\startpiece
+
+\notes\qu{c}\en
+\lyrics{This }
+\notes\qu{d}\en
+\lyrics{is }
+\notes\qu{e}\en
+\lyrics{my }
+\notes\hu{f}\en
+\lyrics{song }
+
+\endpiece
+\end{music}
+```
+</CodeGroup>
+
+## Musical Tables
+
+### Interval Reference Table
+
+<CodeGroup>
+```latex interval-table
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|c|c|}
+\hline
+\textbf{Interval} & \textbf{Semitones} & \textbf{Example} \\
+\hline
+Unison & 0 & C-C \\
+Minor 2nd & 1 & C-D♭ \\
+Major 2nd & 2 & C-D \\
+Minor 3rd & 3 & C-E♭ \\
+Major 3rd & 4 & C-E \\
+Perfect 4th & 5 & C-F \\
+Tritone & 6 & C-F♯ \\
+Perfect 5th & 7 & C-G \\
+\hline
+\end{tabular}
+\caption{Common musical intervals}
+\end{table}
+```
+</CodeGroup>
+
+## Special Music Characters
+
+### Unicode Music Symbols
+
+<CodeGroup>
+```latex unicode-music
+% Requires fontspec and XeLaTeX/LuaLaTeX
+\usepackage{fontspec}
+
+% Musical symbols
+🎵 🎶 🎼 🎹 🎸 🎺 🎻 🥁
+
+% Note values
+𝅝 𝅗𝅥 𝅘𝅥 𝅘𝅥𝅮 𝅘𝅥𝅯 𝅘𝅥𝅰 𝅘𝅥𝅱 𝅘𝅥𝅲
+
+% Clefs
+𝄞 𝄢 𝄡 𝄟 𝄠
+```
+</CodeGroup>
+
+## Best Practices
+
+<CardGroup cols={2}>
+<Card title="Choose the Right Package" icon="check" color="#FF6037">
+Select packages based on your needs - MusiXTeX for full scores, harmony for chord symbols
+</Card>
+<Card title="Consistent Notation" icon="book" color="#FF6037">
+Use standard music notation conventions throughout
+</Card>
+<Card title="Clear Layout" icon="eye" color="#FF6037">
+Ensure adequate spacing between staves and systems
+</Card>
+<Card title="Compile Multiple Times" icon="arrows-rotate" color="#FF6037">
+Music packages often require multiple compilation passes
+</Card>
+</CardGroup>
+
+## Troubleshooting
+
+<Warning>
+**Common issues**:
+- MusiXTeX requires special compilation: Run `musixtex` command
+- Font conflicts: Some music fonts require specific setup
+- Spacing issues: Manual adjustment often needed for complex scores
+</Warning>
+
+## Further Reading
+
+<CardGroup cols={2}>
+<Card title="Linguistics Notation" icon="language" href="/learn/latex/specialized-notation/linguistics" color="#FF6037">
+Phonetic symbols and syntax trees
+</Card>
+<Card title="Symbol Reference" icon="book" href="/learn/reference/symbols" color="#FF6037">
+General symbol reference
+</Card>
+<Card title="Creating Diagrams" icon="diagram-project" href="/learn/latex/figures/diagrams-tikz" color="#FF6037">
+Creating diagrams with TikZ
+</Card>
+<Card title="Advanced Formatting" icon="palette" href="/learn/latex/fonts-formatting/advanced-formatting" color="#FF6037">
+Advanced text formatting
+</Card>
+</CardGroup>

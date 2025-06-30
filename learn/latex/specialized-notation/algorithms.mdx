@@ -1,0 +1,598 @@
+---
+title: Algorithms and Pseudocode
+description: Master algorithm notation in LaTeX. Learn pseudocode formatting, complexity analysis, data structures, and computer science notation.
+---
+
+Learn how to typeset algorithms, pseudocode, and computer science notation professionally in LaTeX.
+
+## Essential Algorithm Packages
+
+<CodeGroup>
+```latex packages
+\usepackage{algorithm}      % Algorithm environment
+\usepackage{algorithmicx}   % Extended algorithmic commands
+\usepackage{algpseudocode}  % Pseudocode style
+\usepackage{listings}       % Code listings
+\usepackage{clrscode3e}     % CLRS book style
+\usepackage{complexity}     % Complexity classes
+\usepackage{amsmath}        % Mathematical notation
+```
+</CodeGroup>
+
+## Basic Pseudocode
+
+### Simple Algorithm Structure
+
+<CodeGroup>
+```latex basic-algorithm
+\begin{algorithm}
+\caption{Binary Search}
+\begin{algorithmic}[1]
+\Procedure{BinarySearch}{$A, n, x$}
+    \State $\textit{left} \gets 1$
+    \State $\textit{right} \gets n$
+    \While{$\textit{left} \leq \textit{right}$}
+        \State $\textit{mid} \gets \lfloor (\textit{left} + \textit{right})/2 \rfloor$
+        \If{$A[\textit{mid}] = x$}
+            \State \textbf{return} $\textit{mid}$
+        \ElsIf{$A[\textit{mid}] < x$}
+            \State $\textit{left} \gets \textit{mid} + 1$
+        \Else
+            \State $\textit{right} \gets \textit{mid} - 1$
+        \EndIf
+    \EndWhile
+    \State \textbf{return} $\textit{null}$
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+```
+</CodeGroup>
+
+### Control Structures
+
+<CodeGroup>
+```latex control-structures
+\begin{algorithmic}[1]
+\State $x \gets 0$
+
+\If{condition}
+    \State statement
+\ElsIf{other condition}
+    \State other statement
+\Else
+    \State default statement
+\EndIf
+
+\While{condition}
+    \State loop body
+\EndWhile
+
+\For{$i = 1$ \textbf{to} $n$}
+    \State loop body
+\EndFor
+
+\For{\textbf{each} $item$ \textbf{in} $collection$}
+    \State process item
+\EndFor
+
+\Repeat
+    \State loop body
+\Until{condition}
+```
+</CodeGroup>
+
+**Visual examples:**
+
+<div style={{ backgroundColor: '#f5f5f5', padding: '1em', borderRadius: '8px', margin: '1em 0' }}>
+  <table style={{ width: '100%', fontSize: '1.1em' }}>
+    <tr>
+      <td><code>\State</code></td>
+      <td style={{ textAlign: 'center' }}>→</td>
+      <td><strong>Simple statement</strong></td>
+    </tr>
+    <tr>
+      <td><code>\If&#123;condition&#125;</code></td>
+      <td style={{ textAlign: 'center' }}>→</td>
+      <td><strong>Conditional statement</strong></td>
+    </tr>
+    <tr>
+      <td><code>\For&#123;$i = 1$ \textbf&#123;to&#125; $n$&#125;</code></td>
+      <td style={{ textAlign: 'center' }}>→</td>
+      <td><strong>For loop with range</strong></td>
+    </tr>
+  </table>
+</div>
+
+## Sorting Algorithms
+
+### Merge Sort
+
+<CodeGroup>
+```latex merge-sort
+\begin{algorithm}
+\caption{Merge Sort}
+\begin{algorithmic}[1]
+\Procedure{MergeSort}{$A, p, r$}
+    \If{$p < r$}
+        \State $q \gets \lfloor (p + r)/2 \rfloor$
+        \State \Call{MergeSort}{$A, p, q$}
+        \State \Call{MergeSort}{$A, q+1, r$}
+        \State \Call{Merge}{$A, p, q, r$}
+    \EndIf
+\EndProcedure
+
+\Procedure{Merge}{$A, p, q, r$}
+    \State $n_1 \gets q - p + 1$
+    \State $n_2 \gets r - q$
+    \State Create arrays $L[1..n_1+1]$ and $R[1..n_2+1]$
+    \For{$i = 1$ \textbf{to} $n_1$}
+        \State $L[i] \gets A[p + i - 1]$
+    \EndFor
+    \For{$j = 1$ \textbf{to} $n_2$}
+        \State $R[j] \gets A[q + j]$
+    \EndFor
+    \State $L[n_1 + 1] \gets \infty$
+    \State $R[n_2 + 1] \gets \infty$
+    \State $i \gets 1$, $j \gets 1$
+    \For{$k = p$ \textbf{to} $r$}
+        \If{$L[i] \leq R[j]$}
+            \State $A[k] \gets L[i]$
+            \State $i \gets i + 1$
+        \Else
+            \State $A[k] \gets R[j]$
+            \State $j \gets j + 1$
+        \EndIf
+    \EndFor
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+```
+</CodeGroup>
+
+## Graph Algorithms
+
+### Depth-First Search
+
+<CodeGroup>
+```latex dfs-algorithm
+\begin{algorithm}
+\caption{Depth-First Search}
+\begin{algorithmic}[1]
+\Procedure{DFS}{$G$}
+    \For{\textbf{each} vertex $u \in V[G]$}
+        \State $color[u] \gets \text{WHITE}$
+        \State $\pi[u] \gets \text{NIL}$
+    \EndFor
+    \State $time \gets 0$
+    \For{\textbf{each} vertex $u \in V[G]$}
+        \If{$color[u] = \text{WHITE}$}
+            \State \Call{DFS-Visit}{$u$}
+        \EndIf
+    \EndFor
+\EndProcedure
+
+\Procedure{DFS-Visit}{$u$}
+    \State $color[u] \gets \text{GRAY}$
+    \State $time \gets time + 1$
+    \State $d[u] \gets time$
+    \For{\textbf{each} $v \in Adj[u]$}
+        \If{$color[v] = \text{WHITE}$}
+            \State $\pi[v] \gets u$
+            \State \Call{DFS-Visit}{$v$}
+        \EndIf
+    \EndFor
+    \State $color[u] \gets \text{BLACK}$
+    \State $time \gets time + 1$
+    \State $f[u] \gets time$
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+```
+</CodeGroup>
+
+### Dijkstra's Algorithm
+
+<CodeGroup>
+```latex dijkstra-algorithm
+\begin{algorithm}
+\caption{Dijkstra's Shortest Path}
+\begin{algorithmic}[1]
+\Procedure{Dijkstra}{$G, w, s$}
+    \State \Call{Initialize-Single-Source}{$G, s$}
+    \State $S \gets \emptyset$
+    \State $Q \gets V[G]$
+    \While{$Q \neq \emptyset$}
+        \State $u \gets \Call{Extract-Min}{Q}$
+        \State $S \gets S \cup \{u\}$
+        \For{\textbf{each} vertex $v \in Adj[u]$}
+            \State \Call{Relax}{$u, v, w$}
+        \EndFor
+    \EndWhile
+\EndProcedure
+
+\Procedure{Relax}{$u, v, w$}
+    \If{$d[v] > d[u] + w(u,v)$}
+        \State $d[v] \gets d[u] + w(u,v)$
+        \State $\pi[v] \gets u$
+    \EndIf
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+```
+</CodeGroup>
+
+## Complexity Analysis
+
+### Big O Notation
+
+<CodeGroup>
+```latex complexity-notation
+% Time complexities
+$O(1)$ \quad\text{constant time}
+$O(\log n)$ \quad\text{logarithmic time}
+$O(n)$ \quad\text{linear time}
+$O(n \log n)$ \quad\text{linearithmic time}
+$O(n^2)$ \quad\text{quadratic time}
+$O(n^3)$ \quad\text{cubic time}
+$O(2^n)$ \quad\text{exponential time}
+$O(n!)$ \quad\text{factorial time}
+
+% Space complexities
+$O(1)$ \quad\text{constant space}
+$O(n)$ \quad\text{linear space}
+$O(n^2)$ \quad\text{quadratic space}
+
+% Asymptotic notation
+$f(n) = O(g(n))$ \quad\text{upper bound}
+$f(n) = \Omega(g(n))$ \quad\text{lower bound}
+$f(n) = \Theta(g(n))$ \quad\text{tight bound}
+$f(n) = o(g(n))$ \quad\text{strict upper bound}
+$f(n) = \omega(g(n))$ \quad\text{strict lower bound}
+```
+</CodeGroup>
+
+### Complexity Classes
+
+<CodeGroup>
+```latex complexity-classes
+% Using complexity package
+\P \quad\text{Polynomial time}
+\NP \quad\text{Nondeterministic polynomial time}
+\coNP \quad\text{Co-NP}
+\PSPACE \quad\text{Polynomial space}
+\EXPTIME \quad\text{Exponential time}
+\NEXPTIME \quad\text{Nondeterministic exponential time}
+
+% Reductions
+$A \leq_p B$ \quad\text{polynomial-time reduction}
+$A \leq_m B$ \quad\text{many-one reduction}
+
+% Completeness
+$L$ is $\NP$-complete if:
+\begin{enumerate}
+    \item $L \in \NP$
+    \item For every $L' \in \NP$, $L' \leq_p L$
+\end{enumerate}
+```
+</CodeGroup>
+
+## Data Structures
+
+### Binary Search Tree Operations
+
+<CodeGroup>
+```latex bst-operations
+\begin{algorithm}
+\caption{Binary Search Tree Insert}
+\begin{algorithmic}[1]
+\Procedure{Tree-Insert}{$T, z$}
+    \State $y \gets \text{NIL}$
+    \State $x \gets root[T]$
+    \While{$x \neq \text{NIL}$}
+        \State $y \gets x$
+        \If{$key[z] < key[x]$}
+            \State $x \gets left[x]$
+        \Else
+            \State $x \gets right[x]$
+        \EndIf
+    \EndWhile
+    \State $p[z] \gets y$
+    \If{$y = \text{NIL}$}
+        \State $root[T] \gets z$
+    \ElsIf{$key[z] < key[y]$}
+        \State $left[y] \gets z$
+    \Else
+        \State $right[y] \gets z$
+    \EndIf
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+```
+</CodeGroup>
+
+### Hash Table Operations
+
+<CodeGroup>
+```latex hash-table
+\begin{algorithm}
+\caption{Hash Table with Chaining}
+\begin{algorithmic}[1]
+\Procedure{Chained-Hash-Insert}{$T, x$}
+    \State Insert $x$ at head of list $T[h(key[x])]$
+\EndProcedure
+
+\Procedure{Chained-Hash-Search}{$T, k$}
+    \State Search for element with key $k$ in list $T[h(k)]$
+\EndProcedure
+
+\Procedure{Chained-Hash-Delete}{$T, x$}
+    \State Delete $x$ from list $T[h(key[x])]$
+\EndProcedure
+
+\Function{Hash-Function}{$k, m$}
+    \State \textbf{return} $k \bmod m$
+\EndFunction
+```
+</CodeGroup>
+
+## Dynamic Programming
+
+### Longest Common Subsequence
+
+<CodeGroup>
+```latex lcs-algorithm
+\begin{algorithm}
+\caption{Longest Common Subsequence}
+\begin{algorithmic}[1]
+\Procedure{LCS-Length}{$X, Y$}
+    \State $m \gets length[X]$
+    \State $n \gets length[Y]$
+    \For{$i = 1$ \textbf{to} $m$}
+        \State $c[i,0] \gets 0$
+    \EndFor
+    \For{$j = 0$ \textbf{to} $n$}
+        \State $c[0,j] \gets 0$
+    \EndFor
+    \For{$i = 1$ \textbf{to} $m$}
+        \For{$j = 1$ \textbf{to} $n$}
+            \If{$x_i = y_j$}
+                \State $c[i,j] \gets c[i-1,j-1] + 1$
+                \State $b[i,j] \gets$ "↖"
+            \ElsIf{$c[i-1,j] \geq c[i,j-1]$}
+                \State $c[i,j] \gets c[i-1,j]$
+                \State $b[i,j] \gets$ "↑"
+            \Else
+                \State $c[i,j] \gets c[i,j-1]$
+                \State $b[i,j] \gets$ "←"
+            \EndIf
+        \EndFor
+    \EndFor
+    \State \textbf{return} $c$ and $b$
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+```
+</CodeGroup>
+
+## Mathematical Algorithms
+
+### Euclidean Algorithm
+
+<CodeGroup>
+```latex euclidean-algorithm
+\begin{algorithm}
+\caption{Euclidean Algorithm}
+\begin{algorithmic}[1]
+\Function{GCD}{$a, b$}
+    \While{$b \neq 0$}
+        \State $temp \gets b$
+        \State $b \gets a \bmod b$
+        \State $a \gets temp$
+    \EndWhile
+    \State \textbf{return} $a$
+\EndFunction
+
+\Function{Extended-GCD}{$a, b$}
+    \If{$b = 0$}
+        \State \textbf{return} $(a, 1, 0)$
+    \Else
+        \State $(d, x', y') \gets \Call{Extended-GCD}{b, a \bmod b}$
+        \State $x \gets y'$
+        \State $y \gets x' - \lfloor a/b \rfloor \cdot y'$
+        \State \textbf{return} $(d, x, y)$
+    \EndIf
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+```
+</CodeGroup>
+
+## Machine Learning Algorithms
+
+### Gradient Descent
+
+<CodeGroup>
+```latex gradient-descent
+\begin{algorithm}
+\caption{Gradient Descent}
+\begin{algorithmic}[1]
+\Procedure{Gradient-Descent}{$f, \nabla f, \alpha, \epsilon$}
+    \State Initialize $\mathbf{x}_0$
+    \State $k \gets 0$
+    \Repeat
+        \State $\mathbf{g}_k \gets \nabla f(\mathbf{x}_k)$
+        \State $\mathbf{x}_{k+1} \gets \mathbf{x}_k - \alpha \mathbf{g}_k$
+        \State $k \gets k + 1$
+    \Until{$\|\mathbf{g}_k\| < \epsilon$}
+    \State \textbf{return} $\mathbf{x}_k$
+\EndProcedure
+
+\Function{Learning-Rate-Schedule}{$k$}
+    \State \textbf{return} $\frac{\alpha_0}{1 + \beta k}$
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+```
+</CodeGroup>
+
+## Parallel Algorithms
+
+### Parallel Merge Sort
+
+<CodeGroup>
+```latex parallel-merge-sort
+\begin{algorithm}
+\caption{Parallel Merge Sort}
+\begin{algorithmic}[1]
+\Procedure{P-Merge-Sort}{$A, p, r$}
+    \If{$p < r$}
+        \State $q \gets \lfloor (p + r)/2 \rfloor$
+        \State \textbf{spawn} \Call{P-Merge-Sort}{$A, p, q$}
+        \State \Call{P-Merge-Sort}{$A, q+1, r$}
+        \State \textbf{sync}
+        \State \Call{P-Merge}{$A, p, q, r$}
+    \EndIf
+\EndProcedure
+
+\Procedure{P-Merge}{$A, p, q, r$}
+    \State $n_1 \gets q - p + 1$
+    \State $n_2 \gets r - q$
+    \If{$n_1 < n_2$}
+        \State Exchange $p \leftrightarrow q+1$ and $n_1 \leftrightarrow n_2$
+    \EndIf
+    \If{$n_1 = 0$}
+        \State \textbf{return}
+    \Else
+        \State $q' \gets \lfloor (p + q)/2 \rfloor$
+        \State $r' \gets \Call{Binary-Search}{A[q'], A, q+1, r}$
+        \State $s \gets p + (q' - p) + (r' - (q+1))$
+        \State $A'[s] \gets A[q']$
+        \State \textbf{spawn} \Call{P-Merge}{A, p, q'-1, r'-1}
+        \State \Call{P-Merge}{A, q'+1, q, r'+1}
+        \State \textbf{sync}
+    \EndIf
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+```
+</CodeGroup>
+
+## Recurrence Relations
+
+### Solving Recurrences
+
+<CodeGroup>
+```latex recurrence-relations
+% Master Theorem
+\textbf{Master Theorem:} Let $T(n) = aT(n/b) + f(n)$ where $a \geq 1$ and $b > 1$.
+
+\textbf{Case 1:} If $f(n) = O(n^{\log_b a - \epsilon})$ for some $\epsilon > 0$,
+then $T(n) = \Theta(n^{\log_b a})$.
+
+\textbf{Case 2:} If $f(n) = \Theta(n^{\log_b a})$,
+then $T(n) = \Theta(n^{\log_b a} \log n)$.
+
+\textbf{Case 3:} If $f(n) = \Omega(n^{\log_b a + \epsilon})$ for some $\epsilon > 0$,
+and $af(n/b) \leq cf(n)$ for some $c < 1$ and sufficiently large $n$,
+then $T(n) = \Theta(f(n))$.
+
+% Examples
+$T(n) = 2T(n/2) + n$ \quad $\Rightarrow$ \quad $T(n) = \Theta(n \log n)$
+$T(n) = 3T(n/4) + n^2$ \quad $\Rightarrow$ \quad $T(n) = \Theta(n^2)$
+$T(n) = T(n-1) + 1$ \quad $\Rightarrow$ \quad $T(n) = \Theta(n)$
+```
+</CodeGroup>
+
+## Algorithm Analysis Proofs
+
+### Correctness Proofs
+
+<CodeGroup>
+```latex correctness-proofs
+% Loop invariant
+\textbf{Loop Invariant for Insertion Sort:}
+
+At the start of each iteration of the \textbf{for} loop of lines 1-8,
+the subarray $A[1..j-1]$ consists of the elements originally in
+$A[1..j-1]$, but in sorted order.
+
+\textbf{Initialization:} Prior to the first iteration, when $j = 2$,
+the subarray $A[1..j-1] = A[1..1] = \{A[1]\}$ is trivially sorted.
+
+\textbf{Maintenance:} Assume the invariant holds at the beginning of an
+iteration. The loop body moves $A[j-1], A[j-2], \ldots$ one position
+to the right until it finds the proper position for $A[j]$.
+
+\textbf{Termination:} When the loop terminates, $j = n + 1$. The
+subarray $A[1..n]$ consists of the original elements in sorted order.
+
+% Asymptotic proof
+\textbf{Theorem:} For any function $f(n)$ and $g(n)$, 
+$f(n) = O(g(n))$ if and only if there exist positive constants 
+$c$ and $n_0$ such that $0 \leq f(n) \leq c \cdot g(n)$ 
+for all $n \geq n_0$.
+```
+</CodeGroup>
+
+## Best Practices
+
+<CardGroup cols={2}>
+<Card title="Clear Variable Names" icon="tag" color="#FF6037">
+Use descriptive variable names and consistent notation
+</Card>
+<Card title="Proper Indentation" icon="indent" color="#FF6037">
+Use consistent indentation to show algorithm structure
+</Card>
+<Card title="Complexity Analysis" icon="chart-line" color="#FF6037">
+Always include time and space complexity analysis
+</Card>
+<Card title="Invariants and Proofs" icon="shield-check" color="#FF6037">
+Document loop invariants and correctness proofs
+</Card>
+</CardGroup>
+
+## Common Algorithm Notation
+
+<div style={{ fontSize: '1.2em', lineHeight: '2' }}>
+
+| Notation | Meaning |
+|:---------|:--------|
+| **←** | Assignment |
+| **⊕** | XOR operation |
+| **⊕** | Addition in GF(2) |
+| **∀** | For all |
+| **∃** | There exists |
+| **∈** | Element of |
+| **⊆** | Subset of |
+| **∪** | Union |
+| **∩** | Intersection |
+| **∅** | Empty set |
+
+</div>
+
+## Troubleshooting
+
+<Warning>
+**Common issues**:
+- Missing algorithm package: Install `algorithm` and `algorithmicx`
+- Line numbering: Use `[1]` option in algorithmic environment  
+- Indentation problems: Check matching `\If`/`\EndIf` pairs
+- Symbol conflicts: Some symbols may conflict with math mode
+</Warning>
+
+## Further Reading
+
+<CardGroup cols={2}>
+<Card title="Mathematics Notation" icon="square-root-variable" href="/learn/latex/mathematics/mathematical-expressions" color="#FF6037">
+Mathematical expressions and notation
+</Card>
+<Card title="Creating Tables" icon="table" href="/learn/latex/tables/creating-tables" color="#FF6037">
+Complexity comparison tables
+</Card>
+<Card title="Code Listings" icon="code" href="/learn/latex/figures/code-listings" color="#FF6037">
+Including actual code implementations
+</Card>
+<Card title="Physics Notation" icon="atom" href="/learn/latex/specialized-notation/physics" color="#FF6037">
+Scientific computing applications
+</Card>
+</CardGroup>

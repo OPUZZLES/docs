@@ -48,6 +48,16 @@ As shown in Equation \eqref{eq:energy}...
 ```
 </CodeGroup>
 
+**Rendered output:**
+
+<div style={{ fontSize: '1.05em', textAlign: 'center', margin: '1em 0' }}>
+<code>\\[ E = mc^2 \\]</code> → <strong>E = mc² (centered display)</strong>
+</div>
+
+<div style={{ fontSize: '1.05em', textAlign: 'center', margin: '1em 0' }}>
+<code>\\begin&#123;equation&#125; E = mc^2 \\end&#123;equation&#125;</code> → <strong>E = mc² (numbered equation)</strong>
+</div>
+
 ### Equation Numbering Control
 
 <CodeGroup>
@@ -112,6 +122,16 @@ For single equations that are too long:
 \end{document}
 ```
 </CodeGroup>
+
+**Visual example:**
+
+<div style={{ backgroundColor: '#f5f5f5', padding: '1em', borderRadius: '8px', margin: '1em 0', fontSize: '1.2em' }}>
+  <div style={{ textAlign: 'center' }}>
+    <strong>(a + b)⁴ = (a + b)²(a + b)²</strong><br/>
+    <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= (a² + 2ab + b²)(a² + 2ab + b²)</strong><br/>
+    <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= a⁴ + 4a³b + 6a²b² + 4ab³ + b⁴</strong>&nbsp;&nbsp;(2)
+  </div>
+</div>
 
 ### Multline Environment
 
@@ -179,6 +199,35 @@ The most versatile environment for multiple equations:
 \end{document}
 ```
 </CodeGroup>
+
+**Visual examples:**
+
+<div style={{ backgroundColor: '#f5f5f5', padding: '1em', borderRadius: '8px', margin: '1em 0', fontSize: '1.2em' }}>
+  <div style={{ marginLeft: '20%' }}>
+    <table style={{ borderSpacing: '2em 0.5em' }}>
+      <tr>
+        <td style={{ textAlign: 'right' }}><strong>2x + 3y</strong></td>
+        <td><strong>=</strong></td>
+        <td><strong>7</strong></td>
+        <td style={{ paddingLeft: '2em' }}>(3)</td>
+      </tr>
+      <tr>
+        <td style={{ textAlign: 'right' }}><strong>5x - 2y</strong></td>
+        <td><strong>=</strong></td>
+        <td><strong>4</strong></td>
+        <td style={{ paddingLeft: '2em' }}>(4)</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div style={{ backgroundColor: '#f5f5f5', padding: '1em', borderRadius: '8px', margin: '1em 0', fontSize: '1.2em' }}>
+  <div style={{ textAlign: 'center' }}>
+    <strong>sin²θ + cos²θ = 1</strong><br/>
+    <strong>1 + tan²θ = sec²θ</strong><br/>
+    <strong>1 + cot²θ = csc²θ</strong>
+  </div>
+</div>
 
 ### Aligned Within Equation
 
@@ -286,6 +335,27 @@ f(x,y) = \begin{cases}
 \end{document}
 ```
 </CodeGroup>
+
+**Visual examples:**
+
+<div style={{ backgroundColor: '#f5f5f5', padding: '1em', borderRadius: '8px', margin: '1em 0', fontSize: '1.2em' }}>
+  <div style={{ textAlign: 'center' }}>
+    <strong>f(x) = &#123;</strong><br/>
+    <span style={{ marginLeft: '4em' }}><strong>x²</strong>&nbsp;&nbsp;&nbsp;&nbsp;if x ≥ 0</span><br/>
+    <span style={{ marginLeft: '4em' }}><strong>-x²</strong>&nbsp;&nbsp;&nbsp;if x < 0</span>
+    <span>&nbsp;&nbsp;(5)</span>
+  </div>
+</div>
+
+<div style={{ backgroundColor: '#f5f5f5', padding: '1em', borderRadius: '8px', margin: '1em 0', fontSize: '1.2em' }}>
+  <div style={{ textAlign: 'center' }}>
+    <strong>sgn(x) = &#123;</strong><br/>
+    <span style={{ marginLeft: '4em' }}><strong>1</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if x > 0</span><br/>
+    <span style={{ marginLeft: '4em' }}><strong>0</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if x = 0</span><br/>
+    <span style={{ marginLeft: '4em' }}><strong>-1</strong>&nbsp;&nbsp;&nbsp;if x < 0</span>
+    <span>&nbsp;&nbsp;(6)</span>
+  </div>
+</div>
 
 ## Gathered and Centered Equations
 
@@ -454,6 +524,20 @@ f(x) = \underbrace{x^2 + 2x}_{\text{quadratic}} +
 ```
 </CodeGroup>
 
+**Visual example:**
+
+<div style={{ backgroundColor: '#f5f5f5', padding: '1em', borderRadius: '8px', margin: '1em 0', fontSize: '1.2em' }}>
+  <div style={{ textAlign: 'center' }}>
+    <span style={{ fontSize: '2em', verticalAlign: 'middle' }}>&#123;</span>
+    <span style={{ display: 'inline-block', textAlign: 'left', marginLeft: '1em' }}>
+      <strong>2x + 3y - z = 4</strong><br/>
+      <strong>x - y + 2z = 1</strong><br/>
+      <strong>3x + y - z = 0</strong>
+    </span>
+    <span>&nbsp;&nbsp;(7)</span>
+  </div>
+</div>
+
 ### Derivations
 
 <CodeGroup>
@@ -466,6 +550,39 @@ f(x) = \underbrace{x^2 + 2x}_{\text{quadratic}} +
 \end{align}
 ```
 </CodeGroup>
+
+**Visual example:**
+
+<div style={{ backgroundColor: '#f5f5f5', padding: '1em', borderRadius: '8px', margin: '1em 0', fontSize: '1.2em' }}>
+  <div style={{ marginLeft: '20%' }}>
+    <table style={{ borderSpacing: '2em 0.5em' }}>
+      <tr>
+        <td style={{ textAlign: 'right' }}><strong>(x + y)²</strong></td>
+        <td><strong>=</strong></td>
+        <td><strong>(x + y)(x + y)</strong></td>
+        <td style={{ paddingLeft: '2em' }}>(8)</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><strong>=</strong></td>
+        <td><strong>x(x + y) + y(x + y)</strong></td>
+        <td style={{ paddingLeft: '2em' }}>(9)</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><strong>=</strong></td>
+        <td><strong>x² + xy + yx + y²</strong></td>
+        <td style={{ paddingLeft: '2em' }}>(10)</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><strong>=</strong></td>
+        <td><strong>x² + 2xy + y²</strong></td>
+        <td style={{ paddingLeft: '2em' }}>(11)</td>
+      </tr>
+    </table>
+  </div>
+</div>
 
 ## Quick Reference
 

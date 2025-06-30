@@ -1,0 +1,362 @@
+---
+title: Advanced Mathematics
+description: Explore advanced mathematical typesetting in LaTeX. Master complex analysis, abstract algebra, topology, and professional theorem environments.
+---
+
+Take your mathematical typesetting to the next level with advanced LaTeX techniques for complex mathematics.
+
+## Advanced Mathematical Packages
+
+<CodeGroup>
+```latex packages
+\usepackage{amsmath}        % Essential math enhancements
+\usepackage{amssymb}        % Additional symbols
+\usepackage{amsthm}         % Theorem environments
+\usepackage{mathtools}      % Extensions to amsmath
+\usepackage{tensor}         % Tensor notation
+\usepackage{mathrsfs}       % Script letters
+\usepackage{bbm}            % Blackboard bold
+\usepackage{dsfont}         % Double stroke fonts
+```
+</CodeGroup>
+
+## Abstract Algebra
+
+### Groups and Rings
+
+<CodeGroup>
+```latex algebra
+% Group theory
+G = \langle a, b \mid a^2 = b^3 = (ab)^2 = e \rangle
+
+% Quotient groups
+G/H \cong \mathbb{Z}_n
+
+% Ring homomorphism
+\phi: R \to S, \quad \phi(xy) = \phi(x)\phi(y)
+
+% Ideals
+\mathfrak{p} \triangleleft R
+
+% Galois groups
+\text{Gal}(K/F) = \text{Aut}(K/F)
+```
+</CodeGroup>
+
+### Field Extensions
+
+<CodeGroup>
+```latex fields
+% Field extension degree
+[K : F] = \dim_F K
+
+% Algebraic closure
+\overline{\mathbb{Q}}
+
+% Splitting field
+K = F(\alpha_1, \ldots, \alpha_n)
+
+% Minimal polynomial
+m_{\alpha,F}(x) = \text{irr}(\alpha, F)
+```
+</CodeGroup>
+
+## Complex Analysis
+
+### Complex Functions
+
+<CodeGroup>
+```latex complex
+% Holomorphic function
+f: \mathbb{C} \to \mathbb{C} \text{ holomorphic}
+
+% Cauchy-Riemann equations
+\frac{\partial u}{\partial x} = \frac{\partial v}{\partial y}, \quad
+\frac{\partial u}{\partial y} = -\frac{\partial v}{\partial x}
+
+% Residue theorem
+\oint_{\gamma} f(z) \, dz = 2\pi i \sum_{k} \text{Res}(f, z_k)
+
+% Laurent series
+f(z) = \sum_{n=-\infty}^{\infty} a_n (z - z_0)^n
+```
+</CodeGroup>
+
+### Contour Integration
+
+<CodeGroup>
+```latex contours
+% Complex integral
+\int_{\gamma} f(z) \, dz = \int_a^b f(\gamma(t)) \gamma'(t) \, dt
+
+% Winding number
+n(\gamma, z_0) = \frac{1}{2\pi i} \oint_{\gamma} \frac{dz}{z - z_0}
+
+% Branch cuts
+\log z = \ln|z| + i\arg(z), \quad -\pi < \arg(z) \leq \pi
+```
+</CodeGroup>
+
+## Topology
+
+### Topological Spaces
+
+<CodeGroup>
+```latex topology
+% Open sets
+\tau = \{U \subseteq X : U \text{ is open}\}
+
+% Closure and interior
+\overline{A} = \bigcap\{F : A \subseteq F, F \text{ closed}\}
+A^{\circ} = \bigcup\{U : U \subseteq A, U \text{ open}\}
+
+% Continuity
+f^{-1}(V) \in \tau_X \text{ for all } V \in \tau_Y
+
+% Compactness
+X = \bigcup_{i \in I} U_i \implies X = \bigcup_{j=1}^n U_{i_j}
+```
+</CodeGroup>
+
+### Algebraic Topology
+
+<CodeGroup>
+```latex alg-topology
+% Fundamental group
+\pi_1(X, x_0) = \{[\gamma] : \gamma \text{ loop at } x_0\}
+
+% Homology groups
+H_n(X) = \ker(\partial_n) / \text{im}(\partial_{n+1})
+
+% Euler characteristic
+\chi(X) = \sum_{i=0}^{\infty} (-1)^i \text{rank}(H_i(X))
+
+% Covering spaces
+p: \tilde{X} \to X \text{ covering map}
+```
+</CodeGroup>
+
+## Category Theory
+
+### Categories and Functors
+
+<CodeGroup>
+```latex category
+% Category
+\mathcal{C} = (\text{Ob}(\mathcal{C}), \text{Mor}(\mathcal{C}))
+
+% Morphisms
+f: A \to B \in \text{Hom}_{\mathcal{C}}(A, B)
+
+% Functors
+F: \mathcal{C} \to \mathcal{D}
+
+% Natural transformation
+\eta: F \Rightarrow G
+
+% Commutative diagram
+\begin{tikzcd}
+A \arrow[r, "f"] \arrow[d, "g"'] & B \arrow[d, "h"] \\
+C \arrow[r, "k"'] & D
+\end{tikzcd}
+```
+</CodeGroup>
+
+## Number Theory
+
+### Algebraic Number Theory
+
+<CodeGroup>
+```latex number-theory
+% Ring of integers
+\mathcal{O}_K = \{x \in K : x \text{ integral over } \mathbb{Z}\}
+
+% Norm and trace
+N_{K/\mathbb{Q}}(\alpha) = \prod_{i=1}^n \sigma_i(\alpha)
+\text{Tr}_{K/\mathbb{Q}}(\alpha) = \sum_{i=1}^n \sigma_i(\alpha)
+
+% Class number
+h_K = |\text{Cl}(K)|
+
+% Dedekind zeta function
+\zeta_K(s) = \sum_{\mathfrak{a}} \frac{1}{N(\mathfrak{a})^s}
+```
+</CodeGroup>
+
+### Analytic Number Theory
+
+<CodeGroup>
+```latex analytic-nt
+% Riemann zeta function
+\zeta(s) = \sum_{n=1}^{\infty} \frac{1}{n^s} = \prod_p \frac{1}{1 - p^{-s}}
+
+% Dirichlet L-functions
+L(s, \chi) = \sum_{n=1}^{\infty} \frac{\chi(n)}{n^s}
+
+% Prime number theorem
+\pi(x) \sim \frac{x}{\ln x}
+
+% Möbius function
+\mu(n) = \begin{cases}
+1 & n = 1 \\
+(-1)^k & n = p_1 \cdots p_k \\
+0 & \text{otherwise}
+\end{cases}
+```
+</CodeGroup>
+
+## Differential Geometry
+
+### Manifolds
+
+<CodeGroup>
+```latex manifolds
+% Tangent space
+T_p M = \{v : C^{\infty}(M) \to \mathbb{R} \mid v \text{ derivation at } p\}
+
+% Differential forms
+\omega \in \Omega^k(M)
+
+% Exterior derivative
+d\omega = \sum_{i_0 < \cdots < i_k} \sum_{j} \frac{\partial f_{i_0\ldots i_k}}{\partial x^j} dx^j \wedge dx^{i_0} \wedge \cdots \wedge dx^{i_k}
+
+% Lie derivative
+\mathcal{L}_X \omega = d(i_X \omega) + i_X(d\omega)
+```
+</CodeGroup>
+
+### Riemannian Geometry
+
+<CodeGroup>
+```latex riemannian
+% Metric tensor
+g_{ij} = \langle \frac{\partial}{\partial x^i}, \frac{\partial}{\partial x^j} \rangle
+
+% Christoffel symbols
+\Gamma^k_{ij} = \frac{1}{2} g^{kl} \left(\frac{\partial g_{jl}}{\partial x^i} + \frac{\partial g_{il}}{\partial x^j} - \frac{\partial g_{ij}}{\partial x^l}\right)
+
+% Riemann curvature tensor
+R^l_{ijk} = \frac{\partial \Gamma^l_{jk}}{\partial x^i} - \frac{\partial \Gamma^l_{ik}}{\partial x^j} + \Gamma^l_{im}\Gamma^m_{jk} - \Gamma^l_{jm}\Gamma^m_{ik}
+
+% Geodesic equation
+\frac{d^2 x^i}{dt^2} + \Gamma^i_{jk} \frac{dx^j}{dt} \frac{dx^k}{dt} = 0
+```
+</CodeGroup>
+
+## Theorem Environments
+
+### Setting Up Theorems
+
+<CodeGroup>
+```latex theorem-setup
+% In preamble
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{note}[theorem]{Note}
+```
+</CodeGroup>
+
+### Using Theorem Environments
+
+<CodeGroup>
+```latex theorem-usage
+\begin{theorem}[Fermat's Last Theorem]
+\label{thm:fermat}
+For $n > 2$, there are no three positive integers $a$, $b$, and $c$ 
+that satisfy the equation $a^n + b^n = c^n$.
+\end{theorem}
+
+\begin{proof}
+The proof is beyond the scope of this document. 
+See Wiles (1995) for details.
+\end{proof}
+
+\begin{lemma}
+\label{lem:helper}
+Every finite integral domain is a field.
+\end{lemma}
+
+By Theorem~\ref{thm:fermat} and Lemma~\ref{lem:helper}, we conclude...
+```
+</CodeGroup>
+
+## Advanced Symbols and Notation
+
+### Special Alphabets
+
+<div style={{ fontSize: '1.05em', lineHeight: '1.8' }}>
+
+| Style | Command | Example |
+|:------|:--------|:--------|
+| Blackboard | `\mathbb{R}` | ℝ |
+| Calligraphic | `\mathcal{L}` | 𝓛 |
+| Fraktur | `\mathfrak{g}` | 𝔤 |
+| Script | `\mathscr{F}` | ℱ |
+| Bold | `\mathbf{v}` | **v** |
+| Bold symbol | `\boldsymbol{\alpha}` | **α** |
+
+</div>
+
+### Advanced Operators
+
+<CodeGroup>
+```latex operators
+% Tensor products
+V \otimes W, \quad \bigotimes_{i=1}^n V_i
+
+% Direct sums
+V \oplus W, \quad \bigoplus_{i=1}^n V_i
+
+% Wedge products
+\alpha \wedge \beta
+
+% Cup and cap products
+\alpha \cup \beta, \quad \alpha \cap \beta
+
+% Hom and End
+\text{Hom}(V, W), \quad \text{End}(V)
+```
+</CodeGroup>
+
+## Tips for Advanced Mathematics
+
+<CardGroup cols={2}>
+<Card title="Use Semantic Commands" icon="code">
+Define `\newcommand{\R}{\mathbb{R}}` for frequently used symbols
+</Card>
+<Card title="Organize Theorems" icon="list-ol">
+Use consistent numbering across theorem-like environments
+</Card>
+<Card title="Clear Notation" icon="eye">
+Define all notation clearly when first introduced
+</Card>
+<Card title="Proper Spacing" icon="ruler">
+Use `\,` and `\:` for fine-tuning mathematical spacing
+</Card>
+</CardGroup>
+
+## Further Reading
+
+<CardGroup cols={2}>
+<Card title="Mathematical Expressions" icon="square-root-variable" href="/learn/latex/mathematics/mathematical-expressions">
+Basic mathematical typesetting
+</Card>
+<Card title="Symbol Reference" icon="book" href="/learn/reference/symbols">
+Complete symbol reference
+</Card>
+<Card title="Physics Mathematics" icon="atom" href="/learn/latex/specialized-notation/physics">
+Physics-specific notation
+</Card>
+<Card title="Matrices Guide" icon="grid" href="/learn/latex/mathematics/matrices">
+Matrix typesetting
+</Card>
+</CardGroup>

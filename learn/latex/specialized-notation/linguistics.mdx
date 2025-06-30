@@ -1,0 +1,557 @@
+---
+title: Linguistics Notation
+description: Master linguistic notation in LaTeX. Learn phonetic symbols, syntax trees, morphological analysis, and specialized linguistics formatting.
+---
+
+Learn how to typeset linguistic notation, phonetic symbols, and syntactic structures professionally in LaTeX.
+
+## Essential Linguistics Packages
+
+<CodeGroup>
+```latex packages
+\usepackage{tipa}           % Phonetic symbols (IPA)
+\usepackage{linguex}        % Example numbering
+\usepackage{gb4e}           % Alternative example numbering
+\usepackage{qtree}          % Syntax trees
+\usepackage{forest}         % Advanced tree diagrams
+\usepackage{tikz-qtree}     % TikZ-based trees
+\usepackage{covington}      % Linguistic examples
+\usepackage{vowel}          % Vowel charts
+```
+</CodeGroup>
+
+## Phonetic Symbols (IPA)
+
+### Consonants
+
+<CodeGroup>
+```latex ipa-consonants
+% Stops
+\textipa{p b t d \:t \:d c \textbardotlessj k g q \textscg ?}
+
+% Fricatives
+\textipa{f v T D s z S Z s\super h z\super h C j\super h x G X R h H}
+
+% Nasals
+\textipa{m M n n\super h \:n N n\super G}
+
+% Liquids
+\textipa{l l\super h \:l L r r\super h \:r R}
+
+% Approximants
+\textipa{B j M\super j w \textbeltl}
+```
+</CodeGroup>
+
+### Vowels
+
+<CodeGroup>
+```latex ipa-vowels
+% Front vowels
+\textipa{i I e E a}
+
+% Central vowels
+\textipa{1 @\super r @ 6 a}
+
+% Back vowels
+\textipa{u U o O A Q}
+
+% Additional vowels
+\textipa{y Y 2 9 O/ \textbari \textschwa}
+```
+</CodeGroup>
+
+**Visual examples:**
+
+<div style={{ backgroundColor: '#f5f5f5', padding: '1em', borderRadius: '8px', margin: '1em 0' }}>
+  <table style={{ width: '100%', fontSize: '1.3em' }}>
+    <tr>
+      <td><code>\textipa&#123;p&#125;</code></td>
+      <td style={{ textAlign: 'center' }}>→</td>
+      <td><strong>p</strong> (voiceless bilabial stop)</td>
+    </tr>
+    <tr>
+      <td><code>\textipa&#123;T&#125;</code></td>
+      <td style={{ textAlign: 'center' }}>→</td>
+      <td><strong>θ</strong> (voiceless dental fricative)</td>
+    </tr>
+    <tr>
+      <td><code>\textipa&#123;S&#125;</code></td>
+      <td style={{ textAlign: 'center' }}>→</td>
+      <td><strong>ʃ</strong> (voiceless postalveolar fricative)</td>
+    </tr>
+    <tr>
+      <td><code>\textipa&#123;@&#125;</code></td>
+      <td style={{ textAlign: 'center' }}>→</td>
+      <td><strong>ə</strong> (schwa)</td>
+    </tr>
+  </table>
+</div>
+
+## Suprasegmentals and Prosodic Notation
+
+### Stress and Tone
+
+<CodeGroup>
+```latex suprasegmentals
+% Stress
+\textipa{"kA:l@} % Primary stress
+\textipa{%kA:l@} % Secondary stress
+
+% Tone markings
+\textipa{\`a}    % Low tone
+\textipa{\'a}    % High tone
+\textipa{\^a}    % Rising tone
+\textipa{\v a}   % Falling tone
+\textipa{\~a}    % Mid tone
+
+% Tone letters
+\textipa{ma\tone{51}}  % High falling
+\textipa{ma\tone{35}}  % Mid rising
+\textipa{ma\tone{214}} % Low falling-rising
+
+% Length
+\textipa{a:}     % Long
+\textipa{a\super h} % Half-long
+```
+</CodeGroup>
+
+### Syllable Structure
+
+<CodeGroup>
+```latex syllable-structure
+% Syllable boundaries
+\textipa{sI.l@.b@l}
+
+% Prosodic word boundaries
+\textipa{|| wO:d || bawn.d@.ri ||} 
+
+% Phonological phrases
+\textipa{( f@"nA.l@.dZI.k@l ) ( "freI.z@z )}
+
+% Metrical feet
+\textipa{(. "stres.t@d .) (. sI"la.b@l .)}
+```
+</CodeGroup>
+
+## Linguistic Examples
+
+### Numbered Examples with linguex
+
+<CodeGroup>
+```latex linguex-examples
+\ex. This is a simple example.
+
+\ex. \a. This is a subexample.
+     \b. This is another subexample.
+     \c. And yet another one.
+
+\ex. \label{important-ex}
+     This example has a label for referencing.
+
+% Referencing
+As shown in (\ref{important-ex}), we can reference examples.
+
+% Glossed examples
+\ex. \gll Mary-ga hon-o yonda.
+         Mary-NOM book-ACC read.PAST
+     \glt 'Mary read a book.'
+```
+</CodeGroup>
+
+### Glossed Examples with gb4e
+
+<CodeGroup>
+```latex gb4e-examples
+\begin{exe}
+\ex This is an example.
+
+\ex \begin{xlist}
+    \ex First subexample
+    \ex Second subexample
+    \end{xlist}
+
+\ex \gll Dies ist ein Beispiel.
+        this is a example
+    \glt 'This is an example.'
+
+\ex \glll María le-yó el libro.
+         María 3.DAT-read.3SG.PAST the book
+         Maria to.him-read the book
+    \glt 'Maria read the book to him.'
+\end{exe}
+```
+</CodeGroup>
+
+## Morphological Analysis
+
+### Morpheme Boundaries
+
+<CodeGroup>
+```latex morphology
+% Morpheme boundaries
+un-break-able
+re-write-ing
+cat-s
+
+% Allomorphs
+\{Z\} $\rightarrow$ [s] / [+voiceless]
+\{Z\} $\rightarrow$ [z] / [+voiced]
+\{Z\} $\rightarrow$ [@z] / [+sibilant]
+
+% Morphological rules
+\textsc{plural}: N $\rightarrow$ N + \{Z\}
+
+% Feature structures
+\begin{tabular}{l}
+[+animate] \\
+[+human] \\
+[-definite]
+\end{tabular}
+```
+</CodeGroup>
+
+### Autosegmental Representation
+
+<CodeGroup>
+```latex autosegmental
+% Tone spreading
+\begin{tikzpicture}
+\node at (0,0) {k};
+\node at (1,0) {a};
+\node at (2,0) {l};
+\node at (3,0) {a};
+\draw (0.5,1) node {H} -- (1,0);
+\draw (0.5,1) -- (2,0);
+\draw (2.5,1) node {L} -- (3,0);
+\end{tikzpicture}
+
+% Multiple tiers
+\begin{tikzpicture}[scale=0.8]
+% Segmental tier
+\node at (0,0) {k};
+\node at (1,0) {a};
+\node at (2,0) {l};
+\node at (3,0) {a};
+% Tonal tier
+\node at (0,1) {H};
+\node at (2,1) {L};
+% Association lines
+\draw (0,1) -- (1,0);
+\draw (2,1) -- (3,0);
+\end{tikzpicture}
+```
+</CodeGroup>
+
+## Syntax Trees
+
+### Simple Trees with qtree
+
+<CodeGroup>
+```latex qtree-simple
+% Basic tree
+\Tree [.S [.NP [.Det The ] [.N cat ] ]
+           [.VP [.V sat ] [.PP [.P on ] [.NP [.Det the ] [.N mat ] ] ] ] ]
+
+% With movement
+\Tree [.CP [.C$'$ [.C that ] 
+                  [.IP [.NP$_i$ Mary ] 
+                       [.I$'$ [.I -ed ] 
+                              [.VP [.V think ] 
+                                   [.CP [.NP$_j$ what ] 
+                                        [.C$'$ [.C ∅ ] 
+                                               [.IP [.NP t$_i$ ] 
+                                                    [.VP [.V bought ] 
+                                                         [.NP t$_j$ ] ] ] ] ] ] ] ] ] ]
+```
+</CodeGroup>
+
+### Advanced Trees with forest
+
+<CodeGroup>
+```latex forest-trees
+\begin{forest}
+[S
+  [NP
+    [Det [the]]
+    [N [student]]
+  ]
+  [VP
+    [V [read]]
+    [NP
+      [Det [a]]
+      [N [book]]
+    ]
+  ]
+]
+\end{forest}
+
+% With features
+\begin{forest}
+[S
+  [NP,roof
+    [John]]
+  [VP
+    [V
+      [believes]]
+    [CP
+      [C
+        [that]]
+      [S
+        [NP,roof
+          [Mary]]
+        [VP
+          [V
+            [left]]]]]]]
+\end{forest}
+```
+</CodeGroup>
+
+## Phonological Rules
+
+### Rule Notation
+
+<CodeGroup>
+```latex phonological-rules
+% Basic rule format
+A $\rightarrow$ B / C \_ D
+
+% Specific examples
+/t/ $\rightarrow$ [t\super h] / \_ [+vowel]
+
+/n/ $\rightarrow$ [N] / \_ [+velar]
+
+% Feature-based rules
+[+consonant] $\rightarrow$ [+voice] / [+voice] \_ [+voice]
+
+% Syllable-based rules
+V $\rightarrow$ V: / \_ C\$ (vowel lengthening before coda)
+
+% Optional rules
+/t/ $\rightarrow$ (∅) / V \_ V (optional /t/ deletion)
+
+% Multiple environments
+/k/ $\rightarrow$ [c] / \_ \{i, e\}
+```
+</CodeGroup>
+
+## Optimality Theory
+
+### Tableaux
+
+<CodeGroup>
+```latex ot-tableau
+\begin{tabular}{|l||c|c|c|}
+\hline
+Input: /kata/ & \textsc{NoCoda} & \textsc{Max} & \textsc{Dep} \\
+\hline\hline
+a. [kata] & *! & & \\
+\hline
+b. [kat] & & *! & \\
+\hline
+c. ☞ [ka.ta] & & & * \\
+\hline
+\end{tabular}
+
+% Ranking
+\textsc{NoCoda} $\gg$ \textsc{Max} $\gg$ \textsc{Dep}
+
+% Violation marks
+* violation
+*! fatal violation
+☞ optimal candidate
+```
+</CodeGroup>
+
+## Historical Linguistics
+
+### Sound Changes
+
+<CodeGroup>
+```latex sound-changes
+% Regular sound changes
+Proto-Indo-European *p > Germanic f
+
+% Conditioned changes
+PIE *k > Latin c / \_ [+front vowel]
+PIE *k > Latin qu / \_ [+back vowel]
+
+% Merger and split
+Middle English /a:/ > Modern English /eI/ (name)
+Middle English /a:/ > Modern English /A:/ (father)
+
+% Comparative method
+\begin{tabular}{lll}
+\textbf{English} & \textbf{German} & \textbf{Proto-Germanic} \\
+father & Vater & *faðer- \\
+mother & Mutter & *mo:ðer- \\
+brother & Bruder & *broðer- \\
+\end{tabular}
+```
+</CodeGroup>
+
+## Sociolinguistics
+
+### Variation and Variables
+
+<CodeGroup>
+```latex sociolinguistics
+% Variables
+(ing): [IN] vs. [In]
+(th): [T] vs. [f] vs. [d]
+
+% Variable rules
+(r) $\rightarrow$ ∅ / V \_ \# (r-dropping)
+Probability: 0.8 (working class), 0.2 (middle class)
+
+% Correlation tables
+\begin{tabular}{|l|c|c|}
+\hline
+\textbf{Social Class} & \textbf{[IN]\%} & \textbf{[In]\%} \\
+\hline
+Upper Middle & 95 & 5 \\
+Lower Middle & 75 & 25 \\
+Working & 25 & 75 \\
+\hline
+\end{tabular}
+```
+</CodeGroup>
+
+## Acoustic Phonetics
+
+### Spectrograms and Formants
+
+<CodeGroup>
+```latex acoustics
+% Formant notation
+F1 = \SI{500}{Hz}, F2 = \SI{1500}{Hz}, F3 = \SI{2500}{Hz}
+
+% Vowel formant space
+\begin{tikzpicture}[scale=0.8]
+\draw[->] (0,0) -- (4,0) node[right] {F2 (Hz)};
+\draw[->] (0,0) -- (0,3) node[above] {F1 (Hz)};
+\node at (0.5,0.5) {i};
+\node at (3.5,0.5) {u};
+\node at (2,2.5) {a};
+\node at (1.5,1) {e};
+\node at (2.5,1) {o};
+\end{tikzpicture}
+
+% VOT measurements
+VOT = \SI{+15}{ms} (aspirated)
+VOT = \SI{+5}{ms} (unaspirated)
+VOT = \SI{-85}{ms} (voiced)
+```
+</CodeGroup>
+
+## Language Typology
+
+### Typological Features
+
+<CodeGroup>
+```latex typology
+% Word order typology
+\begin{tabular}{ll}
+\textbf{Type} & \textbf{Example} \\
+SOV & Japanese, Turkish \\
+SVO & English, Mandarin \\
+VSO & Welsh, Irish \\
+VOS & Malagasy \\
+OVS & Hixkaryana \\
+OSV & Warao \\
+\end{tabular}
+
+% Implicational universals
+If a language has dual number, then it has plural number.
+If SOV $\rightarrow$ then postpositions (generally)
+
+% Morphological typology
+\textbf{Analytic}: Vietnamese, Chinese
+\textbf{Synthetic}: Latin, Russian  
+\textbf{Agglutinative}: Turkish, Finnish
+\textbf{Polysynthetic}: Mohawk, Inuktitut
+```
+</CodeGroup>
+
+## Writing Systems
+
+### Grapheme-Phoneme Correspondences
+
+<CodeGroup>
+```latex writing-systems
+% English spelling
+\textipa{/naIt/} $\leftrightarrow$ \textit{night, knight}
+\textipa{/tu:/} $\leftrightarrow$ \textit{two, too, to}
+
+% Arabic transliteration
+\textarabic{kitAb} ← k-t-b (root)
+\textarabic{kAtib} ← writer (active participle)
+
+% Chinese characters
+汉字 hànzì (Chinese characters)
+人 rén (person) + 木 mù (tree) = 休 xiū (rest)
+```
+</CodeGroup>
+
+## Best Practices
+
+<CardGroup cols={2}>
+<Card title="Consistent IPA Usage" icon="language" color="#FF6037">
+Use the same IPA conventions throughout your document
+</Card>
+<Card title="Clear Example Formatting" icon="list-ol" color="#FF6037">
+Number and format linguistic examples consistently
+</Card>
+<Card title="Proper Glossing" icon="tags" color="#FF6037">
+Follow Leipzig Glossing Rules for morpheme-by-morpheme translation
+</Card>
+<Card title="Tree Readability" icon="sitemap" color="#FF6037">
+Keep syntax trees simple and well-spaced for clarity
+</Card>
+</CardGroup>
+
+## Common Abbreviations
+
+<div style={{ fontSize: '1.2em', lineHeight: '2' }}>
+
+| Abbreviation | Meaning |
+|:-------------|:--------|
+| **NOM** | Nominative |
+| **ACC** | Accusative |
+| **DAT** | Dative |
+| **GEN** | Genitive |
+| **1SG** | First person singular |
+| **3PL** | Third person plural |
+| **PAST** | Past tense |
+| **PRES** | Present tense |
+| **PERF** | Perfect aspect |
+| **PROG** | Progressive aspect |
+
+</div>
+
+## Troubleshooting
+
+<Warning>
+**Common issues**:
+- Missing TIPA fonts: Install the `tipa` package properly
+- Tree alignment: Use appropriate tree packages for complex structures
+- IPA rendering: Some symbols require special font handling
+- Example numbering: Don't mix linguex and gb4e in the same document
+</Warning>
+
+## Further Reading
+
+<CardGroup cols={2}>
+<Card title="Music Notation" icon="music" href="/learn/latex/specialized-notation/music" color="#FF6037">
+Musical symbols and notation
+</Card>
+<Card title="Creating Diagrams" icon="diagram-project" href="/learn/latex/figures/diagrams-tikz" color="#FF6037">
+Advanced TikZ diagrams for syntax trees
+</Card>
+<Card title="Symbol Reference" icon="book" href="/learn/reference/symbols" color="#FF6037">
+General symbol reference
+</Card>
+<Card title="Advanced Formatting" icon="palette" href="/learn/latex/fonts-formatting/advanced-formatting" color="#FF6037">
+Text formatting techniques
+</Card>
+</CardGroup>

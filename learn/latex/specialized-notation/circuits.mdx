@@ -1,0 +1,464 @@
+---
+title: Circuit Diagrams and Electronics
+description: Master electronic circuit diagrams in LaTeX. Learn circuit symbols, components, and professional electronic schematics with CircuiTikZ.
+---
+
+Learn how to create professional electronic circuit diagrams and schematics in LaTeX.
+
+## Essential Circuit Packages
+
+<CodeGroup>
+```latex packages
+\usepackage{circuitikz}     % Complete circuit diagrams
+\usepackage{tikz}           % TikZ graphics
+\usepackage{siunitx}        % SI units for electronics
+\usepackage{steinmetz}      % Phasor notation
+\usepackage{units}          % Unit formatting
+\usepackage{amsmath}        % Math expressions
+```
+</CodeGroup>
+
+## Basic Circuit Elements
+
+### Passive Components
+
+<CodeGroup>
+```latex passive-components
+\begin{circuitikz}
+% Resistor
+\draw (0,0) to[R, l=$R_1$] (2,0);
+
+% Capacitor
+\draw (0,0) to[C, l=$C_1$] (2,0);
+
+% Inductor
+\draw (0,0) to[L, l=$L_1$] (2,0);
+
+% Variable resistor
+\draw (0,0) to[vR, l=$R_{var}$] (2,0);
+
+% Potentiometer
+\draw (0,0) to[pR, l=$P_1$] (2,0);
+\end{circuitikz}
+```
+</CodeGroup>
+
+### Active Components
+
+<CodeGroup>
+```latex active-components
+\begin{circuitikz}
+% Voltage source
+\draw (0,0) to[V, l=$V_s$] (2,0);
+
+% Current source
+\draw (0,0) to[I, l=$I_s$] (2,0);
+
+% Battery
+\draw (0,0) to[battery, l=$E$] (2,0);
+
+% AC source
+\draw (0,0) to[sV, l=$V_{ac}$] (2,0);
+
+% Dependent sources
+\draw (0,0) to[cV, l=$k V_x$] (2,0);  % Voltage controlled
+\draw (0,0) to[cI, l=$g V_x$] (2,0);  % Current controlled
+\end{circuitikz}
+```
+</CodeGroup>
+
+**Visual examples:**
+
+<div style={{ backgroundColor: '#f5f5f5', padding: '1em', borderRadius: '8px', margin: '1em 0' }}>
+  <table style={{ width: '100%', fontSize: '1.3em' }}>
+    <tr>
+      <td><code>to[R, l=$R_1$]</code></td>
+      <td style={{ textAlign: 'center' }}>→</td>
+      <td><strong>Resistor with label R₁</strong></td>
+    </tr>
+    <tr>
+      <td><code>to[C, l=$C_1$]</code></td>
+      <td style={{ textAlign: 'center' }}>→</td>
+      <td><strong>Capacitor with label C₁</strong></td>
+    </tr>
+    <tr>
+      <td><code>to[V, l=$V_s$]</code></td>
+      <td style={{ textAlign: 'center' }}>→</td>
+      <td><strong>Voltage source with label Vs</strong></td>
+    </tr>
+  </table>
+</div>
+
+## Semiconductor Devices
+
+### Diodes and Transistors
+
+<CodeGroup>
+```latex semiconductors
+\begin{circuitikz}
+% Diode
+\draw (0,0) to[D, l=$D_1$] (2,0);
+
+% LED
+\draw (0,0) to[leDo, l=LED] (2,0);
+
+% Zener diode
+\draw (0,0) to[zD, l=$D_z$] (2,0);
+
+% Bipolar transistors
+\draw (0,0) node[npn](npn1)&#123;Q1&#125;;
+\draw (0,-2) node[pnp](pnp1)&#123;Q2&#125;;
+
+% MOSFET
+\draw (4,0) node[nmos](mos1)&#123;M1&#125;;
+\draw (4,-2) node[pmos](mos2)&#123;M2&#125;;
+
+% JFET
+\draw (8,0) node[njfet](jfet1)&#123;J1&#125;;
+\end{circuitikz}
+```
+</CodeGroup>
+
+### Operational Amplifiers
+
+<CodeGroup>
+```latex op-amps
+\begin{circuitikz}
+% Basic op-amp
+\draw (0,0) node[op amp](opamp1)&#123;&#125;;
+
+% With power supplies
+\draw (0,-3) node[op amp, yscale=-1](opamp2)&#123;&#125;
+  (opamp2.up) node[above] &#123;$+V_{CC}$&#125;
+  (opamp2.down) node[below] &#123;$-V_{EE}$&#125;;
+
+% Inverting amplifier circuit
+\draw (0,0) node[op amp](opamp)&#123;&#125;
+  (opamp.+) to[R, l=$R_2$] ++(0,-2) node[ground]&#123;&#125;
+  (opamp.-) to[R, l=$R_1$] ++(-3,0) to[sV, l=$V_{in}$] ++(0,-2) 
+    node[ground]&#123;&#125;
+  (opamp.-) to[R, l=$R_f$] ++(0,2) -| (opamp.out)
+  (opamp.out) to[R, l=$R_L$] ++(2,0) node[ocirc, label=right:$V_{out}$]&#123;&#125;;
+\end{circuitikz}
+```
+</CodeGroup>
+
+## Complex Circuits
+
+### Complete Circuit Example
+
+<CodeGroup>
+```latex complete-circuit
+\begin{circuitikz}[scale=1.2]
+% Power supply
+\draw (0,4) to[V, l=$12V$] (0,0)
+  (0,4) to[short] (2,4)
+  (0,0) node[ground]&#123;&#125;;
+
+% Voltage divider
+\draw (2,4) to[R, l=$R_1=\SI{10}{k\ohm}$] (2,2)
+  to[R, l=$R_2=\SI{5}{k\ohm}$] (2,0)
+  (2,0) to[short] (0,0);
+
+% Transistor amplifier
+\draw (2,2) to[short] (3,2)
+  (3,2) to[R, l=$R_B=\SI{47}{k\ohm}$] (5,2)
+  (5,2) node[npn, anchor=base](Q1)&#123;Q1&#125;
+  (Q1.collector) to[R, l=$R_C=\SI{2.2}{k\ohm}$] (5,4)
+  (5,4) to[short] (2,4)
+  (Q1.emitter) to[R, l=$R_E=\SI{1}{k\ohm}$] (5,0)
+  (5,0) to[short] (2,0);
+
+% Output coupling
+\draw (Q1.collector) to[C, l=$C_{out}=\SI{10}{\mu F}$] (7,3)
+  to[R, l=$R_L=\SI{8}{\ohm}$] (7,0)
+  (7,0) to[short] (5,0)
+  (7,3) node[ocirc, label=right:Output]&#123;&#125;;
+
+% Input coupling
+\draw (3,2) to[C, l=$C_{in}=\SI{1}{\mu F}$] (1,2)
+  node[ocirc, label=left:Input]&#123;&#125;;
+\end{circuitikz}
+```
+</CodeGroup>
+
+## Digital Logic Circuits
+
+### Logic Gates
+
+<CodeGroup>
+```latex logic-gates
+\begin{circuitikz}
+% Basic gates
+\draw (0,0) node[and port](and1)&#123;&#125;;
+\draw (0,-2) node[or port](or1)&#123;&#125;;
+\draw (0,-4) node[not port](not1)&#123;&#125;;
+\draw (4,0) node[xor port](xor1)&#123;&#125;;
+\draw (4,-2) node[nand port](nand1)&#123;&#125;;
+\draw (4,-4) node[nor port](nor1)&#123;&#125;;
+
+% Labels
+\draw (and1.out) node[right=5mm] &#123;AND&#125;;
+\draw (or1.out) node[right=5mm] &#123;OR&#125;;
+\draw (not1.out) node[right=5mm] &#123;NOT&#125;;
+\draw (xor1.out) node[right=5mm] &#123;XOR&#125;;
+\draw (nand1.out) node[right=5mm] &#123;NAND&#125;;
+\draw (nor1.out) node[right=5mm] &#123;NOR&#125;;
+\end{circuitikz}
+```
+</CodeGroup>
+
+### Flip-Flops and Counters
+
+<CodeGroup>
+```latex flip-flops
+\begin{circuitikz}
+% D Flip-flop
+\draw (0,0) node[flipflop D](ff1)&#123;&#125;
+  (ff1.bpin 1) node[left] &#123;D&#125;
+  (ff1.bpin 2) node[left] &#123;CLK&#125;
+  (ff1.bpin 6) node[right] &#123;Q&#125;
+  (ff1.bpin 7) node[right] &#123;$\overline{Q}$&#125;;
+
+% JK Flip-flop
+\draw (0,-4) node[flipflop JK](ff2)&#123;&#125;
+  (ff2.bpin 1) node[left] &#123;J&#125;
+  (ff2.bpin 2) node[left] &#123;CLK&#125;
+  (ff2.bpin 3) node[left] &#123;K&#125;
+  (ff2.bpin 6) node[right] &#123;Q&#125;
+  (ff2.bpin 7) node[right] &#123;$\overline{Q}$&#125;;
+
+% Clock signal
+\draw (ff1.bpin 2) to[short] ++(-1,0)
+  to[square voltage source, l=CLK] ++(0,-1.5)
+  to[short] ++(1,0) to (ff2.bpin 2);
+\end{circuitikz}
+```
+</CodeGroup>
+
+## AC Circuit Analysis
+
+### Phasor Diagrams
+
+<CodeGroup>
+```latex phasors
+\begin{circuitikz}
+% AC source and impedances
+\draw (0,0) to[sV, l=$V_s \angle 0°$] (0,3)
+  to[R, l=$R=\SI{50}{\ohm}$] (3,3)
+  to[L, l=$L=\SI{10}{mH}$] (6,3)
+  to[C, l=$C=\SI{100}{\mu F}$] (6,0)
+  to[short] (0,0);
+
+% Phasor diagram
+\begin{scope}[shift=&#123;(8,1.5)&#125;, scale=1.5]
+\draw[->] (0,0) -- (2,0) node[right] &#123;Re&#125;;
+\draw[->] (0,0) -- (0,2) node[above] &#123;Im&#125;;
+\draw[->, thick, red] (0,0) -- (1.5,0.8) 
+  node[above right] &#123;$V_R$&#125;;
+\draw[->, thick, blue] (0,0) -- (0.5,1.5) 
+  node[above left] &#123;$V_L$&#125;;
+\draw[->, thick, green] (0,0) -- (0.8,-0.6) 
+  node[below right] &#123;$V_C$&#125;;
+\end{scope}
+\end{circuitikz}
+```
+</CodeGroup>
+
+## Specialized Components
+
+### Transformers and Coupled Circuits
+
+<CodeGroup>
+```latex transformers
+\begin{circuitikz}
+% Ideal transformer
+\draw (0,0) to[L, l=$L_1$] (0,2)
+  to[sV, l=$V_1$] (2,2)
+  to[short] (2,0)
+  to[short] (0,0);
+\draw (3,0) to[L, l=$L_2$] (3,2)
+  to[R, l=$R_L$] (5,2)
+  to[short] (5,0)
+  to[short] (3,0);
+  
+% Coupling
+\draw[dashed] (0.5,1) -- (2.5,1);
+\node at (1.5,1.2) &#123;$k$&#125;;
+
+% Center-tapped transformer
+\draw (0,-4) to[L, l=$L_1$] (0,-2)
+  to[sV, l=$V_{ac}$] (2,-2)
+  to[short] (2,-4)
+  to[short] (0,-4);
+\draw (3,-4) to[L, l=$L_{2a}$] (3,-3)
+  (3,-3) to[L, l=$L_{2b}$] (3,-2)
+  to[short] (5,-2)
+  to[D] (5,-3)
+  to[D] (5,-4)
+  to[short] (3,-4);
+\draw (3,-3) to[short] (6,-3) node[ground]&#123;&#125;;
+\end{circuitikz}
+```
+</CodeGroup>
+
+## Measurement and Test Equipment
+
+### Meters and Instruments
+
+<CodeGroup>
+```latex instruments
+\begin{circuitikz}
+% Voltmeter
+\draw (0,0) to[V, l=V] (2,0);
+
+% Ammeter
+\draw (0,-1) to[A, l=A] (2,-1);
+
+% Oscilloscope
+\draw (4,0) node[oscilloscope](scope)&#123;&#125;
+  (scope.in 1) node[left] &#123;CH1&#125;
+  (scope.in 2) node[left] &#123;CH2&#125;;
+
+% Function generator
+\draw (0,-4) node[generator](gen)&#123;&#125;
+  (gen.out 1) node[right] &#123;OUT&#125;
+  (gen.out 2) node[right] &#123;GND&#125;;
+
+% Multimeter
+\draw (4,-4) node[multimeter](mm)&#123;MM&#125;
+  (mm.north) node[above] &#123;Digital&#125;
+  (mm.south) node[below] &#123;Multimeter&#125;;
+\end{circuitikz}
+```
+</CodeGroup>
+
+## Circuit Analysis Techniques
+
+### Node Voltage Analysis
+
+<CodeGroup>
+```latex node-analysis
+% Circuit with node labels
+\begin{circuitikz}
+\draw (0,0) node[ground]&#123;&#125; 
+  to[I, l=$I_s$] (0,2) 
+  to[short] (2,2) coordinate(n1)
+  to[R, l=$R_1$] (4,2) coordinate(n2)
+  to[R, l=$R_2$] (4,0)
+  to[short] (0,0);
+\draw (n1) to[R, l=$R_3$] ++(0,-2) node[ground]&#123;&#125;;
+\draw (n2) to[I, l_=$I_o$, i_=$i_o$] ++(2,0) coordinate(n3)
+  to[R, l=$R_L$] ++(0,-2) node[ground]&#123;&#125;;
+
+% Node labels
+\node at (n1) [above] &#123;$v_1$&#125;;
+\node at (n2) [above] &#123;$v_2$&#125;;
+\node at (n3) [above] &#123;$v_3$&#125;;
+
+% Equations
+\node at (2,-3) [align=left] &#123;
+Node 1: $\frac{v_1}{R_3} + \frac{v_1-v_2}{R_1} = I_s$ \\
+Node 2: $\frac{v_2-v_1}{R_1} + \frac{v_2}{R_2} + \frac{v_2-v_3}{R_L} = 0$
+&#125;;
+\end{circuitikz}
+```
+</CodeGroup>
+
+## Units and Measurements
+
+### Electronic Units with siunitx
+
+<CodeGroup>
+```latex electronic-units
+% Basic electrical units
+\SI{12}{V}                  % Voltage
+\SI{2.5}{A}                 % Current
+\SI{100}{\ohm}              % Resistance
+\SI{10}{k\ohm}              % Kiloohms
+\SI{1}{M\ohm}               % Megohms
+
+% Capacitance and inductance
+\SI{100}{\mu F}             % Microfarads
+\SI{22}{pF}                 % Picofarads
+\SI{10}{mH}                 % Millihenries
+\SI{1}{\mu H}               % Microhenries
+
+% Power and energy
+\SI{25}{W}                  % Watts
+\SI{100}{mW}                % Milliwatts
+\SI{3.6}{kW.h}              % Kilowatt-hours
+
+% Frequency
+\SI{60}{Hz}                 % Hertz
+\SI{1}{kHz}                 % Kilohertz
+\SI{2.4}{GHz}               % Gigahertz
+```
+</CodeGroup>
+
+## Component Values and Tolerances
+
+### Standard Component Values
+
+<CodeGroup>
+```latex component-values
+% Resistor with tolerance
+$R_1 = \SI{4.7}{k\ohm} \pm 5\%$
+
+% Capacitor specifications
+$C_1 = \SI{100}{\mu F}, \SI{25}{V}$
+
+% Inductor with core material
+$L_1 = \SI{1}{mH}$ (ferrite core)
+
+% Transistor specifications
+$\beta = 100$, $V_{CE(sat)} = \SI{0.2}{V}$
+
+% Power ratings
+$P_{max} = \SI{1/4}{W}$ at $\SI{25}{°C}$
+```
+</CodeGroup>
+
+## Best Practices
+
+<CardGroup cols={2}>
+<Card title="Clear Component Labels" icon="tag" color="#FF6037">
+Always label components with both reference designators and values
+</Card>
+<Card title="Consistent Symbol Style" icon="palette" color="#FF6037">
+Use consistent symbols throughout your document
+</Card>
+<Card title="Proper Scaling" icon="expand-arrows-alt" color="#FF6037">
+Scale circuits appropriately for readability
+</Card>
+<Card title="Ground References" icon="arrows-down-to-line" color="#FF6037">
+Clearly indicate ground and reference points
+</Card>
+</CardGroup>
+
+## Troubleshooting
+
+<Warning>
+**Common issues**:
+- Component overlap: Adjust node spacing for complex circuits
+- Label positioning: Use `l=`, `l_=`, `l^=` for different positions
+- Line thickness: Use `thick` or `very thick` for emphasis
+- Grid alignment: Use coordinates for precise component placement
+</Warning>
+
+## Further Reading
+
+<CardGroup cols={2}>
+<Card title="Physics Notation" icon="atom" href="/learn/latex/specialized-notation/physics" color="#FF6037">
+Physics equations and symbols
+</Card>
+<Card title="Creating Diagrams" icon="diagram-project" href="/learn/latex/figures/diagrams-tikz" color="#FF6037">
+Advanced TikZ diagrams
+</Card>
+<Card title="Tables Reference" icon="table" href="/learn/latex/tables/creating-tables" color="#FF6037">
+Component specification tables
+</Card>
+<Card title="Mathematics" icon="square-root-variable" href="/learn/latex/mathematics/mathematical-expressions" color="#FF6037">
+Mathematical analysis
+</Card>
+</CardGroup>

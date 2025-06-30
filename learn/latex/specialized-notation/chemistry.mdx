@@ -1,0 +1,412 @@
+---
+title: Chemistry Notation
+description: Master chemistry notation in LaTeX. Learn chemical formulas, reactions, molecular structures, and specialized chemistry symbols.
+---
+
+Create professional chemistry documents with LaTeX, including chemical formulas, reaction equations, and molecular structures.
+
+## Essential Chemistry Packages
+
+<CodeGroup>
+```latex packages
+\usepackage{chemfig}         % Molecular structures
+\usepackage{mhchem}          % Chemical formulas and equations
+\usepackage{chemmacros}      % Chemistry macros
+\usepackage{siunitx}         % SI units
+\usepackage{chemformula}     % Alternative to mhchem
+\usepackage{mol2chemfig}     % Convert SMILES to chemfig
+```
+</CodeGroup>
+
+## Chemical Formulas with mhchem
+
+### Basic Formulas
+
+<CodeGroup>
+```latex formulas
+% Simple molecules
+\ce{H2O}        % Water
+\ce{CO2}        % Carbon dioxide
+\ce{H2SO4}      % Sulfuric acid
+\ce{Ca(OH)2}    % Calcium hydroxide
+
+% Ions
+\ce{Na+}        % Sodium ion
+\ce{SO4^2-}     % Sulfate ion
+\ce{NH4+}       % Ammonium ion
+
+% Isotopes
+\ce{^{14}C}     % Carbon-14
+\ce{^{235}U}    % Uranium-235
+```
+</CodeGroup>
+
+**Rendered output:**
+
+<div style={{ fontSize: '1.05em', textAlign: 'center', margin: '1em 0' }}>
+<code>\\ce&#123;H2O&#125;</code> → <strong>H₂O</strong>
+</div>
+
+<div style={{ fontSize: '1.05em', textAlign: 'center', margin: '1em 0' }}>
+<code>\\ce&#123;CO2&#125;</code> → <strong>CO₂</strong>
+</div>
+
+<div style={{ fontSize: '1.05em', textAlign: 'center', margin: '1em 0' }}>
+<code>\\ce&#123;H2SO4&#125;</code> → <strong>H₂SO₄</strong>
+</div>
+
+<div style={{ fontSize: '1.05em', textAlign: 'center', margin: '1em 0' }}>
+<code>\\ce&#123;Na+&#125;</code> → <strong>Na⁺</strong>
+</div>
+
+<div style={{ fontSize: '1.05em', textAlign: 'center', margin: '1em 0' }}>
+<code>\\ce&#123;SO4^2-&#125;</code> → <strong>SO₄²⁻</strong>
+</div>
+
+### States and Phases
+
+<CodeGroup>
+```latex states
+% Physical states
+\ce{H2O(l)}     % Liquid water
+\ce{CO2(g)}     % Gaseous CO2
+\ce{NaCl(s)}    % Solid salt
+\ce{Na+(aq)}    % Aqueous sodium ion
+
+% Crystal structures
+\ce{CaCO3.H2O}  % Hydrate
+\ce{Fe^{II}Fe^{III}2O4}  % Mixed oxidation states
+```
+</CodeGroup>
+
+## Chemical Reactions
+
+### Basic Reactions
+
+<CodeGroup>
+```latex reactions
+% Simple reaction
+\ce{2H2 + O2 -> 2H2O}
+
+% With conditions
+\ce{N2 + 3H2 ->[\text{Fe cat.}][450°C, 200 atm] 2NH3}
+
+% Equilibrium
+\ce{N2O4 <=> 2NO2}
+
+% With heat
+\ce{CaCO3 ->[\Delta] CaO + CO2}
+
+% Precipitation
+\ce{AgNO3(aq) + NaCl(aq) -> AgCl v + NaNO3(aq)}
+```
+</CodeGroup>
+
+**Rendered output:**
+
+<div style={{ fontSize: '1.05em', textAlign: 'center', margin: '1em 0' }}>
+<code>\\ce&#123;2H2 + O2 -&gt; 2H2O&#125;</code> → <strong>2H₂ + O₂ → 2H₂O</strong>
+</div>
+
+<div style={{ fontSize: '1.05em', textAlign: 'center', margin: '1em 0' }}>
+<code>\\ce&#123;N2O4 &lt;=&gt; 2NO2&#125;</code> → <strong>N₂O₄ ⇌ 2NO₂</strong>
+</div>
+
+<div style={{ fontSize: '1.05em', textAlign: 'center', margin: '1em 0' }}>
+<code>\\ce&#123;AgCl v&#125;</code> → <strong>AgCl ↓</strong>
+</div>
+
+### Complex Reactions
+
+<CodeGroup>
+```latex complex-reactions
+% Multi-step reactions
+\begin{align}
+\ce{CH4 + Cl2 &->[\text{UV}] CH3Cl + HCl}\\
+\ce{CH3Cl + Cl2 &->[\text{UV}] CH2Cl2 + HCl}
+\end{align}
+
+% Organic reactions
+\ce{R-OH + R'-COOH <=>[H+] R'-COO-R + H2O}
+
+% Redox reactions
+\ce{MnO4- + 8H+ + 5e- -> Mn^2+ + 4H2O}
+```
+</CodeGroup>
+
+## Molecular Structures with chemfig
+
+### Simple Molecules
+
+<CodeGroup>
+```latex molecules
+% Methane
+\chemfig{C(-[2]H)(-[4]H)(-[6]H)-H}
+
+% Ethanol
+\chemfig{H-C(-[2]H)(-[6]H)-C(-[2]H)(-[6]H)-OH}
+
+% Benzene
+\chemfig{*6(=-=-=-)}
+
+% Cyclohexane (chair conformation)
+\chemfig{*6(---(-[,,,,line width=2pt])---)}
+```
+</CodeGroup>
+
+### Complex Structures
+
+<CodeGroup>
+```latex complex-structures
+% Glucose
+\chemfig{
+  HO-[2,0.5,2]?<[7,0.7](-[2,0.5]OH)-[,,,,line width=2pt]
+  (-[6,0.5]OH)>[1,0.7](-[6,0.5]OH)-[3,0.7]
+  (-[4,0.5]OH)-[1,0.7]O-[7,0.7]?
+}
+
+% Aspirin
+\chemfig{
+  *6(=-*6(-(=O)-O-(-=[:30]O)-CH_3)=-=-)
+}
+
+% DNA base pairing
+\chemfig{
+  N**6(--N--C(=[::60]O)--*5(-N=-N(-H)-))
+  @{a1}.|[,3.0]|@{a2}.
+  N**6(-C(-H_3)-C(=[::60]O)-N(-H)--*5(=N--N=))
+}
+\chemmove{\draw[dashed] (a1) -- (a2);}
+```
+</CodeGroup>
+
+## Reaction Mechanisms
+
+### Arrow Pushing
+
+<CodeGroup>
+```latex mechanisms
+% Nucleophilic substitution
+\schemestart
+\chemfig{R-X} + \chemfig{\charge{90=\|}{Nu}}
+\arrow{->[$S_N2$]}
+\chemfig{R-Nu} + \chemfig{X^-}
+\schemestop
+
+% Elimination reaction
+\schemestart
+\chemfig{H-C(-[2]H)(-[6]H)-C(-[2]H)(-[6]X)-H}
+\arrow{->[$E2$][-HX]}
+\chemfig{H-C(-[2]H)=C(-[6]H)-H}
+\schemestop
+```
+</CodeGroup>
+
+### Curved Arrows
+
+<CodeGroup>
+```latex curved-arrows
+\chemfig{
+  @{a1}\charge{45=\|}{O}-H@{a2}
+  \+ R-@{b1}\charge{180=\|}{Br}@{b2}
+}
+\chemmove{
+  \draw[->] (a1) .. controls +(45:5mm) and +(135:5mm) .. (b1);
+  \draw[->] (b1) .. controls +(0:5mm) and +(0:5mm) .. (b2);
+}
+```
+</CodeGroup>
+
+## Laboratory Equipment
+
+### Common Glassware
+
+<CodeGroup>
+```latex equipment
+% Using TikZ for simple diagrams
+\begin{tikzpicture}
+  % Round bottom flask
+  \draw (0,0) circle (1cm);
+  \draw (-0.3,1) -- (-0.3,2);
+  \draw (0.3,1) -- (0.3,2);
+  
+  % Beaker
+  \draw (3,0) -- (3,2) -- (4,2) -- (4,0);
+  \draw (3,0) arc (180:360:0.5cm);
+\end{tikzpicture}
+```
+</CodeGroup>
+
+## Chemical Tables
+
+### Periodic Table Elements
+
+<CodeGroup>
+```latex periodic-table
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Symbol} & \textbf{Name} & \textbf{Number} & \textbf{Mass} \\
+\hline
+H & Hydrogen & 1 & 1.008 \\
+He & Helium & 2 & 4.003 \\
+Li & Lithium & 3 & 6.941 \\
+Be & Beryllium & 4 & 9.012 \\
+\hline
+\end{tabular}
+\caption{First four elements}
+\end{table}
+```
+</CodeGroup>
+
+### Thermodynamic Data
+
+<CodeGroup>
+```latex thermo-data
+% Using siunitx for proper formatting
+\begin{table}[h]
+\centering
+\begin{tabular}{l S[table-format=3.1] S[table-format=3.1]}
+\toprule
+Compound & {$\Delta H_f°$ (\si{kJ/mol})} & {$S°$ (\si{J/(mol.K)})} \\
+\midrule
+\ce{H2O(l)} & -285.8 & 69.9 \\
+\ce{CO2(g)} & -393.5 & 213.8 \\
+\ce{O2(g)} & 0.0 & 205.0 \\
+\bottomrule
+\end{tabular}
+\end{table}
+```
+</CodeGroup>
+
+## Units and Measurements
+
+### Using siunitx
+
+<CodeGroup>
+```latex units
+% Basic units
+\SI{25.0}{°C}                    % Temperature
+\SI{101.325}{kPa}                % Pressure
+\SI{2.5e-3}{mol/L}               % Concentration
+\SI{98.5}{\percent}              % Percentage
+
+% Complex units
+\SI{8.314}{J/(mol.K)}            % Gas constant
+\SI{6.022e23}{mol^{-1}}          % Avogadro's number
+
+% Ranges
+\SIrange{20}{25}{°C}
+\SIrange{1}{5}{mL}
+```
+</CodeGroup>
+
+## Chemical Equations with chemformula
+
+### Alternative Syntax
+
+<CodeGroup>
+```latex chemformula
+% Using chemformula package
+\ch{H2O}                         % Water
+\ch{H+ + OH- <=> H2O}            % Equilibrium
+\ch{CO2 + H2O -> H2CO3}          % Reaction
+
+% With stoichiometry
+\ch{!( 2 H2 + O2 -> 2 H2O )}
+
+% Oxidation states
+\ch{Fe^{III}Cl3}
+```
+</CodeGroup>
+
+## Common Chemistry Symbols
+
+<div style={{ fontSize: '1.05em', lineHeight: '1.8' }}>
+
+| Symbol | LaTeX | Meaning |
+|:------:|:------|:--------|
+| **⇌** | `\ce{<=>}` | Equilibrium |
+| **→** | `\ce{->}` | Reaction arrow |
+| **↓** | `\ce{v}` | Precipitate |
+| **↑** | `\ce{^}` | Gas evolution |
+| **Δ** | `\Delta` | Heat |
+| **°** | `°` or `\degree` | Degree |
+| **±** | `\pm` | Plus/minus |
+| **·** | `\cdot` | Hydrate dot |
+
+</div>
+
+## Spectroscopy Notation
+
+### NMR Spectroscopy
+
+<CodeGroup>
+```latex nmr
+% Chemical shifts
+$\delta$ \SI{7.25}{ppm} (s, 5H, Ph)
+$\delta$ \SI{3.65}{ppm} (q, $J = \SI{7.1}{Hz}$, 2H, \ce{CH2})
+
+% Coupling constants
+$^3J_\text{HH} = \SI{7.5}{Hz}$
+$^1J_\text{CH} = \SI{125}{Hz}$
+```
+</CodeGroup>
+
+### IR Spectroscopy
+
+<CodeGroup>
+```latex ir-spectroscopy
+% Wavenumbers
+\SI{3500}{cm^{-1}} (O--H stretch)
+\SI{1715}{cm^{-1}} (C=O stretch)
+\SI{2950}{cm^{-1}} (C--H stretch)
+
+% Peak descriptions
+$\tilde{\nu}$ = \SI{1650}{cm^{-1}} (s, br)
+```
+</CodeGroup>
+
+## Best Practices
+
+<CardGroup cols={2}>
+<Card title="Consistent Notation" icon="check">
+Use the same package throughout your document
+</Card>
+<Card title="Define Abbreviations" icon="book">
+Define all chemical abbreviations when first used
+</Card>
+<Card title="Use SI Units" icon="ruler">
+Always use siunitx for measurements
+</Card>
+<Card title="Clear Structures" icon="eye">
+Keep molecular structures simple and readable
+</Card>
+</CardGroup>
+
+## Troubleshooting
+
+<Warning>
+**Common issues**:
+- Package conflicts: Don't load both mhchem and chemformula
+- Font issues: Some chemistry fonts require special setup
+- Compilation: chemfig structures may need multiple passes
+</Warning>
+
+## Further Reading
+
+<CardGroup cols={2}>
+<Card title="Physics Notation" icon="atom" href="/learn/latex/specialized-notation/physics">
+Physics symbols and equations
+</Card>
+<Card title="Symbol Reference" icon="book" href="/learn/reference/symbols">
+General symbol reference
+</Card>
+<Card title="Tables Guide" icon="table" href="/learn/latex/tables/creating-tables">
+Creating data tables
+</Card>
+<Card title="Mathematics" icon="square-root-variable" href="/learn/latex/mathematics/mathematical-expressions">
+Mathematical expressions
+</Card>
+</CardGroup>

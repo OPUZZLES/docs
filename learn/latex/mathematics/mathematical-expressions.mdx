@@ -1,0 +1,430 @@
+---
+title: Mathematical Expressions
+description: Master writing mathematical expressions in LaTeX. Learn fractions, roots, integrals, limits, and complex mathematical notation.
+---
+
+Learn how to write beautiful mathematical expressions in LaTeX, from basic arithmetic to complex formulas.
+
+## Basic Mathematical Expressions
+
+### Inline vs Display Math
+
+<CodeGroup>
+```latex math-modes
+% Inline math - flows with text
+The quadratic formula is $x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$.
+
+% Display math - centered on its own line
+The quadratic formula is:
+\[x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}\]
+
+% Or using equation environment (numbered)
+\begin{equation}
+x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
+\end{equation}
+```
+</CodeGroup>
+
+### Basic Operations
+
+<div style={{ fontSize: '1.05em', lineHeight: '1.8' }}>
+
+| Expression | LaTeX | Result |
+|:-----------|:------|:-------|
+| Addition | `a + b` | a + b |
+| Subtraction | `a - b` | a - b |
+| Multiplication | `a \times b` or `a \cdot b` | a × b or a · b |
+| Division | `a \div b` or `a / b` | a ÷ b or a / b |
+| Powers | `a^2` or `a^{10}` | a² or a¹⁰ |
+| Subscripts | `a_1` or `a_{ij}` | a₁ or aᵢⱼ |
+
+</div>
+
+## Fractions and Binomials
+
+### Fractions
+
+<CodeGroup>
+```latex fractions
+% Basic fraction
+\frac{1}{2}
+
+% Nested fractions
+\frac{1}{1 + \frac{1}{2}}
+
+% Display style in inline math
+$\displaystyle\frac{1}{2}$
+
+% Text style in display math
+\[\textstyle\frac{1}{2}\]
+
+% Continued fractions
+\cfrac{1}{2 + \cfrac{1}{3 + \cfrac{1}{4}}}
+```
+</CodeGroup>
+
+**Rendered output:**
+
+<div style={{ fontSize: '1.05em', textAlign: 'center', margin: '1em 0' }}>
+<code>\\frac&#123;1&#125;&#123;2&#125;</code> → <strong>1/2</strong>
+</div>
+
+<div style={{ fontSize: '1.05em', textAlign: 'center', margin: '1em 0' }}>
+<code>\\frac&#123;a+b&#125;&#123;c+d&#125;</code> → <strong>(a+b)/(c+d)</strong>
+</div>
+
+<div style={{ fontSize: '1.05em', textAlign: 'center', margin: '1em 0' }}>
+<code>\\frac&#123;1&#125;&#123;1 + \\frac&#123;1&#125;&#123;2&#125;&#125;</code> → <strong>1/(1 + 1/2)</strong>
+</div>
+
+### Binomial Coefficients
+
+<CodeGroup>
+```latex binomial
+% Binomial coefficient
+\binom{n}{k} = \frac{n!}{k!(n-k)!}
+
+% Different styles
+\dbinom{n}{k}  % Display style
+\tbinom{n}{k}  % Text style
+```
+</CodeGroup>
+
+**Rendered output:**
+
+<div style={{ fontSize: '1.05em', textAlign: 'center', margin: '1em 0' }}>
+<code>\\binom&#123;n&#125;&#123;k&#125;</code> → <strong>(n k)</strong>
+</div>
+
+<div style={{ fontSize: '1.05em', textAlign: 'center', margin: '1em 0' }}>
+<code>\\frac&#123;n!&#125;&#123;k!(n-k)!&#125;</code> → <strong>n! / k!(n-k)!</strong>
+</div>
+
+## Roots and Radicals
+
+<CodeGroup>
+```latex roots
+% Square root
+\sqrt{x}
+
+% nth root
+\sqrt[n]{x}
+
+% Complex expressions
+\sqrt{a^2 + b^2}
+
+% Nested roots
+\sqrt{\sqrt{x} + 1}
+
+% Large expressions
+\sqrt{\frac{x^2 + y^2}{2}}
+```
+</CodeGroup>
+
+**Rendered output:**
+
+<div style={{ fontSize: '1.05em', textAlign: 'center', margin: '1em 0' }}>
+<code>\\sqrt&#123;x&#125;</code> → <strong>√x</strong>
+</div>
+
+<div style={{ fontSize: '1.05em', textAlign: 'center', margin: '1em 0' }}>
+<code>\\sqrt[n]&#123;x&#125;</code> → <strong>ⁿ√x</strong>
+</div>
+
+<div style={{ fontSize: '1.05em', textAlign: 'center', margin: '1em 0' }}>
+<code>\\sqrt&#123;a^2 + b^2&#125;</code> → <strong>√(a² + b²)</strong>
+</div>
+
+## Sums, Products, and Integrals
+
+### Summation
+
+<CodeGroup>
+```latex summation
+% Basic sum
+\sum_{i=1}^{n} i = \frac{n(n+1)}{2}
+
+% Display style
+\displaystyle\sum_{i=1}^{n} i
+
+% Multiple indices
+\sum_{\substack{i=1 \\ j=1}}^{n} a_{ij}
+
+% Infinite series
+\sum_{n=0}^{\infty} \frac{x^n}{n!} = e^x
+```
+</CodeGroup>
+
+**Rendered output:**
+
+<div style={{ fontSize: '1.05em', textAlign: 'center', margin: '1em 0' }}>
+<code>\\sum_&#123;i=1&#125;^&#123;n&#125; i</code> → <strong>Σ(i=1 to n) i</strong>
+</div>
+
+<div style={{ fontSize: '1.05em', textAlign: 'center', margin: '1em 0' }}>
+<code>\\sum_&#123;n=0&#125;^&#123;\\infty&#125; x^n</code> → <strong>Σ(n=0 to ∞) x^n</strong>
+</div>
+
+### Products
+
+<CodeGroup>
+```latex products
+% Basic product
+\prod_{i=1}^{n} i = n!
+
+% Infinite product
+\prod_{n=1}^{\infty} \left(1 - \frac{1}{n^2}\right)
+
+% Co-product
+\coprod_{i \in I} X_i
+```
+</CodeGroup>
+
+### Integration
+
+<CodeGroup>
+```latex integrals
+% Indefinite integral
+\int f(x) \, dx
+
+% Definite integral
+\int_a^b f(x) \, dx
+
+% Multiple integrals
+\iint_D f(x,y) \, dx \, dy
+\iiint_V f(x,y,z) \, dx \, dy \, dz
+
+% Contour integrals
+\oint_C F \cdot dr
+
+% With limits
+\int\limits_0^1 x^2 \, dx = \frac{1}{3}
+```
+</CodeGroup>
+
+**Rendered output:**
+
+<div style={{ fontSize: '1.05em', textAlign: 'center', margin: '1em 0' }}>
+<code>\\int f(x) \\, dx</code> → <strong>∫ f(x) dx</strong>
+</div>
+
+<div style={{ fontSize: '1.05em', textAlign: 'center', margin: '1em 0' }}>
+<code>\\int_a^b f(x) \\, dx</code> → <strong>∫(from a to b) f(x) dx</strong>
+</div>
+
+<div style={{ fontSize: '1.05em', textAlign: 'center', margin: '1em 0' }}>
+<code>\\oint_C F \\cdot dr</code> → <strong>∮ F · dr around C</strong>
+</div>
+
+## Limits and Derivatives
+
+### Limits
+
+<CodeGroup>
+```latex limits
+% Basic limit
+\lim_{x \to 0} \frac{\sin x}{x} = 1
+
+% Limits with approach direction
+\lim_{x \to 0^+} f(x)
+\lim_{x \to 0^-} f(x)
+
+% Limits to infinity
+\lim_{n \to \infty} \left(1 + \frac{1}{n}\right)^n = e
+
+% Supremum and infimum
+\sup_{x \in A} f(x)
+\inf_{x \in A} f(x)
+```
+</CodeGroup>
+
+### Derivatives
+
+<CodeGroup>
+```latex derivatives
+% First derivative
+f'(x) \text{ or } \frac{df}{dx}
+
+% Higher derivatives
+f''(x) \text{ or } \frac{d^2f}{dx^2}
+
+% Partial derivatives
+\frac{\partial f}{\partial x}
+\frac{\partial^2 f}{\partial x \partial y}
+
+% With evaluation
+\left.\frac{df}{dx}\right|_{x=0}
+```
+</CodeGroup>
+
+## Brackets and Delimiters
+
+### Automatic Sizing
+
+<CodeGroup>
+```latex brackets
+% Manual sizing
+( \big( \Big( \bigg( \Bigg(
+
+% Automatic sizing
+\left( \frac{1}{2} \right)
+\left[ \sum_{i=1}^n i \right]
+\left\{ x : x > 0 \right\}
+
+% Mixed delimiters
+\left< \frac{a}{b} \right|
+\left\lfloor x \right\rfloor
+\left\lceil x \right\rceil
+```
+</CodeGroup>
+
+### Special Cases
+
+<CodeGroup>
+```latex special-brackets
+% Cases
+f(x) = \begin{cases}
+  x^2 & \text{if } x \geq 0 \\
+  -x^2 & \text{if } x < 0
+\end{cases}
+
+% Matrices with brackets
+\begin{pmatrix}
+  a & b \\
+  c & d
+\end{pmatrix}
+
+% Norms and absolute values
+\|x\| = \sqrt{x_1^2 + x_2^2}
+|x| = \begin{cases}
+  x & \text{if } x \geq 0 \\
+  -x & \text{if } x < 0
+\end{cases}
+```
+</CodeGroup>
+
+## Functions and Operators
+
+### Standard Functions
+
+<CodeGroup>
+```latex functions
+% Trigonometric
+\sin x, \cos x, \tan x
+\arcsin x, \arccos x, \arctan x
+
+% Exponential and logarithmic
+\exp(x), e^x
+\log x, \ln x, \log_2 x
+
+% Hyperbolic
+\sinh x, \cosh x, \tanh x
+
+% Other functions
+\max(a,b), \min(a,b)
+\gcd(a,b), \det(A)
+```
+</CodeGroup>
+
+### Custom Operators
+
+<CodeGroup>
+```latex custom-operators
+% Define new operators
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+% Usage
+\sgn(x) = \begin{cases}
+  1 & x > 0 \\
+  0 & x = 0 \\
+  -1 & x < 0
+\end{cases}
+
+\argmax_{x \in \mathbb{R}} f(x)
+```
+</CodeGroup>
+
+## Advanced Techniques
+
+### Aligning Equations
+
+<CodeGroup>
+```latex align
+\begin{align}
+  (a + b)^2 &= (a + b)(a + b) \\
+            &= a^2 + ab + ba + b^2 \\
+            &= a^2 + 2ab + b^2
+\end{align}
+
+% Without numbering
+\begin{align*}
+  e^{i\pi} + 1 &= 0 \\
+  e^{i\pi} &= -1
+\end{align*}
+```
+</CodeGroup>
+
+### Text in Math Mode
+
+<CodeGroup>
+```latex text-in-math
+% Using \text
+f(x) = x^2 \text{ for all } x \in \mathbb{R}
+
+% Using \intertext in align
+\begin{align}
+  a &= b + c \\
+  \intertext{and therefore}
+  a - b &= c
+\end{align}
+
+% Math in text
+The value of $\pi$ is approximately $3.14159$.
+```
+</CodeGroup>
+
+## Common Mistakes to Avoid
+
+<Warning>
+**Common errors**:
+- Forgetting braces for multi-character superscripts: Use `x^{10}` not `x^10`
+- Missing `\` before functions: Use `\sin x` not `sin x`
+- Wrong math mode: Use `$...$` for inline, `\[...\]` for display
+- Inconsistent notation: Stick to one style throughout your document
+</Warning>
+
+## Best Practices
+
+<CardGroup cols={2}>
+<Card title="Use Proper Spacing" icon="ruler">
+Add thin spaces with `\,` in integrals: `\int f(x) \, dx`
+</Card>
+<Card title="Choose Right Size" icon="text-height">
+Use `\dfrac` for display fractions in inline math
+</Card>
+<Card title="Be Consistent" icon="check">
+Use the same notation style throughout your document
+</Card>
+<Card title="Number Wisely" icon="hashtag">
+Only number equations you reference
+</Card>
+</CardGroup>
+
+## Further Reading
+
+<CardGroup cols={2}>
+<Card title="Symbol Reference" icon="book" href="/learn/reference/symbols">
+Complete list of mathematical symbols
+</Card>
+<Card title="Advanced Mathematics" icon="function" href="/learn/latex/mathematics/advanced-math">
+Complex mathematical typesetting
+</Card>
+<Card title="Equations Guide" icon="equals" href="/learn/latex/mathematics/equations">
+Multi-line equations and systems
+</Card>
+<Card title="Physics Notation" icon="atom" href="/learn/latex/specialized-notation/physics">
+Physics-specific expressions
+</Card>
+</CardGroup>

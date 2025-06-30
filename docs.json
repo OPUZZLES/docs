@@ -90,11 +90,12 @@
           {
             "group": "Specialized Notation",
             "pages": [
-              "learn/latex/specialized/chemistry",
-              "learn/latex/specialized/music",
-              "learn/latex/specialized/circuits",
-              "learn/latex/specialized/linguistics",
-              "learn/latex/specialized/algorithms"
+              "learn/latex/specialized-notation/chemistry",
+              "learn/latex/specialized-notation/physics",
+              "learn/latex/specialized-notation/music",
+              "learn/latex/specialized-notation/circuits",
+              "learn/latex/specialized-notation/linguistics",
+              "learn/latex/specialized-notation/algorithms"
             ]
           },
           {

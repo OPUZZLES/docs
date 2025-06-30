@@ -1,0 +1,314 @@
+---
+title: Physics Notation and Symbols
+description: Master physics notation in LaTeX - from quantum mechanics to relativity. Learn vectors, tensors, bra-ket notation, and specialized physics symbols.
+---
+
+Learn how to typeset physics equations, symbols, and notation professionally in LaTeX.
+
+## Essential Physics Packages
+
+<CodeGroup>
+```latex packages
+\usepackage{amsmath}     % Essential math
+\usepackage{amssymb}     % Extra symbols
+\usepackage{physics}     % Physics shortcuts
+\usepackage{siunitx}     % SI units
+\usepackage{tensor}      % Tensor notation
+\usepackage{braket}      % Quantum mechanics
+```
+</CodeGroup>
+
+## Common Physics Symbols
+
+<div style={{ fontSize: '1.05em', lineHeight: '1.8' }}>
+
+| Symbol | LaTeX | Description |
+|:------:|:------|:------------|
+| **ℏ** | `\hbar` | Reduced Planck constant |
+| **∇** | `\nabla` | Gradient/Del operator |
+| **∂** | `\partial` | Partial derivative |
+| **∞** | `\infty` | Infinity |
+| **·** | `\cdot` | Dot product |
+| **×** | `\times` | Cross product |
+| **⊗** | `\otimes` | Tensor product |
+| **∑** | `\sum` | Summation |
+| **∫** | `\int` | Integral |
+| **∮** | `\oint` | Closed integral |
+
+</div>
+
+## Vectors and Tensors
+
+### Vector Notation
+
+<CodeGroup>
+```latex vectors
+% Different vector styles
+\vec{F} = m\vec{a}              % Arrow notation
+\mathbf{F} = m\mathbf{a}        % Bold notation
+\boldsymbol{\tau} = \vec{r} \times \vec{F}  % Bold Greek
+
+% Vector operations
+\vec{A} \cdot \vec{B}           % Dot product
+\vec{A} \times \vec{B}          % Cross product
+|\vec{v}| \text{ or } \|\vec{v}\|  % Magnitude
+
+% Unit vectors
+\hat{i}, \hat{j}, \hat{k}       % Cartesian
+\hat{r}, \hat{\theta}, \hat{\phi}  % Spherical
+```
+</CodeGroup>
+
+**Rendered output:**
+
+<div style={{ fontSize: '1.05em', textAlign: 'center', margin: '1em 0' }}>
+<code>\\vec&#123;F&#125;</code> → <strong>F (vector)</strong>
+</div>
+
+<div style={{ fontSize: '1.05em', textAlign: 'center', margin: '1em 0' }}>
+<code>\\vec&#123;A&#125; \\cdot \\vec&#123;B&#125;</code> → <strong>A · B (dot product)</strong>
+</div>
+
+<div style={{ fontSize: '1.05em', textAlign: 'center', margin: '1em 0' }}>
+<code>\\vec&#123;A&#125; \\times \\vec&#123;B&#125;</code> → <strong>A × B (cross product)</strong>
+</div>
+
+<div style={{ fontSize: '1.05em', textAlign: 'center', margin: '1em 0' }}>
+<code>\\hat&#123;i&#125;, \\hat&#123;j&#125;, \\hat&#123;k&#125;</code> → <strong>i, j, k (unit vectors)</strong>
+</div>
+
+### Tensor Notation
+
+<CodeGroup>
+```latex tensors
+% Tensor indices
+T^{\mu\nu}                      % Contravariant
+T_{\mu\nu}                      % Covariant
+T^{\mu}_{\nu}                   % Mixed
+
+% Einstein notation
+g_{\mu\nu} = \eta_{\mu\nu} + h_{\mu\nu}
+
+% Christoffel symbols
+\Gamma^{\lambda}_{\mu\nu}
+
+% Riemann tensor
+R^{\rho}_{\sigma\mu\nu}
+```
+</CodeGroup>
+
+## Quantum Mechanics
+
+### Bra-Ket Notation
+
+<CodeGroup>
+```latex quantum
+% Basic bra-ket
+\ket{\psi}                      % Ket
+\bra{\phi}                      % Bra
+\braket{\phi|\psi}              % Inner product
+\braket{\phi|H|\psi}            % Matrix element
+
+% Operators
+\hat{H}\ket{\psi} = E\ket{\psi} % Eigenvalue equation
+\hat{p} = -i\hbar\frac{\partial}{\partial x}
+
+% Commutators
+[\hat{x}, \hat{p}] = i\hbar
+\{\hat{a}, \hat{a}^{\dagger}\} = 1  % Anticommutator
+```
+</CodeGroup>
+
+### Wave Functions
+
+<CodeGroup>
+```latex wavefunctions
+% Schrödinger equation
+i\hbar\frac{\partial}{\partial t}\Psi = \hat{H}\Psi
+
+% Plane wave
+\psi(x,t) = Ae^{i(kx - \omega t)}
+
+% Spherical harmonics
+Y_{\ell}^m(\theta, \phi)
+
+% Probability density
+|\psi(x,t)|^2 = \psi^*(x,t)\psi(x,t)
+```
+</CodeGroup>
+
+## Classical Mechanics
+
+### Lagrangian and Hamiltonian
+
+<CodeGroup>
+```latex mechanics
+% Lagrangian
+L = T - V = \frac{1}{2}m\dot{x}^2 - V(x)
+
+% Euler-Lagrange equation
+\frac{d}{dt}\frac{\partial L}{\partial \dot{q}} - \frac{\partial L}{\partial q} = 0
+
+% Hamiltonian
+H = \sum_i p_i\dot{q}_i - L
+
+% Hamilton's equations
+\dot{q}_i = \frac{\partial H}{\partial p_i}, \quad
+\dot{p}_i = -\frac{\partial H}{\partial q_i}
+```
+</CodeGroup>
+
+## Electromagnetism
+
+### Maxwell's Equations
+
+<CodeGroup>
+```latex maxwell
+% Differential form
+\nabla \cdot \vec{E} = \frac{\rho}{\epsilon_0}
+\nabla \cdot \vec{B} = 0
+\nabla \times \vec{E} = -\frac{\partial \vec{B}}{\partial t}
+\nabla \times \vec{B} = \mu_0\vec{J} + \mu_0\epsilon_0\frac{\partial \vec{E}}{\partial t}
+
+% Integral form
+\oint_S \vec{E} \cdot d\vec{A} = \frac{Q_{\text{enc}}}{\epsilon_0}
+\oint_C \vec{E} \cdot d\vec{\ell} = -\frac{d\Phi_B}{dt}
+```
+</CodeGroup>
+
+### Field Notation
+
+<CodeGroup>
+```latex fields
+% Electromagnetic tensor
+F^{\mu\nu} = \partial^{\mu}A^{\nu} - \partial^{\nu}A^{\mu}
+
+% Four-potential
+A^{\mu} = (\phi/c, \vec{A})
+
+% Lorentz force
+\vec{F} = q(\vec{E} + \vec{v} \times \vec{B})
+```
+</CodeGroup>
+
+## Thermodynamics
+
+### Thermodynamic Relations
+
+<CodeGroup>
+```latex thermo
+% First law
+dU = \delta Q - \delta W = TdS - PdV
+
+% Partial derivatives
+\left(\frac{\partial U}{\partial S}\right)_V = T
+\left(\frac{\partial U}{\partial V}\right)_S = -P
+
+% Maxwell relations
+\left(\frac{\partial T}{\partial V}\right)_S = -\left(\frac{\partial P}{\partial S}\right)_V
+```
+</CodeGroup>
+
+## Units and Constants
+
+### SI Units with siunitx
+
+<CodeGroup>
+```latex units
+% Basic units
+\SI{3e8}{m/s}                   % Speed of light
+\SI{6.626e-34}{J.s}             % Planck constant
+\SI{9.81}{m/s^2}                % Acceleration
+
+% Complex units
+\SI{13.6}{eV}                   % Energy
+\SI{2.5}{kg.m/s}                % Momentum
+\SI{1.23e-4}{N.m}               % Torque
+
+% Uncertainties
+\SI{9.81 \pm 0.02}{m/s^2}
+```
+</CodeGroup>
+
+## Special Relativity
+
+### Four-Vectors and Metrics
+
+<CodeGroup>
+```latex relativity
+% Four-vectors
+x^{\mu} = (ct, \vec{x})
+p^{\mu} = (E/c, \vec{p})
+
+% Minkowski metric
+\eta_{\mu\nu} = \text{diag}(1, -1, -1, -1)
+
+% Lorentz transformation
+x'^{\mu} = \Lambda^{\mu}_{\nu} x^{\nu}
+
+% Invariant interval
+ds^2 = c^2dt^2 - dx^2 - dy^2 - dz^2
+```
+</CodeGroup>
+
+## Tips for Physics Documents
+
+<CardGroup cols={2}>
+<Card title="Use Consistent Notation" icon="check">
+Stick to either arrows or bold for vectors throughout your document
+</Card>
+<Card title="Define Your Symbols" icon="book">
+Always define non-standard symbols when first introduced
+</Card>
+<Card title="Group Related Equations" icon="object-group">
+Use align environments for related equations
+</Card>
+<Card title="Number Important Equations" icon="hashtag">
+Only number equations you reference later
+</Card>
+</CardGroup>
+
+## Common Physics Environments
+
+<CodeGroup>
+```latex environments
+% For derivations
+\begin{align}
+  F &= ma \\
+  &= m\frac{dv}{dt} \\
+  &= \frac{dp}{dt}
+\end{align}
+
+% For definitions
+\begin{equation}
+  \boxed{E = mc^2}
+\end{equation}
+
+% For multiple cases
+\begin{cases}
+  \psi(x) = Ae^{ikx} + Be^{-ikx} & \text{for } x < 0 \\
+  \psi(x) = Ce^{-\kappa x} & \text{for } x > 0
+\end{cases}
+```
+</CodeGroup>
+
+<Info>
+**Pro tip**: The `physics` package provides many shortcuts like `\dv{f}{x}` for derivatives and `\abs{\psi}` for absolute values.
+</Info>
+
+## Further Reading
+
+<CardGroup cols={2}>
+<Card title="Mathematical Expressions" icon="square-root-variable" href="/learn/latex/mathematics/mathematical-expressions">
+General mathematical typesetting
+</Card>
+<Card title="Chemistry Notation" icon="flask" href="/learn/latex/specialized-notation/chemistry">
+Chemical formulas and equations
+</Card>
+<Card title="Symbol Reference" icon="book" href="/learn/reference/symbols">
+Complete symbol reference
+</Card>
+<Card title="Advanced Math" icon="function" href="/learn/latex/mathematics/advanced-math">
+Advanced mathematical concepts
+</Card>
+</CardGroup>
