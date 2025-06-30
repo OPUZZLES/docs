@@ -1,11 +1,10 @@
 ---
-title: How to Create Tables in LaTeX - Complete Guide with Examples
-description: Master LaTeX table creation with this comprehensive guide. Learn tabular environments, multirow/multicolumn cells, booktabs, decimal alignment, and professional formatting with visual examples.
-keywords: LaTeX tables, tabular environment, LaTeX table tutorial, multicolumn LaTeX, booktabs, table formatting, LaTeX table examples, creating tables
-image: /images/latex-tables-guide.png
+title: LaTeX Tables - Complete Tutorial Guide
+description: Learn to create professional LaTeX tables. Master tabular, booktabs, multirow/column cells, alignment and formatting with examples.
+keywords: LaTeX tables, tabular, booktabs, table formatting, multicolumn
 seo:
-  title: LaTeX Tables Tutorial - Complete Guide to Creating Professional Tables | LaTeX Cloud Studio
-  description: Learn how to create professional tables in LaTeX with step-by-step examples. Master tabular, booktabs, multirow/column cells, decimal alignment, and advanced formatting.
+  title: LaTeX Tables Tutorial - Create Professional Tables
+  description: Complete LaTeX tables guide. Learn tabular, booktabs, multirow, alignment, formatting. Step-by-step examples included.
   canonical: https://resources.latex-cloud-studio.com/learn/latex/tables/creating-tables
 ---
 
@@ -432,6 +431,42 @@ A & B & C \\
 ```
 </CodeGroup>
 
+**Rendered output:**
+
+<div style={{ backgroundColor: '#f8f9fa', padding: '1.5em', borderRadius: '8px', margin: '1em 0', border: '1px solid #e9ecef' }}>
+<div style={{ marginBottom: '1em', fontSize: '0.9em', color: '#6c757d' }}>Tables with vertical lines:</div>
+<table style={{ margin: '0 auto', fontFamily: 'Georgia, serif', fontSize: '1.1em', borderCollapse: 'collapse' }}>
+<tr>
+<td style={{ padding: '6px 12px', textAlign: 'left', borderRight: '1px solid #000' }}>Left</td>
+<td style={{ padding: '6px 12px', textAlign: 'center', borderRight: '1px solid #000' }}>Center</td>
+<td style={{ padding: '6px 12px', textAlign: 'right' }}>Right</td>
+</tr>
+</table>
+<div style={{ marginTop: '1em' }}>
+<table style={{ margin: '0 auto', fontFamily: 'Georgia, serif', fontSize: '1.1em', borderCollapse: 'collapse' }}>
+<tr>
+<td style={{ padding: '6px 12px', textAlign: 'left', borderRight: '3px double #000' }}>Left</td>
+<td style={{ padding: '6px 12px', textAlign: 'center', borderRight: '3px double #000' }}>Center</td>
+<td style={{ padding: '6px 12px', textAlign: 'right' }}>Right</td>
+</tr>
+</table>
+</div>
+<div style={{ marginTop: '1em' }}>
+<table style={{ margin: '0 auto', fontFamily: 'Georgia, serif', fontSize: '1.1em', borderCollapse: 'collapse' }}>
+<tr>
+<td style={{ borderTop: '1px solid #000', borderBottom: '1px solid #000', borderLeft: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'left' }}>A</td>
+<td style={{ borderTop: '1px solid #000', borderBottom: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'center' }}>B</td>
+<td style={{ borderTop: '1px solid #000', borderBottom: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'right' }}>C</td>
+</tr>
+<tr>
+<td style={{ borderBottom: '1px solid #000', borderLeft: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'left' }}>1</td>
+<td style={{ borderBottom: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'center' }}>2</td>
+<td style={{ borderBottom: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'right' }}>3</td>
+</tr>
+</table>
+</div>
+</div>
+
 <Warning>
 **Note**: Vertical lines are generally discouraged in professional tables. They can make tables look cluttered and harder to read.
 </Warning>
@@ -609,6 +644,36 @@ Description & Value \\
 ```
 </CodeGroup>
 
+**Rendered output:**
+
+<div style={{ backgroundColor: '#f8f9fa', padding: '1.5em', borderRadius: '8px', margin: '1em 0', border: '1px solid #e9ecef' }}>
+<div style={{ marginBottom: '1em', fontSize: '0.9em', color: '#6c757d' }}>Multi-row cells example:</div>
+<table style={{ margin: '0 auto', fontFamily: 'Georgia, serif', fontSize: '1.1em', borderCollapse: 'collapse' }}>
+<tr>
+<td style={{ borderTop: '1px solid #000', borderBottom: '1px solid #000', borderLeft: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'left', verticalAlign: 'middle' }} rowSpan={2}>Category</td>
+<td style={{ borderTop: '1px solid #000', borderLeft: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'center' }}>Value 1</td>
+<td style={{ borderTop: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'center' }}>Value 2</td>
+</tr>
+<tr>
+<td style={{ borderBottom: '1px solid #000', borderLeft: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'center' }}>10</td>
+<td style={{ borderBottom: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'center' }}>20</td>
+</tr>
+<tr>
+<td style={{ borderBottom: '1px solid #000', borderLeft: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'left', verticalAlign: 'middle' }} rowSpan={3}>Group A</td>
+<td style={{ borderLeft: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'center' }}>Item 1</td>
+<td style={{ borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'center' }}>100</td>
+</tr>
+<tr>
+<td style={{ borderLeft: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'center' }}>Item 2</td>
+<td style={{ borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'center' }}>200</td>
+</tr>
+<tr>
+<td style={{ borderBottom: '1px solid #000', borderLeft: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'center' }}>Item 3</td>
+<td style={{ borderBottom: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'center' }}>300</td>
+</tr>
+</table>
+</div>
+
 ## Numeric Alignment
 
 ### Decimal Alignment
@@ -732,6 +797,59 @@ Gold & 19.3 \\
 ```
 </CodeGroup>
 
+**Rendered output:**
+
+<div style={{ backgroundColor: '#f8f9fa', padding: '1.5em', borderRadius: '8px', margin: '1em 0', border: '1px solid #e9ecef' }}>
+<div style={{ marginBottom: '1em', fontSize: '0.9em', color: '#6c757d' }}>Currency alignment with dollar signs:</div>
+<table style={{ margin: '0 auto', fontFamily: 'Georgia, serif', fontSize: '1.1em', borderCollapse: 'collapse' }}>
+<tr>
+<td style={{ borderTop: '1px solid #000', borderBottom: '1px solid #000', borderLeft: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'left' }}><strong>Item</strong></td>
+<td style={{ borderTop: '1px solid #000', borderBottom: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'center' }}><strong>Price</strong></td>
+</tr>
+<tr>
+<td style={{ borderBottom: '1px solid #000', borderLeft: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'left' }}>Laptop</td>
+<td style={{ borderBottom: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'right', fontFamily: 'monospace' }}>$1299.99</td>
+</tr>
+<tr>
+<td style={{ borderBottom: '1px solid #000', borderLeft: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'left' }}>Mouse</td>
+<td style={{ borderBottom: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'right', fontFamily: 'monospace' }}>&nbsp;&nbsp;&nbsp;$29.95</td>
+</tr>
+<tr>
+<td style={{ borderBottom: '1px solid #000', borderLeft: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'left' }}>Keyboard</td>
+<td style={{ borderBottom: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'right', fontFamily: 'monospace' }}>&nbsp;&nbsp;&nbsp;$89.50</td>
+</tr>
+<tr>
+<td colSpan={2} style={{ padding: '0', borderTop: '1px solid #000' }}></td>
+</tr>
+<tr>
+<td style={{ borderBottom: '1px solid #000', borderLeft: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'left' }}><strong>Total</strong></td>
+<td style={{ borderBottom: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'right', fontFamily: 'monospace' }}><strong>$1419.44</strong></td>
+</tr>
+</table>
+</div>
+
+<div style={{ backgroundColor: '#f8f9fa', padding: '1.5em', borderRadius: '8px', margin: '1em 0', border: '1px solid #e9ecef' }}>
+<div style={{ marginBottom: '1em', fontSize: '0.9em', color: '#6c757d' }}>Scientific units in headers:</div>
+<table style={{ margin: '0 auto', fontFamily: 'Georgia, serif', fontSize: '1.1em', borderCollapse: 'collapse' }}>
+<tr>
+<td style={{ borderTop: '1px solid #000', borderBottom: '1px solid #000', borderLeft: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'left' }}><strong>Material</strong></td>
+<td style={{ borderTop: '1px solid #000', borderBottom: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'center' }}><strong>Density (g/cm³)</strong></td>
+</tr>
+<tr>
+<td style={{ borderBottom: '1px solid #000', borderLeft: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'left' }}>Water</td>
+<td style={{ borderBottom: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'right', fontFamily: 'monospace' }}>1.0</td>
+</tr>
+<tr>
+<td style={{ borderBottom: '1px solid #000', borderLeft: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'left' }}>Iron</td>
+<td style={{ borderBottom: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'right', fontFamily: 'monospace' }}>7.9</td>
+</tr>
+<tr>
+<td style={{ borderBottom: '1px solid #000', borderLeft: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'left' }}>Gold</td>
+<td style={{ borderBottom: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'right', fontFamily: 'monospace' }}>19.3</td>
+</tr>
+</table>
+</div>
+
 ## Coloring Tables
 
 ### Row and Cell Colors
@@ -771,6 +889,55 @@ Gray column & Normal & Normal \\
 ```
 </CodeGroup>
 
+**Rendered output:**
+
+<div style={{ backgroundColor: '#f8f9fa', padding: '1.5em', borderRadius: '8px', margin: '1em 0', border: '1px solid #e9ecef' }}>
+<div style={{ marginBottom: '1em', fontSize: '0.9em', color: '#6c757d' }}>Alternating row colors:</div>
+<table style={{ margin: '0 auto', fontFamily: 'Georgia, serif', fontSize: '1.1em', borderCollapse: 'collapse' }}>
+<tr style={{ backgroundColor: '#e0e0e0' }}>
+<td style={{ padding: '6px 12px', textAlign: 'left' }}>Header 1</td>
+<td style={{ padding: '6px 12px', textAlign: 'center' }}>Header 2</td>
+<td style={{ padding: '6px 12px', textAlign: 'center' }}>Header 3</td>
+</tr>
+<tr>
+<td style={{ padding: '6px 12px', textAlign: 'left' }}>Row 1</td>
+<td style={{ padding: '6px 12px', textAlign: 'center' }}>Data</td>
+<td style={{ padding: '6px 12px', textAlign: 'center' }}>Data</td>
+</tr>
+<tr style={{ backgroundColor: '#f0f0f0' }}>
+<td style={{ padding: '6px 12px', textAlign: 'left' }}>Row 2</td>
+<td style={{ padding: '6px 12px', textAlign: 'center' }}>Data</td>
+<td style={{ padding: '6px 12px', textAlign: 'center' }}>Data</td>
+</tr>
+<tr>
+<td style={{ padding: '6px 12px', textAlign: 'left' }}>Row 3</td>
+<td style={{ padding: '6px 12px', textAlign: 'center' }}>Data</td>
+<td style={{ padding: '6px 12px', textAlign: 'center' }}>Data</td>
+</tr>
+<tr style={{ backgroundColor: '#f0f0f0' }}>
+<td style={{ padding: '6px 12px', textAlign: 'left' }}>Row 4</td>
+<td style={{ padding: '6px 12px', textAlign: 'center' }}>Data</td>
+<td style={{ padding: '6px 12px', textAlign: 'center' }}>Data</td>
+</tr>
+</table>
+</div>
+
+<div style={{ backgroundColor: '#f8f9fa', padding: '1.5em', borderRadius: '8px', margin: '1em 0', border: '1px solid #e9ecef' }}>
+<div style={{ marginBottom: '1em', fontSize: '0.9em', color: '#6c757d' }}>Individual cell coloring:</div>
+<table style={{ margin: '0 auto', fontFamily: 'Georgia, serif', fontSize: '1.1em', borderCollapse: 'collapse' }}>
+<tr>
+<td style={{ borderTop: '1px solid #000', borderBottom: '1px solid #000', borderLeft: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'left' }}>Normal</td>
+<td style={{ borderTop: '1px solid #000', borderBottom: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'center', backgroundColor: 'yellow' }}>Highlighted</td>
+<td style={{ borderTop: '1px solid #000', borderBottom: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'center' }}>Normal</td>
+</tr>
+<tr>
+<td style={{ borderBottom: '1px solid #000', borderLeft: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'left', backgroundColor: '#ffcccc' }}>Light red</td>
+<td style={{ borderBottom: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'center' }}>Normal</td>
+<td style={{ borderBottom: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'center', backgroundColor: '#ccccff' }}>Light blue</td>
+</tr>
+</table>
+</div>
+
 ### Professional Striped Tables
 
 <CodeGroup>
@@ -794,6 +961,45 @@ Grapes & 5 & \$6.00 \\
 \end{tabular}
 ```
 </CodeGroup>
+
+**Rendered output:**
+
+<div style={{ backgroundColor: '#f8f9fa', padding: '1.5em', borderRadius: '8px', margin: '1em 0', border: '1px solid #e9ecef' }}>
+<div style={{ marginBottom: '1em', fontSize: '0.9em', color: '#6c757d' }}>Professional striped table with booktabs:</div>
+<table style={{ margin: '0 auto', fontFamily: 'Georgia, serif', fontSize: '1.1em', borderCollapse: 'collapse' }}>
+<tr style={{ backgroundColor: '#666666' }}>
+<td style={{ padding: '8px 12px', textAlign: 'left', borderTop: '2px solid #000', color: 'white' }}>Product</td>
+<td style={{ padding: '8px 12px', textAlign: 'center', borderTop: '2px solid #000', color: 'white' }}>Quantity</td>
+<td style={{ padding: '8px 12px', textAlign: 'center', borderTop: '2px solid #000', color: 'white' }}>Price</td>
+</tr>
+<tr>
+<td colSpan={3} style={{ padding: '4px 0', borderTop: '1px solid #000' }}></td>
+</tr>
+<tr style={{ backgroundColor: 'white' }}>
+<td style={{ padding: '8px 12px', textAlign: 'left' }}>Apples</td>
+<td style={{ padding: '8px 12px', textAlign: 'center' }}>10</td>
+<td style={{ padding: '8px 12px', textAlign: 'right' }}>$5.00</td>
+</tr>
+<tr style={{ backgroundColor: '#f0f0f0' }}>
+<td style={{ padding: '8px 12px', textAlign: 'left' }}>Oranges</td>
+<td style={{ padding: '8px 12px', textAlign: 'center' }}>15</td>
+<td style={{ padding: '8px 12px', textAlign: 'right' }}>$7.50</td>
+</tr>
+<tr style={{ backgroundColor: 'white' }}>
+<td style={{ padding: '8px 12px', textAlign: 'left' }}>Bananas</td>
+<td style={{ padding: '8px 12px', textAlign: 'center' }}>20</td>
+<td style={{ padding: '8px 12px', textAlign: 'right' }}>$4.00</td>
+</tr>
+<tr style={{ backgroundColor: '#f0f0f0' }}>
+<td style={{ padding: '8px 12px', textAlign: 'left' }}>Grapes</td>
+<td style={{ padding: '8px 12px', textAlign: 'center' }}>5</td>
+<td style={{ padding: '8px 12px', textAlign: 'right' }}>$6.00</td>
+</tr>
+<tr>
+<td colSpan={3} style={{ padding: '4px 0', borderTop: '2px solid #000' }}></td>
+</tr>
+</table>
+</div>
 
 ## Table Width Control
 
@@ -833,6 +1039,45 @@ Fixed & Narrow & Wide expanding column & Fixed \\
 ```
 </CodeGroup>
 
+**Rendered output:**
+
+<div style={{ backgroundColor: '#f8f9fa', padding: '1.5em', borderRadius: '8px', margin: '1em 0', border: '1px solid #e9ecef' }}>
+<div style={{ marginBottom: '1em', fontSize: '0.9em', color: '#6c757d' }}>Full-width table with expanding column:</div>
+<table style={{ width: '100%', margin: '0 auto', fontFamily: 'Georgia, serif', fontSize: '1.1em', borderCollapse: 'collapse' }}>
+<tr>
+<td style={{ borderTop: '1px solid #000', borderBottom: '1px solid #000', borderLeft: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'left' }}>Left</td>
+<td style={{ borderTop: '1px solid #000', borderBottom: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'left' }}>Expanding middle column that fills available space</td>
+<td style={{ borderTop: '1px solid #000', borderBottom: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'right' }}>Right</td>
+</tr>
+<tr>
+<td style={{ borderBottom: '1px solid #000', borderLeft: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'left' }}>A</td>
+<td style={{ borderBottom: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'left' }}>This column expands to fill available space</td>
+<td style={{ borderBottom: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'right' }}>100</td>
+</tr>
+<tr>
+<td style={{ borderBottom: '1px solid #000', borderLeft: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'left' }}>B</td>
+<td style={{ borderBottom: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'left' }}>Automatically adjusts width</td>
+<td style={{ borderBottom: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'right' }}>200</td>
+</tr>
+</table>
+</div>
+
+<div style={{ backgroundColor: '#f8f9fa', padding: '1.5em', borderRadius: '8px', margin: '1em 0', border: '1px solid #e9ecef' }}>
+<div style={{ marginBottom: '1em', fontSize: '0.9em', color: '#6c757d' }}>Equal width columns spanning full width:</div>
+<table style={{ width: '100%', margin: '0 auto', fontFamily: 'Georgia, serif', fontSize: '1.1em', borderCollapse: 'collapse' }}>
+<tr>
+<td style={{ borderTop: '1px solid #000', borderBottom: '1px solid #000', borderLeft: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'center', width: '33.33%' }}>Equal</td>
+<td style={{ borderTop: '1px solid #000', borderBottom: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'center', width: '33.33%' }}>Width</td>
+<td style={{ borderTop: '1px solid #000', borderBottom: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'center', width: '33.33%' }}>Columns</td>
+</tr>
+<tr>
+<td style={{ borderBottom: '1px solid #000', borderLeft: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'center' }}>These three columns</td>
+<td style={{ borderBottom: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'center' }}>share the available</td>
+<td style={{ borderBottom: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'center' }}>space equally</td>
+</tr>
+</table>
+</div>
+
 ### Resizing Tables
 
 <CodeGroup>
@@ -866,6 +1111,596 @@ Data & Data & Data & Data & Data & Data & Data \\
 ```
 </CodeGroup>
 
+**Rendered output:**
+
+<div style={{ backgroundColor: '#f8f9fa', padding: '1.5em', borderRadius: '8px', margin: '1em 0', border: '1px solid #e9ecef' }}>
+<div style={{ marginBottom: '1em', fontSize: '0.9em', color: '#6c757d' }}>Table resized to fit text width (many columns):</div>
+<table style={{ width: '100%', margin: '0 auto', fontFamily: 'Georgia, serif', fontSize: '0.85em', borderCollapse: 'collapse' }}>
+<tr>
+<td style={{ borderTop: '1px solid #000', borderBottom: '1px solid #000', borderLeft: '1px solid #000', borderRight: '1px solid #000', padding: '4px 8px', textAlign: 'center' }}>Many</td>
+<td style={{ borderTop: '1px solid #000', borderBottom: '1px solid #000', borderRight: '1px solid #000', padding: '4px 8px', textAlign: 'center' }}>Columns</td>
+<td style={{ borderTop: '1px solid #000', borderBottom: '1px solid #000', borderRight: '1px solid #000', padding: '4px 8px', textAlign: 'center' }}>That</td>
+<td style={{ borderTop: '1px solid #000', borderBottom: '1px solid #000', borderRight: '1px solid #000', padding: '4px 8px', textAlign: 'center' }}>Would</td>
+<td style={{ borderTop: '1px solid #000', borderBottom: '1px solid #000', borderRight: '1px solid #000', padding: '4px 8px', textAlign: 'center' }}>Be</td>
+<td style={{ borderTop: '1px solid #000', borderBottom: '1px solid #000', borderRight: '1px solid #000', padding: '4px 8px', textAlign: 'center' }}>Too</td>
+<td style={{ borderTop: '1px solid #000', borderBottom: '1px solid #000', borderRight: '1px solid #000', padding: '4px 8px', textAlign: 'center' }}>Wide</td>
+</tr>
+<tr>
+<td style={{ borderBottom: '1px solid #000', borderLeft: '1px solid #000', borderRight: '1px solid #000', padding: '4px 8px', textAlign: 'center' }}>Data</td>
+<td style={{ borderBottom: '1px solid #000', borderRight: '1px solid #000', padding: '4px 8px', textAlign: 'center' }}>Data</td>
+<td style={{ borderBottom: '1px solid #000', borderRight: '1px solid #000', padding: '4px 8px', textAlign: 'center' }}>Data</td>
+<td style={{ borderBottom: '1px solid #000', borderRight: '1px solid #000', padding: '4px 8px', textAlign: 'center' }}>Data</td>
+<td style={{ borderBottom: '1px solid #000', borderRight: '1px solid #000', padding: '4px 8px', textAlign: 'center' }}>Data</td>
+<td style={{ borderBottom: '1px solid #000', borderRight: '1px solid #000', padding: '4px 8px', textAlign: 'center' }}>Data</td>
+<td style={{ borderBottom: '1px solid #000', borderRight: '1px solid #000', padding: '4px 8px', textAlign: 'center' }}>Data</td>
+</tr>
+</table>
+<div style={{ marginTop: '0.5em', fontSize: '0.85em', color: '#666' }}>
+Note: This table would normally overflow the page margins, but resizebox scales it to fit
+</div>
+</div>
+
+<div style={{ backgroundColor: '#f8f9fa', padding: '1.5em', borderRadius: '8px', margin: '1em 0', border: '1px solid #e9ecef' }}>
+<div style={{ marginBottom: '1em', fontSize: '0.9em', color: '#6c757d' }}>Table scaled to 80% of original size:</div>
+<table style={{ margin: '0 auto', fontFamily: 'Georgia, serif', fontSize: '0.88em', borderCollapse: 'collapse', transform: 'scale(0.8)', transformOrigin: 'center' }}>
+<tr>
+<td style={{ padding: '6px 12px', textAlign: 'left' }}>Left</td>
+<td style={{ padding: '6px 12px', textAlign: 'center' }}>Center</td>
+<td style={{ padding: '6px 12px', textAlign: 'right' }}>Right</td>
+</tr>
+</table>
+<div style={{ marginTop: '0.5em', fontSize: '0.85em', color: '#666' }}>
+Scalebox maintains aspect ratio while reducing overall size
+</div>
+</div>
+
+## Table Design Principles
+
+### Professional Table Design Guidelines
+
+Creating professional tables in LaTeX requires attention to both technical implementation and design principles. Here are the key guidelines that will elevate your table design:
+
+<CardGroup cols={2}>
+<Card title="Clarity First" icon="eye" color="#FF6037">
+Tables should communicate data clearly. Avoid unnecessary decorations that distract from the content.
+</Card>
+<Card title="Consistent Formatting" icon="palette" color="#FF6037">
+Use consistent number formats, alignment, and styling throughout your document.
+</Card>
+<Card title="Appropriate Spacing" icon="arrows-alt-v" color="#FF6037">
+Proper spacing makes tables more readable. Use `\arraystretch` or booktabs for better spacing.
+</Card>
+<Card title="Meaningful Headers" icon="heading" color="#FF6037">
+Clear, descriptive headers help readers understand your data structure immediately.
+</Card>
+</CardGroup>
+
+### When to Use Tables vs Other Formats
+
+Not all data belongs in a table. Consider these alternatives:
+
+| Data Type | Best Format | When to Use |
+|-----------|-------------|-------------|
+| **Few data points** | Inline text | When you have 2-3 values that can be mentioned in a sentence |
+| **Trends over time** | Line graph | When showing how values change over a continuous variable |
+| **Proportions** | Pie/bar chart | When showing parts of a whole or comparing categories |
+| **Complex relationships** | Diagram | When showing connections or flow between elements |
+| **Structured lists** | Tables | When comparing multiple attributes across items |
+
+## Advanced Table Techniques
+
+### Creating Publication-Quality Tables
+
+Professional journals often have specific requirements for tables. Here's how to meet common standards:
+
+<CodeGroup>
+```latex publication-table.tex
+\documentclass{article}
+\usepackage{booktabs}
+\usepackage{siunitx}
+\usepackage{threeparttable}
+\usepackage[font=small,labelfont=bf]{caption}
+
+\begin{document}
+
+\begin{table}[htbp]
+\centering
+\small % Reduce font size for journal requirements
+\caption{Comparison of experimental results across different conditions}
+\label{tab:results}
+\begin{threeparttable}
+\begin{tabular}{@{}lS[table-format=3.1]S[table-format=2.1]S[table-format=1.3]@{}}
+\toprule
+Condition & {Temperature (\si{\celsius})} & {Time (h)} & {Yield} \\
+\midrule
+Control\tnote{a} & 25.0 & 2.0 & 0.850 \\
+Optimized\tnote{b} & 35.5 & 1.5 & 0.923 \\
+Modified & 30.2 & 1.8 & 0.891 \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\footnotesize
+\item[a] Standard laboratory conditions
+\item[b] Conditions optimized through preliminary experiments
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\end{document}
+```
+</CodeGroup>
+
+**Rendered output:**
+
+<div style={{ backgroundColor: '#f8f9fa', padding: '1.5em', borderRadius: '8px', margin: '1em 0', border: '1px solid #e9ecef' }}>
+<div style={{ marginBottom: '1em', textAlign: 'center' }}>
+<div style={{ fontSize: '0.9em', color: '#666', marginBottom: '0.5em' }}>Table 1: Comparison of experimental results across different conditions</div>
+<table style={{ margin: '0 auto', fontFamily: 'Georgia, serif', fontSize: '0.9em', borderCollapse: 'collapse' }}>
+<tr>
+<td style={{ padding: '8px 12px', textAlign: 'left', borderTop: '2px solid #000' }}>Condition</td>
+<td style={{ padding: '8px 12px', textAlign: 'center', borderTop: '2px solid #000' }}>Temperature (°C)</td>
+<td style={{ padding: '8px 12px', textAlign: 'center', borderTop: '2px solid #000' }}>Time (h)</td>
+<td style={{ padding: '8px 12px', textAlign: 'center', borderTop: '2px solid #000' }}>Yield</td>
+</tr>
+<tr>
+<td colSpan={4} style={{ padding: '4px 0', borderTop: '1px solid #000' }}></td>
+</tr>
+<tr>
+<td style={{ padding: '8px 12px', textAlign: 'left' }}>Control<sup>a</sup></td>
+<td style={{ padding: '8px 12px', textAlign: 'right', fontFamily: 'monospace' }}>25.0</td>
+<td style={{ padding: '8px 12px', textAlign: 'right', fontFamily: 'monospace' }}>2.0</td>
+<td style={{ padding: '8px 12px', textAlign: 'right', fontFamily: 'monospace' }}>0.850</td>
+</tr>
+<tr>
+<td style={{ padding: '8px 12px', textAlign: 'left' }}>Optimized<sup>b</sup></td>
+<td style={{ padding: '8px 12px', textAlign: 'right', fontFamily: 'monospace' }}>35.5</td>
+<td style={{ padding: '8px 12px', textAlign: 'right', fontFamily: 'monospace' }}>1.5</td>
+<td style={{ padding: '8px 12px', textAlign: 'right', fontFamily: 'monospace' }}>0.923</td>
+</tr>
+<tr>
+<td style={{ padding: '8px 12px', textAlign: 'left' }}>Modified</td>
+<td style={{ padding: '8px 12px', textAlign: 'right', fontFamily: 'monospace' }}>30.2</td>
+<td style={{ padding: '8px 12px', textAlign: 'right', fontFamily: 'monospace' }}>1.8</td>
+<td style={{ padding: '8px 12px', textAlign: 'right', fontFamily: 'monospace' }}>0.891</td>
+</tr>
+<tr>
+<td colSpan={4} style={{ padding: '4px 0', borderTop: '2px solid #000' }}></td>
+</tr>
+</table>
+<div style={{ marginTop: '0.5em', fontSize: '0.8em' }}>
+<sup>a</sup> Standard laboratory conditions<br/>
+<sup>b</sup> Conditions optimized through preliminary experiments
+</div>
+</div>
+</div>
+
+### Dynamic Table Generation from External Data
+
+For reproducible research, generating tables from data files is essential:
+
+<CodeGroup>
+```latex csv-table.tex
+\documentclass{article}
+\usepackage{pgfplotstable}
+\usepackage{booktabs}
+\usepackage{filecontents}
+
+% Create sample data file
+\begin{filecontents*}{data.csv}
+Sample,Temperature,Pressure,Result
+A,25.3,101.2,Pass
+B,26.1,102.5,Pass
+C,24.8,99.8,Fail
+D,25.7,101.9,Pass
+\end{filecontents*}
+
+\begin{document}
+
+% Basic CSV import
+\pgfplotstabletypeset[
+  col sep=comma,
+  string type,
+  every head row/.style={
+    before row=\toprule,
+    after row=\midrule
+  },
+  every last row/.style={
+    after row=\bottomrule
+  }
+]{data.csv}
+
+% Advanced formatting
+\pgfplotstabletypeset[
+  col sep=comma,
+  string type,
+  columns={Sample,Temperature,Result}, % Select specific columns
+  column type/.add={}{}, % Clear default column types
+  columns/Sample/.style={column name=\textbf{Sample ID}},
+  columns/Temperature/.style={
+    column name=\textbf{Temp. (\si{\celsius})},
+    fixed,
+    precision=1
+  },
+  columns/Result/.style={
+    column name=\textbf{Status},
+    postproc cell content/.code={
+      \ifstrequal{##1}{Pass}
+        {\pgfkeysalso{@cell content=\textcolor{green!60!black}{##1}}}
+        {\pgfkeysalso{@cell content=\textcolor{red!60!black}{##1}}}
+    }
+  }
+]{data.csv}
+
+\end{document}
+```
+</CodeGroup>
+
+**Rendered output:**
+
+<div style={{ backgroundColor: '#f8f9fa', padding: '1.5em', borderRadius: '8px', margin: '1em 0', border: '1px solid #e9ecef' }}>
+<div style={{ marginBottom: '1em', fontSize: '0.9em', color: '#6c757d' }}>Basic CSV import:</div>
+<table style={{ margin: '0 auto', fontFamily: 'Georgia, serif', fontSize: '1.1em', borderCollapse: 'collapse' }}>
+<tr>
+<td style={{ padding: '8px 12px', textAlign: 'left', borderTop: '2px solid #000' }}>Sample</td>
+<td style={{ padding: '8px 12px', textAlign: 'left', borderTop: '2px solid #000' }}>Temperature</td>
+<td style={{ padding: '8px 12px', textAlign: 'left', borderTop: '2px solid #000' }}>Pressure</td>
+<td style={{ padding: '8px 12px', textAlign: 'left', borderTop: '2px solid #000' }}>Result</td>
+</tr>
+<tr>
+<td colSpan={4} style={{ padding: '4px 0', borderTop: '1px solid #000' }}></td>
+</tr>
+<tr>
+<td style={{ padding: '8px 12px', textAlign: 'left' }}>A</td>
+<td style={{ padding: '8px 12px', textAlign: 'left' }}>25.3</td>
+<td style={{ padding: '8px 12px', textAlign: 'left' }}>101.2</td>
+<td style={{ padding: '8px 12px', textAlign: 'left' }}>Pass</td>
+</tr>
+<tr>
+<td style={{ padding: '8px 12px', textAlign: 'left' }}>B</td>
+<td style={{ padding: '8px 12px', textAlign: 'left' }}>26.1</td>
+<td style={{ padding: '8px 12px', textAlign: 'left' }}>102.5</td>
+<td style={{ padding: '8px 12px', textAlign: 'left' }}>Pass</td>
+</tr>
+<tr>
+<td style={{ padding: '8px 12px', textAlign: 'left' }}>C</td>
+<td style={{ padding: '8px 12px', textAlign: 'left' }}>24.8</td>
+<td style={{ padding: '8px 12px', textAlign: 'left' }}>99.8</td>
+<td style={{ padding: '8px 12px', textAlign: 'left' }}>Fail</td>
+</tr>
+<tr>
+<td style={{ padding: '8px 12px', textAlign: 'left' }}>D</td>
+<td style={{ padding: '8px 12px', textAlign: 'left' }}>25.7</td>
+<td style={{ padding: '8px 12px', textAlign: 'left' }}>101.9</td>
+<td style={{ padding: '8px 12px', textAlign: 'left' }}>Pass</td>
+</tr>
+<tr>
+<td colSpan={4} style={{ padding: '4px 0', borderTop: '2px solid #000' }}></td>
+</tr>
+</table>
+</div>
+
+<div style={{ backgroundColor: '#f8f9fa', padding: '1.5em', borderRadius: '8px', margin: '1em 0', border: '1px solid #e9ecef' }}>
+<div style={{ marginBottom: '1em', fontSize: '0.9em', color: '#6c757d' }}>Advanced formatting with column selection and styling:</div>
+<table style={{ margin: '0 auto', fontFamily: 'Georgia, serif', fontSize: '1.1em', borderCollapse: 'collapse' }}>
+<tr>
+<td style={{ padding: '8px 12px', textAlign: 'left', borderTop: '2px solid #000', fontWeight: 'bold' }}>Sample ID</td>
+<td style={{ padding: '8px 12px', textAlign: 'center', borderTop: '2px solid #000', fontWeight: 'bold' }}>Temp. (°C)</td>
+<td style={{ padding: '8px 12px', textAlign: 'center', borderTop: '2px solid #000', fontWeight: 'bold' }}>Status</td>
+</tr>
+<tr>
+<td colSpan={3} style={{ padding: '4px 0', borderTop: '1px solid #000' }}></td>
+</tr>
+<tr>
+<td style={{ padding: '8px 12px', textAlign: 'left' }}>A</td>
+<td style={{ padding: '8px 12px', textAlign: 'right', fontFamily: 'monospace' }}>25.3</td>
+<td style={{ padding: '8px 12px', textAlign: 'center', color: 'green' }}>Pass</td>
+</tr>
+<tr>
+<td style={{ padding: '8px 12px', textAlign: 'left' }}>B</td>
+<td style={{ padding: '8px 12px', textAlign: 'right', fontFamily: 'monospace' }}>26.1</td>
+<td style={{ padding: '8px 12px', textAlign: 'center', color: 'green' }}>Pass</td>
+</tr>
+<tr>
+<td style={{ padding: '8px 12px', textAlign: 'left' }}>C</td>
+<td style={{ padding: '8px 12px', textAlign: 'right', fontFamily: 'monospace' }}>24.8</td>
+<td style={{ padding: '8px 12px', textAlign: 'center', color: 'red' }}>Fail</td>
+</tr>
+<tr>
+<td style={{ padding: '8px 12px', textAlign: 'left' }}>D</td>
+<td style={{ padding: '8px 12px', textAlign: 'right', fontFamily: 'monospace' }}>25.7</td>
+<td style={{ padding: '8px 12px', textAlign: 'center', color: 'green' }}>Pass</td>
+</tr>
+<tr>
+<td colSpan={3} style={{ padding: '4px 0', borderTop: '2px solid #000' }}></td>
+</tr>
+</table>
+</div>
+
+## Accessibility in Tables
+
+### Making Tables Screen-Reader Friendly
+
+While LaTeX primarily produces PDF output, considering accessibility improves document usability:
+
+<CodeGroup>
+```latex accessible-table.tex
+\documentclass{article}
+\usepackage{booktabs}
+\usepackage{array}
+
+% Define column type for headers
+\newcolumntype{H}{>{\bfseries}l}
+
+\begin{document}
+
+% Use semantic markup
+\begin{table}[htbp]
+\caption{Student enrollment by department and year}
+\label{tab:enrollment}
+\centering
+\begin{tabular}{H*{4}{r}}
+\toprule
+Department & \textbf{2021} & \textbf{2022} & \textbf{2023} \\
+\midrule
+Computer Science & 245 & 289 & 312 \\
+Mathematics & 156 & 162 & 171 \\
+Physics & 98 & 103 & 99 \\
+Chemistry & 134 & 141 & 139 \\
+\midrule
+\textbf{Total} & \textbf{633} & \textbf{695} & \textbf{721} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% Alternative text description
+\begin{quote}
+\textit{Table description: This table shows student enrollment numbers across four science departments from 2021 to 2023, with totals for each year. Overall enrollment increased from 633 to 721 students.}
+\end{quote}
+
+\end{document}
+```
+</CodeGroup>
+
+**Rendered output:**
+
+<div style={{ backgroundColor: '#f8f9fa', padding: '1.5em', borderRadius: '8px', margin: '1em 0', border: '1px solid #e9ecef' }}>
+<div style={{ marginBottom: '1em', fontSize: '0.9em', color: '#6c757d' }}>Accessible table with semantic markup:</div>
+<div style={{ marginBottom: '1em', textAlign: 'center' }}>
+<div style={{ fontSize: '0.9em', color: '#666', marginBottom: '0.5em' }}>Table: Student enrollment by department and year</div>
+<table style={{ margin: '0 auto', fontFamily: 'Georgia, serif', fontSize: '1.1em', borderCollapse: 'collapse' }}>
+<tr>
+<td style={{ padding: '8px 12px', textAlign: 'left', borderTop: '2px solid #000', fontWeight: 'bold' }}>Department</td>
+<td style={{ padding: '8px 12px', textAlign: 'right', borderTop: '2px solid #000', fontWeight: 'bold' }}>2021</td>
+<td style={{ padding: '8px 12px', textAlign: 'right', borderTop: '2px solid #000', fontWeight: 'bold' }}>2022</td>
+<td style={{ padding: '8px 12px', textAlign: 'right', borderTop: '2px solid #000', fontWeight: 'bold' }}>2023</td>
+</tr>
+<tr>
+<td colSpan={4} style={{ padding: '4px 0', borderTop: '1px solid #000' }}></td>
+</tr>
+<tr>
+<td style={{ padding: '8px 12px', textAlign: 'left', fontWeight: 'bold' }}>Computer Science</td>
+<td style={{ padding: '8px 12px', textAlign: 'right' }}>245</td>
+<td style={{ padding: '8px 12px', textAlign: 'right' }}>289</td>
+<td style={{ padding: '8px 12px', textAlign: 'right' }}>312</td>
+</tr>
+<tr>
+<td style={{ padding: '8px 12px', textAlign: 'left', fontWeight: 'bold' }}>Mathematics</td>
+<td style={{ padding: '8px 12px', textAlign: 'right' }}>156</td>
+<td style={{ padding: '8px 12px', textAlign: 'right' }}>162</td>
+<td style={{ padding: '8px 12px', textAlign: 'right' }}>171</td>
+</tr>
+<tr>
+<td style={{ padding: '8px 12px', textAlign: 'left', fontWeight: 'bold' }}>Physics</td>
+<td style={{ padding: '8px 12px', textAlign: 'right' }}>98</td>
+<td style={{ padding: '8px 12px', textAlign: 'right' }}>103</td>
+<td style={{ padding: '8px 12px', textAlign: 'right' }}>99</td>
+</tr>
+<tr>
+<td style={{ padding: '8px 12px', textAlign: 'left', fontWeight: 'bold' }}>Chemistry</td>
+<td style={{ padding: '8px 12px', textAlign: 'right' }}>134</td>
+<td style={{ padding: '8px 12px', textAlign: 'right' }}>141</td>
+<td style={{ padding: '8px 12px', textAlign: 'right' }}>139</td>
+</tr>
+<tr>
+<td colSpan={4} style={{ padding: '4px 0', borderTop: '1px solid #000' }}></td>
+</tr>
+<tr>
+<td style={{ padding: '8px 12px', textAlign: 'left', fontWeight: 'bold' }}>Total</td>
+<td style={{ padding: '8px 12px', textAlign: 'right', fontWeight: 'bold' }}>633</td>
+<td style={{ padding: '8px 12px', textAlign: 'right', fontWeight: 'bold' }}>695</td>
+<td style={{ padding: '8px 12px', textAlign: 'right', fontWeight: 'bold' }}>721</td>
+</tr>
+<tr>
+<td colSpan={4} style={{ padding: '4px 0', borderTop: '2px solid #000' }}></td>
+</tr>
+</table>
+</div>
+<div style={{ marginTop: '1em', fontSize: '0.9em', fontStyle: 'italic', color: '#666' }}>
+Table description: This table shows student enrollment numbers across four science departments from 2021 to 2023, with totals for each year. Overall enrollment increased from 633 to 721 students.
+</div>
+</div>
+
+## Troubleshooting Complex Tables
+
+### Common Table Problems and Solutions
+
+<Accordion title="Table extends beyond page margins">
+**Problem**: Your table is too wide for the page.
+
+**Solutions**:
+1. Use `\small` or `\footnotesize` to reduce font size
+2. Use `tabularx` to automatically adjust column widths
+3. Rotate the table with `rotating` package
+4. Use `\resizebox` (last resort - can make text too small)
+
+```latex
+% Option 1: Reduce font size
+{\small
+\begin{tabular}{llllll}
+% Table content
+\end{tabular}
+}
+
+% Option 2: Use tabularx
+\begin{tabularx}{\textwidth}{l*{5}{X}}
+% Content automatically fits page width
+\end{tabularx}
+```
+</Accordion>
+
+<Accordion title="Decimal points don't align">
+**Problem**: Numbers in columns don't align at decimal points.
+
+**Solution**: Use the `siunitx` package with S-type columns:
+
+```latex
+\usepackage{siunitx}
+\begin{tabular}{l S[table-format=3.2]}
+Item & {Value} \\
+\hline
+Product A & 12.5 \\
+Product B & 123.45 \\
+Product C & 1.234 \\
+\end{tabular}
+```
+</Accordion>
+
+<Accordion title="Table numbering is wrong">
+**Problem**: Tables are numbered incorrectly or out of sequence.
+
+**Solutions**:
+1. Check for manual `\setcounter` commands
+2. Ensure proper placement of `\caption`
+3. Use `\numberwithin{table}{section}` for section-based numbering
+
+```latex
+% Reset numbering by section
+\usepackage{amsmath}
+\numberwithin{table}{section}
+
+% Manual adjustment if needed
+\setcounter{table}{0}
+```
+</Accordion>
+
+## Performance Optimization for Large Tables
+
+### Handling Tables with Thousands of Rows
+
+<CodeGroup>
+```latex large-dataset.tex
+\documentclass{article}
+\usepackage{longtable}
+\usepackage{array}
+
+% Optimize compilation for large tables
+\usepackage{etoolbox}
+\AtBeginEnvironment{longtable}{\small}
+
+\begin{document}
+
+% For very large datasets, consider:
+% 1. External processing
+% 2. Pagination
+% 3. Summary tables
+
+\begin{longtable}{@{}lrrr@{}}
+\caption{Large dataset with automatic page breaks} \\
+\toprule
+ID & Value A & Value B & Result \\
+\midrule
+\endfirsthead
+
+\multicolumn{4}{c}{\tablename\ \thetable\ -- \textit{Continued}} \\
+\toprule
+ID & Value A & Value B & Result \\
+\midrule
+\endhead
+
+\midrule
+\multicolumn{4}{r}{\textit{Continued on next page}} \\
+\endfoot
+
+\bottomrule
+\endlastfoot
+
+% Generate sample data
+\newcount\rowcount
+\rowcount=1
+\loop
+  \the\rowcount & \number\numexpr\rowcount*2\relax & 
+  \number\numexpr\rowcount*3\relax & 
+  \number\numexpr\rowcount*5\relax \\
+  \advance\rowcount by 1
+\ifnum\rowcount<100 \repeat
+
+\end{longtable}
+
+\end{document}
+```
+</CodeGroup>
+
+**Rendered output:**
+
+<div style={{ backgroundColor: '#f8f9fa', padding: '1.5em', borderRadius: '8px', margin: '1em 0', border: '1px solid #e9ecef' }}>
+<div style={{ marginBottom: '1em', textAlign: 'center' }}>
+<div style={{ fontSize: '0.9em', color: '#666', marginBottom: '0.5em' }}>Table: Large dataset with automatic page breaks</div>
+<table style={{ margin: '0 auto', fontFamily: 'Georgia, serif', fontSize: '0.9em', borderCollapse: 'collapse' }}>
+<tr>
+<td style={{ padding: '6px 12px', textAlign: 'left', borderTop: '2px solid #000' }}>ID</td>
+<td style={{ padding: '6px 12px', textAlign: 'right', borderTop: '2px solid #000' }}>Value A</td>
+<td style={{ padding: '6px 12px', textAlign: 'right', borderTop: '2px solid #000' }}>Value B</td>
+<td style={{ padding: '6px 12px', textAlign: 'right', borderTop: '2px solid #000' }}>Result</td>
+</tr>
+<tr>
+<td colSpan={4} style={{ padding: '3px 0', borderTop: '1px solid #000' }}></td>
+</tr>
+<tr>
+<td style={{ padding: '6px 12px', textAlign: 'left' }}>1</td>
+<td style={{ padding: '6px 12px', textAlign: 'right' }}>2</td>
+<td style={{ padding: '6px 12px', textAlign: 'right' }}>3</td>
+<td style={{ padding: '6px 12px', textAlign: 'right' }}>5</td>
+</tr>
+<tr>
+<td style={{ padding: '6px 12px', textAlign: 'left' }}>2</td>
+<td style={{ padding: '6px 12px', textAlign: 'right' }}>4</td>
+<td style={{ padding: '6px 12px', textAlign: 'right' }}>6</td>
+<td style={{ padding: '6px 12px', textAlign: 'right' }}>10</td>
+</tr>
+<tr>
+<td style={{ padding: '6px 12px', textAlign: 'left' }}>3</td>
+<td style={{ padding: '6px 12px', textAlign: 'right' }}>6</td>
+<td style={{ padding: '6px 12px', textAlign: 'right' }}>9</td>
+<td style={{ padding: '6px 12px', textAlign: 'right' }}>15</td>
+</tr>
+<tr>
+<td style={{ padding: '6px 12px', textAlign: 'left' }}>4</td>
+<td style={{ padding: '6px 12px', textAlign: 'right' }}>8</td>
+<td style={{ padding: '6px 12px', textAlign: 'right' }}>12</td>
+<td style={{ padding: '6px 12px', textAlign: 'right' }}>20</td>
+</tr>
+<tr>
+<td style={{ padding: '6px 12px', textAlign: 'left' }}>5</td>
+<td style={{ padding: '6px 12px', textAlign: 'right' }}>10</td>
+<td style={{ padding: '6px 12px', textAlign: 'right' }}>15</td>
+<td style={{ padding: '6px 12px', textAlign: 'right' }}>25</td>
+</tr>
+<tr>
+<td style={{ padding: '6px 12px', textAlign: 'center', fontStyle: 'italic' }} colSpan={4}>... (continues for 100 rows)</td>
+</tr>
+<tr>
+<td colSpan={4} style={{ padding: '3px 0', borderTop: '1px solid #000' }}></td>
+</tr>
+<tr>
+<td style={{ padding: '6px 12px', textAlign: 'right', fontStyle: 'italic' }} colSpan={4}>Continued on next page</td>
+</tr>
+</table>
+<div style={{ marginTop: '1em', fontSize: '0.85em', color: '#666' }}>
+<strong>Note:</strong> longtable automatically handles page breaks and continues headers on each page
+</div>
+</div>
+</div>
+
 ## Best Practices
 
 <Tip>
@@ -891,6 +1726,283 @@ Data & Data & Data & Data & Data & Data & Data \\
 4. **Missing package errors**: Load required packages (`array`, `booktabs`, etc.)
 5. **Spacing issues**: Adjust `\arraystretch` or use `\renewcommand{\arraystretch}{1.2}`
 </Warning>
+
+## Comparison with Other Table Tools
+
+### LaTeX Tables vs Word/Excel Tables
+
+Understanding when to use LaTeX tables versus other tools:
+
+| Feature | LaTeX | Word | Excel |
+|---------|-------|------|-------|
+| **Precision** | Exact control | Limited | Good for calculations |
+| **Consistency** | Excellent | Manual | Good within sheet |
+| **Math support** | Native | Limited | Basic |
+| **Automation** | Scriptable | Limited | VBA/Macros |
+| **Version control** | Text-based | Binary | Binary |
+| **Learning curve** | Steep | Gentle | Moderate |
+
+### Converting Tables Between Formats
+
+<CodeGroup>
+```latex excel-to-latex.tex
+% Converting Excel data to LaTeX
+% Option 1: Use excel2latex plugin
+% Option 2: Export as CSV and use pgfplotstable
+% Option 3: Use online converters
+
+% Example using datatool package
+\usepackage{datatool}
+\DTLloaddb{mydata}{data.csv}
+
+\begin{tabular}{lrr}
+\toprule
+\DTLforeach{mydata}{%
+  \name=Name,\value=Value,\status=Status}{%
+  \name & \value & \status \\
+}
+\bottomrule
+\end{tabular}
+```
+</CodeGroup>
+
+**Rendered output:**
+
+<div style={{ backgroundColor: '#f8f9fa', padding: '1.5em', borderRadius: '8px', margin: '1em 0', border: '1px solid #e9ecef' }}>
+<div style={{ marginBottom: '1em', fontSize: '0.9em', color: '#6c757d' }}>Example using datatool to import CSV data:</div>
+<table style={{ margin: '0 auto', fontFamily: 'Georgia, serif', fontSize: '1.1em', borderCollapse: 'collapse' }}>
+<tr>
+<td style={{ padding: '8px 12px', textAlign: 'left', borderTop: '2px solid #000' }}>Name</td>
+<td style={{ padding: '8px 12px', textAlign: 'right', borderTop: '2px solid #000' }}>Value</td>
+<td style={{ padding: '8px 12px', textAlign: 'right', borderTop: '2px solid #000' }}>Status</td>
+</tr>
+<tr>
+<td style={{ padding: '8px 12px', textAlign: 'left' }}>Product A</td>
+<td style={{ padding: '8px 12px', textAlign: 'right' }}>125</td>
+<td style={{ padding: '8px 12px', textAlign: 'right' }}>Active</td>
+</tr>
+<tr>
+<td style={{ padding: '8px 12px', textAlign: 'left' }}>Product B</td>
+<td style={{ padding: '8px 12px', textAlign: 'right' }}>89</td>
+<td style={{ padding: '8px 12px', textAlign: 'right' }}>Pending</td>
+</tr>
+<tr>
+<td style={{ padding: '8px 12px', textAlign: 'left' }}>Product C</td>
+<td style={{ padding: '8px 12px', textAlign: 'right' }}>203</td>
+<td style={{ padding: '8px 12px', textAlign: 'right' }}>Active</td>
+</tr>
+<tr>
+<td colSpan={3} style={{ padding: '4px 0', borderTop: '2px solid #000' }}></td>
+</tr>
+</table>
+<div style={{ marginTop: '0.5em', fontSize: '0.85em', color: '#666' }}>
+This table was automatically generated from CSV data
+</div>
+</div>
+
+## Real-World Table Examples
+
+### Financial Reports
+
+<CodeGroup>
+```latex financial-table.tex
+\documentclass{article}
+\usepackage{booktabs}
+\usepackage{siunitx}
+\usepackage{xcolor}
+
+\begin{document}
+
+\begin{table}[htbp]
+\centering
+\caption{Quarterly Financial Summary (in millions)}
+\begin{tabular}{l*{4}{S[table-format=4.1]}S[table-format=+3.1]}
+\toprule
+{Revenue Stream} & {Q1} & {Q2} & {Q3} & {Q4} & {Change (\%)} \\
+\midrule
+Product Sales & 125.4 & 132.7 & 141.2 & 156.8 & +25.0 \\
+Services & 45.2 & 47.8 & 49.1 & 52.3 & +15.7 \\
+Licensing & 12.3 & 11.9 & 13.2 & 14.1 & +14.6 \\
+\midrule
+\textbf{Total Revenue} & 182.9 & 192.4 & 203.5 & 223.2 & +22.0 \\
+\midrule
+Operating Expenses & 89.2 & 91.5 & 94.8 & 98.2 & +10.1 \\
+\midrule
+\textbf{Net Income} & \textbf{93.7} & \textbf{100.9} & \textbf{108.7} & \textbf{125.0} & 
+  \textcolor{green!60!black}{\textbf{+33.4}} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\end{document}
+```
+</CodeGroup>
+
+**Rendered output:**
+
+<div style={{ backgroundColor: '#f8f9fa', padding: '1.5em', borderRadius: '8px', margin: '1em 0', border: '1px solid #e9ecef' }}>
+<div style={{ marginBottom: '1em', textAlign: 'center' }}>
+<div style={{ fontSize: '0.9em', color: '#666', marginBottom: '0.5em' }}>Table: Quarterly Financial Summary (in millions)</div>
+<table style={{ margin: '0 auto', fontFamily: 'Georgia, serif', fontSize: '1.1em', borderCollapse: 'collapse' }}>
+<tr>
+<td style={{ padding: '8px 12px', textAlign: 'left', borderTop: '2px solid #000' }}>Revenue Stream</td>
+<td style={{ padding: '8px 12px', textAlign: 'right', borderTop: '2px solid #000' }}>Q1</td>
+<td style={{ padding: '8px 12px', textAlign: 'right', borderTop: '2px solid #000' }}>Q2</td>
+<td style={{ padding: '8px 12px', textAlign: 'right', borderTop: '2px solid #000' }}>Q3</td>
+<td style={{ padding: '8px 12px', textAlign: 'right', borderTop: '2px solid #000' }}>Q4</td>
+<td style={{ padding: '8px 12px', textAlign: 'right', borderTop: '2px solid #000' }}>Change (%)</td>
+</tr>
+<tr>
+<td colSpan={6} style={{ padding: '4px 0', borderTop: '1px solid #000' }}></td>
+</tr>
+<tr>
+<td style={{ padding: '8px 12px', textAlign: 'left' }}>Product Sales</td>
+<td style={{ padding: '8px 12px', textAlign: 'right', fontFamily: 'monospace' }}>125.4</td>
+<td style={{ padding: '8px 12px', textAlign: 'right', fontFamily: 'monospace' }}>132.7</td>
+<td style={{ padding: '8px 12px', textAlign: 'right', fontFamily: 'monospace' }}>141.2</td>
+<td style={{ padding: '8px 12px', textAlign: 'right', fontFamily: 'monospace' }}>156.8</td>
+<td style={{ padding: '8px 12px', textAlign: 'right', fontFamily: 'monospace' }}>+25.0</td>
+</tr>
+<tr>
+<td style={{ padding: '8px 12px', textAlign: 'left' }}>Services</td>
+<td style={{ padding: '8px 12px', textAlign: 'right', fontFamily: 'monospace' }}>&nbsp;45.2</td>
+<td style={{ padding: '8px 12px', textAlign: 'right', fontFamily: 'monospace' }}>&nbsp;47.8</td>
+<td style={{ padding: '8px 12px', textAlign: 'right', fontFamily: 'monospace' }}>&nbsp;49.1</td>
+<td style={{ padding: '8px 12px', textAlign: 'right', fontFamily: 'monospace' }}>&nbsp;52.3</td>
+<td style={{ padding: '8px 12px', textAlign: 'right', fontFamily: 'monospace' }}>+15.7</td>
+</tr>
+<tr>
+<td style={{ padding: '8px 12px', textAlign: 'left' }}>Licensing</td>
+<td style={{ padding: '8px 12px', textAlign: 'right', fontFamily: 'monospace' }}>&nbsp;12.3</td>
+<td style={{ padding: '8px 12px', textAlign: 'right', fontFamily: 'monospace' }}>&nbsp;11.9</td>
+<td style={{ padding: '8px 12px', textAlign: 'right', fontFamily: 'monospace' }}>&nbsp;13.2</td>
+<td style={{ padding: '8px 12px', textAlign: 'right', fontFamily: 'monospace' }}>&nbsp;14.1</td>
+<td style={{ padding: '8px 12px', textAlign: 'right', fontFamily: 'monospace' }}>+14.6</td>
+</tr>
+<tr>
+<td colSpan={6} style={{ padding: '4px 0', borderTop: '1px solid #000' }}></td>
+</tr>
+<tr>
+<td style={{ padding: '8px 12px', textAlign: 'left', fontWeight: 'bold' }}>Total Revenue</td>
+<td style={{ padding: '8px 12px', textAlign: 'right', fontFamily: 'monospace' }}>182.9</td>
+<td style={{ padding: '8px 12px', textAlign: 'right', fontFamily: 'monospace' }}>192.4</td>
+<td style={{ padding: '8px 12px', textAlign: 'right', fontFamily: 'monospace' }}>203.5</td>
+<td style={{ padding: '8px 12px', textAlign: 'right', fontFamily: 'monospace' }}>223.2</td>
+<td style={{ padding: '8px 12px', textAlign: 'right', fontFamily: 'monospace' }}>+22.0</td>
+</tr>
+<tr>
+<td colSpan={6} style={{ padding: '4px 0', borderTop: '1px solid #000' }}></td>
+</tr>
+<tr>
+<td style={{ padding: '8px 12px', textAlign: 'left' }}>Operating Expenses</td>
+<td style={{ padding: '8px 12px', textAlign: 'right', fontFamily: 'monospace' }}>&nbsp;89.2</td>
+<td style={{ padding: '8px 12px', textAlign: 'right', fontFamily: 'monospace' }}>&nbsp;91.5</td>
+<td style={{ padding: '8px 12px', textAlign: 'right', fontFamily: 'monospace' }}>&nbsp;94.8</td>
+<td style={{ padding: '8px 12px', textAlign: 'right', fontFamily: 'monospace' }}>&nbsp;98.2</td>
+<td style={{ padding: '8px 12px', textAlign: 'right', fontFamily: 'monospace' }}>+10.1</td>
+</tr>
+<tr>
+<td colSpan={6} style={{ padding: '4px 0', borderTop: '1px solid #000' }}></td>
+</tr>
+<tr>
+<td style={{ padding: '8px 12px', textAlign: 'left', fontWeight: 'bold' }}>Net Income</td>
+<td style={{ padding: '8px 12px', textAlign: 'right', fontFamily: 'monospace', fontWeight: 'bold' }}>93.7</td>
+<td style={{ padding: '8px 12px', textAlign: 'right', fontFamily: 'monospace', fontWeight: 'bold' }}>100.9</td>
+<td style={{ padding: '8px 12px', textAlign: 'right', fontFamily: 'monospace', fontWeight: 'bold' }}>108.7</td>
+<td style={{ padding: '8px 12px', textAlign: 'right', fontFamily: 'monospace', fontWeight: 'bold' }}>125.0</td>
+<td style={{ padding: '8px 12px', textAlign: 'right', fontFamily: 'monospace', fontWeight: 'bold', color: 'green' }}>+33.4</td>
+</tr>
+<tr>
+<td colSpan={6} style={{ padding: '4px 0', borderTop: '2px solid #000' }}></td>
+</tr>
+</table>
+</div>
+</div>
+
+### Scientific Data Tables
+
+<CodeGroup>
+```latex scientific-data.tex
+\documentclass{article}
+\usepackage{booktabs}
+\usepackage{siunitx}
+\usepackage{multirow}
+
+\begin{document}
+
+\begin{table}[htbp]
+\centering
+\caption{Experimental measurements with uncertainties}
+\begin{tabular}{
+  l
+  S[table-format=2.3(1)]
+  S[table-format=3.2(2)]
+  S[table-format=1.4(1)]
+}
+\toprule
+{Sample} & {Mass (\si{\gram})} & {Volume (\si{\milli\liter})} & {Density (\si{\gram\per\cubic\centi\meter})} \\
+\midrule
+Water (control) & 10.000(5) & 10.02(3) & 0.9980(8) \\
+Solution A & 12.345(8) & 11.23(5) & 1.0990(12) \\
+Solution B & 15.678(10) & 13.45(8) & 1.1658(15) \\
+\multirow{2}{*}{Solution C} & 18.234(12) & 15.12(10) & 1.2061(18) \\
+& \multicolumn{3}{c}{\textit{Measurement repeated due to anomaly}} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\end{document}
+```
+</CodeGroup>
+
+**Rendered output:**
+
+<div style={{ backgroundColor: '#f8f9fa', padding: '1.5em', borderRadius: '8px', margin: '1em 0', border: '1px solid #e9ecef' }}>
+<div style={{ marginBottom: '1em', textAlign: 'center' }}>
+<div style={{ fontSize: '0.9em', color: '#666', marginBottom: '0.5em' }}>Table: Experimental measurements with uncertainties</div>
+<table style={{ margin: '0 auto', fontFamily: 'Georgia, serif', fontSize: '1.1em', borderCollapse: 'collapse' }}>
+<tr>
+<td style={{ padding: '8px 12px', textAlign: 'left', borderTop: '2px solid #000' }}>Sample</td>
+<td style={{ padding: '8px 12px', textAlign: 'center', borderTop: '2px solid #000' }}>Mass (g)</td>
+<td style={{ padding: '8px 12px', textAlign: 'center', borderTop: '2px solid #000' }}>Volume (mL)</td>
+<td style={{ padding: '8px 12px', textAlign: 'center', borderTop: '2px solid #000' }}>Density (g/cm³)</td>
+</tr>
+<tr>
+<td colSpan={4} style={{ padding: '4px 0', borderTop: '1px solid #000' }}></td>
+</tr>
+<tr>
+<td style={{ padding: '8px 12px', textAlign: 'left' }}>Water (control)</td>
+<td style={{ padding: '8px 12px', textAlign: 'right', fontFamily: 'monospace' }}>10.000 ± 0.005</td>
+<td style={{ padding: '8px 12px', textAlign: 'right', fontFamily: 'monospace' }}>10.02 ± 0.03</td>
+<td style={{ padding: '8px 12px', textAlign: 'right', fontFamily: 'monospace' }}>0.9980 ± 0.0008</td>
+</tr>
+<tr>
+<td style={{ padding: '8px 12px', textAlign: 'left' }}>Solution A</td>
+<td style={{ padding: '8px 12px', textAlign: 'right', fontFamily: 'monospace' }}>12.345 ± 0.008</td>
+<td style={{ padding: '8px 12px', textAlign: 'right', fontFamily: 'monospace' }}>11.23 ± 0.05</td>
+<td style={{ padding: '8px 12px', textAlign: 'right', fontFamily: 'monospace' }}>1.0990 ± 0.0012</td>
+</tr>
+<tr>
+<td style={{ padding: '8px 12px', textAlign: 'left' }}>Solution B</td>
+<td style={{ padding: '8px 12px', textAlign: 'right', fontFamily: 'monospace' }}>15.678 ± 0.010</td>
+<td style={{ padding: '8px 12px', textAlign: 'right', fontFamily: 'monospace' }}>13.45 ± 0.08</td>
+<td style={{ padding: '8px 12px', textAlign: 'right', fontFamily: 'monospace' }}>1.1658 ± 0.0015</td>
+</tr>
+<tr>
+<td style={{ padding: '8px 12px', textAlign: 'left', verticalAlign: 'middle' }} rowSpan={2}>Solution C</td>
+<td style={{ padding: '8px 12px', textAlign: 'right', fontFamily: 'monospace' }}>18.234 ± 0.012</td>
+<td style={{ padding: '8px 12px', textAlign: 'right', fontFamily: 'monospace' }}>15.12 ± 0.10</td>
+<td style={{ padding: '8px 12px', textAlign: 'right', fontFamily: 'monospace' }}>1.2061 ± 0.0018</td>
+</tr>
+<tr>
+<td style={{ padding: '8px 12px', textAlign: 'center', fontStyle: 'italic' }} colSpan={3}>Measurement repeated due to anomaly</td>
+</tr>
+<tr>
+<td colSpan={4} style={{ padding: '4px 0', borderTop: '2px solid #000' }}></td>
+</tr>
+</table>
+</div>
+</div>
 
 ## Quick Reference
 
