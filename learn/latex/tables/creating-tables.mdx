@@ -46,22 +46,60 @@ Carol & 28 & 92 \\
 **Rendered output:**
 
 <div style={{ backgroundColor: '#f8f9fa', padding: '1.5em', borderRadius: '8px', margin: '1em 0', border: '1px solid #e9ecef' }}>
-<div style={{ marginBottom: '1em', fontSize: '0.9em', color: '#6c757d' }}>Basic tabular environment:</div>
-<table style={{ margin: '0 auto', fontFamily: 'serif', fontSize: '1em' }}>
-<tr><td style={{ padding: '4px 8px', textAlign: 'left' }}>Left</td><td style={{ padding: '4px 8px', textAlign: 'center' }}>Center</td><td style={{ padding: '4px 8px', textAlign: 'right' }}>Right</td></tr>
-<tr><td style={{ padding: '4px 8px', textAlign: 'left' }}>1</td><td style={{ padding: '4px 8px', textAlign: 'center' }}>2</td><td style={{ padding: '4px 8px', textAlign: 'right' }}>3</td></tr>
-<tr><td style={{ padding: '4px 8px', textAlign: 'left' }}>4</td><td style={{ padding: '4px 8px', textAlign: 'center' }}>5</td><td style={{ padding: '4px 8px', textAlign: 'right' }}>6</td></tr>
+<div style={{ marginBottom: '1em', fontSize: '0.9em', color: '#6c757d' }}>For the first code block (basic table without float):</div>
+<table style={{ margin: '0 auto', fontFamily: 'Georgia, serif', fontSize: '1.1em' }}>
+<tr>
+<td style={{ padding: '4px 12px', textAlign: 'left' }}>Left</td>
+<td style={{ padding: '4px 12px', textAlign: 'center' }}>Center</td>
+<td style={{ padding: '4px 12px', textAlign: 'right' }}>Right</td>
+</tr>
+<tr>
+<td style={{ padding: '4px 12px', textAlign: 'left' }}>1</td>
+<td style={{ padding: '4px 12px', textAlign: 'center' }}>2</td>
+<td style={{ padding: '4px 12px', textAlign: 'right' }}>3</td>
+</tr>
+<tr>
+<td style={{ padding: '4px 12px', textAlign: 'left' }}>4</td>
+<td style={{ padding: '4px 12px', textAlign: 'center' }}>5</td>
+<td style={{ padding: '4px 12px', textAlign: 'right' }}>6</td>
+</tr>
 </table>
+<div style={{ marginTop: '0.5em', fontSize: '0.85em', color: '#666' }}>
+• Column 1 (<code>l</code>): Text aligns to the left<br/>
+• Column 2 (<code>c</code>): Text centers in the column<br/>
+• Column 3 (<code>r</code>): Text aligns to the right
+</div>
 </div>
 
 <div style={{ backgroundColor: '#f8f9fa', padding: '1.5em', borderRadius: '8px', margin: '1em 0', border: '1px solid #e9ecef' }}>
-<div style={{ marginBottom: '1em', fontSize: '0.9em', color: '#6c757d' }}>With horizontal lines:</div>
-<table style={{ margin: '0 auto', fontFamily: 'serif', fontSize: '1em', border: '1px solid #000', borderCollapse: 'collapse' }}>
-<tr><td style={{ padding: '4px 8px', textAlign: 'left', border: '1px solid #000' }}><strong>Name</strong></td><td style={{ padding: '4px 8px', textAlign: 'center', border: '1px solid #000' }}><strong>Age</strong></td><td style={{ padding: '4px 8px', textAlign: 'right', border: '1px solid #000' }}><strong>Score</strong></td></tr>
-<tr><td style={{ padding: '4px 8px', textAlign: 'left', border: '1px solid #000' }}>Alice</td><td style={{ padding: '4px 8px', textAlign: 'center', border: '1px solid #000' }}>25</td><td style={{ padding: '4px 8px', textAlign: 'right', border: '1px solid #000' }}>95</td></tr>
-<tr><td style={{ padding: '4px 8px', textAlign: 'left', border: '1px solid #000' }}>Bob</td><td style={{ padding: '4px 8px', textAlign: 'center', border: '1px solid #000' }}>30</td><td style={{ padding: '4px 8px', textAlign: 'right', border: '1px solid #000' }}>87</td></tr>
-<tr><td style={{ padding: '4px 8px', textAlign: 'left', border: '1px solid #000' }}>Carol</td><td style={{ padding: '4px 8px', textAlign: 'center', border: '1px solid #000' }}>28</td><td style={{ padding: '4px 8px', textAlign: 'right', border: '1px solid #000' }}>92</td></tr>
+<div style={{ marginBottom: '1em', fontSize: '0.9em', color: '#6c757d' }}>For the second code block (with horizontal lines):</div>
+<table style={{ margin: '0 auto', fontFamily: 'Georgia, serif', fontSize: '1.1em', borderCollapse: 'collapse' }}>
+<tr>
+<td style={{ padding: '6px 12px', textAlign: 'left', borderTop: '1px solid #000', borderBottom: '1px solid #000', borderLeft: '1px solid #000', borderRight: '1px solid #000' }}><strong>Name</strong></td>
+<td style={{ padding: '6px 12px', textAlign: 'center', borderTop: '1px solid #000', borderBottom: '1px solid #000', borderRight: '1px solid #000' }}><strong>Age</strong></td>
+<td style={{ padding: '6px 12px', textAlign: 'right', borderTop: '1px solid #000', borderBottom: '1px solid #000', borderRight: '1px solid #000' }}><strong>Score</strong></td>
+</tr>
+<tr>
+<td style={{ padding: '6px 12px', textAlign: 'left', borderBottom: '1px solid #000', borderLeft: '1px solid #000', borderRight: '1px solid #000' }}>Alice</td>
+<td style={{ padding: '6px 12px', textAlign: 'center', borderBottom: '1px solid #000', borderRight: '1px solid #000' }}>25</td>
+<td style={{ padding: '6px 12px', textAlign: 'right', borderBottom: '1px solid #000', borderRight: '1px solid #000' }}>95</td>
+</tr>
+<tr>
+<td style={{ padding: '6px 12px', textAlign: 'left', borderBottom: '1px solid #000', borderLeft: '1px solid #000', borderRight: '1px solid #000' }}>Bob</td>
+<td style={{ padding: '6px 12px', textAlign: 'center', borderBottom: '1px solid #000', borderRight: '1px solid #000' }}>30</td>
+<td style={{ padding: '6px 12px', textAlign: 'right', borderBottom: '1px solid #000', borderRight: '1px solid #000' }}>87</td>
+</tr>
+<tr>
+<td style={{ padding: '6px 12px', textAlign: 'left', borderBottom: '1px solid #000', borderLeft: '1px solid #000', borderRight: '1px solid #000' }}>Carol</td>
+<td style={{ padding: '6px 12px', textAlign: 'center', borderBottom: '1px solid #000', borderRight: '1px solid #000' }}>28</td>
+<td style={{ padding: '6px 12px', textAlign: 'right', borderBottom: '1px solid #000', borderRight: '1px solid #000' }}>92</td>
+</tr>
 </table>
+<div style={{ marginTop: '0.5em', fontSize: '0.85em', color: '#666' }}>
+• <code>\hline</code>: Creates horizontal lines above and below rows<br/>
+• <code>|</code> in column spec: Creates vertical lines between columns<br/>
+• <code>&#123;|l|c|r|&#125;</code>: Left, center, right columns with vertical separators
+</div>
 </div>
 
 ### Column Specifications
@@ -160,6 +198,51 @@ As shown in Table \ref{tab:grades}, all students improved.
 ```
 </CodeGroup>
 
+**Rendered output:**
+
+<div style={{ backgroundColor: '#f8f9fa', padding: '1.5em', borderRadius: '8px', margin: '1em 0', border: '1px solid #e9ecef' }}>
+<div style={{ marginBottom: '1em', textAlign: 'center' }}>
+<div style={{ fontSize: '0.9em', color: '#666', marginBottom: '0.5em' }}>Table 1: Student grades</div>
+<table style={{ margin: '0 auto', fontFamily: 'Georgia, serif', fontSize: '1.1em', borderCollapse: 'collapse' }}>
+<tr>
+<td style={{ padding: '6px 12px', textAlign: 'left', borderTop: '1px solid #000' }}>Student</td>
+<td style={{ padding: '6px 12px', textAlign: 'center', borderTop: '1px solid #000' }}>Midterm</td>
+<td style={{ padding: '6px 12px', textAlign: 'center', borderTop: '1px solid #000' }}>Final</td>
+</tr>
+<tr>
+<td colSpan={3} style={{ padding: '0', borderTop: '1px solid #000' }}></td>
+</tr>
+<tr>
+<td style={{ padding: '6px 12px', textAlign: 'left' }}>Alice</td>
+<td style={{ padding: '6px 12px', textAlign: 'center' }}>85</td>
+<td style={{ padding: '6px 12px', textAlign: 'center' }}>92</td>
+</tr>
+<tr>
+<td style={{ padding: '6px 12px', textAlign: 'left' }}>Bob</td>
+<td style={{ padding: '6px 12px', textAlign: 'center' }}>78</td>
+<td style={{ padding: '6px 12px', textAlign: 'center' }}>88</td>
+</tr>
+<tr>
+<td style={{ padding: '6px 12px', textAlign: 'left' }}>Carol</td>
+<td style={{ padding: '6px 12px', textAlign: 'center' }}>92</td>
+<td style={{ padding: '6px 12px', textAlign: 'center' }}>95</td>
+</tr>
+<tr>
+<td colSpan={3} style={{ padding: '0', borderTop: '1px solid #000' }}></td>
+</tr>
+</table>
+</div>
+<div style={{ marginTop: '1em', fontSize: '1em' }}>
+As shown in Table 1, all students improved.
+</div>
+<div style={{ marginTop: '0.5em', fontSize: '0.85em', color: '#666' }}>
+• <code>\caption{}</code>: Adds a numbered caption above the table<br/>
+• <code>\label{}</code>: Creates a reference label for cross-referencing<br/>
+• <code>\centering</code>: Centers the table within the page<br/>
+• <code>[htbp]</code>: Float placement options (here, top, bottom, page)
+</div>
+</div>
+
 ### Table Positioning
 
 <CodeGroup>
@@ -218,6 +301,92 @@ Only & under & these \\
 \end{document}
 ```
 </CodeGroup>
+
+**Rendered output:**
+
+<div style={{ backgroundColor: '#f8f9fa', padding: '1.5em', borderRadius: '8px', margin: '1em 0', border: '1px solid #e9ecef' }}>
+<div style={{ marginBottom: '1em', fontSize: '0.9em', color: '#6c757d' }}>Basic lines with <code>\hline</code>:</div>
+<table style={{ margin: '0 auto', fontFamily: 'Georgia, serif', fontSize: '1.1em', borderCollapse: 'collapse' }}>
+<tr>
+<td style={{ padding: '6px 12px', textAlign: 'left', borderTop: '1px solid #000' }}>Header 1</td>
+<td style={{ padding: '6px 12px', textAlign: 'center', borderTop: '1px solid #000' }}>Header 2</td>
+<td style={{ padding: '6px 12px', textAlign: 'center', borderTop: '1px solid #000' }}>Header 3</td>
+</tr>
+<tr>
+<td colSpan={3} style={{ padding: '0', borderTop: '1px solid #000' }}></td>
+</tr>
+<tr>
+<td style={{ padding: '6px 12px', textAlign: 'left' }}>Data 1</td>
+<td style={{ padding: '6px 12px', textAlign: 'center' }}>Data 2</td>
+<td style={{ padding: '6px 12px', textAlign: 'center' }}>Data 3</td>
+</tr>
+<tr>
+<td colSpan={3} style={{ padding: '0', borderTop: '1px solid #000' }}></td>
+</tr>
+</table>
+</div>
+
+<div style={{ backgroundColor: '#f8f9fa', padding: '1.5em', borderRadius: '8px', margin: '1em 0', border: '1px solid #e9ecef' }}>
+<div style={{ marginBottom: '1em', fontSize: '0.9em', color: '#6c757d' }}>Professional tables with <code>booktabs</code>:</div>
+<table style={{ margin: '0 auto', fontFamily: 'Georgia, serif', fontSize: '1.1em', borderCollapse: 'collapse' }}>
+<tr>
+<td style={{ padding: '8px 12px', textAlign: 'left', borderTop: '2px solid #000' }}>Header 1</td>
+<td style={{ padding: '8px 12px', textAlign: 'center', borderTop: '2px solid #000' }}>Header 2</td>
+<td style={{ padding: '8px 12px', textAlign: 'center', borderTop: '2px solid #000' }}>Header 3</td>
+</tr>
+<tr>
+<td colSpan={3} style={{ padding: '4px 0', borderTop: '1px solid #000' }}></td>
+</tr>
+<tr>
+<td style={{ padding: '8px 12px', textAlign: 'left' }}>Data 1</td>
+<td style={{ padding: '8px 12px', textAlign: 'center' }}>Data 2</td>
+<td style={{ padding: '8px 12px', textAlign: 'center' }}>Data 3</td>
+</tr>
+<tr>
+<td style={{ padding: '8px 12px', textAlign: 'left' }}>Data 4</td>
+<td style={{ padding: '8px 12px', textAlign: 'center' }}>Data 5</td>
+<td style={{ padding: '8px 12px', textAlign: 'center' }}>Data 6</td>
+</tr>
+<tr>
+<td colSpan={3} style={{ padding: '4px 0', borderTop: '2px solid #000' }}></td>
+</tr>
+</table>
+<div style={{ marginTop: '0.5em', fontSize: '0.85em', color: '#666' }}>
+Note the improved spacing and varying line weights
+</div>
+</div>
+
+<div style={{ backgroundColor: '#f8f9fa', padding: '1.5em', borderRadius: '8px', margin: '1em 0', border: '1px solid #e9ecef' }}>
+<div style={{ marginBottom: '1em', fontSize: '0.9em', color: '#6c757d' }}>Partial horizontal lines with <code>\cline{2-3}</code>:</div>
+<table style={{ margin: '0 auto', fontFamily: 'Georgia, serif', fontSize: '1.1em' }}>
+<tr>
+<td style={{ padding: '6px 12px', textAlign: 'left' }}>Full line</td>
+<td style={{ padding: '6px 12px' }}></td>
+<td style={{ padding: '6px 12px' }}></td>
+</tr>
+<tr>
+<td colSpan={3} style={{ padding: '0', borderTop: '1px solid #000' }}></td>
+</tr>
+<tr>
+<td style={{ padding: '6px 12px', textAlign: 'left' }}>Partial</td>
+<td style={{ padding: '6px 12px', textAlign: 'center' }}>line</td>
+<td style={{ padding: '6px 12px', textAlign: 'right' }}>below</td>
+</tr>
+<tr>
+<td style={{ padding: '6px 12px' }}></td>
+<td style={{ padding: '0', borderTop: '1px solid #000' }}></td>
+<td style={{ padding: '0', borderTop: '1px solid #000' }}></td>
+</tr>
+<tr>
+<td style={{ padding: '6px 12px', textAlign: 'left' }}>Only</td>
+<td style={{ padding: '6px 12px', textAlign: 'center' }}>under</td>
+<td style={{ padding: '6px 12px', textAlign: 'right' }}>these</td>
+</tr>
+</table>
+<div style={{ marginTop: '0.5em', fontSize: '0.85em', color: '#666' }}>
+<code>\cline{2-3}</code> draws a line only under columns 2 and 3
+</div>
+</div>
 
 <Tip>
 **Best practice**: Use the `booktabs` package for professional-looking tables. It provides better spacing and line weights than standard LaTeX rules.
@@ -347,28 +516,49 @@ Box B & 15 cm & 8 cm \\
 
 <div style={{ backgroundColor: '#f8f9fa', padding: '1.5em', borderRadius: '8px', margin: '1em 0', border: '1px solid #e9ecef' }}>
 <div style={{ marginBottom: '1em', fontSize: '0.9em', color: '#6c757d' }}>Multi-column spanning:</div>
-<table style={{ margin: '0 auto', fontFamily: 'serif', fontSize: '1em', border: '1px solid #000', borderCollapse: 'collapse' }}>
-<tr><td style={{ border: '1px solid #000', padding: '6px 12px', textAlign: 'center' }} colSpan={3}><strong>Spanning Three Columns</strong></td></tr>
-<tr><td style={{ border: '1px solid #000', padding: '6px 12px', textAlign: 'left' }}>Left</td><td style={{ border: '1px solid #000', padding: '6px 12px', textAlign: 'center' }}>Center</td><td style={{ border: '1px solid #000', padding: '6px 12px', textAlign: 'right' }}>Right</td></tr>
-<tr><td style={{ border: '1px solid #000', padding: '6px 12px', textAlign: 'left' }}>A</td><td style={{ border: '1px solid #000', padding: '6px 12px', textAlign: 'center' }}>B</td><td style={{ border: '1px solid #000', padding: '6px 12px', textAlign: 'right' }}>C</td></tr>
-<tr><td style={{ border: '1px solid #000', padding: '6px 12px', textAlign: 'left' }} colSpan={2}>Span two</td><td style={{ border: '1px solid #000', padding: '6px 12px', textAlign: 'right' }}>Right</td></tr>
+<table style={{ margin: '0 auto', fontFamily: 'Georgia, serif', fontSize: '1.1em', borderCollapse: 'collapse' }}>
+<tr>
+<td style={{ borderTop: '1px solid #000', borderBottom: '1px solid #000', borderLeft: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'center' }} colSpan={3}><strong>Spanning Three Columns</strong></td>
+</tr>
+<tr>
+<td style={{ borderBottom: '1px solid #000', borderLeft: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'left' }}>Left</td>
+<td style={{ borderBottom: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'center' }}>Center</td>
+<td style={{ borderBottom: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'right' }}>Right</td>
+</tr>
+<tr>
+<td style={{ borderBottom: '1px solid #000', borderLeft: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'left' }}>A</td>
+<td style={{ borderBottom: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'center' }}>B</td>
+<td style={{ borderBottom: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'right' }}>C</td>
+</tr>
+<tr>
+<td style={{ borderBottom: '1px solid #000', borderLeft: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'left' }} colSpan={2}>Span two</td>
+<td style={{ borderBottom: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'right' }}>Right</td>
+</tr>
 </table>
 </div>
 
 <div style={{ backgroundColor: '#f8f9fa', padding: '1.5em', borderRadius: '8px', margin: '1em 0', border: '1px solid #e9ecef' }}>
 <div style={{ marginBottom: '1em', fontSize: '0.9em', color: '#6c757d' }}>Complex headers with partial lines:</div>
-<table style={{ margin: '0 auto', fontFamily: 'serif', fontSize: '1em', border: '1px solid #000', borderCollapse: 'collapse' }}>
+<table style={{ margin: '0 auto', fontFamily: 'Georgia, serif', fontSize: '1.1em', borderCollapse: 'collapse' }}>
 <tr>
-<td style={{ border: '1px solid #000', padding: '6px 12px', textAlign: 'center' }}>Item</td>
-<td style={{ border: '1px solid #000 1px solid #000 0 1px solid #000', padding: '6px 12px', textAlign: 'center' }} colSpan={2}>Measurements</td>
+<td style={{ borderTop: '1px solid #000', borderLeft: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'center' }}>Item</td>
+<td style={{ borderTop: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'center' }} colSpan={2}>Measurements</td>
 </tr>
 <tr>
-<td style={{ border: '0 1px solid #000 1px solid #000 1px solid #000', padding: '6px 12px' }}></td>
-<td style={{ border: '1px solid #000 1px solid #000 1px solid #000 0', padding: '6px 12px', textAlign: 'center' }}>Length</td>
-<td style={{ border: '1px solid #000', padding: '6px 12px', textAlign: 'center' }}>Width</td>
+<td style={{ borderLeft: '1px solid #000', borderRight: '1px solid #000', borderBottom: '1px solid #000', padding: '6px 12px' }}></td>
+<td style={{ borderBottom: '1px solid #000', padding: '6px 12px', textAlign: 'center' }}>Length</td>
+<td style={{ borderBottom: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'center' }}>Width</td>
 </tr>
-<tr><td style={{ border: '1px solid #000', padding: '6px 12px', textAlign: 'left' }}>Box A</td><td style={{ border: '1px solid #000', padding: '6px 12px', textAlign: 'center' }}>10 cm</td><td style={{ border: '1px solid #000', padding: '6px 12px', textAlign: 'center' }}>5 cm</td></tr>
-<tr><td style={{ border: '1px solid #000', padding: '6px 12px', textAlign: 'left' }}>Box B</td><td style={{ border: '1px solid #000', padding: '6px 12px', textAlign: 'center' }}>15 cm</td><td style={{ border: '1px solid #000', padding: '6px 12px', textAlign: 'center' }}>8 cm</td></tr>
+<tr>
+<td style={{ borderBottom: '1px solid #000', borderLeft: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'left' }}>Box A</td>
+<td style={{ borderBottom: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'center' }}>10 cm</td>
+<td style={{ borderBottom: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'center' }}>5 cm</td>
+</tr>
+<tr>
+<td style={{ borderBottom: '1px solid #000', borderLeft: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'left' }}>Box B</td>
+<td style={{ borderBottom: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'center' }}>15 cm</td>
+<td style={{ borderBottom: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'center' }}>8 cm</td>
+</tr>
 </table>
 </div>
 
@@ -444,22 +634,54 @@ C & 8.7 & 8.9 & 8.8 \\
 
 <div style={{ backgroundColor: '#f8f9fa', padding: '1.5em', borderRadius: '8px', margin: '1em 0', border: '1px solid #e9ecef' }}>
 <div style={{ marginBottom: '1em', fontSize: '0.9em', color: '#6c757d' }}>Decimal alignment with siunitx:</div>
-<table style={{ margin: '0 auto', fontFamily: 'serif', fontSize: '1em', border: '1px solid #000', borderCollapse: 'collapse' }}>
-<tr><td style={{ border: '1px solid #000', padding: '6px 12px', textAlign: 'left' }}><strong>Item</strong></td><td style={{ border: '1px solid #000', padding: '6px 12px', textAlign: 'center' }}><strong>Value</strong></td></tr>
-<tr><td style={{ border: '1px solid #000', padding: '6px 12px', textAlign: 'left' }}>Product A</td><td style={{ border: '1px solid #000', padding: '6px 12px', textAlign: 'right', fontFamily: 'monospace' }}>&nbsp;&nbsp;12.5&nbsp;</td></tr>
-<tr><td style={{ border: '1px solid #000', padding: '6px 12px', textAlign: 'left' }}>Product B</td><td style={{ border: '1px solid #000', padding: '6px 12px', textAlign: 'right', fontFamily: 'monospace' }}>123.45</td></tr>
-<tr><td style={{ border: '1px solid #000', padding: '6px 12px', textAlign: 'left' }}>Product C</td><td style={{ border: '1px solid #000', padding: '6px 12px', textAlign: 'right', fontFamily: 'monospace' }}>&nbsp;&nbsp;1.234</td></tr>
+<table style={{ margin: '0 auto', fontFamily: 'Georgia, serif', fontSize: '1.1em', borderCollapse: 'collapse' }}>
+<tr>
+<td style={{ borderTop: '1px solid #000', borderBottom: '1px solid #000', borderLeft: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'left' }}><strong>Item</strong></td>
+<td style={{ borderTop: '1px solid #000', borderBottom: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'center' }}><strong>Value</strong></td>
+</tr>
+<tr>
+<td style={{ borderBottom: '1px solid #000', borderLeft: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'left' }}>Product A</td>
+<td style={{ borderBottom: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'right', fontFamily: 'monospace' }}>&nbsp;&nbsp;12.5&nbsp;</td>
+</tr>
+<tr>
+<td style={{ borderBottom: '1px solid #000', borderLeft: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'left' }}>Product B</td>
+<td style={{ borderBottom: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'right', fontFamily: 'monospace' }}>123.45</td>
+</tr>
+<tr>
+<td style={{ borderBottom: '1px solid #000', borderLeft: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'left' }}>Product C</td>
+<td style={{ borderBottom: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'right', fontFamily: 'monospace' }}>&nbsp;&nbsp;1.234</td>
+</tr>
 </table>
 <div style={{ marginTop: '0.5em', fontSize: '0.8em', color: '#666', textAlign: 'center' }}>Notice how decimal points align vertically</div>
 </div>
 
 <div style={{ backgroundColor: '#f8f9fa', padding: '1.5em', borderRadius: '8px', margin: '1em 0', border: '1px solid #e9ecef' }}>
 <div style={{ marginBottom: '1em', fontSize: '0.9em', color: '#6c757d' }}>Multiple numeric columns:</div>
-<table style={{ margin: '0 auto', fontFamily: 'serif', fontSize: '1em', border: '1px solid #000', borderCollapse: 'collapse' }}>
-<tr><td style={{ border: '1px solid #000', padding: '6px 12px', textAlign: 'left' }}><strong>Test</strong></td><td style={{ border: '1px solid #000', padding: '6px 12px', textAlign: 'center' }}><strong>Run 1</strong></td><td style={{ border: '1px solid #000', padding: '6px 12px', textAlign: 'center' }}><strong>Run 2</strong></td><td style={{ border: '1px solid #000', padding: '6px 12px', textAlign: 'center' }}><strong>Run 3</strong></td></tr>
-<tr><td style={{ border: '1px solid #000', padding: '6px 12px', textAlign: 'left' }}>A</td><td style={{ border: '1px solid #000', padding: '6px 12px', textAlign: 'right', fontFamily: 'monospace' }}>9.5</td><td style={{ border: '1px solid #000', padding: '6px 12px', textAlign: 'right', fontFamily: 'monospace' }}>10.2</td><td style={{ border: '1px solid #000', padding: '6px 12px', textAlign: 'right', fontFamily: 'monospace' }}>9.8</td></tr>
-<tr><td style={{ border: '1px solid #000', padding: '6px 12px', textAlign: 'left' }}>B</td><td style={{ border: '1px solid #000', padding: '6px 12px', textAlign: 'right', fontFamily: 'monospace' }}>12.1</td><td style={{ border: '1px solid #000', padding: '6px 12px', textAlign: 'right', fontFamily: 'monospace' }}>11.9</td><td style={{ border: '1px solid #000', padding: '6px 12px', textAlign: 'right', fontFamily: 'monospace' }}>12.3</td></tr>
-<tr><td style={{ border: '1px solid #000', padding: '6px 12px', textAlign: 'left' }}>C</td><td style={{ border: '1px solid #000', padding: '6px 12px', textAlign: 'right', fontFamily: 'monospace' }}>8.7</td><td style={{ border: '1px solid #000', padding: '6px 12px', textAlign: 'right', fontFamily: 'monospace' }}>8.9</td><td style={{ border: '1px solid #000', padding: '6px 12px', textAlign: 'right', fontFamily: 'monospace' }}>8.8</td></tr>
+<table style={{ margin: '0 auto', fontFamily: 'Georgia, serif', fontSize: '1.1em', borderCollapse: 'collapse' }}>
+<tr>
+<td style={{ borderTop: '1px solid #000', borderBottom: '1px solid #000', borderLeft: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'left' }}><strong>Test</strong></td>
+<td style={{ borderTop: '1px solid #000', borderBottom: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'center' }}><strong>Run 1</strong></td>
+<td style={{ borderTop: '1px solid #000', borderBottom: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'center' }}><strong>Run 2</strong></td>
+<td style={{ borderTop: '1px solid #000', borderBottom: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'center' }}><strong>Run 3</strong></td>
+</tr>
+<tr>
+<td style={{ borderBottom: '1px solid #000', borderLeft: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'left' }}>A</td>
+<td style={{ borderBottom: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'right', fontFamily: 'monospace' }}>9.5</td>
+<td style={{ borderBottom: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'right', fontFamily: 'monospace' }}>10.2</td>
+<td style={{ borderBottom: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'right', fontFamily: 'monospace' }}>9.8</td>
+</tr>
+<tr>
+<td style={{ borderBottom: '1px solid #000', borderLeft: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'left' }}>B</td>
+<td style={{ borderBottom: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'right', fontFamily: 'monospace' }}>12.1</td>
+<td style={{ borderBottom: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'right', fontFamily: 'monospace' }}>11.9</td>
+<td style={{ borderBottom: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'right', fontFamily: 'monospace' }}>12.3</td>
+</tr>
+<tr>
+<td style={{ borderBottom: '1px solid #000', borderLeft: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'left' }}>C</td>
+<td style={{ borderBottom: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'right', fontFamily: 'monospace' }}>8.7</td>
+<td style={{ borderBottom: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'right', fontFamily: 'monospace' }}>8.9</td>
+<td style={{ borderBottom: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px', textAlign: 'right', fontFamily: 'monospace' }}>8.8</td>
+</tr>
 </table>
 </div>
 
