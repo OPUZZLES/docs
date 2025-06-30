@@ -1,0 +1,760 @@
+---
+title: Bibliography Management with BibTeX - Complete Guide
+description: Master bibliography management in LaTeX using BibTeX. Learn citation styles, .bib files, and automated reference formatting with examples.
+keywords: LaTeX bibliography, BibTeX, citations, references, bibliography management, citation styles
+seo:
+  title: BibTeX Bibliography Management - LaTeX Guide
+  description: Complete guide to bibliography management with BibTeX. Learn .bib files, citation commands, bibliography styles, and best practices.
+  canonical: https://resources.latex-cloud-studio.com/learn/latex/bibliography/bibliography-management-bibtex
+---
+
+Master **professional bibliography management** in LaTeX using BibTeX. This comprehensive guide covers everything from basic citations to advanced bibliography customization for academic papers, theses, and publications.
+
+<Info>
+**Quick start**: BibTeX automates bibliography formatting in LaTeX. Create a `.bib` file with your references, cite them with `\cite{}`, and LaTeX handles the formatting based on your chosen style.
+
+**Prerequisites**: Basic LaTeX knowledge. For citations basics, see [Bibliography & Citations](/learn/latex/bibliography-citations).
+</Info>
+
+## What You'll Learn
+- ✅ How BibTeX works with LaTeX
+- ✅ Creating and managing .bib files
+- ✅ Citation commands and variations
+- ✅ Bibliography styles (plain, alpha, abbrv, etc.)
+- ✅ Advanced customization techniques
+- ✅ Best practices for reference management
+- ✅ Troubleshooting common issues
+
+## How BibTeX Works
+
+BibTeX is a bibliography management tool that works alongside LaTeX to handle citations and references automatically. Here's the workflow:
+
+<div style={{ backgroundColor: '#f8f9fa', padding: '2em', borderRadius: '8px', margin: '2em 0' }}>
+<div style={{ textAlign: 'center', fontFamily: 'Georgia, serif', fontSize: '1.1em' }}>
+<div style={{ marginBottom: '2em', fontSize: '1.2em', fontWeight: 'bold', color: '#FF6037' }}>BibTeX Workflow</div>
+<div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', flexWrap: 'wrap', gap: '1em' }}>
+<div style={{ textAlign: 'center', padding: '1em' }}>
+<div style={{ backgroundColor: '#FF6037', color: 'white', padding: '1em', borderRadius: '50%', width: '60px', height: '60px', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 0.5em' }}>1</div>
+<div style={{ fontWeight: 'bold' }}>Create .bib file</div>
+<div style={{ fontSize: '0.9em', color: '#666' }}>Store references</div>
+</div>
+<div style={{ fontSize: '2em', color: '#ccc' }}>→</div>
+<div style={{ textAlign: 'center', padding: '1em' }}>
+<div style={{ backgroundColor: '#FF6037', color: 'white', padding: '1em', borderRadius: '50%', width: '60px', height: '60px', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 0.5em' }}>2</div>
+<div style={{ fontWeight: 'bold' }}>Cite in .tex</div>
+<div style={{ fontSize: '0.9em', color: '#666' }}>Use \cite commands</div>
+</div>
+<div style={{ fontSize: '2em', color: '#ccc' }}>→</div>
+<div style={{ textAlign: 'center', padding: '1em' }}>
+<div style={{ backgroundColor: '#FF6037', color: 'white', padding: '1em', borderRadius: '50%', width: '60px', height: '60px', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 0.5em' }}>3</div>
+<div style={{ fontWeight: 'bold' }}>Compile</div>
+<div style={{ fontSize: '0.9em', color: '#666' }}>LaTeX + BibTeX</div>
+</div>
+<div style={{ fontSize: '2em', color: '#ccc' }}>→</div>
+<div style={{ textAlign: 'center', padding: '1em' }}>
+<div style={{ backgroundColor: '#FF6037', color: 'white', padding: '1em', borderRadius: '50%', width: '60px', height: '60px', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 0.5em' }}>4</div>
+<div style={{ fontWeight: 'bold' }}>Output</div>
+<div style={{ fontSize: '0.9em', color: '#666' }}>Formatted bibliography</div>
+</div>
+</div>
+</div>
+</div>
+
+## Basic Setup
+
+### Step 1: Create Your Main Document
+
+<CodeGroup>
+```latex main.tex
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{Sample Article with Bibliography}
+\author{Your Name}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+According to \cite{einstein1905}, the theory of special relativity 
+revolutionized physics. Later work by \cite{hawking1988} expanded 
+our understanding of the universe.
+
+% Bibliography
+\bibliographystyle{plain}  % Choose citation style
+\bibliography{references}   % Link to .bib file (without extension)
+
+\end{document}
+```
+</CodeGroup>
+
+### Step 2: Create Your Bibliography File
+
+<CodeGroup>
+```bibtex references.bib
+@article{einstein1905,
+    author = {Einstein, Albert},
+    title = {On the Electrodynamics of Moving Bodies},
+    journal = {Annalen der Physik},
+    year = {1905},
+    volume = {17},
+    pages = {891--921},
+    doi = {10.1002/andp.19053221004}
+}
+
+@book{hawking1988,
+    author = {Hawking, Stephen},
+    title = {A Brief History of Time},
+    publisher = {Bantam Books},
+    year = {1988},
+    address = {New York},
+    isbn = {978-0553380163}
+}
+```
+</CodeGroup>
+
+### Step 3: Compile Your Document
+
+<div style={{ backgroundColor: '#e8f5e9', padding: '1.5em', borderRadius: '8px', margin: '1em 0' }}>
+<div style={{ fontWeight: 'bold', marginBottom: '0.5em' }}>Compilation sequence:</div>
+<ol style={{ marginLeft: '1.5em', lineHeight: '1.8' }}>
+<li><code>pdflatex main.tex</code> (first pass)</li>
+<li><code>bibtex main</code> (process bibliography)</li>
+<li><code>pdflatex main.tex</code> (incorporate citations)</li>
+<li><code>pdflatex main.tex</code> (finalize references)</li>
+</ol>
+</div>
+
+**Rendered output:**
+
+<div style={{ backgroundColor: '#f8f9fa', padding: '1.5em', borderRadius: '8px', margin: '1em 0', border: '1px solid #e9ecef' }}>
+<div style={{ fontFamily: 'Georgia, serif', fontSize: '1.1em', lineHeight: '1.8' }}>
+<h1 style={{ textAlign: 'center', fontSize: '1.8em', marginBottom: '0.5em' }}>Sample Article with Bibliography</h1>
+<p style={{ textAlign: 'center', marginBottom: '2em' }}>Your Name<br/>November 28, 2024</p>
+<h2 style={{ fontSize: '1.4em', marginBottom: '0.5em' }}>1 Introduction</h2>
+<p style={{ marginBottom: '2em' }}>According to [1], the theory of special relativity revolutionized physics. Later work by [2] expanded our understanding of the universe.</p>
+<h2 style={{ fontSize: '1.4em', marginBottom: '0.5em' }}>References</h2>
+<div style={{ marginLeft: '2em' }}>
+<p style={{ textIndent: '-2em', marginBottom: '0.5em' }}>[1] Albert Einstein. On the electrodynamics of moving bodies. <em>Annalen der Physik</em>, 17:891–921, 1905.</p>
+<p style={{ textIndent: '-2em', marginBottom: '0.5em' }}>[2] Stephen Hawking. <em>A Brief History of Time</em>. Bantam Books, New York, 1988.</p>
+</div>
+</div>
+</div>
+
+## BibTeX Entry Types
+
+### Common Entry Types
+
+<CardGroup cols={2}>
+<Card title="@article" icon="newspaper">
+Journal articles, magazine articles
+```bibtex
+@article{key,
+  author = {},
+  title = {},
+  journal = {},
+  year = {}
+}
+```
+</Card>
+
+<Card title="@book" icon="book">
+Books with publisher
+```bibtex
+@book{key,
+  author = {},
+  title = {},
+  publisher = {},
+  year = {}
+}
+```
+</Card>
+
+<Card title="@inproceedings" icon="users">
+Conference papers
+```bibtex
+@inproceedings{key,
+  author = {},
+  title = {},
+  booktitle = {},
+  year = {}
+}
+```
+</Card>
+
+<Card title="@phdthesis" icon="graduation-cap">
+PhD dissertations
+```bibtex
+@phdthesis{key,
+  author = {},
+  title = {},
+  school = {},
+  year = {}
+}
+```
+</Card>
+</CardGroup>
+
+### Complete Entry Types Reference
+
+<Accordion title="All BibTeX entry types with required and optional fields">
+
+#### @article
+**Required**: author, title, journal, year  
+**Optional**: volume, number, pages, month, doi, note
+
+#### @book
+**Required**: author/editor, title, publisher, year  
+**Optional**: volume/number, series, address, edition, month, isbn, note
+
+#### @booklet
+**Required**: title  
+**Optional**: author, howpublished, address, month, year, note
+
+#### @inbook
+**Required**: author/editor, title, chapter/pages, publisher, year  
+**Optional**: volume/number, series, type, address, edition, month, note
+
+#### @incollection
+**Required**: author, title, booktitle, publisher, year  
+**Optional**: editor, volume/number, series, type, chapter, pages, address, edition, month, note
+
+#### @inproceedings / @conference
+**Required**: author, title, booktitle, year  
+**Optional**: editor, volume/number, series, pages, address, month, organization, publisher, note
+
+#### @manual
+**Required**: title  
+**Optional**: author, organization, address, edition, month, year, note
+
+#### @mastersthesis
+**Required**: author, title, school, year  
+**Optional**: type, address, month, note
+
+#### @misc
+**Required**: none  
+**Optional**: author, title, howpublished, month, year, note, url
+
+#### @phdthesis
+**Required**: author, title, school, year  
+**Optional**: type, address, month, note
+
+#### @proceedings
+**Required**: title, year  
+**Optional**: editor, volume/number, series, address, month, publisher, organization, note
+
+#### @techreport
+**Required**: author, title, institution, year  
+**Optional**: type, number, address, month, note
+
+#### @unpublished
+**Required**: author, title, note  
+**Optional**: month, year
+
+</Accordion>
+
+## Citation Commands
+
+### Basic Citation Commands
+
+<CodeGroup>
+```latex citation-examples.tex
+% Basic citation
+\cite{einstein1905}                    % Output: [1]
+
+% Multiple citations
+\cite{einstein1905,hawking1988}        % Output: [1, 2]
+
+% Citation with page number
+\cite[p.~42]{hawking1988}              % Output: [2, p. 42]
+
+% Citation with prefix
+\cite[see][]{einstein1905}             % Output: [see 1]
+
+% Citation with prefix and page
+\cite[see][p.~15]{einstein1905}        % Output: [see 1, p. 15]
+
+% Textual citations (with natbib package)
+\usepackage{natbib}
+\citet{einstein1905}                   % Output: Einstein (1905)
+\citep{einstein1905}                   % Output: (Einstein, 1905)
+\citeauthor{einstein1905}              % Output: Einstein
+\citeyear{einstein1905}                % Output: 1905
+```
+</CodeGroup>
+
+**Rendered output examples:**
+
+<div style={{ backgroundColor: '#f8f9fa', padding: '1.5em', borderRadius: '8px', margin: '1em 0', border: '1px solid #e9ecef' }}>
+<table style={{ width: '100%', fontFamily: 'Georgia, serif', fontSize: '1.1em' }}>
+<thead>
+<tr style={{ borderBottom: '2px solid #ddd' }}>
+<th style={{ padding: '0.5em', textAlign: 'left' }}>Command</th>
+<th style={{ padding: '0.5em', textAlign: 'left' }}>Output (plain style)</th>
+<th style={{ padding: '0.5em', textAlign: 'left' }}>Output (author-year)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style={{ padding: '0.5em' }}><code>\cite{einstein1905}</code></td>
+<td style={{ padding: '0.5em' }}>[1]</td>
+<td style={{ padding: '0.5em' }}>(Einstein, 1905)</td>
+</tr>
+<tr style={{ backgroundColor: '#f5f5f5' }}>
+<td style={{ padding: '0.5em' }}><code>\cite{einstein1905,hawking1988}</code></td>
+<td style={{ padding: '0.5em' }}>[1, 2]</td>
+<td style={{ padding: '0.5em' }}>(Einstein, 1905; Hawking, 1988)</td>
+</tr>
+<tr>
+<td style={{ padding: '0.5em' }}><code>\cite[p.~42]{hawking1988}</code></td>
+<td style={{ padding: '0.5em' }}>[2, p. 42]</td>
+<td style={{ padding: '0.5em' }}>(Hawking, 1988, p. 42)</td>
+</tr>
+<tr style={{ backgroundColor: '#f5f5f5' }}>
+<td style={{ padding: '0.5em' }}><code>\citet{einstein1905}</code></td>
+<td style={{ padding: '0.5em' }}>—</td>
+<td style={{ padding: '0.5em' }}>Einstein (1905)</td>
+</tr>
+<tr>
+<td style={{ padding: '0.5em' }}><code>\citep{einstein1905}</code></td>
+<td style={{ padding: '0.5em' }}>—</td>
+<td style={{ padding: '0.5em' }}>(Einstein, 1905)</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+## Bibliography Styles
+
+### Standard BibTeX Styles
+
+<div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1em', margin: '2em 0' }}>
+
+<div style={{ backgroundColor: '#fff3e0', padding: '1.5em', borderRadius: '8px', border: '1px solid #ffe0b2' }}>
+<h4 style={{ marginTop: 0, color: '#e65100' }}>plain</h4>
+<code style={{ display: 'block', marginBottom: '0.5em' }}>\bibliographystyle{plain}</code>
+<p style={{ fontSize: '0.9em', marginBottom: '0.5em' }}>Entries sorted alphabetically by author, numbered [1], [2], [3]...</p>
+<div style={{ fontSize: '0.85em', fontFamily: 'Georgia, serif' }}>
+[1] A. Einstein. On the electrodynamics...<br/>
+[2] S. Hawking. A Brief History of Time...
+</div>
+</div>
+
+<div style={{ backgroundColor: '#e8f5e9', padding: '1.5em', borderRadius: '8px', border: '1px solid #c8e6c9' }}>
+<h4 style={{ marginTop: 0, color: '#2e7d32' }}>alpha</h4>
+<code style={{ display: 'block', marginBottom: '0.5em' }}>\bibliographystyle{alpha}</code>
+<p style={{ fontSize: '0.9em', marginBottom: '0.5em' }}>Labels like [Ein05], [Haw88] based on author and year</p>
+<div style={{ fontSize: '0.85em', fontFamily: 'Georgia, serif' }}>
+[Ein05] A. Einstein. On the electrodynamics...<br/>
+[Haw88] S. Hawking. A Brief History of Time...
+</div>
+</div>
+
+<div style={{ backgroundColor: '#e3f2fd', padding: '1.5em', borderRadius: '8px', border: '1px solid #bbdefb' }}>
+<h4 style={{ marginTop: 0, color: '#1565c0' }}>abbrv</h4>
+<code style={{ display: 'block', marginBottom: '0.5em' }}>\bibliographystyle{abbrv}</code>
+<p style={{ fontSize: '0.9em', marginBottom: '0.5em' }}>Like plain but with abbreviated first names, journal names</p>
+<div style={{ fontSize: '0.85em', fontFamily: 'Georgia, serif' }}>
+[1] A. Einstein. On the electrodynamics... <em>Ann. Phys.</em><br/>
+[2] S. Hawking. A Brief History of Time...
+</div>
+</div>
+
+<div style={{ backgroundColor: '#fce4ec', padding: '1.5em', borderRadius: '8px', border: '1px solid #f8bbd0' }}>
+<h4 style={{ marginTop: 0, color: '#c2185b' }}>unsrt</h4>
+<code style={{ display: 'block', marginBottom: '0.5em' }}>\bibliographystyle{unsrt}</code>
+<p style={{ fontSize: '0.9em', marginBottom: '0.5em' }}>Entries in order of citation, not alphabetically</p>
+<div style={{ fontSize: '0.85em', fontFamily: 'Georgia, serif' }}>
+[1] S. Hawking. A Brief History of Time...<br/>
+[2] A. Einstein. On the electrodynamics...
+</div>
+</div>
+
+</div>
+
+### Author-Year Styles (natbib)
+
+<CodeGroup>
+```latex natbib-styles.tex
+\usepackage{natbib}
+
+% Choose one of these styles:
+\bibliographystyle{plainnat}    % Author-year version of plain
+\bibliographystyle{abbrvnat}    % Author-year version of abbrv
+\bibliographystyle{unsrtnat}    % Author-year version of unsrt
+
+% Popular journal styles:
+\bibliographystyle{apalike}     % APA-like style
+\bibliographystyle{chicago}     % Chicago Manual of Style
+\bibliographystyle{harvard}     % Harvard citation style
+\bibliographystyle{agsm}        % Australian Government Style Manual
+```
+</CodeGroup>
+
+### Custom Bibliography Styles
+
+<Tip>
+Many journals and institutions provide their own `.bst` files. Common examples:
+- **IEEEtran.bst** - IEEE Transactions
+- **ACM-Reference-Format.bst** - ACM publications  
+- **apa.bst** - American Psychological Association
+- **vancouver.bst** - Biomedical journals
+- **nature.bst** - Nature journals
+</Tip>
+
+## Managing Large Bibliographies
+
+### Organizing Your .bib File
+
+<CodeGroup>
+```bibtex organized-references.bib
+% ==========================================
+% BOOKS
+% ==========================================
+
+@book{knuth1984tex,
+    author = {Knuth, Donald E.},
+    title = {The {\TeX}book},
+    publisher = {Addison-Wesley},
+    year = {1984},
+    address = {Reading, Massachusetts},
+    isbn = {0-201-13447-0},
+    keywords = {tex, typography, typesetting}
+}
+
+@book{lamport1994latex,
+    author = {Lamport, Leslie},
+    title = {{\LaTeX}: A Document Preparation System},
+    publisher = {Addison-Wesley},
+    year = {1994},
+    edition = {2nd},
+    isbn = {0-201-52983-1},
+    keywords = {latex, documentation}
+}
+
+% ==========================================
+% JOURNAL ARTICLES
+% ==========================================
+
+@article{shannon1948mathematical,
+    author = {Shannon, Claude E.},
+    title = {A Mathematical Theory of Communication},
+    journal = {Bell System Technical Journal},
+    year = {1948},
+    volume = {27},
+    number = {3},
+    pages = {379--423},
+    month = jul,
+    doi = {10.1002/j.1538-7305.1948.tb01338.x},
+    keywords = {information theory, communication}
+}
+
+% ==========================================
+% CONFERENCE PAPERS
+% ==========================================
+
+@inproceedings{turing1950computing,
+    author = {Turing, Alan M.},
+    title = {Computing Machinery and Intelligence},
+    booktitle = {Mind},
+    year = {1950},
+    volume = {59},
+    number = {236},
+    pages = {433--460},
+    keywords = {artificial intelligence, turing test}
+}
+```
+</CodeGroup>
+
+### Using Multiple .bib Files
+
+<CodeGroup>
+```latex multiple-bibs.tex
+% You can use multiple bibliography files
+\bibliography{books,articles,conferences}
+
+% Or keep project-specific references separate
+\bibliography{general-refs,project-specific-refs}
+```
+</CodeGroup>
+
+### String Definitions for Consistency
+
+<CodeGroup>
+```bibtex string-definitions.bib
+% Define common strings to ensure consistency
+@string{ieee = "IEEE Transactions on"}
+@string{acm = "ACM Computing Surveys"}
+@string{springer = "Springer-Verlag"}
+@string{mit = "MIT Press"}
+
+% Use the strings in entries
+@article{example2023,
+    author = {Example, Author},
+    title = {Example Article},
+    journal = ieee # " Software Engineering",  % Concatenation
+    year = {2023},
+    publisher = springer
+}
+```
+</CodeGroup>
+
+## Advanced Features
+
+### Cross-References
+
+<CodeGroup>
+```bibtex cross-references.bib
+@book{edited-volume2023,
+    editor = {Smith, Jane and Doe, John},
+    title = {Advances in Computer Science},
+    publisher = {Academic Press},
+    year = {2023}
+}
+
+@incollection{chapter2023,
+    author = {Johnson, Alice},
+    title = {Machine Learning Applications},
+    pages = {45--67},
+    crossref = {edited-volume2023}  % Inherits book details
+}
+```
+</CodeGroup>
+
+### Custom Fields and Notes
+
+<CodeGroup>
+```bibtex custom-fields.bib
+@article{example2023custom,
+    author = {Author, Example},
+    title = {Article with Custom Fields},
+    journal = {Example Journal},
+    year = {2023},
+    % Standard optional fields
+    note = {Forthcoming},
+    abstract = {This article discusses...},
+    keywords = {keyword1, keyword2, keyword3},
+    % URL and access information
+    url = {https://example.com/article},
+    urldate = {2023-11-28},
+    % Modern identifiers
+    doi = {10.1234/example.2023},
+    eprint = {2301.00000},
+    archivePrefix = {arXiv}
+}
+```
+</CodeGroup>
+
+### Special Characters and Formatting
+
+<CodeGroup>
+```bibtex special-characters.bib
+@article{special-chars2023,
+    % Preserving capitalization
+    title = {The {NASA} {M}ars {R}over: A Study of {AI} in Space},
+    
+    % Special characters
+    author = {M{\"u}ller, Hans and Garc{\'\i}a, Jos{\'e}},
+    
+    % Math in titles
+    title = {On the $\mathcal{O}(n\log n)$ Complexity of Sorting},
+    
+    % Preserving spaces and formatting
+    title = {The {{\TeX}} and {{\LaTeX}} Companion},
+    
+    % Corporate authors
+    author = {{Microsoft Corporation}},
+    
+    % Multiple authors with "and others"
+    author = {First, A. and Second, B. and Third, C. and others},
+    
+    journal = {Example Journal},
+    year = {2023}
+}
+```
+</CodeGroup>
+
+## Best Practices
+
+### 1. Consistent Key Naming
+
+<div style={{ backgroundColor: '#e8f5e9', padding: '1.5em', borderRadius: '8px', margin: '1em 0' }}>
+<h4 style={{ marginTop: 0, color: '#2e7d32' }}>✅ Good Key Naming Conventions</h4>
+<ul style={{ marginBottom: 0 }}>
+<li><code>author2023keyword</code> - e.g., <code>einstein1905relativity</code></li>
+<li><code>author2023a</code>, <code>author2023b</code> - for multiple papers same year</li>
+<li><code>conference2023author</code> - e.g., <code>icml2023smith</code></li>
+</ul>
+</div>
+
+<div style={{ backgroundColor: '#ffebee', padding: '1.5em', borderRadius: '8px', margin: '1em 0' }}>
+<h4 style={{ marginTop: 0, color: '#c62828' }}>❌ Poor Key Names</h4>
+<ul style={{ marginBottom: 0 }}>
+<li><code>paper1</code>, <code>paper2</code> - not descriptive</li>
+<li><code>my-favorite-paper</code> - too subjective</li>
+<li><code>ref:2023/05/28</code> - uses special characters</li>
+</ul>
+</div>
+
+### 2. Complete Information
+
+Always include:
+- **DOI** when available - for reliable access
+- **URL** for online resources
+- **ISBN** for books
+- **Abstract** for searchability
+- **Keywords** for organization
+
+### 3. Version Control
+
+<CodeGroup>
+```bash git-workflow.sh
+# Track your bibliography files
+git add references.bib
+git commit -m "Add quantum computing references"
+
+# Create backups before major changes
+cp references.bib references.bib.backup
+
+# Use meaningful commit messages
+git commit -m "Update author names to include middle initials"
+```
+</CodeGroup>
+
+## Troubleshooting
+
+<Accordion title="Bibliography not appearing">
+**Common causes:**
+1. Missing `\bibliography{filename}` command
+2. Incorrect filename (don't include .bib extension)
+3. Didn't run BibTeX: `bibtex main`
+4. Need additional LaTeX passes
+
+**Solution:**
+```bash
+pdflatex main
+bibtex main
+pdflatex main
+pdflatex main
+```
+</Accordion>
+
+<Accordion title="Citation shows as [?] or bold">
+**Common causes:**
+1. Typo in citation key
+2. Entry not in .bib file
+3. BibTeX compilation failed
+4. Multiple .bib files not all included
+
+**Debugging:**
+```latex
+% Check the .blg file for errors
+% Look for "Warning--I didn't find a database entry for..."
+```
+</Accordion>
+
+<Accordion title="Incorrect sorting or formatting">
+**Common causes:**
+1. Wrong bibliography style
+2. Missing required fields
+3. Special characters not escaped
+
+**Solutions:**
+- Verify all required fields are present
+- Use `{}` to preserve capitalization
+- Check .bst file compatibility
+</Accordion>
+
+<Accordion title="Encoding and special character issues">
+**For UTF-8 support:**
+```latex
+\usepackage[utf8]{inputenc}  % For pdfLaTeX
+% or use XeLaTeX/LuaLaTeX for native UTF-8
+```
+
+**For special characters:**
+```bibtex
+author = {M{\"u}ller, J{\"o}rg}  % ü, ö
+author = {Garc{\'\i}a, Jos{\'e}}   % í, é
+```
+</Accordion>
+
+## Modern Alternatives
+
+### BibLaTeX (Advanced Users)
+
+<Info>
+**BibLaTeX** is a modern replacement for BibTeX with more features:
+- Better Unicode support
+- More entry types and fields
+- Customizable citation styles
+- Multiple bibliographies in one document
+
+Learn more: [BibLaTeX Guide](/learn/latex/bibliography/biblatex)
+</Info>
+
+### Reference Managers
+
+Popular tools that export to BibTeX:
+- **Zotero** - Free, open-source
+- **Mendeley** - Free with Elsevier account
+- **JabRef** - BibTeX-specific manager
+- **EndNote** - Commercial, widely used
+- **Paperpile** - Modern web-based
+
+## Quick Reference Card
+
+<div style={{ backgroundColor: '#f5f5f5', padding: '2em', borderRadius: '8px', margin: '2em 0' }}>
+<h3 style={{ marginTop: 0, color: '#FF6037' }}>BibTeX Quick Reference</h3>
+<div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '2em' }}>
+<div>
+<h4>Essential Commands</h4>
+<code style={{ display: 'block' }}>\bibliographystyle{style}</code>
+<code style={{ display: 'block' }}>\bibliography{bibfile}</code>
+<code style={{ display: 'block' }}>\cite{key}</code>
+<code style={{ display: 'block' }}>\nocite{key}</code>
+<code style={{ display: 'block' }}>\nocite{`*`}</code>
+</div>
+<div>
+<h4>Compilation Order</h4>
+<ol style={{ marginLeft: '1.5em' }}>
+<li>pdflatex main.tex</li>
+<li>bibtex main</li>
+<li>pdflatex main.tex</li>
+<li>pdflatex main.tex</li>
+</ol>
+</div>
+<div>
+<h4>Common Styles</h4>
+<ul style={{ marginLeft: '1.5em' }}>
+<li>plain - Numbered, alphabetical</li>
+<li>alpha - Author-year labels</li>
+<li>abbrv - Abbreviated names</li>
+<li>unsrt - Citation order</li>
+<li>apalike - APA style</li>
+</ul>
+</div>
+</div>
+</div>
+
+## Next Steps
+
+<CardGroup cols={2}>
+<Card title="Citation Styles Guide" icon="palette" href="/learn/latex/bibliography/citation-styles">
+Explore different citation formats and journal requirements
+</Card>
+<Card title="BibLaTeX Tutorial" icon="rocket" href="/learn/latex/bibliography/biblatex">
+Learn the modern bibliography system
+</Card>
+<Card title="Bibliography Templates" icon="copy" href="/templates/bibliography">
+Ready-to-use bibliography examples
+</Card>
+<Card title="Thesis Bibliography" icon="graduation-cap" href="/learn/latex/thesis/bibliography">
+Managing references for large documents
+</Card>
+</CardGroup>
+
+<Warning>
+**LaTeX Cloud Studio** handles BibTeX compilation automatically! Simply upload your `.bib` file and cite your references - we take care of the compilation sequence for you.
+</Warning>

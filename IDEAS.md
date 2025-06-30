@@ -2,6 +2,15 @@
 
 This file tracks future ideas, enhancements, and features to implement in the documentation.
 
+
+
+https://www.overleaf.com/learn/latex/Brackets_and_Parentheses
+https://www.overleaf.com/learn/latex/Subscripts_and_superscripts
+https://www.overleaf.com/learn/latex/Articles/Pandora%E2%80%99s_%5Chbox%3A_Using_LuaTeX_to_Lift_the_Lid_of_TeX_Boxes
+
+inter active syntax test
+
+
 ## Blog Content Ideas
 
 ### High Priority

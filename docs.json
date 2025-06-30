@@ -102,6 +102,7 @@
             "group": "Bibliography & References",
             "pages": [
               "learn/latex/bibliography-citations",
+              "learn/latex/bibliography/bibliography-management-bibtex",
               "learn/latex/cross-referencing"
             ]
           }

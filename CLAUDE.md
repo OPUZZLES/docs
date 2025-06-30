@@ -16,10 +16,12 @@ This is a LaTeX documentation project built with Mintlify for LaTeX Cloud Studio
 
 ## Current Focus
 
-**Active Task**: Creating blog content strategy
-- Building story-driven blog posts that drive traffic to comprehensive documentation
-- Creating complementary content that enhances rather than duplicates existing tutorials
-- Focus on user stories, platform benefits, and community building
+**Documentation Quality Standards**:
+- Every LaTeX code example must include a "**Rendered output:**" section
+- Major documentation pages should exceed 3000 words (surpassing Overleaf)
+- Use consistent HTML styling for visual examples
+- Maintain proper MDX structure (balanced div tags)
+- SEO-optimized titles (< 60 chars) and descriptions (< 160 chars)
 
 ## Important Notes
 
@@ -85,12 +87,52 @@ Organize documentation into logical learning paths:
 - **Practical**: Include real-world examples and use cases
 - **Visual**: Use diagrams, examples, and visual aids
 - **Interactive**: Provide live code examples where possible
+- **Comprehensive**: Aim for 3000+ words on major topics (exceeding Overleaf's coverage)
 
 ### LaTeX Code Examples
 - Always show both the LaTeX code and rendered output
 - Use `<CodeGroup>` for alternative approaches
 - Include common variations and options
 - Highlight important parts of the code
+- **CRITICAL**: Every code example MUST have a "**Rendered output:**" section showing the visual result
+
+### Visual Examples Format
+For ALL LaTeX code examples that produce visual output, include:
+
+```mdx
+<CodeGroup>
+\`\`\`latex filename.tex
+\documentclass{article}
+\begin{document}
+% LaTeX code here
+\end{document}
+\`\`\`
+</CodeGroup>
+
+**Rendered output:**
+
+<div style={{ backgroundColor: '#f8f9fa', padding: '1.5em', borderRadius: '8px', margin: '1em 0', border: '1px solid #e9ecef' }}>
+<div style={{ marginBottom: '1em', fontSize: '0.9em', color: '#6c757d' }}>Description of what this shows:</div>
+{/* HTML representation of the LaTeX output */}
+</div>
+```
+
+### Table Styling Guidelines
+When showing LaTeX table outputs in HTML:
+- Use `borderCollapse: 'collapse'` to avoid double borders
+- Apply borders to individual cells, not the table element
+- Standard font sizes: `1.1em` for content, `0.9em` for captions
+- Use `fontFamily: 'Georgia, serif'` for consistency
+- Add proper spacing with `padding: '6px 12px'` or `padding: '8px 12px'` for booktabs
+
+Example HTML table structure:
+```html
+<table style={{ margin: '0 auto', fontFamily: 'Georgia, serif', fontSize: '1.1em', borderCollapse: 'collapse' }}>
+<tr>
+<td style={{ borderTop: '1px solid #000', borderBottom: '1px solid #000', borderLeft: '1px solid #000', borderRight: '1px solid #000', padding: '6px 12px' }}>Cell content</td>
+</tr>
+</table>
+```
 
 ### Better than Overleaf
 - More visual examples and diagrams
@@ -99,6 +141,7 @@ Organize documentation into logical learning paths:
 - Modern, clean design with #FF6037 accent
 - Mobile-friendly responsive design
 - Faster page loads
+- Comprehensive content (3000+ words for major topics)
 
 ## Key Development Notes
 
@@ -106,6 +149,7 @@ Organize documentation into logical learning paths:
 - `<CodeGroup>` - Show LaTeX code alongside rendered output
 - `<Info>`, `<Tip>`, `<Warning>` - For LaTeX tips and common pitfalls
 - `<Card>`, `<CardGroup>` - For organizing topics and tutorials
+- `<Accordion>` - For troubleshooting sections and expandable content
 - Custom components for LaTeX symbol tables and command references
 
 ### Special Considerations
@@ -114,12 +158,37 @@ Organize documentation into logical learning paths:
 - Create visual symbol picker tools
 - Add search functionality for commands/symbols
 - Include PDF previews where relevant
+- **IMPORTANT**: Always verify MDX parsing - ensure all divs are properly closed
+- Escape special characters in LaTeX code: `{` → `&#123;`, `}` → `&#125;` when needed
+
+### Common MDX Pitfalls to Avoid
+1. **Unclosed divs**: Count opening and closing tags - they must match
+2. **Unescaped braces**: In tables column specs like `{|l|c|r|}`, use `&#123;|l|c|r|&#125;`
+3. **Complex inline styles**: Keep them simple and consistent
+4. **Large code blocks**: Break into smaller, focused examples
+5. **Inline matrices**: Always wrap matrix equations in div elements, not inline
+6. **JSX comments**: Use `{/* comment */}` not `<!-- comment -->`
+7. **Matrix delimiters**: Separate parentheses/brackets into their own span elements
 
 ### SEO and Accessibility
-- Use descriptive titles for all pages
-- Include meta descriptions focused on LaTeX learning
+- Use descriptive titles for all pages (under 60 characters)
+- Include meta descriptions focused on LaTeX learning (under 160 characters)
 - Ensure all code examples have proper syntax highlighting
 - Provide alt text for all images and diagrams
+- Use keywords naturally throughout content
+- Structure content with proper heading hierarchy
+
+### SEO Title/Description Format
+```yaml
+title: LaTeX [Topic] - [Specific Benefit]
+description: [Action verb] [topic] in LaTeX. [Key features/benefits]. [Call to action or value prop].
+```
+
+Example:
+```yaml
+title: LaTeX Tables Tutorial - Create Professional Tables
+description: Complete LaTeX tables guide. Learn tabular, booktabs, multirow, alignment, formatting. Step-by-step examples included.
+```
 
 ## Configuration
 - **Main config**: `docs.json`
