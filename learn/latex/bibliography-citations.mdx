@@ -414,6 +414,153 @@ Multiple studies \citep{jones2021,brown2019} confirm...
 ```
 </CodeGroup>
 
+## Working with Bibliography Databases
+
+### Organizing Large Bibliography Files
+
+<CodeGroup>
+```latex organizing-bibs.tex
+% Split bibliographies by topic
+\addbibresource{primary-sources.bib}
+\addbibresource{secondary-sources.bib}
+\addbibresource{methodology.bib}
+\addbibresource{background.bib}
+
+% Or use categories within one file
+@article{smith2020,
+  author = {Smith, John},
+  title = {Primary Research},
+  journal = {Main Journal},
+  year = {2020},
+  keywords = {primary, experimental, machine-learning}
+}
+
+% Filter by keywords
+\printbibliography[keyword=primary,title={Primary Sources}]
+\printbibliography[keyword=methodology,title={Methodological References}]
+```
+</CodeGroup>
+
+### Bibliography Entry Fields Reference
+
+<Tabs>
+<Tab title="Required Fields">
+```bibtex
+% Article - Required: author, title, journal, year
+@article{key,
+  author = {Last, First and Coauthor, Name},
+  title = {Article Title},
+  journal = {Journal Name},
+  year = {2024}
+}
+
+% Book - Required: author/editor, title, publisher, year
+@book{key,
+  author = {Author, Name},
+  title = {Book Title},
+  publisher = {Publisher Name},
+  year = {2024}
+}
+
+% InProceedings - Required: author, title, booktitle, year
+@inproceedings{key,
+  author = {Author, Name},
+  title = {Paper Title},
+  booktitle = {Conference Proceedings Title},
+  year = {2024}
+}
+```
+</Tab>
+<Tab title="Optional Fields">
+```bibtex
+% Comprehensive article entry
+@article{complete2024,
+  author = {Author, First and Second, Author},
+  title = {Complete Article Example},
+  journal = {Journal of Examples},
+  year = {2024},
+  volume = {12},
+  number = {3},
+  pages = {123--145},
+  month = {March},
+  doi = {10.1234/example.2024.123},
+  url = {https://doi.org/10.1234/example.2024.123},
+  abstract = {This abstract describes...},
+  keywords = {latex, bibliography, example},
+  note = {Special issue on bibliography management}
+}
+```
+</Tab>
+<Tab title="Special Fields">
+```bibtex
+% Electronic sources
+@online{web2024,
+  author = {Organization},
+  title = {Web Resource},
+  url = {https://example.com},
+  urldate = {2024-01-15},
+  year = {2024},
+  note = {Accessed: January 15, 2024}
+}
+
+% Datasets
+@dataset{data2024,
+  author = {Researcher, Name},
+  title = {Research Dataset v1.0},
+  year = {2024},
+  publisher = {Data Repository},
+  version = {1.0},
+  doi = {10.5281/zenodo.123456},
+  url = {https://doi.org/10.5281/zenodo.123456}
+}
+
+% Software
+@software{software2024,
+  author = {Developer, Name},
+  title = {Software Package},
+  year = {2024},
+  publisher = {GitHub},
+  version = {2.1.0},
+  url = {https://github.com/user/repo}
+}
+```
+</Tab>
+</Tabs>
+
+### Managing Cross-References
+
+<CodeGroup>
+```bibtex crossref-example.bib
+% Parent entry (conference proceedings)
+@proceedings{conference2024,
+  title = {Proceedings of the International Conference},
+  year = {2024},
+  editor = {Editor, Name},
+  publisher = {ACM},
+  address = {New York}
+}
+
+% Child entries using crossref
+@inproceedings{paper1_2024,
+  author = {First, Author},
+  title = {First Paper Title},
+  pages = {1--10},
+  crossref = {conference2024}
+}
+
+@inproceedings{paper2_2024,
+  author = {Second, Author},
+  title = {Second Paper Title},
+  pages = {11--20},
+  crossref = {conference2024}
+}
+
+% The crossref field automatically inherits:
+% - booktitle from title
+% - publisher, year, editor, address from parent
+```
+</CodeGroup>
+
 ## Advanced Citation Techniques
 
 ### Custom Citation Commands
@@ -487,6 +634,245 @@ Multiple studies \citep{jones2021,brown2019} confirm...
 ```
 </CodeGroup>
 
+## Customizing Bibliography Appearance
+
+### BibLaTeX Style Customization
+
+<CodeGroup>
+```latex customize-biblatex.tex
+% Customize bibliography appearance
+\usepackage[
+  backend=biber,
+  style=authoryear,
+  dashed=false,          % Repeat author names
+  maxnames=3,            % Show up to 3 names before et al.
+  minnames=1,            % At least 1 name before et al.
+  giveninits=true,       % Use initials
+  uniquename=init,       % Disambiguate by initials
+  uniquelist=false,      % Don't expand name lists
+  doi=true,              % Show DOIs
+  isbn=false,            % Hide ISBNs
+  url=false,             % Hide URLs (when DOI present)
+  eprint=false           % Hide eprint info
+]{biblatex}
+
+% Customize field formats
+\DeclareFieldFormat{title}{\mkbibemph{#1}} % Italicize titles
+\DeclareFieldFormat[article]{title}{\mkbibquote{#1}} % Quote article titles
+\DeclareFieldFormat{journaltitle}{\textit{#1}} % Italicize journal names
+\DeclareFieldFormat{doi}{%
+  \mkbibacro{DOI}\addcolon\space
+  \href{https://doi.org/#1}{\nolinkurl{#1}}}
+
+% Remove "In:" before journal names
+\renewbibmacro{in:}{%
+  \ifentrytype{article}{}{
+    \printtext{\bibstring{in}\intitlepunct}}}
+
+% Custom name format
+\DeclareNameAlias{sortname}{family-given}
+\DeclareNameAlias{default}{family-given}
+```
+</CodeGroup>
+
+### Creating Custom Bibliography Drivers
+
+<CodeGroup>
+```latex custom-drivers.tex
+% Define a new entry type for preprints
+\DeclareBibliographyDriver{preprint}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{author/translator+others}%
+  \setunit{\printdelim{nametitledelim}}\newblock
+  \usebibmacro{title}%
+  \newunit\newblock
+  \printfield{howpublished}%
+  \newunit\newblock
+  \printfield{note}%
+  \newunit\newblock
+  \usebibmacro{doi+eprint+url}%
+  \newunit\newblock
+  \usebibmacro{addendum+pubstate}%
+  \setunit{\bibpagerefpunct}\newblock
+  \usebibmacro{pageref}%
+  \newunit\newblock
+  \iftoggle{bbx:related}
+    {\usebibmacro{related:init}%
+     \usebibmacro{related}}
+    {}%
+  \usebibmacro{finentry}}
+
+% Use in .bib file
+@preprint{arxiv2024,
+  author = {Researcher, Name},
+  title = {Preprint Title},
+  year = {2024},
+  eprint = {2401.12345},
+  eprinttype = {arXiv},
+  eprintclass = {cs.LG}
+}
+```
+</CodeGroup>
+
+### Bibliography Formatting Examples
+
+<CodeGroup>
+```latex formatting-examples.tex
+% Numbered bibliography with custom labels
+\defbibenvironment{bibliography}
+  {\enumerate
+     {\setlength{\leftmargin}{\bibhang}%
+      \setlength{\itemindent}{-\leftmargin}%
+      \setlength{\itemsep}{\bibitemsep}%
+      \setlength{\parsep}{\bibparsep}}}
+  {\endenumerate}
+  {\item[\printfield{labelnumber}.]}  % Add period after number
+
+% Custom bibliography heading
+\defbibheading{bibliography}[\bibname]{%
+  \section*{#1}%
+  \markboth{#1}{#1}%
+  \addcontentsline{toc}{section}{#1}}
+
+% Split bibliography by decade
+\defbibcheck{2020s}{\iffieldint{year}
+  {\ifnumless{\thefield{year}}{2020}
+    {\skipentry}{\ifnumgreater{\thefield{year}}{2029}
+      {\skipentry}{}}}}
+  {\skipentry}}
+
+\defbibcheck{2010s}{\iffieldint{year}
+  {\ifnumless{\thefield{year}}{2010}
+    {\skipentry}{\ifnumgreater{\thefield{year}}{2019}
+      {\skipentry}{}}}}
+  {\skipentry}}
+
+% Print by decade
+\printbibliography[check=2020s,title={2020s Publications}]
+\printbibliography[check=2010s,title={2010s Publications}]
+```
+</CodeGroup>
+
+## Handling Complex Citation Scenarios
+
+### Multi-Volume Works
+
+<CodeGroup>
+```bibtex multivolume.bib
+% Multi-volume book set
+@mvbook{encyclopedia2024,
+  author = {Editor, Chief},
+  title = {Encyclopedia of Computer Science},
+  year = {2024},
+  volumes = {5},
+  publisher = {Academic Press}
+}
+
+% Individual volume
+@book{encyclopedia2024_vol2,
+  author = {Editor, Chief},
+  title = {Encyclopedia of Computer Science},
+  year = {2024},
+  volume = {2},
+  maintitle = {Encyclopedia of Computer Science},
+  mainsubtitle = {Complete Edition},
+  publisher = {Academic Press}
+}
+
+% Reference within multi-volume work
+@inbook{smith2024_encyclopedia,
+  author = {Smith, John},
+  title = {Machine Learning Fundamentals},
+  booktitle = {Encyclopedia of Computer Science},
+  year = {2024},
+  volume = {3},
+  pages = {234--267},
+  publisher = {Academic Press},
+  crossref = {encyclopedia2024}
+}
+```
+</CodeGroup>
+
+### Legal Citations
+
+<CodeGroup>
+```latex legal-citations.tex
+% Legal citation package
+\usepackage[style=apa]{biblatex}
+
+% Case law
+@legal{brown1954,
+  title = {Brown v. Board of Education},
+  year = {1954},
+  volume = {347},
+  reporter = {U.S.},
+  pages = {483},
+  court = {Supreme Court}
+}
+
+% Statute
+@legislation{ada1990,
+  title = {Americans with Disabilities Act},
+  year = {1990},
+  volume = {42},
+  section = {12101},
+  code = {U.S.C.}
+}
+
+% Custom legal citation format
+\DeclareFieldFormat[legal]{title}{\textit{#1}}
+\DeclareBibliographyDriver{legal}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \printfield{title}%
+  \setunit{\addcomma\space}%
+  \printfield{volume}%
+  \setunit{\space}%
+  \printfield{reporter}%
+  \setunit{\space}%
+  \printfield{pages}%
+  \setunit{\space}%
+  \mkbibparens{\printfield{year}}%
+  \usebibmacro{finentry}}
+```
+</CodeGroup>
+
+### Citation Call-Outs and Annotations
+
+<CodeGroup>
+```latex annotations.tex
+% Annotated bibliography
+@article{smith2020,
+  author = {Smith, John},
+  title = {Important Study},
+  journal = {Key Journal},
+  year = {2020},
+  annotation = {This seminal work established the foundation
+                for modern approaches to the problem. The author
+                uses innovative methodology to demonstrate...}
+}
+
+% Print with annotations
+\renewbibmacro*{finentry}{%
+  \finentrypunct
+  \iffieldundef{annotation}
+    {}
+    {\par\vspace{0.5\baselineskip}%
+     \begin{quotation}\small
+       \printfield{annotation}%
+     \end{quotation}}%
+  \finentry}
+
+% In-text annotation references
+\newcommand{\citenote}[2]{%
+  \cite{#1}\footnote{#2}}
+
+% Usage: \citenote{smith2020}{This study is particularly
+% relevant because it addresses our specific use case.}
+```
+</CodeGroup>
+
 ## Best Practices
 
 <Tip>
@@ -502,6 +888,62 @@ Multiple studies \citep{jones2021,brown2019} confirm...
 8. **Permissions**: Ensure you have rights to cite all sources
 </Tip>
 
+### Citation Key Best Practices
+
+<CodeGroup>
+```bibtex citation-keys.bib
+% Good citation key patterns
+@article{smith2020ml,          % author + year + topic
+  author = {Smith, John},
+  title = {Machine Learning Advances},
+  year = {2020}
+}
+
+@book{johnson2021deeplearning, % author + year + keywords
+  author = {Johnson, Mary},
+  title = {Deep Learning Fundamentals},
+  year = {2021}
+}
+
+@inproceedings{lee2024cvpr,    % author + year + venue
+  author = {Lee, David},
+  title = {Computer Vision Paper},
+  booktitle = {CVPR},
+  year = {2024}
+}
+
+% Avoid these patterns
+@article{1,                    % Too generic
+@article{ml_paper,             % No year/author info
+@article{my_favorite_paper,    % Personal references
+@article{temp,                 % Temporary names
+```
+</CodeGroup>
+
+### Managing Bibliography Errors
+
+<Accordion title="Common BibTeX/BibLaTeX Errors">
+**Error: Citation undefined**
+- Check spelling of citation key
+- Ensure .bib file is included
+- Run compilation sequence completely
+
+**Error: Empty bibliography**
+- Verify \cite commands exist in document
+- Check .bib file path
+- Ensure bibliography style is defined
+
+**Error: I found no \citation commands**
+- At least one \cite must appear before \bibliography
+- Check for typos in \cite commands
+- Verify .aux file is being generated
+
+**Error: Repeated entry**
+- Check for duplicate keys in .bib file
+- Look for entries in multiple .bib files
+- Use unique keys for each entry
+</Accordion>
+
 ## Troubleshooting
 
 <Warning>
@@ -516,6 +958,160 @@ Multiple studies \citep{jones2021,brown2019} confirm...
 7. **Page ranges**: Use `--` for page ranges (123--145)
 8. **URLs**: Use `\url{}` command or proper URL fields
 </Warning>
+
+## Working with Multiple Bibliographies
+
+### Chapter-Based Bibliographies
+
+<CodeGroup>
+```latex chapter-bibs.tex
+% Using refsection (BibLaTeX)
+\documentclass{book}
+\usepackage[style=authoryear,refsection=chapter]{biblatex}
+\addbibresource{references.bib}
+
+\begin{document}
+
+\chapter{Introduction}
+\begin{refsection}
+Content with citations \cite{ref1,ref2}.
+\printbibliography[heading=subbibliography]
+\end{refsection}
+
+\chapter{Methods}
+\begin{refsection}
+More content \cite{ref3,ref4}.
+\printbibliography[heading=subbibliography]
+\end{refsection}
+
+% Global bibliography at end
+\printbibliography[title={Complete Bibliography}]
+\end{document}
+```
+</CodeGroup>
+
+### Topic-Based Bibliographies
+
+<CodeGroup>
+```latex topic-bibs.tex
+% Categorize references by topic
+\DeclareBibliographyCategory{theory}
+\DeclareBibliographyCategory{experiments}
+\DeclareBibliographyCategory{applications}
+
+% Assign categories
+\addtocategory{theory}{einstein1905,bohr1913}
+\addtocategory{experiments}{miller2020,jones2021}
+\addtocategory{applications}{smith2022,brown2023}
+
+% Print categorized bibliographies
+\printbibheading{\section{References by Topic}}
+
+\printbibliography[
+  category=theory,
+  title={Theoretical Foundations}]
+
+\printbibliography[
+  category=experiments,
+  title={Experimental Studies}]
+
+\printbibliography[
+  category=applications,
+  title={Practical Applications}]
+
+% Or filter by keywords in .bib entries
+\printbibliography[
+  keyword={machine-learning},
+  title={Machine Learning References}]
+```
+</CodeGroup>
+
+## Integration with LaTeX Features
+
+### Hyperlinked Citations
+
+<CodeGroup>
+```latex hyperref-citations.tex
+% Setup hyperref with biblatex
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  citecolor=blue,
+  linkcolor=blue,
+  urlcolor=blue
+}
+
+% Custom link colors for different citation types
+\DeclareFieldFormat{citehyperref}{%
+  \DeclareFieldAlias{bibhyperref}{noformat}%
+  \bibhyperref{#1}}
+
+\DeclareFieldFormat{textcitehyperref}{%
+  \DeclareFieldAlias{bibhyperref}{noformat}%
+  \bibhyperref{\textcolor{green}{#1}}}
+
+% Backref - show where each reference is cited
+\usepackage[style=authoryear,backref=true]{biblatex}
+
+% Custom backref text
+\DefineBibliographyStrings{english}{%
+  backrefpage = {cited on page},
+  backrefpages = {cited on pages}
+}
+```
+</CodeGroup>
+
+### Bibliography in Table of Contents
+
+<CodeGroup>
+```latex bib-toc.tex
+% Add bibliography to TOC
+\printbibliography[heading=bibintoc,title={References}]
+
+% Or manually
+\printbibliography
+\addcontentsline{toc}{chapter}{Bibliography}
+
+% For numbered sections
+\printbibliography[heading=bibnumbered]
+
+% Custom heading with TOC
+\defbibheading{custom}[\bibname]{%
+  \chapter*{#1}%
+  \markboth{#1}{#1}%
+  \addcontentsline{toc}{chapter}{#1}%
+  \vspace{2em}%
+  \center\textit{All sources have been carefully verified.}%
+  \vspace{1em}}
+
+\printbibliography[heading=custom]
+```
+</CodeGroup>
+
+### Glossary Integration with Citations
+
+<CodeGroup>
+```latex glossary-citations.tex
+% Using glossaries package with citations
+\usepackage{glossaries}
+\makeglossaries
+
+% Define term with citation
+\newglossaryentry{machinelearning}{
+  name={machine learning},
+  description={A subset of artificial intelligence
+    that enables systems to learn from data
+    \cite{mitchell1997}}
+}
+
+% In text
+The concept of \gls{machinelearning} has evolved
+significantly since its inception.
+
+% Print glossary with citations
+\printglossary[title={Glossary with References}]
+```
+</CodeGroup>
 
 ## Quick Reference
 

@@ -1,14 +1,54 @@
 ---
-title: Creating Presentations with Beamer
-description: Master LaTeX presentations using Beamer. Learn slides, themes, animations, and professional presentation techniques.
+title: Creating Presentations with Beamer - Complete Guide
+description: Master LaTeX presentations using Beamer. Learn slides, themes, animations, overlays, graphics, and professional presentation techniques with comprehensive examples.
+seo:
+  title: LaTeX Beamer Presentations - Complete Tutorial & Examples
+  description: Create professional presentations in LaTeX with Beamer. Comprehensive guide covering themes, animations, overlays, graphics, and advanced features.
 ---
 
+# Creating Professional Presentations with Beamer
 
-Create stunning presentations using LaTeX with the Beamer class. This guide covers everything from basic slides to advanced animations and custom themes.
+Create stunning, professional presentations using LaTeX with the Beamer class. This comprehensive guide covers everything from basic slides to advanced animations, custom themes, and conference-ready presentations.
 
 <Info>
 **Quick start**: LaTeX Cloud Studio includes Beamer presentation templates. Select "Presentation" when creating a new project to start with a ready-to-use template.
+
+**Prerequisites**: Basic LaTeX knowledge. See [Creating Your First Document](/learn/latex/basics/creating-first-document) for LaTeX basics.
 </Info>
+
+## Why Use Beamer for Presentations?
+
+### Advantages of LaTeX Presentations
+
+<CardGroup cols={2}>
+<Card title="Consistent Design" icon="palette">
+Professional themes with automatic formatting and consistent typography
+</Card>
+<Card title="Mathematical Excellence" icon="square-root-variable">
+Perfect rendering of equations, formulas, and scientific notation
+</Card>
+<Card title="Version Control" icon="code-branch">
+Plain text format works seamlessly with Git and collaboration tools
+</Card>
+<Card title="Cross-Platform" icon="globe">
+PDF output works everywhere, no compatibility issues
+</Card>
+</CardGroup>
+
+### When to Use Beamer
+
+✅ **Perfect for:**
+- Academic conferences and seminars
+- Technical presentations with equations
+- Reproducible research presentations
+- Presentations requiring precise formatting
+- Multi-author collaborative presentations
+
+❌ **Consider alternatives for:**
+- Quick informal presentations
+- Heavily design-focused slideshows
+- Presentations requiring live editing
+- Non-technical audiences expecting flashy animations
 
 ## Getting Started with Beamer
 
@@ -25,13 +65,18 @@ Create stunning presentations using LaTeX with the Beamer class. This guide cove
 % Packages
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{hyperref}
 
-% Presentation info
+% Presentation metadata
 \title{Your Presentation Title}
 \subtitle{Optional Subtitle}
 \author{Your Name}
 \institute{Your Institution}
 \date{\today}
+
+% Logo (optional)
+\logo{\includegraphics[height=1cm]{logo.png}}
 
 \begin{document}
 
@@ -49,9 +94,9 @@ Create stunning presentations using LaTeX with the Beamer class. This guide cove
 \begin{frame}
 \frametitle{Introduction}
 \begin{itemize}
-  \item First point
-  \item Second point
-  \item Third point
+    \item First point
+    \item Second point
+    \item Third point
 \end{itemize}
 \end{frame}
 
@@ -59,349 +104,366 @@ Create stunning presentations using LaTeX with the Beamer class. This guide cove
 \section{Main Content}
 \begin{frame}
 \frametitle{Key Concepts}
-Your content here...
-\end{frame}
-
-% Thank you slide
-\begin{frame}
-\centering
-\Huge Thank You!
+\begin{block}{Definition}
+    A block environment for definitions
+\end{block}
+\begin{alertblock}{Important}
+    An alert block for warnings
+\end{alertblock}
+\begin{exampleblock}{Example}
+    An example block
+\end{exampleblock}
 \end{frame}
 
 \end{document}
 ```
 </CodeGroup>
 
-### Frame Basics
+### Understanding Frame Structure
 
-<CodeGroup>
-```latex frame-basics.tex
-% Simple frame
-\begin{frame}
+Each slide in Beamer is called a "frame":
+
+```latex
+\begin{frame}[options]
 \frametitle{Slide Title}
-Content goes here
-\end{frame}
-
-% Frame with subtitle
-\begin{frame}
-\frametitle{Main Title}
-\framesubtitle{Subtitle}
-Content with subtitle
-\end{frame}
-
-% Frame options
-\begin{frame}[fragile] % For verbatim content
-\frametitle{Code Example}
-\begin{verbatim}
-def hello():
-    print("Hello, World!")
-\end{verbatim}
-\end{frame}
-
-% Plain frame (no decorations)
-\begin{frame}[plain]
-\centering
-\Huge Special Slide
-\end{frame}
-
-% Centered content
-\begin{frame}[c] % t=top, c=center, b=bottom
-\frametitle{Vertically Centered}
-This content is centered vertically
+\framesubtitle{Optional Subtitle}
+% Slide content goes here
 \end{frame}
 ```
-</CodeGroup>
 
-## Beamer Themes
+**Common frame options:**
+- `[fragile]` - Required for verbatim content or code
+- `[allowframebreaks]` - Allows automatic slide splitting
+- `[plain]` - No header/footer (useful for images)
+- `[noframenumbering]` - Excludes from slide count
+- `[c]` - Center content vertically
+- `[t]` - Top-align content (default)
 
-### Built-in Themes
+## Beamer Themes and Customization
 
-<CodeGroup>
-```latex beamer-themes.tex
-% Presentation themes
-\usetheme{AnnArbor}
-\usetheme{Antibes}
-\usetheme{Bergen}
-\usetheme{Berkeley}
-\usetheme{Berlin}
-\usetheme{Boadilla}
-\usetheme{CambridgeUS}
-\usetheme{Copenhagen}
-\usetheme{Darmstadt}
-\usetheme{Dresden}
-\usetheme{Frankfurt}
-\usetheme{Goettingen}
-\usetheme{Hannover}
-\usetheme{Ilmenau}
-\usetheme{JuanLesPins}
-\usetheme{Luebeck}
-\usetheme{Madrid}
-\usetheme{Malmoe}
-\usetheme{Marburg}
-\usetheme{Montpellier}
-\usetheme{PaloAlto}
-\usetheme{Pittsburgh}
-\usetheme{Rochester}
-\usetheme{Singapore}
-\usetheme{Szeged}
-\usetheme{Warsaw}
+### Built-in Themes Gallery
 
-% Color themes
-\usecolortheme{albatross}
-\usecolortheme{beaver}
-\usecolortheme{beetle}
-\usecolortheme{crane}
-\usecolortheme{dolphin}
-\usecolortheme{dove}
-\usecolortheme{fly}
-\usecolortheme{lily}
-\usecolortheme{orchid}
-\usecolortheme{rose}
-\usecolortheme{seagull}
-\usecolortheme{seahorse}
-\usecolortheme{whale}
-\usecolortheme{wolverine}
+<Tabs>
+<Tab title="Presentation Themes">
+```latex
+% Professional themes
+\usetheme{Berlin}     % Sections in header
+\usetheme{Madrid}     % Clean and professional
+\usetheme{AnnArbor}   % Section navigation
+\usetheme{CambridgeUS} % Red accent
+\usetheme{Warsaw}     % Blue with navigation
 
-% Font themes
-\usefonttheme{default}
-\usefonttheme{serif}
-\usefonttheme{structurebold}
-\usefonttheme{structureitalicserif}
-\usefonttheme{structuresmallcapsserif}
+% Minimalist themes
+\usetheme{default}    % Basic, clean
+\usetheme{Bergen}     % Simple sidebar
+\usetheme{Boadilla}   % Minimal decoration
+
+% Conference themes
+\usetheme{Pittsburgh} % Very minimal
+\usetheme{Rochester}  % Simple top bar
 ```
-</CodeGroup>
+</Tab>
+<Tab title="Color Themes">
+```latex
+% Color theme options
+\usecolortheme{default}  % Standard colors
+\usecolortheme{beaver}   % Red accent
+\usecolortheme{beetle}   % Blue/gray
+\usecolortheme{crane}    % Orange accent
+\usecolortheme{dolphin}  % Blue theme
+\usecolortheme{dove}     % Grayscale
+\usecolortheme{fly}      % Gray theme
+\usecolortheme{lily}     % Light blue
+\usecolortheme{orchid}   % Purple accent
+\usecolortheme{rose}     % Green accent
+\usecolortheme{seagull}  % Gray/blue
+\usecolortheme{seahorse} % Purple/pink
+\usecolortheme{whale}    % Dark blue
+\usecolortheme{wolverine} % Yellow/blue
+```
+</Tab>
+<Tab title="Font Themes">
+```latex
+% Font customization
+\usefonttheme{default}       % Standard fonts
+\usefonttheme{serif}         % Serif fonts
+\usefonttheme{structurebold} % Bold structure
+\usefonttheme{structureitalicserif} % Italic serif
+\usefonttheme{structuresmallcapsserif} % Small caps
 
-### Custom Colors
+% Professional math fonts
+\usefonttheme{professionalfonts}
+```
+</Tab>
+</Tabs>
+
+### Custom Theme Configuration
 
 <CodeGroup>
-```latex custom-colors.tex
-\documentclass{beamer}
-\usepackage{xcolor}
-
+```latex custom-theme.tex
 % Define custom colors
-\definecolor{myblue}{RGB}{0,114,189}
-\definecolor{myred}{RGB}{217,83,79}
-\definecolor{mygreen}{RGB}{92,184,92}
+\definecolor{customblue}{RGB}{0, 102, 204}
+\definecolor{customgray}{RGB}{102, 102, 102}
+\definecolor{customorange}{RGB}{255, 102, 0}
 
 % Apply custom colors
-\setbeamercolor{structure}{fg=myblue}
-\setbeamercolor{alerted text}{fg=myred}
-\setbeamercolor{example text}{fg=mygreen}
+\setbeamercolor{title}{fg=white, bg=customblue}
+\setbeamercolor{frametitle}{fg=white, bg=customblue}
+\setbeamercolor{structure}{fg=customblue}
+\setbeamercolor{normal text}{fg=black, bg=white}
+\setbeamercolor{alerted text}{fg=customorange}
+\setbeamercolor{example text}{fg=customgray}
 
-% Custom color for specific elements
-\setbeamercolor{frametitle}{bg=myblue!20,fg=myblue}
-\setbeamercolor{block title}{bg=myblue,fg=white}
-\setbeamercolor{block body}{bg=myblue!10}
+% Custom fonts
+\setbeamerfont{title}{series=\bfseries, size=\Large}
+\setbeamerfont{frametitle}{series=\bfseries}
+\setbeamerfont{footnote}{size=\tiny}
 
-\begin{document}
+% Remove navigation symbols
+\setbeamertemplate{navigation symbols}{}
 
-\begin{frame}
-\frametitle{Custom Colored Slide}
-Normal text with \alert{alerted text} and \structure{structured text}.
-\end{frame}
-
-\end{document}
+% Custom footer
+\setbeamertemplate{footline}{
+    \leavevmode
+    \hbox{
+        \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}
+            \usebeamerfont{author in head/foot}\insertshortauthor
+        \end{beamercolorbox}
+        \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}
+            \usebeamerfont{title in head/foot}\insertshorttitle
+        \end{beamercolorbox}
+        \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}
+            \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
+            \insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
+        \end{beamercolorbox}
+    }
+    \vskip0pt
+}
 ```
 </CodeGroup>
 
-## Content Elements
+## Content Elements and Formatting
 
 ### Lists and Enumerations
 
 <CodeGroup>
-```latex lists-beamer.tex
+```latex lists-formatting.tex
 \begin{frame}
-\frametitle{Lists in Beamer}
+\frametitle{Types of Lists}
 
-\begin{columns}
-\column{0.5\textwidth}
-\textbf{Itemize:}
+% Bullet points
 \begin{itemize}
-  \item First item
-  \item Second item
-  \begin{itemize}
-    \item Subitem 1
-    \item Subitem 2
-  \end{itemize}
-  \item Third item
+    \item First level item
+    \begin{itemize}
+        \item Second level item
+        \begin{itemize}
+            \item Third level item
+        \end{itemize}
+    \end{itemize}
+    \item<2-> Appears on second click
+    \item<3-> Appears on third click
 \end{itemize}
 
-\column{0.5\textwidth}
-\textbf{Enumerate:}
+% Numbered lists
 \begin{enumerate}
-  \item First step
-  \item Second step
-  \begin{enumerate}
-    \item Substep A
-    \item Substep B
-  \end{enumerate}
-  \item Third step
+    \item First numbered item
+    \item Second numbered item
+    \begin{enumerate}
+        \item Nested enumeration
+        \item Another nested item
+    \end{enumerate}
 \end{enumerate}
-\end{columns}
 
-\vspace{1em}
-\textbf{Description:}
+% Description lists
 \begin{description}
-  \item[Term 1] Description of first term
-  \item[Term 2] Description of second term
+    \item[Term 1] Description of first term
+    \item[Term 2] Description of second term
 \end{description}
 \end{frame}
 ```
 </CodeGroup>
 
-### Blocks and Boxes
+### Blocks and Highlighting
 
 <CodeGroup>
-```latex blocks-beamer.tex
+```latex blocks-alerts.tex
 \begin{frame}
 \frametitle{Block Environments}
 
-\begin{block}{Standard Block}
-This is a standard block with a title.
+% Standard block
+\begin{block}{Standard Block Title}
+    Used for definitions, theorems, or general content that needs emphasis.
 \end{block}
 
-\begin{alertblock}{Alert Block}
-This block is used for important warnings or alerts.
+% Alert block
+\begin{alertblock}{Warning or Important Information}
+    Use this for critical information, warnings, or important notes.
 \end{alertblock}
 
-\begin{exampleblock}{Example Block}
-This block is perfect for examples and illustrations.
+% Example block
+\begin{exampleblock}{Example or Case Study}
+    Perfect for examples, case studies, or practical applications.
 \end{exampleblock}
 
-% Custom blocks
-\begin{definition}
-A \emph{definition} is a statement of the meaning of a term.
-\end{definition}
-
-\begin{theorem}[Pythagoras]
-For a right triangle: $a^2 + b^2 = c^2$
+% Custom theorem environment
+\begin{theorem}[Pythagorean Theorem]
+    For a right triangle: $a^2 + b^2 = c^2$
 \end{theorem}
 
+% Highlighted text
+\alert{This text is highlighted}
+\structure{This text uses structure color}
 \end{frame}
 ```
 </CodeGroup>
 
-### Columns Layout
+### Columns and Layout
 
 <CodeGroup>
-```latex columns-beamer.tex
+```latex columns-layout.tex
 \begin{frame}
 \frametitle{Two-Column Layout}
 
-\begin{columns}[T] % T=top aligned, c=center, b=bottom
-\column{0.5\textwidth}
-\textbf{Left Column}
-\begin{itemize}
-  \item Point 1
-  \item Point 2
-  \item Point 3
-\end{itemize}
+\begin{columns}[T] % [T] for top alignment
+\begin{column}{0.5\textwidth}
+    \textbf{Left Column}
+    \begin{itemize}
+        \item Point 1
+        \item Point 2
+        \item Point 3
+    \end{itemize}
+\end{column}
 
-\column{0.5\textwidth}
-\textbf{Right Column}
-\includegraphics[width=\textwidth]{image.png}
+\begin{column}{0.5\textwidth}
+    \textbf{Right Column}
+    \begin{center}
+        \includegraphics[width=0.8\textwidth]{image.png}
+    \end{center}
+\end{column}
 \end{columns}
 
-\end{frame}
+\vspace{1em}
 
 % Three columns
-\begin{frame}
-\frametitle{Three Columns}
-
 \begin{columns}
-\column{0.33\textwidth}
-Column 1 content
-
-\column{0.33\textwidth}
-Column 2 content
-
-\column{0.33\textwidth}
-Column 3 content
+\begin{column}{0.3\textwidth}
+    \centering
+    \textbf{Column 1}
+\end{column}
+\begin{column}{0.3\textwidth}
+    \centering
+    \textbf{Column 2}
+\end{column}
+\begin{column}{0.3\textwidth}
+    \centering
+    \textbf{Column 3}
+\end{column}
 \end{columns}
-
 \end{frame}
 ```
 </CodeGroup>
 
-## Overlays and Animation
+## Animations and Overlays
 
-### Basic Overlays
+### Basic Overlay Specifications
 
 <CodeGroup>
 ```latex overlays-basic.tex
 \begin{frame}
-\frametitle{Step-by-Step Reveal}
+\frametitle{Overlay Basics}
 
+% Simple overlays
 \begin{itemize}
-  \item<1-> First item appears on slide 1
-  \item<2-> Second item appears on slide 2
-  \item<3-> Third item appears on slide 3
-  \item<4-> Fourth item appears on slide 4
+    \item<1-> Visible from slide 1 onward
+    \item<2-> Visible from slide 2 onward
+    \item<3-> Visible from slide 3 onward
+    \item<2-3> Visible only on slides 2 and 3
+    \item<4> Visible only on slide 4
 \end{itemize}
 
-\only<1>{Text only on slide 1}
-\only<2>{Text only on slide 2}
-\only<3->{Text from slide 3 onwards}
+% Using \only, \uncover, \visible
+\only<1>{This text appears only on slide 1}
+\uncover<2->{This text is uncovered from slide 2}
+\visible<3->{This text is visible from slide 3}
 
-\visible<2->{This is visible from slide 2}
-\uncover<3->{This is uncovered from slide 3}
+% Alert on specific slides
+\alert<2>{This text is highlighted on slide 2}
+
+% Dynamic content
+\only<1>{\includegraphics[width=5cm]{img1.png}}
+\only<2>{\includegraphics[width=5cm]{img2.png}}
+\only<3>{\includegraphics[width=5cm]{img3.png}}
 \end{frame}
 ```
 </CodeGroup>
 
-### Advanced Overlays
+### Advanced Animation Techniques
 
 <CodeGroup>
-```latex overlays-advanced.tex
+```latex advanced-animations.tex
 \begin{frame}
-\frametitle{Complex Animations}
+\frametitle{Progressive Reveal}
 
-% Highlighting text
-This is \alert<2>{important} and this is \alert<3>{also important}.
+% Incremental reveals
+\begin{itemize}[<+->]
+    \item First item (appears on click 1)
+    \item Second item (appears on click 2)
+    \item Third item (appears on click 3)
+\end{itemize}
 
-% Changing content
-\only<1>{Initial equation: $E = mc$}
-\only<2>{Oops, forgot something: $E = mc^2$}
+% Replacing content
+\only<1>{
+    \begin{block}{Step 1}
+        Initial state of the system
+    \end{block}
+}
+\only<2>{
+    \begin{block}{Step 2}
+        Intermediate transformation
+    \end{block}
+}
+\only<3>{
+    \begin{block}{Step 3}
+        Final result
+    \end{block}
+}
 
-% Incremental equations
-\begin{align}
-  f(x) &= x^2 + 2x + 1 \\
-  \onslide<2->&= (x+1)^2 \\
-  \onslide<3->&> 0 \text{ for all } x \neq -1
-\end{align}
+% Highlighting changes
+\begin{equation}
+    f(x) = \alert<2>{a}x^2 + \alert<3>{b}x + \alert<4>{c}
+\end{equation}
 
-% Dynamic blocks
-\begin{block}<4->{Conclusion}
-The function has a minimum at $x = -1$.
-\end{block}
+\begin{itemize}
+    \item<2> \alert<2>{$a$} controls the curvature
+    \item<3> \alert<3>{$b$} affects the slope
+    \item<4> \alert<4>{$c$} sets the y-intercept
+\end{itemize}
 \end{frame}
 ```
 </CodeGroup>
 
-### Pause Command
+### Transition Effects
 
 <CodeGroup>
-```latex pause-command.tex
-\begin{frame}
-\frametitle{Using Pause}
-
-First, we introduce the problem.
-
-\pause
-
-Then, we analyze the requirements.
-
-\pause
+```latex transitions.tex
+% Frame transitions
+\begin{frame}[t]
+\frametitle{Transition Types}
+\transdissolve<2> % Dissolve transition
+\transblindshorizontal<3> % Horizontal blinds
+\transblindsvertical<4> % Vertical blinds
+\transboxin<5> % Box in
+\transboxout<6> % Box out
+\transdissolve<7> % Return to dissolve
 
 \begin{itemize}
-  \item Requirement 1 \pause
-  \item Requirement 2 \pause
-  \item Requirement 3
+    \item<2-> Dissolve effect
+    \item<3-> Horizontal blinds
+    \item<4-> Vertical blinds
+    \item<5-> Box in effect
+    \item<6-> Box out effect
+    \item<7-> Back to dissolve
 \end{itemize}
-
-\pause
-
-Finally, we present the solution.
 \end{frame}
 ```
 </CodeGroup>
@@ -411,380 +473,890 @@ Finally, we present the solution.
 ### Including Images
 
 <CodeGroup>
-```latex images-beamer.tex
-\begin{frame}
-\frametitle{Image Examples}
-
-% Centered image
+```latex images-graphics.tex
+% Full-frame image
+\begin{frame}[plain]
 \begin{center}
-\includegraphics[width=0.6\textwidth]{diagram.png}
+    \includegraphics[height=\paperheight]{full-image.jpg}
 \end{center}
+\end{frame}
 
-% Figure with caption
+% Image with caption
+\begin{frame}
+\frametitle{Figure Example}
 \begin{figure}
-  \centering
-  \includegraphics[width=0.7\textwidth]{graph.pdf}
-  \caption{Experimental results}
+    \centering
+    \includegraphics[width=0.7\textwidth]{diagram.png}
+    \caption{System architecture diagram}
 \end{figure}
+\end{frame}
 
-% Overlayed images
-\begin{overlayarea}{\textwidth}{5cm}
-  \only<1>{\includegraphics[width=0.8\textwidth]{step1.png}}
-  \only<2>{\includegraphics[width=0.8\textwidth]{step2.png}}
-  \only<3>{\includegraphics[width=0.8\textwidth]{step3.png}}
-\end{overlayarea}
+% Side-by-side images
+\begin{frame}
+\frametitle{Comparison}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+    \begin{figure}
+        \centering
+        \includegraphics[width=\textwidth]{before.png}
+        \caption{Before}
+    \end{figure}
+\end{column}
+\begin{column}{0.5\textwidth}
+    \begin{figure}
+        \centering
+        \includegraphics[width=\textwidth]{after.png}
+        \caption{After}
+    \end{figure}
+\end{column}
+\end{columns}
 \end{frame}
 ```
 </CodeGroup>
 
-### TikZ Graphics
+### TikZ Diagrams in Presentations
 
 <CodeGroup>
-```latex tikz-beamer.tex
-\documentclass{beamer}
+```latex tikz-diagrams.tex
 \usepackage{tikz}
-\usetikzlibrary{shapes,arrows,positioning}
-
-\begin{document}
+\usetikzlibrary{shapes.geometric, arrows}
 
 \begin{frame}
-\frametitle{Flow Diagram}
-
+\frametitle{Process Flow Diagram}
 \begin{center}
-\begin{tikzpicture}[
-  block/.style={rectangle, draw, fill=blue!20, 
-    text width=5em, text centered, rounded corners},
-  arrow/.style={->, >=stealth, thick}
-]
+\begin{tikzpicture}[node distance=2cm]
+\tikzstyle{process} = [rectangle, rounded corners, 
+    minimum width=3cm, minimum height=1cm,
+    text centered, draw=black, fill=orange!30]
+\tikzstyle{arrow} = [thick,->,>=stealth]
 
-\node[block] (start) {Start};
-\node[block, below=of start] (process) {Process};
-\node[block, below=of process] (end) {End};
+% Nodes
+\node (input) [process] {Input};
+\node (process) [process, below of=input] {Process};
+\node (output) [process, below of=process] {Output};
 
-\draw[arrow] (start) -- (process);
-\draw[arrow] (process) -- (end);
+% Arrows with overlays
+\draw<2-> [arrow] (input) -- (process);
+\draw<3-> [arrow] (process) -- (output);
 
+% Annotations
+\node<4-> [right of=process, xshift=2cm] 
+    {\alert{Critical Step}};
 \end{tikzpicture}
 \end{center}
-
 \end{frame}
-
-% Animated diagram
-\begin{frame}
-\frametitle{Step-by-Step Diagram}
-
-\begin{center}
-\begin{tikzpicture}
-  \node<1->[circle,draw] (A) at (0,0) {A};
-  \node<2->[circle,draw] (B) at (2,0) {B};
-  \node<3->[circle,draw] (C) at (1,-1.5) {C};
-  
-  \draw<2->[->,thick] (A) -- (B);
-  \draw<3->[->,thick] (A) -- (C);
-  \draw<3->[->,thick] (B) -- (C);
-\end{tikzpicture}
-\end{center}
-
-\end{frame}
-\end{document}
 ```
 </CodeGroup>
 
-## Tables and Data
-
-### Tables in Presentations
+### Tables and Data
 
 <CodeGroup>
-```latex tables-beamer.tex
+```latex tables-data.tex
 \begin{frame}
-\frametitle{Data Presentation}
+\frametitle{Experimental Results}
 
 \begin{table}
 \centering
-\begin{tabular}{l|c|c|c}
+\begin{tabular}{l|rrr}
 \hline
 \textbf{Method} & \textbf{Accuracy} & \textbf{Speed} & \textbf{Memory} \\
 \hline
-Algorithm A & 92\% & Fast & Low \\
-Algorithm B & 95\% & Medium & Medium \\
-Algorithm C & 88\% & Slow & High \\
+Baseline & 82.3\% & 1.0x & 100 MB \\
+\alert<2>{Our Method} & \alert<2>{91.7\%} & \alert<2>{0.8x} & \alert<2>{95 MB} \\
+State-of-art & 90.1\% & 0.5x & 150 MB \\
 \hline
 \end{tabular}
 \caption{Performance comparison}
 \end{table}
 
-% Highlighted table
-\begin{table}
-\centering
-\begin{tabular}{l|c|c}
-\hline
-Item & \only<1>{Value}\only<2>{\alert{Value}} & Status \\
-\hline
-Test 1 & \only<1>{85}\only<2>{\alert{85}} & Pass \\
-Test 2 & 92 & Pass \\
-Test 3 & \only<1>{78}\only<2>{\alert{78}} & \only<1>{Fail}\only<2>{\alert{Fail}} \\
-\hline
-\end{tabular}
-\end{table}
-
+\only<2>{
+\begin{alertblock}{Key Achievement}
+Our method achieves better accuracy with lower memory usage!
+\end{alertblock}
+}
 \end{frame}
 ```
 </CodeGroup>
 
-## Math in Presentations
+## Mathematical Content
 
-### Mathematical Content
+### Equations and Formulas
 
 <CodeGroup>
-```latex math-beamer.tex
+```latex math-content.tex
 \begin{frame}
-\frametitle{Mathematical Theorems}
+\frametitle{Mathematical Equations}
 
+% Simple equation
+\begin{equation}
+    E = mc^2
+\end{equation}
+
+% Aligned equations with overlays
+\begin{align}
+    f(x) &= ax^2 + bx + c \\
+    \uncover<2->{f'(x) &= 2ax + b} \\
+    \uncover<3->{f''(x) &= 2a}
+\end{align}
+
+% Highlighting parts
+\begin{equation}
+    \sum_{i=1}^{n} \alert<2>{x_i^2} = 
+    \uncover<3->{\frac{n(n+1)(2n+1)}{6}}
+\end{equation}
+
+% Theorem with proof
 \begin{theorem}[Fundamental Theorem of Calculus]
-If $f$ is continuous on $[a,b]$, then
-\[
-\int_a^b f(x)\,dx = F(b) - F(a)
-\]
-where $F'(x) = f(x)$.
+    If $f$ is continuous on $[a,b]$, then
+    \[\int_a^b f(x)\,dx = F(b) - F(a)\]
+    where $F'(x) = f(x)$.
 \end{theorem}
 
-\pause
-
-\begin{proof}
-\begin{enumerate}
-  \item<2-> Define $G(x) = \int_a^x f(t)\,dt$
-  \item<3-> Show that $G'(x) = f(x)$
-  \item<4-> Apply the Mean Value Theorem
-\end{enumerate}
-\visible<5->{Therefore, the theorem is proved. \qed}
+\begin{proof}<2->
+    By the mean value theorem...
 \end{proof}
-
 \end{frame}
 ```
 </CodeGroup>
 
-## Navigation and Structure
-
-### Navigation Symbols
+### Matrix Animations
 
 <CodeGroup>
-```latex navigation-beamer.tex
-% Hide navigation symbols
-\setbeamertemplate{navigation symbols}{}
+```latex matrix-animations.tex
+\begin{frame}
+\frametitle{Matrix Operations}
 
-% Custom footline
-\setbeamertemplate{footline}{
-  \leavevmode%
-  \hbox{%
-    \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
-      \usebeamerfont{author in head/foot}\insertshortauthor
-    \end{beamercolorbox}%
-    \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
-      \usebeamerfont{title in head/foot}\insertshorttitle
-    \end{beamercolorbox}%
-    \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
-      \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
-      \insertframenumber{} / \inserttotalframenumber\hspace*{2ex} 
-    \end{beamercolorbox}%
-  }%
-  \vskip0pt%
+% Progressive matrix reveal
+\[
+\begin{pmatrix}
+    a_{11} & \uncover<2->{a_{12}} & \uncover<3->{a_{13}} \\
+    \uncover<2->{a_{21}} & \uncover<2->{a_{22}} & \uncover<3->{a_{23}} \\
+    \uncover<3->{a_{31}} & \uncover<3->{a_{32}} & \uncover<3->{a_{33}}
+\end{pmatrix}
+\]
+
+% Matrix multiplication steps
+\only<4>{
+    \[
+    \begin{pmatrix}
+        \alert{1} & \alert{2} \\
+        3 & 4
+    \end{pmatrix}
+    \begin{pmatrix}
+        \alert{5} \\
+        \alert{6}
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        \alert{17} \\
+        39
+    \end{pmatrix}
+    \]
+    Calculating first element: $1 \times 5 + 2 \times 6 = 17$
+}
+\end{frame}
+```
+</CodeGroup>
+
+## Advanced Features
+
+### Handout Mode and Notes
+
+<CodeGroup>
+```latex handouts-notes.tex
+% In preamble for handout mode
+\documentclass[handout]{beamer}
+% This removes all overlays and animations
+
+% Speaker notes
+\begin{frame}
+\frametitle{Main Slide Content}
+\begin{itemize}
+    \item Point 1
+    \item Point 2
+    \item Point 3
+\end{itemize}
+
+\note{
+    % These notes appear in presenter mode
+    \begin{itemize}
+        \item Expand on point 1
+        \item Remember to mention example
+        \item Time check: 5 minutes
+    \end{itemize}
+}
+\end{frame}
+
+% Notes on separate slide
+\begin{frame}
+\frametitle{Complex Topic}
+Content for audience...
+\end{frame}
+
+\note{
+\begin{itemize}
+    \item Detailed explanation for speaker
+    \item Key points to emphasize
+    \item Possible questions from audience
+\end{itemize}
 }
 ```
 </CodeGroup>
 
-### Sections and Subsections
-
-<CodeGroup>
-```latex sections-beamer.tex
-\documentclass{beamer}
-\usetheme{Frankfurt} % Shows section navigation
-
-\begin{document}
-
-\section{Introduction}
-\subsection{Motivation}
-\begin{frame}
-\frametitle{Why This Topic?}
-Content about motivation...
-\end{frame}
-
-\subsection{Background}
-\begin{frame}
-\frametitle{Historical Context}
-Background information...
-\end{frame}
-
-\section{Main Results}
-\subsection{Theory}
-\begin{frame}
-\frametitle{Theoretical Framework}
-Theoretical content...
-\end{frame}
-
-% Section slide
-\section{Conclusions}
-\begin{frame}
-\sectionpage % Automatic section title slide
-\end{frame}
-
-\end{document}
-```
-</CodeGroup>
-
-## Handouts and Notes
-
 ### Creating Handouts
 
 <CodeGroup>
-```latex handouts-beamer.tex
-% Handout version (no overlays)
-\documentclass[handout]{beamer}
-
+```latex handout-layout.tex
 % Multiple slides per page
 \usepackage{pgfpages}
+
+% 2 slides per page
 \pgfpagesuselayout{2 on 1}[a4paper,border shrink=5mm]
 
 % 4 slides per page
 \pgfpagesuselayout{4 on 1}[a4paper,border shrink=5mm,landscape]
 
-% With notes
-\documentclass[handout,notes=show]{beamer}
-
-\begin{document}
-\begin{frame}
-\frametitle{Slide Title}
-Slide content here...
-
-\note{
-  These are speaker notes:
-  \begin{itemize}
-    \item Remember to mention...
-    \item Don't forget about...
-  \end{itemize}
-}
-\end{frame}
-\end{document}
-```
-</CodeGroup>
-
-### Speaker Notes
-
-<CodeGroup>
-```latex speaker-notes.tex
-\documentclass{beamer}
+% With notes on the side
 \setbeameroption{show notes on second screen=right}
+```
+</CodeGroup>
 
-\begin{document}
+### Bibliography and Citations
+
+<CodeGroup>
+```latex bibliography-beamer.tex
+% In preamble
+\usepackage[backend=biber,style=authoryear]{biblatex}
+\addbibresource{references.bib}
 
 \begin{frame}
-\frametitle{Main Slide}
-This is what the audience sees.
+\frametitle{Literature Review}
 
-\note{
-  \textbf{Speaker notes:}
-  \begin{itemize}
-    \item Explain the concept clearly
-    \item Use the example on the board
-    \item Allow time for questions
-  \end{itemize}
-  
-  Remember: This slide usually takes 3 minutes.
+Key findings from \textcite{smith2023} show that...
+
+\begin{itemize}
+    \item Result 1 \parencite{jones2022}
+    \item Result 2 \parencite{brown2023}
+\end{itemize}
+
+\vfill
+\tiny
+\printbibliography[heading=none]
+\end{frame}
+
+% Or traditional approach
+\begin{frame}[allowframebreaks]
+\frametitle{References}
+\bibliographystyle{apalike}
+\bibliography{references}
+\end{frame}
+```
+</CodeGroup>
+
+### Multimedia Integration
+
+<CodeGroup>
+```latex multimedia.tex
+% Including videos (requires multimedia package)
+\usepackage{multimedia}
+
+\begin{frame}
+\frametitle{Video Demonstration}
+
+\movie[width=8cm,height=6cm,poster,showcontrols]{
+    \includegraphics[width=8cm]{video-poster.png}
+}{video.mp4}
+
+% Alternative: hyperlink to video
+\href{run:./videos/demo.mp4}{
+    \includegraphics[width=0.8\textwidth]{video-thumbnail.png}
 }
 \end{frame}
 
-\end{document}
+% Sound effects
+\sound[automute,inlinesound]{
+    \includegraphics[width=2cm]{speaker-icon.png}
+}{sound.wav}
 ```
 </CodeGroup>
 
-## Advanced Customization
+## Best Practices and Tips
 
-### Custom Templates
-
-<CodeGroup>
-```latex custom-template.tex
-\documentclass{beamer}
-
-% Custom title page
-\setbeamertemplate{title page}{
-  \vbox{}
-  \vfill
-  \begin{centering}
-    {\usebeamercolor[fg]{title}\usebeamerfont{title}\inserttitle\par}
-    \vskip1em
-    {\usebeamercolor[fg]{subtitle}\usebeamerfont{subtitle}\insertsubtitle\par}
-    \vskip2em
-    {\usebeamerfont{author}\insertauthor\par}
-    \vskip1em
-    {\usebeamerfont{institute}\insertinstitute\par}
-    \vskip2em
-    {\usebeamerfont{date}\insertdate\par}
-  \end{centering}
-  \vfill
-}
-
-% Custom frame title
-\setbeamertemplate{frametitle}{
-  \noindent\insertframetitle\par
-  \noindent\usebeamercolor[fg]{frametitle}\rule{\textwidth}{1pt}
-}
-
-\begin{document}
-\frame{\titlepage}
-\end{document}
-```
-</CodeGroup>
-
-## Best Practices
-
-<Tip>
-**Presentation design tips:**
-
-1. **Simplicity**: Less is more - avoid cluttered slides
-2. **Consistency**: Use the same theme throughout
-3. **Font size**: Ensure text is readable from the back of the room
-4. **Colors**: Use high contrast for visibility
-5. **Animations**: Use sparingly and purposefully
-6. **Time**: Plan ~2-3 minutes per slide
-7. **Backup**: Always have a PDF version ready
-</Tip>
-
-## Common Issues
+### Presentation Design Guidelines
 
 <Warning>
-**Troubleshooting Beamer:**
-
-1. **Compilation errors**: Use `[fragile]` for verbatim content
-2. **Missing themes**: Ensure full LaTeX distribution is installed
-3. **Overlay issues**: Check overlay specifications syntax
-4. **Font problems**: Some themes require specific fonts
-5. **PDF size**: Optimize images before including them
+**Common Pitfalls to Avoid:**
+- Too much text on slides (use notes instead)
+- Overusing animations (keep it professional)
+- Inconsistent formatting between slides
+- Small fonts (minimum 20pt for body text)
+- Complex diagrams without buildup
 </Warning>
 
-## Quick Reference
+### Effective Slide Design
 
-### Frame Options
+<Tabs>
+<Tab title="Content Guidelines">
+**The 6×6 Rule:**
+- Maximum 6 bullet points per slide
+- Maximum 6 words per bullet point
+- Use speaker notes for details
+
+**Visual Hierarchy:**
+1. Title: 28-32pt
+2. Main text: 20-24pt
+3. Footnotes: 14-16pt
+4. Captions: 16-18pt
+</Tab>
+<Tab title="Color Usage">
+**Color Best Practices:**
+- Use high contrast (dark on light or light on dark)
+- Limit to 3-4 colors maximum
+- Test on projector (colors may appear different)
+- Consider colorblind-friendly palettes
+
+**Professional Color Schemes:**
 ```latex
-[plain]            % No header/footer
-[fragile]          % For verbatim
-[allowframebreaks] % Auto-split long content
-[shrink]           % Fit content
-[squeeze]          % Reduce spacing
-[t]                % Top alignment
-[c]                % Center alignment
-[b]                % Bottom alignment
-```
+% Blue theme
+\definecolor{mainblue}{RGB}{0,51,102}
+\definecolor{lightblue}{RGB}{204,229,255}
 
-### Overlay Specifications
-```latex
-<1>    % Only on slide 1
-<1->   % From slide 1 onwards
-<-3>   % Until slide 3
-<2-4>  % From slide 2 to 4
-<1,3>  % On slides 1 and 3
+% Green theme  
+\definecolor{maingreen}{RGB}{0,102,51}
+\definecolor{lightgreen}{RGB}{229,255,204}
 ```
+</Tab>
+<Tab title="Typography">
+**Font Selection:**
+- Sans-serif for slides (better readability)
+- Serif for handouts (if needed)
+- Consistent font throughout
+- Avoid decorative fonts
 
----
+**Text Formatting:**
+- Bold for emphasis (not underline)
+- Italics sparingly
+- Consistent bullet styles
+- Proper spacing between elements
+</Tab>
+</Tabs>
+
+### Performance Optimization
+
+<CodeGroup>
+```latex optimization.tex
+% Compile faster during development
+\includeonlyframes{current} % Tag frames with label={current}
+
+% Reduce file size
+\pdfcompresslevel=9
+\pdfobjcompresslevel=3
+
+% Optimize images
+% Convert images to PDF beforehand
+% Use appropriate resolution (150-300 dpi for projection)
+
+% Disable navigation symbols for cleaner look
+\setbeamertemplate{navigation symbols}{}
+
+% Preload frequently used images
+\pgfdeclareimage[height=1cm]{logo}{university-logo}
+\logo{\pgfuseimage{logo}}
+```
+</CodeGroup>
+
+### Accessibility Considerations
 
 <Info>
-**Next**: Create a professional [CV or Resume](/learn/latex/how-to/cv-resume) using LaTeX for your job applications.
+**Making Presentations Accessible:**
+- Use high contrast themes
+- Provide alternative text for images
+- Ensure logical reading order
+- Include slide numbers
+- Distribute handouts with full content
+- Use clear, simple language
 </Info>
+
+## Troubleshooting Common Issues
+
+### Compilation Errors
+
+<Accordion title="Frame too large for slide">
+**Problem**: Content exceeds slide dimensions
+
+**Solutions**:
+- Use `[allowframebreaks]` option
+- Split into multiple frames
+- Reduce font size (last resort)
+- Use `\small` or `\footnotesize` environments
+</Accordion>
+
+<Accordion title="Overlays not working">
+**Problem**: Overlay specifications ignored
+
+**Solutions**:
+- Check for conflicting packages
+- Ensure correct syntax: `<2->` not `<2-`
+- Use `\only` instead of `\uncover` for images
+- Verify frame is not in handout mode
+</Accordion>
+
+<Accordion title="Missing figures or logos">
+**Problem**: Images not appearing
+
+**Solutions**:
+- Check file paths (relative vs absolute)
+- Verify image format compatibility
+- Include graphics package
+- Set graphics path: `\graphicspath{{./images/}}`
+</Accordion>
+
+### Platform-Specific Issues
+
+<Tabs>
+<Tab title="PDF Viewer Issues">
+**Adobe Reader**:
+- Best compatibility with animations
+- Supports multimedia content
+- Full-screen mode: Ctrl+L
+
+**Other Viewers**:
+- Preview (Mac): Limited animation support
+- Evince (Linux): Good basic support
+- Browser PDFs: May not show transitions
+</Tab>
+<Tab title="Projector Setup">
+**Resolution**:
+- Design for 4:3 or 16:9 aspect ratio
+- Test beforehand when possible
+- Have backup: handouts or static PDF
+
+**Display**:
+- Mirror vs extended display
+- Presenter view setup
+- Test animations and colors
+</Tab>
+</Tabs>
+
+## Conference Presentation Template
+
+### Complete Academic Conference Template
+
+<CodeGroup>
+```latex conference-template.tex
+\documentclass[aspectratio=169]{beamer}
+% Use aspectratio=43 for 4:3 displays
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{booktabs}
+\usepackage[backend=biber,style=authoryear-comp]{biblatex}
+\addbibresource{references.bib}
+
+% Theme
+\usetheme{Madrid}
+\usecolortheme{seahorse}
+\usefonttheme{professionalfonts}
+
+% Custom colors
+\definecolor{myblue}{RGB}{0,102,204}
+\definecolor{myred}{RGB}{204,0,0}
+\definecolor{mygreen}{RGB}{0,153,0}
+
+% Settings
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}[frame number]
+\setbeamersize{text margin left=1em,text margin right=1em}
+
+% Metadata
+\title[Short Title]{Full Conference Presentation Title}
+\subtitle{Conference Name 2024}
+\author[A. Author]{Alice Author\inst{1} \and Bob Coauthor\inst{2}}
+\institute[Inst.]{
+    \inst{1}Department of Computer Science\\
+    University Name
+    \and
+    \inst{2}Research Institute\\
+    Another University
+}
+\date{\today}
+
+\AtBeginSection[]{
+    \begin{frame}
+    \vfill
+    \centering
+    \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+        \usebeamerfont{title}\insertsectionhead\par
+    \end{beamercolorbox}
+    \vfill
+    \end{frame}
+}
+
+\begin{document}
+
+% Title page
+\frame{\titlepage}
+
+% Outline
+\begin{frame}
+\frametitle{Outline}
+\tableofcontents
+\end{frame}
+
+% Section 1: Introduction
+\section{Introduction}
+
+\begin{frame}
+\frametitle{Motivation}
+\begin{columns}
+\begin{column}{0.6\textwidth}
+    \begin{itemize}
+        \item<1-> Current challenges in the field
+        \item<2-> Limitations of existing approaches
+        \item<3-> Our novel contribution
+    \end{itemize}
+    
+    \vspace{1em}
+    \uncover<4->{
+    \begin{block}{Research Question}
+        How can we improve performance while maintaining efficiency?
+    \end{block}
+    }
+\end{column}
+\begin{column}{0.4\textwidth}
+    \begin{center}
+        \includegraphics[width=\textwidth]{problem-diagram.png}
+    \end{center}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Continue with more sections...
+
+\end{document}
+```
+</CodeGroup>
+
+## Advanced Presentation Techniques
+
+### Working with Overlays in Complex Scenarios
+
+<CodeGroup>
+```latex complex-overlays.tex
+\begin{frame}
+\frametitle{Advanced Overlay Techniques}
+
+% Conditional content based on slide number
+\alt<2>{%
+    \textcolor{red}{This appears in red on slide 2}%
+}{%
+    \textcolor{blue}{This appears in blue on other slides}%
+}
+
+% Temporal specifications
+\temporal<3>{Before}{On slide 3}{After}
+
+% Complex overlay with multiple conditions
+\begin{itemize}
+    \item<1-> Always visible
+    \item<2-4> Visible on slides 2-4
+    \item<3,5> Visible on slides 3 and 5 only
+    \item<-3,5-> Visible on slides 1-3 and from 5 onward
+\end{itemize}
+
+% Overlay-aware environments
+\begin{onlyenv}<2-4>
+    \begin{block}{Temporary Block}
+        This entire block only exists on slides 2-4
+    \end{block}
+\end{onlyenv}
+\end{frame}
+```
+</CodeGroup>
+
+### Creating Poster Presentations
+
+Beamer also supports academic poster creation with special themes:
+
+<CodeGroup>
+```latex beamer-poster.tex
+\documentclass[final,hyperref={pdfpagelabels=false}]{beamer}
+\usepackage[orientation=portrait,size=a0,scale=1.4]{beamerposter}
+
+\usetheme{confposter}
+\setbeamercolor{block title}{fg=white,bg=blue!70!black}
+\setbeamercolor{block body}{fg=black,bg=white}
+\setbeamercolor{block alerted title}{fg=white,bg=orange!70!black}
+\setbeamercolor{block alerted body}{fg=black,bg=orange!10}
+
+\begin{document}
+\begin{frame}[t]
+\begin{columns}[t]
+
+% Left column
+\begin{column}{.32\linewidth}
+\begin{block}{Introduction}
+    Content for introduction section...
+\end{block}
+
+\begin{block}{Methods}
+    Methodology description...
+\end{block}
+\end{column}
+
+% Middle column
+\begin{column}{.32\linewidth}
+\begin{block}{Results}
+    \begin{figure}
+        \includegraphics[width=\linewidth]{results.png}
+        \caption{Main findings}
+    \end{figure}
+\end{block}
+
+\begin{alertblock}{Key Finding}
+    Highlight your most important result
+\end{alertblock}
+\end{column}
+
+% Right column
+\begin{column}{.32\linewidth}
+\begin{block}{Discussion}
+    Interpretation of results...
+\end{block}
+
+\begin{block}{References}
+    \tiny
+    \bibliographystyle{abbrv}
+    \bibliography{poster}
+\end{block}
+\end{column}
+
+\end{columns}
+\end{frame}
+\end{document}
+```
+</CodeGroup>
+
+### Integration with External Tools
+
+#### Using Matplotlib Figures
+
+<CodeGroup>
+```python generate-figures.py
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Set LaTeX-compatible settings
+plt.rcParams['text.usetex'] = True
+plt.rcParams['font.family'] = 'serif'
+plt.rcParams['font.size'] = 12
+
+# Create figure
+fig, ax = plt.subplots(figsize=(6, 4))
+x = np.linspace(0, 2*np.pi, 100)
+y = np.sin(x)
+
+ax.plot(x, y, 'b-', linewidth=2)
+ax.set_xlabel(r'$x$')
+ax.set_ylabel(r'$\sin(x)$')
+ax.set_title(r'Sine Wave: $y = \sin(x)$')
+ax.grid(True, alpha=0.3)
+
+# Save for Beamer
+fig.savefig('sine_wave.pdf', bbox_inches='tight', dpi=300)
+```
+</CodeGroup>
+
+#### Integrating Videos and GIFs
+
+<CodeGroup>
+```latex video-integration.tex
+% Method 1: Using media9 package (modern approach)
+\usepackage{media9}
+
+\begin{frame}
+\frametitle{Video Demonstration}
+\includemedia[
+  width=0.8\linewidth,
+  height=0.6\linewidth,
+  activate=pageopen,
+  flashvars={
+    source=demo.mp4
+    &autoPlay=true
+  }
+]{\includegraphics[width=0.8\linewidth]{video-poster.png}}{VPlayer.swf}
+\end{frame}
+
+% Method 2: External viewer launch
+\href{run:./videos/demo.mp4}{
+  \includegraphics[width=0.8\linewidth]{video-preview.png}
+}
+
+% Method 3: Animated GIF alternative
+\animategraphics[loop,controls,width=\linewidth]{12}{animation-}{0}{23}
+```
+</CodeGroup>
+
+## Resources and Further Learning
+
+### Essential Packages for Presentations
+
+<CardGroup cols={2}>
+<Card title="beamer" icon="presentation-screen">
+Core presentation class with themes and layouts
+</Card>
+<Card title="pgfpages" icon="copy">
+Create handouts with multiple slides per page
+</Card>
+<Card title="multimedia" icon="play">
+Include videos and sound in presentations
+</Card>
+<Card title="animate" icon="film">
+Create animations from image sequences
+</Card>
+<Card title="tikz" icon="draw-polygon">
+Create professional diagrams and animations
+</Card>
+<Card title="pdfpc" icon="desktop">
+PDF presenter console with notes and timer
+</Card>
+</CardGroup>
+
+### Quick Reference Commands
+
+| Command | Purpose | Example |
+|---------|---------|---------|
+| `\pause` | Simple pause between content | `Text \pause more text` |
+| `\only<n>{content}` | Show content only on slide n | `\only<2>{Slide 2 only}` |
+| `\uncover<n->{content}` | Reveal content from slide n | `\uncover<3->{From slide 3}` |
+| `\alert<n>{text}` | Highlight text on slide n | `\alert<2>{Important!}` |
+| `\item<n->` | Reveal list item from slide n | `\item<2-> Second point` |
+
+### Presentation Workflow
+
+1. **Planning Phase**
+   - Outline your talk structure
+   - Allocate time per section
+   - Plan visual elements
+
+2. **Design Phase**
+   - Choose appropriate theme
+   - Create consistent style
+   - Design animations purposefully
+
+3. **Content Creation**
+   - Write concise bullet points
+   - Create supporting graphics
+   - Add speaker notes
+
+4. **Practice Phase**
+   - Test all animations
+   - Check timing
+   - Verify on target equipment
+
+5. **Delivery**
+   - Have backup formats ready
+   - Test equipment beforehand
+   - Keep handouts available
+
+### Converting Between Formats
+
+#### From PowerPoint to Beamer
+
+While there's no perfect conversion tool, here's a workflow:
+
+1. **Export content**: Save PowerPoint as RTF or plain text
+2. **Extract images**: Save all images separately as PNG/PDF
+3. **Rebuild in Beamer**: Use the content and images in Beamer structure
+4. **Recreate animations**: Map PowerPoint animations to Beamer overlays
+
+#### From Beamer to Other Formats
+
+<CodeGroup>
+```bash conversion-commands.sh
+# Convert to PowerPoint (via LibreOffice)
+pdf2odp presentation.pdf presentation.odp
+libreoffice --convert-to pptx presentation.odp
+
+# Extract slides as images
+convert -density 300 presentation.pdf slide-%03d.png
+
+# Create handout version
+pdfnup --nup 2x3 --frame true presentation.pdf -o handout.pdf
+```
+</CodeGroup>
+
+### Accessibility Best Practices
+
+<CodeGroup>
+```latex accessible-presentation.tex
+% Provide alternative text
+\pdfcompresslevel=9
+\usepackage{accsupp}
+
+\newcommand{\AltText}[2]{%
+  \BeginAccSupp{Alt={#2}}#1\EndAccSupp{}%
+}
+
+% Use in presentation
+\begin{frame}
+\frametitle{Data Visualization}
+\AltText{
+  \includegraphics[width=0.8\textwidth]{chart.png}
+}{Bar chart showing 40% increase in performance from 2022 to 2023}
+\end{frame}
+
+% Ensure reading order
+\setbeamertemplate{navigation symbols}{}
+\usepackage{bookmark}
+\bookmarksetup{open,numbered}
+```
+</CodeGroup>
+
+### Performance Tips for Large Presentations
+
+1. **Optimize images before including**:
+   ```bash
+   # Reduce PDF size
+   gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook \
+      -dNOPAUSE -dQUIET -dBATCH -sOutputFile=compressed.pdf input.pdf
+   ```
+
+2. **Use external figures**:
+   ```latex
+   \pgfdeclareimage[width=5cm]{myimage}{figure.pdf}
+   \pgfuseimage{myimage}
+   ```
+
+3. **Compile sections separately during development**:
+   ```latex
+   \includeonly{section2} % Only compile section 2
+   ```
+
+## Related Resources
+
+<CardGroup cols={2}>
+<Card title="Article Writing" icon="file-lines" href="/learn/latex/how-to/writing-research-paper">
+Learn to write research papers in LaTeX
+</Card>
+<Card title="Graphics & Figures" icon="image" href="/learn/latex/figures/inserting-images">
+Master image handling in LaTeX
+</Card>
+<Card title="TikZ Graphics" icon="draw-polygon" href="/learn/latex/how-to/tikz-diagrams">
+Create professional diagrams
+</Card>
+<Card title="Templates" icon="file-code" href="/templates/presentation">
+Ready-to-use presentation templates
+</Card>
+</CardGroup>
+
+<Tip>
+**Pro tip**: Start with a simple theme and gradually add complexity. Focus on content first, then enhance with animations and graphics. Remember: the best presentations support your talk, not overshadow it.
+</Tip>
+
+Ready to create your presentation? Check out our [presentation templates](/templates/presentation) or start with the basic template above!
