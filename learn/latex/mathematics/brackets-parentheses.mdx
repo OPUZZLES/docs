@@ -1,0 +1,821 @@
+---
+title: Brackets and Parentheses in LaTeX - Complete Guide
+description: Master all types of brackets and parentheses in LaTeX. Learn automatic sizing, manual control, and advanced techniques for mathematical expressions.
+keywords: LaTeX brackets, parentheses, curly braces, square brackets, angle brackets, delimiters, mathematical notation
+seo:
+  title: LaTeX Brackets & Parentheses - Complete Guide
+  description: Learn all bracket types in LaTeX with automatic sizing, manual control, and multi-line equations. Visual examples included.
+  canonical: https://resources.latex-cloud-studio.com/learn/latex/mathematics/brackets-parentheses
+---
+
+Master **all types of brackets and parentheses** in LaTeX mathematical expressions. This comprehensive guide covers everything from basic parentheses to advanced delimiter sizing techniques, with visual examples for every concept.
+
+<Info>
+**Quick start**: LaTeX provides various bracket types and automatic sizing with `\left` and `\right`. For basic parentheses use `()`, for square brackets `[]`, and for curly braces `\&#123;\&#125;`.
+
+**Prerequisites**: Basic LaTeX math mode knowledge. See [Mathematical Expressions](/learn/latex/mathematics/mathematical-expressions) for math mode basics.
+</Info>
+
+## What You'll Learn
+- ✅ All bracket and delimiter types in LaTeX
+- ✅ Automatic sizing with `\left` and `\right`
+- ✅ Manual size control for fine-tuning
+- ✅ Multi-line equations with balanced delimiters
+- ✅ Special cases and advanced techniques
+- ✅ Common errors and how to fix them
+- ✅ Best practices for readable mathematics
+
+## Types of Brackets and Delimiters
+
+### Complete Visual Reference
+
+<div style={{ backgroundColor: '#f8f9fa', padding: '2em', borderRadius: '8px', margin: '2em 0' }}>
+<h3 style={{ textAlign: 'center', marginBottom: '1.5em', color: '#FF6037' }}>All LaTeX Bracket Types</h3>
+<table style={{ width: '100%', borderCollapse: 'collapse', fontFamily: 'Georgia, serif', fontSize: '1.1em' }}>
+<thead>
+<tr style={{ backgroundColor: '#f5f5f5' }}>
+<th style={{ padding: '12px', textAlign: 'left', borderBottom: '2px solid #ddd' }}>Type</th>
+<th style={{ padding: '12px', textAlign: 'left', borderBottom: '2px solid #ddd' }}>LaTeX Code</th>
+<th style={{ padding: '12px', textAlign: 'center', borderBottom: '2px solid #ddd' }}>Output</th>
+<th style={{ padding: '12px', textAlign: 'left', borderBottom: '2px solid #ddd' }}>Common Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style={{ padding: '10px', borderBottom: '1px solid #eee' }}>Parentheses</td>
+<td style={{ padding: '10px', borderBottom: '1px solid #eee' }}><code>( )</code></td>
+<td style={{ padding: '10px', borderBottom: '1px solid #eee', textAlign: 'center', fontSize: '1.3em' }}>( )</td>
+<td style={{ padding: '10px', borderBottom: '1px solid #eee' }}>General grouping</td>
+</tr>
+<tr style={{ backgroundColor: '#fafafa' }}>
+<td style={{ padding: '10px', borderBottom: '1px solid #eee' }}>Square brackets</td>
+<td style={{ padding: '10px', borderBottom: '1px solid #eee' }}><code>[ ]</code></td>
+<td style={{ padding: '10px', borderBottom: '1px solid #eee', textAlign: 'center', fontSize: '1.3em' }}>[ ]</td>
+<td style={{ padding: '10px', borderBottom: '1px solid #eee' }}>Arrays, intervals</td>
+</tr>
+<tr>
+<td style={{ padding: '10px', borderBottom: '1px solid #eee' }}>Curly braces</td>
+<td style={{ padding: '10px', borderBottom: '1px solid #eee' }}><code>\{ \}</code></td>
+<td style={{ padding: '10px', borderBottom: '1px solid #eee', textAlign: 'center', fontSize: '1.3em' }}>{ }</td>
+<td style={{ padding: '10px', borderBottom: '1px solid #eee' }}>Sets, systems</td>
+</tr>
+<tr style={{ backgroundColor: '#fafafa' }}>
+<td style={{ padding: '10px', borderBottom: '1px solid #eee' }}>Angle brackets</td>
+<td style={{ padding: '10px', borderBottom: '1px solid #eee' }}><code>\langle \rangle</code></td>
+<td style={{ padding: '10px', borderBottom: '1px solid #eee', textAlign: 'center', fontSize: '1.3em' }}>⟨ ⟩</td>
+<td style={{ padding: '10px', borderBottom: '1px solid #eee' }}>Inner products</td>
+</tr>
+<tr>
+<td style={{ padding: '10px', borderBottom: '1px solid #eee' }}>Vertical bars</td>
+<td style={{ padding: '10px', borderBottom: '1px solid #eee' }}><code>| |</code> or <code>\vert \vert</code></td>
+<td style={{ padding: '10px', borderBottom: '1px solid #eee', textAlign: 'center', fontSize: '1.3em' }}>| |</td>
+<td style={{ padding: '10px', borderBottom: '1px solid #eee' }}>Absolute value</td>
+</tr>
+<tr style={{ backgroundColor: '#fafafa' }}>
+<td style={{ padding: '10px', borderBottom: '1px solid #eee' }}>Double bars</td>
+<td style={{ padding: '10px', borderBottom: '1px solid #eee' }}><code>\| \|</code> or <code>\Vert \Vert</code></td>
+<td style={{ padding: '10px', borderBottom: '1px solid #eee', textAlign: 'center', fontSize: '1.3em' }}>‖ ‖</td>
+<td style={{ padding: '10px', borderBottom: '1px solid #eee' }}>Norms</td>
+</tr>
+<tr>
+<td style={{ padding: '10px', borderBottom: '1px solid #eee' }}>Floor</td>
+<td style={{ padding: '10px', borderBottom: '1px solid #eee' }}><code>\lfloor \rfloor</code></td>
+<td style={{ padding: '10px', borderBottom: '1px solid #eee', textAlign: 'center', fontSize: '1.3em' }}>⌊ ⌋</td>
+<td style={{ padding: '10px', borderBottom: '1px solid #eee' }}>Floor function</td>
+</tr>
+<tr style={{ backgroundColor: '#fafafa' }}>
+<td style={{ padding: '10px', borderBottom: '1px solid #eee' }}>Ceiling</td>
+<td style={{ padding: '10px', borderBottom: '1px solid #eee' }}><code>\lceil \rceil</code></td>
+<td style={{ padding: '10px', borderBottom: '1px solid #eee', textAlign: 'center', fontSize: '1.3em' }}>⌈ ⌉</td>
+<td style={{ padding: '10px', borderBottom: '1px solid #eee' }}>Ceiling function</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+### Basic Examples
+
+<CodeGroup>
+```latex basic-brackets.tex
+\documentclass{article}
+\usepackage{amsmath}
+\begin{document}
+
+% Parentheses
+$(a + b)$
+
+% Square brackets  
+$[x, y]$
+
+% Curly braces (must be escaped)
+$\{z : z > 0\}$
+
+% Angle brackets
+$\langle u, v \rangle$
+
+% Absolute value
+$|x - y|$
+
+% Norm
+$\|v\|$
+
+% Floor and ceiling
+$\lfloor x \rfloor$ and $\lceil x \rceil$
+
+\end{document}
+```
+</CodeGroup>
+
+**Rendered output:**
+
+<div style={{ backgroundColor: '#f8f9fa', padding: '1.5em', borderRadius: '8px', margin: '1em 0', border: '1px solid #e9ecef' }}>
+<div style={{ fontFamily: 'Georgia, serif', fontSize: '1.2em', lineHeight: '2.5' }}>
+<div>(a + b)</div>
+<div>[x, y]</div>
+<div>&#123;z : z > 0&#125;</div>
+<div>⟨u, v⟩</div>
+<div>|x − y|</div>
+<div>‖v‖</div>
+<div>⌊x⌋ and ⌈x⌉</div>
+</div>
+</div>
+
+## Automatic Delimiter Sizing
+
+### The `\left` and `\right` Commands
+
+LaTeX can automatically size delimiters to match their content using `\left` and `\right`:
+
+<CodeGroup>
+```latex auto-sizing.tex
+\documentclass{article}
+\usepackage{amsmath}
+\begin{document}
+
+% Without automatic sizing
+$(\frac{1}{2})$
+
+% With automatic sizing
+$\left(\frac{1}{2}\right)$
+
+% Works with any delimiter type
+$\left[\frac{x^2}{y}\right]$
+
+$\left\{\sqrt{\frac{a}{b}}\right\}$
+
+$\left|\sum_{i=1}^n x_i\right|$
+
+% Nested fractions
+$\left(\frac{\frac{a}{b}}{\frac{c}{d}}\right)$
+
+\end{document}
+```
+</CodeGroup>
+
+**Rendered output:**
+
+<div style={{ backgroundColor: '#f8f9fa', padding: '1.5em', borderRadius: '8px', margin: '1em 0', border: '1px solid #e9ecef' }}>
+<div style={{ fontFamily: 'Georgia, serif', fontSize: '1.2em', lineHeight: '3' }}>
+<div style={{ marginBottom: '1em' }}>
+<span style={{ fontSize: '0.9em', color: '#666' }}>Without sizing:</span> 
+<span style={{ marginLeft: '1em' }}>(</span>
+<span style={{ display: 'inline-block', verticalAlign: 'middle' }}>
+<span style={{ display: 'block', textAlign: 'center', borderBottom: '1px solid black', padding: '0 0.3em' }}>1</span>
+<span style={{ display: 'block', textAlign: 'center', padding: '0 0.3em' }}>2</span>
+</span>
+<span>)</span>
+</div>
+<div style={{ marginBottom: '1em' }}>
+<span style={{ fontSize: '0.9em', color: '#666' }}>With sizing:</span>
+<span style={{ marginLeft: '1em', fontSize: '1.5em' }}>(</span>
+<span style={{ display: 'inline-block', verticalAlign: 'middle' }}>
+<span style={{ display: 'block', textAlign: 'center', borderBottom: '1px solid black', padding: '0 0.3em' }}>1</span>
+<span style={{ display: 'block', textAlign: 'center', padding: '0 0.3em' }}>2</span>
+</span>
+<span style={{ fontSize: '1.5em' }}>)</span>
+</div>
+<div style={{ marginBottom: '1em' }}>
+<span style={{ fontSize: '2em' }}>[</span>
+<span style={{ display: 'inline-block', verticalAlign: 'middle' }}>
+<span style={{ display: 'block', textAlign: 'center', borderBottom: '1px solid black', padding: '0 0.3em' }}>x²</span>
+<span style={{ display: 'block', textAlign: 'center', padding: '0 0.3em' }}>y</span>
+</span>
+<span style={{ fontSize: '2em' }}>]</span>
+</div>
+<div style={{ marginBottom: '1em' }}>
+<span style={{ fontSize: '2em' }}>&#123;</span>
+<span style={{ fontSize: '1.5em' }}>√</span>
+<span style={{ display: 'inline-block', verticalAlign: 'middle', borderTop: '2px solid black' }}>
+<span style={{ display: 'block', textAlign: 'center', borderBottom: '1px solid black', padding: '0 0.3em' }}>a</span>
+<span style={{ display: 'block', textAlign: 'center', padding: '0 0.3em' }}>b</span>
+</span>
+<span style={{ fontSize: '2em' }}>&#125;</span>
+</div>
+</div>
+</div>
+
+### Important Rules for `\left` and `\right`
+
+<Warning>
+**Critical**: Every `\left` must have a matching `\right` in the same math environment. They must be balanced like opening and closing HTML tags.
+</Warning>
+
+#### Invisible Delimiters
+
+Sometimes you need an invisible delimiter to balance the equation:
+
+<CodeGroup>
+```latex invisible-delimiters.tex
+% Using \right. for invisible right delimiter
+$\left\{\begin{array}{ll}
+x + y = 1 \\
+x - y = 0
+\end{array}\right.$
+
+% Using \left. for invisible left delimiter
+$\left.\frac{dy}{dx}\right|_{x=0}$
+```
+</CodeGroup>
+
+**Rendered output:**
+
+<div style={{ backgroundColor: '#f8f9fa', padding: '1.5em', borderRadius: '8px', margin: '1em 0', border: '1px solid #e9ecef' }}>
+<div style={{ fontFamily: 'Georgia, serif', fontSize: '1.2em', lineHeight: '2' }}>
+<div style={{ marginBottom: '1em' }}>
+<span style={{ fontSize: '2em' }}>&#123;</span>
+<span style={{ display: 'inline-block', verticalAlign: 'middle', marginLeft: '0.5em' }}>
+<div>x + y = 1</div>
+<div>x − y = 0</div>
+</span>
+</div>
+<div>
+<span style={{ display: 'inline-block', verticalAlign: 'middle' }}>
+<span style={{ display: 'block', textAlign: 'center', borderBottom: '1px solid black', padding: '0 0.3em' }}>dy</span>
+<span style={{ display: 'block', textAlign: 'center', padding: '0 0.3em' }}>dx</span>
+</span>
+<span style={{ fontSize: '1.5em', marginLeft: '0.2em' }}>|</span>
+<sub style={{ fontSize: '0.8em' }}>x=0</sub>
+</div>
+</div>
+</div>
+
+## Manual Size Control
+
+### Size Commands
+
+When automatic sizing doesn't give the desired result, use manual size commands:
+
+<div style={{ backgroundColor: '#fff3e0', padding: '1.5em', borderRadius: '8px', margin: '2em 0' }}>
+<h4 style={{ marginTop: 0, color: '#e65100' }}>Delimiter Size Commands (smallest to largest)</h4>
+<table style={{ width: '100%', fontFamily: 'monospace' }}>
+<tr>
+<td style={{ padding: '8px' }}><code>\big</code></td>
+<td style={{ padding: '8px' }}>50% larger than normal</td>
+</tr>
+<tr style={{ backgroundColor: '#ffecb3' }}>
+<td style={{ padding: '8px' }}><code>\Big</code></td>
+<td style={{ padding: '8px' }}>2x normal size</td>
+</tr>
+<tr>
+<td style={{ padding: '8px' }}><code>\bigg</code></td>
+<td style={{ padding: '8px' }}>2.5x normal size</td>
+</tr>
+<tr style={{ backgroundColor: '#ffecb3' }}>
+<td style={{ padding: '8px' }}><code>\Bigg</code></td>
+<td style={{ padding: '8px' }}>3x normal size</td>
+</tr>
+</table>
+</div>
+
+### Size Comparison
+
+<CodeGroup>
+```latex size-comparison.tex
+\documentclass{article}
+\usepackage{amsmath}
+\begin{document}
+
+% Normal size
+$( \frac{1}{2} )$
+
+% \big
+$\big( \frac{1}{2} \big)$
+
+% \Big
+$\Big( \frac{1}{2} \Big)$
+
+% \bigg
+$\bigg( \frac{1}{2} \bigg)$
+
+% \Bigg
+$\Bigg( \frac{1}{2} \Bigg)$
+
+% For opening and closing separately
+$\bigl( x \bigr)$  % 'l' for left, 'r' for right
+
+\end{document}
+```
+</CodeGroup>
+
+**Rendered output:**
+
+<div style={{ backgroundColor: '#f8f9fa', padding: '1.5em', borderRadius: '8px', margin: '1em 0', border: '1px solid #e9ecef' }}>
+<div style={{ fontFamily: 'Georgia, serif', fontSize: '1.2em', display: 'flex', flexWrap: 'wrap', gap: '2em', alignItems: 'center', justifyContent: 'center' }}>
+<div style={{ textAlign: 'center' }}>
+<div style={{ fontSize: '0.8em', color: '#666', marginBottom: '0.5em' }}>Normal</div>
+<span>(<span style={{ display: 'inline-block', verticalAlign: 'middle' }}>
+<span style={{ display: 'block', textAlign: 'center', borderBottom: '1px solid black', padding: '0 0.3em' }}>1</span>
+<span style={{ display: 'block', textAlign: 'center', padding: '0 0.3em' }}>2</span>
+</span>)</span>
+</div>
+<div style={{ textAlign: 'center' }}>
+<div style={{ fontSize: '0.8em', color: '#666', marginBottom: '0.5em' }}>\big</div>
+<span style={{ fontSize: '1.3em' }}>(</span><span style={{ display: 'inline-block', verticalAlign: 'middle' }}>
+<span style={{ display: 'block', textAlign: 'center', borderBottom: '1px solid black', padding: '0 0.3em' }}>1</span>
+<span style={{ display: 'block', textAlign: 'center', padding: '0 0.3em' }}>2</span>
+</span><span style={{ fontSize: '1.3em' }}>)</span>
+</div>
+<div style={{ textAlign: 'center' }}>
+<div style={{ fontSize: '0.8em', color: '#666', marginBottom: '0.5em' }}>\Big</div>
+<span style={{ fontSize: '1.6em' }}>(</span><span style={{ display: 'inline-block', verticalAlign: 'middle' }}>
+<span style={{ display: 'block', textAlign: 'center', borderBottom: '1px solid black', padding: '0 0.3em' }}>1</span>
+<span style={{ display: 'block', textAlign: 'center', padding: '0 0.3em' }}>2</span>
+</span><span style={{ fontSize: '1.6em' }}>)</span>
+</div>
+<div style={{ textAlign: 'center' }}>
+<div style={{ fontSize: '0.8em', color: '#666', marginBottom: '0.5em' }}>\bigg</div>
+<span style={{ fontSize: '2em' }}>(</span><span style={{ display: 'inline-block', verticalAlign: 'middle' }}>
+<span style={{ display: 'block', textAlign: 'center', borderBottom: '1px solid black', padding: '0 0.3em' }}>1</span>
+<span style={{ display: 'block', textAlign: 'center', padding: '0 0.3em' }}>2</span>
+</span><span style={{ fontSize: '2em' }}>)</span>
+</div>
+<div style={{ textAlign: 'center' }}>
+<div style={{ fontSize: '0.8em', color: '#666', marginBottom: '0.5em' }}>\Bigg</div>
+<span style={{ fontSize: '2.5em' }}>(</span><span style={{ display: 'inline-block', verticalAlign: 'middle' }}>
+<span style={{ display: 'block', textAlign: 'center', borderBottom: '1px solid black', padding: '0 0.3em' }}>1</span>
+<span style={{ display: 'block', textAlign: 'center', padding: '0 0.3em' }}>2</span>
+</span><span style={{ fontSize: '2.5em' }}>)</span>
+</div>
+</div>
+</div>
+
+### Left and Right Variants
+
+<Tip>
+Use `l` and `r` suffixes for proper spacing: `\bigl(`, `\bigr)`, `\Bigl[`, `\Bigr]`, etc. This ensures correct spacing around the delimiters.
+</Tip>
+
+## Advanced Techniques
+
+### Nested Brackets
+
+<CodeGroup>
+```latex nested-brackets.tex
+\documentclass{article}
+\usepackage{amsmath}
+\begin{document}
+
+% Poor: all brackets same size
+$[1 + [2 + [3 + 4]]]$
+
+% Better: graduated sizes
+$\Big[1 + \big[2 + [3 + 4]\big]\Big]$
+
+% Best: automatic sizing
+$\left[1 + \left[2 + \left[3 + 4\right]\right]\right]$
+
+% Complex nesting
+$\left\{x : \left[a + \left(\frac{b}{c}\right)\right] > 0\right\}$
+
+\end{document}
+```
+</CodeGroup>
+
+**Rendered output:**
+
+<div style={{ backgroundColor: '#f8f9fa', padding: '1.5em', borderRadius: '8px', margin: '1em 0', border: '1px solid #e9ecef' }}>
+<div style={{ fontFamily: 'Georgia, serif', fontSize: '1.2em', lineHeight: '2.5' }}>
+<div style={{ marginBottom: '1em' }}>
+<span style={{ fontSize: '0.9em', color: '#666' }}>Poor:</span> [1 + [2 + [3 + 4]]]
+</div>
+<div style={{ marginBottom: '1em' }}>
+<span style={{ fontSize: '0.9em', color: '#666' }}>Better:</span> 
+<span style={{ fontSize: '1.6em' }}>[</span>1 + <span style={{ fontSize: '1.3em' }}>[</span>2 + [3 + 4]<span style={{ fontSize: '1.3em' }}>]</span><span style={{ fontSize: '1.6em' }}>]</span>
+</div>
+<div style={{ marginBottom: '1em' }}>
+<span style={{ fontSize: '0.9em', color: '#666' }}>Best:</span>
+<span style={{ fontSize: '2em' }}>[</span>1 + <span style={{ fontSize: '1.6em' }}>[</span>2 + <span style={{ fontSize: '1.3em' }}>[</span>3 + 4<span style={{ fontSize: '1.3em' }}>]</span><span style={{ fontSize: '1.6em' }}>]</span><span style={{ fontSize: '2em' }}>]</span>
+</div>
+</div>
+</div>
+
+### Multi-line Equations with Brackets
+
+For equations that span multiple lines, you need special handling:
+
+<CodeGroup>
+```latex multiline-brackets.tex
+\documentclass{article}
+\usepackage{amsmath}
+\begin{document}
+
+% Using \right. and \left. for invisible delimiters
+\begin{align}
+f(x) = & \left[ x^2 + 2x \right. \\
+       & \left. + 1 \right]
+\end{align}
+
+% Alternative using \big commands
+\begin{align}
+g(x) = & \Big[ x^3 + 3x^2 \\
+       & \phantom{\Big[} + 3x + 1 \Big]
+\end{align}
+
+% For cases/piecewise functions
+\begin{equation}
+f(x) = \begin{cases}
+x^2 & \text{if } x \geq 0 \\
+-x^2 & \text{if } x < 0
+\end{cases}
+\end{equation}
+
+\end{document}
+```
+</CodeGroup>
+
+**Rendered output:**
+
+<div style={{ backgroundColor: '#f8f9fa', padding: '1.5em', borderRadius: '8px', margin: '1em 0', border: '1px solid #e9ecef' }}>
+<div style={{ fontFamily: 'Georgia, serif', fontSize: '1.2em' }}>
+<div style={{ marginBottom: '1.5em' }}>
+<div style={{ textAlign: 'right' }}>f(x) = <span style={{ fontSize: '1.5em' }}>[</span> x² + 2x</div>
+<div style={{ textAlign: 'right', paddingLeft: '3em' }}>+ 1 <span style={{ fontSize: '1.5em' }}>]</span></div>
+</div>
+<div style={{ marginBottom: '1.5em' }}>
+<div style={{ textAlign: 'right' }}>g(x) = <span style={{ fontSize: '1.6em' }}>[</span> x³ + 3x²</div>
+<div style={{ textAlign: 'right', paddingLeft: '3em' }}><span style={{ visibility: 'hidden', fontSize: '1.6em' }}>[</span> + 3x + 1 <span style={{ fontSize: '1.6em' }}>]</span></div>
+</div>
+<div>
+f(x) = <span style={{ fontSize: '2em' }}>&#123;</span>
+<span style={{ display: 'inline-block', verticalAlign: 'middle', marginLeft: '1em' }}>
+<div style={{ textAlign: 'left' }}>x² <span style={{ marginLeft: '2em' }}>if x ≥ 0</span></div>
+<div style={{ textAlign: 'left' }}>−x² <span style={{ marginLeft: '2em' }}>if x < 0</span></div>
+</span>
+</div>
+</div>
+</div>
+
+### Matrix Delimiters
+
+<CodeGroup>
+```latex matrix-delimiters.tex
+\documentclass{article}
+\usepackage{amsmath}
+\begin{document}
+
+% Different matrix environments
+$\begin{pmatrix}  % parentheses
+a & b \\
+c & d
+\end{pmatrix}$
+
+$\begin{bmatrix}  % brackets
+a & b \\
+c & d
+\end{bmatrix}$
+
+$\begin{Bmatrix}  % braces
+a & b \\
+c & d
+\end{Bmatrix}$
+
+$\begin{vmatrix}  % vertical bars
+a & b \\
+c & d
+\end{vmatrix}$
+
+$\begin{Vmatrix}  % double bars
+a & b \\
+c & d
+\end{Vmatrix}$
+
+\end{document}
+```
+</CodeGroup>
+
+**Rendered output:**
+
+<div style={{ backgroundColor: '#f8f9fa', padding: '1.5em', borderRadius: '8px', margin: '1em 0', border: '1px solid #e9ecef' }}>
+<div style={{ display: 'flex', flexWrap: 'wrap', gap: '2em', justifyContent: 'center', fontFamily: 'Georgia, serif', fontSize: '1.2em' }}>
+<div style={{ textAlign: 'center' }}>
+<div style={{ fontSize: '0.8em', color: '#666', marginBottom: '0.5em' }}>pmatrix</div>
+<span style={{ fontSize: '1.5em' }}>(</span>
+<table style={{ display: 'inline-table', verticalAlign: 'middle' }}>
+<tbody>
+<tr><td style={{ padding: '0 0.5em' }}>a</td><td style={{ padding: '0 0.5em' }}>b</td></tr>
+<tr><td style={{ padding: '0 0.5em' }}>c</td><td style={{ padding: '0 0.5em' }}>d</td></tr>
+</tbody>
+</table>
+<span style={{ fontSize: '1.5em' }}>)</span>
+</div>
+<div style={{ textAlign: 'center' }}>
+<div style={{ fontSize: '0.8em', color: '#666', marginBottom: '0.5em' }}>bmatrix</div>
+<span style={{ fontSize: '1.5em' }}>[</span>
+<table style={{ display: 'inline-table', verticalAlign: 'middle' }}>
+<tbody>
+<tr><td style={{ padding: '0 0.5em' }}>a</td><td style={{ padding: '0 0.5em' }}>b</td></tr>
+<tr><td style={{ padding: '0 0.5em' }}>c</td><td style={{ padding: '0 0.5em' }}>d</td></tr>
+</tbody>
+</table>
+<span style={{ fontSize: '1.5em' }}>]</span>
+</div>
+<div style={{ textAlign: 'center' }}>
+<div style={{ fontSize: '0.8em', color: '#666', marginBottom: '0.5em' }}>Bmatrix</div>
+<span style={{ fontSize: '1.5em' }}>&#123;</span>
+<table style={{ display: 'inline-table', verticalAlign: 'middle' }}>
+<tbody>
+<tr><td style={{ padding: '0 0.5em' }}>a</td><td style={{ padding: '0 0.5em' }}>b</td></tr>
+<tr><td style={{ padding: '0 0.5em' }}>c</td><td style={{ padding: '0 0.5em' }}>d</td></tr>
+</tbody>
+</table>
+<span style={{ fontSize: '1.5em' }}>&#125;</span>
+</div>
+<div style={{ textAlign: 'center' }}>
+<div style={{ fontSize: '0.8em', color: '#666', marginBottom: '0.5em' }}>vmatrix</div>
+<span style={{ fontSize: '1.5em' }}>|</span>
+<table style={{ display: 'inline-table', verticalAlign: 'middle' }}>
+<tbody>
+<tr><td style={{ padding: '0 0.5em' }}>a</td><td style={{ padding: '0 0.5em' }}>b</td></tr>
+<tr><td style={{ padding: '0 0.5em' }}>c</td><td style={{ padding: '0 0.5em' }}>d</td></tr>
+</tbody>
+</table>
+<span style={{ fontSize: '1.5em' }}>|</span>
+</div>
+<div style={{ textAlign: 'center' }}>
+<div style={{ fontSize: '0.8em', color: '#666', marginBottom: '0.5em' }}>Vmatrix</div>
+<span style={{ fontSize: '1.5em' }}>‖</span>
+<table style={{ display: 'inline-table', verticalAlign: 'middle' }}>
+<tbody>
+<tr><td style={{ padding: '0 0.5em' }}>a</td><td style={{ padding: '0 0.5em' }}>b</td></tr>
+<tr><td style={{ padding: '0 0.5em' }}>c</td><td style={{ padding: '0 0.5em' }}>d</td></tr>
+</tbody>
+</table>
+<span style={{ fontSize: '1.5em' }}>‖</span>
+</div>
+</div>
+</div>
+
+## Special Use Cases
+
+### Set Notation
+
+<CodeGroup>
+```latex set-notation.tex
+\documentclass{article}
+\usepackage{amsmath}
+\begin{document}
+
+% Basic set
+$A = \{1, 2, 3, 4, 5\}$
+
+% Set builder notation
+$B = \{x \in \mathbb{R} : x^2 < 4\}$
+
+% Set with conditions
+$C = \left\{x \in \mathbb{Z} : \begin{array}{l}
+x > 0 \\
+x \text{ is even}
+\end{array}\right\}$
+
+% Empty set
+$\emptyset = \{\}$
+
+\end{document}
+```
+</CodeGroup>
+
+**Rendered output:**
+
+<div style={{ backgroundColor: '#f8f9fa', padding: '1.5em', borderRadius: '8px', margin: '1em 0', border: '1px solid #e9ecef' }}>
+<div style={{ fontFamily: 'Georgia, serif', fontSize: '1.2em', lineHeight: '2' }}>
+<div>A = &#123;1, 2, 3, 4, 5&#125;</div>
+<div>B = &#123;x ∈ ℝ : x² < 4&#125;</div>
+<div>C = <span style={{ fontSize: '1.8em' }}>&#123;</span>x ∈ ℤ : <span style={{ display: 'inline-block', verticalAlign: 'middle', marginLeft: '0.5em' }}>
+<div>x > 0</div>
+<div>x is even</div>
+</span><span style={{ fontSize: '1.8em' }}>&#125;</span></div>
+<div>∅ = &#123;&#125;</div>
+</div>
+</div>
+
+### Interval Notation
+
+<CodeGroup>
+```latex intervals.tex
+\documentclass{article}
+\usepackage{amsmath}
+\begin{document}
+
+% Open interval
+$(a, b)$
+
+% Closed interval
+$[a, b]$
+
+% Half-open intervals
+$[a, b)$ and $(a, b]$
+
+% Infinite intervals
+$(-\infty, a]$ and $[b, \infty)$
+
+% Union of intervals
+$[0, 1] \cup [2, 3]$
+
+\end{document}
+```
+</CodeGroup>
+
+### Physics and Engineering
+
+<CodeGroup>
+```latex physics-brackets.tex
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{physics} % provides \bra, \ket, \braket
+\begin{document}
+
+% Quantum mechanics bra-ket notation
+$\langle \psi | \phi \rangle$
+
+% With physics package
+$\bra{\psi}\ket{\phi}$
+$\braket{\psi|\phi}$
+
+% Commutator
+$[A, B] = AB - BA$
+
+% Anticommutator  
+$\{A, B\} = AB + BA$
+
+% Poisson bracket
+$\{f, g\} = \sum_i \left(\frac{\partial f}{\partial q_i}\frac{\partial g}{\partial p_i} - \frac{\partial f}{\partial p_i}\frac{\partial g}{\partial q_i}\right)$
+
+\end{document}
+```
+</CodeGroup>
+
+## Common Errors and Solutions
+
+<Accordion title="Error: Missing \right. inserted">
+**Problem**: Every `\left` needs a matching `\right`, even across line breaks.
+
+**Solution**: Use `\right.` for an invisible right delimiter:
+```latex
+\left[ x + y \right.  % End of first line
+\left. + z \right]    % Start of second line
+```
+</Accordion>
+
+<Accordion title="Brackets too large with \left...\right">
+**Problem**: Automatic sizing makes brackets unnecessarily large.
+
+**Solution**: Use manual sizing instead:
+```latex
+% Instead of
+$\left( \sum_{i=1}^n x_i \right)$
+
+% Use
+$\bigg( \sum_{i=1}^n x_i \bigg)$
+```
+</Accordion>
+
+<Accordion title="Curly braces not showing">
+**Problem**: `{` and `}` have special meaning in LaTeX.
+
+**Solution**: Escape them with backslash:
+```latex
+$\{ x : x > 0 \}$  % Correct
+${ x : x > 0 }$    % Wrong - braces disappear
+```
+</Accordion>
+
+<Accordion title="Mismatched bracket sizes in aligned equations">
+**Problem**: Brackets don't match across aligned lines.
+
+**Solution**: Use phantom brackets:
+```latex
+\begin{align}
+f(x) = & \Big[ x^2 + 2x \\
+       & \phantom{\Big[} + 1 \Big]
+\end{align}
+```
+</Accordion>
+
+## Best Practices
+
+### 1. Choose the Right Delimiter
+
+<div style={{ backgroundColor: '#e8f5e9', padding: '1.5em', borderRadius: '8px', margin: '1em 0' }}>
+<h4 style={{ marginTop: 0, color: '#2e7d32' }}>✅ Good Delimiter Choices</h4>
+<ul style={{ marginBottom: 0 }}>
+<li><strong>Parentheses</strong>: General grouping, function arguments</li>
+<li><strong>Square brackets</strong>: Matrices, commutators, intervals</li>
+<li><strong>Curly braces</strong>: Sets, systems of equations</li>
+<li><strong>Angle brackets</strong>: Inner products, averages</li>
+<li><strong>Vertical bars</strong>: Absolute values, determinants, norms</li>
+</ul>
+</div>
+
+### 2. Sizing Guidelines
+
+- Use `\left...\right` for **complex expressions** with varying heights
+- Use manual sizing (`\big`, `\Big`, etc.) for **simple expressions**
+- Be consistent within the same document
+- Don't oversize—readability is key
+
+### 3. Spacing Considerations
+
+<CodeGroup>
+```latex spacing-examples.tex
+% Good spacing with \bigl and \bigr
+$\bigl( x + y \bigr)$
+
+% Poor spacing with just \big
+$\big( x + y \big)$
+
+% For better spacing around bars
+$\left\lvert x \right\rvert$  % Better than |x|
+```
+</CodeGroup>
+
+### 4. Semantic Markup
+
+Use meaningful commands when available:
+
+<CodeGroup>
+```latex semantic-markup.tex
+% Instead of manual brackets
+$|| v ||$
+
+% Use semantic commands
+$\lVert v \rVert$      % Double bars for norm
+$\lvert x \rvert$      % Single bars for absolute value
+$\langle u, v \rangle$ % Angle brackets for inner product
+```
+</CodeGroup>
+
+## Quick Reference Card
+
+<div style={{ backgroundColor: '#f5f5f5', padding: '2em', borderRadius: '8px', margin: '2em 0' }}>
+<h3 style={{ marginTop: 0, color: '#FF6037' }}>Brackets Quick Reference</h3>
+<div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '2em' }}>
+<div>
+<h4>Basic Delimiters</h4>
+<code style={{ display: 'block' }}>( )  [ ]  \{ \}</code>
+<code style={{ display: 'block' }}>\langle \rangle</code>
+<code style={{ display: 'block' }}>| |  \| \|</code>
+<code style={{ display: 'block' }}>\lfloor \rfloor</code>
+<code style={{ display: 'block' }}>\lceil \rceil</code>
+</div>
+<div>
+<h4>Automatic Sizing</h4>
+<code style={{ display: 'block' }}>\left( ... \right)</code>
+<code style={{ display: 'block' }}>\left. ... \right|</code>
+<code style={{ display: 'block' }}>\left\{ ... \right.</code>
+</div>
+<div>
+<h4>Manual Sizes</h4>
+<code style={{ display: 'block' }}>\big \Big \bigg \Bigg</code>
+<code style={{ display: 'block' }}>\bigl( \bigr)</code>
+<code style={{ display: 'block' }}>\Bigl[ \Bigr]</code>
+</div>
+<div>
+<h4>Matrix Environments</h4>
+<code style={{ display: 'block' }}>pmatrix ()</code>
+<code style={{ display: 'block' }}>bmatrix []</code>
+<code style={{ display: 'block' }}>Bmatrix {}</code>
+<code style={{ display: 'block' }}>vmatrix ||</code>
+</div>
+</div>
+</div>
+
+## Related Topics
+
+<CardGroup cols={2}>
+<Card title="Mathematical Expressions" icon="calculator" href="/learn/latex/mathematics/mathematical-expressions">
+Learn math mode basics and expressions
+</Card>
+<Card title="Matrices Guide" icon="table-cells" href="/learn/latex/mathematics/matrices">
+Complete guide to matrices and arrays
+</Card>
+<Card title="Equations" icon="equals" href="/learn/latex/mathematics/equations">
+Multi-line and numbered equations
+</Card>
+<Card title="Math Symbols" icon="sigma" href="/learn/latex/mathematics/symbols">
+Comprehensive symbol reference
+</Card>
+</CardGroup>
+
+<Warning>
+**LaTeX Cloud Studio** automatically handles package loading! The `amsmath` package is pre-loaded, so all bracket commands work immediately without manual package management.
+</Warning>

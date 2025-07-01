@@ -73,6 +73,8 @@
             "group": "Mathematics",
             "pages": [
               "learn/latex/mathematics/basics",
+              "learn/latex/mathematics/subscripts-superscripts",
+              "learn/latex/mathematics/brackets-parentheses",
               "learn/latex/mathematics/equations",
               "learn/latex/mathematics/symbols",
               "learn/latex/mathematics/matrices"
@@ -104,6 +106,12 @@
               "learn/latex/bibliography-citations",
               "learn/latex/bibliography/bibliography-management-bibtex",
               "learn/latex/cross-referencing"
+            ]
+          },
+          {
+            "group": "Advanced Topics",
+            "pages": [
+              "learn/latex/advanced/luatex-boxes"
             ]
           }
         ]
