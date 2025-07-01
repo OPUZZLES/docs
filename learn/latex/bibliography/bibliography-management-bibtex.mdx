@@ -11,7 +11,7 @@ seo:
 Master **professional bibliography management** in LaTeX using BibTeX. This comprehensive guide covers everything from basic citations to advanced bibliography customization for academic papers, theses, and publications.
 
 <Info>
-**Quick start**: BibTeX automates bibliography formatting in LaTeX. Create a `.bib` file with your references, cite them with `\cite{}`, and LaTeX handles the formatting based on your chosen style.
+**Quick start**: BibTeX automates bibliography formatting in LaTeX. Create a `.bib` file with your references, cite them with `\cite{key}`, and LaTeX handles the formatting based on your chosen style.
 
 **Prerequisites**: Basic LaTeX knowledge. For citations basics, see [Bibliography & Citations](/learn/latex/bibliography-citations).
 </Info>
@@ -151,10 +151,10 @@ our understanding of the universe.
 Journal articles, magazine articles
 ```bibtex
 @article{key,
-  author = {},
-  title = {},
-  journal = {},
-  year = {}
+  author = {Author Name},
+  title = {Article Title},
+  journal = {Journal Name},
+  year = {2023}
 }
 ```
 </Card>
@@ -163,10 +163,10 @@ Journal articles, magazine articles
 Books with publisher
 ```bibtex
 @book{key,
-  author = {},
-  title = {},
-  publisher = {},
-  year = {}
+  author = {Author Name},
+  title = {Book Title},
+  publisher = {Publisher Name},
+  year = {2023}
 }
 ```
 </Card>
@@ -175,10 +175,10 @@ Books with publisher
 Conference papers
 ```bibtex
 @inproceedings{key,
-  author = {},
-  title = {},
-  booktitle = {},
-  year = {}
+  author = {Author Name},
+  title = {Paper Title},
+  booktitle = {Conference Name},
+  year = {2023}
 }
 ```
 </Card>
@@ -187,10 +187,10 @@ Conference papers
 PhD dissertations
 ```bibtex
 @phdthesis{key,
-  author = {},
-  title = {},
-  school = {},
-  year = {}
+  author = {Author Name},
+  title = {Thesis Title},
+  school = {University Name},
+  year = {2023}
 }
 ```
 </Card>
@@ -493,7 +493,7 @@ Many journals and institutions provide their own `.bst` files. Common examples:
 @article{example2023,
     author = {Example, Author},
     title = {Example Article},
-    journal = ieee # " Software Engineering",  % Concatenation
+    journal = ieee # " Software Engineering",  % String concatenation
     year = {2023},
     publisher = springer
 }
@@ -710,11 +710,11 @@ Popular tools that export to BibTeX:
 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '2em' }}>
 <div>
 <h4>Essential Commands</h4>
-<code style={{ display: 'block' }}>\bibliographystyle{style}</code>
-<code style={{ display: 'block' }}>\bibliography{bibfile}</code>
-<code style={{ display: 'block' }}>\cite{key}</code>
-<code style={{ display: 'block' }}>\nocite{key}</code>
-<code style={{ display: 'block' }}>\nocite{`*`}</code>
+<code style={{ display: 'block' }}>\bibliographystyle&#123;style&#125;</code>
+<code style={{ display: 'block' }}>\bibliography&#123;bibfile&#125;</code>
+<code style={{ display: 'block' }}>\cite&#123;key&#125;</code>
+<code style={{ display: 'block' }}>\nocite&#123;key&#125;</code>
+<code style={{ display: 'block' }}>\nocite&#123;*&#125;</code>
 </div>
 <div>
 <h4>Compilation Order</h4>
