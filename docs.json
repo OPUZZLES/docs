@@ -241,7 +241,7 @@
     "primary": {
       "type": "button",
       "label": "Sign In",
-      "href": "https://app.latex-cloud-studio.com/signin"
+      "href": "https://www.latex-cloud-studio.com/"
     }
   },
   "footer": {
