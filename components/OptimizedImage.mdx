@@ -1,0 +1,49 @@
+export const OptimizedImage = ({ src, alt, width, height, priority = false }) => {
+  // Generate WebP source
+  const webpSrc = src.replace(/\.(png|jpg|jpeg)$/i, '.webp');
+  
+  return (
+    <picture>
+      <source 
+        srcSet={webpSrc} 
+        type="image/webp"
+      />
+      <source 
+        srcSet={src} 
+        type={src.endsWith('.png') ? 'image/png' : 'image/jpeg'}
+      />
+      <img 
+        src={src}
+        alt={alt}
+        width={width}
+        height={height}
+        loading={priority ? 'eager' : 'lazy'}
+        decoding="async"
+        style={{
+          maxWidth: '100%',
+          height: 'auto'
+        }}
+      />
+    </picture>
+  );
+};
+
+## Usage Example
+
+import { OptimizedImage } from './OptimizedImage.mdx'
+
+<OptimizedImage 
+  src="/images/hero-light.png"
+  alt="LaTeX Cloud Studio Hero"
+  width={2064}
+  height={1104}
+  priority={true}
+/>
+
+## Benefits
+
+- Serves WebP to supported browsers
+- Falls back to original format
+- Lazy loading by default
+- Prevents layout shift with dimensions
+- Responsive sizing
