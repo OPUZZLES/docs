@@ -21,7 +21,18 @@
     "author": "LaTeX Cloud Studio Team",
     "robots": "index, follow",
     "language": "en-US",
-    "revisit-after": "7 days"
+    "revisit-after": "7 days",
+    "link": [
+      {
+        "rel": "preconnect",
+        "href": "https://fonts.googleapis.com"
+      },
+      {
+        "rel": "preconnect",
+        "href": "https://fonts.gstatic.com",
+        "crossorigin": true
+      }
+    ]
   },
   "seo": {
     "indexHiddenPages": false
@@ -228,8 +239,8 @@
     }
   },
   "logo": {
-    "light": "/logo/LCS-Logo-c-removebg-preview.png",
-    "dark": "/logo/LCS-Logo-c-removebg-preview.png"
+    "light": "/logo/lcs-logo-optimized.svg",
+    "dark": "/logo/lcs-logo-optimized.svg"
   },
   "navbar": {
     "links": [
@@ -259,5 +270,10 @@
       "apiKey": "phc_TSFbhAvn2aTODD9RjuB1ULGV4idHgfcqoo6xEhKTcQ",
       "apiHost": "https://eu.i.posthog.com"
     }
+  },
+  "performance": {
+    "lazyLoadImages": true,
+    "preloadFonts": true,
+    "optimizeImages": true
   }
 }
