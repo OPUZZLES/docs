@@ -1,0 +1,95 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "mint",
+  "name": "LaTeX Cloud Studio Documentation",
+  "colors": {
+    "primary": "#FF6037",
+    "light": "#FF8A6B",
+    "dark": "#CC4E2D"
+  },
+  "favicon": "/favicon.ico",
+  "manifest": "/site.webmanifest",
+  "metadata": {
+    "og:site_name": "LaTeX Cloud Studio",
+    "og:type": "website",
+    "og:url": "https://resources.latex-cloud-studio.com",
+    "og:image": "https://resources.latex-cloud-studio.com/images/og-image.png",
+    "twitter:card": "summary_large_image",
+    "twitter:site": "@latexcloudstudio",
+    "twitter:creator": "@latexcloudstudio",
+    "description": "Master LaTeX with our comprehensive documentation, tutorials, and guides. Learn professional document creation with LaTeX Cloud Studio.",
+    "keywords": "LaTeX, documentation, tutorials, cloud editor, document creation, academic writing, scientific publishing",
+    "author": "LaTeX Cloud Studio Team",
+    "robots": "index, follow",
+    "language": "en-US",
+    "revisit-after": "7 days",
+    "link": [
+      {
+        "rel": "preconnect",
+        "href": "https://fonts.googleapis.com"
+      },
+      {
+        "rel": "preconnect",
+        "href": "https://fonts.gstatic.com",
+        "crossorigin": true
+      }
+    ]
+  },
+  "seo": {
+    "indexHiddenPages": false
+  },
+  "search": {
+    "prompt": "Search documentation..."
+  },
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Learn",
+        "groups": [
+          {
+            "group": "Getting Started",
+            "pages": [
+              "index",
+              "getting-started/cloud-studio",
+              "learn/latex-in-30-minutes"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "logo": {
+    "light": "/logo/lcs-logo-optimized.svg",
+    "dark": "/logo/lcs-logo-optimized.svg"
+  },
+  "navbar": {
+    "links": [
+      {
+        "label": "Support",
+        "href": "mailto:hi@mintlify.com"
+      }
+    ],
+    "primary": {
+      "type": "button",
+      "label": "Sign In",
+      "href": "https://www.latex-cloud-studio.com/"
+    }
+  },
+  "footer": {
+    "socials": {
+      "x": "https://x.com/mintlify",
+      "github": "https://github.com/mintlify",
+      "linkedin": "https://linkedin.com/company/mintlify"
+    }
+  },
+  "performance": {
+    "lazyLoadImages": true,
+    "preloadFonts": true,
+    "optimizeImages": true,
+    "prefetchAssets": true,
+    "minifyAssets": true
+  },
+  "experimental": {
+    "optimizeCoreWebVitals": true
+  }
+}
