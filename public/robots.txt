@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+Disallow: /node_modules/
+
+# Optimize crawl budget
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://resources.latex-cloud-studio.com/sitemap.xml
+
+# Cache static assets
+User-agent: *
+Disallow: /*.js$
+Disallow: /*.css$
+Allow: /

@@ -8,6 +8,7 @@
     "dark": "#CC4E2D"
   },
   "favicon": "/favicon.ico",
+  "manifest": "/site.webmanifest",
   "metadata": {
     "og:site_name": "LaTeX Cloud Studio",
     "og:type": "website",
@@ -31,6 +32,14 @@
         "rel": "preconnect",
         "href": "https://fonts.gstatic.com",
         "crossorigin": true
+      },
+      {
+        "rel": "dns-prefetch",
+        "href": "https://www.googletagmanager.com"
+      },
+      {
+        "rel": "dns-prefetch",
+        "href": "https://eu.i.posthog.com"
       }
     ]
   },
@@ -274,6 +283,11 @@
   "performance": {
     "lazyLoadImages": true,
     "preloadFonts": true,
-    "optimizeImages": true
+    "optimizeImages": true,
+    "prefetchAssets": true,
+    "minifyAssets": true
+  },
+  "experimental": {
+    "optimizeCoreWebVitals": true
   }
 }
